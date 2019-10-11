@@ -3,7 +3,4 @@ dist: trusty
 before_install:
 - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-full
 script:
-- pwd
-- find . -name "Makefile"
 - bash .ci/travis/make_all.sh
-- make -C ./notes/03-mlp_backprop
