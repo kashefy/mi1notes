@@ -6,9 +6,5 @@ dist: trusty
 script:
 - pwd
 - find . -name "Makefile"
-- array=(`find . -name 'Makefile'`)
-  for i in "${array[@]}";
-  do :
-    echo $i
-  done
+- bash .ci/travis/make_all.sh
 - make -C ./notes/03-mlp_backprop
