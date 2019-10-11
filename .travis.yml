@@ -1,0 +1,27 @@
+os: linux
+
+# we use the R VM because it contains LaTeX and pandoc
+language: r
+
+# we need super user privileges, so we depend on the old travis-ci infrastructure
+sudo: required
+
+# we can install additional software
+apt_packages:
+# we download pdf2djvu to also generate a djvu file of our LaTeX source
+  - pdf2djvu
+
+script:
+# if you have a markdown source, you can use pandoc to convert it to a LaTeX document
+#  - cat README.md | grep --invert-match "\[\!\[" > README2.md
+#  - cat README2.md | grep --invert-match "Howto Deploy LaTeX Documents" > README.md
+#  - pandoc -s --from=markdown_github --to=latex -M title="Howto Deploy LaTeX Documents" -M author="Simon Waldherr" -V geometry:a4paper,margin=2cm -o README.tex README.md
+
+# in the next step we use pdflatex to convert .tex to .pdf
+# of course we could use pandoc for this also, but pdflatex generates nicer PDFs
+  - pwd
+
+after_success:
+# upload the previously generated pdf file to simonwaldherr.de (use $UPLOADSECRET as password)
+#  - wget --post-file=HowtoDeployLatexDocs-DE.pdf -q -O- "https://simonwaldherr.de/pdf/?repo=HowtoDeployLatexDocs&mode=save&key=$UPLOADSECRET&pull=$TRAVIS_PULL_REQUEST"
+
