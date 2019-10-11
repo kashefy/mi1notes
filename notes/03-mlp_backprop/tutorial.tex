@@ -1,0 +1,68 @@
+\newcommand{\sheetnum}{%
+	03
+}
+%\setcounter{section}{\sheetnum-3}
+\newcommand{\tutorialtitle}{%
+    Multilayer Perceptrons and the Backpropagation algorithm 
+}
+\newcommand{\tutorialtitleshort}{%
+	MLPs and Backprop
+}
+% for slides
+\subtitle{\sheetnum \tutorialtitle}
+
+\maxdeadcycles=100 % Workaround for ! Output loop---100 consecutive dead cycles because of too many figures
+
+% The following use of algroithms does not work well with the notes:
+%
+%
+%
+%
+% instead use the following for your algorithms:
+%
+%\begin{figure}[!t]
+%\removelatexerror
+%\begin{algorithm}[H]
+    % your aglo here
+    %\label{alg:algolabel}
+    %\caption{algocaption}
+%\end{algorithm}
+%\end{figure}
+%\begin{algorithm}
+% Below is the definition for the command \removelatexerror:
+\makeatletter
+\newcommand{\removelatexerror}{\let\@latex@error\@gobble}
+\makeatother
+
+\begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\sheet{\sheetnum}{\tutorialtitleshort}
+
+\ttopic{\tutorialtitle}
+
+\columnratio{0.2,0.8}\textbf{}
+\begin{paracol}{2}
+%\setlength{\columnseprule}{0.1pt}
+%\setlength{\columnsep}{5em}
+
+\begin{rightcolumn}
+
+% notes version will ignore it
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\newpage
+
+\mode<all>
+\input{./mlp_learning_intro}
+\mode*
+
+\end{rightcolumn}
+\end{paracol}
+
+\end{document}

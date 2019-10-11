@@ -1,0 +1,140 @@
+% ---------------------------- README -----------------------------------------
+% This file holds additional command definitions as used in the Machine 
+% Intelligence material.
+% -----------------------------------------------------------------------------
+
+% ------------------------- New Commands --------------------------------------
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+
+\newcommand{\gap}[0]{\vspace{.6cm}}
+\newcommand{\ve}[1]{\bm{#1}}
+
+% independent and identically distributed
+\newcommand{\iid}{i.i.d.}
+
+% Expectation/mean over variable
+\newcommand{\mean}[1]{\langle #1 \rangle}
+
+% Equal sign with exclamation mark on top:
+\newcommand{\eqexcl}{\ensuremath{\stackrel{\mathrm{!}}{=}}}
+%			--------------------
+% Equal sign with hat on top:			
+\newcommand{\corresponds}{\ensuremath{\widehat{=}}}
+%			--------------------
+% Colon before an equal sign - defined to avoid usage of txfonts: 
+\newcommand{\coloneqq}{\ensuremath{:=}}
+\newcommand{\eqqcolon}{\ensuremath{=:}}
+
+%			--------------------
+% \argmin like \min (operator with limits):
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+%			--------------------
+% \argmax as an operator:
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+%			--------------------
+% \sign as an operator:
+\newcommand{\sign}{\operatorname{sign}}
+%			--------------------
+% \emp as an operator:
+\newcommand{\emp}{\operatorname{emp}}
+%			--------------------
+% \dvc as a shorthand for the VC-dimension:
+\newcommand{\dvc}{\mathrm{d}_{\mathrm{VC}}}
+% 			--------------------
+% \smallfrac is a \frac in \textstyle
+\newcommand{\smallfrac}[2]{ {\textstyle \frac{#1}{#2}} }
+% 			--------------------
+% \smallsum creates a sum in textstyle with small indices
+\newcommand{\smallsum}[2]{ 
+	{\textstyle \sum\limits_{\scriptscriptstyle #1}^{\scriptscriptstyle #2}} }
+%			--------------------
+% Font to denote set names
+\newcommand{\Set}[1]{\mathcal{#1}}
+%			--------------------
+\newcommand{\LLR}{\mathcal{L}}
+% KL divergence
+\newcommand{\dkl}{\mathrm{D}_{\mathrm{KL}}}
+\newcommand{\var}{\operatorname{var}}
+% Kurtosis
+\newcommand{\kurt}{\operatorname{kurt}}
+%			--------------------
+\newcommand{\oident}{\rule{5mm}{0pt}}
+\newcommand{\normal}{\mathcal{N}}
+%			--------------------
+% Mathematical standard sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+%			--------------------
+% The following three new commands are here to simplify the extensive use
+% of specially itemized lists. They are solely intended to be used in the
+% itemize environment. 
+\newcommand{\itr}{\item[$\rightarrow$]}
+\newcommand{\itR}{\item[$\Rightarrow$]}
+\newcommand{\itl}{\item[$\leadsto$]}
+\newcommand{\iitem}[1]{\begin{itemize} \item {#1} \end{itemize}}
+%			--------------------
+% To comply with the standard way in neural network textbooks we render all
+% vectors with \underline{\mathbf{NAME}}. As this is quite long and can lead
+% to unnecessary clutter the \vec{NAME} command was redefined.
+\renewcommand{\vec}[1]{\ensuremath{\underline{\mathbf{#1}}}}
+% Note: As a standard the \vec{NAME} command normally renders NAME with an 
+%	arrow above it (as it is written in more math oriented books). 
+%	The \underline{\mathbf{NAME}} method is more common in the field
+%	of neural networks and it has the benefit of not interfering and
+%	being visually more pleasant when dealing with constructs like
+%	\hat{\underline{\mathbf{w}}}.
+%	If the 'standard' math mode is again in fashion, just comment.
+
+% Matrices
+
+% matrix [ ]
+\newcommand{\mat}[2][rrrrrrrrrrrrrrrrrrrrrrrrrr]{\left[
+	\begin{array}{#1}
+	#2\\
+	\end{array}
+	\right]}
+
+% ( )
+\newcommand{\rmat}[2][rrrrrrrrrrrrrrrrrrrrrrrrrr]{\left(
+	\begin{array}{#1}
+	#2\\
+	\end{array}
+	\right)}
+
+% |[ ]|
+\newcommand{\dmat}[2][rrrrrrrrrrrrrrrrrrrrrrrrrr]{\left|\left[
+	\begin{array}{#1}
+	#2\\
+	\end{array}
+	\right]\right|}
+
+% |( )|
+\newcommand{\drmat}[2][rrrrrrrrrrrrrrrrrrrrrrrrrr]{\left|\left(
+	\begin{array}{#1}
+	#2\\
+	\end{array}
+	\right)\right|}
+
+% -----------------------------------------------------------------------------
+\newcommand{\placeimage}[4]{
+	\begin{textblock}{}(#1,#2)
+		\includegraphics[#4]{#3}
+	\end{textblock}
+}
+% -----------------------------------------------------------------------------
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+%\newcommand{\url}[1]{{\sc\footnotesize #1}}
+\newcommand{\ttopic}[1]{\textbf{\LARGE #1}}
+\newcommand{\filename}[1]{\texttt{#1}}
+
+\newcommand{\farrow}{$\Rightarrow\;$}
+\newcommand{\myhref}[2]{{\tt\href{#1}{#2}}}
+
+

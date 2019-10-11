@@ -1,0 +1,104 @@
+\documentclass[pdfetex,ignorenonframetext]{beamer}
+\usetheme{TUBerlin}
+\usepackage{latexsym,listings,graphicx}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[pdfetex]{preview}
+\usepackage{hyperref}
+\usepackage[overlay,absolute]{textpos}
+\usepackage{algorithmic}
+\usepackage{verbatim}
+\usepackage{amssymb,amsmath}
+\usepackage{enumerate}
+\usepackage{mathtools}
+\usepackage[ruled]{algorithm2e}
+\usepackage{appendixnumberbeamer}
+\usepackage[mathscr]{euscript}
+\usepackage{caption}
+\usepackage{subcaption}
+\newsavebox{\imagebox}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue,citecolor=green}
+%\usepackage{paralist}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\tikzset{myrect/.style={rectangle, fill=#1!20, draw=#1!75, text=black}}
+\tikzstyle{axes}=[]
+
+% from tex.stackexchange useful to align substacks
+
+\makeatletter
+\newcommand{\subalign}[1]{%
+  \vcenter{%
+    \Let@ \restore@math@cr \default@tag
+    \baselineskip\fontdimen10 \scriptfont\tw@
+    \advance\baselineskip\fontdimen12 \scriptfont\tw@
+    \lineskip\thr@@\fontdimen8 \scriptfont\thr@@
+    \lineskiplimit\lineskip
+    \ialign{\hfil$\m@th\scriptstyle##$&$\m@th\scriptstyle{}##$\crcr
+      #1\crcr
+    }%
+  }
+}
+\makeatother
+
+\newcommand{\misubsection}[1]{
+	\subsection{\thesubsection) #1}
+	\begin{frame} 
+		\begin{center} \huge
+			\misection.\thesubsection~#1
+		\end{center}
+	\end{frame}
+}
+
+\newenvironment<>{varblock}[2][.9\textwidth]{%
+  \setlength{\textwidth}{#1}
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
+    \par%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}}
+
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamertemplate{section in toc}[default]
+\setbeamertemplate{subsection in toc}[square]
+\setbeamertemplate{enumerate items}[circle] 
+\setbeamertemplate{itemize items}[square] 
+\setbeamertemplate{navigation symbols}{}
+\usefonttheme[onlymath]{serif}
+
+\title[MI 1 Tutorial]{Machine Intelligence 1 Tutorial}
+\institute[www.ni.tu-berlin.de]{Fachgebiet Neuronale Informationsverarbeitung (NI)}
+\author[Kashef]{Youssef Kashef}
+\date{WS 19/20}
+
+\graphicspath{{../../../../../figures/pdf/}}
+
+\newcommand{\figref}[1]{Fig. \hspace{-0.5mm}\ref{#1}}
+\newcommand{\figureref}[1]{Figure \hspace{-0.5mm}\ref{#1}}
+
+\newcommand{\sectionref}[1]{Section \hspace{-1.0mm}\ref{#1}}
+
+% TODO consolidate with notes
+\newcounter{sheetno}
+
+\newcounter{question}
+\setcounter{question}{1}
+
+\newcommand{\question}[2]{%
+	\vspace{4mm}%
+	{Q\thesheetno.\arabic{question}: ~ \textit{#1}%
+	}\\[5mm]%
+	\addtocounter{question}{1}%
+}
+
+% Include in notes but exclude from slides
+% see corresponding \slidessonly for opposite behavior
+\newcommand{\notesonly}[1]{}
+
+\newcommand\labelitemi{\textbullet}
+
+\newcommand{\inparaenum}{\enumerate}
