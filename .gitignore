@@ -1,4 +1,9 @@
 # Custom ignores
+#
+ignore slides and notes pdfs
+tutorial_*.slides.pdf
+tutorial_*.notes.pdf
+
 # ignore source code for now
 *.py
 *.ipynb
