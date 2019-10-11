@@ -6,8 +6,7 @@ script:
 - bash .ci/travis/make_all.sh
 deploy:
   provider: releases
-  api_key:
-    secure: VxmhR8Wcf8CTQAJ2xI/WVl4VlluPuZq4oDAJtsUiGQBi+ylGIwhSVUBk7lq2xlGLo0WBgH7H+RudSsKo41tTFSMCdacS83/+9SjKhD13FaIeZvD58pJYBc8ZwSXygbRWpbMvIvsODDH0W0HF08dYcc4eGTkgjXoAiPVf1Xtg5F/c26acrJnzRvYTxqcgqWqbogXOoKsovNFAUSB90lRCTrMhf+T96LYN0Gep4B3HH/PsPCil8YtdC2s2zh+Ox90qw8Jup3rskYxhwnV/IaTIEVmb7QYNhL36vrhCEisQk8YDOuiWh+1RRm8CUMfG/Szs6/eKFALIXmlAYJ4ARcaBeXJMySkSwjR3uBCX+tV4hgrtTe4jGf6wGcKQ76xaTB+zH4D18GX97YNqzY7xm8sjbPCXAifyzZikINOpkGX7SknsFS79Eo9aNbObd0ea76DnbOFwln/4+DFnmUgm/ZW+1nJMnGoIuutLqsWWA2sxtW8/yFbxNqAXSRDkCi0IqcRMTq8/PrRn+AW/F1XspW3BfEkSRgD5AB5g4gxGYSD8+P2h9WsF4BNFAaGJcG8UWbK9rYf6VYnStO4nv+b/3PBPEmnSadAq8Xc2cvLLV+Pg2N0peKCjtKLRaJRQ5ClSQwdL4JLkd7h1XWIgs0rRqw0K54sRHx4ufQ2vI0V6EN+p6wo=
+  api_key: "$GITHU8_T0KEN"
   file:
   - "./notes/*/tutorial_*.slides.pdf"
   - "./notes/*/tutorial_*.notes.pdf"
