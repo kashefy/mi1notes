@@ -2,7 +2,7 @@ sudo: required
 dist: trusty
 before_install:
 #- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-full
-- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended latex-beamer texlive-science
+- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended latex-beamer texlive-science
 script:
 - bash .ci/travis/make_all.sh
 deploy:
@@ -10,7 +10,6 @@ deploy:
   api_key: "$GITHU8_T0KEN"
   file_glob: true
   file:
-  - "./README.md"
   - "./notes/**/tutorial_*.slides.pdf"
   - "./notes/**/tutorial_*.notes.pdf"
   skip_cleanup: true
