@@ -1,6 +1,26 @@
 sudo: required
+
 dist: trusty
+
 before_install:
 - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-full
+
 script:
 - bash .ci/travis/make_all.sh
+
+deploy:
+
+# provider releases means GitHub Releases
+  provider: releases
+  api_key:
+
+# Travis CI public key encrypted GitHub oauth key for pushing to GitHub Releases
+  secure: "G7PHQHu4OYcgG3sS6Kyv6Iz7BGn8hh8ECL5F4qZDQGRZ0xauWV0ZFHzKnELPy0m3Zkn078uaZZKVS6lRWoNtUW19SQe2N7A6zKWmh8nMOrJ9Qluwb+ksn0FAMSHkAdHS5uObDrXrEj1AWHVxG4xRgnHuGawb3LZDf57k/q4Es5+72cXAL8R0KhP+Pw2Hr9ZX8tJ7IvsYFunwq9Zu9fzJG2oBSnr7v4pfSlk7zekAW+vUfdifuW0J+wSB++DrRM3jDLwqsalm9J98SPIiu/MZi3Q+Eu/101JQVd1CXxo3PQfbcbIvv5CccGHh9wkHk3zqrhr9g05ictWRNrKnAOPZbYywn7IaDdw85EpH2qARVOZbwpsQ9tKPoSrCT7EE2092WUDNgMI+KEUO3oY2rxRd/2urNr87QK36Fw2JyiDBrlbEAyUP9b7dKFIyHJeKJDCOQFK+R5CODuDZzxGSDMK9av6RpglnY+alNxceqXW8MZrDSyQFseKAz8r0B7jWJRBwf31W9+uAV/ZMmepWGQlDs6zc4oGqxwxJ7D4F4iPEc4yUWBCwJhl0tii1akT1n8aB4wfrZGpxZUw/PWTsXZEo+0GUtxvwVWhAk5HFql+S5vFbkdrYtMkfXTmw3xIzaw9vlbny3vLwkMvpG4AqRjSWZ5piSCr+/dpefnXtEVuxLPo="
+
+# the list of files to upload
+  file:
+    - "./notes/*/tutorial_*.slides.pdf"
+    - "./notes/*/tutorial_*.notes.pdf"
+  skip_cleanup: true
+  on:
+    branch: master
