@@ -6,19 +6,9 @@ dist: trusty
 script:
 - pwd
 - find . -name "Makefile"
-- array=(`find . -name '*'${Makefile}'*'`)
+- array=(`find . -name 'Makefile'`)
   for i in "${array[@]}";
   do :
     echo $i
   done
 - make -C ./notes/03-mlp_backprop
-deploy:
-  provider: releases
-  api_key:
-    secure: [YOUR KEY]
-  file:
-  - _build/your_file_1.pdf
-  - _build/your_file_2.pdf
-  skip_cleanup: true
-  on:
-    tags: true
