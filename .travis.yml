@@ -8,9 +8,11 @@ script:
 deploy:
   provider: releases
   api_key: "$GITHU8_T0KEN"
+  file_glob: true
   file:
-  - "./notes/*/tutorial_*.slides.pdf"
-  - "./notes/*/tutorial_*.notes.pdf"
+  - "./README.md"
+  - "./notes/**/tutorial_*.slides.pdf"
+  - "./notes/**/tutorial_*.notes.pdf"
   skip_cleanup: true
   on:
     branch: master
