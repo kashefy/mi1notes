@@ -1,8 +1,7 @@
 sudo: required
-language: r
 dist: trusty
-#before_install:
-#- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
+before_install:
+- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended biblatex latex-beamer
 script:
 - pwd
 - find . -name "Makefile"
