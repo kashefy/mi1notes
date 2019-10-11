@@ -1,16 +1,17 @@
 sudo: required
+language: r
 dist: trusty
-before_install:
-- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
+#before_install:
+#- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
 script:
 - pwd
 - find . -name "Makefile"
-- array=()
-  while IFS=  read -r -d $'\0'; do
-    array+=("$REPLY")
-  done < <(find . -name "Makefile" -print0)
+- array=(`find . -name '*'${Makefile}'*'`)
+  for i in "${array[@]}";
+  do :
+    echo $i
+  done
 - make -C ./notes/03-mlp_backprop
-- pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build tex/your_file_2.tex
 deploy:
   provider: releases
   api_key:
