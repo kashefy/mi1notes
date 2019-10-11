@@ -7,7 +7,7 @@ script:
 deploy:
   provider: releases
   api_key: 
-    secure: OrJ6lm57DFDIx7LXMhAWoMMqtB+CoQXVSSUkzl64vsDM0Ky6uF/yaw6vSmYeb6ez7aPLyGhgGQ6C8453Iw1MmsKciG0G5cXhIPSPfm/Emk6w3hz+7LvVThAPXAZzY0tzsumZZ8cV116JSreKWry8nED1PsBPS/lLGcXuzbDBWrHZhdxRKGw8UEB7CDiCJjdvf6Wyun3ka6QZi3QwYI+i/8aEiI0NdIsxhrYdgCnWPzMYg/68qBwdhQoctoBpRMnGFbRBWcv4wqPznB9DREb87iB+FIBfQaE9xkfxQ2MDJm1dpzxToxIfS/2x1dx8YNP2G6rS9+N2CGVqFSxqfxPSyeJYuNK0ArCeILMn1M3eJ6x5zdmLe68jZWPBToSfo31rr16wKZNzUKbiuYyMgSiJSI0S76kMvILOJXW0CgXI3MSTy5O/TcbWjxyapEcP2QCiC6KxgC9xywKq3C1xRdQW9WMyBvdHU0+aj2In9ni24n1Xnq7mSqflS881Ak4l8GFPewegLSk6PZTgvG98mhhHSZTlvbfkYBCcN/OeVW/Scp92yoSM8vtfw+//K2C1290QAOYCEeM+4Cn+xYxzWrIGWBUQrDw/zPHQfxJsP7DRR50dqX8aQTlVoKXzgk8Pqkq+XxFtrckUeq+s9i6kPY8LJ91n5ud5x+Wq8udl5vYio0g=
+    secure: $GITHU8_T0KEN
   file:
   - "./notes/*/tutorial_*.slides.pdf"
   - "./notes/*/tutorial_*.notes.pdf"
