@@ -21,7 +21,6 @@ handout: $(projname).handout.tex $(projname).tex
 notes: $(projname).notes.tex $(projname).tex
 	$(compile) $(projname).notes.tex
 	$(compile) $(projname).notes.tex
-	$(compile) $(projname).notes.tex
 	mv $(projname).notes.pdf $(targetname).notes.pdf 
 
 clean: cleans cleanh cleana
