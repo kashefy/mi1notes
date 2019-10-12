@@ -49,7 +49,6 @@ A connectionist neuron's response to 1D data:
 \end{figure}
 \end{frame}
 
-
 \subsection{Components of the connectionist neuron}
     
 \begin{frame}
@@ -66,13 +65,8 @@ A connectionist neuron's response to 1D data:
 
     \begin{enumerate}[(a)]
         \item weights $\vec w \in \R^{N}$: The weights represent the strength of the connections between the neuron and each component of the input it receives.\\
-        
         \item A linear filter: Summation of the weighted inputs (e.g. scalar product: $\vec w^{\top} \vec x = \sum_{j} w_{j} x_{j}$).
-        
-        \item A bias value $\theta \in \R$ also known as the threshold of the neuron.\\
-        
-
-        
+        \item A bias value $\theta \in \R$ also known as the threshold of the neuron.
         \item An activation function or transfer function $f: \R \mapsto \R$. \\
         
         $f(\cdot)$ controls the range of the neuron's response. It can have the effect of squashing the response to a specific range of values or a specific set of values and preventing other value ranges.
@@ -82,7 +76,7 @@ A connectionist neuron's response to 1D data:
     \begin{figure}[h]
         \centering
         \includegraphics[height=6cm]{img/neuron_3d_grid_hyperplane.pdf}
-        \caption{The hyperplane $\color{red}H = \set{\vec x : \vec w^{\top} \vec x = \theta}$ that divides the response of the neuron. In the context of classification it is referred to as the decision boundary.}
+        \caption{The plane divides the responses of the neuron. In the context of classification it is referred to as the decision boundary.}
         \label{fig:neuron_3d_grid_hyperplane}
     \end{figure}
     
@@ -117,7 +111,7 @@ A connectionist neuron's response to 1D data:
 {}
 \mode<article>{
 \begin{itemize}
-\item[-] $\vec w$ is effecively the normal vector of the hyperplane. Therefore, the weights represent the orientation of the hyperplane (see. \figref{fig:neuron_3d_grid_hyperplane}).
+\item[-] $\vec w$ is effectively the normal vector of the hyperplane $\color{red}H = \set{\vec x : \vec w^{\top} \vec x = \theta}$. Therefore, the weights represent the orientation of the hyperplane (see. \figref{fig:neuron_3d_grid_hyperplane}).
 \item[-] $\theta$ represents the shift of the hyperplane (see. \figref{fig:neuron_3d_grid_hyperplane}). It is the absolute position of the hyperplane fron the origin along $\vec w$. For any point $\widetilde{\vec x} \in H$ (i.e. points on the plane): 
 $\frac{\vec w^\top \widetilde{\vec x}}{\,||\vec w||_2} = \frac{\theta}{\,||\vec w||_2}$
 \end{itemize}
