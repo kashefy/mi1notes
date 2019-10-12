@@ -1,6 +1,6 @@
 # Machine Intelligence 1: Supervised Learning - Tutorial Notes #
 
-[![Build Status](https://www.travis-ci.org/kashefy/mi1notes.svg?branch=master)](https://www.travis-ci.org/kashefy/mi1notes)[![Coverage Status](https://coveralls.io/repos/github/nigroup/nideep/badge.svg?branch=master)](https://coveralls.io/github/nigroup/nideep?branch=master)
+[![Build Status](https://www.travis-ci.org/kashefy/mi1notes.svg?branch=master)](https://www.travis-ci.org/kashefy/mi1notes)
 [![License: CC BY-SA 4.0](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 This is a collection of notes I've been making for the course [Machine Intelligence 1: Supervised Learning](https://www.ni.tu-berlin.de/menue/teaching_activities/all_courses/machine_intelligence_i/) at the TU Berlin. 
