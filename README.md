@@ -20,6 +20,21 @@ Topics covered throughout the course:
 Ubuntu:
 
     apt install texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended latex-beamer texlive-science
+    
+## How to Contribute ##
+
+Any contribution to add content, visualization and increase the quality of the notes is much appreciated.
+
+Post Issues to report mistakes (e.g. mistakes in the writing, layout mistakes, problems with referencing)
+
+Making Pull request that fix any issues is very much encouraged and appreciated. 
+Feel free to make a pull request that resolves an issue with the content and eliminates any mistakes.
+Any advice on writing better Latex is welcome as well.
+Please keep the scope of changes small to make it easier to spot the differences and identify the contribution in order to speed up the review process and get your changes merges as fast as possible.
+
+For broader changes, open an issue for the proposed broad change so we can discuss it.
+
+At this point I would like to avoid making any major changes to styling but open to discussing them.
 
 ## Acknowledgment ##
 
