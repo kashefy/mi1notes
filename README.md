@@ -25,9 +25,9 @@ Ubuntu:
 
 Any contribution to add content, visualization and increase the quality of the notes is much appreciated.
 
-Post Issues to report mistakes (e.g. mistakes in the writing, layout mistakes, problems with referencing)
+Post [Issues](https://github.com/kashefy/mi1notes/issues) to report mistakes (e.g. mistakes in the writing, layout mistakes, problems with referencing)
 
-Making Pull request that fix any issues is very much encouraged and appreciated. 
+Making [Pull request](https://github.com/kashefy/mi1notes/pulls) that fix any issues is very much encouraged and appreciated. 
 Feel free to make a pull request that resolves an issue with the content and eliminates any mistakes.
 Any advice on writing better Latex is welcome as well.
 Please keep the scope of changes small to make it easier to spot the differences and identify the contribution in order to speed up the review process and get your changes merges as fast as possible.
