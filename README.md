@@ -21,7 +21,7 @@ Ubuntu:
 
     apt install texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended latex-beamer texlive-science
     
-## How to Contribute ##
+## Contributing ##
 
 Any contribution to add content, visualization and increase the quality of the notes is much appreciated.
 
