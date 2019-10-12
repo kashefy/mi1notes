@@ -1,0 +1,76 @@
+\newcommand{\sheetnum}{%
+	01
+}
+%\setcounter{section}{\sheetnum-3}
+\newcommand{\tutorialtitle}{%
+    Introduction and the Connectionist Neuron
+}
+\newcommand{\tutorialtitleshort}{%
+	Intro \& Perceptron
+}
+% for slides
+\subtitle{\sheetnum \tutorialtitle}
+
+% The following use of algroithms does not work well with the notes:
+%
+%
+%
+%
+% instead use the following for your algorithms:
+%
+%\begin{figure}[!t]
+%\removelatexerror
+%\begin{algorithm}[H]
+    % your aglo here
+    %\label{alg:algolabel}
+    %\caption{algocaption}
+%\end{algorithm}
+%\end{figure}
+%\begin{algorithm}
+% Below is the definition for the command \removelatexerror:
+\makeatletter
+\newcommand{\removelatexerror}{\let\@latex@error\@gobble}
+\makeatother
+
+\begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\sheet{\sheetnum}{\tutorialtitleshort}
+
+\ttopic{\tutorialtitle}
+
+\columnratio{0.2,0.8}\textbf{}
+\begin{paracol}{2}
+%\setlength{\columnseprule}{0.1pt}
+%\setlength{\columnsep}{5em}
+
+\begin{rightcolumn}
+
+% notes version will ignore it
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\mode<all>
+\input{./learning_paradigms}
+\mode*
+
+\newpage
+
+\mode<all>
+\input{./connectionist_neuron}
+\mode*
+
+\newpage
+
+\mode<all>
+\input{./mlp_intro}
+\mode*
+
+\end{rightcolumn}
+\end{paracol}
+
+\end{document}
