@@ -38,6 +38,8 @@ MLPs are universal function approximators. This means that, provided some assump
   
 \end{frame}
 
+\newpage
+
 \subsection{Ingredients for function fitting}
 
 \begin{frame}\frametitle{\subsecname}
@@ -49,7 +51,7 @@ Fitting an MLP to a desired function $y_T(\vec x)$ requires the following ingred
 \item A cost function with the objective to optimize it, often a minimization problem: $e(y_T, \vec x) \eqexcl min$
 \item A performance measure. Specifically, \\
 
-the generalization error $E^G$ which is defined as:	
+the generalization \textbf{error} $E^G$ which is defined as:	
 \begin{equation} 
 			E^G \quad := \quad \left<\,e\,\right>_{y_T, \vec{x}} 
 			\quad = \quad \iint d \vec{x} \, dy_T \; 
@@ -79,7 +81,6 @@ The choice of cost function has a direct effect on how the model will learn. For
 
 \end{frame}
 
-
 \subsubsection{Cost functions for Regression}
 
 \begin{frame}\frametitle{\subsecname}
@@ -105,9 +106,28 @@ The choice of cost function has a direct effect on how the model will learn. For
   \end{tabular}
      \pause
 
-  \begin{block}{individual cost $e(y_T, \vec{x})$}
+  \begin{block}{individual cost $e(y_T, y(\vec x; \vec w))$}
     \begin{center} \includegraphics[width=12cm]{img/section1_fig17_v2.pdf} \end{center}
   \end{block}   %\pause
-  {several choices for $e(y_T, \vec{x})$ $\Rightarrow$  predictor will depend on error measure!}
+  {several choices for $e(y_T, y(\vec x; \vec w))$ $\Rightarrow$  The predictor will depend on error measure!}
+  
+\end{frame}
+
+\begin{frame}\frametitle{Quadratic vs. linear error}
+
+\mode<article>{
+\paragraph{Quadratic error}
+}
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=4cm]{img/section1_fig17_quadratic.pdf}
+    \caption{Quadratic error}
+    \label{fig:quadratic_err}
+\end{figure}
+
+\begin{equation}
+e = frac{1}{2} \left( y_{T} - y(\vec x;\vec w)\right)^{2}
+\label{eq:quadratic_error}
+\end{equation}
 
 \end{frame}
