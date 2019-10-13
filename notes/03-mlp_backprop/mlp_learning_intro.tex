@@ -93,13 +93,13 @@ The choice of cost function has a direct effect on how the model will learn. For
       \longrightarrow 
       \underbrace{y
       \in \mathbb{R}
-      }_{\text{attribute}}
+      }_{\substack{\text{scalar}\\ \text{attribute}}}
       \]}
     & & 
     \parbox{8cm}{\footnotesize
       \begin{tabular}{l l}
 	$y_T$: & true value of attribute \\
-	$y(\vec{x})$: & predicted value of attribute (e.g. by MLP)
+	$y(\vec{x}; \vec w)$: & predicted value of attribute (e.g. by MLP)
       \end{tabular}
     }
   \end{tabular}
@@ -108,6 +108,6 @@ The choice of cost function has a direct effect on how the model will learn. For
   \begin{block}{individual cost $e(y_T, \vec{x})$}
     \begin{center} \includegraphics[width=12cm]{img/section1_fig17_v2.pdf} \end{center}
   \end{block}   %\pause
-  \textbf{several choices $\Rightarrow$  predictor will depend on error measure!}
+  {several choices for $e(y_T, \vec{x})$ $\Rightarrow$  predictor will depend on error measure!}
 
 \end{frame}
