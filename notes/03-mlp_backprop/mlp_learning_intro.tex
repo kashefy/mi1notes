@@ -43,10 +43,10 @@ MLPs are universal function approximators. This means that, provided some assump
 \begin{frame}\frametitle{\subsecname}
 
 
-Fit an MLP to desired function $y_T(\vec x)$ requires the following ingredients:
+Fitting an MLP to a desired function $y_T(\vec x)$ requires the following ingredients:
 
 \begin{enumerate}
-\item A cost function with the objective to minimize it: $e(y_T, \vec x)$.
+\item A cost function with the objective to optimize it, often a minimization problem: $e(y_T, \vec x) \eqexcl min$
 \item A performance measure. Specifically, \\
 
 the generalization error $E^G$ which is defined as:	
@@ -56,9 +56,9 @@ the generalization error $E^G$ which is defined as:
 				P_{(y_T, \vec{x})} \, e_{(y_T, \vec{x})}
 \end{equation}
 
-\item A parameterized model: MLP, connecitonist neuron, \ldots
-\item An optimization method or learning algorithm for finding the set of parameters in our model that will minimize the cost function.\\
-This can be done analytically (depending on the conditions) or through an iterative learning algorithm (e.g. gradient-based learning)
+\item A model with tunable parameters: MLP, connecitonist neuron, \ldots
+\item A learning algorithm for finding the set of parameters in our model that will minimize the cost function.\\
+This can be done analytically (depending on some conditions) or through an iterative learning algorithm (e.g. gradient-based learning)
 \end{enumerate}
 
 \end{frame}
@@ -66,16 +66,16 @@ This can be done analytically (depending on the conditions) or through an iterat
 \subsection{Cost functions}
 \begin{frame}\frametitle{\subsecname}
 
-A cost function $e(y_T, \vec x)$ (or more explicitly $e(y_T, y(\vec x; \vec w)$) quanitfies the discrepancy between the model's prediction for a specific observation and the label it is assigned to.
+A cost function $e(y_T, \vec x)$ (or $e(y_T, y(\vec x; \vec w)$) quanitfies the discrepancy between the model's prediction $y(\vec x; \vec w)$ and the label $y_T$ it is assigned to.
 
 Selecting a cost function accounts for 
 \begin{enumerate}
-\item the type of problem (i.e. regression vs. classification) and 
+\item the type of problem (i.e. regression vs. classification), 
 \item how the model is penalized for different types of mistakes it can make such as:
-tolerance for certain error range (e.g. small errors are tolerable), large errors are penalized less.
+small errors are tolerable, large errors are penalized less, etc.
 \end{enumerate}
 
-The choice of cost function has a direct effect on how the model will learn. For example, we will later see in gradient-based learning how the error function can modulate how fast or slow  a model learns.
+The choice of cost function has a direct effect on how the model will learn. For example, we will later see in gradient-based learning how the error function can modulate how fast or slow a model learns.
 
 \end{frame}
 
