@@ -4,6 +4,10 @@
 % -----------------------------------------------------------------------------
 
 % ------------------------- New Commands --------------------------------------
+% strikout / strikethrough
+\newcommand\hcancel[2][black]{\setbox0=\hbox{$#2$}%
+\rlap{\raisebox{.2\ht0}{\textcolor{#1}{\rule{\wd0}{1pt}}}}#2} 
+
 \newcommand{\bs}[1]{\boldsymbol{#1}}
 
 \newcommand{\gap}[0]{\vspace{.6cm}}

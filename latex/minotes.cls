@@ -19,6 +19,7 @@
 \usepackage{subcaption}
 \newsavebox{\imagebox}
 \usepackage{paralist}
+\usepackage{xcolor,cancel}
 
 \setlength{\oddsidemargin}{0.25 in}
 \setlength{\evensidemargin}{-0.25 in}
