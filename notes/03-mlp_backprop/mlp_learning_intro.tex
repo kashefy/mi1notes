@@ -4,14 +4,15 @@
 
 \begin{frame}\frametitle{\subsecname}
 
+MLPs are universal function approximators. This means that, provided some assumptions are satisfied, they are capable of finding a function with which to map observations $\vec x$ to a their corresponding label $y_T$.
 
-MLPs are universal function approximators. This means that, provided some assumptions are satisfied, they are capable of finding a function with which to map observations $\vec x$ to a their corresponding label $\vec y_T$.
+Moving forward we will focus only on \emph{scalar} values for the label $y_T$.
 
    \begin{block}{The universal approximation theorem by Funahashi (1989)\footnote
 	{ Funahashi (1989) On the approximate realization of 
 		continuous mappings by neural networks. Neur Netw, 2:183--192\\
 		Hornik et al. (1989) Multilayer Feedforward Networks 
-		are Universal Approximators. Neur Netw, 2:359--366. }}
+		are Universal Approximators. Neur. Netw, 2:359--366. }}
 	\small
     	Let $y_T{(\vec{x})}$ be a continuous, real valued function 
     	over a compact interval $K$ and     
@@ -31,7 +32,7 @@ MLPs are universal function approximators. This means that, provided some assump
 		\mathrm{w}_{ij}^{10}, \theta_i \in \mathbb{R}$ 
 		such that for every $\varepsilon > 0$:
 		\begin{equation}
-		\max_{\vec{x} \in K} \Big| \,{y}{(\vec{x}; \vec w)} - y_T{(\vec{x})} \,\Big| 
+		\max_{\vec{x} \in K} \Big| \, y_T{(\vec{x})} - {y}{(\vec{x}; \vec w)} \,\Big| 
 		\leq \varepsilon
 		 \end{equation}
   \end{block}
@@ -44,23 +45,38 @@ MLPs are universal function approximators. This means that, provided some assump
 
 \begin{frame}\frametitle{\subsecname}
 
-
-Fitting an MLP to a desired function $y_T(\vec x)$ requires the following ingredients:
+\mode<article>{
+Fitting an MLP to a desired function $y_T(\vec x)$ requires the following:
+}
 
 \begin{enumerate}
-\item A cost function with the objective to optimize it, often a minimization problem: $e(y_T, \vec x) \eqexcl min$
-\item A performance measure. Specifically, \\
+\item 
+\mode<article>{A cost function  with the objective to optimize it, often a minimization problem: $e(y_T, \vec x) \eqexcl \min$}
+\mode<presentation>{A cost function:$e(y_T, \vec x) \eqexcl \min$}
+\item A performance measure, a criterion for \emph{model selection}.
+\mode<article>{Specifically, \\
 
-the generalization \textbf{error} $E^G$ which is defined as:	
+the generalization \textbf{error} $E^G$ which is defined as:}	
 \begin{equation} 
 			E^G \quad := \quad \left<\,e\,\right>_{y_T, \vec{x}} 
 			\quad = \quad \iint d \vec{x} \, dy_T \; 
 				P_{(y_T, \vec{x})} \, e_{(y_T, \vec{x})}
 \end{equation}
 
-\item A model with tunable parameters: MLP, connecitonist neuron, \ldots
-\item A learning algorithm for finding the set of parameters in our model that will minimize the cost function.\\
-This can be done analytically (depending on some conditions) or through an iterative learning algorithm (e.g. gradient-based learning)
+Because $P_{(y_T, \vec{x})}$ is not known, \mode<article>{we turn to the principle of empirical risk minimization (ERM).
+According to ERM we can} approxomate $E^G$ by computing the empirilcal average $E^T$ using the available training data 
+$\left\{\left(\vec x^{(\alpha)}, y_T^{(\alpha)}\right)\right\}, \alpha=1,\ldots,p$.
+\mode<article>{The training error $E^T$ becomes:}
+
+\begin{equation}
+\text{batch training error:}\quad E^T=\sum_{\alpha=1}^{p} e^{(\alpha)}
+\end{equation}
+\mode<article>{
+where $e^{(\alpha)}$ is the cost computed from a single observation $y(x^{(\alpha)};\vec w)$ and its corresponding label ($y_T^{(\alpha)}$). The superscript $^{(\alpha)}$ is used as an index of a specific point in the dataset.
+}
+\item A model with tunable parameters $\vec w$: MLP, connectionist neuron, \ldots
+\item A learning algorithm\mode<article>{ for finding the set of parameters in our model that will minimize the cost function.\\
+This can be done analytically (depending on some conditions) or through an iterative learning algorithm (e.g. gradient-based learning)}
 \end{enumerate}
 
 \end{frame}
@@ -68,7 +84,7 @@ This can be done analytically (depending on some conditions) or through an itera
 \subsection{Cost functions}
 \begin{frame}\frametitle{\subsecname}
 
-A cost function $e(y_T, \vec x)$ (or $e(y_T, y(\vec x; \vec w)$) quanitfies the discrepancy between the model's prediction $y(\vec x; \vec w)$ and the label $y_T$ it is assigned to.
+A cost function $e\left(y_T(\vec x), y(\vec x; \vec w)\right)$, or $e(y_T, \vec x)$ for brevity, quantifies the discrepancy between the model's prediction $y(\vec x; \vec w)$ and the label $y_T$ it is assigned to.
 
 Selecting a cost function accounts for 
 \begin{enumerate}
@@ -77,14 +93,13 @@ Selecting a cost function accounts for
 small errors are tolerable, large errors are penalized less, etc.
 \end{enumerate}
 
-The choice of cost function has a direct effect on how the model will learn. For example, we will later see in gradient-based learning how the error function can modulate how fast or slow a model learns.
+The choice of cost function has a direct effect on how the model learns. For example, we will later see in gradient-based learning how the error function can modulate how fast or slow a model learns.
 
 \end{frame}
 
 \subsubsection{Cost functions for Regression}
 
 \begin{frame}\frametitle{\subsecname}
-
 
   \begin{tabular}{c c c}
     \parbox{4cm}{
@@ -99,35 +114,148 @@ The choice of cost function has a direct effect on how the model will learn. For
     & & 
     \parbox{8cm}{\footnotesize
       \begin{tabular}{l l}
-	$y_T$: & true value of attribute \\
+	$y_T(\vec x)$: & true value of attribute \\
 	$y(\vec{x}; \vec w)$: & predicted value of attribute (e.g. by MLP)
       \end{tabular}
     }
   \end{tabular}
      \pause
 
-  \begin{block}{individual cost $e(y_T, y(\vec x; \vec w))$}
+  \begin{block}{individual cost $e(y_T(\vec x), y(\vec x; \vec w))$}
     \begin{center} \includegraphics[width=12cm]{img/section1_fig17_v2.pdf} \end{center}
-  \end{block}   %\pause
-  {several choices for $e(y_T, y(\vec x; \vec w))$ $\Rightarrow$  The predictor will depend on error measure!}
-  
+  \end{block}
 \end{frame}
 
 \begin{frame}\frametitle{Quadratic vs. linear error}
 
-\mode<article>{
-\paragraph{Quadratic error}
-}
-\begin{figure}[h]
-    \centering
-    \includegraphics[height=4cm]{img/section1_fig17_quadratic.pdf}
-    \caption{Quadratic error}
-    \label{fig:quadratic_err}
+\begin{figure}[ht]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[width=0.4\textwidth]{img/section1_fig17_quadratic}}%
+     \begin{subfigure}[t]{0.45\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+         \caption{linear error}
+         \label{fig:quadratic}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[t]{0.45\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.99\textwidth]{img/section1_fig17_quadratic}
+         }
+         \caption{qudratic error}
+         \label{fig:linear}
+     \end{subfigure}
+     \mode<article>{
+     \caption{quadratic vs. linear error}
+     }
+	 \label{fig:quadratic_vs_linear}
 \end{figure}
 
+
 \begin{equation}
-e = frac{1}{2} \left( y_{T} - y(\vec x;\vec w)\right)^{2}
+e_{\text{quadratic}} := \frac{1}{2} \Big( y_{T}(\vec x) - y(\vec x;\vec w)\Big)^{2}
 \label{eq:quadratic_error}
 \end{equation}
 
+\begin{equation}
+e_{\text{linear}} := \Big| y_{T}(\vec x) - y(\vec x;\vec w)\Big|
+\label{eq:linear_error}
+\end{equation}
+
+The purpose of having $\frac{1}{2}$ in \eqref{eq:quadratic_error} is for convenience for when we calculate the derivative later. 
+Both the quadratic and linear cost functions are symmetric. They therefore yield the same error regardless of the sign. However, the differences between them are:
+
+\begin{table}[h]
+\centering
+\caption{Differences between quadratic and linear cost}
+\begin{tabular}{|c|c|}
+\hline
+quadratic                                                                                                    & linear                                                                                                  \\ \hline \hline
+\begin{tabular}[c]{@{}c@{}}larger error $\leadsto$ larger penalty\\  (sensitive to outliers)\end{tabular} & \begin{tabular}[c]{@{}c@{}}constant increase in error\\  (more stable, robust to outliers)\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}c@{}}converges faster\\ but slow convergence\\ for small errors\end{tabular}           & constant convergence rate                                                                               \\ \hline
+differentiable everywhere                                                                                    & \begin{tabular}[c]{@{}c@{}}not differentiable at zero\\ (not a huge problem)\end{tabular}               \\ \hline
+\begin{tabular}[c]{@{}c@{}}max. likelihood of\\ Gaussian variable\end{tabular}                               &                                                                                                         \\ \hline
+\end{tabular}
+\end{table}
+
+\end{frame}
+
+\newpage
+
+\begin{frame}\frametitle{Relation between quadratic error and Gaussian labels}
+
+\mode<article>{
+\paragraph{Relation between quadratic error and Gaussian labels}\\
+
+}
+
+Assume labels $y_T$ are conditionally Gaussian:
+
+\begin{equation}
+P(y_T|\vec x) = \mathcal{N}(y_T|\underbrace{y(\vec x;\vec w)}_{= \mu},\sigma^2)
+\label{eq:gaussian_labels}
+\end{equation}
+
+\mode<article>{
+Using the quadratic cost leads to a solution that corresponds to the same solution found from maximizing the (log-)likelihood\footnote{often, the log-likelihood is maximized for computational efficiency as the log replaces the product with a sum.} of the Gaussian labels:
+}
+\only<1>{
+%\begin{figure}[h]
+     %\centering
+	%\includegraphics[width=0.4\textwidth]{img/gaussian_labels}
+	%\caption{Gaussian distributed labels}
+	%\label{fig:gaussian_labels}
+%\end{figure}
+
+\begin{figure}[ht]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[width=0.4\textwidth]{img/gaussian_labels}}%
+     \begin{subfigure}[t]{0.45\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+         \caption{guassian labels}
+         \label{fig:quadratic}
+     \end{subfigure}
+     \hspace{2mm}
+     \begin{subfigure}[t]{0.45\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.99\textwidth]{img/qudaratic_conditional}
+         }
+         \caption{aggregate density}
+         \label{fig:linear}
+     \end{subfigure}
+     \mode<article>{
+     \caption{quadratic error and guassian labels}
+     }
+	 \label{fig:quadratic_density_gaussian}
+\end{figure}
+}
+\only<2>{
+\begin{align}
+\vec w^* \in \argmin_{\vec w} E^T 
+\iff& 
+\argmax_{\vec w} \underbrace{\prod_{\alpha=1}^{p} \mathcal{N}(y_T|{y(\vec x;\vec w)},\sigma^2)
+}_{
+\text{likelihood function } \mathcal{L(\vec w)}
+}\\
+&=
+\argmin_{\vec w}
+\underbrace{
+ \lbrack - \ln \mathcal{L(\vec w)}\rbrack
+ }_{\text{neg. log likelihood}}
+\end{align} 
+}
+
+
+\end{frame}
+
+\mode<article>{
+This property makes the quadratic cost function the standard choice for regression.
+}
+
+\begin{frame}
 \end{frame}
