@@ -1,0 +1,40 @@
+\section{Ingredients for function fitting}
+
+\begin{frame}\frametitle{\secname}
+
+\mode<article>{
+Fitting an MLP to a desired function $y_T(\vec x)$ requires the following:
+}
+
+\begin{enumerate}
+\item 
+\mode<article>{A cost function  with the objective to optimize it, often a minimization problem: $e(y_T, \vec x) \eqexcl \min$}
+\mode<presentation>{A cost function:$e(y_T, \vec x) \eqexcl \min$}
+\item A performance measure, a criterion for \emph{model selection}.
+\mode<article>{Specifically, \\
+
+the generalization \textbf{error} $E^G$ which is defined as:}	
+\begin{equation} 
+			E^G \quad := \quad \left<\,e\,\right>_{y_T, \vec{x}} 
+			\quad = \quad \iint d \vec{x} \, dy_T \; 
+				P_{(y_T, \vec{x})} \, e_{(y_T, \vec{x})}
+\end{equation}
+
+Because $P_{(y_T, \vec{x})}$ is not known, \mode<article>{we turn to the principle of empirical risk minimization (ERM).
+According to ERM we can} approxomate $E^G$ by computing the empirilcal average $E^T$ using the available training data 
+$\left\{\left(\vec x^{(\alpha)}, y_T^{(\alpha)}\right)\right\}, \alpha=1,\ldots,p$.
+\mode<article>{The training error $E^T$ becomes:}
+
+\begin{equation}
+\text{batch training error:}\quad E^T=\sum_{\alpha=1}^{p} e^{(\alpha)}
+\end{equation}
+\mode<article>{
+where $e^{(\alpha)}$ is the cost computed from a single observation $y(x^{(\alpha)};\vec w)$ and its corresponding label ($y_T^{(\alpha)}$). The superscript $^{(\alpha)}$ is used as an index of a specific point in the dataset.
+}
+\item A model with tunable parameters $\vec w$: MLP, connectionist neuron, \ldots
+\item A learning algorithm\mode<article>{ for finding the set of parameters in our model that will minimize the cost function.\\
+This can be done analytically (depending on some conditions) or through an iterative learning algorithm (e.g. gradient-based learning)}
+\end{enumerate}
+
+\end{frame}
+
