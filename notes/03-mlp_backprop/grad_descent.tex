@@ -159,12 +159,14 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 
 \begin{frame}\frametitle{Gradient calculation: Connectionist neuron}
     
-    Recall the previous example with the connectionis neuron:
+    Recall the previous example with the connectionist neuron:
     
     \begin{figure}[h]
         \centering
         \includegraphics[height=2.5cm]{img/linearNeuron_y}
+        \mode<article>{
         \caption{Connctionist neuron}
+        }
         \label{fig:neuron} 
     \end{figure}
     
@@ -182,21 +184,28 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 			} }
     \end{equation}
     
+\end{frame}
+\begin{frame}
+    
+    \only<1>{
     Knowing that
     \begin{align}
 		\frac{\partial \ETw}
 			{\partial \mathrm{w}_{j}}
-		\quad&=\quad \frac{1}{p} \sum_{\alpha=1}^p
+		\;&=\; \frac{1}{p} \sum_{\alpha=1}^p
         \frac{\partial e\tyxwalpha}
-			{\partial \mathrm{w}_{j}}\\
-        &=\quad \frac{1}{p} \sum_{\alpha=1}^p 
+			{\partial \mathrm{w}_{j}}
+        =\; \frac{1}{p} \sum_{\alpha=1}^p 
         \frac{\partial e^{(\alpha)}}
 			{\partial \mathrm{w}_{j}}
 	\end{align}
+    }
     with $j=0,\ldots,N$.\\
     
+    \mode<article>{
     The individual cost $e^{(\alpha)}$ is a function of terms that are functions of other terms themselves. Therefore, $\frac{\partial e^{(\alpha)}}{\partial \mathrm{w}_{j}}$ is computed by applying the \emph{chain rule}:\\
-    
+    }
+    \only<1,2>{
 	\begin{align}
 		\frac{\partial \ETw}
 			{\partial \mathrm{w}_{j}}
@@ -214,24 +223,37 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 							\text{model class}\\
                             \text{(e.g. perceptron, MLP)}}}
 	\end{align}
+    }
     
+    \mode<article>{
     The first factor
     represents the first link from applying the chain rule. One needs to recognize here that this factor only depends on the choice of cost function.\\
-    Therefore, if the objective were to minimize quadratic error:
+    }
     
+    \only<1>{
+    \mode<article>{
+    Therefore, if the objective were to minimize} quadratic error:
+    
+    \mode<presentation>{\vspace{-1cm}}
     \begin{equation}
 			e\tyxw := \frac{1}{2} \left( y_T - y(\vec{x}; \vec w) \right)^2{}
     \end{equation}
-    Consequently,
+    
+    \mode<article>{Consequently,}
+    
     \begin{equation}
 			\textcolor{blue}{\frac{\partial e\tyxwalpha}{
 					\partial y{(\vec{x}^{(\alpha)}; \vec{w})} }
 				= y_T^{(\alpha)} - y{(\vec{x}^{(\alpha)}; \vec{w})}}
     \end{equation}
+    }
     
+\mode<article>{
     The first factor is completely independent of the type of model we choose. The model-specific contribution to the error function appears in the second factor:
-    Continuing with our choice of connectionist neuron:
-    
+    Continuing with our choice of} connectionist neuron:
+
+    \mode<presentation>{\vspace{-5mm}}
+    \only<2>{
     \begin{equation}
             y(\vec x; \vec w) := 
             f \Big(\; \sum_{j=0}^{N} {w}_{j} {x}_j
@@ -257,6 +279,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
                 {\partial \mathrm{w}_{j}}
             }_{=x_{j}}
 	\end{align}
+    }
     
 \end{frame}
 
@@ -268,21 +291,19 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     \begin{figure}[h]
         \centering
         \includegraphics[height=3.25cm]{img/section1_fig19}
-        \caption{Gradient descent finds local minima. We therefore denote the solution with $\hat{\vec w}$}
-        \label{fig:minimize_via_gradient_descent_local} 
     \end{figure}
     
-        \begin{equation*}
-		w_{ij}^{v'v}(t+1) \quad=\quad w_{ij}^{v'v}(t) 
-				\;\;{\color{red}-}\;\;
-				\underbrace{\eta}_{ 
-						\substack{\text{learning} \\ \text{step} } }
-                        \cdot
-				\underbrace{\frac{\partial \ETw}{
-					\partial \mathrm{w}_{ij}^{v'v}}}_{
-						\substack{
-							\text{\textcolor{red}{gradient vector}} 
-			} }
+    \begin{equation*}
+        w_{ij}^{v'v}(t+1) \quad=\quad w_{ij}^{v'v}(t) 
+            \;\;{\color{red}-}\;\;
+            \underbrace{\eta}_{ 
+                    \substack{\text{learning} \\ \text{step} } }
+                    \cdot
+            \underbrace{\frac{\partial \ETw}{
+                \partial \mathrm{w}_{ij}^{v'v}}}_{
+                    \substack{
+                        \text{\textcolor{red}{gradient vector}} 
+        } }
     \end{equation*}
     }
     
