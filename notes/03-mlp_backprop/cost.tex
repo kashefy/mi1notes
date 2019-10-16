@@ -218,10 +218,11 @@ for the ``positive'' and ``negative''/``other'' class respectively.
 \begin{frame}\frametitle{Cost function derivation via minimization of the Kullback-Leibler divergence}
 
 \mode<article>{
-\paragraph{Cost function derivation via minimization of the Kullback-Leibler divergence between data and model distributions}\\
+\paragraph{The Kullback-Leibler divergence }\\
+
 }
 
-The Kullback-Leibler divergence (KL-divergence or $\dkl$) is a measure of how much one probability distribution is from another distribution.
+$\dkl(P||Q)$ is a measure of how much a probability distribution $P$ differs from another distribution $Q$.
 
 Properties of the KL-divergence:
 
@@ -234,7 +235,7 @@ Properties of the KL-divergence:
 \end{frame}
 
 \begin{frame}\frametitle{Cost function derivation via minimization of the Kullback-Leibler divergence}
-
+ 
 From KL-divergence to binary cross entropy loss:
 \only<1>{
 
@@ -348,7 +349,7 @@ ERM for computing cross entropy loss using the training data:
 
 \begin{align}
 \onslide<1->{
-E^T &= \frac{1}{p} \sum_{\alpha=1}^{p} - \bigg( \;
+\ETw &= \frac{1}{p} \sum_{\alpha=1}^{p} - \bigg( \;
 	\sum_{y\in\{{\color{red}0},{\color{blue}1}\}} P_{\text{data}}(y | \vec x^{(\alpha)})
 	 \ln \lbrack P_{\text{model}}(y | \vec x^{(\alpha)}) \rbrack
 	 \;\bigg)\\
@@ -374,7 +375,7 @@ E^T &= \frac{1}{p} \sum_{\alpha=1}^{p} - \bigg( \;
 	 \ln \lbrack {\color{blue}y(\vec x^{(\alpha)};\vec w)} \rbrack
 	 - ( {\color{red}1-y_T^{(\alpha)}} ) \cdot
 	 \ln \lbrack {\color{red}1-y(\vec x^{(\alpha)};\vec w)} \rbrack  \;\bigg) \\
-	 &= \frac{1}{p} \sum_{\alpha=1}^{p} e^{(\alpha)}
+	 &= \frac{1}{p} \sum_{\alpha=1}^{p} e\tyxwalpha
 }
 \end{align}
 

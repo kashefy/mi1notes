@@ -1,10 +1,10 @@
 \section{Gradient-based learning}
 
 \begin{frame}\frametitle{\secname}
-	Training error $E^T$ for the training set $\{\vec x^{(\alpha)}, y^{(\alpha)}_{T}\}$: 
+	Training error $E^T$ for the training set $\left\{\vec x^{(\alpha)}, y^{(\alpha)}_{T}\right\}$: 
     \begin{equation}
-        E_{[\vec{w}]}^T = \frac{1}{p} \sum\limits_{\alpha = 1}^p 
-					e_{[\vec{w}]}^{(\alpha)}
+        \ETw = \frac{1}{p} \sum\limits_{\alpha = 1}^p 
+					e\tyxwalpha
     \end{equation}
     
     \mode<article>{
@@ -12,7 +12,7 @@
     }
     
     \begin{equation}
-        E_{[\vec{w}]}^T \eqexcl \min_{\vec w} \quad \Rightarrow \quad \vec w^{*} = \argmin_{\vec w} E_{[\vec{w}]}^T
+        \ETw \eqexcl \min_{\vec w} \quad \Rightarrow \quad \vec w^{*} = \argmin_{\vec w} \ETw
     \end{equation}
 
     \begin{figure}[h]
@@ -31,7 +31,7 @@
     
 \end{frame}
 
-\begin{frame}\frametitle{Finding the minumum of $E_{[\vec{w}]}^T$ analytically}
+\begin{frame}\frametitle{Finding the minumum of $\ETw$ analytically}
 
     Example with a simple connectionist neuron model
     with parameters
@@ -42,16 +42,16 @@
     \begin{enumerate}
     \item Compute the gradient w.r.t. $\vec w$ by taking the first partial derivatives w.r.t to each component in the vector $\vec w$
     \begin{equation}
-        \frac{\partial E_{[\vec{w}]}^T}{\partial \vec w} = \left(\,
-        \frac{\partial E_{[\vec{w}]}^T}{\partial w_{0}}, \,
-        \frac{\partial E_{[\vec{w}]}^T}{\partial w_{1}}, \,\ldots\,,\, 
-        \frac{\partial E_{[\vec{w}]}^T}{\partial w_{N}}\,
+        \frac{\partial \ETw}{\partial \vec w} = \left(\,
+        \frac{\partial \ETw}{\partial w_{0}}, \,
+        \frac{\partial \ETw}{\partial w_{1}}, \,\ldots\,,\, 
+        \frac{\partial \ETw}{\partial w_{N}}\,
         \right)^{\top}
         \label{eq:gradient_partial}
     \end{equation}
-    The gradient $\frac{\partial E_{[\vec{w}]}^T}{\partial \vec w}$ has the same dimensionality as $\vec w$.
+    The gradient $\frac{\partial \ETw}{\partial \vec w}$ has the same dimensionality as $\vec w$.
     
-    \item Set the gradient to zero: $\frac{\partial E_{[\vec{w}]}^T}{\partial \vec w} \eqexcl \vec 0$
+    \item Set the gradient to zero: $\frac{\partial \ETw}{\partial \vec w} \eqexcl \vec 0$
     \item Solve for $\vec w$ to find extrema.
     \item Select solution corresponding to global minimum.
     
@@ -63,7 +63,7 @@
 \end{frame}
 
 
-\begin{frame}\frametitle{Finding the minumum of $E_{[\vec{w}]}^T$ iteratively}
+\begin{frame}\frametitle{Finding the minumum of $\ETw$ iteratively}
 
 \mode<article>{
 
@@ -84,7 +84,8 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 				\;\;{\color{red}-}\;\;
 				\underbrace{{\eta}}_{ 
 						\substack{\text{learning} \\ \text{step} } }
-				\underbrace{\frac{\partial E_{[\vec{w}]}^T}{
+                        \cdot
+				\underbrace{\frac{\partial \ETw}{
 					\partial \mathrm{w}_{i}}}_{
 						\substack{
 							\text{\textcolor{red}{``gradient''}} 
@@ -92,7 +93,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
             \label{eq:gradient_descent_neuron}
     \end{equation}
     
-    $\vec w_{\mathrm{init}}$ is bascially a random guess of where the solution might be and going against the gradient will potentially move us closer to the minimum. 
+    $\vec w^{\mathrm{init}}$ is bascially a random guess of where the solution might be and going against the gradient will potentially move us closer to the minimum. 
     }
 	\only<2,3>{
     For an MLP:
@@ -101,7 +102,8 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 				\;\;{\color{red}-}\;\;
 				\underbrace{\eta}_{ 
 						\substack{\text{learning} \\ \text{step} } }
-				\underbrace{\frac{\partial E_{[\vec{w}]}^T}{
+                        \cdot
+				\underbrace{\frac{\partial \ETw}{
 					\partial \mathrm{w}_{ij}^{v'v}}}_{
 						\substack{
 							\text{\textcolor{red}{gradient vector}} 
