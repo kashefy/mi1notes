@@ -318,19 +318,15 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     }
 \end{frame}
 
-\begin{frame}
     
+    \mode<article>{
     \begin{figure}[h]
         \centering
         \includegraphics[height=3cm]{img/section1_fig14_ij}
         \caption{Example MLP architecture}
     \end{figure}
     
-    \mode<article>{
     \eqref{eq:gradient_descent_mlp} shows us how gradients are used for iteratively finding the minimum of the training error.
-    The layered structure of an MLP implies that computing the gradient requires a more involved application of the chain rule.
+    The layered structure of an MLP implies that computing the gradient requires a more involved application of the chain rule. The backpropagation algorithm exploits the chain rule to efficently compute the gradients for an MLP.
     }
     
-    
-    
-\end{frame}
