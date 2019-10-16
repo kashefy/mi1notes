@@ -3,6 +3,13 @@
 ignore slides and notes pdfs
 tutorial_*.slides.pdf
 tutorial_*.notes.pdf
+tutorial_*.handout.pdf
+
+# ignore intermediate pdfs
+tutorial.slides.pdf
+tutorial.notes.pdf
+tutorial.handout.pdf
+
 
 # ignore source code for now
 *.py
