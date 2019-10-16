@@ -13,9 +13,6 @@
 \newcommand{\gap}[0]{\vspace{.6cm}}
 \newcommand{\ve}[1]{\bm{#1}}
 
-% independent and identically distributed
-\newcommand{\iid}{i.i.d.}
-
 % Expectation/mean over variable
 \newcommand{\mean}[1]{\langle #1 \rangle}
 
@@ -141,4 +138,22 @@
 \newcommand{\farrow}{$\Rightarrow\;$}
 \newcommand{\myhref}[2]{{\tt\href{#1}{#2}}}
 
+% --------------------------- Aliases -----------------------------------------
 
+% independent and identically distributed
+\newcommand{\iid}{i.i.d.}
+
+% parameterized cost function
+\newcommand{\tyxw}{\left(y_T, y\left(\vec x; \vec w\right)\right)}
+\newcommand{\tyxwalpha}{\left(y^{(\alpha)}_T, y\left(\vec x^{(\alpha)}; \vec w\right)\right)}
+\newcommand{\txw}{\left(y_T, \vec x; \vec w\right)}
+\newcommand{\txwalpha}{\left(y^{(\alpha)}_T, \vec x^{(\alpha)}; \vec w\right)}
+
+% training error error
+\newcommand{\ET}{{E}^T}
+\newcommand{\ETw}{\ET_{[\vec w]}}
+
+% generalization error
+\newcommand{\EG}{{E}^G}
+\newcommand{\EGw}{{E}^G_{[\vec w]}}
+\newcommand{\estEG}{\widehat{E}^G}

@@ -1,8 +1,7 @@
-
 \subsection{Cost functions}
 \begin{frame}\frametitle{\subsecname}
 
-A cost function $e\left(y_T(\vec x), y(\vec x; \vec w)\right)$, or $e(y_T, \vec x)$ for brevity, quantifies the discrepancy between the model's prediction $y(\vec x; \vec w)$ and the label $y_T$ it is assigned to.
+A cost function $e\tyxw$, quantifies the discrepancy between the model's prediction $y(\vec x; \vec w)$ and the label $y_T$ which $\vec x$ is assigned to.
 
 Selecting a cost function accounts for 
 \begin{enumerate}
@@ -39,7 +38,7 @@ The choice of cost function has a direct effect on how the model learns. For exa
   \end{tabular}
      \pause
 
-  \begin{block}{individual cost $e(y_T(\vec x), y(\vec x; \vec w))$}
+  \begin{block}{individual cost $e\tyxw$}
     \begin{center} \includegraphics[width=12cm]{img/section1_fig17_v2.pdf} \end{center}
   \end{block}
 \end{frame}
@@ -49,7 +48,7 @@ The choice of cost function has a direct effect on how the model learns. For exa
 \begin{figure}[ht]
      \centering
      \savebox{\imagebox}{
-	 \includegraphics[width=0.4\textwidth]{img/section1_fig17_quadratic}}%
+	 \includegraphics[width=0.4\textwidth]{img/section1_fig17_linear}}%
      \begin{subfigure}[t]{0.45\textwidth}
          \centering
          \usebox{\imagebox}% Place largest image
@@ -73,12 +72,12 @@ The choice of cost function has a direct effect on how the model learns. For exa
 
 
 \begin{equation}
-e_{\text{quadratic}} := \frac{1}{2} \Big( y_{T}(\vec x) - y(\vec x;\vec w)\Big)^{2}
+e_{\text{quadratic}}\tyxw := \frac{1}{2} \Big( y_{T}(\vec x) - y(\vec x;\vec w)\Big)^{2}
 \label{eq:quadratic_error}
 \end{equation}
 
 \begin{equation}
-e_{\text{linear}} := \Big| y_{T}(\vec x) - y(\vec x;\vec w)\Big|
+e_{\text{linear}}\tyxw := \Big| y_{T}(\vec x) - y(\vec x;\vec w)\Big|
 \label{eq:linear_error}
 \end{equation}
 
@@ -154,7 +153,7 @@ Using the quadratic cost leads to a solution that corresponds to the same soluti
 }
 \only<2>{
 \begin{align}
-\vec w^* \in \argmin_{\vec w} E^T 
+\vec w^* \in \argmin_{\vec w} \ETw 
 \iff& 
 \argmax_{\vec w} \underbrace{\prod_{\alpha=1}^{p} \mathcal{N}(y_T|{y(\vec x;\vec w)},\sigma^2)
 }_{
