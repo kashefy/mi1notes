@@ -283,16 +283,9 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     
 \end{frame}
 
-\subsection{The Backpropagation algorithm}
-
 \begin{frame}\frametitle{Computing gradients for an MLP}
+
     \mode<presentation>{
-    
-    \begin{figure}[h]
-        \centering
-        \includegraphics[height=3.25cm]{img/section1_fig19}
-    \end{figure}
-    
     \begin{equation*}
         w_{ij}^{v'v}(t+1) \quad=\quad w_{ij}^{v'v}(t) 
             \;\;{\color{red}-}\;\;
@@ -305,12 +298,37 @@ Learning from gradient descent is an alternate approach for finding the minimum 
                         \text{\textcolor{red}{gradient vector}} 
         } }
     \end{equation*}
+    
+    \begin{figure}[ht]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[trim=150 0 0 0,clip,height=2.5cm]{img/section1_fig19}}%
+     \begin{subfigure}[t]{0.35\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+     \end{subfigure}
+     \hspace{7mm}
+     \begin{subfigure}[t]{0.49\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.99\textwidth]{img/section1_fig14_ij}
+         }
+     \end{subfigure}
+    \end{figure}
     }
+\end{frame}
+
+\begin{frame}
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[height=3cm]{img/section1_fig14_ij}
+        \caption{Example MLP architecture}
+    \end{figure}
     
     \mode<article>{
-    
     \eqref{eq:gradient_descent_mlp} shows us how gradients are used for iteratively finding the minimum of the training error.
-    The layered structure of an MLP implies that computing the gradient involves application of the chain rule.
+    The layered structure of an MLP implies that computing the gradient requires a more involved application of the chain rule.
     }
     
     
