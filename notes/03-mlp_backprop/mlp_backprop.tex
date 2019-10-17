@@ -1,73 +1,109 @@
 \section{The backpropagation algorithm}
 
-\begin{frame}\frametitle{\secname}
-
-The Backpropagation algorithm is a method for computing gradients by using the chain rule efficiently.
-
-\end{frame}
-
-
 \definecolor{darkgreen}{rgb}{0,0.6,0}
 \definecolor{darkcyan}{rgb}{0,0.5,0.5}
 \definecolor{darkyellow}{rgb}{0.5,0.5,0}
 \definecolor{mangenta}{rgb}{1,0,1}
-% -----------------------------------------------------------------------------
-\begin{frame} \frametitle{Gradients in neural networks}
-	\begin{equation*}
+
+\begin{frame}\frametitle{\secname}
+
+The Backpropagation algorithm is a method for computing gradients by using the chain rule efficiently.
+\mode<article>{\eqref{eq:gradient_terms} shows us how the gradient breaks down into (1) an error term and (2) a term dependent on the type of model chosen:
+}	
+\begin{equation*}
 	\textcolor{orange}{	\frac{\partial y(\vec{x}; \vec{w})}{
 			\partial \mathrm{w}_{ij}^{v'v}}}
-	\end{equation*}
+\end{equation*}
+    
+The Backpropagation algorithm handles the computation of this term for neural networks such as the one depicted in \figref{fig:example_mlp}.
 
-	\begin{center} \includegraphics[height=3.5cm]{img/section1_fig20.pdf} \end{center}
-
-		%~ \begin{minipage}{3.5cm}
-	\hspace{0.9cm} \tiny Bias node included in the parents.
-		%~ \end{minipage}
-	\vspace{0.3cm}\\
-	\includegraphics[width=4cm]{img/MLP_horizontal.eps}
-	%\hfill{\tiny see blackboard for derivation}
 \end{frame}
 
 % -----------------------------------------------------------------------------
-\begin{frame} \frametitle{Gradients in neural networks} 
+\begin{frame} \frametitle{Gradients in neural networks}
 
-	\placeimage{9.5}{1}{img/section1_fig20_mini_multicolor.pdf}{width=4.8cm}	
-	\vspace{9mm}
-	%How do the weights $w_{ij}^{v'v}$ of hidden units $S_i^{v'}$
-   	%contribute to the error?
-	\begin{block}{Solution: smart application of the chain rule}
-		\begin{eqnarray*}
-			{\color{darkgreen}h_i^{v'}} 
-	   			&=& \kern-2ex\smallsum{(\mu,k) \in P(v',i)}{} \kern-2ex
-	   			w_{ik}^{v'\mu}\;  f_k^\mu\big( {\color{teal} h_k^\mu} \big)
-	   		\\[4mm]
-			\frac{\partial y(\vec{x}; \vec{w})}{\partial \mathrm{w}_{ij}^{v'v}}
-				&=& \underbrace{\frac{\partial y(\vec{x}; \vec{w})}
-					{{\color{darkgreen}\partial h_i^{v'}}} }_{ 
-						\substack{\coloneqq\;{\color{red}\delta_i^{v'}} \\
-						\text{``local error''} \\
-						\text{at neuron} \\
-						(v', i)}
-					}
-				  \cdot 
-				  \underbrace{\frac{{\color{darkgreen}\partial h_i^{v'}}}
-				  	{\partial \mathrm{w}_{ij}^{v'v}}}_{
-						\substack{=\;f_j^v({\color{teal} h_j^v}) \\
-						\text{activity} \\
-						\text{of neuron} \\
-						(v, j)}}
-		\end{eqnarray*}
-	\end{block}
+    \begin{figure}[h]
+    \centering   
+    \includegraphics[height=3cm]{img/section1_fig20_mini_multicolor.pdf}
+    \mode<article>{
+    \caption{Nodes $(v,j)$ and $(v', i)$ are connected via the weight $w^{v'v}_{ij}$. The bias node for neuron $(v,j)$ is included in the set of its parent nodes.}
+    }
+    \label{fig:connection_ij}
+    \end{figure}
+    
+    \mode<article>{
+    The Backpropagation algorithm is not tied to any specific architecture. We will therefore attempt to formulate how it works in the general sense.
+    
+    $h^{v'}_{i}$ measures the total input arriving at neuron $i$ in layer $v'$. 
+    Let $P(v', i)$ describe the set of parent nodes feeding input to neuron $(v', i)$.
+    Therefore, $h^{v'}_{i}$ is the weighted sum of this neuron's parent activations:
+    }
+    \mode<presentation>{\vspace{-5mm}
+    }
+    \begin{equation}
+            {\color{darkgreen}h_i^{v'}} 
+            := 
+            \kern-2ex
+            \sum_{(\mu,k) \in P(v',\,i)}
+            \kern-2ex
+            w_{ik}^{v'\mu}\; 
+            f_k^\mu\big( {\color{teal} h_k^\mu} \big)   
+            \label{eq:total_input_vi}
+    \end{equation}
+    
+    \mode<article>{
+    $\mu$ and $k$ in \eqref{eq:total_input_vi} serve as placeholders for the layer and index for each of the parent nodes $P(v', i)$ feeding input to neuron $(v', i)$.
+    }
+    \mode<presentation>{\vspace{-5mm}
+    }
+    
+    \pause 
+    \question{How does $w_{ij}^{v'v}$ contribute to the error?
+    \slidesonly{$\frac{\partial y(\vec{x}; \vec{w})}{\partial w_{ij}^{v'v}} = \ldots$
+    }}
+    
+    \mode<article>{
+    - The contribution is measured by applying the chain rule:
+    }
+    \mode<presentation>{\vspace{-9mm}
+    }
+    
+    \begin{eqnarray}
+        \frac{\partial y(\vec{x}; \vec{w})}{\partial w_{ij}^{v'v}}
+            = \underbrace{\frac{\partial y(\vec{x}; \vec{w})}
+                {{\color{darkgreen}\partial h_i^{v'}}} }_{ 
+                    \substack{\coloneqq\;{\color{red}\delta_i^{v'}} \\
+                    \text{``local error''} \\
+                    \text{at neuron} \\
+                    (v', i)}
+                }
+              \cdot 
+              \underbrace{\frac{{\color{darkgreen}\partial h_i^{v'}}}
+                {\partial w_{ij}^{v'v}}}_{
+                    \substack{=\;f_j^v({\color{teal} h_j^v}) \\
+                    \text{activity} \\
+                    \text{of neuron} \\
+                    (v, j)}}
+                \label{eq:input_output_terms}
+    \end{eqnarray}
+    
+    \mode<article>{
+    Applying the chain rule as done in \eqref{eq:input_output_terms} breaks the contribution of  $w_{ij}^{v'v}$ to the error into two parts:
+    %\begin{enumerate}
+     %\item Its contribution due to its immediate ``output''. What activity results downstream because of it? In other words, how does $w_{ij}^{v'v}$ influence its \emph{children} in deeper layers?
+     %\item Its contribution due to its immediate ``input''. 
+    %\end{enumerate}
+    }
 \end{frame}
 
 % -----------------------------------------------------------------------------
 \begin{frame} \frametitle{Gradients in neural networks}
 	\only<1,2>{\placeimage{9.5}{1}{img/section1_fig20_mini_multicolor.pdf}{width=4.8cm}}
 	\only<3->{\placeimage{9.5}{1}{img/section1_fig20_mini_back_multicolor.pdf}{width=4.8cm}}
-	
-	\vspace{11mm}
+    
+    \mode<presentation>{ \vspace{11mm} }
 	\begin{enumerate}
-		\item {\textbf forward propagation}: calculate activities 
+		\item \textbf{forward propagation}: calculate activities 
 				$f_i^{v'}({\color{darkgreen}h_i^{v'}})$
 				{\small(parents $\rightarrow$ children)}
 				$$	
@@ -100,7 +136,7 @@ The Backpropagation algorithm is a method for computing gradients by using the c
 		}
 	}
 	\only<3->{
-		\item {\textbf backpropagation}: calculate ``local errors'' 
+		\item \textbf{backpropagation}: calculate ``local errors'' 
 				$\color{red}\delta_i^{v'}$
 				{\small(children $\rightarrow$ parents)}
 				\vspace{-1mm}
@@ -142,7 +178,7 @@ The Backpropagation algorithm is a method for computing gradients by using the c
 		}
 		\only<5->{
 		\vspace{-1mm}
-		\item {\textbf weight update}: using activities and local errors
+		\item \textbf {weight update}: using activities and local errors
 			$$
 				\mathrm{w}_{ij}^{v'v}
 				\quad \leftarrow \quad 

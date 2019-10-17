@@ -213,32 +213,33 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     The individual cost $e^{(\alpha)}$ is a function of terms that are functions of other terms themselves. Therefore, $\frac{\partial e^{(\alpha)}}{\partial \mathrm{w}_{j}}$ is computed by applying the \emph{chain rule}:\\
     }
     \only<1,2>{
-	\begin{align}
+	\begin{equation}
 		\frac{\partial \ETw}
 			{\partial \mathrm{w}_{j}}
-		&\quad=\quad \frac{1}{p} \sum_{\alpha=1}^p	\underbrace{
+		\;=\; \frac{1}{p} \sum_{\alpha=1}^p	\underbrace{
 			\textcolor{blue}{
 			\frac{\partial e\tyxwalpha}{\partial 
 					y(\vec{x}^{(\alpha)}, \vec{w})} }}_{
 						\substack{\text{factor depending} \\
 							\text{on cost function}}}
-				  \cdot \underbrace{
+				  \;\cdot \underbrace{
 			\textcolor{orange}{
 			\frac{\partial y(\vec{x}^{(\alpha)}, \vec{w})}{
 					\partial \mathrm{w}_{j}}} }_{
 						\substack{\text{factor depending on} \\
 							\text{model class}\\
                             \text{(e.g. perceptron, MLP)}}}
-	\end{align}
+            \label{eq:gradient_terms}
+	\end{equation}
     }
     
     \mode<article>{
     The first factor
-    represents the first link from applying the chain rule. One needs to recognize here that this factor only depends on the choice of cost function.\\
+    represents the first link from applying the chain rule. One recognizes that it only depends on the choice of the cost function. This \emph{error term} is completely independent of the type of model we choose.\\
     }
     
     \only<1>{
-    \mode<article>{
+    \notesonly{
     Therefore, if the objective were to minimize} quadratic error:
     
     \mode<presentation>{\vspace{-1cm}}
@@ -246,7 +247,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 			e\tyxw := \frac{1}{2} \left( y_T - y(\vec{x}; \vec w) \right)^2{}
     \end{equation}
     
-    \mode<article>{Consequently,}
+    \mode<article>{it follows:}
     
     \begin{equation}
 			\textcolor{blue}{\frac{\partial e\tyxwalpha}{
@@ -256,8 +257,9 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     }
     
 \mode<article>{
-    The first factor is completely independent of the type of model we choose. The model-specific contribution to the error function appears in the second factor:
-    Continuing with our choice of} connectionist neuron:
+    The model-specific contribution to the error function appears in the second factor:}
+    
+    Continuing with our connectionist neuron \notesonly{from \figref{fig:neuron}}:
 
     \mode<presentation>{\vspace{-5mm}}
     \only<2>{
@@ -332,6 +334,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
         \centering
         \includegraphics[height=3cm]{img/section1_fig14_ij}
         \caption{Example MLP architecture}
+        \label{fig:example_mlp}
     \end{figure}
     
     \eqref{eq:gradient_descent_mlp} shows us how gradients are used for iteratively finding the minimum of the training error.
