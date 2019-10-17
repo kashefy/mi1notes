@@ -11,6 +11,7 @@ tutorial.notes.pdf
 tutorial.handout.pdf
 
 
+
 # ignore source code for now
 *.py
 *.ipynb
@@ -421,3 +422,7 @@ dmypy.json
 .pyre/
 
 ## PYTHON ignore - END
+
+# Custom exclusions - BEGIN
+!*eps-converted-to.*
+# Custom exclusions - END
