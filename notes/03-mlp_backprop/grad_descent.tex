@@ -38,6 +38,7 @@
 
 
     - The strategy for finding the minimum of a function $\ETw$ analytically is as follows:
+    \pause
     \begin{enumerate}
     \item Compute the gradient w.r.t. $\vec w$ by taking the first partial derivatives w.r.t to each component in the vector $\vec w$
     \begin{equation}
@@ -49,6 +50,7 @@
         \label{eq:gradient_partial}
     \end{equation}
     The gradient $\frac{\partial \ETw}{\partial \vec w}$ has the same dimensionality as $\vec w$.
+    \pause
     
     \item Set the gradient to zero: $\frac{\partial \ETw}{\partial \vec w} \eqexcl \vec 0$
     \item Solve for $\vec w$ to find extrema.
@@ -56,15 +58,16 @@
     
     \end{enumerate}
     
+    Caveat: Closed-form solution infeasible for complex models such as MLPs.
+    
     \mode<presentation>{
-    Caveat: Not always applicable. Closed-form solution infeasible for complex models such as MLPs.
     Instead: Iterative learning algorithm gradient descent.
     }
 \end{frame}
 
 \subsection{Gradient descent}
 
-\begin{frame}\frametitle{Finding the minumum of $\ETw$ iteratively}
+\begin{frame}\frametitle{Finding the minumum of $\ETw$ iteratively\only<2->{ for an \underline{MLP}}}
 
 \mode<article>{
 
@@ -73,7 +76,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 }
     \begin{figure}[h]
         \centering
-        \includegraphics[height=3.25cm]{img/section1_fig19}
+        \includegraphics[height=3.cm]{img/section1_fig19}
         \caption{Minimzing the training error iteratively via gradient descent}
         \label{fig:minimize_via_gradient_descent} 
     \end{figure}
@@ -95,8 +98,9 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     \end{equation}
     
     with $j=0,\ldots,N$
-    
+    \mode<article>{
     $\vec w^{\mathrm{init}}$ is bascially a random guess of where the solution might be and going against the gradient will potentially move us closer to the minimum. 
+    }
     }
 	\only<2,3>{
     For an MLP:
@@ -109,6 +113,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 				\underbrace{\frac{\partial \ETw}{
 					\partial \mathrm{w}_{ij}^{v'v}}}_{
 						\substack{
+							\text{component of}
 							\text{\textcolor{red}{gradient vector}} 
 			} }
             \label{eq:gradient_descent_mlp}
@@ -120,7 +125,8 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     The learning step (learning rate) $\eta$ modulates the magnitude of our update. $\eta$ can be treated as a constant but we will also see how the value of $\eta$ can change over time, i.e. $\eta(t)$.
     }
     \only<3>{
-    \question{Why do we \underline{subtract} the gradient from the current value of $w_{ij}^{v'v}(t)$?}
+    \mode<presentation>{\vspace{-3mm}}
+    \question{Why do we \underline{subtract} the gradient from $w_{ij}^{v'v}(t)$?}
     }
     
     \mode<article>{
@@ -180,7 +186,8 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 				\underbrace{\frac{\partial \ETw}{
 					\partial \mathrm{w}_{j}}}_{
 						\substack{
-							\text{\textcolor{red}{``gradient''}} 
+							\text{component of}\\
+							\text{\textcolor{red}{the gradient}} 
 			} }
     \end{equation}
     
@@ -295,6 +302,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
             \underbrace{\frac{\partial \ETw}{
                 \partial \mathrm{w}_{ij}^{v'v}}}_{
                     \substack{
+							\text{component of the }\\
                         \text{\textcolor{red}{gradient vector}} 
         } }
     \end{equation*}
