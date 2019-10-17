@@ -420,7 +420,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# ignore jupyter notebook checkpoints
-.ipynb_checkpoints
-
 ## PYTHON ignore - END
