@@ -381,7 +381,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
             }
             \only<15,16>{{\color{red}\delta^{0}_{j}}
              &=}
-             \only<16>{\text{Not applicable to observed input}}
+             \only<16>{&\text{Not applicable to observed input}}
         \end{flalign}
     }
     \only<3,4,13,14>{
@@ -412,14 +412,14 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
             \vec {w}_{j}^{21}\\
              {\color{red} \vec \delta^{1}}
              &=
-            {\slidesonly{\scriptstyle}
-            [\vec f^{1}]'({\color{darkgreen}h^{1}})\,
-            ({\color{red} (\vec \delta^{2})^{\top}}
-            \vec {W}^{21})^{\top}
-            ([\vec f^{1}]'({\color{darkgreen}h^{1}}))^{\top}
-            ({\color{red} (\vec \delta^{2})^{\top}}
-            \vec {W}^{21})?%TODO
-            }
+            %{\slidesonly{\scriptstyle}
+            %[\vec f^{1}]'({\color{darkgreen}h^{1}})\,
+            %({\color{red} (\vec \delta^{2})^{\top}}
+            %\vec {W}^{21})^{\top}
+            %([\vec f^{1}]'({\color{darkgreen}h^{1}}))^{\top}
+            %({\color{red} (\vec \delta^{2})^{\top}}
+            %\vec {W}^{21})?%TODO
+            %}
              }
         }
         \end{flalign}
