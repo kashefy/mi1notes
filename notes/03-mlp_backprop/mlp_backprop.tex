@@ -8,20 +8,36 @@
 \begin{frame}\frametitle{\secname}
 
 The Backpropagation algorithm is a method for computing gradients by using the chain rule efficiently.
-\mode<article>{\eqref{eq:gradient_terms} shows us how the gradient breaks down into (1) an error term and (2) a term dependent on the type of model chosen:
+\mode<article>{\eqref{eq:gradient_terms} shows us how the gradient breaks down into (1) an error term and (2) a term dependent on the type of model chosen. Specifically:
 }	
 \begin{equation*}
 	\textcolor{orange}{	\frac{\partial y(\vec{x}; \vec{w})}{
 			\partial \mathrm{w}_{ij}^{v'v}}}
+    \label{eq:model_term}
 \end{equation*}
     
-The Backpropagation algorithm handles the computation of this term for neural networks such as the one depicted in \figref{fig:example_mlp}.
+The Backpropagation algorithm handles the computation of the term in \eqref{eq:model_term} for neural networks such as the one depicted in \figref{fig:example_mlp}.
 
 \end{frame}
 
 % -----------------------------------------------------------------------------
 \begin{frame} \frametitle{Gradients in neural networks}
-
+    
+    \mode<article>{
+    The Backpropagation algorithm is not tied to any specific neural architecture. We will therefore attempt to formulate how it works in the general sense.\\
+    
+    Let $w^{v'v}_{ij}$ be the weight connecting neuron $j$ in layer $v$ to neuron $i$ in layer $v'$, In order to compute $\frac{\partial y(\vec{x}; \vec{w})}{
+			\partial \mathrm{w}_{ij}^{v'v}}$ we need to identify the following:
+    \begin{itemize}
+        \item $P(v, j)$: the set of parent nodes feeding input to neuron $(v, j)$,
+        \item $C(v', i)$: the set of children nodes which neuron $(v', i)$ provides with input
+    \end{itemize}
+    
+    $h^{v'}_{i}$ measures the total input arriving at neuron $i$ in layer $v'$. 
+    Let $P(v', i)$ describe the set of parent nodes feeding input to neuron $(v', i)$.
+    Therefore, $h^{v'}_{i}$ is the weighted sum of this neuron's parent activations:
+    }
+    
     \begin{figure}[h]
     \centering   
     \includegraphics[height=3cm]{img/section1_fig20_mini_multicolor.pdf}
@@ -31,13 +47,6 @@ The Backpropagation algorithm handles the computation of this term for neural ne
     \label{fig:connection_ij}
     \end{figure}
     
-    \mode<article>{
-    The Backpropagation algorithm is not tied to any specific architecture. We will therefore attempt to formulate how it works in the general sense.
-    
-    $h^{v'}_{i}$ measures the total input arriving at neuron $i$ in layer $v'$. 
-    Let $P(v', i)$ describe the set of parent nodes feeding input to neuron $(v', i)$.
-    Therefore, $h^{v'}_{i}$ is the weighted sum of this neuron's parent activations:
-    }
     \mode<presentation>{\vspace{-5mm}
     }
     \begin{equation}
