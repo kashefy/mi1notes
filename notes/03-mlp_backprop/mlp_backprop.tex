@@ -336,88 +336,132 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
 }
 \end{frame}
 
-\begin{frame}\frametitle{The forward pass}
+\begin{frame}
     \mode<presentation>{
-    %\vspace{-3mm}
-    %\begin{figure}[h]
-    %\centering   
-    %\includegraphics[height=4cm]{img/section1_fig14_fc}
-    %\end{figure}
-    %\vspace{-3mm}
     \placeimage{7.4}{1}{img/section1_fig14_fc}{width=6.7cm}
+    \begin{textblock}{4}(0.5,2)
+    \begin{equation}
+    \boxed{
+    \only<-8>{
+    \frametitle{The forward pass}
+        {\color{darkgreen}h_i^{v'}}
+        \,= \kern-2ex
+        \smallsum{(\mu,k) \in P(v',\,i)}{}
+        \kern-2ex
+        w_{ik}^{v'\mu}\; f_k^\mu\big( {\color{teal} h_k^\mu} \big)
+    }
+    \only<9->{
+    \frametitle{The backward pass}
+            {\color{red}\delta_i^{v'}}
+            =
+            [f_i^{v'}]'({\color{darkgreen}h_i^{v'}}) 
+            \kern-3ex\sum_{(v''\hspace{-1mm},\,k) \in C(v',\,i)}\kern-3ex
+            {\color{red}\delta_k^{v''}} 
+            {w}_{ki}^{v'' v'}
+            }
+            }
+    \end{equation}
+    \end{textblock}
     \vspace{2cm}
     }
     
     Compute $h^{v}_{i}$ for $v = 0,\ldots,L$:
     \begin{itemize}
-    \only<1>{
+    \only<1,2,15,16>{
         \item $v=0$ (input layer):\\ \slidesonly{\vspace{-3mm}}
         \begin{flalign}
-            h^{0}_{j} &= x_{j}\;,\qquad j=1,\ldots,N&&\\
-            h^{0}_{0} &= 1\qquad\quad(\text{bias node})&&\\
-            \vec h^{0} &= \vec x\qquad\quad(\text{bias included})&&\\
-            f^0_{j}(h) :\kern-0.5ex&= h \qquad\quad \text{ (identity function)} \;\Rightarrow\; \vec f^0(\vec h) = \vec x
+            h^{0}_{j} &=
+            \only<1>{&&}
+            \only<2,15,16>{
+                              x_{j}\;,   & j=1,\ldots,N&&\\
+                h^{0}_{0}  &= 1          & (\text{bias node})\\
+                \vec h^{0} &= \vec x     & (\text{bias included})\\
+                f^0_{j}(h) :\kern-0.5ex&= h \qquad\Rightarrow\; \vec f^0(\vec h) = \vec x
+                & \text{ (identity function)}\\
+            }
+            \only<15,16>{{\color{red}\delta^{0}_{j}}
+             &=}
+             \only<16>{\text{Not applicable to observed input}}
         \end{flalign}
     }
-    \only<2>{
-        \item $v=1$ (1\textsuperscript{st} hidden layer):\\ \slidesonly{\vspace{-3mm}}
+    \only<3,4,13,14>{
+        \item $v=1$ (1\textsuperscript{st} hidden layer, $N^{(1)} \text{ nodes}$):\\ \slidesonly{\vspace{-5mm}}
         \begin{flalign}
-        h^{1}_{j} &= \kern-2ex\smallsum{(\mu,k) \in P(1,\,j)}{} \kern-2ex
-	   			w_{jk}^{1\mu}\;  f_k^\mu\big( {h_k^\mu} \big)\;,\quad j=1,\ldots,N^{(1)}&&\\
-                  &= \smallsum{k=0}{N} w_{jk}^{10}\;  f_k^0\big( {h_k^0} \big) = (\vec w_{j}^{10})^{\top} \vec h^0 \quad(\text{bias included})&&\\
-        \vec h^{1} &= (\vec W^{10})^{\top} \vec h^0 \quad(\text{biases included})&&\\
-        f^1_{j}(h) &= \text{e.g. }\tanh() \qquad j=1,\ldots,N^{(1)}&&
-        \end{flalign}
-    }
-    \only<3,7,8>{
-        \item $v=2$ (2\textsuperscript{nd} hidden layer):\\ \slidesonly{\vspace{-3mm}}
-        \begin{flalign}
-        h^{2}_{i} 
-        \only<3>{&= \kern-2ex\smallsum{(\mu,j) \in P(2,\,i)}{} \kern-2ex
-	   			w_{ij}^{2\mu}\;  f_j^\mu\big( {h_j^\mu} \big)\;,\quad i=1,\ldots,N^{(2)}&&\\
-                }
-                  &= \smallsum{j=0}{N^{(1)}} w_{ij}^{21}\;  f_j^1\big( {h_j^1} \big) = (\vec w_{i}^{21})^{\top} \vec f^{1}(\vec h^1) \quad(\text{bias included})&&\\
-        \vec h^{2} &= (\vec W^{21})^{\top} \vec f^{1}(\vec h^1) \quad(\text{biases included})&&\\
-        f^2_{i}(h) &= \text{e.g. }\tanh() \qquad i=1,\ldots,N^{(2)}&&
-        \end{flalign}
-    }
-    \only<7,8>{
-        \slidesonly{\vspace{-8mm}}
-        \begin{flalign}
-         {\color{red}\delta^{2}_{i}}
-         &= 
-            [f_i^{2}]'({\color{darkgreen}h_i^{2}}) 
-            \kern-3ex\sum_{(v''\hspace{-1mm},\,k) \in C(2,\,i)}\kern-3ex
-            {\color{red}\delta_k^{v''}} 
-            {w}_{ki}^{2v'}
-        \only<7>{&&}
-        \only<8>{
-         \;=\; 
-            [f_i^{2}]'({\color{darkgreen}h_i^{2}})
-            {\color{red}\delta_1^{L}} 
-            {w}_{1i}^{L2}\\
-         {\color{red} \vec \delta^{2}} &=\; (\vec w^{L2})^{\top}[\vec f^{2}]'(\vec h^{2})
-            &&
+        h^{1}_{j} &= 
+        \only<3>{&&}
+        \only<4,13,14>{
+            \smallsum{k=0}{N} w_{jk}^{10}\;  f_k^0\big( {h_k^0} \big) = (\vec w_{j}^{10})^{\top} \vec h^0 & (\text{bias included})&&\\
+            \vec h^{1} &= (\vec W^{10})^{\top} \vec h^0 &(\text{biases included})\\
+            f^1_{j}(h) &= \text{e.g. }\tanh() & j=1,\ldots,N^{(1)}\\
+        }
+        \only<13,14>{
+             {\color{red}\delta^{1}_{j}}
+             &=
+             \only<14>{\slidesonly{\scriptstyle}
+                         %[f_i^{v'}]'({\color{darkgreen}h_i^{v'}}) 
+            %\sum_{(v''\hspace{-1mm},\,k) \in C(v',\,i)}
+            %{\color{red}\delta_k^{v''}} 
+            %{w}_{ki}^{v'' v'}
+            [f_j^{1}]'({\color{darkgreen}h_j^{1}}) 
+            \kern-.5ex\sum_{k=0}^{N^{(2)}}\kern-.5ex
+            {\color{red}\delta_k^{2}} \,
+            {w}_{kj}^{21}
+            = 
+            [f_j^{1}]'({\color{darkgreen}h_j^{1}})\,
+            {\color{red} (\vec \delta^{2})^{\top}}
+            \vec {w}_{j}^{21}\\
+             {\color{red} \vec \delta^{1}}
+             &=
+            {\slidesonly{\scriptstyle}
+            [\vec f^{1}]'({\color{darkgreen}h^{1}})\,
+            ({\color{red} (\vec \delta^{2})^{\top}}
+            \vec {W}^{21})^{\top}
+            ([\vec f^{1}]'({\color{darkgreen}h^{1}}))^{\top}
+            ({\color{red} (\vec \delta^{2})^{\top}}
+            \vec {W}^{21})?%TODO
+            }
+             }
         }
         \end{flalign}
     }
-    \only<4,5,6>{
+    \only<5,6,11,12>{
+        \item $v=2$ (2\textsuperscript{nd} hidden layer, $N^{(2)} \text{ nodes}$):\\ \slidesonly{\vspace{-3mm}}
+        \begin{flalign}
+        h^{2}_{i} &=
+        \only<5>{&&}
+        \only<6,11,12>{
+            \smallsum{j=0}{N^{(1)}} w_{ij}^{21}\;  f_j^1\big( {h_j^1} \big) = (\vec w_{i}^{21})^{\top} \vec f^{1}(\vec h^1) &(\text{bias included})&&\\
+            \vec h^{2} &= (\vec W^{21})^{\top} \vec f^{1}(\vec h^1) &(\text{biases included})\\
+            f^2_{i}(h) &= \text{e.g. }\tanh() & i=1,\ldots,N^{(2)}\\
+        }
+        \only<11,12>{
+             {\color{red}\delta^{2}_{i}}
+             &=
+            \only<12>{
+                [f_i^{2}]'({\color{darkgreen}h_i^{2}})
+                {\color{red}\delta_1^{L}} 
+                {w}_{1i}^{L2}\\
+             {\color{red} \vec \delta^{2}} &=\; (\vec w^{L2})^{\top}[\vec f^{2}]'(\vec {\color{darkgreen}h^{2}})
+            }
+        }
+        \end{flalign}
+        }
+    \only<7,8,9,10>{
         \item $v=L$ (output layer):\\ \slidesonly{\vspace{-4mm}}
         \begin{flalign}
-        h^{L}_{1} 
-        \only<4>{&=\kern-2ex\smallsum{(\mu,i) \in P(L,\,1)}{} \kern-2ex
-	   			w_{1i}^{L\mu}\;  f_i^\mu\big( {h_i^\mu} \big)\;&&\\
-                }
-                  &= \smallsum{i=0}{N^{(2)}} w_{1i}^{L2}\;  f_i^1\big( {h_i^1} \big) = (\vec w_{1}^{21})^{\top} \vec f^{2}(\vec h^2) \quad(\text{bias included})&&\\
-        y(\vec x; \vec w) &= f^L_{1}(h^{L}_{1})&&\\
-        f^L_{1}(h) &= \text{e.g. logistic function (sigmoid)}&&
-        \end{flalign}
-    }
-    \only<5,6>{
-        \slidesonly{\vspace{-8mm}}
-        \begin{flalign}
-         {\color{red}\delta^{v}_{i}}  &= \frac{\partial y(\vec{x}; \vec{w})} {{\color{blue}\partial h_1^{L}}}
-					= [f_1^{L}]'({\color{blue} h_1^{L}})&&
+        h^{L}_{1} &=
+        \only<7>{&&}
+        \only<8,9,10>{
+            \smallsum{i=0}{N^{(2)}} w_{1i}^{L2}\;  f_i^1\big( {h_i^1} \big) = (\vec w_{1}^{21})^{\top} \vec f^{2}(\vec h^2) &(\text{bias included})&&\\
+            y(\vec x; \vec w) &= f^L_{1}(h^{L}_{1})&&\\
+            f^L_{1}(h) &= \text{e.g. logistic function (sigmoid)}\\
+        }
+        \only<9,10>{
+            {\color{red}\delta^{L}_{1}}  &= \frac{\partial y(\vec{x}; \vec{w})} {{\color{blue}\partial h_1^{L}}} =
+            \only<10>{
+                [f_1^{L}]'({\color{blue} h_1^{L}})
+            }
+        }
         \end{flalign}
     }
     \end{itemize}
