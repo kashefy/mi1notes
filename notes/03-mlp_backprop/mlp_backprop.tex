@@ -345,7 +345,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
     %\end{figure}
     %\vspace{-3mm}
     \placeimage{7.4}{1}{img/section1_fig14_fc}{width=6.7cm}
-    \vspace{3cm}
+    \vspace{2cm}
     }
     
     Compute $h^{v}_{i}$ for $v = 0,\ldots,L$:
@@ -369,24 +369,55 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
         f^1_{j}(h) &= \text{e.g. }\tanh() \qquad j=1,\ldots,N^{(1)}&&
         \end{flalign}
     }
-    \only<3>{
+    \only<3,7,8>{
         \item $v=2$ (2\textsuperscript{nd} hidden layer):\\ \slidesonly{\vspace{-3mm}}
         \begin{flalign}
-        h^{2}_{i} &= \kern-2ex\smallsum{(\mu,j) \in P(2,\,i)}{} \kern-2ex
+        h^{2}_{i} 
+        \only<3>{&= \kern-2ex\smallsum{(\mu,j) \in P(2,\,i)}{} \kern-2ex
 	   			w_{ij}^{2\mu}\;  f_j^\mu\big( {h_j^\mu} \big)\;,\quad i=1,\ldots,N^{(2)}&&\\
+                }
                   &= \smallsum{j=0}{N^{(1)}} w_{ij}^{21}\;  f_j^1\big( {h_j^1} \big) = (\vec w_{i}^{21})^{\top} \vec f^{1}(\vec h^1) \quad(\text{bias included})&&\\
         \vec h^{2} &= (\vec W^{21})^{\top} \vec f^{1}(\vec h^1) \quad(\text{biases included})&&\\
         f^2_{i}(h) &= \text{e.g. }\tanh() \qquad i=1,\ldots,N^{(2)}&&
         \end{flalign}
     }
-    \only<4>{
-        \item $v=L$ (output layer):\\ \slidesonly{\vspace{-3mm}}
+    \only<7,8>{
+        \slidesonly{\vspace{-8mm}}
         \begin{flalign}
-        h^{L}_{1} &= \kern-2ex\smallsum{(\mu,i) \in P(L,\,1)}{} \kern-2ex
+         {\color{red}\delta^{2}_{i}}
+         &= 
+            [f_i^{2}]'({\color{darkgreen}h_i^{2}}) 
+            \kern-3ex\sum_{(v''\hspace{-1mm},\,k) \in C(2,\,i)}\kern-3ex
+            {\color{red}\delta_k^{v''}} 
+            {w}_{ki}^{2v'}
+        \only<7>{&&}
+        \only<8>{
+         \;=\; 
+            [f_i^{2}]'({\color{darkgreen}h_i^{2}})
+            {\color{red}\delta_1^{L}} 
+            {w}_{1i}^{L2}\\
+         {\color{red} \vec \delta^{2}} &=\; (\vec w^{L2})^{\top}[\vec f^{2}]'(\vec h^{2})
+            &&
+        }
+        \end{flalign}
+    }
+    \only<4,5,6>{
+        \item $v=L$ (output layer):\\ \slidesonly{\vspace{-4mm}}
+        \begin{flalign}
+        h^{L}_{1} 
+        \only<4>{&=\kern-2ex\smallsum{(\mu,i) \in P(L,\,1)}{} \kern-2ex
 	   			w_{1i}^{L\mu}\;  f_i^\mu\big( {h_i^\mu} \big)\;&&\\
+                }
                   &= \smallsum{i=0}{N^{(2)}} w_{1i}^{L2}\;  f_i^1\big( {h_i^1} \big) = (\vec w_{1}^{21})^{\top} \vec f^{2}(\vec h^2) \quad(\text{bias included})&&\\
         y(\vec x; \vec w) &= f^L_{1}(h^{L}_{1})&&\\
         f^L_{1}(h) &= \text{e.g. logistic function (sigmoid)}&&
+        \end{flalign}
+    }
+    \only<5,6>{
+        \slidesonly{\vspace{-8mm}}
+        \begin{flalign}
+         {\color{red}\delta^{v}_{i}}  &= \frac{\partial y(\vec{x}; \vec{w})} {{\color{blue}\partial h_1^{L}}}
+					= [f_1^{L}]'({\color{blue} h_1^{L}})&&
         \end{flalign}
     }
     \end{itemize}
@@ -469,7 +500,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
 						 \,, \quad \forall w_{ij}^{v'v}$
 				\hspace{11mm} // sum
 			}
-			\notesonly{// gradient descent step:\\
+			\notesonly{ // gradient descent step:\\
             
             }
 			$\text{gradient}_{ij}^{v'v} := \frac{1}{p} \text{gradient}_{ij}^{v'v}$\\
