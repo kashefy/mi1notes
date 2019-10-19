@@ -1,4 +1,4 @@
-\section{The backpropagation algorithm}
+\section{The Backpropagation algorithm}
 
 \definecolor{darkgreen}{rgb}{0,0.6,0}
 \definecolor{darkcyan}{rgb}{0,0.5,0.5}
@@ -101,7 +101,7 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
     \eqref{eq:input_output_terms} breaks the contribution of  $w_{ij}^{v'v}$ to the neuron's output into two parts:
     \begin{enumerate}
      \item The contribution of $h^{v'}_{i}$ to the network's response $y(\vec x; \vec w)$. This is referred to as the ``local error'' at neuron $(v',i)$. The efficiency of the Backpropagation algorithm is based on how it computes the ``local error'' denoted by $\delta_i^{v'}$ for neuron $(v', i)$ and all other neurons in the network.
-     \item The contribution of $h^{v'}_{i}$ due to one of its inputs, namely neuron $(v,j)$ which is weighted by $w_{ij}^{v'v}$. We already have everythin to compute this term and that is by taking the definition of $h^{v'}_{i}$ in \eqref{eq:total_input_vi} and taking the derivative w.r.t. $w_{ij}^{v'v}$. 
+     \item The contribution of $h^{v'}_{i}$ due to one of its inputs, namely neuron $(v,j)$ which is weighted by $w_{ij}^{v'v}$. We already have everything to compute this term and that is by taking the definition of $h^{v'}_{i}$ in \eqref{eq:total_input_vi} and taking the derivative w.r.t. $w_{ij}^{v'v}$. 
      This should be straightforward, since only a single term in the sum depends on $w_{ij}^{v'v}$:
          \begin{equation}
             \frac{{\color{darkgreen}\partial h_i^{v'}}}
@@ -126,10 +126,10 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 \end{frame}
 
 \begin{frame}\frametitle{The Backpropagation algorithm}
-    The backpropagation algorithm is composed of two stages:
+    The Backpropagation algorithm is composed of two stages:
     \begin{enumerate}
      \item \textbf{forward propagation}
-     \mode<article>{: Given some input $\vec x$ compute the activites of all neurons and the response of the network.}
+     \mode<article>{: Given some input $\vec x$ compute the activities of all neurons and the response of the network.}
      \item \textbf{backwards propagation}
      \mode<article>{: Given the response of the network. Recursively calculate the local errors starting with the output node and work your way backwards through the network.}
     \end{enumerate}
@@ -304,7 +304,7 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 \definecolor{forward}{rgb}{0,0.7,0}
 \definecolor{backward}{rgb}{0.8,0,0}
 
-\subsection{Summary of the backpropagation for gradient descent}
+\subsection{Summary of the Backpropagation for gradient descent}
 
 \begin{frame} \frametitle{\subsecname}
     \mode<presentation>{
