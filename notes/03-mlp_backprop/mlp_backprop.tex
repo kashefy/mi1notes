@@ -128,9 +128,9 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 \begin{frame}\frametitle{The Backpropagation algorithm}
     The Backpropagation algorithm is composed of two stages:
     \begin{enumerate}
-     \item \textbf{forward propagation}
+     \item \textbf{forward propagation} (forward pass)
      \mode<article>{: Given some input $\vec x$ compute the activities of all neurons and the response of the network.}
-     \item \textbf{backwards propagation}
+     \item \textbf{backwards propagation} (backward pass)
      \mode<article>{: Given the response of the network. Recursively calculate the local errors starting with the output node and work your way backwards through the network.}
     \end{enumerate}
 \end{frame}
@@ -304,6 +304,97 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 \definecolor{forward}{rgb}{0,0.7,0}
 \definecolor{backward}{rgb}{0.8,0,0}
 
+\subsection{Example: MLP with fully connected layers}
+
+\mode<article>{
+We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig:mlp_fc}. All neurons in one layer are connected with all nodes of the next layer. The layers are therefore \emph{fully connected}. This implies that the weights between consecutive layers make up a \emph{dense} weight matrix. This allows us to express the formulas using vector notation.  
+}
+
+\begin{frame}\frametitle{\subsecname}
+    \begin{figure}[h]
+    \centering   
+    \includegraphics[height=5cm]{img/section1_fig14_fc}
+    \mode<article>{
+    \caption{MLP with fully connected layers}
+    }
+    \label{fig:mlp_fc}
+    \end{figure}
+    
+\notesonly{Recall that the purpose of the Backpropagation algorithm is to compute the gradients. Therefore, the task is to obtain an expression for computing }\slidesonly{compute} the gradients for all weights and biases in this network:\\
+
+\pause
+
+\question{What is the general procedure for the Backpropagation algorithm?}
+
+\mode<article>{
+\pause
+- The procedure is:
+\begin{enumerate}
+ \item Forward pass: forward propagation of neuron activities and obtain the network's response,
+ \item Backward pass: backpropagation of ``local errors''
+\end{enumerate}
+}
+\end{frame}
+
+\begin{frame}\frametitle{The forward pass}
+    \mode<presentation>{
+    %\vspace{-3mm}
+    %\begin{figure}[h]
+    %\centering   
+    %\includegraphics[height=4cm]{img/section1_fig14_fc}
+    %\end{figure}
+    %\vspace{-3mm}
+    \placeimage{7.4}{1}{img/section1_fig14_fc}{width=6.7cm}
+    \vspace{3cm}
+    }
+    
+    Compute $h^{v}_{i}$ for $v = 0,\ldots,L$:
+    \begin{itemize}
+    \only<1>{
+        \item $v=0$ (input layer):\\ \slidesonly{\vspace{-3mm}}
+        \begin{flalign}
+            h^{0}_{j} &= x_{j}\;,\qquad j=1,\ldots,N&&\\
+            h^{0}_{0} &= 1\qquad\quad(\text{bias node})&&\\
+            \vec h^{0} &= \vec x\qquad\quad(\text{bias included})&&\\
+            f^0_{j}(h) :\kern-0.5ex&= h \qquad\quad \text{ (identity function)} \;\Rightarrow\; \vec f^0(\vec h) = \vec x
+        \end{flalign}
+    }
+    \only<2>{
+        \item $v=1$ (1\textsuperscript{st} hidden layer):\\ \slidesonly{\vspace{-3mm}}
+        \begin{flalign}
+        h^{1}_{j} &= \kern-2ex\smallsum{(\mu,k) \in P(1,\,j)}{} \kern-2ex
+	   			w_{jk}^{1\mu}\;  f_k^\mu\big( {h_k^\mu} \big)\;,\quad j=1,\ldots,N^{(1)}&&\\
+                  &= \smallsum{k=0}{N} w_{jk}^{10}\;  f_k^0\big( {h_k^0} \big) = (\vec w_{j}^{10})^{\top} \vec h^0 \quad(\text{bias included})&&\\
+        \vec h^{1} &= (\vec W^{10})^{\top} \vec h^0 \quad(\text{biases included})&&\\
+        f^1_{j}(h) &= \text{e.g. }\tanh() \qquad j=1,\ldots,N^{(1)}&&
+        \end{flalign}
+    }
+    \only<3>{
+        \item $v=2$ (2\textsuperscript{nd} hidden layer):\\ \slidesonly{\vspace{-3mm}}
+        \begin{flalign}
+        h^{2}_{i} &= \kern-2ex\smallsum{(\mu,j) \in P(2,\,i)}{} \kern-2ex
+	   			w_{ij}^{2\mu}\;  f_j^\mu\big( {h_j^\mu} \big)\;,\quad i=1,\ldots,N^{(2)}&&\\
+                  &= \smallsum{j=0}{N^{(1)}} w_{ij}^{21}\;  f_j^1\big( {h_j^1} \big) = (\vec w_{i}^{21})^{\top} \vec f^{1}(\vec h^1) \quad(\text{bias included})&&\\
+        \vec h^{2} &= (\vec W^{21})^{\top} \vec f^{1}(\vec h^1) \quad(\text{biases included})&&\\
+        f^2_{i}(h) &= \text{e.g. }\tanh() \qquad i=1,\ldots,N^{(2)}&&
+        \end{flalign}
+    }
+    \only<4>{
+        \item $v=L$ (output layer):\\ \slidesonly{\vspace{-3mm}}
+        \begin{flalign}
+        h^{L}_{1} &= \kern-2ex\smallsum{(\mu,i) \in P(L,\,1)}{} \kern-2ex
+	   			w_{1i}^{L\mu}\;  f_i^\mu\big( {h_i^\mu} \big)\;&&\\
+                  &= \smallsum{i=0}{N^{(2)}} w_{1i}^{L2}\;  f_i^1\big( {h_i^1} \big) = (\vec w_{1}^{21})^{\top} \vec f^{2}(\vec h^2) \quad(\text{bias included})&&\\
+        y(\vec x; \vec w) &= f^L_{1}(h^{L}_{1})&&\\
+        f^L_{1}(h) &= \text{e.g. logistic function (sigmoid)}&&
+        \end{flalign}
+    }
+    \end{itemize}
+    
+\end{frame}
+
+\newpage
+
 \subsection{Summary of the Backpropagation for gradient descent}
 
 \begin{frame} \frametitle{\subsecname}
@@ -392,3 +483,5 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 		%\caption{Backpropagation in feedforward networks}
 	%\end{algorithm}
 \end{frame}
+
+
