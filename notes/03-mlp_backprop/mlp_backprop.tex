@@ -106,13 +106,14 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
          \begin{equation}
             \frac{{\color{darkgreen}\partial h_i^{v'}}}
             {\partial w_{ij}^{v'v}}
-            =  \frac{\partial \left(
-            \sum_{(\mu,k) \in P(v',\,i)}
-            w_{ik}^{v'\mu}\; 
-            f_k^\mu\big( {\color{teal} h_k^\mu} \big)  
-            \right)
-            } 
+            =  \frac{\partial}
             {\partial w_{ij}^{v'v}}
+            \left(
+            \sum_{(\mu,k) \in P(v',\,i)}
+            \kern-3ex
+            w_{ik}^{v'\mu}\; 
+            f_k^\mu\big( {\color{teal} h_k^\mu} \big){}
+            \right)
             = \underbrace{f_j^v({\color{teal} h_j^v})}_{
             \substack{
                     \text{activity} \\
@@ -138,9 +139,10 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 
 % -----------------------------------------------------------------------------
 \begin{frame} \frametitle{The Backpropagation algorithm}
+    \mode<presentation>{
 	\only<1,2>{\placeimage{9.5}{1}{img/section1_fig20_mini_multicolor.pdf}{width=4.8cm}}
 	\only<3->{\placeimage{9.5}{1}{img/section1_fig20_mini_back_multicolor.pdf}{width=4.8cm}}
-    
+    }
     \mode<presentation>{ \vspace{11mm} }
 	\begin{enumerate}
 		\item \textbf{forward propagation}: calculate activities 
@@ -182,7 +184,7 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 				\vspace{-1mm}
 				%~ \begin{eqnarray*} 
 				%~ \end{eqnarray*}
-				\begin{eqnarray*} 
+				\begin{eqnarray} 
 				{\color{red} \delta_1^L}
 				&=& \frac{\partial y(\vec{x}; \vec{w})} {{\color{blue}\partial h_1^{L}}}
 					= [f_1^{L}]'({\color{blue} h_1^{L}})
@@ -190,11 +192,12 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 							\\
 					{\color{red}\delta_i^{v'}} 
 					\only<3>{
-						&=&  \frac{\partial y(\vec x; \vec w)}{\partial h^{v'}_{i}}
-						\qquad \text{local error at neuron }(v', i)\\
+						&=&  \frac{\partial y(\vec x; \vec w)}{\color{darkgreen}\partial h^{v'}_{i}}
+						\qquad \text{``local error'' at neuron }(v', i)
+                        \label{eq:delta_step1}\\
 						}
 					\only<4->{
-						&=&  \kern-3ex\sum\limits_{(v''\hspace{-1mm},\,k) \in C(v',\,i)}
+						&=&  \kern-3ex\sum\limits_{(v''\hspace{-1mm},\,k) \in C(v',\,i)}{
 						\underbrace{
 							\smallfrac{\partial y(\vec{x}; \vec{w})}
 								{{\color{blue}\partial  h_k^{v''}}}
@@ -203,42 +206,99 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 						\underbrace{\smallfrac
 								{{\color{blue}\partial h_k^{v''}} }
 								{{\color{darkgreen}\partial h_i^{v'}}}
-							}_{\mathrm{w}_{ki}^{v''v'} \kern-.5ex\cdot\kern.5ex
-								[f_i^{v'}]'({\color{darkgreen}h_i^{v'}}) } %\,,
-					\kern-3ex=\;\;\; %\underbrace{
+							}_{{w}_{ki}^{v''v'} \kern-.5ex\cdot\kern.5ex
+								[f_i^{v'}]'({\color{darkgreen}h_i^{v'}}) }}
+                            \label{eq:delta_step2}
+                                \notesonly{\\&=&  \kern-3ex\sum\limits_{(v''\hspace{-1mm},\,k) \in C(v',\,i)}{
+						{\kern-2ex {\color{red}\delta_k^{v''}}}
+                        \cdot\,
+						{{w}_{ki}^{v''v'} \kern-.5ex\kern.5ex
+								[f_i^{v'}]'({\color{darkgreen}h_i^{v'}}) }}}
+                                \notesonly{\\ \kern-3ex&=&\;\;\; }%\,,
+                                \slidesonly{\kern-3ex=\;\;\; }%\underbrace{
 							[f_i^{v'}]'({\color{darkgreen}h_i^{v'}}) 
 							\kern-3ex\sum_{(v''\hspace{-1mm},\,k) \in C(v',\,i)}\kern-3ex
 							{\color{red}\delta_k^{v''}} 
-							\mathrm{w}_{ki}^{v'' v'} 
+							{w}_{ki}^{v'' v'} 
 						}
 						%}_{{\color{red} \delta_i^L}\;=\;
 						%	[f_i^{L}]'({\color{darkgreen} h_i^{L}})
 						%	\;\;\text{for}\;v'=L}
-				\end{eqnarray*}
+				\end{eqnarray}
 		}
 		\only<5->{
 		\vspace{-1mm}
 		\item[] \textbf {weight update}: using activities and local errors
-			$$
+        \begin{equation}
 				\mathrm{w}_{ij}^{v'v}
 				\quad \leftarrow \quad 
-				\mathrm{w}_{ij}^{v'v} - \eta \cdot
-				\smallfrac{\partial e}{\partial\mathrm{w}_{ij}^{v'v}}
-				\quad=\quad \mathrm{w}_{ij}^{v'v} - \eta \cdot
+				{w}_{ij}^{v'v} - \eta \cdot
+				\smallfrac{\partial e}{\partial{w}_{ij}^{v'v}}
+				\quad=\quad {w}_{ij}^{v'v} - \eta \cdot
 				\smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot
 				\only<5>{
-				\smallfrac{\partial y(\vec{x}; \vec{w})}{\partial\mathrm{w}_{ij}^{v'v}}\hspace{8.5mm}
+				\smallfrac{\partial y(\vec{x}; \vec{w})}{\partial{w}_{ij}^{v'v}}\hspace{8.5mm}
 				}
+                \slidesonly{
 				\only<6>{
 				{\color{red} \delta_i^{v'}} \kern-.5ex\cdot
 			   			f_j^v( {\color{darkgreen}h_j^v} )
+			   	}}
+        \end{equation}
+        \notesonly{
+        \begin{equation}
+				\mathrm{w}_{ij}^{v'v}
+				\quad \leftarrow \quad 
+                {w}_{ij}^{v'v} - \eta \cdot
+				\smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot
+				{
+				{\color{red} \delta_i^{v'}} \kern-.5ex\cdot
+			   			f_j^v( {\color{darkgreen}h_j^v} )
 			   	}
-			$$
+        \end{equation}
+        }
 			}
 	\end{enumerate}
 	%{\scriptsize
 	%Computational complexity: $O(n)$, $n$: number of weights \& thresholds}
+    
 \end{frame}
+
+\mode<article>{
+    To understand how the ``local error'' at neuron $(v',i)$ goes from its definition in \eqref{eq:delta_step1} to \eqref{eq:delta_step2}, one needs to look at the propagation from $(v',i)$ forwards to all its immediate children nodes in $C(v', i)$. Let $(v'', k)$ describe a neuron positioned deeper in the network and connected to $(v',i)$, making it one of its children and, in turn, making $(v',i)$ one of the parents of $(v'', k)$.\\
+    Analogous to how we compute in ${\color{darkgreen}h_i^{v'}}$ in \eqref{eq:total_input_vi}:
+    
+    \begin{align}
+            {\color{blue}h_k^{v''}} 
+            :=& 
+            \kern-2ex
+            \sum_{(\mu,\,l) \in P(v'',\,k)}
+            \kern-2ex
+            w_{kl}^{v''\mu}\; 
+            f_l^\mu\big( {h_l^\mu} \big)   
+            \label{eq:total_input_vddk}\\
+            =&\; \ldots \,+\,{}
+            w_{ki}^{v''v'}\; 
+            f_i^{v'}\big( {\color{darkgreen}h_i^{v'}})
+            \,+\, \ldots
+    \end{align}
+    
+    Since only one term in this sum depends on ${\color{darkgreen} h_i^{v'}}$:
+    \begin{align}
+    \frac{{\color{blue}\partial h_k^{v''}} }{{\color{darkgreen}\partial h_i^{v'}}}
+    \;&= \;
+    \frac{\partial}{\color{darkgreen}\partial h_i^{v'}}
+    \left(
+    w_{ki}^{v''v'}\; 
+            f_i^{v'}\big( {\color{darkgreen}h_i^{v'}})
+    \right)\\
+    \;&= \; w_{ki}^{v''v'} \,
+    \frac{\partial}{\color{darkgreen}\partial h_i^{v'}}
+            f_i^{v'}\big( {\color{darkgreen}h_i^{v'}})\\
+    \;&= \; {{w}_{ki}^{v''v'} \;
+    [f_i^{v'}]'({\color{darkgreen}h_i^{v'}}) }
+    \end{align}
+}
 
 % -----------------------------------------------------------------------------
 \definecolor{forward}{rgb}{0,0.7,0}
@@ -247,10 +307,12 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 \subsection{Summary of the backpropagation for gradient descent}
 
 \begin{frame} \frametitle{\subsecname}
+    \mode<presentation>{
 	\only<1>{
 		\placeimage{10.75}{5.5}{img/MLP_forward.pdf}{width=3.75cm}
 		\placeimage{10.75}{8.7}{img/MLP_backward.pdf}{width=3.75cm}
-	} \only<2> {
+	}}
+     \only<2> {
 		%\begin{minipage}{4}(11.5,5)
 			%{\color{blue}
 				%\footnotesize
@@ -273,13 +335,16 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 		\footnotesize
 		\DontPrintSemicolon
 		initialization of weights and thresholds \\
+        
 		\While{stopping criterion not met}{
 			$\text{gradient}_{ij}^{v'v} := 0 
 					\,, \quad \forall w_{ij}^{v'v}$ \\
+                    
 			\For{$\alpha \in \{1,\ldots,p\}$}{
 				${\color{forward}h_i^0} 
 					:= x_i^{(\alpha)} \,, \quad \forall i$ 
 				\qquad\qquad // {\color{forward}forward propagation}\\
+                
 				\For{$v' \in \{1,\ldots,L\}$}{
 					%~ ${\color{forward} h_i^{v'}} 
 						%~ := \sum\limits_{\scriptscriptstyle
@@ -296,6 +361,7 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 				${\color{backward} \delta_1^L} 
 					:= [f_1^L]'({\color{forward}h_1^L}) $%\,, \quad \forall i$ 
 				\qquad // {\color{backward}backward propagation}\\
+                
 				\For{$v' \in \{L-1,\ldots,1\}$} {
 					${\color{backward}\delta_i^{v'}} 
 						:= [f_{i}^{v'}]'({\color{forward}h_i^{v'}}) 
@@ -312,12 +378,15 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 						 \,, \quad \forall w_{ij}^{v'v}$
 				\hspace{11mm} // sum
 			}
+			\notesonly{// gradient descent step:\\
+            
+            }
 			$\text{gradient}_{ij}^{v'v} := \frac{1}{p} \text{gradient}_{ij}^{v'v}$\\
 			% $w_{ij}^{v'v} := w_{ij}^{v'v} - \frac{\hat \eta}{p}
 			 $w_{ij}^{v'v} := w_{ij}^{v'v} - \eta
 					\, \text{gradient}_{ij}^{v'v} 
 					\,, \quad \forall w_{ij}^{v'v}	$
-			\hspace{15mm} // gradient descent step
+			\slidesonly{\hspace{15mm} // gradient descent step}
 					\vspace{-1.5mm}
 		}
 		%\caption{Backpropagation in feedforward networks}
