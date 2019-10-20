@@ -22,6 +22,7 @@
 \usepackage{paralist}
 \usepackage{xcolor,cancel}
 
+
 \setlength{\oddsidemargin}{0.25 in}
 \setlength{\evensidemargin}{-0.25 in}
 \setlength{\topmargin}{-0.9 in}
@@ -99,3 +100,4 @@
 % Include in slides but exclude from notes
 % see corresponding \notesonly for what to include in notes but not in slides mode
 \newcommand{\slidesonly}[1]{}
+
