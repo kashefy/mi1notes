@@ -322,149 +322,208 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
 
 \pause
 
-\question{What is the general procedure for the Backpropagation algorithm?}
+\question{What is the procedure for the Backpropagation algorithm?}\\
 
 \mode<article>{
-\pause
 - The procedure is:
 \begin{enumerate}
- \item Forward pass: forward propagation of neuron activities and obtain the network's response,
- \item Backward pass: backpropagation of ``local errors''
+ \item Forward pass: forward propagation of neuron activities and obtain the network's response (compute ${\color{darkgreen}h^{v}_{i}}$ for $v = 0,\ldots,L$),\\
+ 
+ followed by
+ \item Backward pass: backpropagation of ``local errors'' (compute ${\color{red}\delta^{v}_{i}}$).
 \end{enumerate}
 }
 \end{frame}
 
-\begin{frame}
+\subsubsection{The forward pass}
+\begin{frame}\frametitle{\subsubsecname}
+    
     \mode<presentation>{
     \placeimage{7.4}{1}{img/section1_fig14_fc_nolayers}{width=6.7cm}
     \begin{textblock}{4}(0.5,2)
     \begin{equation}
     \boxed{
-    \only<-8>{
-    \frametitle{The forward pass}
         {\color{darkgreen}h_i^{v'}}
         \,= \kern-2ex
         \smallsum{(\mu,k) \in P(v',\,i)}{}
         \kern-2ex
         w_{ik}^{v'\mu}\; f_k^\mu\big( {\color{teal} h_k^\mu} \big)
     }
-    \only<9->{
-    \frametitle{The backward pass}
-            {\color{red}\delta_i^{v'}}
-            =
-            [f_i^{v'}]'({\color{darkgreen}h_i^{v'}}) 
-            \kern-3ex\sum_{(v''\hspace{-1mm},\,k) \in C(v',\,i)}\kern-3ex
-            {\color{red}\delta_k^{v''}} 
-            {w}_{ki}^{v'' v'}
+    \end{equation}
+    \end{textblock}
+    \vspace{1cm}
+    }
+    
+    Compute ${\color{darkgreen}h^{v}_{i}}$ \only<1>{for $v = 0,\ldots,L$}:
+
+    \begin{itemize}
+    \only<1,2>{
+        \item $v=0$ (input layer):\\ \slidesonly{\vspace{-3mm}}
+        \begin{flalign}
+            h^{0}_{j} &=
+            \slidesonly{\only<1>{&&}}
+            \only<2>{
+                              x_{j}\;,   & j=1,\ldots,N&&\\
+                h^{0}_{0}  &=  x_{0} = 1          & (\text{bias node})\\
+                \vec h^{0} &= \vec x     & (\text{bias included})\\
+                f^0_{j}(h) :\kern-0.5ex&= h & \text{ (identity function)}\\
+                %\Rightarrow\; 
+                \vec f^0(\vec h) &= \vec x & \text{ (identity, bias included)}
             }
+        \end{flalign}
+    }
+    \only<3,4>{
+        \slidesonly{\vspace{5mm}}
+        \item $v=1$ (1\textsuperscript{st} hidden layer with $N_{1} \text{ nodes}$):\\ \slidesonly{\vspace{-2mm}}
+        \begin{flalign}
+        h^{1}_{j} &= 
+        \slidesonly{\only<3>{&&}}
+        \only<4>{
+            \smallsum{k=0}{N} w_{jk}^{10}\;  f_k^0\big( {h_k^0} \big) = {\vec w_{j}^{10}}^{\top} \vec h^0 & (\text{bias included})&&\\
+            \vec h^{1} &= {\vec W^{10}}^{\top} \vec h^0 = {\vec W^{10}}^{\top} \vec x &(\text{biases included})\\
+            f^1_{j}(h) :\kern-0.5ex&= \text{e.g. }\tanh(h),  &j=1,\ldots,N_{1}\\ f^1_{0}(h) :\kern-0.5ex&= h &\text{(identity for bias)}\\
+        }
+        \end{flalign}
+    }
+    \only<5,6>{
+        \item $v=2$ (2\textsuperscript{nd} hidden layer with $N_{2} \text{ nodes}$):\\ \slidesonly{\vspace{-7mm}}
+    % temporarily change footnote marks to symbols so not to confuse with exponents
+    %\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+        \begin{flalign}
+        h^{2}_{i} &=
+        \slidesonly{\only<5>{&&}}
+        \only<6>{
+            \smallsum{j=0}{N_{1}} w_{ij}^{21}\;  f_j^1\big( {h_j^1} \big) = 
+            {\vec w_{i}^{21}}^{\top} 
+            %\overbrace{
+            \vec f^{1}(\vec h^1)
+            %}^{
+            %\vec s^1
+            %} 
+            &(\text{bias included})&&\\
+            \vec h^{2} &= {\vec W^{21}}^{\top} \vec f^{1}(\vec h^1) &(\text{biases included})\\
+            f^2_{i}(h) :\kern-0.5ex&= \text{e.g. }\tanh(h) &i=\mathbf{1},\ldots,N_{2}\\
+            f^2_{0}(h) :\kern-0.5ex&= h &\text{identity for bias}\\
+        }
+        \end{flalign}
+        }
+    \only<7,8>{
+        \item $v=L$ (output layer):\\ \slidesonly{\vspace{-4mm}}
+        \begin{flalign}
+        h^{L}_{1} &=
+        \slidesonly{\only<7>{&&}}
+        \only<8>{
+            \smallsum{i=0}{N^{(2)}} w_{1i}^{L2}\;  f_i^1\big( {h_i^1} \big) = {\vec w_{1}^{21}}^{\top} \vec f^{2}(\vec h^2) &(\text{bias included})&&\\
+            y(\vec x; \vec w) &= f^L_{1}(h^{L}_{1})&&\\
+            f^L_{1}(h) :\kern-0.5ex&= \text{e.g. logistic function (sigmoid)}\\
+        }
+        \end{flalign}
+    }
+    \end{itemize}
+    
+\end{frame}
+
+\subsubsection{The backward pass}
+
+\begin{frame}\frametitle{\subsubsecname}
+    \mode<presentation>{
+    \placeimage{7.4}{1}{img/section1_fig14_fc_nolayers}{width=6.7cm}
+    \begin{textblock}{4}(0.5,2)
+    \begin{equation}
+    \boxed{
+        {\color{red}\delta_i^{v'}}
+        =
+        [f_i^{v'}]'({\color{darkgreen}h_i^{v'}}) 
+        \kern-3ex\sum_{(v''\hspace{-1mm},\,k) \in C(v',\,i)}\kern-3ex
+        {\color{red}\delta_k^{v''}} 
+        {w}_{ki}^{v'' v'}
             }
     \end{equation}
     \end{textblock}
     \vspace{2cm}
     }
     
-    \only<-8>{
-    Compute ${\color{darkgreen}h^{v}_{i}}$ for $v = 0,\ldots,L$:
-    }
-    \only<9->{
     Compute ${\color{red}\delta^{v}_{i}}$:
-    }
+    
     \begin{itemize}
-    \only<1,2,15,16>{
-        \item $v=0$ (input layer):\\ \slidesonly{\vspace{-3mm}}
-        \begin{flalign}
-            h^{0}_{j} &=
-            \slidesonly{\only<1>{&&}}
-            \only<2,15,16>{
-                              x_{j}\;,   & j=1,\ldots,N&&\\
-                h^{0}_{0}  &= 1          & (\text{bias node})\\
-                \vec h^{0} &= \vec x     & (\text{bias included})\\
-                f^0_{j}(h) :\kern-0.5ex&= h \qquad\Rightarrow\; \vec f^0(\vec h) = \vec x
-                & \text{ (identity function)}\\
-            }
-            \only<15,16>{{\color{red}\delta^{0}_{j}}
-             &=}
-             \only<16>{\text{Not applicable to observed input}&}
-        \end{flalign}
-    }
-    \only<3,4,13,14>{
-        \item $v=1$ (1\textsuperscript{st} hidden layer, $N^{(1)} \text{ nodes}$):\\ \slidesonly{\vspace{-5mm}}
-        \begin{flalign}
-        h^{1}_{j} &= 
-        \slidesonly{\only<3>{&&}}
-        \only<4,13,14>{
-            \smallsum{k=0}{N} w_{jk}^{10}\;  f_k^0\big( {h_k^0} \big) = {\vec w_{j}^{10}}^{\top} \vec h^0 & (\text{bias included})&&\\
-            \vec h^{1} &= {\vec W^{10}}^{\top} \vec h^0 &(\text{biases included})\\
-            f^1_{j}(h) &= \text{e.g. }\tanh() & j=1,\ldots,N^{(1)}\\
-        }
-        \only<13,14>{
-             {\color{red}\delta^{1}_{j}}
-             &=
-             \only<14>{\slidesonly{\scriptstyle}
-                         %[f_i^{v'}]'({\color{darkgreen}h_i^{v'}}) 
-            %\sum_{(v''\hspace{-1mm},\,k) \in C(v',\,i)}
-            %{\color{red}\delta_k^{v''}} 
-            %{w}_{ki}^{v'' v'}
-            [f_j^{1}]'({\color{darkgreen}h_j^{1}}) 
-            \kern-.5ex\sum_{k=0}^{N^{(2)}}\kern-.5ex
-            {\color{red}\delta_k^{2}} \,
-            {w}_{kj}^{21}
-            = 
-            [f_j^{1}]'({\color{darkgreen}h_j^{1}})\,
-            {\color{red} {\vec \delta^{2}}^{\top}}
-            \vec {w}_{j}^{21}\\
-             {\color{red} \vec \delta^{1}}
-             &=
-            %{\slidesonly{\scriptstyle}
-            %[\vec f^{1}]'({\color{darkgreen}h^{1}})\,
-            %({\color{red} (\vec \delta^{2})^{\top}}
-            %\vec {W}^{21})^{\top}
-            %([\vec f^{1}]'({\color{darkgreen}h^{1}}))^{\top}
-            %({\color{red} (\vec \delta^{2})^{\top}}
-            %\vec {W}^{21})?%TODO
-            %}
-             }
-        }
-        \end{flalign}
-    }
-    \only<5,6,11,12>{
-        \item $v=2$ (2\textsuperscript{nd} hidden layer, $N^{(2)} \text{ nodes}$):\\ \slidesonly{\vspace{-3mm}}
-        \begin{flalign}
-        h^{2}_{i} &=
-        \slidesonly{\only<5>{&&}}
-        \only<6,11,12>{
-            \smallsum{j=0}{N^{(1)}} w_{ij}^{21}\;  f_j^1\big( {h_j^1} \big) = {\vec w_{i}^{21}}^{\top} \vec f^{1}(\vec h^1) &(\text{bias included})&&\\
-            \vec h^{2} &= {\vec W^{21}}^{\top} \vec f^{1}(\vec h^1) &(\text{biases included})\\
-            f^2_{i}(h) &= \text{e.g. }\tanh() & i=1,\ldots,N^{(2)}\\
-        }
-        \only<11,12>{
-             {\color{red}\delta^{2}_{i}}
-             &=
-            \only<12>{
-                [f_i^{2}]'({\color{darkgreen}h_i^{2}})\,
-                {\color{red}\delta_1^{L}} 
-                {w}_{1i}^{L2}\\
-             {\color{red} \vec \delta^{2}} &=\; {\vec w^{L2}}^{\top}[\vec f^{2}]'({\color{darkgreen}\vec h^{2}})
-            }
-        }
-        \end{flalign}
-        }
-    \only<7,8,9,10>{
+    \only<1,2>{
         \item $v=L$ (output layer):\\ \slidesonly{\vspace{-4mm}}
         \begin{flalign}
-        h^{L}_{1} &=
-        \slidesonly{\only<7>{&&}}
-        \only<8,9,10>{
-            \smallsum{i=0}{N^{(2)}} w_{1i}^{L2}\;  f_i^1\big( {h_i^1} \big) = {\vec w_{1}^{21}}^{\top} \vec f^{2}(\vec h^2) &(\text{bias included})&&\\
             y(\vec x; \vec w) &= f^L_{1}(h^{L}_{1})&&\\
             f^L_{1}(h) &= \text{e.g. logistic function (sigmoid)}\\
-        }
-        \only<9,10>{
             {\color{red}\delta^{L}_{1}}  &= \frac{\partial y(\vec{x}; \vec{w})} {{\color{blue}\partial h_1^{L}}} =
-            \only<10>{
+        \only<2>{
                 [f_1^{L}]'({\color{blue} h_1^{L}})
-            }
         }
+        \end{flalign}
+    }
+
+    \only<3,4>{
+        \item $v=2$ (2\textsuperscript{nd} hidden layer with $N_{2} \text{ nodes}$):\\ \slidesonly{\vspace{-7mm}}
+    % temporarily change footnote marks to symbols so not to confuse with exponents
+    \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+        \begin{flalign}
+            f^2_{i}(h) :\kern-0.5ex&= \text{e.g. }\tanh(h), &i=1,\ldots,N_{2}&&\\
+            f^2_{0}(h) :\kern-0.5ex&= h &\text{(identity for bias)}\\
+            {\color{red}\delta^{2}_{i}} &=
+        \only<4>{
+                [f_i^{2}]'({\color{darkgreen}h_i^{2}})\;
+                {\color{red}\delta_1^{L}} \,
+                {w}_{1i}^{L2}\\
+             {\color{red} \vec \delta^{2}} &=\; [\vec f^{2}]'({\color{darkgreen}\vec h^{2}}) \odot ({\color{red}\delta_1^{L}} \cdot {\vec w^{L2}})
+        \notesonly{ \footnotemark }
+        }
+        \end{flalign}
+        \notesonly{
+        \footnotetext{``$\odot$'' stands for elementwise multiplication, while ``$\cdot$'' stands for the dot product.}
+        % change footnote marks back to original scheme (numbers)
+        \renewcommand*{\thefootnote}{\arabic{footnote}}
+        }
+        }
+    \only<5,6>{
+        \item $v=1$ (1\textsuperscript{st} hidden layer with $N_{1} \text{ nodes}$):\\ \slidesonly{\vspace{-5mm}}
+        \begin{flalign}
+            f^1_{j}(h) :\kern-0.5ex&= \text{e.g. }\tanh(h),  &j=1,\ldots,N_{1}\\ f^1_{0}(h) :\kern-0.5ex&= h &\text{identity for bias}&&\\
+            {\color{red}\delta^{1}_{j}}
+             &=
+        \only<6>{
+                [f_j^{1}]'({\color{darkgreen}h_j^{1}}) 
+                \kern-.5ex\sum_{k=1}^{N_{2}}\kern-.5ex
+                {\color{red}\delta_k^{2}} \,
+                {w}_{kj}^{21}
+                = 
+                [f_j^{1}]'({\color{darkgreen}h_j^{1}})\,
+                {\color{red} {\vec \delta^{2}}^{\top}}
+                \vec {w}_{j}^{21}  &(\text{skip }k=0)\\
+            {\color{red} \vec \delta^{1}}
+             &=
+                [\vec f^{1}]'({\color{darkgreen}h^{1}})
+                \odot
+                ({\color{red} {\vec \delta^{2}}^{\top}}
+                \kern-.5ex\cdot
+                \vec {W}^{21})^{\top} &(\text{bias j=0  incl.})\\
+             &= 
+                [\vec f^{1}]'({\color{darkgreen}h^{1}})
+                \odot
+                ({\vec {W}^{21}}^{\top} 
+                \kern-.7ex\cdot{}
+                {\color{red} {\vec \delta^{2}}})
+                & (\vec A\, \vec B)^{\kern-.5ex\top}\kern-1ex=\vec B^{\top}\kern-.8ex\vec A^{\top}
+        }
+        \end{flalign}
+    }
+    \only<7,8>{
+        \item $v=0$ (input layer):\\ \slidesonly{\vspace{-3mm}}
+        \begin{flalign}
+                f^0_{j}(h) :\kern-0.5ex&= h & \text{ (identity function)}&&\\
+                \vec f^0(\vec h) :\kern-0.5ex&= \vec x &\text{ (bias included)}
+                \\
+            {\color{red}\delta^{0}_{j}}
+             &=
+            \only<8>{
+            0&
+             (\text{Not applicable to observed input})
+             }
         \end{flalign}
     }
     \end{itemize}
@@ -476,8 +535,6 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
 % -----------------------------------------------------------------------------
 \definecolor{forward}{rgb}{0,0.7,0}
 \definecolor{backward}{rgb}{0.8,0,0}
-
-
 
 \subsection{Summary of the Backpropagation for gradient descent}
 
