@@ -15,7 +15,7 @@ Topics covered throughout the course:
 * Bayesian networks
 * Reinforcement learning
 
-## Instructions on compiling the Latex sources ##
+## Instructions on compiling the LaTeX sources ##
 
 Ubuntu:
 
