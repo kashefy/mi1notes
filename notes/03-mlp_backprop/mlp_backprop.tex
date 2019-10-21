@@ -551,6 +551,17 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
     
 \end{frame}
 
+\begin{frame}\frametitle{Dimensions}
+
+\begin{align}
+0 &   & & \vec h^{0} \in \R^{N+1}\\ 
+1 &   \vec w_{j}^{10}  \in \R^{N+1}    &  \vec {W}^{10} \in \R^{(N+1) \times N_{1}} &\vec h^{1} \in \R^{N_{1}+1}\\
+2 &   \vec w_{i}^{21}  \in \R^{N_{1}+1}    &  \vec {W}^{21}  \in \R^{(N_{1}+1) \times N_{2}} &\vec h^{2} \in \R^{N_{2}+1}\\
+L &\vec w_{1}^{L2}  \in \R^{N_{2}+1}    &  &\vec h^{L} \in \R\\  
+\end{align}
+    
+\end{frame}
+
 \clearpage
 
 % -----------------------------------------------------------------------------
