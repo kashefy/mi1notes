@@ -500,7 +500,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
                 %\notesonly{\\&}
                 = 
                 [f_j^{1}]'({\color{darkgreen}h_j^{1}})\,
-                {\color{red} {\vec \delta^{2}}^{\top}}
+                {\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}}
                 \widetilde{\vec {w}}_{j}^{21}
                 &(\text{bias k=0  excl.})\notesonly{\\[3mm]}\slidesonly{\\}
                 %(\text{skip }k=0)\\
@@ -522,13 +522,15 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
                 \odot
                 ({{\vec {\widetilde{W}}}^{21}}^{\top} 
                 \kern-.7ex\cdot
-                {\color{red} {\vec \delta^{2}}})
+                {\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}})
                 & (\vec A\, \vec B)^{\kern-.5ex\top}\kern-1ex=\vec B^{\top}\kern-.8ex\vec A^{\kern-.5ex\top}
         }
         \end{flalign}
         \notesonly{
             \footnotetext{
-            $\widetilde{\vec {W}}^{21} \; \corresponds \; {\vec {W}}^{21}$ without the bias node (k=0) in each column ${\vec {w}}_{j}^{21}$.}
+            $\widetilde{\vec {W}}^{21} \; \corresponds \; {\vec {W}}^{21}$ without the bias node (k=0) in each column ${\vec {w}}_{j}^{21}$.\\
+            ${\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}}  \; \corresponds \; {\color{red} {\vec{{\delta}}^{2}}^{\top}}$ without the bias node (k=0), i.e. ${\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}}$ is ${\color{red} {\vec{{\delta}}^{2}}^{\top}}$ without ${\color{red} \delta^{2}_{0}}$.
+            }
         }
     }
     \only<7,8>{
@@ -553,12 +555,61 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
 
 \begin{frame}\frametitle{Dimensions}
 
-\begin{align}
-0 &   & & \vec h^{0} \in \R^{N+1}\\ 
-1 &   \vec w_{j}^{10}  \in \R^{N+1}    &  \vec {W}^{10} \in \R^{(N+1) \times N_{1}} &\vec h^{1} \in \R^{N_{1}+1}\\
-2 &   \vec w_{i}^{21}  \in \R^{N_{1}+1}    &  \vec {W}^{21}  \in \R^{(N_{1}+1) \times N_{2}} &\vec h^{2} \in \R^{N_{2}+1}\\
-L &\vec w_{1}^{L2}  \in \R^{N_{2}+1}    &  &\vec h^{L} \in \R\\  
-\end{align}
+{\renewcommand{\arraystretch}{1.5} %<- control vertical spacing
+\begin{table}[!h]
+\centering
+\caption{Overview of dimensions}
+%\resizebox{\textwidth}{!}
+{%
+\label{tab:summary_bp} 
+\begin{tabular}{|c||c|c|c|}
+\hline
+\multicolumn{1}{|c||}{layer} & \multicolumn{1}{c|}{parameters}                  & \multicolumn{1}{c|}{total input} & \multicolumn{1}{c|}{``local'' errors}\\ 
+\hline \hline
+$v=0$
+& N/A 
+&
+\begin{tabular}[c]{@{}l@{}}
+    $\vec h^{0} := \vec x$\\
+    $\vec h^{0} \in \R^{N+1}$\vspace{2mm}
+\end{tabular} 
+& N/A\\ 
+\hline
+$v=1$ 
+& \begin{tabular}[c]{@{}l@{}}
+    $\vec w_{j}^{10}  \in \R^{N+1}$\\
+    $\vec {W}^{10} \in \R^{(N+1) \times N_{1}}$\vspace{2mm}
+\end{tabular} 
+& \begin{tabular}[c]{@{}l@{}}
+    %$\vec h^{1} := \vec f({\vec {W}^{10}}^{\top}\vec x)$\\
+    $\vec h^{1} \in \R^{N_{1}+1}$\vspace{2mm}
+\end{tabular} 
+& \begin{tabular}[c]{@{}l@{}}
+    ${\color{red} \vec{\delta}^{1}} \in \R^{N_{1}+1}$\vspace{2mm}
+\end{tabular} \\ 
+\hline
+$v=2$ 
+& \begin{tabular}[c]{@{}l@{}}
+    $\vec w_{i}^{21}  \in \R^{N_{1}+1} $\\
+    $\vec {W}^{21}  \in \R^{(N_{1}+1) \times N_{2}}$\vspace{2mm}
+\end{tabular} 
+& $\vec h^{2} \in \R^{N_{2}+1}$ 
+& \begin{tabular}[c]{@{}l@{}}
+    ${\color{red} \vec{\delta}^{2}} \in \R^{N_{2}+1}$ \\
+    ${\color{red} \widetilde{\vec{\delta}}^{2}} \in \R^{N_{2}}$\vspace{2mm}
+\end{tabular} \\ 
+\hline
+$v=L$ 
+& \begin{tabular}[c]{@{}l@{}}
+    $\vec w_{1}^{L2}  \in \R^{N_{2}+1}$\vspace{2mm}
+\end{tabular} 
+& $\vec h^{L} \in \R$ 
+& ${\color{red}\delta^{L}_{1}} \in \R$\\ 
+\hline
+\end{tabular}
+}
+\end{table}
+} % arraystretch
     
 \end{frame}
 
