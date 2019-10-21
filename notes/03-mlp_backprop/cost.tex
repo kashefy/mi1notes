@@ -389,3 +389,86 @@ ERM for computing cross entropy loss using the training data:
 Extendable to multi-class cross entropy alongside \emph{softmax} normalization.
 
 \end{frame}
+
+\begin{frame}
+    
+{\renewcommand{\arraystretch}{1.2} %<- control vertical spacing
+\begin{table}[h!]
+\caption{Cost functions \& output layers}\slidesonly{\vspace{-5mm}}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|c|c|l|}
+\hline
+task 
+&  
+\begin{tabular}[c]{@{}c@{}}\multicolumn{1}{c}
+~\\[-5mm]
+data\\
+$\big\{ \vec x^{(\alpha)}, y_T^{(\alpha)} \big\}_{\alpha=1}^{p}$\\[2mm]
+\end{tabular}
+& output layer 
+& \begin{tabular}[c]{@{}c@{}}
+    cost function\\ 
+    $e := e\tyxw$\end{tabular} \\ 
+\hline \hline
+scalar regression 
+& 
+$y_{T} \in \R$
+& \begin{tabular}[c]{@{}l@{}}linear\\ $y = {\vec w^{LL-1}}^{\top} \vec s^{L-1}$\end{tabular} 
+& \begin{tabular}[c]{@{}c@{}}quadratic error\\
+$e = \frac{1}{2} \big( y_{T} - y\big)^{2}$\end{tabular} 
+\\ \hline
+\begin{tabular}[c]{@{}l@{}}multivariate linear \\ regression\end{tabular} 
+&  
+$\vec y_{T} \in \R^{M}$
+& \begin{tabular}[c]{@{}l@{}}linear\\ $y_{k} = {\vec w_{k}^{LL-1}}^{\top} \vec s^{L-1}$\end{tabular} 
+& \begin{tabular}[c]{@{}c@{}}squared Euclidean \\ distance\\ 
+$e = \frac{1}{2} \lVert \vec y_{T} - \vec y \rVert^{2}_{2}$
+\end{tabular} \\ 
+\hline
+\begin{tabular}[c]{@{}l@{}}binary \\ classification\end{tabular} 
+&  $y_{T} \in \{0,1\}, \{-1,1\}$
+&
+\begin{tabular}[c]{@{}c@{}}logistic sigmoid\\ 
+$y = \frac{1}{1+exp(-h_{1}^{L})}$\\
+or $y = \tanh(h_{1}^{L})$
+\end{tabular} 
+& \begin{tabular}[c]{@{}l@{}}cross entropy\\ 
+$
+e = \kern-.5ex
+- y_T
+\ln \lbrack y \rbrack \quad$\\
+$
+\;
+-\kern-.2ex ( 1\kern-.5ex-\kern-.5exy_T )
+\ln \lbrack 1\kern-.5ex-\kern-.5exy \rbrack
+$
+\end{tabular} \\ 
+\hline
+\begin{tabular}[c]{@{}l@{}}multi-class \\ classification\\ with $M$ classes\end{tabular} 
+&  
+\begin{tabular}[c]{@{}c@{}}
+$y_{T} \in \{0,1\}^{M}$\\
+1-out-of-M encoding/\\
+1-hot-encoding\\
+e.g. $y_{T}=(0,0,1,0)^{\top}$\\ $\corresponds$ class 3 out of 4
+\end{tabular}
+& \begin{tabular}[c]{@{}c@{}}softmax\\ 
+$y_{k} = \frac{exp(h_{k}^{L})}{\sum_{k=1}^{M} exp(h_{k}^{L})}$\\[5mm]
+$\Rightarrow \sum_{k=1}^{M} y_{k} = 1$
+\end{tabular}
+& \begin{tabular}[c]{@{}c@{}}cross entropy\\(multi-class case)\\ 
+$
+e = \kern-.3ex
+-\kern-.2ex\sum_{k=1}^{M} {y_T}_{k} $\\
+$\;\;\cdot 
+%$\cdot
+\ln \lbrack y_{k}\big(\vec x; \vec w\big) \rbrack
+$
+\end{tabular} \\
+\hline
+\end{tabular}
+}
+\end{table}
+} % arraystretch
+
+\end{frame}
