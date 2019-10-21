@@ -403,7 +403,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
             &(\text{bias included})&&\\
             \vec h^{2} &= {\vec W^{21}}^{\top} \vec f^{1}(\vec h^1) &(\text{biases included})\\
             f^2_{i}(h) :\kern-0.5ex&= \text{e.g. }\tanh(h) &i=\mathbf{1},\ldots,N_{2}\\
-            f^2_{0}(h) :\kern-0.5ex&= h &\text{identity for bias}\\
+            f^2_{0}(h) :\kern-0.5ex&= h &\text{(identity for bias)}\\
         }
         \end{flalign}
         }
@@ -445,6 +445,8 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
     
     Compute ${\color{red}\delta^{v}_{i}}$:
     
+    % temporarily change footnote marks to symbols so not to confuse with exponents
+    \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
     \begin{itemize}
     \only<1,2>{
         \item $v=L$ (output layer):\\ \slidesonly{\vspace{-4mm}}
@@ -460,8 +462,6 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
 
     \only<3,4>{
         \item $v=2$ (2\textsuperscript{nd} hidden layer with $N_{2} \text{ nodes}$):\\ \slidesonly{\vspace{-7mm}}
-    % temporarily change footnote marks to symbols so not to confuse with exponents
-    \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
         \begin{flalign}
             f^2_{i}(h) :\kern-0.5ex&= \text{e.g. }\tanh(h), &i=1,\ldots,N_{2}&&\\
             f^2_{0}(h) :\kern-0.5ex&= h &\text{(identity for bias)}\\
@@ -469,48 +469,67 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
         \only<4>{
                 [f_i^{2}]'({\color{darkgreen}h_i^{2}})\;
                 {\color{red}\delta_1^{L}} \,
-                {w}_{1i}^{L2}\\
-             {\color{red} \vec \delta^{2}} &=\; [\vec f^{2}]'({\color{darkgreen}\vec h^{2}}) \odot ({\color{red}\delta_1^{L}} \cdot {\vec w^{L2}})
+                {w}_{1i}^{L2}
+                &(\text{bias }{\scriptsize{w}_{0i}^{L2}}\text{ excl.})\\
+             {\color{red} \vec \delta^{2}} &=\; [\vec f^{2}]'({\color{darkgreen}\vec h^{2}}) \odot ({\color{red}\delta_1^{L}} \cdot {\widetilde{\vec w}_{1}^{L2}})
         \notesonly{ \footnotemark }
+        %\notesonly{ \footnotemark }
         }
         \end{flalign}
         \notesonly{
-        \footnotetext{``$\odot$'' stands for elementwise multiplication, while ``$\cdot$'' stands for the dot product.}
-        % change footnote marks back to original scheme (numbers)
-        \renewcommand*{\thefootnote}{\arabic{footnote}}
+            \footnotetext{
+            $\widetilde{\vec {w}}_{1}^{L2} \; \corresponds \; {\vec {w}}_{1}^{L2}$ without the bias node (k=0).\\
+            ``$\odot$'' stands for elementwise multiplication, while ``$\cdot$'' stands for the dot product.
+            }
         }
+        %\notesonly{
+        %\footnotetext{``$\odot$'' stands for elementwise multiplication, while ``$\cdot$'' stands for the dot product.}
+        %}
         }
     \only<5,6>{
         \item $v=1$ (1\textsuperscript{st} hidden layer with $N_{1} \text{ nodes}$):\\ \slidesonly{\vspace{-5mm}}
         \begin{flalign}
-            f^1_{j}(h) :\kern-0.5ex&= \text{e.g. }\tanh(h),  &j=1,\ldots,N_{1}\\ f^1_{0}(h) :\kern-0.5ex&= h &\text{identity for bias}&&\\
+            f^1_{j}(h) :\kern-0.5ex&= \text{e.g. }\tanh(h),  &j=1,\ldots,N_{1}\\ f^1_{0}(h) :\kern-0.5ex&= h &\text{(identity for bias)}&&\\
             {\color{red}\delta^{1}_{j}}
              &=
         \only<6>{
                 [f_j^{1}]'({\color{darkgreen}h_j^{1}}) 
                 \kern-.5ex\sum_{k=1}^{N_{2}}\kern-.5ex
                 {\color{red}\delta_k^{2}} \,
-                {w}_{kj}^{21}
+                {w}_{kj}^{21} \\&
+                %\notesonly{\\&}
                 = 
                 [f_j^{1}]'({\color{darkgreen}h_j^{1}})\,
                 {\color{red} {\vec \delta^{2}}^{\top}}
-                \vec {w}_{j}^{21}  &(\text{skip }k=0)\\
+                \widetilde{\vec {w}}_{j}^{21}
+                &(\text{bias k=0  excl.})\notesonly{\\[3mm]}\slidesonly{\\}
+                %(\text{skip }k=0)\\
+                %}
+        %\end{flalign}
+        %\vspace{-2mm}
+        %\begin{flalign}
+        %\only<6>{
             {\color{red} \vec \delta^{1}}
              &=
                 [\vec f^{1}]'({\color{darkgreen}h^{1}})
                 \odot
                 ({\color{red} {\vec \delta^{2}}^{\top}}
                 \kern-.5ex\cdot
-                \vec {W}^{21})^{\top} &(\text{bias j=0  incl.})\\
+                \widetilde{\vec {W}}^{21})^{\top} \notesonly{ \footnotemark }
+                &(\text{\footnotesize \notesonly{bias} j=0  incl./k=0  excl.})\\
              &= 
                 [\vec f^{1}]'({\color{darkgreen}h^{1}})
                 \odot
-                ({\vec {W}^{21}}^{\top} 
-                \kern-.7ex\cdot{}
+                ({{\vec {\widetilde{W}}}^{21}}^{\top} 
+                \kern-.7ex\cdot
                 {\color{red} {\vec \delta^{2}}})
-                & (\vec A\, \vec B)^{\kern-.5ex\top}\kern-1ex=\vec B^{\top}\kern-.8ex\vec A^{\top}
+                & (\vec A\, \vec B)^{\kern-.5ex\top}\kern-1ex=\vec B^{\top}\kern-.8ex\vec A^{\kern-.5ex\top}
         }
         \end{flalign}
+        \notesonly{
+            \footnotetext{
+            $\widetilde{\vec {W}}^{21} \; \corresponds \; {\vec {W}}^{21}$ without the bias node (k=0) in each column ${\vec {w}}_{j}^{21}$.}
+        }
     }
     \only<7,8>{
         \item $v=0$ (input layer):\\ \slidesonly{\vspace{-3mm}}
@@ -527,6 +546,8 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
         \end{flalign}
     }
     \end{itemize}
+    % change footnote marks back to original scheme (numbers)
+    \renewcommand*{\thefootnote}{\arabic{footnote}}
     
 \end{frame}
 
