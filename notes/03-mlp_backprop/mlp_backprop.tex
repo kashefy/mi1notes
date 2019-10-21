@@ -12,7 +12,7 @@ The Backpropagation algorithm is a method for computing gradients by using the c
 }	
 \begin{equation}
 	\textcolor{orange}{	\frac{\partial y(\vec{x}; \vec{w})}{
-			\partial \mathrm{w}_{ij}^{v'v}}}
+			\partial {w}_{ij}^{v'v}}}
     \label{eq:model_term}
 \end{equation}
     
@@ -27,7 +27,7 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
     The Backpropagation algorithm is not tied to any specific neural architecture. We will therefore attempt to formulate how it works in the general sense.\\
     
     Let $w^{v'v}_{ij}$ be the weight connecting neuron $j$ in layer $v$ to neuron $i$ in layer $v'$, In order to compute $\frac{\partial y(\vec{x}; \vec{w})}{
-			\partial \mathrm{w}_{ij}^{v'v}}$ we need to identify the following:
+			\partial {w}_{ij}^{v'v}}$ we need to identify the following:
     \begin{itemize}
         \item $P(v, j)$: the set of immediate parent nodes feeding input into neuron $(v, j)$,
         \item $C(v', i)$: the set of immediate children nodes which neuron $(v', i)$ provides with input
@@ -230,7 +230,7 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 		\vspace{-1mm}
 		\item[] \textbf {weight update}: using activities and local errors
         \begin{equation}
-				\mathrm{w}_{ij}^{v'v}
+				{w}_{ij}^{v'v}
 				\quad \leftarrow \quad 
 				{w}_{ij}^{v'v} - \eta \cdot
 				\smallfrac{\partial e}{\partial{w}_{ij}^{v'v}}
@@ -247,7 +247,7 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
         \end{equation}
         \notesonly{
         \begin{equation}
-				\mathrm{w}_{ij}^{v'v}
+				{w}_{ij}^{v'v}
 				\quad \leftarrow \quad 
                 {w}_{ij}^{v'v} - \eta \cdot
 				\smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot

@@ -90,7 +90,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 						\substack{\text{learning} \\ \text{step} } }
                         \cdot
 				\underbrace{\frac{\partial \ETw}{
-					\partial \mathrm{w}_{j}}}_{
+					\partial {w}_{j}}}_{
 						\substack{
 							\text{\textcolor{red}{``gradient''}} 
 			} }
@@ -111,7 +111,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 						\substack{\text{learning} \\ \text{step} } }
                         \cdot
 				\underbrace{\frac{\partial \ETw}{
-					\partial \mathrm{w}_{ij}^{v'v}}}_{
+					\partial {w}_{ij}^{v'v}}}_{
 						\substack{
 							\text{component of}
 							\text{\textcolor{red}{gradient vector}} 
@@ -184,7 +184,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 						\substack{\text{learning} \\ \text{step} } }
                         \cdot
 				\underbrace{\frac{\partial \ETw}{
-					\partial \mathrm{w}_{j}}}_{
+					\partial {w}_{j}}}_{
 						\substack{
 							\text{component of}\\
 							\text{\textcolor{red}{the gradient}} 
@@ -198,24 +198,24 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     Knowing that
     \begin{align}
 		\frac{\partial \ETw}
-			{\partial \mathrm{w}_{j}}
+			{\partial {w}_{j}}
 		\;&=\; \frac{1}{p} \sum_{\alpha=1}^p
         \frac{\partial e\tyxwalpha}
-			{\partial \mathrm{w}_{j}}
+			{\partial {w}_{j}}
         =\; \frac{1}{p} \sum_{\alpha=1}^p 
         \frac{\partial e^{(\alpha)}}
-			{\partial \mathrm{w}_{j}}
+			{\partial {w}_{j}}
 	\end{align}
     }
     with $j=0,\ldots,N$.\\
     
     \mode<article>{
-    The individual cost $e^{(\alpha)}$ is a function of terms that are functions of other terms themselves. Therefore, $\frac{\partial e^{(\alpha)}}{\partial \mathrm{w}_{j}}$ is computed by applying the \emph{chain rule}:\\
+    The individual cost $e^{(\alpha)}$ is a function of terms that are functions of other terms themselves. Therefore, $\frac{\partial e^{(\alpha)}}{\partial {w}_{j}}$ is computed by applying the \emph{chain rule}:\\
     }
     \only<1,2>{
 	\begin{equation}
 		\frac{\partial \ETw}
-			{\partial \mathrm{w}_{j}}
+			{\partial {w}_{j}}
 		\;=\; \frac{1}{p} \sum_{\alpha=1}^p	\underbrace{
 			\textcolor{blue}{
 			\frac{\partial e\tyxwalpha}{\partial 
@@ -225,7 +225,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 				  \;\cdot \underbrace{
 			\textcolor{orange}{
 			\frac{\partial y(\vec{x}^{(\alpha)}, \vec{w})}{
-					\partial \mathrm{w}_{j}}} }_{
+					\partial {w}_{j}}} }_{
 						\substack{\text{factor depending on} \\
 							\text{model class}\\
                             \text{(e.g. perceptron, MLP)}}}
@@ -275,17 +275,17 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     \begin{align}
 			\textcolor{orange}{
 			\frac{\partial y(\vec{x}^{(\alpha)}, \vec{w})}
-            {\partial \mathrm{w}_{j}}}
+            {\partial {w}_{j}}}
             &= \frac{\partial y(\vec{x}^{(\alpha)}, \vec{w})}
             {\partial h(\vec x^{(\alpha)}; \vec w)}
             \cdot
             \frac{\partial h(\vec x^{(\alpha)}; \vec w)}
-            {\partial \mathrm{w}_{j}}\\
+            {\partial {w}_{j}}\\
             &= \underbrace{f'(h(\vec x^{(\alpha)}; \vec w))}_{\substack{\text{depends on}\\ \text{transfer function}}}
             \cdot
             \underbrace{
                 \frac{\partial \vec w^{\top} \vec x^{(\alpha)}}
-                {\partial \mathrm{w}_{j}}
+                {\partial {w}_{j}}
             }_{=x_{j}}
 	\end{align}
     }
@@ -302,7 +302,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
                     \substack{\text{learning} \\ \text{step} } }
                     \cdot
             \underbrace{\frac{\partial \ETw}{
-                \partial \mathrm{w}_{ij}^{v'v}}}_{
+                \partial {w}_{ij}^{v'v}}}_{
                     \substack{
 							\text{component of the }\\
                         \text{\textcolor{red}{gradient vector}} 
