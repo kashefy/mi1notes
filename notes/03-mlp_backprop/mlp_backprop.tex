@@ -553,7 +553,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
     
 \end{frame}
 
-\begin{frame}\frametitle{Dimensions}
+\begin{frame}
 
 {\renewcommand{\arraystretch}{1.5} %<- control vertical spacing
 \begin{table}[!h]
@@ -627,23 +627,6 @@ $v=L$
 		\placeimage{10.75}{5.5}{img/MLP_forward.pdf}{width=3.75cm}
 		\placeimage{10.75}{8.7}{img/MLP_backward.pdf}{width=3.75cm}
 	}}
-     \only<2> {
-		%\begin{minipage}{4}(11.5,5)
-			%{\color{blue}
-				%\footnotesize
-				%\begin{center}
-					%computational and 
-					%memory complexity \\[2mm]
-					%{\color{red}
-						%$\mathcal{O}(n)$, %\quad
-					%} \\[2mm]
-					%$n$: number of weights
-					%i.e.~{\em linear} in the 
-					%number of weights
-				%\end{center}
-			%}
-		%\end{minipage}
-	}
 	
 	%\begin{algorithm}[H] 
 		%\scriptsize
@@ -708,4 +691,58 @@ $v=L$
 	%\end{algorithm}
 \end{frame}
 
+\subsubsection{Complexity}
 
+\begin{frame}\frametitle{\subsubsecname}
+
+The computational and 
+memory complexity of the Backpropagation algorithm is
+$\mathcal{O}(n)$, %\quad,{}
+where $n$ is the total number of the weights in the network. 
+\mode<article>{It is therefore, 
+\emph{linear} in the 
+number of weights.}
+
+An alternative\slidesonly{:}\notesonly{and very simple method for computing the gradients would be to use }
+\pause
+\emph{finite differences}.
+
+Let $\widetilde{\vec w}$ denote all parameters of the network except for a single weight $w^{v'v}_{ij}$
+
+\mode<article>{
+The idea is to add (subtract) a small offset $\varepsilon$ to (from) $w^{v'v}_{ij}$ in the network, while keeping all other weights $\widetilde{\vec w}$ fixed and measure the change in the error function. Specifically,
+}
+\begin{equation}
+e\big(y_T, y\big(\vec x; \widetilde{\vec w}, {w}^{v'v}_{ij} \pm \varepsilon\big)\big) =: e\big(\widetilde{\vec w}, {w}^{v'v}_{ij} \pm \varepsilon\big) \text{ for brevity}
+\end{equation}
+
+For $\varepsilon \ll 1$ follows:
+
+\begin{equation}
+\frac{\partial e\left(y_T, y\left(\vec x; {\vec w}\right)\right)}{\partial {w}^{v'v}_{ij}} =
+\frac{
+e\big(\widetilde{\vec w}, {w}^{v'v}_{ij} + \varepsilon\big)
++
+e\big(\widetilde{\vec w}, {w}^{v'v}_{ij} - \varepsilon\big)
+}
+{2 \,\varepsilon}
++ \mathcal{O}(\varepsilon^{2})
+\label{eq:finitediff}
+\end{equation}
+
+\notesonly{
+The complexity of the forward propagation remains $\mathcal{O}(n)$. Performed it twice in \eqref{eq:finitediff} is manageable as $\mathcal{O}(2n) \leadsto \mathcal{O}(n)$.
+However, this is the complexity for a single weight. Performing this for all $n$ weights in the network increases the complexity of finite differences to $\mathcal{O}(n^{2})$.
+
+However, numerical differentiation such as finite differences remains a useful tool for debugging your Backpropagation algorithm and performing gradient checks.
+}
+
+\pause
+
+\slidesonly{
+Complexity of finite differences increases to.$\mathcal{O}(n^{2})$. But still good for gradient checks.
+}
+
+
+    
+\end{frame}
