@@ -6,7 +6,7 @@
 
 
 \notesonly{
-We have some cost function we want to minimze but solving the problem analytically is not applicable.
+We have some cost function we want to minimize but solving the problem analytically is not applicable.
 
 }
 
@@ -24,9 +24,9 @@ We have some cost function we want to minimze but solving the problem analytical
 
 \end{frame}
 
-We therefore opt for Graident-based optimization which is an iterative optimization procedure. 
+We therefore opt for Gradient-based optimization which is an iterative optimization procedure. 
 In the case of a \emph{minimization} problem one can reduce some cost function $E^T_{[\vec w]}$ by taking steps in the direction of steepest \emph{descent}.
-For minimzing some cost function $E^T_{[\vec w]}$ w.r.t. to a set of weights $\vec w$, it follows that, if
+For minimizing some cost function $E^T_{[\vec w]}$ w.r.t. to a set of weights $\vec w$, it follows that, if
 
 \begin{equation}
 \vec w_{t+1} = \vec w_t - \eta_t \, \frac{\partial E^T}{\partial \vec w} \Bigg|_{\vec w_t}
@@ -37,4 +37,8 @@ We refer to $\eta_t$ as the learning rate. It allows us to control the size of t
 \emph{Subtracting} the gradient from the current $\vec w_t$ lets us move against the slope in towards some minimum. 
 
 \subsection{``Scope'' of Gradient methods}.
+
+The scope of the gradient method refers to the amount of data used for deciding on the direction of the gradient.
+
+
 
