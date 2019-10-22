@@ -7,6 +7,7 @@
 \RequirePackage{etoolbox, comment} % not ifthen, xstring, 
 \RequirePackage[latin9]{inputenc}
 \RequirePackage[T1]{fontenc}
+\usepackage[overlay,absolute]{textpos}
 \RequirePackage{enumerate}
 \RequirePackage{graphics,graphicx}
 \usepackage{paracol}
@@ -20,6 +21,7 @@
 \newsavebox{\imagebox}
 \usepackage{paralist}
 \usepackage{xcolor,cancel}
+
 
 \setlength{\oddsidemargin}{0.25 in}
 \setlength{\evensidemargin}{-0.25 in}
@@ -98,3 +100,4 @@
 % Include in slides but exclude from notes
 % see corresponding \notesonly for what to include in notes but not in slides mode
 \newcommand{\slidesonly}[1]{}
+

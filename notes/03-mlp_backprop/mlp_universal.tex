@@ -19,8 +19,8 @@ Moving forward we will focus on \emph{scalar} values for the label $y_T$ but als
     	Let $y_T{(\vec{x})}$ be a continuous, real valued function 
     	over a compact interval $K$ and     
 		\begin{equation} 
-		{y}{(\vec{x}; \vec w)} = \sum_{i=1}^M \mathrm{w}_i^{21} 
-		f\Big( \sum\limits_{j=1}^N \mathrm{w}_{ij}^{10} 
+		{y}{(\vec{x}; \vec w)} = \sum_{i=1}^M {w}_i^{21} 
+		f\Big( \sum\limits_{j=1}^N {w}_{ij}^{10} 
 		  \mathrm{x}_j - \theta_i \Big)
 		 \end{equation}
     	be a three-layered MLP with a non-constant, bounded, 
@@ -30,8 +30,8 @@ Moving forward we will focus on \emph{scalar} values for the label $y_T$ but als
 	   \pause
 
 		Then there exists a set of parameters 
-		$M, N \in \mathbb{N}$ and $\mathrm{w}_i^{21}, 
-		\mathrm{w}_{ij}^{10}, \theta_i \in \mathbb{R}$ 
+		$M, N \in \N$ and ${w}_i^{21}, 
+		{w}_{ij}^{10}, \theta_i \in \R$ 
 		such that for every $\varepsilon > 0$:
 		\begin{equation}
 			\max_{\vec{x} \in K} \Big| \, y_T{(\vec{x})} - {y}{(\vec{x}; \vec w)} \,\Big| 
