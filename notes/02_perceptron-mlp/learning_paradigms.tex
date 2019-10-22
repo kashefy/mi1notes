@@ -1,10 +1,12 @@
 \section{Learning Paradigms}
 
-\begin{frame}
+\begin{frame}\frametitle{\secname}
 
+\mode<article>{
 There are three learning paradigms in machine learning:
+}
 \begin{itemize}
-\item Supervised learning\notesonly{. This is learning with a teacher (cf. \sectionref{sec:supervised}).}
+\item Supervised learning\notesonly{. Learning with a teacher (cf. \sectionref{sec:supervised}).}
 \item Unsupervised learning\notesonly{. Learning only from observations, without a teacher (cf. \sectionref{sec:unsupervised}).}
 \item Reinforcement learning\notesonly{. This is about maximizing reward (cf. \sectionref{sec:reinforcement}).}
 \end{itemize}
@@ -29,7 +31,8 @@ Differences: Data \& objective model.
 
 \mode<article>Supervised learning is\mode<all>essentially function fitting.
 
-\underline{Data}:
+\underline{Data}:\\
+\mode<presentation>{\vspace{5mm}}
 
 Consider this dataset of tuples:
 \begin{equation}
@@ -51,18 +54,19 @@ When $y_T \in \{ 0, \ldots, K-1\}$, we refer to this as a multi-class classifica
 \end{itemize}
 }
 
-\end{frame}
+%\end{frame}
+\pause
+%\begin{frame}
 
-\begin{frame}
-
-\underline{Objective model}:
-
-Supervised learning algorithms are used to find a function that maps observations to their label which represents some concept or value.
-This mapping can be described in the form of:
+\underline{Objective model}:\\
+\mode<presentation>{\vspace{5mm}}
+\notesonly{Supervised learning algorithms are used to }find a function that maps observations to their label(s)\notesonly{ which represents some concept or value.
+This mapping can be described in the form of:}
 \begin{itemize}
 \item a discrimination function $\vec y = \vec f(\vec x)$, \\ 
 
-where $\vec f(\cdot)$ denotes a vector valued function $\vec f: \R^N \rightarrow \R^M$
+\notesonly{
+where $\vec f(\cdot)$ denotes a vector valued function }$\vec f: \R^N \rightarrow \R^M$
 \item a conditional distribution $P(\,\vec y \,|\, \vec x\,)$.
 \end{itemize}
 
@@ -92,18 +96,28 @@ A dataset of observations:
 \end{array}
 \right) \in \R^{N \times p}
 \end{equation}
-
-where $p$ denotes the number of observations (i.e. size of the dataset) and $N$ denotes the number of dimensions.
-The samples are often assumed to be \iid.
+\notesonly{
+where $p$ denotes the number of observations (i.e. size of the dataset) and $N$ denotes the number of dimensions.}
+\slidesonly{
+where 
+\begin{itemize}
+\item[] $p$ \corresponds\, no. of observations (often \iid)
+\item[] $N$ \corresponds\, no. of dimensions
+\end{itemize}
+}
+\notesonly{
+The samples are often assumed to be \iid, but algorithms for handling sequential data also exist.
 
 Example: $\vec x$ could represent user ratings, pixel values in images.
-
+}
 \end{frame}
 \begin{frame}
 
 \underline{Objective model}:
-
+\mode<presentation>{\vspace{5mm}}
+\mode<article>{
 An unsupervised learning algorithm is used to capture structure or directions in the data. This can be achieved by finding:
+}
 \begin{itemize}
 \item the underlying distribution $P(\vec x)$ that generated this data (e.g. density estimation),
 \item $\vec z := \vec f(\vec x)$, where $\vec z$ is a measure of 
@@ -140,16 +154,17 @@ Our data consists of a sequence. Each time step is described by
 
 \begin{itemize}
 \item a state $\vec x \in \mathcal{X}$ or $\vec x \in \R^N$, e.g. $\mathcal{X} := \{ \vec x_1, \ldots, \vec x_S\} \subset \{0,1\}^S$ (1-out-$S$ encoding)
+\pause
 \item an action $\vec a$ which can be taken by the agent:\\
 
 $\vec a \in \mathcal{A}$ or $\vec a \in \R^M$, e.g. $\mathcal{A} := \{ \vec a_1, \ldots, \vec a_A\} \subset \{0,1\}^A$ (1-out-$A$ encoding)
-
+\pause
 \item a reward $r \in \R$ or $r \in \{0,1\}$, e.g. $r \in \{\text{``cheese''},\text{``no cheese''}\}$.
 
 \end{itemize}
-
-Each time step describes what reward was received when performing some action while in some state. 
-The sequence we observe becomes:
+\pause
+\mode<article>{Each time step describes what reward was received when performing some action while in some state. 
+The sequence we observe becomes:}
 
 \begin{align}
 \label{eq:chain}
@@ -157,10 +172,11 @@ The sequence we observe becomes:
 \left( \vec x^{(0)}, \vec a^{(0)}, r^{(0)} \right) \,,\, \ldots \,,\, \left(\vec x^{(p)}, \vec a^{(p)}, r^{(p)} \right)
 \end{align}
 
+\question{Can we still assume \iid?}
 
-
-
-Since we observe sequential data, we no longer assume \iid \emph{within} a sequence. But if we have multiple sequences, we can assume \iid \emph{across} sequences.
+\mode<article>{
+-Since we observe sequential data, we no longer assume \iid \emph{within} a sequence. But if we have multiple sequences, we can assume \iid \emph{across} sequences.
+}
 
 \end{frame}
 
@@ -169,15 +185,37 @@ Since we observe sequential data, we no longer assume \iid \emph{within} a seque
 Example:
 \begin{itemize}
 \item $\vec x \; \corresponds$ position in a maze
-\item $\vec s \; \corresponds$ movement direction (velocity), e.g. turn left/right
+\item $\vec a \; \corresponds$ movement direction (velocity), e.g. turn left/right
 \item $r \; \corresponds$ found the cheese, found smaller piece of cheese. A negative reward, ``punishment'' is also possible.
 \end{itemize}
 \end{frame}
 
+
+\begin{frame}
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[height=5cm]{img/handheld-game-console-2134571_640}
+    \end{figure}
+    
+\question{What would be a state/action/reward here?}
+
+\end{frame}
+
+\begin{frame}
+    \begin{figure}[h]
+        \centering
+        \includegraphics[height=5cm]{img/babyrajeshraj-1087832_640}
+    \end{figure}
+    
+\question{What would be a state/action/reward here?}
+
+\end{frame}
+
 \begin{frame}
 
-\underline{Objective model}:
-
+\underline{Objective model}:\\
+\mode<presentation>{\vspace{5mm}}
 Reinforcement learning can be used to:
 \begin{itemize}
 \item select the optimal action when arriving at a state: $\vec a^* = \vec f(\vec x, r)$
