@@ -24,7 +24,7 @@ A connectionist neuron's response to 1D data:
          \caption{}
          \label{fig:neuron_1d_sigmoid}
      \end{subfigure}
-     \hfill
+     \hspace{10mm}
      \begin{subfigure}[t]{0.35\textwidth}
          \centering
          \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
@@ -33,18 +33,23 @@ A connectionist neuron's response to 1D data:
          \caption{}
          \label{fig:neuron_1d_sign}
      \end{subfigure}
+     \mode<article>{
      \caption{Examples of different neuron responses to scalar input of two types: $\times$ and $\circ$. In \ref{fig:neuron_1d_sigmoid}: The neuron's response $y$ is continuous. In \ref{fig:neuron_1d_sign} the neuron repsonse is $+1$ for positive input and $-1$ otherwise. The red lines act as a decision boundary.}
+	 }
 	 \label{fig:neuron_1d}
 \end{figure}
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}\frametitle{
+A connectionist neuron's response to 3D data:}
 
 \begin{figure}[ht]
      \centering
 	\includegraphics[width=0.4\textwidth]{img/neuron_3d_grid}
+     \mode<article>{
 	\caption{Examples of a neuron's response to 3D input of types $\times$ and $\circ$. Inputs of different types fall on opposite sides of a plane. The red plane acts as a decision boundary}
+	}
 	\label{fig:neuron_3d_grid} 
 \end{figure}
 \end{frame}
@@ -59,19 +64,42 @@ A connectionist neuron's response to 1D data:
         \caption{The input-output relationship for a connectionist neuron. $w_{j}$ describes the connection from the $j$-th input.}
         \label{fig:neuron_diagram}
     \end{figure}
-    
-    \figref{fig:neuron_diagram} is a diagram of a connectionist neuron. Given an input vector $\vec x \in \R^{N}$ with components $x_{j}$,
+    \notesonly{
+    \figref{fig:neuron_diagram} is a diagram of a connectionist neuron.} Given an input vector $\vec x \in \R^{N}$ with components $x_{j}$,
     the connectionist neuron is composed of the following elements:
 
     \begin{enumerate}[(a)]
-        \item weights $\vec w \in \R^{N}$: The weights represent the strength of the connections between the neuron and each component of the input it receives.\\
-        \item A linear filter: Summation of the weighted inputs (e.g. scalar product: $\vec w^{\top} \vec x = \sum_{j} w_{j} x_{j}$).
-        \item A bias value $\theta \in \R$ also known as the threshold of the neuron.
+        \item weights $\vec w \in \R^{N}$\notesonly{: The weights represent the strength of the connections between the neuron and each component of the input it receives.}\\
+        \item A linear filter: \notesonly{Summation of the weighted inputs, i.e. scalar product: }$\vec w^{\top} \vec x = \sum_{j} w_{j} x_{j}$.
+        \item A bias value $\theta \in \R$ also known as the \emph{threshold} of the neuron.
         \item An activation function or transfer function $f: \R \mapsto \R$. \\
+        \mode<article>{
         
         $f(\cdot)$ controls the range of the neuron's response. It can have the effect of squashing the response to a specific range of values or a specific set of values and preventing other value ranges.
+        }
         \item The scalar output of the neuron: $y$.
     \end{enumerate}
+    
+    \question{How does one interpret the scalar product $\vec w^\top \vec x$?}\\
+    
+    \mode<article>{
+    The scalar product (dot product) acts as measure of similarity between $\vec w$ and $\vec x$.
+    By looking at the geometric intepretation of the scalar product (dot product):
+    \begin{equation}
+    \vec w\top\vec x = ||\vec w||\;||\vec x||\,\cos{\theta}
+    \end{equation}
+    
+    where $\theta$ in this case is the agnle between the two vectors. Therefore, $\vec w^\top \vec x$:
+    
+    \begin{itemize}
+    \item is maximal when both vectors point in the same direction.
+    \item It is zero if both vectors are orthogonal.
+    \item It is maximally negative when both vectors point in opposite direction.
+    \end{itemize}
+    }
+   
+\end{frame}
+\begin{frame}
     
     \begin{figure}[h]
         \centering
@@ -79,6 +107,9 @@ A connectionist neuron's response to 1D data:
         \caption{The plane divides the responses of the neuron. In the context of classification it is referred to as the decision boundary.}
         \label{fig:neuron_3d_grid_hyperplane}
     \end{figure}
+    
+\end{frame}
+\begin{frame}
     
     The input-output relationship is described by a linear filter with a static non-linearity $f(\cdot)$:
 
@@ -97,7 +128,8 @@ A connectionist neuron's response to 1D data:
 		\vec{w}: & \text{weight vector of the neuron with components }
 			\mathrm{w}_{j}\\
 		\theta: & \text{threshold of the neuron} \\
-		h: & \text{total input of the neuron. } h \propto \frac{\vec w^\top \vec x}{\;||\vec w||_2} \text{ component of $\vec x$ in the direction of $\vec w$}\\
+		h: & \text{total input of the neuron. } \\
+		&\quad h \propto \frac{\vec w^\top \vec x}{\;||\vec w||_2} \text{ component of $\vec x$ in the direction of $\vec w$}\\
 		f(\cdot): & \text{transfer function}
 	\end{array} \]
     
@@ -190,10 +222,8 @@ $\frac{\vec w^\top \widetilde{\vec x}}{\,||\vec w||_2} = \frac{\theta}{\,||\vec 
 \question{How does the logistic sigmoidal function relate to the tanh function?}
 
 \mode<presentation>{
-    \begin{figure}
-        \centering
-        \includegraphics[height=6cm]{img/neuron_1d_sigm_tanh}
-    \end{figure}
+
+	\only<1,2>{\placeimage{9.5}{4}{img/neuron_1d_sigm_tanh}{width=4.cm}}
 }
 
 \mode<article>{
@@ -206,13 +236,13 @@ From this follows:
 	f_{{\text{sigmoid}}}(h) 
     & = \frac{1}{1 + e^{-h}} \\
 	& = \frac{e^{\frac{h}{2}}}{e^{\frac{h}{2}} + e^{-\frac{h}{2}}} \\
-	& = \frac{1}{2} \Big(
+	& = \frac{1}{2} \Bigg(
 		\underbrace{\frac{e^{\frac{h}{2}} - e^{-\frac{h}{2}}}{
 			e^{\frac{h}{2}} + e^{-\frac{h}{2}}}}_{
 				= \tanh \frac{h}{2}}
 		+ \underbrace{\frac{e^{\frac{h}{2}} + e^{-\frac{h}{2}}}{
 				e^{\frac{h}{2}} + e^{-\frac{h}{2}}}}_{= 1}
-		\Big) \\
+		\Bigg) \\
 	& = \frac{1}{2} \left( \tanh \frac{h}{2} + 1 \right)
 	\end{align}
 
@@ -265,7 +295,9 @@ Note that the sum in \eqref{eq:weight_with_bias} now iterates from ${\color{blue
 	$\vec{x}$ will be used for $\rmat{ \mathrm{x}_1 \\ \vdots\;\,\\ \mathrm{x}_N}$ 
 	as well as for $\rmat{ \mathrm{x}_0 \\ \mathrm{x}_1 \\ \vdots\;\,\\ \mathrm{x}_N}$.
 	
+	\mode<article>{
 	Whether the bias is absorbed or not should become apparent from the context or explicitly from the limits of the sum.
+	}
 }
 
 \end{frame}

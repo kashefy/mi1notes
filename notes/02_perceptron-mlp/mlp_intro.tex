@@ -1,11 +1,12 @@
 \subsection{Limitations of Perceptrons}
 
+\mode<article>{
 Connectionist neurons, or perceptrons, are limited in the variety of functions they are able to fit. 
 When dealing with classification problems, a perceptron can only find a linear separation between any two classes. Irrespective of the neuron's non-linear activation function, the perceptron is regarded as a \emph{linear classifier}. Whether something falls on one side of the decision boundary or the other, is entirely based on applying a linear filter (i.e. $\vec w^{\top} \vec x$). The non-linearity $f(h)$ merely controls the value range of the neuron's response ($\{0,1\}, (-1,+1)$, \ldots) which helps in interpreting the neuron's response.\\
 
 If observations for two different classes are distributed such that one cannot draw a line to separate them, then the two classes
 are not linearly separable. In this case the perceptron will fail to find a suitable classification boundary between the two classes.
-
+}
 
 \begin{frame}\frametitle{Linear classifiers/linear decision boundaries}
 
@@ -16,15 +17,14 @@ Consider the following binary classification problems with $\vec x \in \R^2$.{}
 \begin{figure}[h]
     \centering
 	\includegraphics[width=0.8\textwidth]{img/and_or_xor_y}
+	\mode<article>{
 	\caption{(a) points are classified according to the AND function,
 	(b) points are classified according to the OR function,
 	(c) points are classified according to the XOR function.
 	}
+	}
 	\label{fig:and_or_xor} 
 \end{figure}
-
-
-\end{frame}
 
 \mode<article>{
 In \figureref{fig:and_or_xor}, particularly (a) and (b),
@@ -34,17 +34,18 @@ It is impossible to find a single line that will separate the classes.\\
 The XOR function is not linearly separable.
 }
 
-\begin{frame}
-\question{Can we solve the XOR problem with multiple perceptrons? How?}
+\pause 
 
-\slidesonly{
-\begin{figure}[ht]
-     \centering
-	\includegraphics[trim=480 0 0 30, clip, width=0.4\textwidth]{img/and_or_xor_y.png}
-	\caption*{A single perceptron can not solve the XOR problem.}
-	\label{fig:xor} 
-\end{figure}
-}
+\question{Can we solve the XOR problem with multiple perceptrons? How?}\\
+
+%\slidesonly{
+%\begin{figure}[ht]
+     %\centering
+	%\includegraphics[trim=480 0 0 30, clip, width=0.4\textwidth]{img/and_or_xor_y.png}
+	%\caption*{A single perceptron can not solve the XOR problem.}
+	%\label{fig:xor} 
+%\end{figure}
+%}
 
 \pause
 
@@ -53,6 +54,9 @@ The XOR function is not linearly separable.
 A perceptron is used to solve each sub-problem.
 
 If you're familiar with Boolean algebra, you might recognize the following expression for the XOR function:
+}
+\mode<presentation>{
+\vspace{-10mm}
 }
 
 \begin{equation}
@@ -65,11 +69,13 @@ If you're familiar with Boolean algebra, you might recognize the following expre
 
 \end{frame}
 
+\mode<article>{
 For instance, the first perceptron $S^1_1$ is tasked to separate the bottom-right cloud of points from the rest. 
 A second perceptron $S^1_2$ is used to separate the top-left cloud from the rest.
 A third perceptron $S^2_1$ will then use the responses from of the first two perceptrons, by responding to ``is only one of the two perceptrons ON?''.
 
 \figref{fig:build_xor} illustrates this approach. One need only recognize that each sub-problem is linearly separable.\\
+}
 
 \begin{frame}
 \begin{figure}[ht]
@@ -79,7 +85,9 @@ A third perceptron $S^2_1$ will then use the responses from of the first two per
 	\label{fig:build_xor} 
 \end{figure}
 
+\mode<article>{
 What we are essentially describing is a Multilayered perceptron (MLP) with an architecture as illustrated in \figref{fig:xor_mlp_arch}. The MLP is made up of an output layer with  a single output neuron $S^2_1$, and one hidden layer with two hidden neurons, $S^1_1$ and $S^2_2$ (the superscript denotes the layer index, the subscript denotes the neuron index within its layer). The terms ``neurons'' and ``nodes'' will be used interchangeably and are treated as synonyms.
+}
 
 \begin{figure}[ht]
     \centering
@@ -150,18 +158,27 @@ $w_{j0}^{v0}$ measures the bias $-\theta_{j0}^{v0}$ for neuron $(v,j)$.
 \end{frame}
 
 \definecolor{darkgreen}{rgb}{0,0.6,0}
-\begin{frame}\frametitle{MLP}
+\begin{frame}
+\only<1>{\frametitle{MLP}
+}
+\only<2>{\frametitle{MLP with \textbf{fully connected} layers}
+}
 
 \mode<presentation>{
 \begin{figure}[ht]
      \centering
      \savebox{\imagebox}{
-	 \includegraphics[width=0.6\textwidth]{img/section1_fig14}}%
-     \begin{subfigure}[t]{0.6\textwidth}
+     \only<1>{
+	 \includegraphics[width=0.4\textwidth]{img/section1_fig14}%
+	 }
+     \only<2->{
+	 \includegraphics[width=0.4\textwidth]{img/section1_fig14_fc}%
+	 }}%
+     \begin{subfigure}[t]{0.5\textwidth}
          \centering
          \usebox{\imagebox}% Place largest image
      \end{subfigure}
-     \hfill
+     \hspace{10mm}
      \begin{subfigure}[t]{0.3\textwidth}
          \centering
          \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
@@ -184,11 +201,111 @@ We now look at how this notation describes how a neuron $(v', i)$ processes its 
 }
 
 \mode<article>{
-The idea is to identify the set of parent nodes $P(v', i)$ that feed input into neuron $(v',i)$. The weighted sum of the parent activations yields the total input ${\color{darkgreen}h^{v'}_i}$
+The idea is to identify the set of parent nodes $P(v', i)$ that feed input into neuron $(v',i)$. The weighted sum of the parent activations yields the total input ${\color{darkgreen}h^{v'}_i}$:
+}
+   
+\only<-2>{
+\begin{equation}
+		{\color{darkgreen}h_i^{v'}} 
+		:= 
+		\kern-2ex
+		\sum_{(\mu,k) \in P(v',\,i)}
+		\kern-2ex
+		w_{ik}^{v'\mu}\; 
+		f_k^\mu\big( {\color{teal} h_k^\mu} \big)   
+		\label{eq:total_input_vdi_pre},
+\end{equation}
 }
 
+\mode<article>{
+We now assume that an architecture with \emph{fully connected layers}. This implies that every node in layer $v$ is connected to all nodes in the subequent layer $v'$ (except for the bias node in $v'$ because it has no parents). This type of connectivity allows us to simplify the notation as it implies that the set of parents $P(v',\,i)$ is essentially a vector of all activations in layer $v$:
+}
+
+\only<2>{
+\slidesonly{
+Full connectivity implies
+}
+\begin{equation}
+P(v',i) := (
+\underbrace{
+s^v_0}_{\substack{=1\\ \text{(bias)}}
+}
+, s^v_1, \ldots, s^v_j, \ldots, s^v_{N_v})^\top,
+\end{equation}
+
+where $N_v$ is the number of hidden nodes in layer $v$. 
+
+\notesonly{From this follows:}
+}
+
+\only<3>{
+
 \begin{align}
-s^{v'}_i = f^{v'}_i(h^{v'}_i) \quad \text{e.g. } s^{v'}_i = f^{v'}_i\big(\sum_{j=0}^{N_{v}} w_{ij}^{v'v} s^v_j\big)
+		{\color{darkgreen}h_i^{v'}} 
+		:=& 
+		\kern-2ex
+		\sum_{(\mu,k) \in P(v',\,i)}
+		\kern-2ex
+		w_{ik}^{v'\mu}\; 
+		f_k^\mu\big( {\color{teal} h_k^\mu} \big) 
+		{\color{darkgreen}h_i^{v'}} \\
+		=& 
+		\kern1.5ex
+		\sum_{j=0}^{N_v}
+		w_{ij}^{v'v}\; 
+		f_j^v\big( {\color{teal} h_j^v} \big)\\
+		=& 
+		\kern1.5ex
+		{\vec w_{i}^{v'v}}^\top
+		\kern-1ex
+		\cdot  
+		\vec f^v\big( {\color{teal} \vec h^v} \big)\\
+		=& 
+		\kern1.5ex
+		{\vec w_{i}^{v'v}}^\top
+		\kern-1ex
+		\cdot
+		\vec s^v\\
 \end{align}
+
+\slidesonly{\vspace{-5mm}}
+here $\vec w_{i}^{v'v} := \big(
+\underbrace{
+w_{i0}^{v'v}}_{\text{bias}}
+, w_{i1}^{v'v}, \ldots,w_{iN_v}^{v'v}\big)^\top \in \R^{N_v+1}$
+}
+
+\only<4>{
+\notesonly{
+Consequently, to compute} the total input for all $N_{v'}$ neurons in the layer $v$\notesonly{ we introduce the weight matrix 
+$\vec W^{v'v} := \big({\vec w_1^{v'v}}^\top, {\vec w_2^{v'v}}^\top, \ldots, {\vec w_{N_{v'}}^{v'v}}^\top\big)$:}
+\begin{equation}
+\vec W^{v'v} = 
+\left(
+\begin{array}{cccccc}
+\Big| & \Big| & & \Big| & & \Big| \\[3mm]
+\vec w_{1}^{v'v} & \vec w_{2}^{v'v} & \cdots & \vec w_{i}^{v'v} & \cdots & \vec w_{N_{v'}}^{v'v}\\[2mm]
+\Big| & \Big| & & \Big| & & \Big|
+\end{array}
+\right) \in \R^{(N_v+1) \times N_{v'}}
+\end{equation}
+
+Therefore,
+
+\begin{equation}
+		{\color{darkgreen} \vec h^{v'}} 
+		=
+		{\vec W^{v'v}}^\top
+		\kern-1ex
+		\cdot
+		\vec f^v\big( {\color{teal} \vec h^v} \big)
+		=
+		\kern1.5ex
+		{\vec W^{v'v}}^\top
+		\kern-1ex
+		\cdot
+		\vec s^v
+\end{equation}
+}
 
 \end{frame}
