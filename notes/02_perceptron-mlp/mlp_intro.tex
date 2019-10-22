@@ -132,7 +132,7 @@ s^{v'}_i = f^{v'}_i(h^{v'}_i)
 \end{equation}
 
 \mode<article>{
-where common choices for $f^v_j(\cdot)$, dpeending on the layer, can be:
+where common choices for $f^v_j(\cdot)$, depending on the layer, can be:
 \begin{itemize}
 \item the identity function: $f^v_j(h) := h$. Often for the input layer, i.e. $s^0_j = f^0_j(h^0_j) = f^0_j(x_j) = x_j$
 \item logistic sigmoidal or $\tanh(h)$. Common for hidden neurons and output neurons (for classification tasks).
@@ -218,7 +218,7 @@ The idea is to identify the set of parent nodes $P(v', i)$ that feed input into 
 }
 
 \mode<article>{
-We now assume that an architecture with \emph{fully connected layers}. This implies that every node in layer $v$ is connected to all nodes in the subequent layer $v'$ (except for the bias node in $v'$ because it has no parents). This type of connectivity allows us to simplify the notation as it implies that the set of parents $P(v',\,i)$ is essentially a vector of all activations in layer $v$:
+We now assume that an architecture with \emph{fully connected layers}. This implies that every node in layer $v$ is connected to all nodes in the subsequent layer $v'$ (except for the bias node in $v'$ because it has no parents). This type of connectivity allows us to simplify the notation as it implies that the set of parents $P(v',\,i)$ is essentially a vector of all activations in layer $v$:
 }
 
 \only<2>{
