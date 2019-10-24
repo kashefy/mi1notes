@@ -192,25 +192,41 @@ Example:
 
 
 \begin{frame}
-    
+    \mode<presentation>{
     \begin{figure}[h]
         \centering
+        \only<1>{
         \includegraphics[height=5cm]{img/handheld-game-console-2134571_640}
+        }
+        \only<2>{
+        \includegraphics[height=3cm]{img/babyrajeshraj-1087832_640}
+        }
     \end{figure}
+    }
     
 \question{What would be a state/action/reward here?}
 
 \end{frame}
 
-\begin{frame}
-    \begin{figure}[h]
-        \centering
-        \includegraphics[height=5cm]{img/babyrajeshraj-1087832_640}
-    \end{figure}
-    
-\question{What would be a state/action/reward here?}
-
-\end{frame}
+\mode<article>{
+\begin{figure}[ht]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[width=0.2\textwidth]{img/handheld-game-console-2134571_640}}%
+     \begin{subfigure}[t]{0.35\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+     \end{subfigure}
+     \hspace{1mm}
+     \begin{subfigure}[t]{0.25\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.5\textwidth]{img/babyrajeshraj-1087832_640}
+         }
+     \end{subfigure}
+     \caption{Representing games for reinforcement learning}
+\end{figure}
+}
 
 \begin{frame}
 
