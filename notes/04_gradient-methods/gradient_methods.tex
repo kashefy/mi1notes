@@ -1,0 +1,44 @@
+\section{Gradient methods}
+
+\subsection{The need for gradient-based optimization}
+
+\begin{frame}
+
+
+\notesonly{
+We have some cost function we want to minimize but solving the problem analytically is not applicable.
+
+}
+
+
+
+\question{In what case(s) do we avoid an analytical solution?}
+
+\begin{itemize}
+	\item We cannot fit all the data into memory.
+	\item It involves finding an inverse of a matrix, that is not invertible (e.g. linear regression $(\vec X \, \vec X^\top)^{-1}\vec X \, \vec y_{True}^\top$.
+	\item There is no closed-form solution for the model we're using (e.g. MLP)
+	\item Computing the Hessian is too costly.
+	\item Non-stationary data. We cannot easily adapt to changes over time.
+\end{itemize}
+
+\end{frame}
+
+We therefore opt for Gradient-based optimization which is an iterative optimization procedure. 
+In the case of a \emph{minimization} problem one can reduce some cost function $E^T_{[\vec w]}$ by taking steps in the direction of steepest \emph{descent}.
+For minimizing some cost function $E^T_{[\vec w]}$ w.r.t. to a set of weights $\vec w$, it follows that, if
+
+\begin{equation}
+\vec w_{t+1} = \vec w_t - \eta_t \, \frac{\partial E^T}{\partial \vec w} \Bigg|_{\vec w_t}
+\end{equation}
+
+and a small enough $\eta_t \in \R^+$, then the cost at the next step $t+1$ will become less or remain unchanged. That is $E^T_{[\vec w_{t+1}]} \le E^T_{[\vec w_{t}]}$.
+We refer to $\eta_t$ as the learning rate. It allows us to control the size of the step we take in the direction of the gradient.
+\emph{Subtracting} the gradient from the current $\vec w_t$ lets us move against the slope in towards some minimum. 
+
+\subsection{``Scope'' of Gradient methods}.
+
+The scope of the gradient method refers to the amount of data used for deciding on the direction of the gradient.
+
+
+

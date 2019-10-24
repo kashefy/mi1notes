@@ -70,31 +70,75 @@ If you're familiar with Boolean algebra, you might recognize the following expre
 \end{frame}
 
 \mode<article>{
-For instance, the first perceptron $S^1_1$ is tasked to separate the bottom-right cloud of points from the rest. 
-A second perceptron $S^1_2$ is used to separate the top-left cloud from the rest.
-A third perceptron $S^2_1$ will then use the responses from of the first two perceptrons, by responding to ``is only one of the two perceptrons ON?''.
+For instance, the first perceptron ${\color{magenta}s^1_1}$ is tasked to separate the bottom-right cloud of points from the rest. 
+A second perceptron ${\color{green}s^1_2}$ is used to separate the top-left cloud from the rest.
+A third perceptron ${\color{blue}s^2_1}$ will then use the responses of both and respond to ``is \textbf{only one} of the two perceptrons \textbf{on}?''.
 
 \figref{fig:build_xor} illustrates this approach. One need only recognize that each sub-problem is linearly separable.\\
 }
 
 \begin{frame}
+
 \begin{figure}[ht]
     \centering
-	\includegraphics[width=0.9\textwidth]{img/build_xor.png}
+	\includegraphics[width=0.6\textwidth]{img/build_xor}
 	\caption{Solving sub-problems of the XOR problem.}
 	\label{fig:build_xor} 
 \end{figure}
 
+\end{frame}
+
+
 \mode<article>{
-What we are essentially describing is a Multilayered perceptron (MLP) with an architecture as illustrated in \figref{fig:xor_mlp_arch}. The MLP is made up of an output layer with  a single output neuron $S^2_1$, and one hidden layer with two hidden neurons, $S^1_1$ and $S^2_2$ (the superscript denotes the layer index, the subscript denotes the neuron index within its layer). The terms ``neurons'' and ``nodes'' will be used interchangeably and are treated as synonyms.
+\figref{fig:xor_decisions} visualizes the response of the final neuron $s^2_1$ for different values of $x_1$ and $x_2$. The space is partitioned into one region in which the activity is $< 0.5$ and two disjoint regions (top-left \& bottom-right) in which the activity is $> 0.5$.
 }
 
+\begin{frame}
+\mode<presentation>{
 \begin{figure}[ht]
     \centering
-	\includegraphics[width=0.5\textwidth]{img/xor_mlp_arch}
-	\caption{Simplified MLP architecture for the XOR problem consisting of one hidden layer with two hidden nodes $S^1_1$, $S^1_2$, and one output layer with a single output neuron $S^2_1$}
+	\includegraphics[width=0.4\textwidth]{img/xor_decision}
+	\caption{identifying the decision boundaries}
+	\label{fig:xor_decisions} 
+\end{figure}
+}
+\end{frame}
+
+
+\mode<article>{
+\begin{figure}[ht]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[width=0.3\textwidth]{img/xor_decision}}%
+     \begin{subfigure}[t]{0.35\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+	\caption{Identifying the decision boundaries.}
+         \label{fig:xor_decisions}
+     \end{subfigure}
+     \hspace{2mm}
+     \begin{subfigure}[t]{0.35\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.9\textwidth]{img/xor_mlp_arch}
+         }
+	\caption{simplified MLP architecture for the XOR problem}
+         \label{fig:xor_mlp_arch}
+     \end{subfigure}
+\end{figure}
+
+What we are essentially describing is a Multilayered perceptron (MLP) with an architecture as illustrated in \figref{fig:xor_mlp_arch}. This MLP is made up of an output layer with a single output neuron ${\color{blue}s^2_1}$, and one hidden layer with two hidden neurons, ${\color{magenta}s^1_1}$ and ${\color{green}s^2_2}$ (the superscript denotes the layer index, the subscript denotes the neuron index within its layer). The terms ``neurons'' and ``nodes'' are treated as synonyms.
+}
+\begin{frame}
+
+\mode<presentation>{
+\begin{figure}[ht]
+    \centering
+	\includegraphics[width=0.4\textwidth]{img/xor_mlp_arch}
+	\caption{simplified MLP architecture}
 	\label{fig:xor_mlp_arch} 
 \end{figure}
+}
 
 \end{frame}
 
@@ -107,7 +151,7 @@ What we are essentially describing is a Multilayered perceptron (MLP) with an ar
 
 \mode<article>{
 The nodes in a feedforward neural network form a directed acyclic graph (DAG). There are no connections that feed back to a neuron in an earlier layer. A neuron can only be connected to another neuron that lies in a deeper layer in the network. We will eventually cover neural architectures that allow for feedback connections such as recurrent neural networks.
-\figref{fig:mlp_arch} depicts an example MLP architecture.
+\figref{fig:mlp_arch} is an example MLP architecture (simplified by omitting bias nodes).
 }
 
 \begin{figure}[ht]
@@ -190,18 +234,16 @@ $w_{j0}^{v0}$ measures the bias $-\theta_{j0}^{v0}$ for neuron $(v,j)$.
 
 \mode<article>{
 
-We now look at how this notation describes how a neuron $(v', i)$ processes its input. 
-
 \begin{figure}
     \centering
-	\includegraphics[width=0.4\textwidth]{img/section1_fig20_mini_vdi}
+	\includegraphics[width=0.33\textwidth]{img/section1_fig20_mini_vdi}
 	\caption{Computing the total input for neuron $(v',i)$}
 	\label{eq:compute_vdi}
 \end{figure}
 }
 
 \mode<article>{
-The idea is to identify the set of parent nodes $P(v', i)$ that feed input into neuron $(v',i)$. The weighted sum of the parent activations yields the total input ${\color{darkgreen}h^{v'}_i}$:
+To formulate how neuron $(v', i)$ processes its input requires identifying the set of parent nodes $P(v', i)$ of neuron $(v',i)$. The weighted sum of the parent activations yields the total input ${\color{darkgreen}h^{v'}_i}$:
 }
    
 \only<-2>{
