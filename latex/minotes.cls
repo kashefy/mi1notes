@@ -34,7 +34,7 @@
 
 % Update the following presets
 % presets - BEGIN
-\newcommand{\coursetitle}{Machine Intelligence 2}
+\newcommand{\coursetitle}{Machine Intelligence 1}
 \newcommand{\authorname}{Kashef}
 % presets - END
 
