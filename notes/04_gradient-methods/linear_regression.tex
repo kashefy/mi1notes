@@ -56,13 +56,24 @@ The term $\frac{1}{2}$ is merely for convinience when computing the gradient lat
 \begin{align}
 E^{T} &\eqexcl \min_{\vec w}\\
 \frac{\partial E^{T}}{\partial \vec w} &= \vec 0 \qquad\qquad \text{(satisfied by extrema)}
+\label{eq:extremacond}
 \end{align}
     
 \end{frame}
 
+\newpage
+
 \subsection{Calculating the gradient}
 
+%\mode<article>{
+%Finding extrema that satisfy \eqref{eq:extremacond}:
+%}
+
 \begin{frame}\frametitle{\subsecname}
+ 
+% temporarily change footnote marks to symbols so not to confuse with exponents
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}    
+
 \begin{align}
 \frac{\partial E^{T}}{\partial \vec w} 
 \;\;&=\;\; 
@@ -84,9 +95,85 @@ E^{T} &\eqexcl \min_{\vec w}\\
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
 {\color{blue}
 \big( y(x^{(\alpha)}; \vec w) - y_{T}^{(\alpha)} \big)
-}\\
+}
 \cdot
-\frac{\partial}{\partial}\\
-%\frac{\partial}{\partial}
+{\color{orange}
+\frac{\partial}{\partial \vec w} \vec w^{\top} \vec x^{(\alpha)}
+}
+\;\footnotemark \\
+\;\;&=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+{\color{blue}
+\big( \vec w^{\top}\vec x^{(\alpha)} - y_{T}^{(\alpha)} \big)
+}
+\cdot
+{\color{orange}
+\vec x^{(\alpha)}
+}\\
+\;\;&=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+{\color{orange}
+\vec x^{(\alpha)}
+}
+\cdot
+{\color{blue}
+\big( {\vec x^{(\alpha)}}^{\top}\vec w - y_{T}^{(\alpha)} \big)
+}\;\footnotemark \\
+\;\;&=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\Big( 
+\vec x^{(\alpha)}
+\left({\vec x^{(\alpha)}}^{\top}\right)\vec w - \vec x^{(\alpha)} y_{T}^{(\alpha)}
+\Big)\\
+\;\;&=:\;\; \vec g
 \end{align}    
+
+%\notesonly{ 
+\footnotetext{
+partial derivative calculated by using 
+$y(x^{(\alpha)};\vec w) = \vec w^{\top}\vec x^{(\alpha)}$ and 
+$\frac{\partial}{\partial \vec a}\left(\vec a^{\top} \vec b\right) = \vec b = (b_{1}, b_{2}, \ldots, b_{N})^{\top}$
+}
+\footnotetext{
+$\vec w^{\top}\vec x^{(\alpha)} = {\vec x^{(\alpha)}}^{\top} \vec w$
+}
+%}
+
+% change footnote marks back to original scheme (numbers)
+\renewcommand*{\thefootnote}{\arabic{footnote}}
+
+\end{frame}
+
+\subsection{Finding minimia}
+
+\begin{frame}\frametitle{\subsecname}
+
+Computing the Hessian $\vec H$ to identify minima among the solutions that satisfy \eqref{eq:extremacond}:
+
+Let $\vec g$ denote the gradient vector: $\vec g = \frac{\partial E^{T}}{\partial \vec w}$
+
+\begin{align}
+\vec H := \frac{\partial \vec g}{\partial \vec w}
+\;\;&=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\frac{\partial}{\partial \vec w}
+\left(
+\frac{e^{(\alpha)}}{y(\vec x^{(\alpha)}; \vec w)}
+\cdot
+\frac{\partial y(x^{(\alpha)};\vec w)}{\partial \vec w} 
+\right)\\
+\;\;&=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\frac{\partial}{\partial \vec w}
+\Big( 
+\vec x^{(\alpha)}
+\left({\vec x^{(\alpha)}}^{\top}\right) \vec w 
+\;-\; 
+\underbrace{
+\vec x^{(\alpha)}
+y_{T}^{(\alpha)} 
+}_{\text{indep. of }\vec w}
+\Big)\\
+\end{align}
+
 \end{frame}
