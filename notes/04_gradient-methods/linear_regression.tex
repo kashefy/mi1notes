@@ -1,7 +1,92 @@
 \section{Linear neuron for regression: analytical solution}
 
+\subsection{Data, Model and Objective}
+
+\begin{frame}\frametitle{Setting}
+
+\underline{Data}:\\
+
+\begin{align*}
+\text{observations} \quad x &\in \R \\
+\text{label}        \quad y_{T} &\in \R \\
+\text{Data set } &: \Big\{
+\left(x^{(1)}, y_T^{(1)} 
+\right)
+\,,\, \ldots \,,\,
+\left( x^{(\alpha)}, y_T^{(\alpha)} \right)
+\,,\, \ldots \,,\, 
+\left( x^{(p)}, y_T^{(p)} \right) 
+\Big\}
+\end{align*}
+
+\pause
+
+\underline{Model}:\\
+
+linear neuron:
+\begin{equation}
+    y(x; \vec w) = w_{0} + w_{1} x = \vec w^{\top} \vec x
+\end{equation}
+
+with $\vec x := (1, x)^{\top} \in \R^{2}$ and $\vec w := (w_{0}, w_{1})^{\top} \in \R^{2}$
+
+\end{frame}
+
 \begin{frame}
 
+\underline{Cost function}:\\
 
+Quadratic error
 
+\begin{align}
+E^{T} &= \frac{1}{p} \sum_{\alpha=1}^{p} \;
+\frac{1}{2} \, \left( y(x^{(\alpha)}; \vec w)- y^{(\alpha)}_{T}\right)^{2}\\
+&= \frac{1}{p} \sum_{\alpha=1}^{p}
+\;e^{(\alpha)}
+\end{align}
+
+\mode<article>{
+The term $\frac{1}{2}$ is merely for convinience when computing the gradient later.
+}
+
+\pause
+
+\underline{Optimization}:\\
+
+\begin{align}
+E^{T} &\eqexcl \min_{\vec w}\\
+\frac{\partial E^{T}}{\partial \vec w} &= \vec 0 \qquad\qquad \text{(satisfied by extrema)}
+\end{align}
+    
+\end{frame}
+
+\subsection{Calculating the gradient}
+
+\begin{frame}\frametitle{\subsecname}
+\begin{align}
+\frac{\partial E^{T}}{\partial \vec w} 
+\;\;&=\;\; 
+\frac{1}{p} \sum_{\alpha=1}^{p} \; 
+\frac{\partial e^{(\alpha)}}{\partial \vec w}\\
+\;\;&\stackrel{\mathclap{
+\substack{\text{chain}\\\text{rule}}}
+}
+{=}\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+{\color{blue}
+\frac{\partial e^{(\alpha)}}{\partial y(x^{(\alpha)};\vec w)}
+} 
+\cdot
+{\color{orange}
+\frac{\partial y(x^{(\alpha)};\vec w)}{\partial \vec w}
+}\\
+\;\;&=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+{\color{blue}
+\big( y(x^{(\alpha)}; \vec w) - y_{T}^{(\alpha)} \big)
+}\\
+\cdot
+\frac{\partial}{\partial}\\
+%\frac{\partial}{\partial}
+\end{align}    
 \end{frame}
