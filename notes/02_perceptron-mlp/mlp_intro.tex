@@ -295,9 +295,11 @@ where $N_v$ is the number of hidden nodes in layer $v$.
 		\sum_{(\mu,k) \in P(v',\,i)}
 		\kern-2ex
 		w_{ik}^{v'\mu}\; 
-		f_k^\mu\big( {\color{teal} h_k^\mu} \big) 
-		{\color{darkgreen}h_i^{v'}} \\
-		=& 
+		f_k^\mu\big( {\color{teal} h_k^\mu} \big) \\
+		{\color{darkgreen}h_i^{v'}} \;
+		\stackrel{\mathclap{
+\substack{\text{\tiny fully}\\\text{\tiny conn.}}}
+}{=}& 
 		\kern1.5ex
 		\sum_{j=0}^{N_v}
 		w_{ij}^{v'v}\; 
