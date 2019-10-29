@@ -203,11 +203,30 @@ Therefore,
 %}_{\text{indep. of }\vec w}
 %\Big)\\
 \Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)} y_{T}^{(\alpha)} \Big)^\top
-\;\;&=\;\;\\
-\intertext{$\big(\vec x^{(\alpha)} \, (\vec w^{\top}\vec x^{(\alpha)})\big)^\top = $}\\
+\intertext{$
+{\scriptstyle
+\big(\vec x^{(\alpha)} (\vec w^{\top}\vec x^{(\alpha)})\big)^\top 
+=~(\vec w^{\top}\vec x^{(\alpha)})^{\top}{\vec x^{(\alpha)}}^{\top}
+=~{\vec x^{(\alpha)}}^{\top} \vec w~{\vec x^{(\alpha)}}^{\top}
+}
+$}
+\;\;&=\;\;
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
 \frac{\partial}{\partial \vec w}
+~{\vec x^{(\alpha)}}^{\top} \vec w~{\vec x^{(\alpha)}}^{\top}
+-
+\frac{\partial}{\partial \vec w}
+\underbrace{
+\Big(\vec x^{(\alpha)} y_{T}^{(\alpha)} \Big)^\top
+}_{\text{indep. of }\vec w}
 %\Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)}^\top y_{T}^{(\alpha)} \Big)\\
+\intertext{
+using $\scriptstyle \frac{\partial~\vec a^{\top}\vec B~\vec c}{\partial \vec B} = ~\vec a~\vec b^{\top}$
+}
+\;\;&=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\frac{\partial}{\partial \vec w}
+\Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)} y_{T}^{(\alpha)} \Big)^\top
 \end{align}
 
 \end{frame}
