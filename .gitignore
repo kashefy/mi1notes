@@ -5,12 +5,16 @@ tutorial_*.slides.pdf
 tutorial_*.notes.pdf
 tutorial_*.handout.pdf
 
+ignore slides and notes pdf archives
+tutorial_slides.zip
+tutorial_notes.zip
+tutorial_handout.zip
+tutorial_pdfs.zip
+
 # ignore intermediate pdfs
 tutorial.slides.pdf
 tutorial.notes.pdf
 tutorial.handout.pdf
-
-
 
 # ignore source code for now
 *.py
