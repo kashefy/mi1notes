@@ -81,7 +81,18 @@ A third perceptron ${\color{blue}s^2_1}$ will then use the responses of both and
 
 \begin{figure}[ht]
     \centering
-	\includegraphics[width=0.6\textwidth]{img/build_xor}
+	\includegraphics[width=0.75\textwidth]{img/build_xor_crf}
+	\caption{Solving sub-problems of the XOR problem.}
+	\label{fig:build_xor} 
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{figure}[ht]
+    \centering
+	\includegraphics[width=0.75\textwidth]{img/build_xor}
 	\caption{Solving sub-problems of the XOR problem.}
 	\label{fig:build_xor} 
 \end{figure}
@@ -94,51 +105,57 @@ A third perceptron ${\color{blue}s^2_1}$ will then use the responses of both and
 }
 
 \begin{frame}
-\mode<presentation>{
-\begin{figure}[ht]
-    \centering
-	\includegraphics[width=0.4\textwidth]{img/xor_decision}
-	\caption{identifying the decision boundaries}
-	\label{fig:xor_decisions} 
-\end{figure}
-}
-\end{frame}
-
-
-\mode<article>{
 \begin{figure}[ht]
      \centering
      \savebox{\imagebox}{
-	 \includegraphics[width=0.3\textwidth]{img/xor_decision}}%
+     \mode<presentation>{
+	 \includegraphics[width=0.4\textwidth]{img/xor_decision}
+	 }
+     \mode<article>{
+	 \includegraphics[width=0.35\textwidth]{img/xor_decision}
+	 }
+	 }%
      \begin{subfigure}[t]{0.35\textwidth}
          \centering
          \usebox{\imagebox}% Place largest image
-	\caption{Identifying the decision boundaries.}
+         \caption{}
          \label{fig:xor_decisions}
      \end{subfigure}
-     \hspace{2mm}
-     \begin{subfigure}[t]{0.35\textwidth}
+     \slidesonly{
+     \hspace{4mm}
+     \begin{subfigure}[t]{0.45\textwidth}
+     }
+    \notesonly{
+     \hspace{1mm}
+     \begin{subfigure}[t]{0.38\textwidth}
+     }
          \centering
          \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
-         \includegraphics[width=0.9\textwidth]{img/xor_mlp_arch}
+         \includegraphics[width=0.9\textwidth]{img/xor_decision_s}
          }
-	\caption{simplified MLP architecture for the XOR problem}
-         \label{fig:xor_mlp_arch}
+         \caption{}
+         \label{fig:xor_decisions_s}
      \end{subfigure}
+	\caption{Identifying the decision boundaries.}
 \end{figure}
+\end{frame}
+
+\newpage
+\mode<article>{
+
 
 What we are essentially describing is a Multilayered perceptron (MLP) with an architecture as illustrated in \figref{fig:xor_mlp_arch}. This MLP is made up of an output layer with a single output neuron ${\color{blue}s^2_1}$, and one hidden layer with two hidden neurons, ${\color{magenta}s^1_1}$ and ${\color{green}s^2_2}$ (the superscript denotes the layer index, the subscript denotes the neuron index within its layer). The terms ``neurons'' and ``nodes'' are treated as synonyms.
 }
 \begin{frame}
 
-\mode<presentation>{
 \begin{figure}[ht]
     \centering
 	\includegraphics[width=0.4\textwidth]{img/xor_mlp_arch}
 	\caption{simplified MLP architecture}
 	\label{fig:xor_mlp_arch} 
 \end{figure}
-}
+
+
 
 \end{frame}
 
@@ -289,9 +306,11 @@ where $N_v$ is the number of hidden nodes in layer $v$.
 		\sum_{(\mu,k) \in P(v',\,i)}
 		\kern-2ex
 		w_{ik}^{v'\mu}\; 
-		f_k^\mu\big( {\color{teal} h_k^\mu} \big) 
-		{\color{darkgreen}h_i^{v'}} \\
-		=& 
+		f_k^\mu\big( {\color{teal} h_k^\mu} \big) \\
+		{\color{darkgreen}h_i^{v'}} \;
+		\stackrel{\mathclap{
+\substack{\text{\tiny fully}\\\text{\tiny conn.}}}
+}{=}& 
 		\kern1.5ex
 		\sum_{j=0}^{N_v}
 		w_{ij}^{v'v}\; 
