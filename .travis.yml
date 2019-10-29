@@ -5,6 +5,9 @@ before_install:
 - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended latex-beamer texlive-science
 script:
 - bash .ci/travis/make_all.sh
+
+after_success:
+- bash .ci/travis/zip_pdfs.sh
 deploy:
   provider: releases
   api_key: "$GITHU8_T0KEN"
@@ -12,6 +15,7 @@ deploy:
   file:
   - "./notes/**/tutorial_*.slides.pdf"
   - "./notes/**/tutorial_*.notes.pdf"
+  - "./tutorial_*.zip"
   skip_cleanup: true
   on:
     branch: master
