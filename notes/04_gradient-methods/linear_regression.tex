@@ -6,18 +6,23 @@
 
 \underline{Data}:\\
 
-\begin{align*}
-\text{observations} \quad x &\in \R \\
-\text{label}        \quad y_{T} &\in \R \\
-\text{Data set } &: \Big\{
-\left(x^{(1)}, y_T^{(1)} 
-\right)
-\,,\, \ldots \,,\,
-\left( x^{(\alpha)}, y_T^{(\alpha)} \right)
-\,,\, \ldots \,,\, 
-\left( x^{(p)}, y_T^{(p)} \right) 
+\begin{table}[h]
+\begin{tabular}{rl}
+obserrvations & $x \in \R$ \\
+label         & $y_{T} \in \R$ \\
+Dataset       & 
+$
+\Big\{
+	\left(x^{(1)}, y_T^{(1)} 
+	\right)
+	\,,\, \ldots \,,\,
+	\left( x^{(\alpha)}, y_T^{(\alpha)} \right)
+	\,,\, \ldots \,,\, 
+	\left( x^{(p)}, y_T^{(p)} \right) 
 \Big\}
-\end{align*}
+$
+\end{tabular}
+\end{table}
 
 \pause
 
@@ -100,7 +105,8 @@ E^{T} &\eqexcl \min_{\vec w}\\
 {\color{orange}
 \frac{\partial}{\partial \vec w} \vec w^{\top} \vec x^{(\alpha)}
 }
-\;\footnotemark \\
+%} \;\footnotemark \\
+\intertext{using $\frac{\partial}{\partial \vec a}\left(\vec a^{\top} \vec b\right) = \vec b = (b_{1}, b_{2}, \ldots, b_{N})^{\top}$}
 \;\;&=\;\;
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
 {\color{blue}
@@ -112,28 +118,32 @@ E^{T} &\eqexcl \min_{\vec w}\\
 }\\
 \;\;&=\;\;
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
-{\color{orange}
-\vec x^{(\alpha)}
-}
-\cdot
-{\color{blue}
-\big( {\vec x^{(\alpha)}}^{\top}\vec w - y_{T}^{(\alpha)} \big)
-}\;\footnotemark \\
-\;\;&=\;\;
-\frac{1}{p} \sum_{\alpha=1}^{p} \;
-\Big( 
-\vec x^{(\alpha)}
-\left({\vec x^{(\alpha)}}^{\top}\right)\vec w - \vec x^{(\alpha)} y_{T}^{(\alpha)}
-\Big)\\
+\big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)} y_{T}^{(\alpha)} \big)\\
+%\;\;&=\;\;
+%\frac{1}{p} \sum_{\alpha=1}^{p} \;
+%{\color{orange}
+%\vec x^{(\alpha)}
+%}
+%\cdot
+%{\color{blue}
+%\big( {\vec x^{(\alpha)}}^{\top}\vec w - y_{T}^{(\alpha)} \big)
+%}\;\footnotemark \\
+%\;\;&=\;\;
+%\frac{1}{p} \sum_{\alpha=1}^{p} \;
+%\Big( 
+%{\vec x^{(\alpha)}}^{\top} \kern-.5ex \vec w\; 
+%\vec x^{(\alpha)} 
+%- y_{T}^{(\alpha)} \vec x^{(\alpha)}
+%\Big)\\
 \;\;&=:\;\; \vec g
 \end{align}    
 
 %\notesonly{ 
-\footnotetext{
-partial derivative calculated by using 
-$y(x^{(\alpha)};\vec w) = \vec w^{\top}\vec x^{(\alpha)}$ and 
-$\frac{\partial}{\partial \vec a}\left(\vec a^{\top} \vec b\right) = \vec b = (b_{1}, b_{2}, \ldots, b_{N})^{\top}$
-}
+%\footnotetext{
+%partial derivative calculated by using 
+%$y(x^{(\alpha)};\vec w) = \vec w^{\top}\vec x^{(\alpha)}$ and 
+%$\frac{\partial}{\partial \vec a}\left(\vec a^{\top} \vec b\right) = \vec b = (b_{1}, b_{2}, \ldots, b_{N})^{\top}$
+%}
 \footnotetext{
 $\vec w^{\top}\vec x^{(\alpha)} = {\vec x^{(\alpha)}}^{\top} \vec w$
 }
@@ -144,16 +154,34 @@ $\vec w^{\top}\vec x^{(\alpha)} = {\vec x^{(\alpha)}}^{\top} \vec w$
 
 \end{frame}
 
-\subsection{Finding minimia}
+\subsection{Finding minima}
 
 \begin{frame}\frametitle{\subsecname}
 
-Computing the Hessian $\vec H$ to identify minima among the solutions that satisfy \eqref{eq:extremacond}:
+Constructing the Hessian matrix $\vec H$ to identify minima among the solutions that satisfy \eqref{eq:extremacond}:
+\begin{equation}
+\vec{H} \equiv \frac{\partial^2 E^T}{\partial\vec{w}^2} =
+\left(\begin{array}{cccc}  
+  \frac{\partial^2 E^T}{\partial w_0^2} &
+  \frac{\partial^2 E^T}{\partial w_0\partial w_1} & \cdots &
+  \frac{\partial^2 E^T}{\partial w_0\partial w_N} \\
+  \frac{\partial^2 E^T}{\partial w_1\partial w_0} &
+  \frac{\partial^2 E^T}{\partial w_1^2} & \cdots &
+  \frac{\partial^2 E^T}{\partial w_1\partial w_N} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  \frac{\partial^2 E^T}{\partial w_N\partial w_0} &
+  \frac{\partial^2 E^T}{\partial w_N\partial w_1} & \cdots &
+  \frac{\partial^2 E^T}{\partial w_N^2}
+\end{array}\right)
+\end{equation}
 
-Let $\vec g$ denote the gradient vector: $\vec g = \frac{\partial E^{T}}{\partial \vec w}$
+Let $\vec g$ denote the gradient vector: $\vec g = \frac{\partial E^{T}}{\partial \vec w}$. 
+We recognize that the i-th \underline{row} in $\vec H$ resembles $\frac{\partial}{\partial w_i}\vec g^\top$.
+
+Therefore,
 
 \begin{align}
-\vec H := \frac{\partial \vec g}{\partial \vec w}
+\vec H := \frac{\partial}{\partial \vec w}\vec g^\top
 \;\;&=\;\;
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
 \frac{\partial}{\partial \vec w}
@@ -161,19 +189,25 @@ Let $\vec g$ denote the gradient vector: $\vec g = \frac{\partial E^{T}}{\partia
 \frac{e^{(\alpha)}}{y(\vec x^{(\alpha)}; \vec w)}
 \cdot
 \frac{\partial y(x^{(\alpha)};\vec w)}{\partial \vec w} 
-\right)\\
+\right)^{\kern-1ex\top}\\
 \;\;&=\;\;
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
 \frac{\partial}{\partial \vec w}
-\Big( 
-\vec x^{(\alpha)}
-\left({\vec x^{(\alpha)}}^{\top}\right) \vec w 
-\;-\; 
-\underbrace{
-\vec x^{(\alpha)}
-y_{T}^{(\alpha)} 
-}_{\text{indep. of }\vec w}
-\Big)\\
+%\Big( 
+%\vec x^{(\alpha)}
+%\left({\vec x^{(\alpha)}}^{\top}\right) \vec w 
+%\;-\; 
+%\underbrace{
+%\vec x^{(\alpha)}
+%y_{T}^{(\alpha)} 
+%}_{\text{indep. of }\vec w}
+%\Big)\\
+\Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)} y_{T}^{(\alpha)} \Big)^\top
+\;\;&=\;\;\\
+\intertext{$\big(\vec x^{(\alpha)} \, (\vec w^{\top}\vec x^{(\alpha)})\big)^\top = $}\\
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\frac{\partial}{\partial \vec w}
+%\Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)}^\top y_{T}^{(\alpha)} \Big)\\
 \end{align}
 
 \end{frame}
