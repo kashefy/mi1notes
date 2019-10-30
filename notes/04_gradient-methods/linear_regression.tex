@@ -144,9 +144,9 @@ E^{T} &\eqexcl \min_{\vec w}\\
 %$y(x^{(\alpha)};\vec w) = \vec w^{\top}\vec x^{(\alpha)}$ and 
 %$\frac{\partial}{\partial \vec a}\left(\vec a^{\top} \vec b\right) = \vec b = (b_{1}, b_{2}, \ldots, b_{N})^{\top}$
 %}
-\footnotetext{
-$\vec w^{\top}\vec x^{(\alpha)} = {\vec x^{(\alpha)}}^{\top} \vec w$
-}
+%\footnotetext{
+%$\vec w^{\top}\vec x^{(\alpha)} = {\vec x^{(\alpha)}}^{\top} \vec w$
+%}
 %}
 
 % change footnote marks back to original scheme (numbers)
@@ -203,30 +203,170 @@ Therefore,
 %}_{\text{indep. of }\vec w}
 %\Big)\\
 \Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)} y_{T}^{(\alpha)} \Big)^\top
-\intertext{$
+\intertext{using $
 {\scriptstyle
-\big(\vec x^{(\alpha)} (\vec w^{\top}\vec x^{(\alpha)})\big)^\top 
-=~(\vec w^{\top}\vec x^{(\alpha)})^{\top}{\vec x^{(\alpha)}}^{\top}
-=~{\vec x^{(\alpha)}}^{\top} \vec w~{\vec x^{(\alpha)}}^{\top}
+\big(\vec A~\vec B~\vec C\big)^\top =~\vec C^\top \vec B^\top \vec A^\top
+}
+\quad
+$ 
+and 
+$
+\quad
+{\scriptstyle
+{\vec x^{(\alpha)}}^{\top} \vec w=~\vec w^{\top}\vec x^{(\alpha)}
 }
 $}
+%\intertext{$
+%{\scriptstyle
+%\big(\vec x^{(\alpha)} (\vec w^{\top}\vec x^{(\alpha)})\big)^\top 
+%=~(\vec w^{\top}\vec x^{(\alpha)})^{\top}{\vec x^{(\alpha)}}^{\top}
+%=~{\vec x^{(\alpha)}}^{\top} \vec w~{\vec x^{(\alpha)}}^{\top}
+%}
+%$}
 \;\;&=\;\;
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
 \frac{\partial}{\partial \vec w}
-~{\vec x^{(\alpha)}}^{\top} \vec w~{\vec x^{(\alpha)}}^{\top}
+~\vec w^{\top}{\vec x^{(\alpha)}}~{\vec x^{(\alpha)}}^{\top}
 -
 \frac{\partial}{\partial \vec w}
+\Big(
 \underbrace{
-\Big(\vec x^{(\alpha)} y_{T}^{(\alpha)} \Big)^\top
+\vec x^{(\alpha)} y_{T}^{(\alpha)} 
 }_{\text{indep. of }\vec w}
+\Big)^\top
 %\Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)}^\top y_{T}^{(\alpha)} \Big)\\
 \intertext{
-using $\scriptstyle \frac{\partial~\vec a^{\top}\vec B~\vec c}{\partial \vec B} = ~\vec a~\vec b^{\top}$
+using product rule
 }
+\vec H
 \;\;&=\;\;
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
-\frac{\partial}{\partial \vec w}
-\Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)} y_{T}^{(\alpha)} \Big)^\top
+\vec x^{(\alpha)}~{\vec x^{(\alpha)}}^\top
+\end{align}
+
+\end{frame}
+
+\subsection{Represent gradient and Hessian in matrix form}
+
+\begin{frame}
+
+Let $\vec X$ represent the observations for all training points:
+
+\begin{equation}
+\vec X := 
+\left(
+\begin{array}{cccccc}
+\Big| & \Big| & & \Big| & & \Big| \\[3mm]
+\vec x^{(1)} & \vec x^{(2)} & \cdots & \vec x^{(\alpha)} & \cdots & \vec x^{(p)}\\[2mm]
+\Big| & \Big| & & \Big| & & \Big|
+\end{array}
+\right) \in \R^{2 \times p}
+\end{equation}
+
+and let $\vec y_{\text{True}}$ represent the true labels for all training points:
+
+\begin{equation}
+\vec y_{\text{True}} := (y_T^{(1)}, \ldots, y_T^{(p)}) \in \R^{1 \times p}
+\end{equation}
+
+From this follows:
+
+\begin{align}
+\vec g
+\;\;&=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)} y_{T}^{(\alpha)} \big)\\
+\;\;&=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\big( \vec x^{(\alpha)} \, {\vec x^{(\alpha)}}^{\top} \vec w- \vec x^{(\alpha)} y_{T}^{(\alpha)} \big)\\
+\;\;&=\;\;
+\frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right)
+\end{align}
+
+stationary point:
+
+\begin{align}
+\vec g \eqexcl \vec 0 \iff \vec X \, \vec X^\top \vec w^*  &= \vec X\, \vec y_{\text{True}}^\top\\
+\vec w^* &=
+{
+\underbrace{
+\left(
+\vec X \, \vec X^\top
+\right)
+}_{\substack{\text{assumes}\\ \text{invertibility}}} 
+}^{-1} \vec X\, \vec y_{\text{True}}^\top
+\end{align}
+
+$\vec w^*$ is a global minimum because
+
+\begin{enumerate}[1.]
+\item it is a unique solution of $\vec g = \vec 0$ and
+\item 
+\begin{equation}
+\vec H 
+= \frac{1}{p} \sum_{\alpha=1}^{p} \;
+\vec x^{(\alpha)}~{\vec x^{(\alpha)}}^\top 
+= \frac{1}{p} \, \vec X \, \vec X^\top = \vec C
+\end{equation}
+where $\vec C$ is the \emph{empirical covariance matrix} which is positive definite for invertible $\vec X\, \vec X^\top$.
+\end{enumerate}
+
+positive definiteness:
+
+\begin{align}
+\forall \vec z \in \R^2: \quad \vec z^\top \vec H\, \vec z 
+\, &= \frac{1}{p} \, \vec z^\top \vec X \, \vec X^\top \vec z\\
+\, &= \frac{1}{p} \, \Big \lVert \, \vec X^\top \vec z \, \Big \rVert_2^2 > 0 \quad \mathrm{iff.} \; \vec z \ne \vec 0
+\end{align}
+
+\end{frame}
+
+\subsection{Solution with regularization}
+
+\begin{frame}
+
+$L_2$ regularization cost:
+\begin{equation}
+E^R_{[\vec w]} := \frac{1}{2} \sum_{(i, j, v', v)} 
+			\big( \mathrm{w}_{ij}^{v'v} \big)^2 = \frac{1}{2} \lVert \vec w \rVert_2^2 = \frac{1}{2} \vec w^\top \vec w 
+\end{equation}
+
+\begin{equation}
+\frac{\partial}{\partial \vec w} E^R_{[\vec w]} = \frac{1}{2} \cdot 2 \cdot \vec w = \vec w
+\end{equation}
+
+The regularized cost function:
+
+\begin{equation}
+	R_{[\vec{w}]} = \underbrace{ E_{[\vec{w}]}^T }_{
+			\substack{\text{training} \\ \text{error} \\ \text{e.g. quadratic cost}}}
+		+ \underbrace{ \lambda E_{[\vec{w}]}^R }_{
+			\substack{\text{regularization} \\ \text{term}}}
+		\eqexcl \min 
+\end{equation}
+
+where 
+\begin{itemize}
+	\item $E^R \; \corresponds \; $ prior knowledge of solution
+	\item $\lambda:$ regularization parameter 
+\end{itemize}
+
+Gradient:
+
+\begin{align}
+\vec g^R 
+&= \frac{\partial}{\partial \vec w} E^T_{[\vec w]} + \frac{\partial}{\partial \vec w} E^R_{[\vec w]}\\
+&= \frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right) + \vec I_N \, \lambda \, \vec w\\
+\iff& \quad \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top + p \lambda \, \vec I_N \,  \vec w \eqexcl \vec 0\\
+\vec w* &=  {\underbrace{
+\left(\, \vec X \, \vec X^\top + p \lambda \vec I_N \,  \right)
+}_{
+\substack{
+\text{positive definite and}\\
+\text{therefore invertible}\\
+}
+}
+}^{-1} \vec X \, \vec y_{\mathrm{True}}^{\top}
 \end{align}
 
 \end{frame}
