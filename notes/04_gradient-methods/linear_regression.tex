@@ -330,9 +330,9 @@ $L_2$ regularization cost:
 E^R_{[\vec w]} := \frac{1}{2} \sum_{(i, j, v', v)} 
 			\big( \mathrm{w}_{ij}^{v'v} \big)^2 = \frac{1}{2} \lVert \vec w \rVert_2^2 = \frac{1}{2} \vec w^\top \vec w 
 \end{equation}
-
+\renewcommand{\CancelColor}{\color{gray}}
 \begin{equation}
-\frac{\partial}{\partial \vec w} E^R_{[\vec w]} = \frac{1}{2} \cdot 2 \cdot \vec w = \vec w
+\frac{\partial}{\partial \vec w} E^R_{[\vec w]} = \frac{1}{\wcancel{2}} \cdot \wcancel{2} \cdot \vec w = \vec w
 \end{equation}
 
 The regularized cost function:
@@ -342,7 +342,7 @@ The regularized cost function:
 			\substack{\text{training} \\ \text{error} \\ \text{e.g. quadratic cost}}}
 		+ \underbrace{ \lambda E_{[\vec{w}]}^R }_{
 			\substack{\text{regularization} \\ \text{term}}}
-		\eqexcl \min 
+		\eqexcl \min_{\vec w}
 \end{equation}
 
 where 
@@ -354,12 +354,12 @@ where
 Gradient:
 
 \begin{align}
-\vec g^R 
+\vec g^R :=  \frac{\partial}{\partial \vec w} R_{[\vec w]}
 &= \frac{\partial}{\partial \vec w} E^T_{[\vec w]} + \frac{\partial}{\partial \vec w} E^R_{[\vec w]}\\
-&= \frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right) + \vec I_N \, \lambda \, \vec w\\
-\iff& \quad \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top + p \lambda \, \vec I_N \,  \vec w \eqexcl \vec 0\\
-\vec w* &=  {\underbrace{
-\left(\, \vec X \, \vec X^\top + p \lambda \vec I_N \,  \right)
+&= \frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right) + \vec I_N \, \lambda \, \vec w\\[2mm]
+\iff& \quad \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top + p \lambda \, \vec I_N \,  \vec w \eqexcl \vec 0\\[2mm]
+\vec w^* &=  {\underbrace{
+\left(\, \vec X \, \vec X^\top + p \lambda \, \vec I_N \,  \right)
 }_{
 \substack{
 \text{positive definite and}\\
