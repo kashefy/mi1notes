@@ -87,6 +87,12 @@ Both the quadratic and linear cost functions are symmetric. They therefore yield
 }
 \end{frame}
 \begin{frame}\frametitle{Quadratic vs. linear error}
+
+\mode<presentation>{
+	\placeimage{8.5}{1.2}{img/section1_fig17_quadratic}{width=2.5cm}
+	\placeimage{12.5}{.9}{img/section1_fig17_linear}{width=2.5cm}
+}
+
 \begin{table}[h]
 \centering
 \caption{Differences between quadratic and linear cost}
@@ -227,12 +233,24 @@ for the \textcolor{blue}{``positive''} and \textcolor{red}{``negative''/``other'
 
 $\dkl(P||Q)$ is a measure of how much a probability distribution $P$ differs from another distribution $Q$.
 
+\begin{align}
+\dkl\left(\, P(\vec x) ||\, Q(\vec x) \,\right)
+:= \iint d \vec x \, P(\vec x)
+\ln 
+\left( 
+\frac{P(\vec x)}{Q(\vec x)}
+\right)
+\end{align}
+
 Properties of the KL-divergence:
 
 \begin{itemize}
-\item $\dkl = 0$ iff. both distribution are \emph{identical}.
-\item Otherwise $\dkl > 0$.
-\item Does not qualify as a metric because it is not symmetric. For different distributions P and Q: $\dkl(P_||Q) \ne \dkl(Q||P)$
+\item $\dkl = 0$ iff. both distribution are \emph{identical},
+\item otherwise, $\dkl > 0$.
+\item[!] Does not qualify as a metric because it is not symmetric. For different distributions $P$ and $Q$:
+	\begin{equation}
+	\dkl(P||Q) \ne \dkl(Q||P)
+	\end{equation}
 \end{itemize}
 
 \end{frame}
@@ -382,7 +400,9 @@ ERM for computing cross entropy loss using the training data:
 	 \ln \lbrack {\color{blue}y(\vec x^{(\alpha)};\vec w)} \rbrack
 	 - ( {\color{red}1-y_T^{(\alpha)}} ) \cdot
 	 \ln \lbrack {\color{red}1-y(\vec x^{(\alpha)};\vec w)} \rbrack  \;\bigg) \\
+	 \notesonly{
 	 &= \frac{1}{p} \sum_{\alpha=1}^{p} e\tyxwalpha
+	 }
 }
 \end{align}
 
