@@ -212,7 +212,7 @@ MLP, scalar output \mode<article>{interpreted as probability that $y(\vec x; \ve
 y(\vec x;\vec w) =: P_{\text{model}} ({\color{blue}y=1}|\vec x;\vec w) \;\; \text{and} \;\; P_{\text{model}} ({\color{red}y=0}|\vec x; \vec w) = 1-y(\vec x;\vec w)
 \end{equation}
 
-for the \textcolor{blue}``positive'' and ``negative''/``other'' class respectively.
+for the \textcolor{blue}{``positive''} and \textcolor{red}{``negative''/``other''} class respectively.
 
 \end{itemize}
 
@@ -416,6 +416,7 @@ $y_{T} \in \R$
 & \begin{tabular}[c]{@{}l@{}}linear\\ $y = {\vec w^{LL-1}}^{\top} \vec s^{L-1}$\end{tabular} 
 & \begin{tabular}[c]{@{}c@{}}quadratic error\\
 $e = \frac{1}{2} \big( y_{T} - y\big)^{2}$\end{tabular} 
+\pause
 \\ \hline
 \begin{tabular}[c]{@{}l@{}}multivariate linear \\ regression\end{tabular} 
 &  
@@ -423,8 +424,9 @@ $\vec y_{T} \in \R^{M}$
 & \begin{tabular}[c]{@{}l@{}}linear\\ $y_{k} = {\vec w_{k}^{LL-1}}^{\top} \vec s^{L-1}$\end{tabular} 
 & \begin{tabular}[c]{@{}c@{}}squared Euclidean \\ distance\\ 
 $e = \frac{1}{2} \lVert \vec y_{T} - \vec y \rVert^{2}_{2}$
-\end{tabular} \\ 
-\hline
+\end{tabular}
+\pause
+\\ \hline
 \begin{tabular}[c]{@{}l@{}}binary \\ classification\end{tabular} 
 &  $y_{T} \in \{0,1\}, \{-1,1\}$
 &
@@ -442,8 +444,9 @@ $
 -\kern-.2ex ( 1\kern-.5ex-\kern-.5exy_T )
 \ln \lbrack 1\kern-.5ex-\kern-.5exy \rbrack
 $
-\end{tabular} \\ 
-\hline
+\end{tabular}
+\pause
+\\ \hline
 \begin{tabular}[c]{@{}l@{}}multi-class \\ classification\\ with $M$ classes\end{tabular} 
 &  
 \begin{tabular}[c]{@{}c@{}}
