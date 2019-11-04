@@ -70,6 +70,7 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
     \pause 
     \question{How does $w_{ij}^{v'v}$ contribute to the error?
     \slidesonly{$\frac{\partial y(\vec{x}; \vec{w})}{\partial w_{ij}^{v'v}} = \ldots$
+    \pause
     }}\\
     
     \mode<article>{
@@ -550,6 +551,21 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
              (\text{Not applicable to observed input})
              }
         \end{flalign}
+        \slidesonly{
+        \vspace{5mm}
+        \begin{equation}
+		\boxed{
+				{w}_{ij}^{v'v}
+				\quad \leftarrow \quad 
+				{w}_{ij}^{v'v} - \eta \cdot
+				\smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot
+				\smallfrac{\partial y(\vec{x}; \vec{w})}{\partial{w}_{ij}^{v'v}}
+				\;=\; {w}_{ij}^{v'v} - \eta \cdot
+				{\color{red} \delta_i^{v'}} \kern-.5ex\cdot
+			   			f_j^v( {\color{darkgreen}h_j^v} )
+		}
+        \end{equation}
+        }
     }
     \end{itemize}
     % change footnote marks back to original scheme (numbers)
@@ -612,7 +628,7 @@ $v=L$
 & \begin{tabular}[c]{@{}l@{}}
     $\vec w_{1}^{L2}  \in \R^{N_{2}+1}$\vspace{2mm}
 \end{tabular} 
-& $h^{L} \in \R$ 
+& $h_1^{L} \in \R$ 
 & ${\color{red}\delta^{L}_{1}} \in \R$\\ 
 \hline
 \end{tabular}
@@ -724,7 +740,7 @@ The idea is to add (subtract) a small offset $\varepsilon$ to (from) $w^{v'v}_{i
 \begin{equation}
 e\big(y_T, y\big(\vec x; \widetilde{\vec w}, {w}^{v'v}_{ij} \pm \varepsilon\big)\big) =: e\big(\widetilde{\vec w}, {w}^{v'v}_{ij} \pm \varepsilon\big) \text{ for brevity}
 \end{equation}
-
+\pause
 For $\varepsilon \ll 1$ follows:
 
 \begin{equation}
