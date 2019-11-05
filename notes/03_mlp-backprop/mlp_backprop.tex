@@ -99,7 +99,7 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
     \end{eqnarray}
     
     \mode<article>{
-    \eqref{eq:input_output_terms} breaks the contribution of  $w_{ij}^{v'v}$ to the neuron's output into two parts:
+    \eqref{eq:input_output_terms} breaks the contribution of  $w_{ij}^{v'v}$ to the network's output into two parts:
     \begin{enumerate}
      \item The contribution of $h^{v'}_{i}$ to the network's response $y(\vec x; \vec w)$. This is referred to as the ``local error'' at neuron $(v',i)$. The efficiency of the Backpropagation algorithm is based on how it computes the ``local error'' denoted by $\delta_i^{v'}$ for neuron $(v', i)$ and all other neurons in the network.
      \item The contribution of $h^{v'}_{i}$ due to one of its inputs, namely neuron $(v,j)$ which is weighted by $w_{ij}^{v'v}$. We already have everything to compute this term and that is by taking the definition of $h^{v'}_{i}$ in \eqref{eq:total_input_vi} and taking the derivative w.r.t. $w_{ij}^{v'v}$. 
@@ -130,9 +130,9 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
     The Backpropagation algorithm is composed of two stages:
     \begin{enumerate}
      \item \textbf{forward propagation} (forward pass)
-     \mode<article>{: Given some input $\vec x$ compute the activities of all neurons and the response of the network.}
+     \mode<article>{: Given some input $\vec x$, compute the activities of all neurons and the response of the network.}
      \item \textbf{backwards propagation} (backward pass)
-     \mode<article>{: Given the response of the network. Recursively calculate the local errors starting with the output node and work your way backwards through the network.}
+     \mode<article>{: Given the response of the network, recursively calculate the local errors starting with the output node and work your way backwards through the network.}
     \end{enumerate}
 \end{frame}
 
@@ -232,10 +232,10 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 		\item[] \textbf {weight update}: using activities and local errors
         \begin{equation}
 				{w}_{ij}^{v'v}
-				\quad \leftarrow \quad 
+				\; \leftarrow \; 
 				{w}_{ij}^{v'v} - \eta \cdot
 				\smallfrac{\partial e}{\partial{w}_{ij}^{v'v}}
-				\quad=\quad {w}_{ij}^{v'v} - \eta \cdot
+				\;=\; {w}_{ij}^{v'v} - \eta \, \cdot 
 				\smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot
 				\only<5>{
 				\smallfrac{\partial y(\vec{x}; \vec{w})}{\partial{w}_{ij}^{v'v}}\hspace{8.5mm}
@@ -243,18 +243,18 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
                 \slidesonly{
 				\only<6>{
 				{\color{red} \delta_i^{v'}} \kern-.5ex\cdot
-			   			f_j^v( {\color{darkgreen}h_j^v} )
+			   			f_j^v( {\color{teal}h_j^v} )
 			   	}}
         \end{equation}
         \notesonly{
         \begin{equation}
 				{w}_{ij}^{v'v}
 				\quad \leftarrow \quad 
-                {w}_{ij}^{v'v} - \eta \cdot
+                {w}_{ij}^{v'v} - \eta \, \cdot
 				\smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot
 				{
 				{\color{red} \delta_i^{v'}} \kern-.5ex\cdot
-			   			f_j^v( {\color{darkgreen}h_j^v} )
+			   			f_j^v( {\color{teal}h_j^v} )
 			   	}
         \end{equation}
         }
@@ -328,10 +328,8 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
 \mode<article>{
 - The procedure is:
 \begin{enumerate}
- \item Forward pass: forward propagation of neuron activities and obtain the network's response (compute ${\color{darkgreen}h^{v}_{i}}$ for $v = 0,\ldots,L$),\\
- 
- followed by
- \item Backward pass: backpropagation of ``local errors'' (compute ${\color{red}\delta^{v}_{i}}$).
+ \item forward pass: compute ${h^{v}_{i}}$ for $v = 0,\ldots,L$,\\
+ \item backward pass: backpropagation of ``local errors'' (i.e. compute ${\color{red}\delta^{v}_{i}}$).
 \end{enumerate}
 }
 \end{frame}
@@ -355,7 +353,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
     \vspace{1cm}
     }
     
-    Compute ${\color{darkgreen}h^{v}_{i}}$ \only<1>{for $v = 0,\ldots,L$}:
+    Compute ${h^{v}_{i}}$ \only<1>{for $v = 0,\ldots,L$}:
 
     \begin{itemize}
     \only<1,2>{
@@ -532,7 +530,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
         \end{flalign}
         \notesonly{
             \footnotetext{
-            $\widetilde{\vec {W}}^{21} \; \corresponds \; {\vec {W}}^{21}$ without the bias node in each column ${\vec {w}}_{j}^{21}$.\\
+            $\widetilde{\vec {W}}^{21} \; \corresponds \; {\vec {W}}^{21}$ without the bias in each column vector ${\vec {w}}_{j}^{21}$. $w_{\color{magenta}{kj}}^{21}$ refers to row ${\color{magenta}j}$, col. ${\color{magenta}k}$ of $\widetilde{\vec {W}}^{21}$.
             ${\color{darkgreen} {\vec{\widetilde{h}}^{1}}}  \; \corresponds \; {\color{darkgreen} {\vec{{h}}^{1}}}$ without the bias node.
             %${\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}}  \; \corresponds \; {\color{red} {\vec{{\delta}}^{2}}^{\top}}$ without the bias node (k=0), i.e. ${\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}}$ is ${\color{red} {\vec{{\delta}}^{2}}^{\top}}$ without ${\color{red} \delta^{2}_{0}}$.
             }
