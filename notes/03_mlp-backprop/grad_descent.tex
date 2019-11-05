@@ -245,7 +245,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     
     \mode<presentation>{\vspace{-1cm}}
     \begin{equation}
-			e\tyxw := \frac{1}{2} \left( y_T - y(\vec{x}; \vec w) \right)^2{}
+			e\tyxw := \frac{1}{2} \left( y_T - y(\vec{x}; \vec w) \right)^2
     \end{equation}
     
     \mode<article>{it follows:}
@@ -253,7 +253,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     \begin{equation}
 			\textcolor{blue}{\frac{\partial e\tyxwalpha}{
 					\partial y{(\vec{x}^{(\alpha)}; \vec{w})} }
-				= y_T^{(\alpha)} - y{(\vec{x}^{(\alpha)}; \vec{w})}}
+				= - y_T^{(\alpha)} + y{(\vec{x}^{(\alpha)}; \vec{w})}}
     \end{equation}
     }
     
