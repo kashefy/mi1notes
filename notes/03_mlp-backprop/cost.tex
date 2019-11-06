@@ -87,6 +87,12 @@ Both the quadratic and linear cost functions are symmetric. They therefore yield
 }
 \end{frame}
 \begin{frame}\frametitle{Quadratic vs. linear error}
+
+\mode<presentation>{
+	\placeimage{8.5}{1.2}{img/section1_fig17_quadratic}{width=2.5cm}
+	\placeimage{12.5}{.9}{img/section1_fig17_linear}{width=2.5cm}
+}
+
 \begin{table}[h]
 \centering
 \caption{Differences between quadratic and linear cost}
@@ -212,7 +218,7 @@ MLP, scalar output \mode<article>{interpreted as probability that $y(\vec x; \ve
 y(\vec x;\vec w) =: P_{\text{model}} ({\color{blue}y=1}|\vec x;\vec w) \;\; \text{and} \;\; P_{\text{model}} ({\color{red}y=0}|\vec x; \vec w) = 1-y(\vec x;\vec w)
 \end{equation}
 
-for the \textcolor{blue}``positive'' and ``negative''/``other'' class respectively.
+for the \textcolor{blue}{``positive''} and \textcolor{red}{``negative''/``other''} class respectively.
 
 \end{itemize}
 
@@ -227,12 +233,24 @@ for the \textcolor{blue}``positive'' and ``negative''/``other'' class respective
 
 $\dkl(P||Q)$ is a measure of how much a probability distribution $P$ differs from another distribution $Q$.
 
+\begin{align}
+\dkl\left(\, P( z) ||\, Q( z) \,\right)
+:= \int d  z \, P( z)
+\ln 
+\left( 
+\frac{P(z)}{Q(z)}
+\right)
+\end{align}
+
 Properties of the KL-divergence:
 
 \begin{itemize}
-\item $\dkl = 0$ iff. both distribution are \emph{identical}.
-\item Otherwise $\dkl > 0$.
-\item Does not qualify as a metric because it is not symmetric. For different distributions P and Q: $\dkl(P_||Q) \ne \dkl(Q||P)$
+\item $\dkl = 0$ iff. both distribution are \emph{identical},
+\item otherwise, $\dkl > 0$.
+\item[!] Does not qualify as a metric because it is not symmetric. For different distributions $P$ and $Q$:
+	\begin{equation}
+	\dkl(P||Q) \ne \dkl(Q||P)
+	\end{equation}
 \end{itemize}
 
 \end{frame}
@@ -382,7 +400,9 @@ ERM for computing cross entropy loss using the training data:
 	 \ln \lbrack {\color{blue}y(\vec x^{(\alpha)};\vec w)} \rbrack
 	 - ( {\color{red}1-y_T^{(\alpha)}} ) \cdot
 	 \ln \lbrack {\color{red}1-y(\vec x^{(\alpha)};\vec w)} \rbrack  \;\bigg) \\
+	 \notesonly{
 	 &= \frac{1}{p} \sum_{\alpha=1}^{p} e\tyxwalpha
+	 }
 }
 \end{align}
 
@@ -416,6 +436,7 @@ $y_{T} \in \R$
 & \begin{tabular}[c]{@{}l@{}}linear\\ $y = {\vec w^{LL-1}}^{\top} \vec s^{L-1}$\end{tabular} 
 & \begin{tabular}[c]{@{}c@{}}quadratic error\\
 $e = \frac{1}{2} \big( y_{T} - y\big)^{2}$\end{tabular} 
+\pause
 \\ \hline
 \begin{tabular}[c]{@{}l@{}}multivariate linear \\ regression\end{tabular} 
 &  
@@ -423,8 +444,9 @@ $\vec y_{T} \in \R^{M}$
 & \begin{tabular}[c]{@{}l@{}}linear\\ $y_{k} = {\vec w_{k}^{LL-1}}^{\top} \vec s^{L-1}$\end{tabular} 
 & \begin{tabular}[c]{@{}c@{}}squared Euclidean \\ distance\\ 
 $e = \frac{1}{2} \lVert \vec y_{T} - \vec y \rVert^{2}_{2}$
-\end{tabular} \\ 
-\hline
+\end{tabular}
+\pause
+\\ \hline
 \begin{tabular}[c]{@{}l@{}}binary \\ classification\end{tabular} 
 &  $y_{T} \in \{0,1\}, \{-1,1\}$
 &
@@ -442,8 +464,9 @@ $
 -\kern-.2ex ( 1\kern-.5ex-\kern-.5exy_T )
 \ln \lbrack 1\kern-.5ex-\kern-.5exy \rbrack
 $
-\end{tabular} \\ 
-\hline
+\end{tabular}
+\pause
+\\ \hline
 \begin{tabular}[c]{@{}l@{}}multi-class \\ classification\\ with $M$ classes\end{tabular} 
 &  
 \begin{tabular}[c]{@{}c@{}}

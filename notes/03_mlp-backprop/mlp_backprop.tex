@@ -15,9 +15,9 @@ The Backpropagation algorithm is a method for computing gradients by using the c
 			\partial {w}_{ij}^{v'v}}}
     \label{eq:model_term}
 \end{equation}
-    
+\mode<article>{
 The Backpropagation algorithm handles the computation of the term in \eqref{eq:model_term} for neural networks such as the one depicted in \figref{fig:example_mlp}.
-
+}
 \end{frame}
 
 % -----------------------------------------------------------------------------
@@ -70,6 +70,7 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
     \pause 
     \question{How does $w_{ij}^{v'v}$ contribute to the error?
     \slidesonly{$\frac{\partial y(\vec{x}; \vec{w})}{\partial w_{ij}^{v'v}} = \ldots$
+    \pause
     }}\\
     
     \mode<article>{
@@ -98,7 +99,7 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
     \end{eqnarray}
     
     \mode<article>{
-    \eqref{eq:input_output_terms} breaks the contribution of  $w_{ij}^{v'v}$ to the neuron's output into two parts:
+    \eqref{eq:input_output_terms} breaks the contribution of  $w_{ij}^{v'v}$ to the network's output into two parts:
     \begin{enumerate}
      \item The contribution of $h^{v'}_{i}$ to the network's response $y(\vec x; \vec w)$. This is referred to as the ``local error'' at neuron $(v',i)$. The efficiency of the Backpropagation algorithm is based on how it computes the ``local error'' denoted by $\delta_i^{v'}$ for neuron $(v', i)$ and all other neurons in the network.
      \item The contribution of $h^{v'}_{i}$ due to one of its inputs, namely neuron $(v,j)$ which is weighted by $w_{ij}^{v'v}$. We already have everything to compute this term and that is by taking the definition of $h^{v'}_{i}$ in \eqref{eq:total_input_vi} and taking the derivative w.r.t. $w_{ij}^{v'v}$. 
@@ -129,9 +130,9 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
     The Backpropagation algorithm is composed of two stages:
     \begin{enumerate}
      \item \textbf{forward propagation} (forward pass)
-     \mode<article>{: Given some input $\vec x$ compute the activities of all neurons and the response of the network.}
+     \mode<article>{: Given some input $\vec x$, compute the activities of all neurons and the response of the network.}
      \item \textbf{backwards propagation} (backward pass)
-     \mode<article>{: Given the response of the network. Recursively calculate the local errors starting with the output node and work your way backwards through the network.}
+     \mode<article>{: Given the response of the network, recursively calculate the local errors starting with the output node and work your way backwards through the network.}
     \end{enumerate}
 \end{frame}
 
@@ -231,10 +232,10 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
 		\item[] \textbf {weight update}: using activities and local errors
         \begin{equation}
 				{w}_{ij}^{v'v}
-				\quad \leftarrow \quad 
+				\; \leftarrow \; 
 				{w}_{ij}^{v'v} - \eta \cdot
 				\smallfrac{\partial e}{\partial{w}_{ij}^{v'v}}
-				\quad=\quad {w}_{ij}^{v'v} - \eta \cdot
+				\;=\; {w}_{ij}^{v'v} - \eta \, \cdot 
 				\smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot
 				\only<5>{
 				\smallfrac{\partial y(\vec{x}; \vec{w})}{\partial{w}_{ij}^{v'v}}\hspace{8.5mm}
@@ -242,18 +243,18 @@ The Backpropagation algorithm handles the computation of the term in \eqref{eq:m
                 \slidesonly{
 				\only<6>{
 				{\color{red} \delta_i^{v'}} \kern-.5ex\cdot
-			   			f_j^v( {\color{darkgreen}h_j^v} )
+			   			f_j^v( {\color{teal}h_j^v} )
 			   	}}
         \end{equation}
         \notesonly{
         \begin{equation}
 				{w}_{ij}^{v'v}
 				\quad \leftarrow \quad 
-                {w}_{ij}^{v'v} - \eta \cdot
+                {w}_{ij}^{v'v} - \eta \, \cdot
 				\smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot
 				{
 				{\color{red} \delta_i^{v'}} \kern-.5ex\cdot
-			   			f_j^v( {\color{darkgreen}h_j^v} )
+			   			f_j^v( {\color{teal}h_j^v} )
 			   	}
         \end{equation}
         }
@@ -327,10 +328,8 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
 \mode<article>{
 - The procedure is:
 \begin{enumerate}
- \item Forward pass: forward propagation of neuron activities and obtain the network's response (compute ${\color{darkgreen}h^{v}_{i}}$ for $v = 0,\ldots,L$),\\
- 
- followed by
- \item Backward pass: backpropagation of ``local errors'' (compute ${\color{red}\delta^{v}_{i}}$).
+ \item forward pass: compute ${h^{v}_{i}}$ for $v = 0,\ldots,L$,\\
+ \item backward pass: backpropagation of ``local errors'' (i.e. compute ${\color{red}\delta^{v}_{i}}$).
 \end{enumerate}
 }
 \end{frame}
@@ -354,7 +353,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
     \vspace{1cm}
     }
     
-    Compute ${\color{darkgreen}h^{v}_{i}}$ \only<1>{for $v = 0,\ldots,L$}:
+    Compute ${h^{v}_{i}}$ \only<1>{for $v = 0,\ldots,L$}:
 
     \begin{itemize}
     \only<1,2>{
@@ -413,7 +412,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
         h^{L}_{1} &=
         \slidesonly{\only<7>{&&}}
         \only<8>{
-            \smallsum{i=0}{N^{(2)}} w_{1i}^{L2}\;  f_i^1\big( {h_i^1} \big) = {\vec w_{1}^{21}}^{\top} \vec f^{2}(\vec h^2) &(\text{bias included})&&\\
+            \smallsum{i=0}{N_{2}} w_{1i}^{L2}\;  f_i^1\big( {h_i^1} \big) = {\vec w_{1}^{21}}^{\top} \vec f^{2}(\vec h^2) &(\text{bias included})&&\\
             y(\vec x; \vec w) &= f^L_{1}(h^{L}_{1})&&\\
             f^L_{1}(h) :\kern-0.5ex&= \text{e.g. logistic function (sigmoid)}\\
         }
@@ -471,14 +470,15 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
                 {\color{red}\delta_1^{L}} \,
                 {w}_{1i}^{L2}
                 &(\text{bias }{\scriptsize{w}_{0i}^{L2}}\text{ excl.})\\
-             {\color{red} \vec \delta^{2}} &=\; [\vec f^{2}]'({\color{darkgreen}\vec h^{2}}) \odot ({\color{red}\delta_1^{L}} \cdot {\widetilde{\vec w}_{1}^{L2}})
+             {\color{red} \vec \delta^{2}} &=\; [\vec f^{2}]'({\color{darkgreen}\widetilde{\vec h}^{2}}) \odot ({\color{red}\delta_1^{L}} \cdot {\widetilde{\vec w}_{1}^{L2}})
         \notesonly{ \footnotemark }
         %\notesonly{ \footnotemark }
         }
         \end{flalign}
         \notesonly{
             \footnotetext{
-            $\widetilde{\vec {w}}_{1}^{L2} \; \corresponds \; {\vec {w}}_{1}^{L2}$ without the bias node (k=0).\\
+            $\widetilde{\vec {w}}_{1}^{L2} \; \corresponds \; {\vec {w}}_{1}^{L2}$ without the bias node.\\
+            ${\color{darkgreen} {\vec{\widetilde{h}}^{2}}}  \; \corresponds \; {\color{darkgreen} {\vec{{h}}^{2}}}$ without the bias node.
             ``$\odot$'' stands for elementwise multiplication, while ``$\cdot$'' stands for the dot product.
             }
         }
@@ -496,13 +496,14 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
                 [f_j^{1}]'({\color{darkgreen}h_j^{1}}) 
                 \kern-.5ex\sum_{k=1}^{N_{2}}\kern-.5ex
                 {\color{red}\delta_k^{2}} \,
-                {w}_{kj}^{21} \\&
+                {w}_{{\color{magenta}kj}}^{21} %\\%&
                 %\notesonly{\\&}
-                = 
-                [f_j^{1}]'({\color{darkgreen}h_j^{1}})\,
-                {\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}}
-                \widetilde{\vec {w}}_{j}^{21}
-                &(\text{bias k=0  excl.})\notesonly{\\[3mm]}\slidesonly{\\}
+                %= 
+                %[f_j^{1}]'({\color{darkgreen}h_j^{1}})\,
+                %{\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}}
+                %\widetilde{\vec {w}}_{j}^{21}
+                &(\text{bias k=0  excl.})\\%TODO: vector notation for this
+                %\notesonly{\\[3mm]}\slidesonly{\\}
                 %(\text{skip }k=0)\\
                 %}
         %\end{flalign}
@@ -511,25 +512,27 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
         %\only<6>{
             {\color{red} \vec \delta^{1}}
              &=
-                [\vec f^{1}]'({\color{darkgreen}h^{1}})
+                [\vec f^{1}]'({\color{darkgreen}\widetilde{\vec h}^{1}})
                 \odot
-                ({\color{red} {\vec \delta^{2}}^{\top}}
+                (
                 \kern-.5ex\cdot
-                \widetilde{\vec {W}}^{21})^{\top} \notesonly{ \footnotemark }
-                &(\text{\footnotesize \notesonly{bias} j=0  incl./k=0  excl.})\\
-             &= 
-                [\vec f^{1}]'({\color{darkgreen}h^{1}})
-                \odot
-                ({{\vec {\widetilde{W}}}^{21}}^{\top} 
-                \kern-.7ex\cdot
-                {\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}})
-                & (\vec A\, \vec B)^{\kern-.5ex\top}\kern-1ex=\vec B^{\top}\kern-.8ex\vec A^{\kern-.5ex\top}
+                \widetilde{\vec {W}}^{21}
+                {\color{red} {\vec \delta^{2}}}) \notesonly{ \footnotemark }
+                & \\
+             %&= 
+                %[\vec f^{1}]'({\color{darkgreen}h^{1}})
+                %\odot
+                %({{\vec {\widetilde{W}}}^{21}}^{\top} 
+                %\kern-.7ex\cdot
+                %{\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}})
+                %& (\vec A\, \vec B)^{\kern-.5ex\top}\kern-1ex=\vec B^{\top}\kern-.8ex\vec A^{\kern-.5ex\top}
         }
         \end{flalign}
         \notesonly{
             \footnotetext{
-            $\widetilde{\vec {W}}^{21} \; \corresponds \; {\vec {W}}^{21}$ without the bias node (k=0) in each column ${\vec {w}}_{j}^{21}$.\\
-            ${\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}}  \; \corresponds \; {\color{red} {\vec{{\delta}}^{2}}^{\top}}$ without the bias node (k=0), i.e. ${\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}}$ is ${\color{red} {\vec{{\delta}}^{2}}^{\top}}$ without ${\color{red} \delta^{2}_{0}}$.
+            $\widetilde{\vec {W}}^{21} \; \corresponds \; {\vec {W}}^{21}$ without the bias in each column vector ${\vec {w}}_{j}^{21}$. $w_{\color{magenta}{kj}}^{21}$ refers to row ${\color{magenta}j}$, col. ${\color{magenta}k}$ of $\widetilde{\vec {W}}^{21}$.
+            ${\color{darkgreen} {\vec{\widetilde{h}}^{1}}}  \; \corresponds \; {\color{darkgreen} {\vec{{h}}^{1}}}$ without the bias node.
+            %${\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}}  \; \corresponds \; {\color{red} {\vec{{\delta}}^{2}}^{\top}}$ without the bias node (k=0), i.e. ${\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}}$ is ${\color{red} {\vec{{\delta}}^{2}}^{\top}}$ without ${\color{red} \delta^{2}_{0}}$.
             }
         }
     }
@@ -546,6 +549,21 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
              (\text{Not applicable to observed input})
              }
         \end{flalign}
+        \slidesonly{
+        \vspace{5mm}
+        \begin{equation}
+		\boxed{
+				{w}_{ij}^{v'v}
+				\quad \leftarrow \quad 
+				{w}_{ij}^{v'v} - \eta \cdot
+				\smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot
+				\smallfrac{\partial y(\vec{x}; \vec{w})}{\partial{w}_{ij}^{v'v}}
+				\;=\; {w}_{ij}^{v'v} - \eta \cdot
+				{\color{red} \delta_i^{v'}} \kern-.5ex\cdot
+			   			f_j^v( {\color{darkgreen}h_j^v} )
+		}
+        \end{equation}
+        }
     }
     \end{itemize}
     % change footnote marks back to original scheme (numbers)
@@ -582,28 +600,33 @@ $v=1$
 \end{tabular} 
 & \begin{tabular}[c]{@{}l@{}}
     %$\vec h^{1} := \vec f({\vec {W}^{10}}^{\top}\vec x)$\\
-    $\vec h^{1} \in \R^{N_{1}+1}$\vspace{2mm}
+    $\vec h^{1} \in \R^{N_{1}+1}$\\
+    $\widetilde{\vec h}^{1} \in \R^{N_{1}}$\vspace{2mm}
 \end{tabular} 
 & \begin{tabular}[c]{@{}l@{}}
-    ${\color{red} \vec{\delta}^{1}} \in \R^{N_{1}+1}$\vspace{2mm}
+    ${\color{red} \vec{\delta}^{1}} \in \R^{N_{1}}$\vspace{2mm}
 \end{tabular} \\ 
 \hline
 $v=2$ 
 & \begin{tabular}[c]{@{}l@{}}
     $\vec w_{i}^{21}  \in \R^{N_{1}+1} $\\
-    $\vec {W}^{21}  \in \R^{(N_{1}+1) \times N_{2}}$\vspace{2mm}
+    $\vec {W}^{21}  \in \R^{(N_{1}+1) \times N_{2}}$\\
+    $\widetilde{\vec {W}}^{21}  \in \R^{(N_{1}) \times N_{2}}$\vspace{2mm}
 \end{tabular} 
-& $\vec h^{2} \in \R^{N_{2}+1}$ 
 & \begin{tabular}[c]{@{}l@{}}
-    ${\color{red} \vec{\delta}^{2}} \in \R^{N_{2}+1}$ \\
-    ${\color{red} \widetilde{\vec{\delta}}^{2}} \in \R^{N_{2}}$\vspace{2mm}
+    $\vec h^{2} \in \R^{N_{2}+1}$\\
+    $\widetilde{\vec h}^{2} \in \R^{N_{2}}$\vspace{2mm}
+\end{tabular}
+& \begin{tabular}[c]{@{}l@{}}
+    ${\color{red} \vec{\delta}^{2}} \in \R^{N_{2}}$ \\
+    %${\color{red} \widetilde{\vec{\delta}}^{2}} \in \R^{N_{2}}$\vspace{2mm}
 \end{tabular} \\ 
 \hline
 $v=L$ 
 & \begin{tabular}[c]{@{}l@{}}
     $\vec w_{1}^{L2}  \in \R^{N_{2}+1}$\vspace{2mm}
 \end{tabular} 
-& $\vec h^{L} \in \R$ 
+& $h_1^{L} \in \R$ 
 & ${\color{red}\delta^{L}_{1}} \in \R$\\ 
 \hline
 \end{tabular}
@@ -715,7 +738,7 @@ The idea is to add (subtract) a small offset $\varepsilon$ to (from) $w^{v'v}_{i
 \begin{equation}
 e\big(y_T, y\big(\vec x; \widetilde{\vec w}, {w}^{v'v}_{ij} \pm \varepsilon\big)\big) =: e\big(\widetilde{\vec w}, {w}^{v'v}_{ij} \pm \varepsilon\big) \text{ for brevity}
 \end{equation}
-
+\pause
 For $\varepsilon \ll 1$ follows:
 
 \begin{equation}

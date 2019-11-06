@@ -17,13 +17,13 @@
 
     \begin{figure}[h]
         \centering
-        \includegraphics[height=3.25cm]{img/section1_fig19_no_steps}
+        \includegraphics[height=2.5cm]{img/section1_fig19_no_steps}
         \caption{Training error with minimum at $\vec w^{*}$}
         \label{fig:training_error} 
     \end{figure}
+    \slidesonly{\vspace{-10mm}}
     
     \pause 
-    
     \question{What is the strategy for finding $\vec w^{*}$ analytically?}
 
 \end{frame}
@@ -92,7 +92,8 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 				\underbrace{\frac{\partial \ETw}{
 					\partial {w}_{j}}}_{
 						\substack{
-							\text{\textcolor{red}{``gradient''}} 
+							\text{component of}\\
+							\text{\textcolor{red}{gradient vector}} 
 			} }
             \label{eq:gradient_descent_neuron}
     \end{equation}
@@ -113,7 +114,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 				\underbrace{\frac{\partial \ETw}{
 					\partial {w}_{ij}^{v'v}}}_{
 						\substack{
-							\text{component of}
+							\text{component of}\\
 							\text{\textcolor{red}{gradient vector}} 
 			} }
             \label{eq:gradient_descent_mlp}
@@ -244,7 +245,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     
     \mode<presentation>{\vspace{-1cm}}
     \begin{equation}
-			e\tyxw := \frac{1}{2} \left( y_T - y(\vec{x}; \vec w) \right)^2{}
+			e\tyxw := \frac{1}{2} \left( y_T - y(\vec{x}; \vec w) \right)^2
     \end{equation}
     
     \mode<article>{it follows:}
@@ -252,7 +253,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     \begin{equation}
 			\textcolor{blue}{\frac{\partial e\tyxwalpha}{
 					\partial y{(\vec{x}^{(\alpha)}; \vec{w})} }
-				= y_T^{(\alpha)} - y{(\vec{x}^{(\alpha)}; \vec{w})}}
+				= - y_T^{(\alpha)} + y{(\vec{x}^{(\alpha)}; \vec{w})}}
     \end{equation}
     }
     
