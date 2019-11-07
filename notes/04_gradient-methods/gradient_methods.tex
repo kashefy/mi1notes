@@ -14,13 +14,14 @@ We have some cost function we want to minimize but solving the problem analytica
 
 \question{In what case(s) do we avoid an analytical solution?}
 
+\pause
 \begin{itemize}
 	\item We cannot fit all the data into memory.
 	\item It involves finding an inverse of a matrix, that is not invertible (e.g. linear regression $(\vec X \, \vec X^\top)^{-1}\vec X \, \vec y_{True}^\top$.
 	\item There is no closed-form solution for the model we're using (e.g. MLP)
-	\item Computing the Hessian is too costly. Newton's method also not applicable.\footnote{
+	\item Computing the Hessian is too costly. Newton's method also not applicable.\notesonly{\footnote{
 	Newton's method finds the root of a function iteratively using the second-order Taylor expansion of the cost function around a point $\vec w_t$. For more details see Haykin Ch. 3.3.
-	}
+	}}
 	\item Non-stationary data. We cannot easily adapt to changes over time.
 \end{itemize}
 
