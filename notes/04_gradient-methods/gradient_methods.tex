@@ -17,8 +17,17 @@ We have some cost function we want to minimize but solving the problem analytica
 \pause
 \begin{itemize}
 	\item We cannot fit all the data into memory.
-	\item It involves finding an inverse of a matrix, that is not invertible (e.g. linear regression $(\vec X \, \vec X^\top)^{-1}\vec X \, \vec y_{True}^\top$.
-	\item There is no closed-form solution for the model we're using (e.g. MLP)
+	\item \notesonly{It involves finding an inverse of a matrix, that is not invertible (e.g. linear regression $(\vec X \, \vec X^\top)^{-1}\vec X \, \vec y_{True}^\top$.
+	}
+    \slidesonly{
+    $$
+    \vec w^{*} = (\vec X \, \vec X^\top)^{-1}\vec X \, \vec y_{True}^\top
+    $$
+    \pause
+    but $(\vec X \, \vec X^\top)^{-1}$ is not invertible
+    }
+    \item \notesonly{There is no closed-form solution for the model we're using (e.g. MLP)}
+    \slidesonly{no closed form solution for our model (e.g. MLP with non-linearities)}
 	\item Computing the Hessian is too costly. Newton's method also not applicable.\notesonly{\footnote{
 	Newton's method finds the root of a function iteratively using the second-order Taylor expansion of the cost function around a point $\vec w_t$. For more details see Haykin Ch. 3.3.
 	}}
@@ -27,18 +36,24 @@ We have some cost function we want to minimize but solving the problem analytica
 
 \end{frame}
 
+\mode<article>{
+
 We therefore opt for Gradient-based optimization which is an iterative optimization procedure. 
 In the case of a \emph{minimization} problem one can reduce some cost function $E^T_{[\vec w]}$ by taking steps in the direction of steepest \emph{descent}.
 For minimizing some cost function $E^T_{[\vec w]}$ w.r.t. to a set of weights $\vec w$, it follows that, if
-
+}
+\begin{frame}\frametitle{Alternative: iterative gradient-based optimization}
 \begin{equation}
 \vec w_{t+1} = \vec w_t - \underbrace{\eta_t \, \frac{\partial E^T}{\partial \vec w} \Bigg|_{\vec w_t}}_{\text{update}~\Delta \vec w}
 \end{equation}
+\notesonly{
+and a small enough }\slidesonly{with }$\eta_t \in \R^+$, then \notesonly{the cost at the next step $t+1$ will become less or remain unchanged. That is} $E^T_{[\vec w_{t+1}]} \le E^T_{[\vec w_{t}]}$.
 
-and a small enough $\eta_t \in \R^+$, then the cost at the next step $t+1$ will become less or remain unchanged. That is $E^T_{[\vec w_{t+1}]} \le E^T_{[\vec w_{t}]}$.
+\mode<article>{
 We refer to $\eta_t$ as the learning rate. It allows us to control the size of the step we take in the direction of the gradient.
 \emph{Subtracting} the gradient from the current $\vec w_t$ lets us move against the slope in towards some minimum. 
-
+}
+\pause
 The behavior of gradient descent can be controlled by modulating 
 \begin{itemize}
 \item The ``scope'' of the gradient. What do we use for deciding on the direction of the update?
@@ -46,13 +61,15 @@ The behavior of gradient descent can be controlled by modulating
 \end{itemize}
 
 
+\end{frame}
+
 \subsection{``Scope'' of the gradient}
 
+\begin{frame}\frametitle{\subsecname}
+\mode<article>{
 The scope of the gradient method refers to the amount of data used for deciding on the direction of the gradient.
-
-
-\begin{frame}
-
+}
+\slidesonly{\vspace{-2mm}}
 \renewcommand*{\arraystretch}{1.}{
 \begin{table}[h]
 \begin{tabular}[c]{r|l|l}
@@ -106,8 +123,120 @@ estimate of $E^T$
 \end{tabular}
 \end{table}
 }
+\pause
+\slidesonly{\vspace{-5mm}}
+\question{Which of the can handle non-stationary data?}
 
 \end{frame}
 
-
 \subsection{Learning rate schedules}
+
+\begin{frame}\frametitle{Robinns \& Munro condition}
+
+\begin{figure}[ht]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[width=0.5\textwidth]{img/RobbinsMunroNew.png}}%
+     \begin{subfigure}[t]{0.35\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+         \caption{}
+     \end{subfigure}
+     \hspace{10mm}
+     \begin{subfigure}[t]{0.5\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.99\textwidth]{img/learning_rate-eps-converted-to}
+         }
+         \caption{}
+     \end{subfigure}
+\end{figure}
+
+    
+\end{frame}
+
+\begin{frame} \frametitle{Impulse terms}
+	%\visible<2>{
+		\begin{equation*}
+			\Delta \vec{w}_{t + 1} \quad=\quad 
+			{\color{blue} -{\eta} \frac{\partial E^T}{
+				\partial \vec{w}} \bigg|_{\vec{w}_t} } + \;\;
+				\underbrace{{\color{red} \mu \; \Delta \vec{w}_t} }_{
+					\substack{\text{impulse} \\
+						\text{term}}}
+		\end{equation*}
+	%}
+	\vspace{-2cm}
+	%\only<1>{	
+		\begin{center} 
+			\includegraphics[height=6cm]{img/section1_fig23_clean.pdf} \\
+		\end{center}
+	%} \only<2>{
+		\begin{center} 
+			\includegraphics[height=6cm]{img/section1_fig24_clean.pdf}  \\
+		\end{center}
+	%}
+\end{frame}
+
+% -----------------------------------------------------------------------------
+\begin{frame} \frametitle{Adaptive step size}
+\begin{center} \includegraphics[height=4cm]{img/section1_fig25.pdf} \end{center}
+\[ \eta_{t + 1} = \left \{ 
+	\begin{array}{lll}
+		\rho \eta_t, 
+			& \text{if } \Delta E^T < 0,
+			& \text{increase step size, if } E^T \downarrow \\
+		\delta \eta_t, 
+			& \text{if } \Delta E^T > 0,
+			& \text{decrease step size, if } E^T \uparrow 
+	\end{array} \right.
+\]
+typical values: $\rho = 1.1, \delta = 0.5$
+\end{frame}
+
+% -----------------------------------------------------------------------------
+\begin{frame}\frametitle{Line search}
+    \begin{figure}[h]
+    \centering   
+    \includegraphics[height=5cm]{img/section1_fig26}
+    \mode<article>{
+    \caption{Line Search}
+    }
+    \end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Parabolic interpolation}
+\slidesonly{
+	\only<1->{\placeimage{9.5}{1}{img/section1_fig26}{width=5cm}}
+    \vspace{20mm}
+    }
+	\begin{center} 
+		\includegraphics<1>[height=5cm]{img/parabolicInterpolation_clean_a.pdf} 
+		\includegraphics<2>[height=5cm]{img/parabolicInterpolation_clean_b.pdf} 
+	\end{center}
+\end{frame}
+
+
+% -----------------------------------------------------------------------------
+\begin{frame}\frametitle{Line search}
+	\begin{block}{Line search: successive parabolic interpolation}
+		\textbf{Initialization:} $a_0, b_0, c_0 \, (\text{on } 
+			\vec w_t + \lambda \vec{d}_t);\quad E_{(a_0)}^T,
+				\quad E_{(b_0)}^T > E_{(c_0)}^T$
+		\vspace{3mm} 
+
+		\While{stopping criterion not fulfilled}{
+			\vspace{2mm}
+			Fit a parabola through the three points $a_t, b_t, c_t$ \\[2mm]
+			Calculate location $d_t$ of its minimum\\[0mm]
+			Set $c_{t+1} = d_t,\quad b_{t+1} = c_t,\quad a_{t+1} = \left \{ 
+			  \begin{array}{ll}
+			 		a_t, & E_{(a_t)}^T < E_{(b_t)}^T \\
+			 		b_t, & \text{else}
+			 	\end{array} \right.$ 
+		}
+	\end{block}
+
+	{\scriptsize For details and implementation see 
+	e.g.~Numerical Recipes, 2nd edition, Chapter 10.2.}
+\end{frame}
