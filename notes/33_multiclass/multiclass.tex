@@ -48,6 +48,7 @@
 \end{frame}
 
 \begin{frame}\frametitle{Optimization via gradient descent (on-line)}
+From minimizing KL-divergence to multi-class cross entropy:
 	\begin{equation}
 			\frac{\partial e}{\partial \vec{w}}
 		=  - \frac{\partial}{\partial \vec{w}} 
@@ -58,9 +59,6 @@
 	\begin{equation}
 		  	y_{k (\vec{x};\vec{w})} = \frac{\exp h_{k (\vec{x};\vec{w})}}
 		  		{\sum_l \exp h_{l (\vec{x};\vec{w})}}
-		  	\stackrel{\substack{\text{for}\\\text{brevity}}}{=} 
-		  	y_{k} = \frac{\exp h_{k}}
-		  		{\sum_l \exp h_{l}}
 	\end{equation}
 	due to softmax normalization.
 	For brevity:
@@ -69,7 +67,9 @@
 		  	y_{k} = \frac{\exp h_{k}}
 		  		{\sum_l \exp h_{l}}
 	\end{equation}
+	\notesonly{
 	(don't forget that $y_k$, $h_k$ and $h_l$ are all functions of $\vec w$)
+	}
 	\begin{align}
 	\frac{\partial e}{\partial \vec{w}} =
 	\frac{\partial}{\partial \vec{w}} 
@@ -167,7 +167,7 @@
 		\sum_l y_{l} \cdot \frac{\partial h_l}{\partial \vec{w}} \right)\\
 	\only<2->{
 		&= -\sum\limits_{k = 1}^c  {y_{Tk}} \cdot \frac{\partial h_k}{\partial \vec{w}} 
-		+ \underbrace{\left(\sum\limits_{k = 1}^c  {y_{Tk}}\right)}_{\only<3->{=1}} \cdot
+		+ \underbrace{\left(\sum\limits_{k = 1}^c  {y_{Tk}}\right)}_{\only<2>{=?}\only<3->{=1}} \cdot
 		\sum_l y_{l} \cdot \frac{\partial h_l}{\partial \vec{w}}\\
 		}
 	\only<4->{
