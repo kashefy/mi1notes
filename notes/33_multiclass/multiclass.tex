@@ -45,82 +45,156 @@
 			\end{array}
 		\end{array}
 	\end{array} \]
-
-	\begin{block}{Softmax normalization}
-		$$
-			y_{k (\vec{x};\vec{w})} = \frac{\exp(h_{k (\vec{x};\vec{w})})}{
-				\sum_l \exp(h_{l (\vec{x};\vec{w})})}
-		$$
-	\end{block}
 \end{frame}
 
 \begin{frame}\frametitle{Optimization via gradient descent (on-line)}
-	{%\footnotesize
-	\begin{eqnarray*}
-		\Delta \vec w &=& 
-			- \eta \frac{\partial e^{(\alpha)}}{\partial \vec w} \\[6mm]
-		\frac{\partial e^{(\alpha)}}{\partial \vec{w}}
-		& = & - \frac{\partial}{\partial \vec{w}} 
-		  	\sum_{k = 1}^c y_{Tk}^{(\alpha)} 
-		  	\ln\big(y_{k (\vec{x}^{(\alpha)}; \vec{w})}\big)
-		\quad \quad \text{with} \quad 
+	\begin{equation}
+			\frac{\partial e}{\partial \vec{w}}
+		=  - \frac{\partial}{\partial \vec{w}} 
+		  	\sum_{k = 1}^c y_{Tk} 
+		  	\ln \big(y_{k (\vec{x}; \vec{w})}\big)
+	\end{equation}
+	with
+	\begin{equation}
 		  	y_{k (\vec{x};\vec{w})} = \frac{\exp h_{k (\vec{x};\vec{w})}}
 		  		{\sum_l \exp h_{l (\vec{x};\vec{w})}}
-		\only<1>{\\[10mm]}
-		\only<2>{\\[4mm]}
-		\only<1>{ &=& \text{see blackboard...} \\}
-		\only<2>{
-		& = & \sum\limits_{k = 1}^c \Big( y_{k (\vec{x}^{(\alpha)}; 
+		  	\stackrel{\substack{\text{for}\\\text{brevity}}}{=} 
+		  	y_{k} = \frac{\exp h_{k}}
+		  		{\sum_l \exp h_{l}}
+	\end{equation}
+	due to softmax normalization.
+	For brevity:
+	\begin{equation}
+		  	y_{k (\vec{x};\vec{w})} = 
+		  	y_{k} = \frac{\exp h_{k}}
+		  		{\sum_l \exp h_{l}}
+	\end{equation}
+	(don't forget that $y_k$, $h_k$ and $h_l$ are all functions of $\vec w$)
+	\begin{align}
+	\frac{\partial e}{\partial \vec{w}} =
+	\frac{\partial}{\partial \vec{w}} 
+		  	\sum_{k = 1}^c y_{Tk}
+		  	\ln \big(y_{k}\big)
+		& \stackrel{\substack{\text{chain}\\\text{rule}}}{=} 
+		\sum\limits_{k = 1}^c y_{Tk} \cdot \frac{1}{y_k} \cdot \frac{\partial y_k}{\partial \vec{w}}
+	\end{align}
+	Compute $\frac{\partial y_k}{\partial \vec{w}}$ (i.e. derivative of softmax normalization):
+	
+
+\end{frame}
+
+\begin{frame}\frametitle{Derivative of softmax normalization}
+\only<1>{
+	\begin{align}
+		\frac{\partial y_k}{\partial \vec{w}}
+		& = \frac{\partial}{\partial \vec{w}}
+		\left( 
+		\frac{\exp h_{k}}
+		{\sum_l \exp h_{l}}
+		\right)
+		 = \frac{\partial}{\partial \vec{w}} 
+		 \left( 
+		\frac{u}{v}
+		  \right)
+	\end{align}
+	
+	where
+	\begin{align}
+	u := \exp h_{k} \quad &\leadsto \quad u' := \exp h_{k} \frac{\partial h_k}{\partial \vec{w}}\\
+	v := \sum_l \exp h_{l} \quad &\leadsto \quad v' := \sum_l \left( \exp h_{l} \frac{\partial h_l}{\partial \vec{w}} \right)
+	\end{align}
+	
+	Using the quotient rule:
+	}
+	\begin{align}
+	\only<1>{
+	\frac{\partial y_k}{\partial \vec{w}}
+	&= 
+		\frac{u'v - v'u}
+		{v^2}
+	=
+		\frac{u'v}
+		{v^2}
+		-
+		\frac{v'u}
+		{v^2}\\
+	&=  \frac{\exp h_{k} \cdot \frac{\partial h_k}{\partial \vec{w}} \cdot \sum_l \exp h_{l}}{ \left(\sum_l \exp h_{l} \right)^2 }
+	-
+	\frac{\exp h_{k} \sum_l \left( \exp h_{l} \cdot \frac{\partial h_l}{\partial \vec{w}} \right) }{ \left(\sum_l \exp h_{l} \right)^2 }\\
+	}
+	\only<2->{
+	\slidesonly{\frac{\partial y_k}{\partial \vec{w}}}
+	&=  \frac{\exp h_{k} \cdot \frac{\partial h_k}{\partial \vec{w}} \cdot \cancel{\sum_l \exp h_{l}}}{ \left(\sum_l \exp h_{l} \right)^{\cancel{2}} }
+	-
+	\frac{\exp h_{k} \sum_l \left( \exp h_{l} \cdot \frac{\partial h_l}{\partial \vec{w}} \right) \cdot }{ \left(\sum_l \exp h_{l} \right)^2 }\\
+	}
+	\only<3->{
+	&=  \;\; \frac{\exp h_{k}}{ \sum_l \exp h_{l} } \cdot \frac{\partial h_k}{\partial \vec{w}} \;\;
+	- \;\;
+	\frac{\exp h_{k}}{ \sum_l \exp h_{l}  } \cdot 
+	\frac{\sum_l \left( \exp h_{l} \cdot \frac{\partial h_l}{\partial \vec{w}} \right) }{ \sum_l \exp h_{l} }\\
+	}
+	\only<4->{
+	&=  \qquad y_k \cdot \frac{\partial h_k}{\partial \vec{w}} \;\;
+	- \;\;
+	y_k \cdot 
+	\frac{\sum_l \left( \exp h_{l} \cdot \frac{\partial h_l}{\partial \vec{w}} \right) }{ \sum_l \exp h_{l} }\\
+	}
+	\only<5->{
+	&=  \qquad y_k \cdot \frac{\partial h_k}{\partial \vec{w}} \;\;
+	- \;\;
+	y_k \cdot 
+	\sum_l \left(\frac{ \exp h_{l}  }{ \sum_l \exp h_{l} } \right) \cdot \frac{\partial h_l}{\partial \vec{w}} \\
+	}
+	\only<6->{
+	&=  \qquad y_k \cdot \frac{\partial h_k}{\partial \vec{w}} \;\;
+	- \;\;
+	y_k \cdot 
+	\sum_l y_{l} \cdot \frac{\partial h_l}{\partial \vec{w}}
+	}
+	\end{align}
+
+\end{frame}
+\begin{frame}
+	Plugging this back into our expression for $\partial e/\partial \vec w$:
+	\begin{align}
+		\frac{\partial e}{\partial \vec{w}} 
+		&= -
+		\sum\limits_{k = 1}^c y_{Tk} \cdot \frac{1}{y_k} \cdot \frac{\partial y_k}{\partial \vec{w}}\\
+		&= -\sum\limits_{k = 1}^c  \frac{y_{Tk}}{\cancel{y_k}} \cdot \left( \cancel{y_k} \cdot \frac{\partial h_k}{\partial \vec{w}} 
+		- 
+		\cancel{y_k} \cdot 
+		\sum_l y_{l} \cdot \frac{\partial h_l}{\partial \vec{w}} \right)\\
+	\only<2->{
+		&= -\sum\limits_{k = 1}^c  {y_{Tk}} \cdot \frac{\partial h_k}{\partial \vec{w}} 
+		+ \underbrace{\left(\sum\limits_{k = 1}^c  {y_{Tk}}\right)}_{\only<3->{=1}} \cdot
+		\sum_l y_{l} \cdot \frac{\partial h_l}{\partial \vec{w}}\\
+		}
+	\only<4->{
+		&= -\sum\limits_{k = 1}^c  {y_{Tk}} \cdot \frac{\partial h_k}{\partial \vec{w}} 
+		+ 
+		\sum_{l=1}^c y_{l} \cdot \frac{\partial h_l}{\partial \vec{w}}\\
+		}
+	\only<5->{
+		&= {\color{red}-}\sum\limits_{k = 1}^c  {y_{Tk}} \cdot \frac{\partial h_k}{\partial \vec{w}} 
+		{\color{red}+} 
+		\sum\limits_{k = 1}^c y_{k} \cdot \frac{\partial h_k}{\partial \vec{w}}\\
+		&= \sum\limits_{k = 1}^c  \left( y_{k}
+		{\color{red}-} y_{Tk}
+		 \right) \cdot \frac{\partial h_k}{\partial \vec{w}}
+		 }
+	\end{align}
+\end{frame}
+\begin{frame}
+	Since we evaluate the error for each individual pair $(\vec x^{(\alpha)}, \vec y_T^{(\alpha)})$:
+	\begin{align}
+	\frac{\partial e^{(\alpha)}}{\partial \vec{w}}
+		& =  \sum\limits_{k = 1}^c \Big( y_{k (\vec{x}^{(\alpha)}; 
 			\vec{w})} - y_{Tk}^{(\alpha)} \Big) 
 				\underbrace{\frac{\partial h_{k (\vec{x}^{(\alpha)}; 
 				              \vec{w})}}{\partial \vec{w}}}_{
-				          \substack{\leadsto \text{backprop}}}
-		}
-	\end{eqnarray*}
-	}%
+				          \substack{\text{via}\\ \text{backprop}}}
+	\end{align}
+	
 \end{frame}
 
-\begin{equation}
-	e^{(\alpha)} = -\sum_{k = 1}^c y_{Tk}^{(\alpha)} \ln 
-		y_{k (\vec{x}^{(\alpha)}; \vec{w})} 
-\end{equation}
-\begin{equation}
-	\begin{array}{lll}
-	\frac{\partial e^{(\alpha)}}{\partial \vec{w}}
-	& = & -\sum\limits_{k = 1}^c \frac{y_{Tk}^{(\alpha)}}{
-		y_{k (\vec{x}^{(\alpha)}; \vec{w})}} \cdot
-		\frac{\partial y_{k (\vec{x}^{(\alpha)}; \vec{w})}}{
-			\partial \vec{w}} \\
-	& = & -\sum\limits_{k = 1}^c \frac{y_{Tk}^{(\alpha)}}{
-		y_{k (\vec{x}^{(\alpha)}; \vec{w})}}
-		\Bigg\{ y_{k (\vec{x}^{(\alpha)}; \vec{w})} 
-			\frac{\partial h_{k (\vec{x}^{(\alpha)}; \vec{w})}}{
-				\partial \vec{w}} \\
-	&& -\frac{\exp h_{k (\vec{x}^{(\alpha)}; \vec{w})}}{
-				\Big(\sum\limits_{l = 1}^c \exp 
-					h_{l (\vec{x}^{(\alpha)}; \vec{w})}
-				\Big)^2} 
-			\sum\limits_{l = 1}^c \exp h_{l (\vec{x}^{(\alpha)}; 
-				\vec{w})}
-			\frac{\partial h_{l (\vec{x}^{(\alpha)}; \vec{w})}}{
-				\partial \vec{w}}
-		\Bigg\}\\
-	& = & -\sum\limits_{k = 1}^c y_{Tk}^{(\alpha)} 
-		\frac{\partial h_{k (\vec{x}^{(\alpha)}; \vec{w})}}{
-				\partial \vec{w}}
-		+ \underbrace{\bigg( \sum\limits_{k = 1}^c y_{Tk}^{(\alpha)} 
-				\bigg)}_{=1}
-			\bigg( \sum\limits_{l = 1}^c y_{l (\vec{x}^{(\alpha)}; 
-					\vec{w})}
-				\frac{\partial
-					h_{l (\vec{x}^{(\alpha)}; \vec{w})}}{
-						\partial \vec{w}}
-			\bigg) \\
-	& = & \sum\limits_{k = 1}^c \Big( y_{k (\vec{x}^{(\alpha)}; \vec{w})}
-			- y_{Tk}^{(\alpha)} \Big) 
-		\underbrace{\frac{\partial h_{k (\vec{x}^{(\alpha)}; 
-				\vec{w})}}{\partial \vec{w}}}_{
-					\substack{\text{using, e.g.}\\
-						\text{backpropagation}}}
-	\end{array}
-\end{equation}
