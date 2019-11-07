@@ -1,0 +1,83 @@
+\subsection{Cost functions}
+
+\subsubsection{Multi-class classification}
+
+\begin{frame}\frametitle{Data representation}
+	\textbf{Prediction of class labels}\\[4mm]
+	observations: $\Big\{ \Big( \vec{x}^{(\alpha)}, y_T^{(\alpha)} 
+		\Big) \Big\}, \quad \alpha \in  \{1, \ldots, p\}$\\
+			$c$ classes $C_k, \quad k \in \{1, \ldots, c\}
+		\quad\Rightarrow\quad y_T^{(\alpha)} \in \{1, \ldots, k\}$
+	\vspace{8mm}
+	\pause
+	
+	\textbf{Prediction of class probabilities}\\
+	\begin{block}{1-out-of-c code}
+		\begin{equation*}
+			y_{Tk}^{(\alpha)} = \left 
+			\{ \begin{array}{lll}
+			0, & \vec{x}^{(\alpha)} \notin C_k  \\
+			1, & \vec{x}^{(\alpha)} \in C_k
+			\end{array} \right.
+			\quad \Rightarrow 
+			\text{binary vector $\vec y_T^{(\alpha)}$, one non-zero element}
+		\end{equation*}
+		Limiting case of probabilities: true labels are known.
+	\end{block}
+\end{frame}
+
+
+% -----------------------------------------------------------------------------
+\begin{frame}\frametitle{Model class}
+	\[ \begin{array}{ll}
+		\begin{array}{l}
+			%\includegraphics[height=4cm]{img/section1_fig37}
+		\end{array}
+		&
+		\begin{array}{l}
+			\text{Probabilistic interpretation} \\
+			\text{of network output:}\\[1mm]
+			y_{k (\vec{x};\vec{w})} \coloneqq P(\vec{x} \in C_k; \vec{w}) \\[2mm]
+			\begin{array}{lcl}
+				0 \leq & y_{k (\vec{x};\vec{w})} & \leq 1 \\[1mm]
+					   & \sum\limits_{k=1}^c 
+					   		y_{k (\vec{x};\vec{w})} & = 1
+			\end{array}
+		\end{array}
+	\end{array} \]
+
+	\begin{block}{Softmax normalization}
+		$$
+			y_{k (\vec{x};\vec{w})} = \frac{\exp(h_{k (\vec{x};\vec{w})})}{
+				\sum_l \exp(h_{l (\vec{x};\vec{w})})}
+		$$
+	\end{block}
+\end{frame}
+
+\begin{frame}\frametitle{Optimization via gradient descent (on-line)}
+	{%\footnotesize
+	\begin{eqnarray*}
+		\Delta \vec w &=& 
+			- \eta \frac{\partial e^{(\alpha)}}{\partial \vec w} \\[6mm]
+		\frac{\partial e^{(\alpha)}}{\partial \vec{w}}
+		& = & - \frac{\partial}{\partial \vec{w}} 
+		  	\sum_{k = 1}^c y_{Tk}^{(\alpha)} 
+		  	\ln\big(y_{k (\vec{x}^{(\alpha)}; \vec{w})}\big)
+		\quad \quad \text{with} \quad 
+		  	y_{k (\vec{x};\vec{w})} = \frac{\exp h_{k (\vec{x};\vec{w})}}
+		  		{\sum_l \exp h_{l (\vec{x};\vec{w})}}
+		\only<1>{\\[10mm]}
+		\only<2>{\\[4mm]}
+		\only<1>{ &=& \text{see blackboard...} \\}
+		\only<2>{
+		& = & \sum\limits_{k = 1}^c \Big( y_{k (\vec{x}^{(\alpha)}; 
+			\vec{w})} - y_{Tk}^{(\alpha)} \Big) 
+				\underbrace{\frac{\partial h_{k (\vec{x}^{(\alpha)}; 
+				              \vec{w})}}{\partial \vec{w}}}_{
+				          \substack{\leadsto \text{backprop}}}
+		}
+	\end{eqnarray*}
+	}%
+\end{frame}
+
+
