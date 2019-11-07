@@ -80,4 +80,47 @@
 	}%
 \end{frame}
 
-
+\begin{equation}
+	e^{(\alpha)} = -\sum_{k = 1}^c y_{Tk}^{(\alpha)} \ln 
+		y_{k (\vec{x}^{(\alpha)}; \vec{w})} 
+\end{equation}
+\begin{equation}
+	\begin{array}{lll}
+	\frac{\partial e^{(\alpha)}}{\partial \vec{w}}
+	& = & -\sum\limits_{k = 1}^c \frac{y_{Tk}^{(\alpha)}}{
+		y_{k (\vec{x}^{(\alpha)}; \vec{w})}} \cdot
+		\frac{\partial y_{k (\vec{x}^{(\alpha)}; \vec{w})}}{
+			\partial \vec{w}} \\
+	& = & -\sum\limits_{k = 1}^c \frac{y_{Tk}^{(\alpha)}}{
+		y_{k (\vec{x}^{(\alpha)}; \vec{w})}}
+		\Bigg\{ y_{k (\vec{x}^{(\alpha)}; \vec{w})} 
+			\frac{\partial h_{k (\vec{x}^{(\alpha)}; \vec{w})}}{
+				\partial \vec{w}} \\
+	&& -\frac{\exp h_{k (\vec{x}^{(\alpha)}; \vec{w})}}{
+				\Big(\sum\limits_{l = 1}^c \exp 
+					h_{l (\vec{x}^{(\alpha)}; \vec{w})}
+				\Big)^2} 
+			\sum\limits_{l = 1}^c \exp h_{l (\vec{x}^{(\alpha)}; 
+				\vec{w})}
+			\frac{\partial h_{l (\vec{x}^{(\alpha)}; \vec{w})}}{
+				\partial \vec{w}}
+		\Bigg\}\\
+	& = & -\sum\limits_{k = 1}^c y_{Tk}^{(\alpha)} 
+		\frac{\partial h_{k (\vec{x}^{(\alpha)}; \vec{w})}}{
+				\partial \vec{w}}
+		+ \underbrace{\bigg( \sum\limits_{k = 1}^c y_{Tk}^{(\alpha)} 
+				\bigg)}_{=1}
+			\bigg( \sum\limits_{l = 1}^c y_{l (\vec{x}^{(\alpha)}; 
+					\vec{w})}
+				\frac{\partial
+					h_{l (\vec{x}^{(\alpha)}; \vec{w})}}{
+						\partial \vec{w}}
+			\bigg) \\
+	& = & \sum\limits_{k = 1}^c \Big( y_{k (\vec{x}^{(\alpha)}; \vec{w})}
+			- y_{Tk}^{(\alpha)} \Big) 
+		\underbrace{\frac{\partial h_{k (\vec{x}^{(\alpha)}; 
+				\vec{w})}}{\partial \vec{w}}}_{
+					\substack{\text{using, e.g.}\\
+						\text{backpropagation}}}
+	\end{array}
+\end{equation}
