@@ -156,6 +156,10 @@ estimate of $E^T$
 \end{frame}
 
 \begin{frame} \frametitle{Impulse terms}
+\mode<article>{
+\underline{Impulse terms}:
+
+}
 	%\visible<2>{
 		\begin{equation*}
 			\Delta \vec{w}_{t + 1} \quad=\quad 
@@ -180,6 +184,10 @@ estimate of $E^T$
 
 % -----------------------------------------------------------------------------
 \begin{frame} \frametitle{Adaptive step size}
+ \mode<article>{
+\underline{Adaptive step size}:
+
+}   
 \begin{center} \includegraphics[height=4cm]{img/section1_fig25.pdf} \end{center}
 \[ \eta_{t + 1} = \left \{ 
 	\begin{array}{lll}
@@ -196,7 +204,11 @@ typical values: $\rho = 1.1, \delta = 0.5$
 
 % -----------------------------------------------------------------------------
 \begin{frame}\frametitle{Line search}
-    \begin{figure}[h]
+\mode<article>{
+\underline{Line search}:
+
+}
+   \begin{figure}[h]
     \centering   
     \includegraphics[height=5cm]{img/section1_fig26}
     \mode<article>{
@@ -240,3 +252,45 @@ typical values: $\rho = 1.1, \delta = 0.5$
 	{\scriptsize For details and implementation see 
 	e.g.~Numerical Recipes, 2nd edition, Chapter 10.2.}
 \end{frame}
+
+\begin{frame}\frametitle{Line search}
+
+\mode<presentation>{
+    \begin{center} 
+		\includegraphics[height=5cm]{img/section1_fig19_no_steps} 
+	\end{center}
+}
+
+\question{What are potential pitfalls of parabolic interpolation?}
+
+\end{frame}
+
+\begin{frame}\frametitle{Parabolic interpolation}
+
+\mode<presentation>{
+    \begin{center}
+		\includegraphics[height=5cm]{img/parabolicInterpolation_clean_b} 
+	\end{center}
+}
+
+Compute optimal step size:
+
+\begin{equation}
+	  \vec{w}_{t+1} = \vec{w}_t - \eta_{t} \vec{g}_t,
+	  \qquad \text{with optimal step size} \qquad
+	  \eta_{t} = \frac{\vec{g}_t^\top\vec{g}_t}{\vec{g}_t^\top\vec{H}\,\vec{g}_t} \,.
+\end{equation}
+
+\end{frame}
+
+
+\begin{frame}\frametitle{Conjugate gradient method}
+\mode<article>{
+\underline{Conjugate gradient method}:
+
+}
+
+Don't undo progress of previous search directions $d_{t}$, $d_{t-1}$
+
+\end{frame}
+
