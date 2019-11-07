@@ -290,7 +290,12 @@ Compute optimal step size:
 
 }
 
-Don't undo progress of previous search directions $d_{t}$, $d_{t-1}$
+Don't undo progress of previous search directions $d_{t}$, $d_{t-1}$.
+
+In other words:
+
+The component of the gradient parallel to the old direction $d_{t}$ should
+remain zero along the new direction $d_{t+1}$
 
 \end{frame}
 
