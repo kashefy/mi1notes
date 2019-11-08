@@ -132,19 +132,21 @@ From minimizing KL-divergence to multi-class cross entropy:
 	&=  \;\; \frac{\exp h_{k}}{ \sum_l \exp h_{l} } \cdot \frac{\partial h_k}{\partial \vec{w}} \;\;
 	- \;\;
 	\frac{\exp h_{k}}{ \sum_l \exp h_{l}  } \cdot 
-	\frac{\sum_l \left( \exp h_{l} \cdot \frac{\partial h_l}{\partial \vec{w}} \right) }{ \sum_l \exp h_{l} }\\
+	\frac{\sum_l \left( \exp h_{l} \cdot \frac{\partial h_l}{\partial \vec{w}} \right) }{ \sum_{\color{blue}q} \exp h_{\color{blue}q} }\\
+	\notesonly{\intertext{where {\color{blue}q=1,\ldots,c}, same as $l$.
+	{Renaming the literal used in the sum does not change the sum.}}}
 	}
 	\only<4->{
 	&=  \qquad y_k \cdot \frac{\partial h_k}{\partial \vec{w}} \;\;
 	- \;\;
 	y_k \cdot 
-	\frac{\sum_l \left( \exp h_{l} \cdot \frac{\partial h_l}{\partial \vec{w}} \right) }{ \sum_l \exp h_{l} }\\
+	\frac{\sum_l \left( \exp h_{l} \cdot \frac{\partial h_l}{\partial \vec{w}} \right) }{ \sum_{\color{blue}q} \exp h_{\color{blue}q} }\\
 	}
 	\only<5->{
 	&=  \qquad y_k \cdot \frac{\partial h_k}{\partial \vec{w}} \;\;
 	- \;\;
 	y_k \cdot 
-	\sum_l \left(\frac{ \exp h_{l}  }{ \sum_l \exp h_{l} } \right) \cdot \frac{\partial h_l}{\partial \vec{w}} \\
+	\sum_l \left(\frac{ \exp h_{l}  }{ \sum_{\color{blue}q} \exp h_{\color{blue}q} } \right) \cdot \frac{\partial h_l}{\partial \vec{w}} \\
 	}
 	\only<6->{
 	&=  \qquad y_k \cdot \frac{\partial h_k}{\partial \vec{w}} \;\;
