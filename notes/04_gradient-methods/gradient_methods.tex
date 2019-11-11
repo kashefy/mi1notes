@@ -125,7 +125,7 @@ estimate of $E^T$
 }
 \pause
 \slidesonly{\vspace{-5mm}}
-\question{Which of the can handle non-stationary data?}
+\question{Which of these can handle non-stationary data?}
 
 \end{frame}
 
@@ -140,15 +140,17 @@ estimate of $E^T$
      \begin{subfigure}[t]{0.35\textwidth}
          \centering
          \usebox{\imagebox}% Place largest image
-         \caption{}
+         \notesonly{\caption{}}
      \end{subfigure}
      \hspace{10mm}
      \begin{subfigure}[t]{0.5\textwidth}
          \centering
          \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \only<2>{
          \includegraphics[width=0.99\textwidth]{img/learning_rate-eps-converted-to}
          }
-         \caption{}
+         }
+         \notesonly{\caption{}}
      \end{subfigure}
 \end{figure}
 
@@ -171,15 +173,15 @@ estimate of $E^T$
 		\end{equation*}
 	%}
 	\vspace{-2cm}
-	%\only<1>{	
+	\only<1>{	
 		\begin{center} 
 			\includegraphics[height=6cm]{img/section1_fig23_clean.pdf} \\
 		\end{center}
-	%} \only<2>{
+	} \only<2>{
 		\begin{center} 
 			\includegraphics[height=6cm]{img/section1_fig24_clean.pdf}  \\
 		\end{center}
-	%}
+	}
 \end{frame}
 
 % -----------------------------------------------------------------------------
@@ -290,12 +292,86 @@ Compute optimal step size:
 
 }
 
-Don't undo progress of previous search directions $d_{t}$, $d_{t-1}$.
+		\begin{eqnarray}
+			\vec{w}_{t+1}
+			%& = & \mathrm{w}_{ij}(t) 
+			%+ \Delta \mathrm{w}_{ij}(t)  \\ 
+			& =&  \vec{w}_t + \eta_t \, \vec{d}_{t-1}
+		\end{eqnarray}
+
+Don't undo progress of previous search directions $\vec d_{t}$, $\vec d_{t-1}$.
 
 In other words:
 
-The component of the gradient parallel to the old direction $d_{t}$ should
-remain zero along the new direction $d_{t+1}$
+The component of the gradient parallel to the old direction $\vec d_{t}$ should
+remain zero along the new direction $\vec d_{t+1}$
+
+\pause
+	
+	\begin{block}{$ $}
+		\textbf{Initialization:} $\vec{w},\quad \vec{d} = - \vec{g}$\\
+		\vspace{3mm}
+
+		\While{stopping criterion not fulfilled}{
+			\vspace{1mm}
+			Minimize $E^T$ along $\vec{d}$ using line-search 
+				\quad $\rightarrow$ new $\vec{w}$ \\[1mm]
+			Calculate the new conjugate direction 
+				\quad $\;\,\rightarrow$ new $\vec{d}$
+			\vspace{1mm}
+		}
+	\end{block}
 
 \end{frame}
 
+% -----------------------------------------------------------------------------
+\begin{frame}\frametitle{Adaptive momentum: the Polak-Ribiere rule}
+	\begin{equation}\tag{conjugate direction}
+		\vec{d}_{t+1} = - 
+		\overbrace{\frac{\partial E^T}{\partial \vec{w}}
+			\bigg|_{\vec{w}_{t+1}}}^{\vec{g}_{t+1}} + \beta_t \, \vec{d}_t
+	\end{equation}%\\[5mm]
+	\begin{equation}\tag{``smart momentum''}
+		\beta_t = \underbrace{ \frac{\vec{g}_{t+1}^\top
+			\big( \vec{g}_{t+1} - \vec{g}_t \big)}{
+			\vec{g}_t^\top \vec{g}_t} }_{
+				\text{Polak-Ribiere rule}}
+	\end{equation}
+	OR
+			  \begin{equation} %\tag{Fletcher-Reeves form}
+		  		\beta_t = \underbrace{-\frac{\vec{g}_{t+1}^\top\vec{g}_{t+1}}%
+		  		{\vec{g}_t^\top\vec{g}_t}}_{\text{Fletcher-Reeves}}.
+		  \end{equation} 
+	%\iitem{determine learning rate $\eta_t$ via line search}
+\end{frame}
+
+% -----------------------------------------------------------------------------
+\begin{frame}\frametitle{Conjugate gradient descent algorithm}
+\slidesonly{
+	\begin{block}{$ $}
+		\textbf{Initialization:} $\vec{w},\quad \vec{d} = - \vec{g}$\\
+		\vspace{3mm}
+
+		\While{stopping criterion not fulfilled}{
+			\vspace{1mm}
+			Minimize $E^T$ along $\vec{d}$ using line-search 
+				\quad $\rightarrow$ new $\vec{w}$ \\[1mm]
+			Calculate the new conjugate direction 
+				\quad $\;\,\rightarrow$ new $\vec{d}$
+			\vspace{1mm}
+		}
+	\end{block}
+	}
+	\iitem{Subsequent search directions lose conjugacy 
+		\iitem{search direction should be reset to the 	steepest \\ 
+			descent direction at least every $N$ iterations (in practice apply heuristic, e.g. reset every 5 steps)}
+	}
+\end{frame}
+
+\slidesonly{
+\begin{frame} \frametitle{Comparison}
+\placeimage{0.5}{2}{img/section1_fig23_clean}{width=6cm}
+\placeimage{8}{2}{img/section1_fig24_clean}{width=6cm}
+\placeimage{0.5}{8}{img/section1_fig23_clean_ls}{width=6cm}
+\end{frame}
+}
