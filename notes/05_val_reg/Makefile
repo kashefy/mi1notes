@@ -1,7 +1,7 @@
 all: slides notes clean
 #all:  handout
 
-targetname = tutorial_04_gradient_methods
+targetname = tutorial_05_val_reg
 projname = tutorial
 compile = pdflatex
 projnameS = $(projname).slides
