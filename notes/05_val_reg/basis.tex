@@ -3,8 +3,63 @@
 \subsection{A non-linearly separable problem}
 
 \begin{frame}\frametitle{\subsecname}
+
+\question{Find a linear separation between the classes using only a connectionist neuron.}
+
+\end{frame}
+
+\begin{frame}\frametitle{\subsecname}
+
+\question{Fit this parabola using only a connectionist neuron.}
+
 \end{frame}
 
 \subsection{Nonlinear basis function}
 
 
+\begin{frame}\frametitle{\subsecname}
+
+Feature transformation $(\vec x\in \R^N)$:
+
+\begin{equation}
+\vec \phi: \vec x \mapsto \vec \phi(\vec x)
+\end{equation}
+
+\mode<article>{$\phi(\vec x)$ can transform our N-dim input $\vec x$ to another feature space of possibly higher dimensionality.
+}
+Expanding our feature space using \emph{Monomials} of highest degree $k$ (i.e. polynomial expansion):
+
+\begin{align*}
+\phi_i(\vec x) \in 
+\{\;
+&1, 
+x_1\,,\, x_2, \ldots, x_N,
+x_1^2\,,\, x_1 x_2, \ldots, x_1x_N,\ldots,\,x_N^2,\,\ldots\\
+&x_1 x_N^{k-1}\,,\, x_1^k, \ldots, x_N^k
+\}
+\end{align*}
+
+\begin{equation}
+\phi_i(\vec x) \in \Big\{ \prod_{j=1}^N x_j^{a_j} \;\;: a_j \in \N_0 \;\; \text{with} \;\; 0 \, \le \, \sum_{j=1}^{N} a_j \le k  
+\Big\} 
+\end{equation}
+
+where $i=1,\ldots d$.
+
+Example: $k=9, N=2 \Rightarrow d=55$
+
+
+\end{frame}
+
+\subsection{Preprocessing: Sphering}
+
+\begin{frame}\frametitle{\subsecname}
+
+Large $\lVert \vec x \rVert$ can lead to to very large $\phi_i(\vec x)$. \\
+Also the correlation between a pair ($\phi_i(\vec x), \phi_j(\vec x)$), $i,j=1,\ldots d$ will also increase.
+
+We want to decorrelate the transformed data and standardize it (keep veriance of $\phi_i(\vec x)$ = 1)
+
+\emph{Sphering} is a preprocessing step that accomplishes both.
+
+\end{frame}
