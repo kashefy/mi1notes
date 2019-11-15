@@ -127,7 +127,7 @@ Let us look at the following scenerio where we've trained
 % -----------------------------------------------------------------------------
 \definecolor{darkgreen}{rgb}{0,0.6,0}
 \begin{frame} \frametitle{\subsecname}
-Compare ${\color{darkgreen}E^T}$ and ${\color{red} \widehat E^G}$:\\
+Compare ${\color{red}E^T}$ and ${\color{darkgreen} \widehat E^G}$:\\
 
 	\begin{minipage}{3.5cm}
 	\begin{center}
@@ -137,9 +137,9 @@ Compare ${\color{darkgreen}E^T}$ and ${\color{red} \widehat E^G}$:\\
 	\begin{equation}
 			\left.
 			\begin{array}{l}
-			  {\color{darkgreen}E^T} \text{ large} \\
-			  {\color{red} \widehat E^G} \text{ large}
-			\end{array} \right \} {\color{darkgreen}E^T} \approx {\color{red} \widehat E^G}
+			  {\color{red}E^T} \text{ large} \\
+			  {\color{darkgreen} \widehat E^G} \text{ large}
+			\end{array} \right \} {\color{red}E^T} \approx {\color{darkgreen} \widehat E^G}
 	\end{equation}
 	\end{minipage}
 	\pause
@@ -151,9 +151,9 @@ Compare ${\color{darkgreen}E^T}$ and ${\color{red} \widehat E^G}$:\\
 	\pause
 	\begin{equation}
 			\left. \begin{array}{l}
-				E^T \text{ small} \\
-				{\color{red} \widehat E^G} \text{ large}
-			\end{array} \right \} E^T \ll {\color{red}\widehat E^G}
+				{\color{red}E^T} \text{ small} \\
+				{\color{darkgreen} \widehat E^G} \text{ large}
+			\end{array} \right \} {\color{red}E^T} \ll {\color{darkgreen}\widehat E^G}
 	\end{equation}
 	\end{minipage}
 \end{frame}
@@ -168,9 +168,9 @@ Compare ${\color{darkgreen}E^T}$ and ${\color{red} \widehat E^G}$:\\
 	\begin{block}{Diagnostics}
 		$$
 			\left. \begin{array}{l}
-				{\color{darkgreen}E^T} \text{ small} \\
-				 {\color{red}\widehat E^G} \text{ small}
-			\end{array} \right \} {\color{darkgreen}E^T} \approx {\color{red}\widehat E^G}
+				{\color{red}E^T} \text{ small} \\
+				 {\color{darkgreen}\widehat E^G} \text{ small}
+			\end{array} \right \} {\color{red}E^T} \approx {\color{darkgreen}\widehat E^G}
 		$$
 	\end{block}
 \end{frame}
@@ -186,9 +186,9 @@ Compare ${\color{darkgreen}E^T}$ and ${\color{red} \widehat E^G}$:\\
 	\begin{equation}
 			\left.
 			\begin{array}{l}
-			  {\color{darkgreen}E^T} \text{ large} \\
-			  {\color{red} \widehat E^G} \text{ large}
-			\end{array} \right \} {\color{darkgreen}E^T} \approx {\color{red} \widehat E^G}
+			  {\color{red}E^T} \text{ large} \\
+			  {\color{darkgreen} \widehat E^G} \text{ large}
+			\end{array} \right \} {\color{red}E^T} \approx {\color{darkgreen} \widehat E^G}
 	\end{equation}
 	\end{minipage}
 	\hspace{2.5cm}
@@ -226,9 +226,9 @@ Compare ${\color{darkgreen}E^T}$ and ${\color{red} \widehat E^G}$:\\
 	\end{center}
 	\begin{equation}
 			\left. \begin{array}{l}
-				E^T \text{ small} \\
-				{\color{red} \widehat E^G} \text{ large}
-			\end{array} \right \} E^T \ll {\color{red}\widehat E^G}
+				{\color{red}E^T} \text{ small} \\
+				{\color{darkgreen} \widehat E^G} \text{ large}
+			\end{array} \right \} {\color{red}E^T} \ll {\color{darkgreen}\widehat E^G}
 	\end{equation}
 	\end{minipage}
 	\hspace{2cm}
@@ -345,7 +345,7 @@ Using a larger training set (i.e. increasing $p$) to identify potential overfitt
 
 \begin{figure}[ht]
      \centering
-	\includegraphics[width=0.4\textwidth]{img/bias_var_dog}
+	\includegraphics[width=0.5\textwidth]{img/bias_var_dog}
      \mode<article>{
 	\caption{The bias-variance tradeoff with variable degrees of freedom}
 	}
@@ -357,7 +357,7 @@ Using a larger training set (i.e. increasing $p$) to identify potential overfitt
 
 \begin{figure}[ht]
      \centering
-	\includegraphics[width=0.4\textwidth]{img/bias_var_lambda}
+	\includegraphics[width=0.5\textwidth]{img/bias_var_lambda}
      \mode<article>{
 	\caption{The bias-variance tradeoff for different regularization strengths}
 	}
@@ -371,7 +371,7 @@ Using a larger training set (i.e. increasing $p$) to identify potential overfitt
 
 \begin{figure}[ht]
      \centering
-	\includegraphics[width=0.4\textwidth]{img/bias_var_p_annot}
+	\includegraphics[width=0.5\textwidth]{img/bias_var_p_annot}
      \mode<article>{
 	\caption{The bias-variance tradeoff for different number of training samples}
 	}
