@@ -1,4 +1,5 @@
 \section{The Vanishing Gradient Problem}
+
 \definecolor{darkgreen}{rgb}{0,0.6,0}
 
 
@@ -130,19 +131,21 @@
     }
     \only<+->{
     \;\;&=\;\;
-    f'(h^{\color{blue}4}) w^{43} \cdot f'(h^{\color{magenta}3}) w^{32} \cdot f'(h^{\color{darkgreen}2}) w^{21} \cdot f'(h^{\color{red}1}) w^{10}
+    f'(h^{\color{blue}4})  \cdot w^{43} f'(h^{\color{magenta}3}) \cdot w^{32}  f'(h^{\color{darkgreen}2}) \cdot  w^{21} f'(h^{\color{red}1}) \cdot  w^{10} x
     }
     \end{align}
 \end{frame}
 
+\subsection{Using the Backpropagation algorithm}
 
-\begin{frame}\frametitle{\secname}
+\begin{frame}\frametitle{\subsecname}
 \mode<presentation>{
 	\begin{center}
-		\includegraphics[width=10cm]{img/simple_arch_color}
+		\includegraphics[width=7cm]{img/simple_arch_color}
 	\end{center}
+	\vspace{-5mm}
+	Recall that
 	}
-	\underline{Using the Backpropagation algorithm}:
 	    \begin{equation}
             \only<+->{
         {\delta_i^{v'}}
@@ -156,18 +159,34 @@
     \substack{\text{this}\\ \text{model}}}
     }{=} 
             \only<+->{
-            [f^{v'}]'({h^{v'}}) \,
+            f'({h^{v'}}) \,
         {w}^{v'' v'} \cdot
     {\delta^{v''}} 
             }
     \end{equation}
     
+    and 
+    \slidesonly{
+	\vspace{-5mm}
+	}
+    
     \begin{equation}
-     \frac{\partial y}{\partial w^{10}} = 				{w}_{ij}^{v'v} - \eta \cdot
-				\smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot
-				\smallfrac{\partial y(\vec{x}; \vec{w})}{\partial{w}_{ij}^{v'v}}
-				\;=\; {w}_{ij}^{v'v} - \eta \smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot \cdot
-				{\color{red} \delta_i^{v'}} \kern-.5ex\cdot
-			   			f_j^v( {\color{darkgreen}h_j^v} )
+     \frac{\partial y}{\partial w^{v'v}} = 
+				{ \delta^{v'}} \kern-.5ex\cdot
+			   			f^v( {h^v} )
     \end{equation}
+    
+    Therefore:
+    \slidesonly{
+	\vspace{-8mm}
+	}
+    
+    \begin{align}
+     \frac{\partial y}{\partial w^{10}} 
+     &= \delta^{1} \cdot x \\
+	 &= x \cdot f'(h^{\color{red}1}) w^{21} \cdot \delta^2\\
+	 &= x \cdot f'(h^{\color{red}1}) w^{21} \cdot f'(h^{\color{darkgreen}2}) w^{32} \cdot \delta^3\\
+	 &= x \cdot f'(h^{\color{red}1}) w^{21} \cdot f'(h^{\color{darkgreen}2}) w^{32} \cdot f'(h^{\color{magenta}3}) w^{43} \cdot \delta^4\\
+	 &= x \cdot f'(h^{\color{red}1}) w^{21} \cdot f'(h^{\color{darkgreen}2}) w^{32} \cdot f'(h^{\color{magenta}3}) w^{43} \cdot f'(h^{\color{blue}4})
+    \end{align}
 \end{frame}
