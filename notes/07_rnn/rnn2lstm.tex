@@ -1,18 +1,162 @@
 \section{From RNNs to LSTMs}
 
-\subsection{A non-linearly separable problem}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+\definecolor{darkyellow}{rgb}{0.5,0.5,0}
+\definecolor{midgreen}{rgb}{0,0.75,0}
 
-\begin{frame}\frametitle{\subsecname}
 
-\question{Find a linear separation between the classes using only a connectionist neuron.}
+\begin{frame}\frametitle{Motivation}
+	\begin{itemize}
+	\setlength\itemsep{1cm}
+	\item[]
+	A simple RNN learns from short-term errors faster (exponentially)\\
+	than from errors due to longer ($\Delta t >\!\!> 1$) distances in a sequence.\\
+	
+	\item[]Example:\\Estimating the topic of a lengthy text where the ``clue'' is mentioned in the very beginning.\\
+	
+	\item[]The gradient vanishes.
+	\end{itemize}
+\end{frame}
 
-\begin{figure}[ht]
-     \centering
-	\includegraphics[width=0.4\textwidth]{img/rnn}
-     \mode<article>{
-	\caption{A non-linearly separable classification problem.}
-	}
-	\label{fig:nonsepcirc} 
-\end{figure}
+% ------------------------------------------------------------------------------
+%~ \begin{frame}\frametitle{Solution 3: long short-term memory (LSTM)}
+\begin{frame}\frametitle{Long short-term memory (LSTM) architecture}
+	\begin{textblock}{}(10.25,2.5)
+		%\includegraphics<1>[height=3cm]{img/lstm_feedback.pdf}
+		\includegraphics<1>[height=3cm]{img/lstm_feedback_delay.pdf}
+		%\includegraphics<2>[height=3cm]{img/lstm_write.pdf}
+		\includegraphics<2>[height=3cm]{img/lstm_write_delay.pdf}
+		%\includegraphics<3->[height=3cm]{img/lstm.pdf}
+		\includegraphics<3->[height=3cm]{img/lstm_delay.pdf}
+	\end{textblock}
+	
+	\begin{textblock}{10}(0.4,2.5)
+		\only<1>{ \small
+			\iitem{extend the simple RNN with state nodes $\vec s$}
+			\vspace{-5mm}
+			\iitem{leaky unit $s_i$ with $\alpha_i=1$}
+			\vspace{-5mm}
+			\iitem{{\color{darkgreen}time delayed feedback} to hidden layer}
+			\vspace{-5mm}
+			\iitem{{\color{blue} transfer function} 
+					$\sigma(x) = \big( 1 + e^{-x} \big)^{-1}$
+					}
+			%\vspace{-5mm}
+			%\iitem{state $s_i$ gets overwritten easily}
+		} \only<2>{ \small
+			\iitem{introducing an {\color{blue}input (``write'') gate 
+					$g_i^\mathrm{i}$}
+					\vspace{-2mm}
+					\iitem{\footnotesize gate transfer function
+							$\sigma(x) = \big( 1 + e^{-x} \big)^{-1}$} }
+			\vspace{-4mm}
+			\iitem{state input is multiplied ($\color{blue}\otimes$) with gate}
+			\vspace{-5mm}
+			\iitem{state $s_i$ only changes when 
+					{\color{blue}$g_i^{\mathrm{i}(t)} \gg 0$}}
+			\vspace{-5mm}
+			\iitem{local errors $\delta_i^{(t)}$ still accumulate in $s_i$}
+		} \only<3>{ \small
+			\iitem{introducing an {\color{darkgreen}output 
+					(``read'') gate $g_i^\mathrm{i}$}
+					\vspace{-2mm}
+					\iitem{\footnotesize gate transfer function
+							$\sigma(x) = \big( 1 + e^{-x} \big)^{-1}$} }
+			\vspace{-4mm}
+			\iitem{state output is multiplied 
+					($\color{darkgreen}\otimes$) with gate}
+			\vspace{-5mm}
+			\iitem{error $\delta_i^{(t)}$ only changes when 
+					{\color{darkgreen}$g_i^{\mathrm{o}(t)} \gg 0$}}
+			\vspace{-4mm}
+			\iitem{both gates and the state form a {\color{darkyellow}LSTM cell}}
+		} \only<4>{ \small\vspace{-1mm}
+			\iitem{gates determine access to the state $s_i$
+				\vspace{-1mm}
+				\iitem{$\color{blue}g_i^{\mathrm{i}}$  learns 
+					what to remember}
+				\vspace{-3mm}
+				\iitem{$\color{darkgreen}g_i^\mathrm{o}$ 
+					learns when use the memory} }
+			\vspace{-4mm}
+			\iitem{gates regulate the flow of activity and error
+				\vspace{-1mm}
+				\iitem{$\color{blue}g_i^{\mathrm{i}}$ regulates 
+						the forward-pass}
+				\vspace{-3mm}
+				\iitem{$\color{darkgreen}g_i^\mathrm{o}$ 
+					regulates the backward-pass} }
+		}
+		%TODO forget gate equations and figure
+		 %\only<5>{ \small\vspace{-1mm}
+			%\iitem{ LSTM cells often have an additional forget gate $\color{red}g^{\mathrm{f}}_i$ for states $s_i$ }
+			%\vspace{-4mm}
+		%}
+	\end{textblock}
+	
+	\begin{textblock}{10}(0.8,7.5)
+	\small
+	\begin{eqnarray*}
+		\vec s^{(t)} &=& \vec  s^{(t-1)} 
+				+ {\color{blue} \tanh\Big(
+					\vec W^s \vec h^{(t-1)} \Big)
+					\visible<2->{ \cdot \vec g^{\mathrm{i}(t)}} } \\[-1mm]
+		\vec y^{(t)} &=& f\Big( \vec V^y \, \vec h^{(t)} + \vec b^y
+					+ {\color{darkgreen} \vec U^y 
+					\visible<3->{\big(} \vec s^{(t)} 
+					\visible<3->{\cdot \vec g^{\mathrm o(t)} \big)} } 
+					\Big) \,,
+					\qquad \text{e.g.}\;f(\cdot)=\text{softmax}(\cdot) \\[-1mm]
+		\vec h^{(t)} &=& \tanh\Big( \vec U^h \, \vec x^{(t)}  
+				+ \vec W^h \, \vec h^{(t-1)} + \vec b^h
+				+ {\color{darkgreen} \vec V^h 
+					\visible<3->{\big(} \vec s^{(t-1)} 
+					\visible<3->{\cdot g_i^{\mathrm{o}(t)} \big)} }
+				\Big) \\[-1mm]
+		\visible<2->{\color{blue}g_i^{\mathrm{i}(t)}} 
+			&\visible<2->{\color{blue}=}& 
+			\visible<2->{\color{blue}
+				\sigma\Big(\vec U^\mathrm{i} \, \vec x^{(t)} 
+				+ \vec V^\mathrm{i} \, \vec s^{(t-1)} 
+				+ \vec W^\mathrm{i} \, \vec h^{(t-1)} 
+				+ \vec b^\mathrm{i} \Big) } \\[-1mm]
+		\visible<3->{\color{darkgreen}g_i^{\mathrm{o}(t)}} 
+			&\visible<3->{\color{darkgreen}=}& 
+			\visible<3->{\color{darkgreen}
+				\sigma\Big(\vec U^\mathrm{o} \, \vec x^{(t)} 
+				+ \vec V^\mathrm{o} \, \vec s^{(t-1)} 
+				+ \vec W^\mathrm{o} \, \vec h^{(t-1)} 
+				+ b_i^\mathrm{o} \Big) } 
+	\end{eqnarray*}	
+	\end{textblock}
+	
+	\begin{textblock}{20}(2.75,14.9)
+		\footnotesize\only<1-2>{\citep[Section 10.10]{Hochreiter97,Goodfellow16}}
+	\end{textblock}
+\end{frame}
 
+\begin{frame}\frametitle{LSTM with forget gate}
+\end{frame}
+
+\begin{frame}\frametitle{Complexity}
+
+	\begin{minipage}{\textwidth}
+		\begin{minipage}{0.21\textwidth}
+			{\includegraphics<1>[width=\textwidth]{img/rnn_supscript.pdf}}
+		\end{minipage}	
+		\hspace{0.6cm}
+		\begin{minipage}{0.6\textwidth}
+		
+		\begin{textblock}{10}(5.0,3.5)
+			Simple RNN:\\
+			for $\vec x \in \R^N, \vec y \in R^M, \vec h \in \R^H$:\\
+			\begin{itemize}
+			\item $V^y \in \R^{M,H}, b^y \in \R^{M}$
+			\item $V^y \in \R^{M,H}, b^y \in \R^{M}$
+			\item $V^y \in \R^{M,H}, b^y \in \R^{M}$
+			\end{itemize}
+		\end{textblock}
+		
+		\end{minipage}
+	\end{minipage}
 \end{frame}

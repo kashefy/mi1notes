@@ -57,24 +57,26 @@
 
 \begin{frame}\frametitle{\subsecname}
 
-Omitting sequence index $\alpha$
+%Omitting sequence index $\alpha$
 \begin{figure}[ht]
      \centering
-	\includegraphics[width=0.2\textwidth]{img/rnn_time_delay}
+	\includegraphics[width=0.4\textwidth]{img/rnn_time_delay}
      \mode<article>{
 	\caption{Basic RNN architecture}
 	}
 	\label{fig:rnn} 
 \end{figure}
 
-We measure the activities of the neurons in the RNN:
-
-
 
 \end{frame}
 
-\begin{frame}\frametitle{\subsecname}
+\subsubsection{Measure the activities}
 
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+
+\begin{frame}\frametitle{\subsubsecname}
+
+\mode<article>{
 \begin{figure}[ht]
      \centering
 	\includegraphics[width=0.2\textwidth]{img/rnn_colored}
@@ -83,6 +85,10 @@ We measure the activities of the neurons in the RNN:
 	}
 	\label{fig:rnn} 
 \end{figure}
+}
+\mode<presentation>{
+\placeimage{13}{1}{img/rnn_colored}{width=2cm}
+}
 
 Let
 \begin{itemize}
@@ -91,20 +97,65 @@ Let
 \item[] $M$ be the number of output nodes
 \end{itemize}
 
+\pause
+
 Identify the free parameters (trainable weights) of the network:
 
 \begin{itemize}
 \item input-to-hidden: ${\color{blue} \vec U = (\vec u_1,\ldots, \vec u_i, \ldots,\vec u_H)} \in \R^{H,N}$
 \item hidden-to-hidden: ${\color{red} \vec W = (\vec w_1,\ldots, \vec w_j, \ldots,\vec u_H)} \in \R^{H,H}$
-\item hidden-to-output: ${\color{green} \vec V = (\vec v_1,\ldots, \vec u_j, \ldots,\vec u_H)} \in \R^{H,H}$
+\item hidden-to-output: ${\color{darkgreen} \vec V = (\vec v_1,\ldots, \vec v_k, \ldots,\vec v_H)} \in \R^{H,H}$
 \end{itemize}
 
 
-We measure the activities of the neurons in the RNN:
-
-Omitting sequence index $\alpha$
 
 
+\end{frame}
 
 
+% ------------------------------------------------------------------------------
+\begin{frame}\frametitle{A simple RNN}
+	\begin{minipage}{\textwidth}
+		\begin{minipage}{0.21\textwidth}
+			{\includegraphics<1>[width=\textwidth]{img/rnn_no_supscript.pdf}}
+			{\includegraphics<2>[width=\textwidth]{img/rnn_no_supscript.pdf}}
+			{\includegraphics<3>[width=\textwidth]{img/rnn_supscript.pdf}}
+		\end{minipage}	
+		\hspace{0.6cm}
+		\begin{minipage}{0.6\textwidth}
+		
+		\begin{textblock}{10}(5.0,3.5)
+			\only<1> {\small define $h_i^{(t)}$ and $y_k^{(t)}$:}
+			\only<2> {\small switch from element-wise notation to vector notation}
+			\only<3> {\small add superscripts to the different weight matrices}
+		\end{textblock}
+			\begin{eqnarray*}
+			\only<1>{
+				h_i^{(t)} &=& \tanh \Big({\smallsum{k=1}{N} U_{ik} \, x_k^{(t)}} 
+						{ + \smallsum{j=1}{H}  W_{ij} \, h_j^{(t-1)}}
+						+ b^h_i \Big) \,,
+						\\
+				y_k^{(t)} &=& f\Big({\smallsum{j=1}{H} 
+						V_{kj} \, h_j^{(t)}} + b^y_k\Big) \,,\\[0.7cm]
+					\;\text{e.g.}\;f(\cdot) &:=& \mathrm{ softmax}(\cdot)\\
+					}
+			\only<2>{
+				\vec h^{(t)} &=& \tanh\Big({\vec U \, \vec x^{(t)}} 
+						{ + vec W \, \vec h^{(t-1)}}
+						+ \vec b^h \Big) \,,
+						\\
+				\vec y^{(t)} &=& f\Big({\vec V \, h^{(t)}} + \vec b^y\Big) \,,\\[0.7cm]
+					\;\text{e.g.}\;f(\cdot) &:=& \mathrm{softmax}(\cdot)\\
+					}
+			\only<3>{
+				\vec h^{(t)} &=& \tanh\Big({\vec U^h \, \vec x^{(t)}} 
+						{ + \vec W^h \, \vec h^{(t-1)}}
+						+ \vec b^h \Big) \,,
+						\\
+				\vec y^{(t)} &=& f\Big({\vec V^h \, \vec h^{(t)}} + \vec b^y\Big) \,,\\[0.7cm]
+					\;\text{e.g.}\;f(\cdot) &:=& \mathrm{softmax}(\cdot)\\
+					}
+			\end{eqnarray*}
+		\end{minipage}
+	\end{minipage}
 \end{frame}
