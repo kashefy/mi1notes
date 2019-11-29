@@ -18,6 +18,188 @@
 	\end{itemize}
 \end{frame}
 
+\subsection{The Vanishing Gradient Problem leads to exponential forgetting}
+
+\begin{frame}\frametitle{A simple RNN}
+	\begin{minipage}{\textwidth}
+		\begin{minipage}{0.21\textwidth}
+			{\includegraphics<1>[width=\textwidth]{img/rnn.pdf}}
+			{\includegraphics<2>[width=\textwidth]{img/rnn_superscript.pdf}}
+		\end{minipage}	
+		\hspace{0.6cm}
+		\begin{minipage}{0.6\textwidth}
+		
+		\begin{textblock}{10}(5.0,3.5)
+			\only<2> {\small add superscripts to the different weight matrices}
+		\end{textblock}
+			\begin{eqnarray*}
+			\only<1>{
+				\vec h^{(t)} &=& \tanh\Big({\vec U \, \vec x^{(t)}} 
+						{ + \vec W \, \vec s^{(t-1)}}
+						+ \vec b^\mathrm{s} \Big) \,,
+						\\
+				\vec y^{(t)} &=& f\Big({\vec V \, s^{(t)}} + \vec b^\mathrm{y}\Big) \,,\\[0.7cm]
+					\;\text{e.g.}\;f(\cdot) &:=& \text{e.g. } \mathrm{softmax}(\cdot) \text{ for classification}\\
+					}
+			\only<2>{
+				\vec h^{(t)} &=& \tanh\Big({\vec U^h \, \vec x^{(t)}} 
+						{ + \vec W^h \, \vec s^{(t-1)}}
+						+ \vec b^\mathrm{s} \Big) \,,
+						\\
+				\vec y^{(t)} &=& f\Big({\vec V^h \, \vec s^{(t)}} + \vec b^\mathrm{y}\Big) \,,\\[0.7cm]
+					\;\text{e.g.}\;f(\cdot) &:=& \text{e.g. } \mathrm{softmax}(\cdot) \text{ for classification}\\
+					}
+			\end{eqnarray*}
+		\end{minipage}
+	\end{minipage}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+\begin{frame}\frametitle{Exponential forgetting}
+	\iitem{a RNN with no inputs and a linear transfer function}
+	\vspace{1mm}
+	$$
+		\vec s^{(t)} 
+		\quad = \quad \vec W \, \vec s^{(t-1)}
+		\quad=\quad (\vec W)^t \, \vec s^{(0)}
+	$$
+	\pause
+	\iitem{eigenvalue decomposition:
+		$\vec W = \vec U \, \vec \Lambda \, \vec U^\top$}
+	\vspace{1mm}
+	$$
+		\vec s^{(t)} \quad =\quad 
+			\underbrace{\vec U
+			}_{\kern-3ex\text{\footnotesize rotate back}\kern-3ex}
+			\overbrace{(\vec \Lambda)^t
+			}^{\kern-6ex\text{\footnotesize exponential scaling}\kern-6ex}
+			\underbrace{\vec U^\top \vec s^{(0)}
+			}_{\text{\footnotesize rotation}}
+	$$
+	\pause
+	\iitem{long-term activity dominated by the largest $|\lambda_{1}|$ 
+		%grows fastest / shrinks slowest
+		\vspace{1mm}
+		\iitem{$|\lambda_{1}| > 1 \quad 
+			\leadsto \quad \lim\limits_{t\to\infty} s_i^{(t)} = \pm \infty\,,
+				\forall i$
+			\hfill (exploding activity)}
+		\vspace{-2mm}
+		\iitem{$|\lambda_{1}| < 1 \quad 
+			\leadsto \quad \lim\limits_{t\to\infty} s_i^{(t)} = 0 \,,
+				\forall i$
+			\hfill (vanishing activity)}
+	}
+	%\blfootnote{\hfill\citep[Section 10.7]{Goodfellow16}}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+\begin{frame}\frametitle{Vanishing gradients}
+\mode<presentation>{
+	\begin{minipage}{\textwidth} \hspace{5mm}
+		\includegraphics[height=4cm]{img/rnn_unfolded_untie.pdf}
+	\end{minipage}
+	}
+	%~ \iitem{local error terms $\vec \delta^{(t)}$ in backpropagation through time
+	\iitem{local error terms in backpropagation through time
+		\vspace{1mm}
+		%\iitem{for transfer function $f(h) = \tanh(h)$, 
+				%i.e.~$f'(h) = \big(1 - f^2(h)\big)$\\
+				%%~ and total input $z_i^{(t)} = \smallsum{j=1}{H} W_{ij} h_j^{(t-1)}$
+                %}
+				}
+	%~ \vspace{2mm}
+	%~ $$
+		%~ \delta_i^{(t)} 
+		%%\quad=\quad \smallfrac{\partial E^T}{\partial h_i^{(t)}}
+		%~ \quad=\quad \smallfrac{\partial y^{(t)}}{\partial z_i^{(t)}}
+		%%\quad=\quad \Big(\kern-1.5ex\underbrace{1 - \big(h_i^{(t)}\big)^2
+		%~ \quad=\quad \Big(\kern-1.5ex\underbrace{1 - f^2\big(z_i^{(t)}\big)
+				%~ }_{\begin{array}{c}\\[-4mm]
+					%~ \text{\scriptsize derivative < 1} \\[-1.5mm]
+					%~ \text{\scriptsize i.e.~contracting} 
+				%~ \end{array}} \kern-1.5ex\Big)
+			%~ \cdot \Big(\underbrace{\smallsum{j=1}{H} W_{ij}^\top \delta_j^{(t+1)}
+				%~ }_{\kern-2ex\begin{array}{c}\\[-6mm]
+					%~ \text{\scriptsize potentially} \\[-1.75mm]
+					%~ \text{\scriptsize exploding/vanishing}
+				%~ \end{array}\kern-2ex}\Big)
+	%~ $$
+	%~ \vspace{2mm}
+	%~ \iitem{over many time steps the local errors $\delta_i^{(t)}$ often vanish}
+	\iitem{over many time steps the local errors may also vanish}
+		%\vspace{1mm}
+		%\iitem{large $\vec w_i \Rightarrow h_i^{(t)} \approx 1 \Rightarrow$ 
+		%	derivative $\approx 0$}
+		%\iitem{rarely explodes thanks to anti-cyclical derivative $<1$}
+	\vspace{2mm}
+	\iitem{small short-term errors overshadow large long-term errors}
+	%\vspace{2mm}
+	%\begin{center}\bf 
+	%	How can we learn long time-series without vanishing gradients?
+	%\end{center}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+%~ \begin{frame}\frametitle{Solution 1: echo-state networks (1)}
+\begin{frame}\frametitle{Echo-state networks (1)}
+	\placeimage{13.75}{0.75}{img/rnn.pdf}{height=3cm}
+		\iitem{system dynamics determine the input representation
+			\vspace{1mm}
+			\iitem{non-linear preprocessing step with memory}}
+		\vspace{4mm}
+		\iitem{address vanishing gradients by keeping $\vec W$ and $\vec U$ fixed
+			\vspace{1mm}
+			\iitem{output weights $\vec V$ can be trained by e.g.~linear regression}
+			\vspace{-1mm}
+			\iitem{hidden ``reservoir'' maintains inputs/errors over time}
+			%\vspace{-2mm}
+			%\iitem{hidden dynamics must be rich enough to bridge the gap}
+		}
+		\vspace{4mm}
+		\iitem{system dynamics determine how fast inputs/errors are forgotten}
+	\blfootnote{\hfill\citep[Section 10.8]{Jaeger04,Goodfellow16}}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+%~ \begin{frame}\frametitle{Solution 1: echo-state networks (2)}
+\begin{frame}\frametitle{Echo-state networks (2)}
+	\placeimage{13.75}{0.75}{img/rnn.pdf}{height=3cm}
+		\iitem{eigenvalues $\lambda_i$ of the system's {\em Jacobian} $\vec J$}
+			$$
+				J_{ij}^{(t)} 
+				\quad=\quad 
+				%~ \smallfrac{\partial h_i^{(t)}}{\partial h_j^{(t-1)}}
+				%~ \quad=\quad
+				%~ f'\big(h_i^{(t)}\big) \cdot W_{ij}
+				\smallfrac{\partial h_i^{(t)}}{\partial h_j^{(t-1)}}
+				\quad=\quad
+				 W_{ij} \, f'\big(h_j^{(t)}\big)
+				\hspace{2cm}
+			$$
+            $$
+                h_i^{(t)} = \smallsum{j=1}{H} W_{ij} \, f(h_j^{(t-1)})
+            $$
+		\vspace{2mm}
+		\iitem{eigenvectors with $|\lambda_i| \approx 1$ 
+				vanish/explode {\em very slowly}
+			\vspace{1mm}
+			\iitem{inputs/errors are maintained for a long time}}
+		\vspace{6mm}
+		\iitem{generate random $\vec W$, and $\vec U$ 
+				where all $|\lambda_j| \approx r$
+			\vspace{1mm}
+			%~ \iitem{$f'(h_i^{(t)}) < 1$ \quad is a contraction $\quad\leadsto\quad$ $r > 1$}
+			\iitem{$f'(h_j^{(t)}) < 1$ \quad is a contraction $\quad\leadsto\quad$ $r > 1$}
+			\vspace{-1mm}
+			\iitem{values between $r=1.2$ and $r=3$ are used in practice}
+			\vspace{-2mm}
+			%\iitem{$n$ hidden neurons can maintain
+					%inputs/errors for up to $n$ time steps }
+					}
+	\blfootnote{\hfill\citep[Section 10.8]{Jaeger04,Goodfellow16}}
+\end{frame}
+
 % ------------------------------------------------------------------------------
 %~ \begin{frame}\frametitle{Solution 3: long short-term memory (LSTM)}
 \begin{frame}\frametitle{Long short-term memory (LSTM) architecture}
@@ -27,7 +209,7 @@
 		%\includegraphics<2>[height=3cm]{img/lstm_write.pdf}
 		\includegraphics<2>[height=3cm]{img/lstm_write_delay.pdf}
 		%\includegraphics<3->[height=3cm]{img/lstm.pdf}
-		\includegraphics<3->[height=3cm]{img/lstm_delay.pdf}
+		\includegraphics<3->[height=3cm]{img/lstm_delay_indices.pdf}
 	\end{textblock}
 	
 	\begin{textblock}{10}(0.4,2.5)
@@ -97,66 +279,125 @@
 	\begin{textblock}{10}(0.8,7.5)
 	\small
 	\begin{eqnarray*}
-		\vec s^{(t)} &=& \vec  s^{(t-1)} 
-				+ {\color{blue} \tanh\Big(
-					\vec W^s \vec h^{(t-1)} \Big)
-					\visible<2->{ \cdot \vec g^{\mathrm{i}(t)}} } \\[-1mm]
-		\vec y^{(t)} &=& f\Big( \vec V^y \, \vec h^{(t)} + \vec b^y
-					+ {\color{darkgreen} \vec U^y 
-					\visible<3->{\big(} \vec s^{(t)} 
-					\visible<3->{\cdot \vec g^{\mathrm o(t)} \big)} } 
+		\vec c^{(t)} &=& \vec  c^{(t-1)} 
+				+  {\color{blue} \visible<2->{ \vec g^{\mathrm{i}(t)} \odot}  \tanh\Big( 
+					\vec W^\mathrm{c} \vec s^{(t-1)} \Big)
+					 } \\[-1mm]
+		\vec y^{(t)} &=& f\Big( \vec V^\mathrm{y} \, \vec s^{(t)} + \vec b^\mathrm{y}
+					+ {\color{darkgreen} \vec U^\mathrm{y} 
+					\visible<3->{\big(} \vec c^{(t)} 
+					\visible<3->{\odot \vec g^{\mathrm{o}(t)} \big)} } 
 					\Big) \,,
 					\qquad \text{e.g.}\;f(\cdot)=\text{softmax}(\cdot) \\[-1mm]
-		\vec h^{(t)} &=& \tanh\Big( \vec U^h \, \vec x^{(t)}  
-				+ \vec W^h \, \vec h^{(t-1)} + \vec b^h
-				+ {\color{darkgreen} \vec V^h 
-					\visible<3->{\big(} \vec s^{(t-1)} 
-					\visible<3->{\cdot g_i^{\mathrm{o}(t)} \big)} }
+		\vec s^{(t)} &=& \tanh\Big( \vec U^\mathrm{h} \, \vec x^{(t)}  
+				+ \vec W^\mathrm{h} \, \vec s^{(t-1)} + \vec b^\mathrm{s}
+				+ {\color{darkgreen} \vec V^\mathrm{h} 
+					\visible<3->{\big(} \vec c^{(t-1)} 
+					\visible<3->{\odot \vec g^{\mathrm{o}(t)} \big)} }
 				\Big) \\[-1mm]
-		\visible<2->{\color{blue}g_i^{\mathrm{i}(t)}} 
+		\visible<2->{\color{blue} \vec g^{\mathrm{i}(t)}} 
 			&\visible<2->{\color{blue}=}& 
 			\visible<2->{\color{blue}
 				\sigma\Big(\vec U^\mathrm{i} \, \vec x^{(t)} 
-				+ \vec V^\mathrm{i} \, \vec s^{(t-1)} 
-				+ \vec W^\mathrm{i} \, \vec h^{(t-1)} 
+				+ \vec V^\mathrm{i} \, \vec c^{(t-1)} 
+				+ \vec W^\mathrm{i} \, \vec s^{(t-1)} 
 				+ \vec b^\mathrm{i} \Big) } \\[-1mm]
-		\visible<3->{\color{darkgreen}g_i^{\mathrm{o}(t)}} 
+		\visible<3->{\color{darkgreen} \vec g^{\mathrm{o}(t)}} 
 			&\visible<3->{\color{darkgreen}=}& 
 			\visible<3->{\color{darkgreen}
 				\sigma\Big(\vec U^\mathrm{o} \, \vec x^{(t)} 
-				+ \vec V^\mathrm{o} \, \vec s^{(t-1)} 
-				+ \vec W^\mathrm{o} \, \vec h^{(t-1)} 
-				+ b_i^\mathrm{o} \Big) } 
+				+ \vec V^\mathrm{o} \, \vec c^{(t-1)} 
+				+ \vec W^\mathrm{o} \, \vec s^{(t-1)} 
+				+ \vec b^\mathrm{o} \Big) } 
 	\end{eqnarray*}	
+	
+	
+	\only<4>{
+	\vspace{-5mm}
+	
+	\question{Why does ${\color{blue}\tanh(\cdot)}$ make sense here?
+	}
+	}
+	
 	\end{textblock}
+	
 	
 	\begin{textblock}{20}(2.75,14.9)
 		\footnotesize\only<1-2>{\citep[Section 10.10]{Hochreiter97,Goodfellow16}}
 	\end{textblock}
+	
+	
 \end{frame}
 
 \begin{frame}\frametitle{LSTM with forget gate}
+\begin{figure}[ht]
+     \centering
+	\includegraphics[width=0.4\textwidth]{img/lstm_delay_forget.pdf}
+     \mode<article>{
+	\caption{Basic RNN architecture}
+	}
+	\label{fig:rnn} 
+\end{figure}
+\pause
+
+\begin{equation}
+		{\color{magenta} \vec g_i^{\mathrm{f}(t)}} 
+			= 
+			\color{magenta}
+				\sigma\Big(\vec U^\mathrm{f} \, \vec x^{(t)} 
+				+ \vec V^\mathrm{f} \, \vec c^{(t-1)} 
+				+ \vec W^\mathrm{f} \, \vec s^{(t-1)} 
+				+ \vec b^\mathrm{f} \Big) 
+\end{equation}
+
+Consequently:
+\begin{equation}
+		\vec c^{(t)} = {\color{magenta}\vec g^{\mathrm{f}(t)} \odot\,} \vec  c^{(t-1)} 
+				+  {\color{blue} { \vec g^{\mathrm{i}(t)} \odot}  \tanh\Big( 
+					\vec W^\mathrm{c} \vec s^{(t-1)} \Big)
+					 }
+\end{equation}
+
+
 \end{frame}
 
 \begin{frame}\frametitle{Complexity}
-
-	\begin{minipage}{\textwidth}
-		\begin{minipage}{0.21\textwidth}
-			{\includegraphics<1>[width=\textwidth]{img/rnn_supscript.pdf}}
-		\end{minipage}	
-		\hspace{0.6cm}
-		\begin{minipage}{0.6\textwidth}
-		
-		\begin{textblock}{10}(5.0,3.5)
+\mode<presentation>{
+\only<1>{
+			\placeimage{13}{1}{img/rnn_superscript}{width=2cm}
+			}
+\only<2->{
+			\placeimage{9}{1}{img/lstm_delay_forget}{width=5cm}
+			}
+}
+		For $\vec x \in \R^N, \vec h \in \R^H, \vec y \in \R^M$:\\
+		\begin{itemize}
+		\item[]
 			Simple RNN:\\
-			for $\vec x \in \R^N, \vec y \in R^M, \vec h \in \R^H$:\\
 			\begin{itemize}
-			\item $V^y \in \R^{M,H}, b^y \in \R^{M}$
-			\item $V^y \in \R^{M,H}, b^y \in \R^{M}$
-			\item $V^y \in \R^{M,H}, b^y \in \R^{M}$
+			\item $\vec U^{\mathrm{h}} \in \R^{H,N},\quad \vec b^{\mathrm{h}} \in \R^{H}$
+			\item $\vec W^{\mathrm{h}} \in \R^{H,H}$
+			\item $\vec V^{\mathrm{y}} \in \R^{M,H},\quad \vec b^{\mathrm{y}} \in \R^{M}$
 			\end{itemize}
-		\end{textblock}
+			\pause
+			
+		\item[]
+			LSTM:\\
+			All of the above in addition to\ldots
+			for $\vec c, {\color{blue}\vec g^{\mathrm{i}}}, {\color{darkgreen}\vec g^{\mathrm{o}}}, {\color{magenta}\vec g^{\mathrm{f}}} \in \R^K$\\
+			(often $K=H$):\\
+			\pause
+			\begin{itemize}
+			\item $\color{blue}\vec W^{\mathrm{c}} \in \R^{H,H}$
+			\item $\color{darkgreen}\vec U^{\mathrm{y}} \in \R^{M,H}$
+			\item $\color{darkgreen}\vec V^{\mathrm{h}} \in \R^{H,H}$
+			\item $\color{blue}\vec U^{\mathrm{i}} \in \R^{K,N}$
+			\item $\color{blue}\vec V^{\mathrm{i}} \in \R^{K,K}$
+			\item $\color{blue}\vec W^{\mathrm{i}} \in \R^{K,H}, \quad \vec b^{\mathrm{i}} \in \R^{K}$
+			\item duplicate $\color{blue}\vec U^{\mathrm{i}}, \color{blue}\vec V^{\mathrm{i}}, \color{blue}\vec W^{\mathrm{i}}$
+			for the output gate $\leadsto \color{darkgreen}\vec U^{\mathrm{o}}, \color{darkgreen}\vec V^{\mathrm{o}}, \color{darkgreen}\vec W^{\mathrm{o}}$ and $\color{darkgreen}\vec b^{\mathrm{o}}$
+			\item and for the forget gate $\leadsto \color{magenta}\vec U^{\mathrm{o}}, \color{magenta}\vec V^{\mathrm{o}}, \color{magenta}\vec W^{\mathrm{o}}$ and $\color{magenta}\vec b^{\mathrm{f}}$
+			\end{itemize}
+		\end{itemize}
 		
-		\end{minipage}
-	\end{minipage}
 \end{frame}
