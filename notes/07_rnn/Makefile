@@ -10,6 +10,8 @@ projnameA = $(projname).notes
 
 slides: $(projname).slides.tex $(projname).tex
 	$(compile) $(projname).slides.tex
+	#bibtex $(projname).slides
+	$(compile) $(projname).slides.tex
 	mv $(projname).slides.pdf $(targetname).slides.pdf 
 
 handout: $(projname).handout.tex $(projname).tex
@@ -19,6 +21,7 @@ handout: $(projname).handout.tex $(projname).tex
 # Repeat compilation for the references to show up correctly
 notes: $(projname).notes.tex $(projname).tex
 	$(compile) $(projname).notes.tex
+	#bibtex $(projname).slides.tex
 	$(compile) $(projname).notes.tex
 	$(compile) $(projname).notes.tex
 	mv $(projname).notes.pdf $(targetname).notes.pdf 
