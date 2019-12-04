@@ -34,7 +34,7 @@
 		\end{textblock}
 			\begin{eqnarray*}
 			\only<1>{
-				\vec h^{(t)} &=& \tanh\Big({\vec U \, \vec x^{(t)}} 
+				\vec s^{(t)} &=& \tanh\Big({\vec U \, \vec x^{(t)}} 
 						{ + \vec W \, \vec s^{(t-1)}}
 						+ \vec b^\mathrm{s} \Big) \,,
 						\\
@@ -42,11 +42,11 @@
 					\;\text{e.g.}\;f(\cdot) &:=& \text{e.g. } \mathrm{softmax}(\cdot) \text{ for classification}\\
 					}
 			\only<2>{
-				\vec h^{(t)} &=& \tanh\Big({\vec U^h \, \vec x^{(t)}} 
-						{ + \vec W^h \, \vec s^{(t-1)}}
+				\vec s^{(t)} &=& \tanh\Big({\vec U^\mathrm{h} \, \vec x^{(t)}} 
+						{ + \vec W^\mathrm{h} \, \vec s^{(t-1)}}
 						+ \vec b^\mathrm{s} \Big) \,,
 						\\
-				\vec y^{(t)} &=& f\Big({\vec V^h \, \vec s^{(t)}} + \vec b^\mathrm{y}\Big) \,,\\[0.7cm]
+				\vec y^{(t)} &=& f\Big({\vec V^\mathrm{y} \, \vec s^{(t)}} + \vec b^\mathrm{y}\Big) \,,\\[0.7cm]
 					\;\text{e.g.}\;f(\cdot) &:=& \text{e.g. } \mathrm{softmax}(\cdot) \text{ for classification}\\
 					}
 			\end{eqnarray*}
@@ -56,7 +56,7 @@
 
 % ------------------------------------------------------------------------------
 \begin{frame}\frametitle{Exponential forgetting}
-	\iitem{a RNN with no inputs and a linear transfer function}
+	\iitem{an RNN with no inputs and a linear transfer function}
 	\vspace{1mm}
 	$$
 		\vec s^{(t)} 
@@ -109,22 +109,22 @@
                 %}
 				}
 	%~ \vspace{2mm}
-	%~ $$
-		%~ \delta_i^{(t)} 
-		%%\quad=\quad \smallfrac{\partial E^T}{\partial h_i^{(t)}}
-		%~ \quad=\quad \smallfrac{\partial y^{(t)}}{\partial z_i^{(t)}}
+	%$$
+		%\delta_i^{(t)} 
+		%%quad=\quad \smallfrac{\partial E^T}{\partial h_i^{(t)}}
+		%\quad=\quad \smallfrac{\partial y^{(t)}}{\partial z_i^{(t)}}
 		%%\quad=\quad \Big(\kern-1.5ex\underbrace{1 - \big(h_i^{(t)}\big)^2
-		%~ \quad=\quad \Big(\kern-1.5ex\underbrace{1 - f^2\big(z_i^{(t)}\big)
-				%~ }_{\begin{array}{c}\\[-4mm]
-					%~ \text{\scriptsize derivative < 1} \\[-1.5mm]
-					%~ \text{\scriptsize i.e.~contracting} 
-				%~ \end{array}} \kern-1.5ex\Big)
-			%~ \cdot \Big(\underbrace{\smallsum{j=1}{H} W_{ij}^\top \delta_j^{(t+1)}
-				%~ }_{\kern-2ex\begin{array}{c}\\[-6mm]
-					%~ \text{\scriptsize potentially} \\[-1.75mm]
-					%~ \text{\scriptsize exploding/vanishing}
-				%~ \end{array}\kern-2ex}\Big)
-	%~ $$
+		%\quad=\quad \Big(\kern-1.5ex\underbrace{1 - f^2\big(z_i^{(t)}\big)
+				%}_{\begin{array}{c}\\[-4mm]
+					%\text{\scriptsize derivative < 1} \\[-1.5mm]
+					%\text{\scriptsize i.e.~contracting} 
+				%\end{array}} \kern-1.5ex\Big)
+			%\cdot \Big(\underbrace{\smallsum{j=1}{H} W_{ij}^\top \delta_j^{(t+1)}
+				%}_{\kern-2ex\begin{array}{c}\\[-6mm]
+					%\text{\scriptsize potentially} \\[-1.75mm]
+					%\text{\scriptsize exploding/vanishing}
+				%\end{array}\kern-2ex}\Big)
+	%$$
 	%~ \vspace{2mm}
 	%~ \iitem{over many time steps the local errors $\delta_i^{(t)}$ often vanish}
 	\iitem{over many time steps the local errors may also vanish}

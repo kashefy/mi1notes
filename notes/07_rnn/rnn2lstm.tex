@@ -179,7 +179,7 @@ Consequently:
 			\placeimage{9}{1}{img/lstm_delay_forget}{width=5cm}
 			}
 }
-		For $\vec x \in \R^N, \vec h \in \R^H, \vec y \in \R^M$:\\
+		For $\vec x \in \R^N, \vec s \in \R^H, \vec y \in \R^M$:\\
 		\begin{itemize}
 		\item[]
 			Simple RNN:\\
@@ -198,9 +198,9 @@ Consequently:
 			\pause
 			\begin{itemize}
 			\item for $\vec c$:
-             $\color{blue}\vec W^{\mathrm{c}} \in \R^{H,H}$, 
-			 $\color{darkgreen}\vec U^{\mathrm{y}} \in \R^{M,H}$,
-			 $\color{darkgreen}\vec V^{\mathrm{h}} \in \R^{H,H}$
+             $\color{blue}\vec W^{\mathrm{c}} \in \R^{K,H}$, 
+			 $\color{darkgreen}\vec U^{\mathrm{y}} \in \R^{M,K}$,
+			 $\color{darkgreen}\vec V^{\mathrm{h}} \in \R^{H,K}$
 			\item[] for ${\color{blue}\vec g^{\mathrm{i}}}$:
             \begin{itemize}
                 \item $\color{blue}\vec U^{\mathrm{i}} \in \R^{K,N}$
