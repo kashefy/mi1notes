@@ -1,0 +1,17 @@
+\documentclass{../../latex/minotes}
+\input{../../latex/customcommands}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+\let\oldframe\frame
+\let\oldendframe\endframe
+
+\newcommand{\notesonly}[1]{#1}
+
+\newcommand{\mystackrel}[2]{\stackrel{\mathmakebox[\widthof{#1}]{#2}}{=}}
+
+% frame titles only effective in presentation mode
+\renewcommand{\frametitle}[1]{}
+
+\input{tutorial}
