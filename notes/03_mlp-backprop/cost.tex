@@ -128,6 +128,12 @@ P(y_T|\vec x) = \mathcal{N}(y_T|\underbrace{y(\vec x;\vec w)}_{= \mu},\sigma^2)
 Using the quadratic cost leads to a solution that corresponds to the same solution found from maximizing the (log-)likelihood\footnote{often, the log-likelihood is maximized for computational efficiency as the log replaces the product with a sum.} of the Gaussian labels:
 }
 \only<1>{
+    \begin{figure}[h]
+        \centering
+        \includegraphics[height=4cm]{img/Regression_example_dense}
+    \end{figure}
+}
+\only<2>{
 %\begin{figure}[h]
      %\centering
 	%\includegraphics[width=0.4\textwidth]{img/gaussian_labels}
@@ -160,7 +166,7 @@ Using the quadratic cost leads to a solution that corresponds to the same soluti
 	 \label{fig:quadratic_density_gaussian}
 \end{figure}
 }
-\only<2>{
+\only<3>{
 \begin{align}
 \vec w^* \in \argmin_{\vec w} \ETw 
 \iff& 
