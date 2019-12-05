@@ -2,7 +2,7 @@
 
 \subsection{The setting}
 
-\begin{frame}\frametitle{\subsecname for M-way classification}
+\begin{frame}\frametitle{\subsecname~for M-way classification}
 
 \mode<article>{
 Specifying the data and model for a multi-class classification with $M$ classes (i.e. $M$-way classification)
@@ -44,25 +44,10 @@ Specifying the data and model for a multi-class classification with $M$ classes 
 
 \end{frame}
 
-\subsection{k nearest neighbor}
-
+\subsection{k nearest neighbor classifier}
 
 \begin{frame}\frametitle{\subsecname}
-
 Prediction follows the majority vote of the $k$ nearest neighbors around the query point.
-
-\begin{figure}[ht]
-     \centering
-	\includegraphics[width=0.2\textwidth]{img/section4_fig11_K2}
-     \mode<article>{
-	\caption{Basic RNN architecture}
-	}
-	\label{fig:rnn} 
-\end{figure}
-
-\end{frame}
-
-\begin{frame}\frametitle{\subsecname}
 
 Let $k$NN$(\vec x)$ be the indices $\{\beta_1, \beta_2,\ldots,\beta_k\}$ of the $k$ data points closest to $\vec x$ w.r.t. Euclidean norm:
 
@@ -78,14 +63,14 @@ Let $k$NN$(\vec x)$ be the indices $\{\beta_1, \beta_2,\ldots,\beta_k\}$ of the 
 
 \begin{frame}\frametitle{\subsubsecname}
 
-For multi-class classificationm the $k$NN classifier (for fixed $k~\corresponds$ hyperparameter) is defined by:
+For multi-class classification the $k$NN classifier (for fixed $k~\corresponds$ hyper-parameter) is defined by:
 
 \begin{equation}
-\vec y(\vec x) \frac{1}{k} \sum_{\beta \in k\mathrm{NN}(\vec x)} \vec y_{T}^{(\beta)}
+\vec y(\vec x) = \frac{1}{k} \sum_{\beta \in k\mathrm{NN}(\vec x)} \kern-0.5ex \vec y_{T}^{(\beta)}
 \label{eq:knn_classifier}
 \end{equation}
 
-$\vec y(\vec )$ in \eqref{eq:knn_classifier} is effectively an arithmetic average of the labels in the neighborhood.
+$\vec y(\vec x)$ \notesonly{in \eqref{eq:knn_classifier}} is effectively an arithmetic average of the labels in the neighborhood.
 
 \end{frame}
 
@@ -115,9 +100,9 @@ applying a hard decision would yield $c=1$.
 
 \begin{frame}\frametitle{\subsubsecname}
 
-For binary classification, we can set the $M=2$ for multi-class $k$NN classifier.
+For binary classification, we can set $M=2$ for multi-class $k$NN classifier.
 
-Alternatively, we can construct $k$NN classifier for binary classification using \emph{scalar} labels:
+Alternatively, we can construct the $k$NN classifier for binary classification using \emph{scalar} labels:
 
 \begin{equation}
 y_T \in \{0,1\}\quad \text{ and }\quad y(\vec x) \in \R
@@ -140,7 +125,7 @@ y(\vec x) \ge\,0\,:\,
 
 Remarks:
 \begin{enumerate}
-\item The value of $k$ controls the model complexity ($k = 1 \leadsto$ overfitting, larger $k \leadsto$ underfitting)
+\item The value of $k$ controls the model complexity ($k = 1 \leadsto$ over-fitting, larger $k \leadsto$ under-fitting)
 \item Selecting the $k$ nearest neighbors of some point $\vec x$ can be costly but can be made more efficient using data structures such as \emph{Kdtrees})
 \end{enumerate}
 

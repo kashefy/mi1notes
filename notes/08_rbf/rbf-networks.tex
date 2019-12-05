@@ -5,7 +5,7 @@
 
 \begin{frame}\frametitle{\secname}
 
-A tradeoff between $k$NN classification and Parzen window classification.
+A trade-off between $k$NN classification and Parzen window classification.
 
 Instead of taking all $p$ points to predict the class probabilities (Parzen), limit the prediction to $k \ll p$ \cancel{points} ``representative'' functions.
 
@@ -59,7 +59,7 @@ Feature transformation $(\vec x\in \R^N)$:
 
 Assume $\{\vec t_i\}$ and corresponding kernel width $\{\sigma_i\}$ have already been determined.
 
-Transform the feature space using \emph{radial basis functions} (gaussian kernel functions):
+Transform the feature space using \emph{radial basis functions} (Gaussian kernel functions):
 
 \begin{align}
 \phi_i(\vec x) \in 
@@ -128,11 +128,9 @@ quadratic cost function. \pause Reuse solution for linear regression:
 
 \subsection{Multi-dimensional RBF-Networks}
 
-\begin{frame}\frametitle{subsecname}
+\begin{frame}\frametitle{\subsecname}
 
 Generalizing nonlinear basis functions in linear models:
-
-Extenaion to:
 
 \begin{equation}
 \vec y(\vec \phi(\vec x))) = 
@@ -278,7 +276,7 @@ global approximation                                                            
 \begin{tabular}[c]{@{}l@{}}common neuronal mode \\between hidden and output neurons\end{tabular}                  & \begin{tabular}[c]{@{}l@{}}The hidden layer serves a \\very different purpose\\than the output layer\end{tabular} \\ 
 \hline\pause
 
-\begin{tabular}[c]{@{}l@{}}total input of a hidden neuron\\determined via inner product\\$\vec w_i^\top x$\end{tabular}                  & \begin{tabular}[c]{@{}l@{}}total input is based on a Euclidean dsitance\end{tabular} \\ 
+\begin{tabular}[c]{@{}l@{}}total input of a hidden neuron\\determined via inner product\\$\vec w_i^\top x$\end{tabular}                  & \begin{tabular}[c]{@{}l@{}}total input is based on a Euclidean distance\end{tabular} \\ 
 \hline\pause
 
 \begin{tabular}[c]{@{}l@{}}\end{tabular}                  & \begin{tabular}[c]{@{}l@{}}restricted function class (many \\ basis functions needed\\ for complicated approximations)\end{tabular} \\ 

@@ -81,14 +81,14 @@ The confusion matrix differentiates between the types of mistakes a classifier m
 }
 
 \begin{equation}
-\text{Accuracy } \corresponds
  \text{ \# of correct classifications } 
+ \corresponds \text{ Accuracy }
  = \frac{TP+TN}{P+N}
 \end{equation}
 
 \only<2>{
 \slidesonly{
-{\placeimage{12}{1}{img/hist_imbalanced}{width=3cm}}
+{\placeimage{12.5}{10}{img/hist_imbalanced}{width=3cm}}
 }
 
 In our imbalanced example:
@@ -96,7 +96,9 @@ In our imbalanced example:
 \frac{TP+TN}{P+N} = \frac{0+9500}{500+9500} = 0.95
 \end{equation}
 
+\notesonly{
 Accuracy is a misleading metric when the classes are imbalance.
+}
 }
 
 \only<3>{
@@ -167,7 +169,7 @@ Calibration: finding an operating point by adjusting the threshold that takes co
 General procedure:
 \begin{enumerate}
 \item train binary classifier (assuming $y(\vec x) \in \lbrack0,1\rbrack$)
-\item make predicitons on the test set (selecting an operating point counts as a hyperparameter selection)
+\item make predictions on the test set (selecting an operating point counts as a hyper-parameter selection)
 \item Save ``probabilistic'' output, no thresholding.
 \item for threshold $\mathrm{thr} \in \lbrack0,1\rbrack$ do:
 \begin{enumerate}
@@ -225,16 +227,16 @@ What if the proportions in my training set is different from that of the validat
 
 \begin{frame}
 
-All we did so far is measure generlization performance and tune our operating point.
+All we did so far is measure generalization performance and tune our operating point.
 
-\question{Is there anything else we can do about imabalanced data?}
+\question{Is there anything else we can do about imbalanced data?}
 
 \pause
 
 \begin{enumerate}
 \item Train the classifier on a synthetically balanced dataset by
 \begin{itemize}
-\item subsampling from the majority class (no one likes to throw away data)
+\item sub-sampling from the majority class (no one likes to throw away data)
 \item oversampling the minority class
 \end{itemize}
 
@@ -246,7 +248,7 @@ All we did so far is measure generlization performance and tune our operating po
 \item class weighted loss function:
 e.g. weighted cross entropy:
 \begin{equation}
-e^{(\alpha)} = -\gamma y_T^(\alpha) \ln(y^{(\alpha)}) - \beta (1-y_T^{(\alpha)}) \ln(1-y^{(\alpha)})
+e^{(\alpha)} = -\, \gamma \, y_T^{(\alpha)} \cdot \ln \lbrack y^{(\alpha)} \rbrack - \beta \, (1-y_T^{(\alpha)}) \cdot \ln \lbrack 1-y^{(\alpha)} \rbrack
 \end{equation}
 where $\beta$ and $\gamma$ represent ``class weights''
 \end{enumerate}
