@@ -72,7 +72,13 @@ Let $k$NN$(\vec x)$ be the indices $\{\beta_1, \beta_2,\ldots,\beta_k\}$ of the 
 \lVert \vec x^{(\alpha)} - \vec x\rVert_{2}
 \end{equation}
 
-The $k$NN classifier (for fixed $k~\corresponds$ hyperparameter) is defined by
+\end{frame}
+
+\subsubsection{For multi-class classification}
+
+\begin{frame}\frametitle{\subsubsecname}
+
+For multi-class classificationm the $k$NN classifier (for fixed $k~\corresponds$ hyperparameter) is defined by:
 
 \begin{equation}
 \vec y(\vec x) \frac{1}{k} \sum_{\beta \in k\mathrm{NN}(\vec x)} \vec y_{T}^{(\beta)}
@@ -89,7 +95,53 @@ Example k=3, M=4
 \begin{equation}
 \vec y(\vec x) = \frac{1}{3}
 \left\lbrack
+\,
+\rmat{ 1 \\ 0 \\ 0 \\ 0}\, +\,
+\rmat{ 1 \\ 0 \\ 0 \\ 0} +\,
+\rmat{ 0 \\ 1 \\ 0 \\ 0}\,
 \right\rbrack
+=
+\frac{1}{3}
+\rmat{ 2 \\ 1 \\ 0 \\ 0}
+=
+\rmat{ 2/3 \\ 1/3 \\ 0\; \\ 0\;}
 \end{equation}
+
+applying a hard decision would yield $c=1$.
     
+\end{frame}
+
+\subsubsection{For binary classification}
+
+\begin{frame}\frametitle{\subsubsecname}
+
+For binary classification, we can set the $M=2$ for multi-class $k$NN classifier.
+
+Alternatively, we can construct $k$NN classifier for binary classification using \emph{scalar} labels:
+
+\begin{equation}
+y_T \in \{0,1\}\quad \text{ and }\quad y(\vec x) \in \R
+\end{equation}
+with
+
+\begin{equation}
+y(\vec x) \ge\,0\,:\,
+\begin{cases*}
+      \;y(\vec x) & probability of class $1$ \\
+      \;1-y(\vec x)     & probability of class $0$
+    \end{cases*}
+\end{equation}
+
+\question{What is the role of $k$ in terms of model complexity? $k = 1$ vs. $k = p$}
+
+\pause
+
+\question{How would you select the $k$ nearest neighbors for some query point $\vec x$?}
+
+Remarks:
+\begin{enumerate}
+\item The value of $k$ controls the model complexity ($k = 1 \leadsto$ overfitting, larger $k \leadsto$ underfitting)
+\item Selecting the $k$ nearest neighbors of some point $\vec x$ can be costly but can be made more efficient using data structures such as \emph{Kdtrees})
+\end{enumerate}
+
 \end{frame}
