@@ -20,7 +20,7 @@ Let $k$ be the number of basis functions.
 \begin{figure}[ht]
      \centering
      \savebox{\imagebox}{
-	 \includegraphics[width=0.37\textwidth]{img/parzen_data}}%
+	 \includegraphics[width=0.34\textwidth]{img/parzen_data}}%
      \begin{subfigure}[t]{0.37\textwidth}
          \centering
          \usebox{\imagebox}% Place largest image
@@ -135,20 +135,27 @@ Generalizing nonlinear basis functions in linear models:
 \begin{equation}
 \vec y(\vec \phi(\vec x))) = 
 \rmat{
-y_1(\vec \phi(\vec x)))\\
-y_2(\vec \phi(\vec x)))\\
+y_1(\vec \phi(\vec x))\\
+y_2(\vec \phi(\vec x))\\
 \vdots\\
-y_M(\vec \phi(\vec x)))\\
+y_M(\vec \phi(\vec x))\\
 }
-= \vec W^\top \phi(\vec x)
+= \vec W^\top \kern-.5ex \phi(\vec x)
 \end{equation}
 
 with $\vec W \in \R^{k+1,M}$
 
-closed form solution (for quadratic cost): 
+closed form solution for quadratic cost: 
 
 \begin{equation}
-\vec W^{*} = \left( \vec \Phi \, \vec \Phi^{\top} \right)^{-1} \vec \Phi \, \vec Y_{\text{True}}^{\top}
+\vec W^{*} =
+\underbrace{
+\left(\vec \Phi \, \vec \Phi^{\top} \right)^{-1}
+}_{
+\substack{
+\text{assume}\\ \text{invertibility}}
+}
+\vec \Phi \, \vec Y_{\text{True}}^{\top}
 \end{equation}
 
 \question{What is $\vec Y_{\text{True}}$? What is the shape of this matrix?}
@@ -182,11 +189,11 @@ For weight decay:
 
 \mode<presentation>{
 \begin{equation}
-\vec y_{\text{Parzen}}(\vec x) := \frac{1}{Z} \sum_{\alpha=1}^{p} \vec y_T^{(\alpha)} \cdot \kappa(\vec x, \vec x^{(\alpha)})
+\vec y_{\text{Parzen}}(\vec x) := \frac{1}{Z} \sum_{\alpha=1}^{p} \vec y_T^{(\alpha)}\, \kappa(\vec x, \vec x^{(\alpha)})
 \qquad \text{(Parzen window classifier)}
 \end{equation}
 \begin{equation}
-    \vec y_{\text{RBF-Net}}(\vec \phi; \vec w) = \sum_{i=0}^{k} w_{i} \phi_{i}(\vec x) = \vec w^{\top} \vec \phi \qquad \text{(RBF-Network)}
+    \vec y_{\text{RBF-Net}}(\vec \phi; \vec w) = \sum_{i=0}^{k} w_{i} \phi_{i}(\vec x) \qquad \text{(RBF-Network)}
 \end{equation}
 }
 
@@ -198,7 +205,7 @@ For weight decay:
 
 \pause
 
-- An RBF-Network can be constructed and parameterized to act as a Parzen window classifier by placing the a ``representative'/centroid over each point.
+- An RBF-Network can be constructed and parameterized to act as a Parzen window classifier by placing a ``representative'/centroid over every point $^{(\alpha)}$.
 
 
 
@@ -245,7 +252,7 @@ For weight decay:
 
 \begin{frame}
 
-\slidesonly{\vspace{-3mm}
+\slidesonly{\vspace{-2mm}
 }
 {
 \slidesonly{\footnotesize}
