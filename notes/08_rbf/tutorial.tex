@@ -1,14 +1,15 @@
 \usepackage[authoryear,round]{natbib}
+\usepackage{multirow}
 
 \newcommand{\sheetnum}{%
-	06
+	07
 }
 %\setcounter{section}{\sheetnum-3}
 \newcommand{\tutorialtitle}{%
-    Reccurent neural networks
+    Class Imbalance and RBF-Networks
 }
 \newcommand{\tutorialtitleshort}{%
-	RNNs
+	RBF
 }
 % for slides
 \subtitle{\sheetnum \tutorialtitle}
@@ -57,6 +58,10 @@
 \begin{frame}
 \tableofcontents
 \end{frame}
+
+\mode<all>
+\input{./imbalance}
+\mode*
 
 \mode<all>
 \input{./knn}
