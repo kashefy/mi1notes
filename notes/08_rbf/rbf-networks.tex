@@ -108,7 +108,7 @@ with & $\alpha = 1,\ldots,p$
 \notesonly{
 Start from $i=0$ to include bias node (unlike the case with monomials where the bias was already present at $i=1$).
 }
-\slidesonly{Don't forget the bias
+\slidesonly{Don't forget the bias!
 }
 Set $\vec \Phi = \left( \vec \phi^{(1)},\ldots, \vec \phi^{(\alpha)},\ldots, \vec \phi^{(p)}\right) \in \R^{k+1,p}$
 
@@ -133,12 +133,12 @@ quadratic cost function. \pause Reuse solution for linear regression:
 Generalizing nonlinear basis functions in linear models:
 
 \begin{equation}
-\vec y(\vec \phi(\vec x))) = 
+\vec y(\vec \phi(\vec x)) = 
 \rmat{
 y_1(\vec \phi(\vec x))\\
 y_2(\vec \phi(\vec x))\\
-\vdots\\
-y_M(\vec \phi(\vec x))\\
+\vdots\qquad\\
+y_M(\vec \phi(\vec x))
 }
 = \vec W^\top \kern-.5ex \phi(\vec x)
 \end{equation}
