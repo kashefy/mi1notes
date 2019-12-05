@@ -200,13 +200,18 @@ The higher the area under curve (ROC AUC) the better the classifier.
 }
 \only<2>{
 
-\textbf{But}\\
-At the end of the day I need to pick an operating point.
+\textbf{But} at the end of the day I need to pick an operating point \notesonly{(i.e. one threshold value)}.
 
-\question{What criterion could I use to favor one threshold over and other?}
+\question{What criterion could I use to favor one threshold over another?}
 }
 
 \end{frame}
+
+\mode<article>{
+- Assign a ``decision cost $\$_{ij}$'' for different classes 
+where $\$_{ij}$ denotes the cost of predicting class $C_{i}$ when the true label is $C_{j}$
+(cf. lecture slides 1.4)
+}
 
 \begin{frame}
 
