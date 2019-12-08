@@ -125,7 +125,7 @@ The confusion matrix differentiates between the types of mistakes a classifier m
 
 In our imbalanced example:
 \begin{equation}
-\frac{TP+TN}{P+N} = \frac{0+9500}{500+9500} = 0.95
+\frac{T\kern-.4exP+T\kern-.5exN}{P+N} = \frac{0+9500}{500+9500} = 0.95
 \end{equation}
 
 \notesonly{
@@ -140,38 +140,40 @@ How many of the positive labels did we get:
 
 \begin{equation}
 \text{sensitivity (recall) }
- = \frac{TP}{P}
+ = \frac{T\kern-.4exP}{P}
 \end{equation}
 
 and how often were we correct, whenever we predicted positive?
 
 \begin{equation}
 \text{precision }
- = \frac{TP}{TP+FP}
+ = \frac{T\kern-.4exP}{T\kern-.4exP+F\kern-.5exP}
 \end{equation}
 
-Combine recall and precision into:
+Recall and precision can be combined into:
 
 \begin{equation}
 \text{F1 score }
- = 2 \frac{\mathrm{recall} \times \mathrm{precision}}{\mathrm{recall} + \mathrm{precision}}
+ = 2 \cdot \frac{\mathrm{recall} \times \mathrm{precision}}{\mathrm{recall} + \mathrm{precision}}
 \end{equation}
 
 Similarly, for the negative class. How many of the negative class did we get:
 
 \begin{equation}
 \text{specificity}
- = \frac{TN}{N}
+ = \frac{T\kern-.5exN}{N}
 \end{equation}
 
 
-Combine recall and specificity into:
+Recall and specificity can be combined into:
 
 
 \begin{equation}
 \text{Balanced Accuracy }
  = \frac{1}{2} (\mathrm{recall} + \mathrm{specificity})
 \end{equation}
+
+``F1 score'' and ``Balanced Accuracy'' are common choices for assessing performance of a classifier evaluated on imbalanced data with different implications with regards to how ``consistent'' this imbalance is. 
 
 }
 
@@ -206,7 +208,7 @@ General procedure:
 \item for threshold $\mathrm{thr} \in \lbrack0,1\rbrack$ do:
 \begin{enumerate}
 	\item assign predictions to classes using current threshold $\mathrm{thr}$
-	\item compute confusion matrix (e.g. $TP$ and $FP$)
+	\item compute confusion matrix (e.g. $T\kern-.4exP$ and $F\kern-.5exP$)
 	\item[]repeat
 \end{enumerate}
 \item Compute metrics as a function of $\mathrm{thr}_i$
@@ -217,11 +219,12 @@ General procedure:
 \end{frame}
 
 \begin{frame}
-Example for the calibration procedure: \emph{Receiver operating characteristics (ROC)}. Keep track of $TP$ and $FP$ as a function of different threshold values.
+Example for the calibration procedure: \emph{Receiver operating characteristics (ROC)}. Keep track of $T\kern-.4exP$ and $F\kern-.4exP$ as a function of different threshold values.
 
 \begin{figure}[h]
+    \centering
 	\includegraphics[width=0.35\textwidth]{img/curves_roc}
-	\caption{ROC curve}
+	\caption{ROC curve. $T\kern-.4exP/P\,\corresponds $ true positive rate (TPR) and $F\kern-.4exP/P\,\corresponds$ false positive rate (FPR)}
 \end{figure}
 
 \only<1>{
