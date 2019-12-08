@@ -32,14 +32,46 @@ Not the same as ``easy vs. difficult'' classes. This is only about class frequen
 \end{figure} 
 
 \only<2>{     
-A strong imbalance leads to the classifier learning a trivial solution that minimizes the average cost over the training samples.
+A strong imbalance leads to the classifier learning a trivial solution that indeed minimizes the average cost over the training samples.
 }
-\only<2,3>{
+\only<2>{
 \begin{equation}
 E^T = \sum_{\alpha=1}^p e^{(\alpha)}
 \end{equation}
 }
 \only<3>{
+\begin{equation}
+E^T = 
+{\color{blue}\sum_{\beta\,\in D_{+}}^{|D_{+}|} e^{(\beta)}}
++
+{\color{red}\sum_{\beta\,\in D_{-}}^{|D_{-}|} e^{(\beta)}}
+\end{equation}
+
+\mode<article>{
+where set $D_{+}$ and $D_{-}$ are the subsets of data of only positive and negative samples, respectively:
+
+\begin{equation}
+{
+\color{blue}
+D_{+} := 
+\Big\{ \left(\vec x^{(\alpha)}, \vec y^{(\alpha)}_{T} \right) \Big|\,y^{(\alpha)}_{T} > 0 \,\Big\}
+\quad \text{(subset of positive samples)}
+}
+\end{equation}
+
+and 
+
+\begin{equation}
+{
+\color{red}
+D_{-} := 
+\Big\{ \left(\vec x^{(\alpha)}, \vec y^{(\alpha)}_{T} \right) \Big|\,y^{(\alpha)}_{T} \le 0 \,\Big\}
+\quad \text{(subset of positive samples)}
+}
+\end{equation}
+
+}
+
 By always predicting ``0'' it will be correct 95\% of the time.
 }
 \end{frame}
