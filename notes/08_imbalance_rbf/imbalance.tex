@@ -14,14 +14,14 @@ Not the same as ``easy vs. difficult'' classes. This is only about class frequen
 \begin{figure}[ht]
      \centering
      \savebox{\imagebox}{
-	 \includegraphics[width=0.37\textwidth]{img/hist_balanced}}%
-     \begin{subfigure}[t]{0.37\textwidth}
+	 \includegraphics[width=0.28\textwidth]{img/hist_balanced}}%
+     \begin{subfigure}[t]{0.28\textwidth}
          \centering
          \usebox{\imagebox}% Place largest image
          \caption{balanced $\approx 1:1$}
      \end{subfigure}
-     \hspace{2mm}
-     \begin{subfigure}[t]{0.37\textwidth}
+     \hspace{5mm}
+     \begin{subfigure}[t]{0.28\textwidth}
          \centering
          \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
          \includegraphics[width=0.99\textwidth]{img/hist_imbalanced}
@@ -89,7 +89,7 @@ The confusion matrix differentiates between the types of mistakes a classifier m
 												  &          & \multicolumn{1}{c|}{``Cat''} & \multicolumn{1}{c|}{``not Cat''}  &  \\ \cline{1-4}
 \multicolumn{1}{|r|}{\multirow{2}{*}{Prediction}} & Positive & \textbf{T}rue \textbf{P}ositives & \textbf{F}alse \textbf{P}ositives &  \\ \cline{2-4}
 \multicolumn{1}{|r|}{}                            & Negative &  \textbf{F}alse \textbf{N}egatives & \textbf{T}rue \textbf{N}egatives &  \\ \cline{1-4}
-												  &          & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{N}  &  \\ \cline{3-4}
+												  &          & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$N$}  &  \\ \cline{3-4}
 \end{tabular}	
 
 
@@ -107,7 +107,7 @@ The confusion matrix differentiates between the types of mistakes a classifier m
 												  &          & \multicolumn{1}{c|}{``Cat''} & \multicolumn{1}{c|}{``not Cat''}  &  \\ \cline{1-4}
 \multicolumn{1}{|r|}{\multirow{2}{*}{Prediction}} & Positive & \textbf{T}rue \textbf{P}ositives & \textbf{F}alse \textbf{P}ositives &  \\ \cline{2-4}
 \multicolumn{1}{|r|}{}                            & Negative &  \textbf{F}alse \textbf{N}egatives & \textbf{T}rue \textbf{N}egatives &  \\ \cline{1-4}
-												  &          & \multicolumn{1}{c|}{P} & \multicolumn{1}{c|}{N}  &  \\ \cline{3-4}
+												  &          & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$N$}  &  \\ \cline{3-4}
 \end{tabular}	
 
 }
@@ -115,12 +115,12 @@ The confusion matrix differentiates between the types of mistakes a classifier m
 \begin{equation}
  \text{ \# of correct classifications } 
  \corresponds \text{ Accuracy }
- = \frac{TP+TN}{P+N}
+ = \frac{T\kern-.4ex P+T\kern-.4exN}{P+N}
 \end{equation}
 
 \only<2>{
 \slidesonly{
-{\placeimage{12.5}{10}{img/hist_imbalanced}{width=3cm}}
+{\placeimage{12.5}{10.}{img/hist_imbalanced}{width=25mm}}
 }
 
 In our imbalanced example:
@@ -198,22 +198,33 @@ What if the proportions in my training set is different from that of the validat
 
 \begin{frame}\frametitle{\subsubsecname}
 
-Calibration: finding an operating point by adjusting the threshold that takes converts the prediction of classifier into a hard decision.
+\mode<article>{Calibrating the classifier: }
+Finding an operating point by adjusting the threshold that converts the prediction of classifier into a hard decision.
 
 General procedure:
 \begin{enumerate}
 \item train binary classifier (assuming $y(\vec x) \in \lbrack0,1\rbrack$)
-\item make predictions on the test set (selecting an operating point counts as a hyper-parameter selection)
+\pause
+\item make predictions on a \emph{hold-out} set (\notesonly{selecting an operating point}\slidesonly{this} counts as a hyper-parameter selection)
+\pause
 \item Save ``probabilistic'' output, no thresholding.
+\pause
 \item for threshold $\mathrm{thr} \in \lbrack0,1\rbrack$ do:
 \begin{enumerate}
 	\item assign predictions to classes using current threshold $\mathrm{thr}$
+\pause
 	\item compute confusion matrix (e.g. $T\kern-.4exP$ and $F\kern-.5exP$)
 	\item[]repeat
 \end{enumerate}
 \item Compute metrics as a function of $\mathrm{thr}_i$
 \end{enumerate}
 
+\question{What does $thr$ effectively represent?}
+
+\notesonly{
+- Effecitvley the bias of the output neuron. Changing $thr$ corresponds to shifting/translating the hyperplane that divides the two classes.
+The orientation of the hyperplane remains the same.
+}
 
 
 \end{frame}
