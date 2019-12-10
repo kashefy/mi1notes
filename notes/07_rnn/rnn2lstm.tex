@@ -161,31 +161,33 @@ architecture with memory cells.
 	}
 	\end{center}
 \end{frame}
-
-\begin{frame}\frametitle{Unrolling the LSTM in time (the build up - reading from memory)}
-	\begin{center}
-	\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll}
-	\captionof*{figure}{Adding output gates for reading}
-	\end{center}
-	\end{frame}
 }
 
-\begin{frame}\frametitle{Unrolling the LSTM in time}
+\begin{frame}\frametitle{
+Unrolling the LSTM in time
+(the build up - reading from memory)
+}
 
-\underline{Unrolling the LSTM in time}:
+\mode<article>{
+\underline{Unrolling the LSTM in time}:\\
 
 An alternative visualization of the LSTM cell without delay blocks. We can unroll the network in time to see how the units interact with one another.
+}
+
+\mode<presentation>{
+\placeimage{11.7}{2.2}{img/lstm_delay_indices}{width=33mm}
+\vspace{22mm}
+}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll}
 	\mode<article>{
-	\caption
+	\caption{Unrolling the LSTM cell with input and output gates in time.}
 	}
 	\mode<presentation>{
-	\caption*
+	\captionof*{figure}{Adding output gates for reading}
 	}
-	{Unrolling the LSTM cell in time.}
 \end{figure}
 
 \end{frame}
