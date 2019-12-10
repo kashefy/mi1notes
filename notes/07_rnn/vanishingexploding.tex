@@ -23,7 +23,9 @@
 \begin{frame}\frametitle{A simple RNN}
 	\begin{minipage}{\textwidth}
 		\begin{minipage}{0.21\textwidth}
+        \mode<presentation>{
 			{\includegraphics<1>[width=\textwidth]{img/rnn.pdf}}
+            }
 			{\includegraphics<2>[width=\textwidth]{img/rnn_superscript.pdf}}
 		\end{minipage}	
 		\hspace{0.6cm}
@@ -33,6 +35,7 @@
 			\only<2> {\small add superscripts to the different weight matrices}
 		\end{textblock}
 			\begin{eqnarray*}
+             \slidesonly{  
 			\only<1>{
 				\vec s^{(t)} &=& \tanh\Big({\vec U \, \vec x^{(t)}} 
 						{ + \vec W \, \vec s^{(t-1)}}
@@ -41,6 +44,7 @@
 				\vec y^{(t)} &=& f\Big({\vec V \, s^{(t)}} + \vec b^\mathrm{y}\Big) \,,\\[0.7cm]
 					\;\text{e.g.}\;f(\cdot) &:=& \text{e.g. } \mathrm{softmax}(\cdot) \text{ for classification}\\
 					}
+                    }
 			\only<2>{
 				\vec s^{(t)} &=& \tanh\Big({\vec U^\mathrm{h} \, \vec x^{(t)}} 
 						{ + \vec W^\mathrm{h} \, \vec s^{(t-1)}}
