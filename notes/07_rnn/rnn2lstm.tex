@@ -139,34 +139,38 @@ architecture with memory cells.
 \end{frame}
 
 \mode<presentation>{
-\begin{frame}\frametitle{Unrolling the LSTM in time (the build up)}
 
-An alternative visualization of the LSTM cell without delay blocks. We can unroll the network in time to see how the units interact with one another.
+\begin{frame}\frametitle{Unrolling the LSTM in time (the build up - memory states)}
+	An alternative visualization of the LSTM cell without delay blocks. We can unroll the network in time to see how the units interact with one another.
 
-\begin{center}
-\only<+>{
-\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll_memory}
-\captionof*{figure}{Connecting states to hidden \& output units}
-}
-\only<+>{
-\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll_write_connect_bubbles}
-\captionof*{figure}{Adding input gates for writing}
-}
-\only<+>{
-\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll_write}
-\captionof*{figure}{Adding input gates for writing (keep connections but reduce clutter)}
-}
-\only<+>{
-\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll}
-\captionof*{figure}{Adding output gates for reading}
-}
-\end{center}
-
+	\begin{center}
+	\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll_memory}
+	\captionof*{figure}{Connecting states to hidden \& output units}
+	\end{center}
 \end{frame}
+
+\begin{frame}\frametitle{Unrolling the LSTM in time (the build up - writing to memory)}
+	\begin{center}
+	\only<1>{
+	\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll_write_connect_bubbles}
+	\captionof*{figure}{Adding input gates for writing}
+	}
+	\only<2>{
+	\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll_write}
+	\captionof*{figure}{Adding input gates for writing (keep connections but reduce clutter)}
+	}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Unrolling the LSTM in time (the build up - reading from memory)}
+	\begin{center}
+	\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll}
+	\captionof*{figure}{Adding output gates for reading}
+	\end{center}
+	\end{frame}
 }
 
 \begin{frame}\frametitle{Unrolling the LSTM in time}
-
 
 \underline{Unrolling the LSTM in time}:
 
