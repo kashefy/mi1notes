@@ -10,8 +10,8 @@ architecture with memory cells.
 \end{frame}
 
 % ------------------------------------------------------------------------------
-%~ \begin{frame}\frametitle{Solution 3: long short-term memory (LSTM)}
 \begin{frame}\frametitle{Long short-term memory (LSTM) architecture}
+    \mode<presentation>{
 	\begin{textblock}{}(10.25,2.5)
 		%\includegraphics<1>[height=3cm]{img/lstm_feedback.pdf}
 		\includegraphics<1>[height=3cm]{img/lstm_feedback_delay.pdf}
@@ -20,6 +20,16 @@ architecture with memory cells.
 		%\includegraphics<3->[height=3cm]{img/lstm.pdf}
 		\includegraphics<3->[height=3cm]{img/lstm_delay_indices.pdf}
 	\end{textblock}
+    }
+    \mode<article>{
+	\begin{textblock}{}(10.25,2.5)
+		\includegraphics[height=3cm]{img/lstm_feedback_delay.pdf}\\
+        
+		\includegraphics[height=3cm]{img/lstm_write_delay.pdf}\\
+        
+		\includegraphics[height=3cm]{img/lstm_delay_indices.pdf}
+	\end{textblock}
+    }
 	
 	\begin{textblock}{10}(0.4,2.5)
 		\only<1>{ \small
@@ -32,8 +42,6 @@ architecture with memory cells.
 			\iitem{{\color{blue} transfer function} 
 					$\sigma(x) = \big( 1 + e^{-x} \big)^{-1}$
 					}
-			%\vspace{-5mm}
-			%\iitem{state $s_i$ gets overwritten easily}
 		} \only<2>{ \small
 			\iitem{introducing an {\color{blue}input (``write'') gate 
 					$g_i^\mathrm{i}$}
@@ -78,11 +86,6 @@ architecture with memory cells.
 				\iitem{$\color{darkgreen}g_i^\mathrm{o}$ 
 					regulates the backward-pass} }
 		}
-		%TODO forget gate equations and figure
-		 %\only<5>{ \small\vspace{-1mm}
-			%\iitem{ LSTM cells often have an additional forget gate $\color{red}g^{\mathrm{f}}_i$ for states $s_i$ }
-			%\vspace{-4mm}
-		%}
 	\end{textblock}
 	
 	\begin{textblock}{10}(0.8,7.5)
@@ -137,6 +140,64 @@ architecture with memory cells.
 	
 	
 \end{frame}
+
+\newpage
+
+\mode<presentation>{
+
+\begin{frame}\frametitle{Unrolling the LSTM in time (the build up - memory states)}
+	An alternative visualization of the LSTM cell without delay blocks. We can unroll the network in time to see how the units interact with one another.
+
+	\begin{center}
+	\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll_memory}
+	\captionof*{figure}{Connecting states to hidden \& output units}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Unrolling the LSTM in time (the build up - writing to memory)}
+	\begin{center}
+	\only<1>{
+	\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll_write_connect_bubbles}
+	\captionof*{figure}{Adding input gates for writing}
+	}
+	\only<2>{
+	\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll_write}
+	\captionof*{figure}{Adding input gates for writing (keep connections but reduce clutter)}
+	}
+	\end{center}
+\end{frame}
+}
+
+\begin{frame}\frametitle{
+Unrolling the LSTM in time
+(the build up - reading from memory)
+}
+
+\mode<article>{
+\underline{Unrolling the LSTM in time}:\\
+
+An alternative visualization of the LSTM cell without delay blocks. We can unroll the network in time to see how the units interact with one another.
+}
+
+\mode<presentation>{
+\placeimage{11.7}{2.2}{img/lstm_delay_indices}{width=33mm}
+\vspace{22mm}
+}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{img/lstm_delay_unroll}
+	\mode<article>{
+	\caption{Unrolling the LSTM cell with input and output gates in time.}
+	}
+	\mode<presentation>{
+	\captionof*{figure}{Adding output gates for reading}
+	}
+\end{figure}
+
+\end{frame}
+
+\newpage
 
 \begin{frame}\frametitle{LSTM with forget gate}
 \begin{figure}[ht]
