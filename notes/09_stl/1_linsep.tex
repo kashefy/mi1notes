@@ -63,16 +63,74 @@ Calculate the number of linearly separable assignments:
 \end{equation}
 
 The Binomial coefficient\footnote{
-See \href{https://en.wikipedia.org/wiki/Pascal\%27s_triangle}{Pascal's triangle} for a fun way on how to manually compute the coefficient.} (``$n$ choose $k$'') 
+See \href{https://en.wikipedia.org/wiki/Pascal\%27s_triangle}{Pascal's triangle} for a fun way on how to manually compute the coefficient.
+} 
+(``$n$ choose $k$'') 
 is defined as:
 
 \begin{equation}
 \left(n \atop k \right) = \frac{n!}{k! (n-k)!}
 \end{equation}
 
-The Binomial coefficient represents the coefficient of the $y^k$ term in the polynomial expansion $(1+y)^n$
+for $n,k \in \N_0$ with $n \ge k \ge 0$
 
- and 
+\end{frame}
+
+\begin{frame}\frametitle{The Binomial coefficient}
+
+The Binomial coefficient represents the coefficient associated with the $y^k$ term in the polynomial expansion $(1+y)^n$.
+
+Consider the following example\footnote{
+The example is taken from the wikipedia article on \href{https://en.wikipedia.org/wiki/Binomial_coefficient}{Binomial coefficient}
+} of using polynomial expansion for calculating the fourth power of $(1+y)$:
+
+\begin{align}
+(1+y)^4 &= 
+\left({4 \atop 0}\right) y^0 +
+\left({4 \atop 1}\right) y^1 +
+{\color{blue}\left({4 \atop 2}\right) y^2} +
+\left({4 \atop 3}\right) y^3 +
+\left({4 \atop 4}\right) y^4\\
+&= 1 + 4y + {\color{blue}6y^2} + 4y^3 + y^4
+\label{eq:polyexpansion}
+\end{align}
+
+The binomial coefficient $\left({4 \atop 2}\right) = \frac{4!}{2!(4-2)!} = 6$. ${\color{blue}6}$ matches the coefficient in front of the ${\color{blue}y^2}$ term in the expansion\notesonly{ in \eqref{eq:polyexpansion}}.
+
+\end{frame}
+
+\begin{frame}\frametitle{How do we actually get the number of configurations?}
+
+\begin{equation*}
+	\tilde C_{(p,N)} := 2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	p-1\\
+	k
+	\end{array}\right)
+\end{equation*}
+
+Using our example with $p=4$ and $N=2$:
+\begin{align}
+	\tilde C_{(4,2)} &= 2 \sum_{k=0}^{2} \left( \begin{array}{c}
+	4-1\\
+	k
+	\end{array}\right)\\
+	&= 2 
+	\Big\lbrack
+	\underbrace{
+	\left({4-1 \atop {\color{red}0}}\right)
+	}_{\substack{\text{all positive}\\ \text{{\color{red}none} negative}}}
+	+
+	\underbrace{
+	\left({4-1 \atop {\color{red}1}}\right)
+	}_{\substack{\text{{\color{red}1} out of p}\\ \text{negative}}}
+	+
+	\underbrace{
+	\left({4-1 \atop {\color{red}2}}\right)
+	}_{\substack{\text{{\color{red}2} out of p}\\ \text{negative}}}
+	\Big\rbrack\\
+	&= 2
+\end{align}
+
 
 \end{frame}
 
