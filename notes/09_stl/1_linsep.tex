@@ -169,3 +169,54 @@ It is important to understand that $\tilde C_{(p,N)}$ and $C_{(p,N)}$ effecitvle
 \end{frame}
 
 
+
+\begin{align}
+	\tilde C_{(p,N)} + \tilde C_{(p,N-1)} 
+    &= \tilde C_{(p+1,N)}\\
+    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	p-1\\
+	k
+	\end{array}\right)
+    +
+    2 \sum_{k=0}^{N-1} \left( \begin{array}{c}
+	p-1\\
+	k
+	\end{array}\right)
+    &= 
+    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	p+1-1\\
+	k
+	\end{array}\right)\\
+    2 \left( \begin{array}{c}
+	p-1\\
+	0
+	\end{array}\right)
+    +
+    2 \sum_{k=1}^{N} \left( \begin{array}{c}
+	p-1\\
+	k
+	\end{array}\right)
+    +
+    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	p-1\\
+	k
+	\end{array}\right){}
+    &= 
+    +
+    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	p\\
+	k
+	\end{array}\right)\\
+    2 \left( \begin{array}{c}
+	p-1\\ 0
+	\end{array}\right)
+    +
+    2 \sum_{k=1}^{N} \left( \begin{array}{c}
+	p-1\\ k
+	\end{array}\right)
+    + 
+    2 \sum_{k=1}^{N} \left( \begin{array}{c}
+	p-1\\ k-1
+	\end{array}\right)
+    &=
+\end{align}
