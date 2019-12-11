@@ -204,8 +204,7 @@ It is important to understand that $\tilde C_{(p,N)}$ and $C_{(p,N)}$ effecitvle
     &= 
     +
     2 \sum_{k=0}^{N} \left( \begin{array}{c}
-	p\\
-	k
+	p\\k
 	\end{array}\right)\\
     2 \left( \begin{array}{c}
 	p-1\\ 0
@@ -219,4 +218,51 @@ It is important to understand that $\tilde C_{(p,N)}$ and $C_{(p,N)}$ effecitvle
 	p-1\\ k-1
 	\end{array}\right)
     &=
+    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	p\\ k
+	\end{array}\right)\\
+    2 \left( \begin{array}{c}
+	p-1\\ 0
+	\end{array}\right)
+    +
+    2 \sum_{k=1}^{N}
+    \Big \lbrack \underbrace{
+    \left(
+    \begin{array}{c}
+	p-1\\ k
+	\end{array}\right)
+    +\left(
+    \begin{array}{c} 
+	p-1\\ k-1
+	\end{array}\right)
+    }_{\text{recursive function}}
+    \Big 
+    \rbrack
+    &= 2 \sum_{k=0}^{N}
+    \left(
+    \begin{array}{c} 
+	p\\ k
+	\end{array}\right)\\
+    2 \underbrace{\left( \begin{array}{c}
+	p-1\\ 0
+	\end{array}\right)}_{=1=\left( \begin{array}{c}
+	p\\ 0
+	\end{array}\right)}
+    +
+    2 \sum_{k=1}^{N}\left( \begin{array}{c}
+	p\\ k
+	\end{array}\right)
+    &= 2 \sum_{k=0}^{N}
+    \left( \begin{array}{c}
+	p\\ k
+	\end{array}\right)\\
+2 \sum_{k=0}^{N}
+    \left( \begin{array}{c}
+	p\\ k
+	\end{array}\right)
+    &=
+2 \sum_{k=0}^{N}
+    \left( \begin{array}{c}
+	p\\ k
+	\end{array}\right)
 \end{align}
