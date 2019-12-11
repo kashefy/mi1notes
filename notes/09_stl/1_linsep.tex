@@ -1,0 +1,113 @@
+\section{Linear separability}
+
+
+\begin{frame}\frametitle{\secname}
+
+\underline{Setting}:\\
+
+\begin{equation*}
+\Big\{ \left(\vec x^{(\alpha)}, y^{(\alpha)}_{\mathrm{T}} \right) \Big\}\,,\quad \alpha = 1,\ldots,p
+\end{equation*}
+
+\begin{itemize}
+\item $p$ points
+\item $N$ dimensions $\vec x \in \R^N$
+\item binary assignment: $y_T \in \{-1,1\}$
+\end{itemize}
+
+\pause
+
+\underline{Model}:\\
+
+Linear neuron with $N$ weights and a bias ($N+1$ degrees of freedom).
+
+\pause
+
+\underline{Task}:\\
+
+Find the total number of binary assignments that are linearly separable.
+
+\end{frame}
+
+\begin{frame}\frametitle{Find the total number of affinely separable assignments}
+
+\begin{enumerate}
+\item Place $p$ points in $N$ dimensions, anyway you like as long as they're not colinear.
+\item Assign all possible labels to the points.
+\end{enumerate}
+
+Example with 4 points in 2D:
+
+\mode<presentation>{
+\textbf{see blackboard}
+}
+
+\question{How many assignment configurations are there?}
+
+\question{How many of them can be separated by a connectionist neuron?}
+
+\end{frame}
+
+\begin{frame}\frametitle{Calculate the number of configurations that are linearly separable}
+
+Calculate the number of linearly separable assignments:
+
+\begin{equation}
+	\tilde C_{(p,N)} := 2 \sum_{k=0}^{N} 
+	\underbrace{
+	\left( \begin{array}{c}
+	p-1\\
+	k
+	\end{array}\right)
+	}_{\substack{\text{Binomial}\\ \text{coefficient}}}
+\end{equation}
+
+The Binomial coefficient\footnote{
+See \href{https://en.wikipedia.org/wiki/Pascal\%27s_triangle}{Pascal's triangle} for a fun way on how to manually compute the coefficient.} (``$n$ choose $k$'') 
+is defined as:
+
+\begin{equation}
+\left(n \atop k \right) = \frac{n!}{k! (n-k)!}
+\end{equation}
+
+The Binomial coefficient represents the coefficient of the $y^k$ term in the polynomial expansion $(1+y)^n$
+
+ and 
+
+\end{frame}
+
+\begin{frame}
+
+\mode<presentation>{
+
+\begin{equation*}
+	\tilde C_{(p,N)} := 2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	p-1\\
+	k
+	\end{array}\right)
+\end{equation*}
+}
+
+\textbf{But} this looks slightly different from what is in the lecture. In the lecture it looked like this:
+
+\begin{equation}
+	C_{(p,N)} := 2 \sum_{k=0}^{N-1} \left( \begin{array}{c}
+	p-1\\
+	k
+	\end{array}\right)
+\end{equation}
+
+\question{Why does the sum for $\tilde C_{(p,N)}$ run to $N$ instead of $N-1$?}
+
+\mode<article>{
+-The reason that $\tilde C_{(p,N)}$ computes the sum for $k=1,\ldots,N$ instead of stopping at $N$ is that sum iterates over the degrees of freedom. 
+Choosing a connectionist neuron to the separation involves $N+1$ degrees of freedom because we add the bias term (the ability to translate the hyperplane).
+Therefore, the reason is the model choice and assuming that $C_{(p,N)}$ counts separability around the origin without the ability to shift the hyperplane.
+
+-An alternative explanation to the difference in the formula is how to intepret $N$. The definition of $C_{(p,N)}$ treats $N$ as the parameters of the hyperplane. Therefore the bias is implicit.
+If we assume that $N$ is the number of components in $\vec x$ and we need to prepend a bias term to it, we compute the number of separable configurations using $\tilde C_{(p,N)}$. 
+It is important to understand that $\tilde C_{(p,N)}$ and $C_{(p,N)}$ effecitvley yield the same result when we feed each the appropriate arguments.
+}
+\end{frame}
+
+
