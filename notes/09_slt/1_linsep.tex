@@ -172,8 +172,6 @@ It is important to understand that $\tilde C_{(p,N)}$ and $C_{(p,N)}$ effecitvle
 }
 \end{frame}
 
-
-<<<<<<< HEAD
 \begin{frame}
 Recursive formula for the binomial coefficient:
 \begin{equation}
@@ -199,9 +197,16 @@ Use the the recursive formula for the binomial coefficient to show that:
 
 \end{frame}
 
+\begin{frame}
+\mode<presentation>{
+\vspace{-5mm}
+}
+
+{
 \begin{align}
-	\tilde C_{(p,N)} + \tilde C_{(p,N-1)} 
-    &= \tilde C_{(p+1,N)}\\
+\only<1>{
+	\tilde C_{(p,N)} \qquad + \;\;\quad \tilde C_{(p,N-1)} \qquad
+    &= \qquad \tilde C_{(p+1,N)}\\
     2 \sum_{k=0}^{N} \left( \begin{array}{c}
 	p-1\\
 	k
@@ -226,36 +231,45 @@ Use the the recursive formula for the binomial coefficient to show that:
 	k
 	\end{array}\right)
     +
-    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+    2 \sum_{k=0}^{N{\color{red}-1}} \left( \begin{array}{c}
 	p-1\\
 	k
-	\end{array}\right){}
+	\end{array}\right)
     &= 
-    +
     2 \sum_{k=0}^{N} \left( \begin{array}{c}
 	p\\k
-	\end{array}\right)\\
+	\end{array}\right)
+	\\
     2 \left( \begin{array}{c}
 	p-1\\ 0
 	\end{array}\right)
     +
-    2 \sum_{k=1}^{N} \left( \begin{array}{c}
+    {\color{blue}
+    2 \sum_{k=1}^{N}
+    }\left( \begin{array}{c}
 	p-1\\ k
 	\end{array}\right)
     + 
-    2 \sum_{k=1}^{N} \left( \begin{array}{c}
-	p-1\\ k-1
+    {\color{blue}
+    2 \sum_{k=1}^{N}
+    } \left( \begin{array}{c}
+	p-1\\ k{\color{red}-1}
 	\end{array}\right)
     &=
-    2 \sum_{k=0}^{N} \left( \begin{array}{c}
-	p\\ k
-	\end{array}\right)\\
+    %2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	%p\\ k
+	%\end{array}\right)
+	}
+\only<1,2>{
+	\\
     2 \left( \begin{array}{c}
 	p-1\\ 0
 	\end{array}\right)
     +
+    {\color{blue}
     2 \sum_{k=1}^{N}
-    \Big \lbrack \underbrace{
+    }
+    \bigg \lbrack \underbrace{
     \left(
     \begin{array}{c}
 	p-1\\ k
@@ -265,13 +279,17 @@ Use the the recursive formula for the binomial coefficient to show that:
 	p-1\\ k-1
 	\end{array}\right)
     }_{\text{recursive function}}
-    \Big 
+    \bigg 
     \rbrack
-    &= 2 \sum_{k=0}^{N}
-    \left(
-    \begin{array}{c} 
-	p\\ k
-	\end{array}\right)\\
+    &=
+     %2 \sum_{k=0}^{N}
+    %\left(
+    %\begin{array}{c} 
+	%p\\ k
+	%\end{array}\right)
+	\\
+}
+\only<2>{
     2 \underbrace{\left( \begin{array}{c}
 	p-1\\ 0
 	\end{array}\right)}_{=1=\left( \begin{array}{c}
@@ -294,4 +312,15 @@ Use the the recursive formula for the binomial coefficient to show that:
     \left( \begin{array}{c}
 	p\\ k
 	\end{array}\right)
+	}
 \end{align}
+}
+\mode<presentation>{
+\only<2>{
+\begin{equation*}
+\tilde C_{(p,N)}+\tilde C_{(p,N-1)}=\tilde C_{(p+1,N)}
+\end{equation*}
+}
+}
+
+\end{frame}
