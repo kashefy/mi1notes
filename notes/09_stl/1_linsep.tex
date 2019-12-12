@@ -169,6 +169,7 @@ It is important to understand that $\tilde C_{(p,N)}$ and $C_{(p,N)}$ effecitvle
 \end{frame}
 
 
+<<<<<<< HEAD
 \begin{frame}
 Recursive formula for the binomial coefficient:
 \begin{equation}
@@ -193,20 +194,100 @@ Use the the recursive formula for the binomial coefficient to show that:
 \end{equation}
 
 \end{frame}
-\begin{frame}
-		\underline{Solution:} 
-			\begin{eqnarray}
-				\tilde C_{(p,N)}+ \tilde C_{(p,N-1)}
-				&=& 2\sum_{k=0}^{N} \left({p-1 \atop k}\right)
-				+ 2\sum_{k=0}^{N-1} \left({p-1 \atop k}\right) \\
-				&=& 2 \underbrace{\left({p-1 \atop 0}\right)
-						}_{1 = ({p \atop 0})}
-					+ 2\sum_{k=1}^{N} \bigg[ 
-						\underbrace{\left({p-1 \atop k}\right)
-						+ \left({p-1 \atop k-1}\right)
-							}_{\left({p \atop k}\right)}
-					\bigg] 
-				\quad=\quad \tilde C_{(p+1,N)} \,.
-			\end{eqnarray}
-\end{frame}
 
+\begin{align}
+	\tilde C_{(p,N)} + \tilde C_{(p,N-1)} 
+    &= \tilde C_{(p+1,N)}\\
+    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	p-1\\
+	k
+	\end{array}\right)
+    +
+    2 \sum_{k=0}^{N-1} \left( \begin{array}{c}
+	p-1\\
+	k
+	\end{array}\right)
+    &= 
+    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	p+1-1\\
+	k
+	\end{array}\right)\\
+    2 \left( \begin{array}{c}
+	p-1\\
+	0
+	\end{array}\right)
+    +
+    2 \sum_{k=1}^{N} \left( \begin{array}{c}
+	p-1\\
+	k
+	\end{array}\right)
+    +
+    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	p-1\\
+	k
+	\end{array}\right){}
+    &= 
+    +
+    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	p\\k
+	\end{array}\right)\\
+    2 \left( \begin{array}{c}
+	p-1\\ 0
+	\end{array}\right)
+    +
+    2 \sum_{k=1}^{N} \left( \begin{array}{c}
+	p-1\\ k
+	\end{array}\right)
+    + 
+    2 \sum_{k=1}^{N} \left( \begin{array}{c}
+	p-1\\ k-1
+	\end{array}\right)
+    &=
+    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	p\\ k
+	\end{array}\right)\\
+    2 \left( \begin{array}{c}
+	p-1\\ 0
+	\end{array}\right)
+    +
+    2 \sum_{k=1}^{N}
+    \Big \lbrack \underbrace{
+    \left(
+    \begin{array}{c}
+	p-1\\ k
+	\end{array}\right)
+    +\left(
+    \begin{array}{c} 
+	p-1\\ k-1
+	\end{array}\right)
+    }_{\text{recursive function}}
+    \Big 
+    \rbrack
+    &= 2 \sum_{k=0}^{N}
+    \left(
+    \begin{array}{c} 
+	p\\ k
+	\end{array}\right)\\
+    2 \underbrace{\left( \begin{array}{c}
+	p-1\\ 0
+	\end{array}\right)}_{=1=\left( \begin{array}{c}
+	p\\ 0
+	\end{array}\right)}
+    +
+    2 \sum_{k=1}^{N}\left( \begin{array}{c}
+	p\\ k
+	\end{array}\right)
+    &= 2 \sum_{k=0}^{N}
+    \left( \begin{array}{c}
+	p\\ k
+	\end{array}\right)\\
+2 \sum_{k=0}^{N}
+    \left( \begin{array}{c}
+	p\\ k
+	\end{array}\right)
+    &=
+2 \sum_{k=0}^{N}
+    \left( \begin{array}{c}
+	p\\ k
+	\end{array}\right)
+\end{align}

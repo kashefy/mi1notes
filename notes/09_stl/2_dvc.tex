@@ -1,10 +1,33 @@
-\section{The VC dimension}
+\section{The Vapnik-Chervanenkis (VC) dimension}
 
 
 \begin{frame}\frametitle{\secname}
 
+$\dvc$ is a not actually a dimension but a \emph{capacity measure} 
+of a model class that parameterized by $\vec w$.
+
+\underline{Definition}:\\
+
+$\dvc :=$ \underline{maximal number of data points $p$} for which \emph{all} possible label configurations $\{y_{T}^{(\alpha)} \in \{-1,1\}\}_{\alpha=1}^{p}$ can be perfectly trained (i.e. $E^{T}_{[\vec w]}=0$) by tuning the model parameters $\vec w$.
+If (at least) one dataset $\{(\vec x^{(\alpha)}, y_{T}^{(\alpha)})\}_{\alpha=1}^{p}$ with $p$ points exists such that the model can be tuned to perfectly classify any label configuration for that dataset, then the $\dvc$ for this model class is $p$.
 
 
+
+
+
+
+\end{frame}
+
+\begin{frame}
+
+\underline{Examples}:
+
+\begin{itemize}
+\item $\dvc^{\text{perceptron}} = N+1 = $\# params.
+\item $\dvc^{\text{MLP}} = \mathcal{O}$(\# params.$^{2}$)
+\item $\dvc^{\text{sinusoid}} = \infty$
+\end{itemize}
+    
 \end{frame}
 
 
