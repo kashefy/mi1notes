@@ -42,7 +42,8 @@ Example with 4 points in 2D:
 \textbf{see blackboard}
 }
 
-\question{How many assignment configurations are there?}
+\question{How many assignment configurations are there?}\\
+
 
 \question{How many of them can be separated by a connectionist neuron?}
 
@@ -99,7 +100,7 @@ The binomial coefficient $\left({4 \atop 2}\right) = \frac{4!}{2!(4-2)!} = 6$. $
 
 \end{frame}
 
-\begin{frame}\frametitle{How do we actually get the number of configurations?}
+\begin{frame}\frametitle{Calculating the number of separable configurations?}
 
 \begin{equation*}
 	\tilde C_{(p,N)} := 2 \sum_{k=0}^{N} \left( \begin{array}{c}
@@ -116,19 +117,22 @@ Using our example with $p=4$ and $N=2$:
 	\end{array}\right)\\
 	&= 2 
 	\Big\lbrack
-	\underbrace{
-	\left({4-1 \atop {\color{red}0}}\right)
-	}_{\substack{\text{all positive}\\ \text{{\color{red}none} negative}}}
+	%\underbrace{
+	\left({4-1 \atop {\color{black}0}}\right)
+	%}_{\substack{\text{all positive}\\ \text{{\color{red}none} negative}}}
 	+
-	\underbrace{
-	\left({4-1 \atop {\color{red}1}}\right)
-	}_{\substack{\text{{\color{red}1} out of p}\\ \text{negative}}}
+	%\underbrace{
+	\left({4-1 \atop {\color{black}1}}\right)
+	%}_{\substack{\text{{\color{red}1} out of p}\\ \text{negative}}}
 	+
-	\underbrace{
-	\left({4-1 \atop {\color{red}2}}\right)
-	}_{\substack{\text{{\color{red}2} out of p}\\ \text{negative}}}
+	%\underbrace{
+	\left({4-1 \atop {\color{black}2}}\right)
+	%}_{\substack{\text{{\color{red}2} out of p}\\ \text{negative}}}
 	\Big\rbrack\\
-	&= 2
+	&= 2 \Big\lbrack
+	1 + 3 + 3
+	\Big\rbrack\\
+	&= 14
 \end{align}
 
 
