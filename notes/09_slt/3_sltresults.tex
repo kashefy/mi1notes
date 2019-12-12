@@ -4,11 +4,21 @@
 		\begin{itemize}
 			\item Learnability - Convergence of Empirical risk minimization is guaranteed (cf. \sectionref{sec:convergence_erm})
 			\item formulation of conditions under which ERM works
-			\item bounds describing \textbf{generalization ability} of ERM 
+			\item bounds describing \textbf{generalization ability} of ERM \\
+            
+            For a finite training set, the generalization error is bound with probability $1-\eta$:
+            \begin{equation}
+            E^{G}_{[\vec w]} \;\le\; E^{T}_{[\vec w]} + \sqrt{\frac{\dvc \left(\ln \frac{2\,p}{\dvc} + 1\right)-\frac{\eta}{4}}{p}} \quad \text{for } p > \dvc
+            \end{equation}
+            
+            100\% overfitting for $p\,<\,\dvc$.{}
+            
+            Bound allows to calculate $p$ for targeting a given generlization error.
+            
 			\item inductive inference for \textbf{small sample size}s 
 				based on these bounds
 			\item methods for implementing this new type 
-				of inference ($\rightarrow$ {SVMs})
+				of inference ($\rightarrow$ maximum margin classifiers e.g. {SVMs})
 		\end{itemize}
 \end{frame}
 
