@@ -10,12 +10,13 @@
 
 \begin{frame}\frametitle{\secname - What is it?}
 
-The growth function is the measure of complexity for a model class.\\
+The growth function is the measure of \emph{sample} complexity for a model class.\\[5mm]
 
-It measures the complexity of the functions that can be fitted using a model from that model class (e.g. connectionist neuron).
-Complexity in terms of \emph{sample} complexity or \emph{how much can I do with $p$ points in $N$ dimensions?}\\
+It measures the complexity of the functions that can be fitted using a model from that model class (e.g. connectionist neuron).\\[5mm]
 
-It is closely related to the \emph{VC dimension}, another measure for model complexity which we will introduce shortly.
+\emph{sample} complexity: \emph{how much can I do with $p$ points in $N$ dimensions?}\\[10mm]
+
+It is closely related to the \emph{VC dimension}.
 
 \end{frame}
 
@@ -56,19 +57,18 @@ It is closely related to the \emph{VC dimension}, another measure for model comp
 
 \begin{frame} \frametitle{The growth function $G_{(p)}^\Lambda$}
 	\begin{itemize}
-		\item<1> \textbf{data representation:} 
+		\item<1-> \textbf{data representation:} 
 			$\vec{x} \in \mathbb{R}^N, \quad y_T \in \{-1,+1\}$ 
 		\vspace{5mm}
-		\item<2> \textbf{model class:} 
+		\item<1-> \textbf{model class:} 
 			set $\Lambda$ of functions $y_{(\vec{x}; \vec{w})} \in \{-1,+1\}$
 			
 			Think of $\Lambda$ as a set of classifiers.
 			The classifiers in this set come from the same model class (e.g. connectionist neurons with weights $\vec w$).
-			They values in $\vec w$ are different across the classifiers in the set $\Lambda$.
-			Each classifier describes a different hyperplane to separate the two classes in the data.
+			Each classifier describes a different hyperplane (different $\vec w$) to separate the two classes in the data.
 			
 		\vspace{5mm}
-		\item<3> {\textbf binary label vector:} $\vec y_{(\vec{w})} = \Big( 
+		\item<2-> {\textbf binary label vector:} $\vec y_{(\vec{w})} = \Big( 
 			y_{(\vec{x}^{(1)}, \vec{w})}, 
 			y_{(\vec{x}^{(2)}, \vec{w})}, \ldots, 
 			y_{(\vec{x}^{(p)}, \vec{w})} \Big)$
@@ -81,7 +81,7 @@ It is closely related to the \emph{VC dimension}, another measure for model comp
 			Looking at the predictions each one produces for the $p$ points will produce some label vector $\vec y_{(\vec{w})}$ with $p$ elements. A prediction for every point.
 			
 		\vspace{5mm}
-		\item<4> {\textbf number} of different vectors $\vec y_{(\vec{w})}$ 
+		\item<3> {\textbf number} of different vectors $\vec y_{(\vec{w})}$ 
 			induced by all $\vec w \in \Lambda$:
 			\vspace{-2mm}
 			\begin{equation}

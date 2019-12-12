@@ -1,32 +1,60 @@
 \section{Convergence of Empirical risk minimization (ERM)}
 
-% -----------------------------------------------------------------------------
-\begin{frame}\frametitle{The learning problem}
-	\begin{center} 
-		\includegraphics[height=5cm]{img/section2_fig1.pdf} 
-	\end{center}
-	\begin{itemize}
-		\item {\footnotesize samples are drawn \iid from $P(\vec x, y_T)$\\[1mm]
-			 $\quad \leadsto \quad$ $\vec w$ are random variables}
-	\end{itemize}
-	%{\footnotesize\hfill (see blackboard)}
+\mode<presentation>{
+\begin{frame} 
+    \begin{center} \huge
+        \secname
+    \end{center}
 \end{frame}
+}
 
+\begin{frame}\frametitle{The learning problem}
+    \mode<article>{
+    \begin{figure}
+        \centering
+		\includegraphics[height=3cm]{img/section2_fig1.pdf}
+	\end{figure}
+    }
+    \mode<presentation>{
+	\placeimage{8}{3}{img/section2_fig1}{width=6cm}
+    }
+	\begin{itemize}
+		\item {\footnotesize samples are drawn \iid~from $P(\vec x, y_T)$\\[1mm]
+			 $\quad \leadsto \quad$ $\vec w$ are random variables}
+        \item $R_{[\vec w_p]}\,\corresponds\,E^{T}_{[\vec w]}$ \notesonly{:the empirical risk obtained from training the model using a finite set with $p$ points, and}
+        \item $R_{[\vec w_{\color{red}0}]}\,\corresponds\,E^{G}_{[\vec w]}$ \\
+        Recall
+        \begin{eqnarray} \hspace{5mm} 
+			E_{[\vec{w}]}^G 
+			&=& \text{probability of misclassification} \\[-1mm]
+			&=& \int P_{(y_T, \vec{x})} \,
+				e_{(y_T, \vec{x};\vec{w})} \, 
+				d \vec{x} \, d y_T \;\;\eqexcl\;\; \min
+		\end{eqnarray}
+        
+        \notesonly{
+        Therefore, $R_{[\vec w_0]}$ represents the risk obtained from training the model using inifinite many points.
+        }
+        (Don't treat the ${\color{red}_0}$ as zero data points but rather as ``minimal'' risk)
+	\end{itemize}
+\end{frame}
 
 % -----------------------------------------------------------------------------
 \definecolor{question1}{rgb}{0,0,1}
 \definecolor{question2}{rgb}{0,0.5,0}
-\begin{frame}\frametitle{The key questions of Statistical Learning Theory}
+\begin{frame}\frametitle{When does inductive learning through ERM work?}
 	\begin{center} 
-		\includegraphics<1-2>[height=5cm]{img/section2_fig1_question1.pdf}
-		\includegraphics<3->[height=5cm]{img/section2_fig1_question2_lessw.pdf}  
+		\includegraphics<1-2>[height=4cm]{img/section2_fig1_question1.pdf}
+		\includegraphics<3->[height=4cm]{img/section2_fig1_question2_lessw.pdf}  
 	\end{center}
 	\only<1>{
 		\begin{enumerate}
-			\item When does inductive learning through ERM work?
+		\item {\footnotesize $p$ samples are drawn \iid~from $P(\vec x, y_T)$\\[1mm]
+			 $\quad \leadsto \quad$ $\vec w$ are random variables}
+			\item 
 				\vspace{1mm}
-				\iitem{$R(\vec w_p)$ 
-					should reflect the true optimal risk $R(\vec w_0)$ 
+				\iitem{$R_{\text{emp}[\vec w_p]}$ 
+					should reflect the true optimal risk $R_{[\vec w_0]}$ 
 					in the limit $p \to \infty$:}
 				\vspace{1mm}
 				\begin{equation*}
@@ -39,21 +67,21 @@
 		\end{enumerate}
 	} \only<2>{
 		\begin{enumerate} \setcounter{enumi}{1}
-			\item How strongly does $R_{(\vec{w}_p)}$ differ 
-				from $R_{(\vec{w}_0)}$ for  \textbf{finite} samples?
+			\item How strongly does $R_{[\vec{w}_p]}$ differ 
+				from $R_{[\vec{w}_0]}$ for  \textbf{finite} samples?
 				\vspace{1mm}
 				\iitem{For a given confidence $\epsilon$, find $\eta$ such that}
 				\vspace{1mm}
 				\begin{equation*}
 					P \Big\{ {\color{question1} 
-							\big| R_{(\vec{w}_p)} - R_{(\vec{w}_0)} \big| 
+							\big| R_{[\vec{w}_p]} - R_{[\vec{w}_0]} \big| 
 						} \geq \eta \Big\} \;\;<\;\; \epsilon \,.
 				\end{equation*}
 		\end{enumerate}
 	} \only<3>{
 		\begin{enumerate} \setcounter{enumi}{2}
-			\item Do training errors $R_{\text{emp}(\vec w)}$ 
-				reflect generalization performance $R_{(\vec w)}$?
+			\item Do training errors $R_{\text{emp}[\vec w]}$ 
+				reflect generalization performance $R_{[\vec w]}$?
 				\vspace{1mm}
 				\iitem{\footnotesize Avoid overfitting for finite samples,
 				i.e.~given confidence $\epsilon$, find $\eta$ such that: 
@@ -62,23 +90,18 @@
 				\vspace{1mm}
 				$$
 					P \Big\{ {\color{question2}
-							\big| R_{(\vec w)} - R_{\mathrm{emp}(\vec w)} \big|
+							\big| R_{[\vec w]} - R_{\mathrm{emp}[\vec w]} \big|
 						} > \eta \Big\} \;\;<\;\; \epsilon \,, 
 						\qquad \forall \vec w \in \Lambda \,.
 				$$
+                where $\Lambda$ is the model class (e.g. connectionist neuron)
 		\end{enumerate}
 	}
 \end{frame}
 
 
-
+\mode<article>{
 \begin{frame}\frametitle{\subsecname}\label{sec:convergence_erm}
-			
-			
-			\begin{itemize}
-			\item $R_{[\vec w_p]}$ is the empirical risk obtained from training the model using a finite set with $p$ points, and
-			\item $R_{[\vec w_0]}$ risk obtained from training the model with inifinite many points (Don't treat the $_0$ as zero points but rather ``minimal'').
-			\end{itemize}
 			
 			And this difference becoming smaller and smaller as we feed more points into the model. That is:
 			\begin{equation}
@@ -136,6 +159,5 @@
 			\end{equation}
 			
 			\textbf{But} Our dataset is never going to be inifinitley large. Therefore a more realistic formulation for the convergence of ERM would be:
-			
-			
 \end{frame}
+}

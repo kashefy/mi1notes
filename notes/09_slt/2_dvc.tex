@@ -20,12 +20,15 @@
 
 \textbf{see blackboard...}
 
+\end{frame}
 
-\pause
+\begin{frame}\frametitle{Shattering p points}
 
 \begin{enumerate}
 \item Generate a dataset of $p$ points in $N$ dimensions and place them in some arrangement.
+\pause
 \item Decide on a model class $\Lambda$ (e.g. connectionist neuron)
+\pause
 \item For each possible binary label configuration (total: $2^p$) $\{y_T^{(\alpha)}\}_{\alpha=1}^p$ do
 	\begin{itemize}
 	\item[] Train the paramters $\vec w$ of a model from the set $\Lambda$.
@@ -34,13 +37,18 @@
 	\item[] If $E^T_{[\vec w]} = 0$ keep the model, otherwise, discard it. 
 	\end{itemize}
 \item Count how many models you kept.\\
+\pause
 \item[] If you were able to keep a model with $E^T_{[\vec w]} = 0$ for each of the $2^p$ possible label configurations,\\
 then the model class $\Lambda$ with that number of tunable parameters in $\vec w$ \emph{shatters} a dataset of $p$ points in $N$ dimensions.
 \end{enumerate}
 
+\end{frame}
+
+\begin{frame}\frametitle{Shattering a dataset}
+
 \textbf{Important}:\\
 
-Shattering requires finding only a single arrangment of the $p$ points for which the model can be fitted to all $2^p$ label configurations.
+Shattering requires finding \underline{only a single arrangment} of the $p$ points for which the model can be fitted to all $2^p$ label configurations.
 
 \mode<article>{
 It does not have to be able to for all possible arrangements (placements) of the $p$ points.
@@ -51,20 +59,26 @@ If there exists at least \textbf{one} dataset for which it can perfectly predict
 \begin{frame}\frametitle{\secname}
 
 $\dvc$ is not actually a dimension but a single number \emph{capacity measure} 
-of a model class that is parameterized by $\vec w$.
+of a model class that is parameterized by $\vec w$.\\[5mm]
 
 \underline{Definition}:\\
-
+\only<1>{
 $\dvc :=$ \underline{maximal number of data points $p$} that a model can \emph{shatter}.\\
-
+}
+\only<2>{
 In other words, The VC dimension is the largest \# of points  
 $p$ for which there exist at least one set  
 $\vec X$ for which all  
 $2^p$ label configurations can be solved with zero error.\\
-
+}
+\only<3>{
 In more words: $\dvc$ is \underline{maximal number of data points $p$} for which \emph{all} possible label configurations $\{y_{T}^{(\alpha)} \in \{-1,1\}\}_{\alpha=1}^{p}$ can be perfectly trained (i.e. $E^{T}_{[\vec w]} = R_{\text{emp}[\vec w]} = 0$) by tuning the model parameters $\vec w$.
 If (at least) one dataset $\{(\vec x^{(\alpha)}, y_{T}^{(\alpha)})\}_{\alpha=1}^{p}$ with $p$ points exists such that the model can be tuned to perfectly classify any label configuration for that dataset, then the $\dvc$ for this model class is $p$.
+}
 
+\end{frame}
+
+\begin{frame}
 
 \question{What was the $\dvc$ for our model in the previous example?}
 
@@ -79,6 +93,14 @@ If (at least) one dataset $\{(\vec x^{(\alpha)}, y_{T}^{(\alpha)})\}_{\alpha=1}^
 &{\dvc}^{\text{MLP}} &\kern-12ex=\;\;& \mathcal{O}(\text{\#params}^{2})\\
 &{\dvc}^{\text{sinusoid}} &\kern-12ex=\;\;& \infty
 \end{align}
+
+\pause
+
+\question{How is ${\dvc}^{\text{sinusoid}} = \infty$?}
+
+\mode<article>{
+The parameters of the sinusoid are, amplitude, phase and frequency. A total of 3 parameters. Regardless of how many points there are, it is always possible to find values for the 3 paramters such that the sinusoid goes through all $p$ points.
+}
     
 \end{frame}
 
