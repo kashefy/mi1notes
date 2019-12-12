@@ -78,8 +78,9 @@ It is closely related to the \emph{VC dimension}.
 			\end{itemize}
 			
 			Each classifier in $\lambda$ descibes a different hyperplane.
+            \mode<article>{
 			Looking at the predictions each one produces for the $p$ points will produce some label vector $\vec y_{(\vec{w})}$ with $p$ elements. A prediction for every point.
-			
+			}
 		\vspace{5mm}
 		\item<3> {\textbf number} of different vectors $\vec y_{(\vec{w})}$ 
 			induced by all $\vec w \in \Lambda$:
@@ -89,54 +90,58 @@ It is closely related to the \emph{VC dimension}.
 				N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda 
 				\;\;\leq 2^p 
 			\end{equation}
-			
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{The growth function $G_{(p)}^\Lambda$ and $N^{\Lambda}$}
 		Two hyperplanes can be different but still yield the same predictions.
 		Example:\\
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=0.35\textwidth]{img/uniquepredictions}
+			\includegraphics[width=0.6\textwidth]{img/uniquepredictions}
+            \mode<article>{
 			\caption{Different hyperplanes can lead to different but also to identical labeling of points}
+            }
 		\end{figure}
-		
-		We're only interested in the set of unique labeling vectors, moreimportantly the size of this set. It tells us how many labeling configuration can be fitted by a model from the model class.
+		\mode<article>{
+		We're interested in the set of unique labeling vectors, moreimportantly the size of this set. It tells us how many labeling configuration can be fitted by a model from the model class.
 		The number of unique labeling vectors is 
 		$N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda$
 		
 		Given that the total number of possible labeling configuration is $2^p$
 		and that we cannot guarantee that the models from $\Lambda$ can be fitted to all of them, it follows:
-		
-			\begin{equation}
-				N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda
-				\;\;\leq 2^p 
-			\end{equation}
-		
-			
-	\end{itemize}
+		}
+        \begin{equation}
+            N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda
+            \;\;\leq 2^p 
+        \end{equation}
 \end{frame}
 
-\begin{frame} \frametitle{Defining the growth function $G_{(p)}^\Lambda$}
+\begin{frame}\frametitle{Defining the growth function $G_{(p)}^\Lambda$}
 
 	\mode<article>{	
 		There are various reasons for $N^\Lambda$ to fall below $2^p$. Maybe we didn't sample enough classifiers from $\Lambda$. To eliminate the effects of this ``sampling'' we look for the maximum value \emph{that can be obtained} (supremum) for $N^\Lambda$ and by looking at how this value behaves as a function of $p$ we arrive at the the growth function:
 		}
 		
-	\begin{equation} 
-			G_{(p)}^\Lambda = \ln \underbrace{ \bigg( 
-				\sup_{\vec{x}^{(1)}, \ldots \vec{x}^{(p)}}
-				N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda \bigg) }_{
-					\text{worst case}}
-	\end{equation}
-	
-	\pause
+	%\begin{equation} 
+			%G_{(p)}^\Lambda = \ln \underbrace{ \bigg( 
+				%\sup_{\vec{x}^{(1)}, \ldots \vec{x}^{(p)}}
+				%N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda \bigg) }_{
+					%\text{worst case}}
+	%\end{equation}
 	
 	\begin{equation}
 	G_{(p)}^\Lambda = \ln \bigg( 
 				\sup_{\vec{x}^{(1)}, \ldots \vec{x}^{(p)}}
-				N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda \bigg) = \ln 2^p = p ln 2
+				N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda \bigg) = \ln 2^p = p \ln 2
 	\end{equation}
 	
+    \notesonly{
 	Before we proceed, we turn back to the convergence of ERM, specifically \eqref{eq:erm_converges_zero}:
+    }
 	\mode<presentation>{
+    Recall:\\
+    
 				\begin{equation*}
 				\lim_{p \to \infty} P\bigg\{ 
 					{
@@ -150,14 +155,28 @@ It is closely related to the \emph{VC dimension}.
 	\begin{equation}
 	\lim_{p \to \infty} G_{(p)}^\Lambda / p = 0
 	\end{equation}
-	
+	\mode<article>{
 	In the case of $G_{(p)}^\Lambda = p \ln 2$:
-	
+	}
 	\begin{equation}
-	\lim_{p \to \infty} p \ln 2 / p = \ln 2 \ne 0
+	\lim_{p \to \infty} \left( p \ln 2 \right ) / p = \ln 2 \ne 0
 	\end{equation}
 	
-	There is no convergence to zero, regardless of $p$. According to Vapnik, this means that the classifiers predictions become ambiguous and will likely fail to generalize. This should not be confused with the definition of $\dvc$, the growth function does not tell us how many points we need to separate two classes but how many points we need to exclude ambiguous predictions. Example: Any linear neuron can find a hyperplane to separate two specific points in 1-D space. It does not tell us anything about the neuron's ability to separate an additional 3rd test point in that same space. Therefore $p = 2$ is still ambiguous for the linear neuron. Regardless of how many dimensions.
+	There is no convergence to zero, regardless of $p$. According to Vapnik, this means that the classifiers predictions become ambiguous and will likely fail to generalize.
+
+\end{frame}
+
+\begin{frame}
+    The growth function does not tell us how many points we need to separate the two classes but how many points we need to exclude ambiguous predictions.\\
+    
+    Example:\\
+    \mode<presentation>{
+    
+    Linear neuron 2 points in 2D\\
+    \textbf{see blackboard\ldots}
+    }
+    
+    \mode<article>{Any linear neuron can find a hyperplane to separate two specific points in 2-D space. It does not tell us anything about the neuron's ability to separate an additional 3rd test point in that same space. Therefore $p = 2$ is still ambiguous for the linear neuron.}
 	
 	%However, for $$p \gt d_{VC}$$ the growth function behaves differently, namely
 
@@ -191,5 +210,19 @@ It is closely related to the \emph{VC dimension}.
 		%\itR the growth function is bounded by a term logarithmic in $p$
 		%\itR the growth rate depends on the model's VC-dimension $\dvc$ 
 	\end{itemize}
+\end{frame}
+
+% -----------------------------------------------------------------------------
+\begin{frame}\frametitle{The growth function $G_{(p)}^\Lambda$}
+	\begin{center}
+		\includegraphics[height=5.7cm]{img/growth_function_clean}
+	\end{center}
+	\vspace{-2mm}
+	$d_{VC}$: capacity measure of the model class\\
+	small $d_{VC}$: small sample size sufficient for learning\\
+	large $d_{VC}$: large sample size required
+
+		%\item growth function defines VC-dimension $\dvc$
+		%\item higher capacity $\rightarrow$ more different labelings
 \end{frame}
 
