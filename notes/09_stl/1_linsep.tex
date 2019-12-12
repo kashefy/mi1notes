@@ -169,3 +169,44 @@ It is important to understand that $\tilde C_{(p,N)}$ and $C_{(p,N)}$ effecitvle
 \end{frame}
 
 
+\begin{frame}
+Recursive formula for the binomial coefficient:
+\begin{equation}
+			\left( \begin{array}{c}
+			n\\
+			k
+			\end{array}\right)+
+			\left( \begin{array}{c}
+			n\\
+			k-1
+			\end{array}\right)=
+			\left( \begin{array}{c}
+			n+1\\
+			k
+			\end{array}\right)
+\end{equation}
+
+Use the the recursive formula for the binomial coefficient to show that:
+
+\begin{equation}
+\tilde C_{(p,N)}+\tilde C_{(p,N-1)}=\tilde C_{(p+1,N)}
+\end{equation}
+
+\end{frame}
+\begin{frame}
+		\underline{Solution:} 
+			\begin{eqnarray}
+				\tilde C_{(p,N)}+ \tilde C_{(p,N-1)}
+				&=& 2\sum_{k=0}^{N} \left({p-1 \atop k}\right)
+				+ 2\sum_{k=0}^{N-1} \left({p-1 \atop k}\right) \\
+				&=& 2 \underbrace{\left({p-1 \atop 0}\right)
+						}_{1 = ({p \atop 0})}
+					+ 2\sum_{k=1}^{N} \bigg[ 
+						\underbrace{\left({p-1 \atop k}\right)
+						+ \left({p-1 \atop k-1}\right)
+							}_{\left({p \atop k}\right)}
+					\bigg] 
+				\quad=\quad \tilde C_{(p+1,N)} \,.
+			\end{eqnarray}
+\end{frame}
+
