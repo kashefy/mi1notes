@@ -1,31 +1,83 @@
 \section{Convergence of Empirical risk minimization (ERM)}
 
+% -----------------------------------------------------------------------------
+\begin{frame}\frametitle{The learning problem}
+	\begin{center} 
+		\includegraphics[height=5cm]{img/section2_fig1.pdf} 
+	\end{center}
+	\begin{itemize}
+		\item {\footnotesize samples are drawn \iid from $P(\vec x, y_T)$\\[1mm]
+			 $\quad \leadsto \quad$ $\vec w$ are random variables}
+	\end{itemize}
+	%{\footnotesize\hfill (see blackboard)}
+\end{frame}
+
+
+% -----------------------------------------------------------------------------
+\definecolor{question1}{rgb}{0,0,1}
+\definecolor{question2}{rgb}{0,0.5,0}
+\begin{frame}\frametitle{The key questions of Statistical Learning Theory}
+	\begin{center} 
+		\includegraphics<1-2>[height=5cm]{img/section2_fig1_question1.pdf}
+		\includegraphics<3->[height=5cm]{img/section2_fig1_question2_lessw.pdf}  
+	\end{center}
+	\only<1>{
+		\begin{enumerate}
+			\item When does inductive learning through ERM work?
+				\vspace{1mm}
+				\iitem{$R(\vec w_p)$ 
+					should reflect the true optimal risk $R(\vec w_0)$ 
+					in the limit $p \to \infty$:}
+				\vspace{1mm}
+				\begin{equation*}
+					\lim_{p \rightarrow \infty} P \Big\{ 
+							{\color{question1} \big| R_{(\vec{w}_p)}
+							- R_{(\vec{w}_0)} \big| }
+						\geq \eta \Big\} \;\;=\;\; 0 \,,
+						\quad\text{ for all }\quad \eta > 0 \,.
+				\end{equation*}
+		\end{enumerate}
+	} \only<2>{
+		\begin{enumerate} \setcounter{enumi}{1}
+			\item How strongly does $R_{(\vec{w}_p)}$ differ 
+				from $R_{(\vec{w}_0)}$ for  \textbf{finite} samples?
+				\vspace{1mm}
+				\iitem{For a given confidence $\epsilon$, find $\eta$ such that}
+				\vspace{1mm}
+				\begin{equation*}
+					P \Big\{ {\color{question1} 
+							\big| R_{(\vec{w}_p)} - R_{(\vec{w}_0)} \big| 
+						} \geq \eta \Big\} \;\;<\;\; \epsilon \,.
+				\end{equation*}
+		\end{enumerate}
+	} \only<3>{
+		\begin{enumerate} \setcounter{enumi}{2}
+			\item Do training errors $R_{\text{emp}(\vec w)}$ 
+				reflect generalization performance $R_{(\vec w)}$?
+				\vspace{1mm}
+				\iitem{\footnotesize Avoid overfitting for finite samples,
+				i.e.~given confidence $\epsilon$, find $\eta$ such that: 
+					%i.e.~$R_{(\vec w)} \approx R_{\mathrm{emp}(\vec w)}$:
+				}
+				\vspace{1mm}
+				$$
+					P \Big\{ {\color{question2}
+							\big| R_{(\vec w)} - R_{\mathrm{emp}(\vec w)} \big|
+						} > \eta \Big\} \;\;<\;\; \epsilon \,, 
+						\qquad \forall \vec w \in \Lambda \,.
+				$$
+		\end{enumerate}
+	}
+\end{frame}
+
+
+
 \begin{frame}\frametitle{\subsecname}\label{sec:convergence_erm}
 			
-			Convergence of Empirical risk minimization is guaranteed:
 			
-			For a model class with \emph{finite} $\dvc$, the empirical training error will converge to the generalization error
-			with more data. That is:
-			\begin{equation}
-				\lim_{p \to \infty}
-						E^T_{[\vec w]} = E^G_{[\vec w]}
-			\end{equation}
-			
-			The requirement is that $\dvc$ is \emph{finite}.
-			
-			\mode<article>{The training error converges to the generalization error.
-			}
-			In terms of risk, this would be:
-			
-			\begin{equation}
-				\lim_{p \to \infty} 
-					R_{\text{emp}[\vec w]} = R_{[\vec w]}
-			\end{equation}
-			
-			Another way to look at this is to measure the difference between $R_{(\vec w_p)}$ and $R_{(\vec w_0)}$, where
 			\begin{itemize}
-			\item $R_{(\vec w_p)}$ is the empirical risk obtained from training the model using a finite set with $p$ points, and
-			\item $R_{(\vec w_0)}$ risk obtained from training the model with inifinite many points (Don't treat the $_0$ as zero points but rather ``minimal'').
+			\item $R_{[\vec w_p]}$ is the empirical risk obtained from training the model using a finite set with $p$ points, and
+			\item $R_{[\vec w_0]}$ risk obtained from training the model with inifinite many points (Don't treat the $_0$ as zero points but rather ``minimal'').
 			\end{itemize}
 			
 			And this difference becoming smaller and smaller as we feed more points into the model. That is:
@@ -40,15 +92,15 @@
 			
 			Understanding what $P\bigg\{ 
 					{
-						\Big|R_{(\vec w_p)} - R_{(\vec w_0)}\Big| 
+						\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
 					}
 				\geq \eta \bigg\}$ represents:
 			
 			\begin{itemize}
-			\item We expect the model trained on $p$ points to accumulate some error $R_{(\vec w_p)}$.
-			\item Training the model with a different set of $p$ points may yield a different value for $R_{(\vec w_p)}$.
-			\item Training many models with $p$ will yield many values for $R_{(\vec w_p)}$.
-			\item Measuring the absolute difference between every $R_{(\vec w_p)}$ we obtained and $R_{(\vec w_0)}$ will lead to ``difference values'' that follow some distribution $P\bigg\{ 
+			\item We expect the model trained on $p$ points to accumulate some error $R_{[\vec w_p]}$.
+			\item Training the model with a different set of $p$ points may yield a different value for $R_{[\vec w_p]}$.
+			\item Training many models with $p$ will yield many values for $R_{[\vec w_p]}$.
+			\item Measuring the absolute difference between every $R_{[\vec w_p]}$ we obtained and $R_{[\vec w_0]}$ will lead to ``difference values'' that follow some distribution $P\bigg\{ 
 					{
 						\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
 					}
