@@ -1,0 +1,195 @@
+\section{The growth function}
+
+\mode<presentation>{
+\begin{frame} 
+    \begin{center} \huge
+        \secname
+    \end{center}
+\end{frame}
+}
+
+\begin{frame}\frametitle{\secname - What is it?}
+
+The growth function is the measure of complexity for a model class.\\
+
+It measures the complexity of the functions that can be fitted using a model from that model class (e.g. connectionist neuron).
+Complexity in terms of \emph{sample} complexity or \emph{how much can I do with $p$ points in $N$ dimensions?}\\
+
+It is closely related to the \emph{VC dimension}, another measure for model complexity which we will introduce shortly.
+
+\end{frame}
+
+\subsection{Definining the growth function}
+
+\mode<presentation>{
+\begin{frame} \frametitle{The growth function $G_{(p)}^\Lambda$}
+	\begin{itemize}
+		\item \textbf{data representation:} 
+			$\vec{x} \in \mathbb{R}^N, \quad y_T \in \{-1,+1\}$ 
+		\vspace{5mm}
+		\item \textbf{model class:} 
+			set $\Lambda$ of functions $y_{(\vec{x}; \vec{w})} \in \{-1,+1\}$
+			
+		\vspace{5mm}
+		\item {\textbf binary label vector:} $\vec y_{(\vec{w})} = \Big( 
+			y_{(\vec{x}^{(1)}, \vec{w})}, 
+			y_{(\vec{x}^{(2)}, \vec{w})}, \ldots, 
+			y_{(\vec{x}^{(p)}, \vec{w})} \Big)$
+			\begin{itemize}	
+				\item different classifiers can induce the 
+					same label vector on the training set 
+			\end{itemize}
+			
+		\vspace{5mm}
+		\item {\bf number} of different vectors $\vec y_{(\vec{w})}$ 
+			induced by all $\vec w \in \Lambda$:
+			\vspace{-2mm}
+			\begin{equation}
+				\tag{depends on $\Lambda$ and the sample}
+				N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda 
+				\;\;\leq 2^p 
+			\end{equation}
+	\end{itemize}
+\end{frame}
+}
+
+
+\begin{frame} \frametitle{The growth function $G_{(p)}^\Lambda$}
+	\begin{itemize}
+		\item<1> \textbf{data representation:} 
+			$\vec{x} \in \mathbb{R}^N, \quad y_T \in \{-1,+1\}$ 
+		\vspace{5mm}
+		\item<2> \textbf{model class:} 
+			set $\Lambda$ of functions $y_{(\vec{x}; \vec{w})} \in \{-1,+1\}$
+			
+			Think of $\Lambda$ as a set of classifiers.
+			The classifiers in this set come from the same model class (e.g. connectionist neurons with weights $\vec w$).
+			They values in $\vec w$ are different across the classifiers in the set $\Lambda$.
+			Each classifier describes a different hyperplane to separate the two classes in the data.
+			
+		\vspace{5mm}
+		\item<3> {\textbf binary label vector:} $\vec y_{(\vec{w})} = \Big( 
+			y_{(\vec{x}^{(1)}, \vec{w})}, 
+			y_{(\vec{x}^{(2)}, \vec{w})}, \ldots, 
+			y_{(\vec{x}^{(p)}, \vec{w})} \Big)$
+			\begin{itemize}	
+				\item different classifiers can induce the 
+					same label vector on the training set 
+			\end{itemize}
+			
+			Each classifier in $\lambda$ descibes a different hyperplane.
+			Looking at the predictions each one produces for the $p$ points will produce some label vector $\vec y_{(\vec{w})}$ with $p$ elements. A prediction for every point.
+			
+		\vspace{5mm}
+		\item<4> {\textbf number} of different vectors $\vec y_{(\vec{w})}$ 
+			induced by all $\vec w \in \Lambda$:
+			\vspace{-2mm}
+			\begin{equation}
+				\tag{depends on $\Lambda$ and the sample}
+				N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda 
+				\;\;\leq 2^p 
+			\end{equation}
+			
+		Two hyperplanes can be different but still yield the same predictions.
+		Example:\\
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.35\textwidth]{img/uniquepredictions}
+			\caption{Different hyperplanes can lead to different but also to identical labeling of points}
+		\end{figure}
+		
+		We're only interested in the set of unique labeling vectors, moreimportantly the size of this set. It tells us how many labeling configuration can be fitted by a model from the model class.
+		The number of unique labeling vectors is 
+		$N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda$
+		
+		Given that the total number of possible labeling configuration is $2^p$
+		and that we cannot guarantee that the models from $\Lambda$ can be fitted to all of them, it follows:
+		
+			\begin{equation}
+				N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda
+				\;\;\leq 2^p 
+			\end{equation}
+		
+			
+	\end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{Defining the growth function $G_{(p)}^\Lambda$}
+
+	\mode<article>{	
+		There are various reasons for $N^\Lambda$ to fall below $2^p$. Maybe we didn't sample enough classifiers from $\Lambda$. To eliminate the effects of this ``sampling'' we look for the maximum value \emph{that can be obtained} (supremum) for $N^\Lambda$ and by looking at how this value behaves as a function of $p$ we arrive at the the growth function:
+		}
+		
+	\begin{equation} 
+			G_{(p)}^\Lambda = \ln \underbrace{ \bigg( 
+				\sup_{\vec{x}^{(1)}, \ldots \vec{x}^{(p)}}
+				N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda \bigg) }_{
+					\text{worst case}}
+	\end{equation}
+	
+	\pause
+	
+	\begin{equation}
+	G_{(p)}^\Lambda = \ln \bigg( 
+				\sup_{\vec{x}^{(1)}, \ldots \vec{x}^{(p)}}
+				N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda \bigg) = \ln 2^p = p ln 2
+	\end{equation}
+	
+	Before we proceed, we turn back to the convergence of ERM, specifically \eqref{eq:erm_converges_zero}:
+	\mode<presentation>{
+				\begin{equation*}
+				\lim_{p \to \infty} P\bigg\{ 
+					{
+						\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
+					}
+				\geq \eta \bigg\}\;\;=\;\; 0 \,, \quad \forall \eta > 0
+			\end{equation*}
+	}
+	
+	This convergence is equivalent to\footnote{We don't dig into how they are equivalent. If interested, see \href{https://www.math.arizona.edu/~hzhang/math574m/Read/vapnik.pdf}{Vapnik (1999)}}:
+	\begin{equation}
+	\lim_{p \to \infty} G_{(p)}^\Lambda / p = 0
+	\end{equation}
+	
+	In the case of $G_{(p)}^\Lambda = p \ln 2$:
+	
+	\begin{equation}
+	\lim_{p \to \infty} p \ln 2 / p = \ln 2 \ne 0
+	\end{equation}
+	
+	There is no convergence to zero, regardless of $p$. According to Vapnik, this means that the classifiers predictions become ambiguous and will likely fail to generalize. This should not be confused with the definition of $\dvc$, the growth function does not tell us how many points we need to separate two classes but how many points we need to exclude ambiguous predictions. Example: Any linear neuron can find a hyperplane to separate two specific points in 1-D space. It does not tell us anything about the neuron's ability to separate an additional 3rd test point in that same space. Therefore $p = 2$ is still ambiguous for the linear neuron. Regardless of how many dimensions.
+	
+	%However, for $$p \gt d_{VC}$$ the growth function behaves differently, namely
+
+%$$ G^{\Lambda}_{(p)} <=  d_{VC} ( 1+ ln p / d_{VC} $$
+
+%In this case  $$ lim_{p \rightarrow \infty}  G^{\Lambda}_{(p)}/p = 0 $$ converges, and the ambiguity is gone. We always know if a model can find a separating hyperplane or not. The more points we add, the less likely a model will find a solution, but if it does, they will no longer be ambiguous.
+
+%The above on the growth function is my understanding from Schölkopf and Smola Ch 5.5, if you want to go over it and see if you arrive to the same understanding.
+
+
+%Maybe this provokes the question: Why is the plot even useful? If I change my model to something with a lower d_VC, all I'm doing is that I allow the linear part of G to stop and switch to the curvy part earlier. A lower d_VC means that the curvy part happens for less p where the p ln 2 is also lower. The range of ambiguous predictions becomes lower and I'm able to generalize with fewer training samples.
+	
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item bound on growth function (Vapnik, 1998)
+			\begin{equation*}
+				G_{(p)}^\Lambda
+				\left \{ \begin{array}{ll}
+					= p \ln 2 
+					& \text{for } p \leq \dvc \\
+					\leq \dvc \Big( 1 + \ln \frac{p}{\dvc} \Big) 
+					& \text{for } p > \dvc
+				\end{array} \right.
+			\end{equation*}
+
+		\item Vapnik-Chernovenkis dimension $d_{VC}$: \\
+			capacity measure of the model class
+		%\itR the growth function is independent of a specific sample
+		%\itR the growth function is bounded by a term logarithmic in $p$
+		%\itR the growth rate depends on the model's VC-dimension $\dvc$ 
+	\end{itemize}
+\end{frame}
+

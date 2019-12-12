@@ -1,0 +1,89 @@
+\section{Convergence of Empirical risk minimization (ERM)}
+
+\begin{frame}\frametitle{\subsecname}\label{sec:convergence_erm}
+			
+			Convergence of Empirical risk minimization is guaranteed:
+			
+			For a model class with \emph{finite} $\dvc$, the empirical training error will converge to the generalization error
+			with more data. That is:
+			\begin{equation}
+				\lim_{p \to \infty}
+						E^T_{[\vec w]} = E^G_{[\vec w]}
+			\end{equation}
+			
+			The requirement is that $\dvc$ is \emph{finite}.
+			
+			\mode<article>{The training error converges to the generalization error.
+			}
+			In terms of risk, this would be:
+			
+			\begin{equation}
+				\lim_{p \to \infty} 
+					R_{\text{emp}[\vec w]} = R_{[\vec w]}
+			\end{equation}
+			
+			Another way to look at this is to measure the difference between $R_{(\vec w_p)}$ and $R_{(\vec w_0)}$, where
+			\begin{itemize}
+			\item $R_{(\vec w_p)}$ is the empirical risk obtained from training the model using a finite set with $p$ points, and
+			\item $R_{(\vec w_0)}$ risk obtained from training the model with inifinite many points (Don't treat the $_0$ as zero points but rather ``minimal'').
+			\end{itemize}
+			
+			And this difference becoming smaller and smaller as we feed more points into the model. That is:
+			\begin{equation}
+				\lim_{p \to \infty} P\bigg\{ 
+					{
+						\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
+					}
+				\geq \eta \bigg\}\;\;=\;\; 0 \,, \quad \forall \eta > 0
+				\label{eq:erm_converges_zero}
+			\end{equation}
+			
+			Understanding what $P\bigg\{ 
+					{
+						\Big|R_{(\vec w_p)} - R_{(\vec w_0)}\Big| 
+					}
+				\geq \eta \bigg\}$ represents:
+			
+			\begin{itemize}
+			\item We expect the model trained on $p$ points to accumulate some error $R_{(\vec w_p)}$.
+			\item Training the model with a different set of $p$ points may yield a different value for $R_{(\vec w_p)}$.
+			\item Training many models with $p$ will yield many values for $R_{(\vec w_p)}$.
+			\item Measuring the absolute difference between every $R_{(\vec w_p)}$ we obtained and $R_{(\vec w_0)}$ will lead to ``difference values'' that follow some distribution $P\bigg\{ 
+					{
+						\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
+					}
+				\geq \eta \bigg\}$
+			\item We measure the probability of the absolute difference exceeding some value $\eta$:
+			\begin{equation}
+			P\bigg\{ 
+					{
+						\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
+					}
+				\geq \eta \bigg\}\,, \quad \forall \eta > 0
+			\end{equation}
+			This is the same asking how often does traning with $p$ points yield a difference in risk above some value.
+			\item Now repeat tranining these models but using a larger value for $p$.\\
+			What the theory tells you is that as you increase $p$ and keeping $\eta$ fixed:
+			\begin{itemize}
+			\item The $R_{[\vec w_p]}$ of the models will improve and get smaller.
+			\item The absolute differences $\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big|$ will become smaller and smaller,
+			\item The distribution of these differences will shift below $\eta$ (i.e. to the left of $\eta$)
+			\item Less and less models will score differences $\ge \eta$
+			\item Eventually, for some large $p$, the $R_{[\vec w_p]}$ of the models will be so good that the probability of finding a model that has a risk difference of $\eta$ or higher (worse performance) will vanish. And this is what \eqref{eq:risktozero} describes:
+			\end{itemize}
+			
+			\end{itemize}
+			
+			\begin{equation}
+				\lim_{p \to \infty} P\bigg\{ 
+					{
+						\Big|R_{(\vec w_p)} - R_{(\vec w_0)}\Big| 
+					}
+				\geq \eta \bigg\}\;\;=\;\; 0 \,, \quad \forall \eta > 0
+				\label{eq:risktozero}
+			\end{equation}
+			
+			\textbf{But} Our dataset is never going to be inifinitley large. Therefore a more realistic formulation for the convergence of ERM would be:
+			
+			
+\end{frame}

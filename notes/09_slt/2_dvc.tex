@@ -50,14 +50,19 @@ If there exists at least \textbf{one} dataset for which it can perfectly predict
 
 \begin{frame}\frametitle{\secname}
 
-$\dvc$ is not actually a dimension but a \emph{capacity measure} 
+$\dvc$ is not actually a dimension but a single number \emph{capacity measure} 
 of a model class that is parameterized by $\vec w$.
 
 \underline{Definition}:\\
 
-$\dvc :=$ \underline{maximal number of data points $p$} that a model can \emph{shatter}.
+$\dvc :=$ \underline{maximal number of data points $p$} that a model can \emph{shatter}.\\
 
-In other words: $\dvc$ is \underline{maximal number of data points $p$} for which \emph{all} possible label configurations $\{y_{T}^{(\alpha)} \in \{-1,1\}\}_{\alpha=1}^{p}$ can be perfectly trained (i.e. $E^{T}_{[\vec w]} = R_{\text{emp}[\vec w]} = 0$) by tuning the model parameters $\vec w$.
+In other words, The VC dimension is the largest \# of points  
+$p$ for which there exist at least one set  
+$\vec X$ for which all  
+$2^p$ label configurations can be solved with zero error.\\
+
+In more words: $\dvc$ is \underline{maximal number of data points $p$} for which \emph{all} possible label configurations $\{y_{T}^{(\alpha)} \in \{-1,1\}\}_{\alpha=1}^{p}$ can be perfectly trained (i.e. $E^{T}_{[\vec w]} = R_{\text{emp}[\vec w]} = 0$) by tuning the model parameters $\vec w$.
 If (at least) one dataset $\{(\vec x^{(\alpha)}, y_{T}^{(\alpha)})\}_{\alpha=1}^{p}$ with $p$ points exists such that the model can be tuned to perfectly classify any label configuration for that dataset, then the $\dvc$ for this model class is $p$.
 
 
@@ -180,6 +185,16 @@ If (at least) one dataset $\{(\vec x^{(\alpha)}, y_{T}^{(\alpha)})\}_{\alpha=1}^
 			
 \end{frame}
 
+%TODO
+%We replace  
+%η
+  %by this juggernaut term. We don't ask you to reproduce it. The important thing is to understand what happens when you select a larger value for p. The bound becomes tighter. This should not come as a surprise. In #30 we had the case of p approaching infinity which allowed us to bound everything by some constant  
+%η
+ %. Slide #31 expands this constant into terms that are a function of p. The bound has to be sensitive to p. #31 does not add new information but only rearranges the terms to being back  
+%η
+  %and express the confidence in terms of the size of the data set instead of  
+%ϵ
+ %.
 
 \begin{frame}\frametitle{The solution to learning problem 2} 
 	\begin{center}
