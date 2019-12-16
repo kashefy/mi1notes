@@ -134,10 +134,11 @@ It is closely related to the \emph{VC dimension}.
 	G_{(p)}^\Lambda = \ln \bigg( 
 				\sup_{\vec{x}^{(1)}, \ldots \vec{x}^{(p)}}
 				N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda \bigg) = \ln 2^p = p \ln 2
+				\label{eq:growthln2}
 	\end{equation}
 	
     \notesonly{
-	Before we proceed, we turn back to the convergence of ERM, specifically \eqref{eq:erm_converges_zero}:
+	Before we proceed, we turn back to the convergence of ERM, specifically \eqref{eq:absdeltaconvergence0}:
     }
 	\mode<presentation>{
     Recall:\\
@@ -151,18 +152,20 @@ It is closely related to the \emph{VC dimension}.
 			\end{equation*}
 	}
 	
-	This convergence is equivalent to\footnote{We don't dig into how they are equivalent. If interested, see \href{https://www.math.arizona.edu/~hzhang/math574m/Read/vapnik.pdf}{Vapnik (1999)}}:
+	This convergence is equivalent to\footnote{We don't dig into how they are equivalent. If interested, see Ch. 5.5 \citep{scholkopf2001learning} for a description of the approach and \citep{vapnik1999overview} for the detailed derivation.
+	}:
 	\begin{equation}
-	\lim_{p \to \infty} G_{(p)}^\Lambda / p = 0
+	\lim_{p \to \infty} G_{(p)}^\Lambda / p \eqexcl 0
 	\end{equation}
 	\mode<article>{
-	In the case of $G_{(p)}^\Lambda = p \ln 2$:
+	In the case of $G_{(p)}^\Lambda = p \ln 2$ as per our definition of the growth function in \eqref{eq:growthln2}:
 	}
 	\begin{equation}
 	\lim_{p \to \infty} \left( p \ln 2 \right ) / p = \ln 2 \ne 0
 	\end{equation}
 	
-	There is no convergence to zero, regardless of $p$. According to Vapnik, this means that the classifiers predictions become ambiguous and will likely fail to generalize.
+	\notesonly{
+	There is no convergence to zero, regardless of $p$. According to Vapnik, this means that} the classifier's predictions become ambiguous and will likely fail to generalize.
 
 \end{frame}
 
@@ -177,19 +180,21 @@ It is closely related to the \emph{VC dimension}.
     }
     
     \mode<article>{Any linear neuron can find a hyperplane to separate two specific points in 2-D space. It does not tell us anything about the neuron's ability to separate an additional 3rd test point in that same space. Therefore $p = 2$ is still ambiguous for the linear neuron.}
+    
+\end{frame}
+
+\mode<article>{
+\begin{frame}
+However, for $p > \dvc$ the growth function behaves differently, namely
+	\begin{equation}
+		G^{\Lambda}_{(p)} \le \dvc (1+ ln \frac{p}{\dvc}
+	\end{equation}
 	
-	%However, for $$p \gt d_{VC}$$ the growth function behaves differently, namely
-
-%$$ G^{\Lambda}_{(p)} <=  d_{VC} ( 1+ ln p / d_{VC} $$
-
-%In this case  $$ lim_{p \rightarrow \infty}  G^{\Lambda}_{(p)}/p = 0 $$ converges, and the ambiguity is gone. We always know if a model can find a separating hyperplane or not. The more points we add, the less likely a model will find a solution, but if it does, they will no longer be ambiguous.
-
-%The above on the growth function is my understanding from Schölkopf and Smola Ch 5.5, if you want to go over it and see if you arrive to the same understanding.
-
+	In this case  $\lim_{p \to \infty} G_{(p)}^\Lambda$ converges to zero, and there is no more complete ambiguity. There is at least one region in feature space where all different classifiers from $\Lambda$ will agree on what class to assign to points in that region. There may still exist regions for which  predictions will be ambiguous but the complete ambiguity is gone. The more points we add, the less likely a model will find a solution, but if it does, they will no longer be ambiguous.
 
 %Maybe this provokes the question: Why is the plot even useful? If I change my model to something with a lower d_VC, all I'm doing is that I allow the linear part of G to stop and switch to the curvy part earlier. A lower d_VC means that the curvy part happens for less p where the p ln 2 is also lower. The range of ambiguous predictions becomes lower and I'm able to generalize with fewer training samples.
-	
 \end{frame}
+}
 
 \begin{frame}
 	\begin{itemize}

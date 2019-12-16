@@ -22,7 +22,7 @@
 
 \end{frame}
 
-\begin{frame}\frametitle{Shattering p points}
+\begin{frame}\frametitle{Shattering $p$ points}
 
 \begin{enumerate}
 \item Generate a dataset of $p$ points in $N$ dimensions and place them in some arrangement.
@@ -36,7 +36,7 @@
 	\item[] Measure the error $E^T_{[\vec w]}$
 	\item[] If $E^T_{[\vec w]} = 0$ keep the model, otherwise, discard it. 
 	\end{itemize}
-\item Count how many models you kept.\\
+\item Count how many models you've kept.\\
 \pause
 \item[] If you were able to keep a model with $E^T_{[\vec w]} = 0$ for each of the $2^p$ possible label configurations,\\
 then the model class $\Lambda$ with that number of tunable parameters in $\vec w$ \emph{shatters} a dataset of $p$ points in $N$ dimensions.
@@ -48,7 +48,7 @@ then the model class $\Lambda$ with that number of tunable parameters in $\vec w
 
 \textbf{Important}:\\
 
-Shattering requires finding \underline{only a single arrangment} of the $p$ points for which the model can be fitted to all $2^p$ label configurations.
+Shattering requires finding \underline{at least one arrangment} of the $p$ points for which the model can be fitted to all $2^p$ label configurations.
 
 \mode<article>{
 It does not have to be able to for all possible arrangements (placements) of the $p$ points.
@@ -67,8 +67,8 @@ $\dvc :=$ \underline{maximal number of data points $p$} that a model can \emph{s
 }
 \only<2>{
 In other words, The VC dimension is the largest \# of points  
-$p$ for which there exist at least one set  
-$\vec X$ for which all  
+$p$ for which there exist at least one dataset  
+$\vec X = \left(\vec x^{(1)}, \ldots, \vec x^{(p)}\right)^\top $ for which all  
 $2^p$ label configurations can be solved with zero error.\\
 }
 \only<3>{

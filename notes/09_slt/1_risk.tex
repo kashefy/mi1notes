@@ -64,9 +64,9 @@
 		\end{figure}
 	\end{center}
 	\only<1>{
-	
+	\mode<article>{
 	\underline{The key questions of Statistical Learning Theory:}
-	
+	}
 		\begin{enumerate}
 		\slidesonly{
 		\vspace{-5mm}
@@ -85,6 +85,7 @@
 						- R_{(\vec{w}_0)} \big| }
 					\geq \eta \Big\} \;\;=\;\; 0 \,,
 					\quad\text{ for all }\quad \eta > 0 \,.
+				\label{eq:absdeltaconvergence0}
 			\end{equation}
 		\end{enumerate}
 	} \only<2>{
@@ -98,6 +99,7 @@
 					P \Big\{ {\color{question1} 
 							\big| R_{[\vec{w}_p]} - R_{[\vec{w}_0]} \big| 
 						} \geq \eta \Big\} \;\;<\;\; \epsilon \,.
+						\label{eq:convergenceeps}
 				\end{equation}
 		\end{enumerate}
 	} \only<3>{
@@ -115,6 +117,7 @@
 							\big| R_{[\vec w]} - R_{\mathrm{emp}[\vec w]} \big|
 						} > \eta \Big\} \;\;<\;\; \epsilon \,, 
 						\qquad \forall \vec w \in \Lambda \,.
+						\label{eq:convergenceepsgeneral}
 				\end{equation}
                 where $\Lambda$ is the model class (e.g. connectionist neuron)
 		\end{enumerate}
@@ -122,40 +125,37 @@
 \end{frame}
 
 \begin{frame}
-\mode<presentation>{
-	\placeimage{8}{3}{img/section2_fig1_question1}{width=6cm}
+\label{sec:convergence_erm}
+\frametitle{ Understanding what $P\big\{ 
+	{\color{question1}
+		\big|R_{[\vec w_p]} - R_{[\vec w_0]}\big| 
+	} \geq \eta \big\}$ represents
 }
-    \begin{figure}
-    \mode<article>{
-        \centering
-        }
-        \mode<presentation>{
-        \raggedright
-        }
-		\includegraphics[height=7cm]{img/PdeltaReta}
-        \caption{Distribution of absolute risk differences for larger number of training points $p_{1} < p_{2} < p_{3} < p_{4}$}
-	\end{figure}
-\end{frame}
 
-\mode<article>{
-\begin{frame}\frametitle{\subsecname}\label{sec:convergence_erm}
-			
-			And this difference becoming smaller and smaller as we feed more points into the model. That is:
-			\begin{equation}
-				\lim_{p \to \infty} P\bigg\{ 
-					{
-						\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
-					}
-				\geq \eta \bigg\}\;\;=\;\; 0 \,, \quad \forall \eta > 0
-				\label{eq:erm_converges_zero}
-			\end{equation}
-			
-			Understanding \figref{fig:randremp} and what $P\bigg\{ 
-					{
-						\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
-					}
-				\geq \eta \bigg\}$ represents:
-			
+			%And this difference becoming smaller and smaller as we feed more points into the model. That is:
+			%\begin{equation}
+				%\lim_{p \to \infty} P\bigg\{ 
+					%{
+						%\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
+					%}
+				%\geq \eta \bigg\}\;\;=\;\; 0 \,, \quad \forall \eta > 0
+				%\label{eq:erm_converges_zero}
+			%\end{equation}
+\mode<presentation>{
+	\placeimage{8}{5}{img/section2_fig1_question1}{width=6cm}
+}
+\begin{figure}
+	\mode<article>{ \centering }
+	\mode<presentation>{ \raggedright \vspace{-2mm}}
+	\includegraphics[height=\slidesonly{6.7cm}{\notesonly{8cm}}]{img/PdeltaReta}
+	\caption{Distribution of absolute risk differences for larger number of training points $p_{1} < p_{2} < p_{3} < p_{4}$}
+	\label{fig:PdeltaReta}
+\end{figure}
+	
+\mode<article>{			
+			Understanding \figref{fig:randremp} and
+			what\eqref{eq:absdeltaconvergence0} represents:
+				
 			\begin{itemize}
 			\item We expect the model trained on $p$ points to have  some error $R_{\text{emp}}$ that is minimal for some $\vec w_p$ at which the emprical error is $R_{\text{emp}[\vec w_p]}$.
 			\item Estimating the generalization performance for the solution $\vec w_p$ on a hold-out set yields a risk value of $R_{[\vec w_p]}$. We expect it to be higher than the optimal risk $R_{[\vec w_0]}$. We therefore measure the absolute difference between both:
@@ -173,42 +173,57 @@
 			\big| R_{(\vec{w}_p)}
 						- R_{(\vec{w}_0)} \big|
 						}$
-			\item Measuring the absolute difference between every $R_{[\vec w_p]}$ we obtained and $R_{[\vec w_0]}$ will lead to ``difference values'' that follow some distribution $P\bigg\{ 
-					{
-						\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
+			\item Measuring the absolute difference between every $R_{[\vec w_p]}$ we obtained and $R_{[\vec w_0]}$ will lead to ``difference values'' that follow some distribution $P\big\{ 
+					{\color{question1}
+						\big|R_{[\vec w_p]} - R_{[\vec w_0]}\big| 
 					}
-				\geq \eta \bigg\}$
+				\geq \eta \big\}$
 			\item We measure the probability of the absolute difference exceeding some value $\eta$:
 			\begin{equation}
-			P\bigg\{ 
-					{
-						\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
+			P\big\{ 
+					{\color{question1}
+						\big|R_{[\vec w_p]} - R_{[\vec w_0]}\big| 
 					}
-				\geq \eta \bigg\}\,, \quad \forall \eta > 0
+				\geq \eta \big\}\,, \quad \forall \eta > 0
 			\end{equation}
 			This is the same asking: How often does traning with $p$ points yield a difference in risk above some value.
-			\item Now we repeat tranining these models but using a larger value for $p$.\\
+			\item Now we repeat the tranining of these models but using a larger value for $p$.\\
 			
 			What the theory tells you is that as you increase $p$ and keeping $\eta$ fixed:
 			\begin{itemize}
-			\item The $R_{[\vec w_p]}$ of the models will improve and get smaller.
-			\item The absolute differences ${color{question1}\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big|}$ will become smaller and smaller,
-			\item As depicted by , the distribution of these differences will shift below $\eta$ (i.e. to the left of $\eta$)
-			\item Less and less models will score differences $\ge \eta$
-			\item Eventually, for some large $p$, the $R_{[\vec w_p]}$ of the models will be so good that the probability of finding a model that has a risk difference of $\eta$ or higher (worse performance) will vanish. And this is what \eqref{eq:risktozero} describes:
+				\item The $R_{[\vec w_p]}$ of the models will improve and get smaller.
+				\item The absolute differences ${color{question1}\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big|}$ will become smaller and smaller,
+				\item As depicted by \figref{fig:PdeltaReta}, the distribution of these differences will shift below $\eta$ (i.e. to the left of $\eta$)
+				\item Less and less models will score differences $\ge \eta$
+				\item Eventually, for some large $p$, the $R_{[\vec w_p]}$ of the models will be so good that the probability of finding a model that has a risk difference of $\eta$ or higher (worse performance) will vanish. And this is what \eqref{eq:risktozero} describes:
 			\end{itemize}
-			
 			\end{itemize}
-			
 			\begin{equation}
 				\lim_{p \to \infty} P\bigg\{ 
-					{
+					{\color{question1}
 						\Big|R_{(\vec w_p)} - R_{(\vec w_0)}\Big| 
 					}
 				\geq \eta \bigg\}\;\;=\;\; 0 \,, \quad \forall \eta > 0
 				\label{eq:risktozero}
 			\end{equation}
 			
-			\textbf{But} Our dataset is never going to be inifinitley large. Therefore a more realistic formulation for the convergence of ERM would be:
-\end{frame}
+			\textbf{But} Our dataset is never going to be inifinitley large. Therefore a more realistic formulation for the convergence of ERM would be that it will below some value $\epsilon$:
+			\begin{equation}
+					P \Big\{ {\color{question1} 
+							\big| R_{[\vec{w}_p]} - R_{[\vec{w}_0]} \big| 
+						} \geq \eta \Big\} \;\;<\;\; \epsilon \,.
+						\label{eq:convergenceeps}
+				\end{equation}
+				
+			Furthermore, recalling what we've learned about the bias-variance tradeoff, the solution that minimizes $R_{\text{emp}}$ might not be a favorable solution. We therefore extend comparison of the curves $R_{\text{emp}}$ with $R$ to include other solutions that do not necessarily minimize the empirical risk $R_{\text{emp}}$ (i.e. training error). This leads to further modifying our formulation of the convergence from \eqref{eq:convergenceeps} to:
+				\begin{equation}
+					P \Big\{ {\color{question2}
+							\big| R_{[\vec w]} - R_{\mathrm{emp}[\vec w]} \big|
+						} > \eta \Big\} \;\;<\;\; \epsilon \,, 
+						\qquad \forall \vec w \in \Lambda \,.
+						\label{eq:convergenceepsgeneral}
+				\end{equation}
+			
+			The key difference between \eqref{eq:convergenceeps} and \eqref{eq:convergenceepsgeneral} is that the latter is no longer restricted to the solutions $\vec w_p$ at which the empricial risk is minimal but may include solutions $\vec w$ that can potentially generalize better.
 }
+\end{frame}
