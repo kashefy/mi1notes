@@ -2,8 +2,7 @@
 
 \begin{frame}\frametitle{Results statistical learning theory}
 		\begin{itemize}
-			\item Learnability - Convergence of Empirical risk minimization is guaranteed (cf. \sectionref{sec:convergence_erm})
-			\item formulation of conditions under which ERM works
+			\item formulation of conditions under which ERM works and its convergence (cf. \sectionref{sec:convergence_erm})
 			\item bounds describing \textbf{generalization ability} of ERM \\
             
             For a finite training set, the generalization error is bound with probability $1-\eta$:
@@ -18,7 +17,7 @@
             
             100\% overfitting for $p\,<\,\dvc$.{}
             
-            Bound allows to calculate $p$ for targeting a given generlization error.
+            Bound allows to calculate $p$ for targeting a given generalization error.
             
 			\item inductive inference for \textbf{small sample size}s 
 				based on these bounds
@@ -28,8 +27,8 @@
 \end{frame}
 
 \subsection{Revisit convergence of ERM}
-
-\begin{frame}\frametitle{\subsecname}\label{sec:convergence_erm}
+\mode<article>{
+\begin{frame}\frametitle{\subsecname}\label{sec:convergence_erm_revisit}
 			
 			Convergence of Empirical risk minimization is guaranteed:
 			
@@ -60,10 +59,11 @@
 				\label{eq:risktozero}
 			\end{equation}
 			
-			\textbf{But} Our dataset is never going to be inifinitley large. Therefore, a more realistic formulation for the convergence of ERM would be:
+			\textbf{But} Our dataset is never going to be infinitely large. Therefore, a more realistic formulation for the convergence of ERM would be:
 			
 			
 \end{frame}
+}
 
 %TODO
 %We replace  

@@ -32,7 +32,7 @@ Find the total number of binary assignments that are linearly separable.
 \begin{frame}\frametitle{Find the total number of affinely separable assignments}
 
 \begin{enumerate}
-\item Place $p$ points in $N$ dimensions, anyway you like as long as they're not colinear.
+\item Place $p$ points in $N$ dimensions, anyway you like as long as they're not collinear.
 \item Assign all possible labels to the points.
 \end{enumerate}
 
@@ -92,7 +92,7 @@ for $n,k \in \N_0$ with $n \ge k \ge 0$
 The Binomial coefficient represents the coefficient associated with the $y^k$ term in the polynomial expansion $(1+y)^n$.
 
 Consider the following example\footnote{
-The example is taken from the wikipedia article on \href{https://en.wikipedia.org/wiki/Binomial_coefficient}{Binomial coefficient}
+The example is taken from the Wikipedia article on \href{https://en.wikipedia.org/wiki/Binomial_coefficient}{Binomial coefficient}
 } of using polynomial expansion for calculating the fourth power of $(1+y)$:
 
 \begin{align}
@@ -178,9 +178,9 @@ Using our example with $p=4$ and $N=2$:
 Choosing a connectionist neuron to the separation involves $N+1$ degrees of freedom because we add the bias term (the ability to translate the hyperplane).
 Therefore, the reason is the model choice and assuming that $C_{(p,N)}$ counts separability around the origin without the ability to shift the hyperplane.
 
--An alternative explanation to the difference between $\tilde C_{(p,N)}$ and $C_{(p,N)}$ is how to intepret $N$. The definition of $C_{(p,N)}$ treats $N$ as the parameters of the hyperplane. Therefore the bias is implicit.
+-An alternative explanation to the difference between $\tilde C_{(p,N)}$ and $C_{(p,N)}$ is how to interpret $N$. The definition of $C_{(p,N)}$ treats $N$ as the parameters of the hyperplane. Therefore the bias is implicit.
 If we assume that $N$ is the number of components in $\vec x$ and we need to prepend a bias term to it, we compute the number of separable configurations using $\tilde C_{(p,N)}$. 
-It is important to understand that $\tilde C_{(p,N)}$ and $C_{(p,N)}$ effecitvley yield the same result when we feed each the appropriate arguments.
+It is important to understand that $\tilde C_{(p,N)}$ and $C_{(p,N)}$ effectively yield the same result when we feed each the appropriate arguments.
 }
 \end{frame}
 
@@ -208,7 +208,7 @@ Use the the recursive formula for the binomial coefficient to show that:
 \label{eq:c_relation}
 \end{equation}
 
-The relevance of \notesonly{\eqref{eq:c_relation}}\slidesonly{ this} relationship becomes apparant when attempting to derive the VC dimension \notesonly{(introduced in \sectionref{seq:dvc})} of a connectionist neuron.
+The relevance of \notesonly{\eqref{eq:c_relation}}\slidesonly{ this} relationship becomes apparent when attempting to derive the VC dimension \notesonly{(introduced in \sectionref{seq:dvc})} of a connectionist neuron.
 
 \end{frame}
 

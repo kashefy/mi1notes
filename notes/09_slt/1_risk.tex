@@ -38,7 +38,7 @@
 		\end{eqnarray}
         
         \notesonly{
-        Therefore, $R_{[\vec w_0]}$ represents the risk value obtained from training the model using inifinite many points.
+        Therefore, $R_{[\vec w_0]}$ represents the risk value obtained from training the model using infinitely many points.
         }
         (Don't treat the ${\color{red}_0}$ as zero data points but rather as ``minimal'' risk)
 	\end{itemize}
@@ -57,7 +57,7 @@
 			\includegraphics<3->[height=4cm]{img/section2_fig1_question2_lessw} 
 			\mode<article>{
 			\caption{
-			Measuring the difference between empricial risk obtained from a finite site of $p$ points with risk obtained using inifitely many points.
+			Measuring the difference between empirical risk obtained from a finite site of $p$ points with risk obtained using infinitely many points.
 			}
 			\label{fig:randremp}
 			} 
@@ -157,7 +157,7 @@
 			what\eqref{eq:absdeltaconvergence0} represents:
 				
 			\begin{itemize}
-			\item We expect the model trained on $p$ points to have  some error $R_{\text{emp}}$ that is minimal for some $\vec w_p$ at which the emprical error is $R_{\text{emp}[\vec w_p]}$.
+			\item We expect the model trained on $p$ points to have  some error $R_{\text{emp}}$ that is minimal for some $\vec w_p$ at which the empirical error is $R_{\text{emp}[\vec w_p]}$.
 			\item Estimating the generalization performance for the solution $\vec w_p$ on a hold-out set yields a risk value of $R_{[\vec w_p]}$. We expect it to be higher than the optimal risk $R_{[\vec w_0]}$. We therefore measure the absolute difference between both:
 			\begin{equation}
 			{\color{question1}
@@ -186,8 +186,8 @@
 					}
 				\geq \eta \big\}\,, \quad \forall \eta > 0
 			\end{equation}
-			This is the same asking: How often does traning with $p$ points yield a difference in risk above some value.
-			\item Now we repeat the tranining of these models but using a larger value for $p$.\\
+			This is the same asking: How often does training with $p$ points yield a difference in risk above some value.
+			\item Now we repeat the training of these models but using a larger value for $p$.\\
 			
 			What the theory tells you is that as you increase $p$ and keeping $\eta$ fixed:
 			\begin{itemize}
@@ -207,7 +207,7 @@
 				\label{eq:risktozero}
 			\end{equation}
 			
-			\textbf{But} Our dataset is never going to be inifinitley large. Therefore a more realistic formulation for the convergence of ERM would be that it will below some value $\epsilon$:
+			\textbf{But} Our dataset is never going to be infinitely large. Therefore a more realistic formulation for the convergence of ERM would be that it will below some value $\epsilon$:
 			\begin{equation}
 					P \Big\{ {\color{question1} 
 							\big| R_{[\vec{w}_p]} - R_{[\vec{w}_0]} \big| 
@@ -224,6 +224,6 @@
 						\label{eq:convergenceepsgeneral}
 				\end{equation}
 			
-			The key difference between \eqref{eq:convergenceeps} and \eqref{eq:convergenceepsgeneral} is that the latter is no longer restricted to the solutions $\vec w_p$ at which the empricial risk is minimal but may include solutions $\vec w$ that can potentially generalize better.
+			The key difference between \eqref{eq:convergenceeps} and \eqref{eq:convergenceepsgeneral} is that the latter is no longer restricted to the solutions $\vec w_p$ at which the empirical risk is minimal but may include solutions $\vec w$ that can potentially generalize better.
 }
 \end{frame}

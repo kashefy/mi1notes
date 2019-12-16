@@ -31,7 +31,7 @@
 \pause
 \item For each possible binary label configuration (total: $2^p$) $\{y_T^{(\alpha)}\}_{\alpha=1}^p$ do
 	\begin{itemize}
-	\item[] Train the paramters $\vec w$ of a model from the set $\Lambda$.
+	\item[] Train the parameters $\vec w$ of a model from the set $\Lambda$.
 	\item[] Generate binary predictions $\{y^{(\alpha)}(\vec x^{(\alpha)}; \vec w)\}_{\alpha=1}^p$
 	\item[] Measure the error $E^T_{[\vec w]}$
 	\item[] If $E^T_{[\vec w]} = 0$ keep the model, otherwise, discard it. 
@@ -48,7 +48,7 @@ then the model class $\Lambda$ with that number of tunable parameters in $\vec w
 
 \textbf{Important}:\\
 
-Shattering requires finding \underline{at least one arrangment} of the $p$ points for which the model can be fitted to all $2^p$ label configurations.
+Shattering requires finding \underline{at least one arrangement} of the $p$ points for which the model can be fitted to all $2^p$ label configurations.
 
 \mode<article>{
 It does not have to be able to for all possible arrangements (placements) of the $p$ points.
@@ -103,7 +103,7 @@ y^{\text{sinusoid}}(x;w) = \sign \big\lbrack \sin\left( w x \right) \big\rbrack
 \question{How is ${\dvc}^{\text{sinusoid}} = \infty$? There's only 1 parameter!}
 
 \mode<article>{
-The parameters of the sinusoid are, amplitude, phase and frequency. A total of 3 parameters. Regardless of how many points there are, it is always possible to find values for the 3 paramters such that the sinusoid goes through all $p$ points.
+The parameters of the sinusoidal are, amplitude, phase and frequency. A total of 3 parameters. Regardless of how many points there are, it is always possible to find values for the 3 parameters such that the sinusoidal goes through all $p$ points.
 }
     
 \end{frame}
