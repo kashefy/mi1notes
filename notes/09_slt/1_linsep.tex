@@ -54,7 +54,7 @@ Example with 4 points in 2D:
 			\centering
 			\includegraphics[width=0.85\textwidth]{img/linearly_sep}
             \mode<article>{
-			\caption{Classifying 4 points in 2D. Multiply by 2 (reverse classification) to get all possible $2^4 = 16$ configurations.}
+			\caption{Classifying 4 points in 2D. Multiply by 2 (reverse classification) to get all possible $2^4 = 16$ configurations. 2 of those configurations, the XOR- (top-right) and XNOR-like configurations are not linearly separable.}
             }
 		\end{figure}
 \end{frame}
@@ -117,6 +117,7 @@ The binomial coefficient $\left({4 \atop 2}\right) = \frac{4!}{2!(4-2)!} = 6$. $
 	p-1\\
 	k
 	\end{array}\right)
+	\label{eq:cwithbias}
 \end{equation*}
 
 Using our example with $p=4$ and $N=2$:
@@ -167,16 +168,17 @@ Using our example with $p=4$ and $N=2$:
 	p-1\\
 	k
 	\end{array}\right)
+	\label{eq:cnobias}
 \end{equation}
 
-\question{Why does the sum for $\tilde C_{(p,N)}$ run to $N$ instead of $N-1$?}
+\question{Why does the sum for $\tilde C_{(p,N)}$ run to $N$ instead of $N-1$?}\\
 
 \mode<article>{
--The reason that $\tilde C_{(p,N)}$ computes the sum for $k=1,\ldots,N$ instead of stopping at $N$ is that sum iterates over the degrees of freedom. 
+-The difference between $\tilde C_{(p,N)}$ from \eqref{eq:cwithbias} and $C_{(p,N)}$ from \eqref{eq:cnobias} look different is due to the fact that $\tilde C_{(p,N)}$ computes the sum for $k=1,\ldots,N$ instead of stopping at $N$ is that sum iterates over the degrees of freedom. 
 Choosing a connectionist neuron to the separation involves $N+1$ degrees of freedom because we add the bias term (the ability to translate the hyperplane).
 Therefore, the reason is the model choice and assuming that $C_{(p,N)}$ counts separability around the origin without the ability to shift the hyperplane.
 
--An alternative explanation to the difference in the formula is how to intepret $N$. The definition of $C_{(p,N)}$ treats $N$ as the parameters of the hyperplane. Therefore the bias is implicit.
+-An alternative explanation to the difference between $\tilde C_{(p,N)}$ and $C_{(p,N)}$ is how to intepret $N$. The definition of $C_{(p,N)}$ treats $N$ as the parameters of the hyperplane. Therefore the bias is implicit.
 If we assume that $N$ is the number of components in $\vec x$ and we need to prepend a bias term to it, we compute the number of separable configurations using $\tilde C_{(p,N)}$. 
 It is important to understand that $\tilde C_{(p,N)}$ and $C_{(p,N)}$ effecitvley yield the same result when we feed each the appropriate arguments.
 }
@@ -203,7 +205,10 @@ Use the the recursive formula for the binomial coefficient to show that:
 
 \begin{equation}
 \tilde C_{(p,N)}+\tilde C_{(p,N-1)}=\tilde C_{(p+1,N)}
+\label{eq:c_relation}
 \end{equation}
+
+The relevance of \notesonly{\eqref{eq:c_relation}}\slidesonly{ this} relationship becomes apparant when attempting to derive the VC dimension \notesonly{(introduced in \sectionref{seq:dvc})} of a connectionist neuron.
 
 \end{frame}
 
@@ -214,71 +219,80 @@ Use the the recursive formula for the binomial coefficient to show that:
 
 {
 \begin{align}
-\only<1>{
+\only<1,2>{
 	\tilde C_{(p,N)} 
-	\qquad + \;\;\quad \tilde C_{(p,N-1)} \qquad
-    &= \slidesonly{\qquad} \tilde C_{(p+1,N)}\\
-    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+	\qquad + \quad \tilde C_{(p,N-1)} \;\;\quad
+    &= \slidesonly{\qquad} \tilde C_{(p+1,N)}\qquad\\
+    \notesonly{
+	\intertext{Plugging in \eqref{eq:cwithbias} for each:}
+	}
+    2 \sum_{k=0}^{N} \left(\kern-1ex \begin{array}{c}
 	p-1\\
 	k
-	\end{array}\right)
+	\end{array} \kern-1ex \right)
     +
-    2 \sum_{k=0}^{N-1} \left( \begin{array}{c}
+    2 \sum_{k=0}^{N-1} \left(\kern-1ex \begin{array}{c}
 	p-1\\
 	k
-	\end{array}\right)
+	\end{array} \kern-1ex \right)
     &= 
-    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+    2 \sum_{k=0}^{N} \left(\kern-1ex \begin{array}{c}
 	p+1-1\\
 	k
-	\end{array}\right)\\
-    2 \left( \begin{array}{c}
+	\end{array} \kern-1ex \right)\\
+}
+\only<2,3,4>{
+	\intertext{Simplify the LHS by modifying the sums such that they share the same limits:}
+	{\color{magenta}
+    2 \left(\kern-1ex \begin{array}{c}
 	p-1\\
 	0
-	\end{array}\right)
+	\end{array}\kern-1ex\right)}
     +
-    2 \sum_{k=1}^{N} \left( \begin{array}{c}
+    2 \sum_{k={\color{magenta}\cancel{0}1}}^{N} \left(\kern-1ex \begin{array}{c}
 	p-1\\
 	k
-	\end{array}\right)
+	\end{array} \kern-1ex \right)
     +
-    2 \sum_{k=0}^{N{\color{red}-1}} \left( \begin{array}{c}
+    2 \sum_{k=0}^{N{\color{red}-1}} \left(\kern-1ex \begin{array}{c}
 	p-1\\
 	k
-	\end{array}\right)
+	\end{array}\kern-1ex\right)
     &= 
-    2 \sum_{k=0}^{N} \left( \begin{array}{c}
+    2 \sum_{k=0}^{N} \left(\begin{array}{c}
 	p\\k
 	\end{array}\right)
 	\\
-    2 \left( \begin{array}{c}
+}
+\only<3,4>{
+    2 \left(\kern-1ex \begin{array}{c}
 	p-1\\ 0
-	\end{array}\right)
-    +
+	\end{array} \kern-1ex \right)
+    + 2
     {\color{blue}
-    2 \sum_{k=1}^{N}
-    }\left( \begin{array}{c}
+    \sum_{k=1}^{N}
+    }\left(\kern-1ex \begin{array}{c}
 	p-1\\ k
-	\end{array}\right)
-    + 
+	\end{array} \kern-1ex \right)
+    + 2
     {\color{blue}
-    2 \sum_{k=1}^{N}
-    } \left( \begin{array}{c}
+    \sum_{k=1}^{N}
+    } \left(\kern-1ex \begin{array}{c}
 	p-1\\ k{\color{red}-1}
-	\end{array}\right)
+	\end{array} \kern-1ex \right)
     &=
     %2 \sum_{k=0}^{N} \left( \begin{array}{c}
 	%p\\ k
 	%\end{array}\right)
-}
-\only<1,2>{
 	\\
-    2 \left( \begin{array}{c}
+}
+\only<4>{
+    2 \left(\kern-1ex \begin{array}{c}
 	p-1\\ 0
-	\end{array}\right)
-    +
+	\end{array} \kern-1ex \right)
+    + 2
     {\color{blue}
-    2 \sum_{k=1}^{N}
+    \sum_{k=1}^{N}
     }
     \bigg \lbrack \underbrace{
     \left(
@@ -292,31 +306,27 @@ Use the the recursive formula for the binomial coefficient to show that:
     }_{=\left(
     \begin{array}{c} 
 	p\\ k
-	\end{array}\right)\text{ (recursive property)}}
+	\end{array}\right)\text{ (using the recursive property)}}
     \bigg 
     \rbrack
     &=
-     %2 \sum_{k=0}^{N}
-    %\left(
-    %\begin{array}{c} 
-	%p\\ k
-	%\end{array}\right)
 	\\
 }
-\only<2>{
-    2 \underbrace{\left( \begin{array}{c}
+\only<5>{
+    2 \; \underbrace{\kern-0.8ex\left( \begin{array}{c}
 	p-1\\ 0
-	\end{array}\right)}_{=1=\left( \begin{array}{c}
+	\end{array}\right)\kern-0.8ex}_{=1=\left( \begin{array}{c}
 	p\\ 0
 	\end{array}\right)}
     +
-    2 \sum_{k=1}^{N}\left( \begin{array}{c}
+    2 {\color{blue}\sum_{k=1}^{N}}\left( \begin{array}{c}
 	p\\ k
 	\end{array}\right)
     &= 2 \sum_{k=0}^{N}
     \left( \begin{array}{c}
 	p\\ k
 	\end{array}\right)\\
+\intertext{$\left({p \atop 0}\right)$ can now be absorbed into the sum:}
 2 \sum_{k=0}^{N}
     \left( \begin{array}{c}
 	p\\ k
@@ -330,7 +340,7 @@ Use the the recursive formula for the binomial coefficient to show that:
 \end{align}
 }
 \mode<presentation>{
-\only<2>{
+\only<5>{
 \begin{equation*}
 \tilde C_{(p,N)}+\tilde C_{(p,N-1)}=\tilde C_{(p+1,N)}
 \end{equation*}

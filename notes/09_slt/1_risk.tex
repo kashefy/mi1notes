@@ -1,4 +1,4 @@
-\section{Convergence of Empirical risk minimization (ERM)}
+\section{Convergence of empirical risk minimization (ERM)}
 
 \mode<presentation>{
 \begin{frame} 
@@ -10,30 +10,35 @@
 
 \begin{frame}\frametitle{The learning problem}
     \mode<article>{
-    \begin{figure}
+    \begin{figure}[h]
         \centering
-		\includegraphics[height=3cm]{img/section2_fig1.pdf}
+		\includegraphics[height=4cm]{img/section2_fig1.pdf}
+		\caption{Comparing risk with empirical risk using a finite set with $p$ points.}
 	\end{figure}
     }
     \mode<presentation>{
 	\placeimage{8}{3}{img/section2_fig1}{width=6cm}
     }
+    \underline{Setting}:\\
+    
 	\begin{itemize}
 		\item {\footnotesize samples are drawn \iid~from $P(\vec x, y_T)$\\[1mm]
 			 $\quad \leadsto \quad$ $\vec w$ are random variables}
         \item $R_{[\vec w_p]}\,\corresponds\,E^{T}_{[\vec w]}$ \notesonly{:the empirical risk obtained from training the model using a finite set with $p$ points, and}
         \item $R_{[\vec w_{\color{red}0}]}\,\corresponds\,E^{G}_{[\vec w]}$ \\
-        Recall
+        \slidesonly{\vspace{5mm}}
+        
+        Recall that
         \begin{eqnarray} \hspace{5mm} 
 			E_{[\vec{w}]}^G 
 			&=& \text{probability of misclassification} \\[-1mm]
 			&=& \int P_{(y_T, \vec{x})} \,
 				e_{(y_T, \vec{x};\vec{w})} \, 
-				d \vec{x} \, d y_T \;\;\eqexcl\;\; \min
+				d \vec{x} \, d y_T \;\;\eqexcl\;\; \min_{\vec w}
 		\end{eqnarray}
         
         \notesonly{
-        Therefore, $R_{[\vec w_0]}$ represents the risk obtained from training the model using inifinite many points.
+        Therefore, $R_{[\vec w_0]}$ represents the risk value obtained from training the model using inifinite many points.
         }
         (Don't treat the ${\color{red}_0}$ as zero data points but rather as ``minimal'' risk)
 	\end{itemize}
@@ -44,26 +49,43 @@
 \definecolor{question2}{rgb}{0,0.5,0}
 \begin{frame}\frametitle{When does inductive learning through ERM work?}
 	\begin{center} 
-		\includegraphics<1-2>[height=4cm]{img/section2_fig1_question1.pdf}
-		\includegraphics<3->[height=4cm]{img/section2_fig1_question2_lessw.pdf}  
+	\slidesonly{
+		\includegraphics<1-2>[height=4cm]{img/section2_fig1_question1}
+		}
+		\begin{figure}[h]
+			\centering
+			\includegraphics<3->[height=4cm]{img/section2_fig1_question2_lessw} 
+			\mode<article>{
+			\caption{
+			Measuring the difference between empricial risk obtained from a finite site of $p$ points with risk obtained using inifitely many points.
+			}
+			\label{fig:randremp}
+			} 
+		\end{figure}
 	\end{center}
 	\only<1>{
+	
+	\underline{The key questions of Statistical Learning Theory:}
+	
 		\begin{enumerate}
+		\slidesonly{
+		\vspace{-5mm}
 		\item {\footnotesize $p$ samples are drawn \iid~from $P(\vec x, y_T)$\\[1mm]
 			 $\quad \leadsto \quad$ $\vec w$ are random variables}
-			\item 
-				\vspace{1mm}
-				\iitem{$R_{\text{emp}[\vec w_p]}$ 
-					should reflect the true optimal risk $R_{[\vec w_0]}$ 
-					in the limit $p \to \infty$:}
-				\vspace{1mm}
-				\begin{equation*}
-					\lim_{p \rightarrow \infty} P \Big\{ 
-							{\color{question1} \big| R_{(\vec{w}_p)}
-							- R_{(\vec{w}_0)} \big| }
-						\geq \eta \Big\} \;\;=\;\; 0 \,,
-						\quad\text{ for all }\quad \eta > 0 \,.
-				\end{equation*}
+			 }
+		\item 
+			\vspace{1mm}
+			\iitem{$R_{\text{emp}[\vec w_p]}$ 
+				should reflect the true optimal risk $R_{[\vec w_0]}$ 
+				in the limit $p \to \infty$:}
+			\vspace{1mm}
+			\begin{equation}
+				\lim_{p \rightarrow \infty} P \Big\{ 
+						{\color{question1} \big| R_{(\vec{w}_p)}
+						- R_{(\vec{w}_0)} \big| }
+					\geq \eta \Big\} \;\;=\;\; 0 \,,
+					\quad\text{ for all }\quad \eta > 0 \,.
+			\end{equation}
 		\end{enumerate}
 	} \only<2>{
 		\begin{enumerate} \setcounter{enumi}{1}
@@ -72,11 +94,11 @@
 				\vspace{1mm}
 				\iitem{For a given confidence $\epsilon$, find $\eta$ such that}
 				\vspace{1mm}
-				\begin{equation*}
+				\begin{equation}
 					P \Big\{ {\color{question1} 
 							\big| R_{[\vec{w}_p]} - R_{[\vec{w}_0]} \big| 
 						} \geq \eta \Big\} \;\;<\;\; \epsilon \,.
-				\end{equation*}
+				\end{equation}
 		\end{enumerate}
 	} \only<3>{
 		\begin{enumerate} \setcounter{enumi}{2}
@@ -88,12 +110,12 @@
 					%i.e.~$R_{(\vec w)} \approx R_{\mathrm{emp}(\vec w)}$:
 				}
 				\vspace{1mm}
-				$$
+				\begin{equation}
 					P \Big\{ {\color{question2}
 							\big| R_{[\vec w]} - R_{\mathrm{emp}[\vec w]} \big|
 						} > \eta \Big\} \;\;<\;\; \epsilon \,, 
 						\qquad \forall \vec w \in \Lambda \,.
-				$$
+				\end{equation}
                 where $\Lambda$ is the model class (e.g. connectionist neuron)
 		\end{enumerate}
 	}
@@ -113,16 +135,29 @@
 				\label{eq:erm_converges_zero}
 			\end{equation}
 			
-			Understanding what $P\bigg\{ 
+			Understanding \figref{fig:randremp} and what $P\bigg\{ 
 					{
 						\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
 					}
 				\geq \eta \bigg\}$ represents:
 			
 			\begin{itemize}
-			\item We expect the model trained on $p$ points to accumulate some error $R_{[\vec w_p]}$.
-			\item Training the model with a different set of $p$ points may yield a different value for $R_{[\vec w_p]}$.
-			\item Training many models with $p$ will yield many values for $R_{[\vec w_p]}$.
+			\item We expect the model trained on $p$ points to have  some error $R_{\text{emp}}$ that is minimal for some $\vec w_p$ at which the emprical error is $R_{\text{emp}[\vec w_p]}$.
+			\item Estimating the generalization performance for the solution $\vec w_p$ on a hold-out set yields a risk value of $R_{[\vec w_p]}$. We expect it to be higher than the optimal risk $R_{[\vec w_0]}$. We therefore measure the absolute difference between both:
+			\begin{equation}
+			{\color{question1}
+			\big| R_{(\vec{w}_p)}
+						- R_{(\vec{w}_0)} \big|
+						}
+			\end{equation}
+			\item Training the model with a different set of $p$ points (the size of the training set is kept at $p$) may yield a different minimum for $R_{\text{emp}[\vec w_p]}$ with a corresponding generalization performance $R_{[\vec w_p]}$ and consequently a different absolute difference ${\color{question1}
+			\big| R_{(\vec{w}_p)}
+						- R_{(\vec{w}_0)} \big|
+						}$
+			\item Training many models while keeping $p$ fixed will yield many values for the absolute difference ${\color{question1}
+			\big| R_{(\vec{w}_p)}
+						- R_{(\vec{w}_0)} \big|
+						}$
 			\item Measuring the absolute difference between every $R_{[\vec w_p]}$ we obtained and $R_{[\vec w_0]}$ will lead to ``difference values'' that follow some distribution $P\bigg\{ 
 					{
 						\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big| 
@@ -136,13 +171,14 @@
 					}
 				\geq \eta \bigg\}\,, \quad \forall \eta > 0
 			\end{equation}
-			This is the same asking how often does traning with $p$ points yield a difference in risk above some value.
-			\item Now repeat tranining these models but using a larger value for $p$.\\
+			This is the same asking: How often does traning with $p$ points yield a difference in risk above some value.
+			\item Now we repeat tranining these models but using a larger value for $p$.\\
+			
 			What the theory tells you is that as you increase $p$ and keeping $\eta$ fixed:
 			\begin{itemize}
 			\item The $R_{[\vec w_p]}$ of the models will improve and get smaller.
-			\item The absolute differences $\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big|$ will become smaller and smaller,
-			\item The distribution of these differences will shift below $\eta$ (i.e. to the left of $\eta$)
+			\item The absolute differences ${color{question1}\Big|R_{[\vec w_p]} - R_{[\vec w_0]}\Big|}$ will become smaller and smaller,
+			\item As depicted by , the distribution of these differences will shift below $\eta$ (i.e. to the left of $\eta$)
 			\item Less and less models will score differences $\ge \eta$
 			\item Eventually, for some large $p$, the $R_{[\vec w_p]}$ of the models will be so good that the probability of finding a model that has a risk difference of $\eta$ or higher (worse performance) will vanish. And this is what \eqref{eq:risktozero} describes:
 			\end{itemize}
