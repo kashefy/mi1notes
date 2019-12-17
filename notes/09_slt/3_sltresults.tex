@@ -1,0 +1,31 @@
+\section{Results statistical learning theory}
+
+\begin{frame}\frametitle{Results of Statistical Learning Theory}
+		\begin{itemize}
+			\item formulation of conditions under which ERM works and its convergence (cf. \sectionref{sec:convergence_erm})
+			\item bounds describing \textbf{generalization ability} of ERM \\
+            
+            For a finite training set, the generalization error is bound with probability $1-\epsilon$:
+            \begin{equation}
+				E^{G}_{[\vec w]} \;\le\; E^{T}_{[\vec w]} + \sqrt{\frac{\dvc \left(\ln \frac{2\,p}{\dvc} + 1\right)-\frac{\epsilon}{4}}{p}} \quad \text{for } p > \dvc
+				\label{eq:generalizationresults}
+            \end{equation}
+            
+            \mode<article>{
+            where $\dvc \left(\ln \frac{2\,p}{\dvc} + 1\right) =: G^{\Lambda}_{(2p)}$ from \eqref{eq:growthpiecewise} for $p > \dvc$.
+            }
+            
+            \mode<article>{
+            \eqref{eq:generalizationresults} is obtained by solving \eqref{eq:boundgenerlization} for $\epsilon$ \footnote{If interested, cf. supplementary material ``Deviations from the optimal model''}.
+            }
+            
+            100\% overfitting for $p\,<\,\dvc$.
+            
+            Bound allows to calculate $p$ for targeting a given generalization error.
+            
+			\item inductive inference for \textbf{small sample size}s 
+				based on these bounds
+			\item methods for implementing this new type 
+				of inference ($\rightarrow$ maximum margin classifiers e.g. {SVMs})
+		\end{itemize}
+\end{frame}

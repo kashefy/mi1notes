@@ -7,6 +7,7 @@
 \RequirePackage{etoolbox, comment} % not ifthen, xstring, 
 \RequirePackage[latin9]{inputenc}
 \RequirePackage[T1]{fontenc}
+\usepackage{hyperref}
 \usepackage[overlay,absolute]{textpos}
 \RequirePackage{enumerate}
 \RequirePackage{graphics,graphicx}
