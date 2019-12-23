@@ -9,16 +9,14 @@
     \begin{center}
         Essentially just hill-climbing (gradient ascent)
     \end{center}
-\end{frame}
-
-\begin{frame}\frametitle{\secname}
+    \pause
 
 \underline{Objective}: \\
 \textit{Maximize} an objective function while also satisfying some constraint(s).\\
 {
 \small(\textit{Maximize}: Find the arguments that maximize an objective function.)
 }\\[5mm]
-Don't forget: any maximization problem can be turned into a minimization problem.
+Don't forget: any maximization problem can be turned into a minimization problem\notesonly{ by maximizing the ``negative'' of the function}.
 \end{frame}
 
 \subsection{Gradient ascent - unconstrained optimization}
@@ -60,39 +58,44 @@ We restrict solutions to those that satisfy the constraint $g(w_1, w_2) = c$:
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\linewidth]{img/lagrange_objfunction_constrained}
+\includegraphics[width=0.7\linewidth]{img/lagrange_objfunction_constrained}
 \mode<article>{
-\caption{The surface of the constaint cuts through that of the objective function. The highest point that can be reached on $f$ which also intersects with $g$ is unique in that the gradient of $f$ and $g$ both point in the same direction with only a difference in scale.}
+\caption{The surface of the constaint cuts through the surface of the objective function. The highest point that can be reached on $f$ which also intersects with $g$ is unique in that the gradients of $f$ and $g$ both point in the same direction with only a difference in scale.}
 }
 \end{figure}
 
+\question{What is characteristic of the solution to the constrained optimization problem?}
 
-$$\vec \nabla f = \lambda' \vec \nabla g\,,\quad
+\notesonly{
+-The solution of the constrained optimization problem is characterized by:
+}
+\begin{equation}
+    \vec \nabla f = \lambda' \vec \nabla g\,,\quad
 \text{where $\lambda'$ is a scaling factor.}
-$$
-This holds for the highest position in $f$ while also satisfying the constraint.
+\label{eq:equality}
+\end{equation}
+
+\notesonly{\eqref{eq:equality} holds for the highest position in $f$ while also satisfying the constraint.}
 Consequently,
 
+\begin{align}
+  \vec \nabla f \; - \lambda' \vec \nabla g     &= \vec 0 \\
+  \vec \nabla f \; + \underbrace{(- \lambda')}_{=:\lambda} \vec \nabla g &= \vec 0 \\
+  \vec \nabla f \;  + \lambda \vec \nabla g      &= \vec 0 \text{ (to be more consistent with lecture slides.})
+\end{align}
 
-\begin{centering}
-\begin{align*}
-  \vec \nabla f \; &-& \lambda' \vec \nabla g     &= \vec 0 \\
-  \vec \nabla f \; &+& (- \lambda') \vec \nabla g &= \vec 0 \\
-  \vec \nabla f \;  &+& \lambda \vec \nabla g      &= \vec 0 \text{ (to be more consistent with lecture slides.})\\
-\end{align*}
-\end{centering}
 \end{frame}
 
 \begin{frame}
 %\newpage
 The optimization problem is thus:
 
-$$
-\underbrace{f(w_1, w_2) \;\eqexcl\; \text{max}}_{\text{maximization}} \quad  \text{subject to} \quad \underbrace{g(w_1,w_2)\;-c\; = \; 0}_{\text{one constraint}}
-$$
+\begin{equation}
+\underbrace{f(w_1, w_2) \;\eqexcl\; \max_{w_{1},w_{2}}}_{\text{maximization}} \quad  \text{subject to} \quad \underbrace{g(w_1,w_2)\;-c\; = \; 0}_{\text{one constraint}}
+\end{equation}
 
 \newpage
-The Lagrangian is then defined as:
+The Lagrangian function is then defined as:
 
 $$
 L(w_1, w_2, \lambda) \; = \; f(w_1,w_2) + \lambda(g(w_1, w_2)-c)
