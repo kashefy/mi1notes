@@ -52,7 +52,7 @@ The gradient $\vec \nabla f$ describes the direction of greatest ascent:\\
 
 \newpage
 
-\subsection{Adding a constraint}
+\subsection{Adding a single constraint}
 \begin{frame}\frametitle{\subsecname}
 We restrict solutions to those that satisfy the constraint $g(w_1, w_2) = c$:
 
@@ -64,50 +64,69 @@ We restrict solutions to those that satisfy the constraint $g(w_1, w_2) = c$:
 }
 \end{figure}
 
-\question{What is characteristic of the solution to the constrained optimization problem?}
-
+\only<1,2>{
+\question{What is characteristic of the solution to the constrained optimization problem?}\\
+}
 \notesonly{
 -The solution of the constrained optimization problem is characterized by:
 }
+\only<2>{
+\slidesonly{\vspace{-5mm}}
 \begin{equation}
     \vec \nabla f = \lambda' \vec \nabla g\,,\quad
 \text{where $\lambda'$ is a scaling factor.}
 \label{eq:equality}
 \end{equation}
+}
+\notesonly{\eqref{eq:equality} holds for the highest position in $f$ while also satisfying the constraint.\\
 
-\notesonly{\eqref{eq:equality} holds for the highest position in $f$ while also satisfying the constraint.}
-Consequently,
-
+Consequently,}
+% temporarily change footnote marks to symbols so not to confuse with exponents
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\only<3>{
+\slidesonly{\vspace{-5mm}}
 \begin{align}
   \vec \nabla f \; - \lambda' \vec \nabla g     &= \vec 0 \\
   \vec \nabla f \; + \underbrace{(- \lambda')}_{=:\lambda} \vec \nabla g &= \vec 0 \\
-  \vec \nabla f \;  + \lambda \vec \nabla g      &= \vec 0 \text{ (to be more consistent with lecture slides.})
+  \vec \nabla f \;  + \lambda \vec \nabla g      &= \vec 0\notesonly{\;\footnotemark }
+  \label{eq:equalitylambda}
 \end{align}
+}
+\notesonly{
+    \footnotetext{
+    The switch from $\lambda'$ to $\lambda$ is to be more consistent with lecture slides.
+    }
+}
+% change footnote marks back to original scheme (numbers)
+\renewcommand*{\thefootnote}{\arabic{footnote}}
 
 \end{frame}
 
 \begin{frame}
 %\newpage
-The optimization problem is thus:
+The constrained optimization problem is formulated as:
 
 \begin{equation}
-\underbrace{f(w_1, w_2) \;\eqexcl\; \max_{w_{1},w_{2}}}_{\text{maximization}} \quad  \text{subject to} \quad \underbrace{g(w_1,w_2)\;-c\; = \; 0}_{\text{one constraint}}
+\underbrace{f(w_1, w_2) \;\eqexcl\; \max_{w_{1},w_{2}}}_{\text{maximization}} \quad  \text{subject to} \quad \underbrace{g(w_1,w_2)\;-c\; = \; 0}_{\text{a single constraint}}
+\label{eq:optconstrained}
 \end{equation}
 
-\newpage
-The Lagrangian function is then defined as:
+\notesonly{
+The \emph{Lagrangian} function reformulates the constrained optimization problem from \eqref{eq:optconstrained} in a way that reflects the relationship of the two gradients at the solution and thus facilitate finding the solution \eqref{eq:equalitylambda}.} The Lagrangian is therefore defined as:
 
-$$
+\begin{equation}
 L(w_1, w_2, \lambda) \; = \; f(w_1,w_2) + \lambda(g(w_1, w_2)-c)
-$$
+\end{equation}
 
 Setting the gradient $\nabla L$ to zero guarantees $\vec \nabla f \;  + \lambda \vec \nabla g = \vec 0$
 
-$$
+\pause 
+
+\begin{equation}
 \vec \nabla L = 
 \rmat{
-	\frac{\partial L}{\partial w_1} \\[0.3cm]
-	\frac{\partial L}{\partial w_2} \\[0.3cm]
+	\frac{\partial L}{\partial w_1} \\[0.5cm]
+	\frac{\partial L}{\partial w_2} \\[0.5cm]
 	\frac{\partial L}{\partial \lambda}
 	}
 =
@@ -116,18 +135,36 @@ $$
 	\frac{\partial f}{\partial w_2} \quad+\quad \lambda \frac{\partial g}{\partial w_2} \\[0.3cm]
 	\underbrace{\frac{\partial f}{\partial \lambda}}_{=0} \;+\; g(w_1, w_2)-c
 	}
-$$
+=
+\rmat{
+	0 \\[0.5cm]
+	0 \\[0.5cm]
+    0
+	}
+= \vec 0
+\label{eq:lagrangiangrad}
+\end{equation}
 
-Setting the first two elements in $\nabla L$, namely $\frac{\partial L}{\partial w_1}$ and $\frac{\partial L}{\partial w_2}$, to zero ensures that $\nabla f = -\lambda \nabla g$,\\
+Setting the first two elements of $\nabla L$\notesonly{, namely $\frac{\partial L}{\partial w_1}$ and $\frac{\partial L}{\partial w_2}$,} to zero ensures that $\nabla f = -\lambda \nabla g$,\\
 while $\frac{\partial L}{\partial \lambda}=0$ ensures that $g(w_1, w_2) = c$.\\
 
-3 equations, 3 unknowns.\\
+\eqref{eq:lagrangiangrad} describes a system of 3 equations with 3 unknowns.\\
 
-We refer to $\lambda$ as the multiplier for constraint $c$.
+We refer to $\lambda$ as the \emph{multiplier} for constraint $c$.
 
+\end{frame}
 
-\subsection{How do we extend this to multiple constraints?}
+\begin{frame}\frametitle{Example}
+ 
+    
+\end{frame}
 
+\subsection{Multiple constraints}
+
+\begin{frame}
+ 
+\question{How do we extend this to multiple constraints?}
+    
 $$
 \underbrace{f_0(\vec w) \;\eqexcl\; \text{max}}_{\text{maximization}} \quad  \text{and} \quad f_k(\vec w)\;\le\; = \; 0 \;, \quad k = 1,\ldots,m
 $$
