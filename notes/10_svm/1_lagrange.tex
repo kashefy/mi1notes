@@ -103,24 +103,24 @@ Consequently,}
 \end{frame}
 
 \begin{frame}
-%\newpage
+\only<1,2>{
 The constrained optimization problem is formulated as:
-
 \begin{equation}
 \underbrace{f(w_1, w_2) \;\eqexcl\; \max_{w_{1},w_{2}}}_{\text{maximization}} \quad  \text{subject to} \quad \underbrace{g(w_1,w_2)\;-c\; = \; 0}_{\text{a single constraint}}
 \label{eq:optconstrained}
 \end{equation}
-
+}
 \notesonly{
-The \emph{Lagrangian} function reformulates the constrained optimization problem from \eqref{eq:optconstrained} in a way that reflects the relationship of the two gradients at the solution and thus facilitate finding the solution \eqref{eq:equalitylambda}.} The Lagrangian is therefore defined as:
+The \emph{Lagrangian} function reformulates the constrained optimization problem from \eqref{eq:optconstrained} in a way that reflects the relationship of the two gradients at the solution and thus facilitate finding the solution \eqref{eq:equalitylambda}.} The \emph{Lagrangian} is \notesonly{therefore }defined as:
 
+\only<2,3>{
 \begin{equation}
 L(w_1, w_2, \lambda) \; = \; f(w_1,w_2) + \lambda(g(w_1, w_2)-c)
 \end{equation}
 
 Setting the gradient $\nabla L$ to zero guarantees $\vec \nabla f \;  + \lambda \vec \nabla g = \vec 0$
-
-\pause 
+}
+\only<3>{
 
 \begin{equation}
 \vec \nabla L = 
@@ -148,40 +148,67 @@ Setting the gradient $\nabla L$ to zero guarantees $\vec \nabla f \;  + \lambda 
 Setting the first two elements of $\nabla L$\notesonly{, namely $\frac{\partial L}{\partial w_1}$ and $\frac{\partial L}{\partial w_2}$,} to zero ensures that $\nabla f = -\lambda \nabla g$,\\
 while $\frac{\partial L}{\partial \lambda}=0$ ensures that $g(w_1, w_2) = c$.\\
 
-\eqref{eq:lagrangiangrad} describes a system of 3 equations with 3 unknowns.\\
+\notesonly{\eqref{eq:lagrangiangrad} describes a system of }3 equations with 3 unknowns.\notesonly{
+\footnote{
+Not much emphasis is put on knowing how to solve this by hand. If interested, the wikipedia article on \href{https://en.wikipedia.org/wiki/Lagrange_multiplier\#Examples}{Lagrange multiplier} provides some examples.}
+}\\
 
-We refer to $\lambda$ as the \emph{multiplier} for constraint $c$.
-
-\end{frame}
-
-\begin{frame}\frametitle{Example}
- 
-    
+We refer to $\lambda$ as the \emph{multiplier} for the constraint $c$.
+}
 \end{frame}
 
 \subsection{Multiple constraints}
 
 \begin{frame}
  
-\question{How do we extend this to multiple constraints?}
+\question{How do we extend this to multiple {\color{red}{equality}} constraints?}
+
+\slidesonly{\vspace{-2mm}}
     
-$$
-\underbrace{f_0(\vec w) \;\eqexcl\; \text{max}}_{\text{maximization}} \quad  \text{and} \quad f_k(\vec w)\;\le\; = \; 0 \;, \quad k = 1,\ldots,m
-$$
+\begin{equation}
+\underbrace{f_0(\vec w) \;\eqexcl\; \text{max}}_{\text{maximization}} \quad  \text{and} \quad f_k(\vec w)\;{\color{red}{=}}\; \; 0 \;, \quad k = 1,\ldots,m
+\label{eq:optimizationequalitymultipe}
+\end{equation}
 
-where $m$ denotes the number of constraints.
+where $m$ denotes the number of constraints. $f_{0}(\vec w)$ is reserved for the function to be optimized., while $f_{1}(\vec w), f_{2}(\vec w),\ldots,f_{m}(\vec w)$ is used for all $m$ constraints.
 
-The Lagrangian is then defined as:
-
-$$
-L(\,\vec w\;, \underbrace{\{\lambda_k\}}_{
+The Lagrangian for multiple constraints is defined as:
+%\slidesonly{\vspace{-2mm}}
+\begin{align}
+L(\,\vec w\;, \overbrace{\{\lambda_k\}}^{
 \mathclap{
 \substack{\text{a multiplier} \\
 \text{for each constraint}}
 }
-}) \; = \; f_0(\vec w) + \sum_{k=1}^{m} \lambda_k \, f_k(\vec w)
-$$
+}) 
+\; &= \; 
+f_0(\vec w) + \lambda_1 \, f_1(\vec w) + \lambda_2 \, f_2(\vec w) + \, \ldots \, + \lambda_m \, f_m(\vec w) \\
+\; &= \; 
+f_0(\vec w) + \sum_{k=1}^{m} \lambda_k \, f_k(\vec w)
+\label{eq:lagrangianmultiple}
+\end{align}
 
+\question{What if we have {inequality} constraints?}
 
 \end{frame}
 
+\begin{frame}
+
+In the case of {\color{red}{inequality}} constraints, our constrained optimization problem would have the following form:
+
+\begin{equation}
+\underbrace{f_0(\vec w) \;\eqexcl\; \text{max}}_{\text{maximization}} \quad  \text{and} \quad f_k(\vec w)\; {\color{red}{\le}} \; 0 \;, \quad k = 1,\ldots,m{}
+\label{eq:optimizationINequalitymultipe}
+\end{equation}
+
+However, the Lagrangian remains the same\notesonly{ as in \eqref{eq:lagrangianmultiple}}. The inequality is taken into account in that the solutions for $\lambda$ extend to some range:
+
+\begin{equation}
+L(\,\vec w\;, \{\lambda_k\}
+) \; = \; f_0(\vec w) + \sum_{k=1}^{m} \lambda_k \, f_k(\vec w)\,,\qquad
+\lambda_{k} \;{\color{red}{\ge}}\; 0 \quad \forall k \in \{1,\ldots,m\}
+\label{eq:lagrangianINequalitymultiple}
+\end{equation}
+ 
+    
+\end{frame}
