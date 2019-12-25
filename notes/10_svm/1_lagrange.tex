@@ -1,5 +1,6 @@
 \section{Precursor: Method of Lagrange Multipliers}
 
+\definecolor{darkgreen}{rgb}{0,0.6,0}
 
 \begin{frame}\frametitle{\secname} 
     \begin{center}
@@ -65,7 +66,7 @@ We restrict solutions to those that satisfy the constraint $g(w_1, w_2) = c$:
 \end{figure}
 
 \only<1,2>{
-\question{What is characteristic of the solution to the constrained optimization problem?}\\
+\question{What is characteristic of the solution ${\color{darkgreen}\vec w^{*}}$ to the constrained optimization problem?}\\
 }
 \notesonly{
 -The solution of the constrained optimization problem is characterized by:
@@ -73,7 +74,7 @@ We restrict solutions to those that satisfy the constraint $g(w_1, w_2) = c$:
 \only<2>{
 \slidesonly{\vspace{-5mm}}
 \begin{equation}
-    \vec \nabla f = \lambda' \vec \nabla g\,,\quad
+    \vec \nabla f \big|_{\color{darkgreen}\vec w^{*}} = \lambda' \vec \nabla g\big|_{\color{darkgreen}\vec w^{*}} \,,\quad
 \text{where $\lambda'$ is a scaling factor.}
 \label{eq:equality}
 \end{equation}
@@ -115,10 +116,10 @@ The \emph{Lagrangian} function reformulates the constrained optimization problem
 
 \only<2,3>{
 \begin{equation}
-L(w_1, w_2, \lambda) \; = \; f(w_1,w_2) + \lambda(g(w_1, w_2)-c)
+L(w_1, w_2, \lambda) \; := \; f(w_1,w_2) + \lambda(g(w_1, w_2)-c)
 \end{equation}
 
-Setting the gradient $\nabla L$ to zero guarantees $\vec \nabla f \;  + \lambda \vec \nabla g = \vec 0$
+Setting the gradient $\nabla L$ to zero guarantees a solution at which $\vec \nabla f \;  + \lambda \vec \nabla g = \vec 0$
 }
 \only<3>{
 
@@ -181,9 +182,9 @@ L(\,\vec w\;, \overbrace{\{\lambda_k\}}^{
 \text{for each constraint}}
 }
 }) 
-\; &= \; 
+\; :=& \; 
 f_0(\vec w) + \lambda_1 \, f_1(\vec w) + \lambda_2 \, f_2(\vec w) + \, \ldots \, + \lambda_m \, f_m(\vec w) \\
-\; &= \; 
+\; =& \; 
 f_0(\vec w) + \sum_{k=1}^{m} \lambda_k \, f_k(\vec w)
 \label{eq:lagrangianmultiple}
 \end{align}
@@ -205,7 +206,7 @@ However, the Lagrangian remains the same\notesonly{ as in \eqref{eq:lagrangianmu
 
 \begin{equation}
 L(\,\vec w\;, \{\lambda_k\}
-) \; = \; f_0(\vec w) + \sum_{k=1}^{m} \lambda_k \, f_k(\vec w)\,,\qquad
+) \; := \; f_0(\vec w) + \sum_{k=1}^{m} \lambda_k \, f_k(\vec w)\,,\qquad
 \lambda_{k} \;{\color{red}{\ge}}\; 0 \quad \forall k \in \{1,\ldots,m\}
 \label{eq:lagrangianINequalitymultiple}
 \end{equation}
