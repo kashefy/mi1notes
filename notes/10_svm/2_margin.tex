@@ -11,9 +11,95 @@
 \end{frame}
 }
 
-\subsection{The binary classification setting}
+\subsection{The margin}
 
-\begin{frame}
+\begin{frame}\frametitle{Identifying the margin}
+\mode<article>{
+Consider the following linearly separable binary classification problem and the different hyperplanes for separating the two classes. In order to identify the margn of a hyperplane:
+}
+
+\only<1-3>{
+\begin{enumerate}[(a)]
+\item select a hyperplane,
+\item select the traninng point closest to the hyperplane. Call it $\vec x^{*}$. $\vec x^{*}$ has the shortest normal distance to the hyperplane.
+\item measure the normal distance between $\vec x^{*}$ and the hyperplane and call it $d_{w}$
+\end{enumerate}
+}
+%\begin{figure}[h]
+    %\includegraphics[width=0.5\linewidth]{img/section2_fig13_v2_nomargin_h_none}
+    %\mode<article>{
+    %\caption{Different hyperplanes for a linearly separable problem.}
+    %}
+%\end{figure}
+
+\begin{figure}[ht]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[width=0.35\textwidth]{img/section2_fig13_v2_nomargin_h_multiple}}%
+     \only<1>{
+     \begin{subfigure}[t]{0.35\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+         \mode<article>{
+         \caption{}
+         }
+         \label{fig:multiplehyperplanes}
+     \end{subfigure}
+     }
+     \hspace{2mm}
+     \only<2>{
+     \begin{subfigure}[t]{0.35\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.99\textwidth]{img/section2_fig13_v2_nomargin_h_closest}
+         }
+         \mode<article>{
+         \caption{}
+         }
+     \end{subfigure}
+     }
+     \hspace{2mm}
+     \only<3,4>{
+     \begin{subfigure}[t]{0.35\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.99\textwidth]{img/section2_fig13_v2_nomargin_h_margin}
+         }
+         \mode<article>{
+         \caption{}
+         }
+         \label{fig:margin}
+     \end{subfigure}
+     \hspace{2mm}
+     }
+     \only<4>{
+     \begin{subfigure}[t]{0.35\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.99\textwidth]{img/section2_fig13_v2_nomargin_h_marginother}
+         }
+         \mode<article>{
+         \caption{}
+         }
+         \label{fig:marginother}
+     \end{subfigure}
+     }
+     \mode<article>{
+     \caption{Identifying the margin $d_{w}$ for a hyperplane.}
+	 }
+	 \label{fig:identifymargin}
+\end{figure}
+
+The distance $d_{w}$ is the \emph{margin} for that hyperplane.
+
+\question{What are the implications of a wide vs. narrow margin?}
+
+    
+\end{frame}
+
+\begin{frame}\frametitle{Wide vs. narrow margins}
+
+Different hyperplanes may score the same value on the error functions and produce identical predictions on the training set.
     
 \end{frame}
 
