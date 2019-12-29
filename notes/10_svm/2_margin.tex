@@ -291,8 +291,10 @@ $$}
 \end{frame}
 
 \begin{frame}
-
+\only<1,4>{
 If the margin provides a bound for the $\dvc$
+}
+\only<1,4>{
 \mode<presentation>{ 
 $$
     \dvc \quad\leq\quad \min \bigg( \bigg\lfloor 
@@ -300,23 +302,68 @@ $$
 \bigg\rfloor, N \bigg) + 1\slidesonly{\qquad\qquad}
 $$
 }
+}
+\only<1->{
 
 \question{What were the benefits of reducing $\dvc$?}
 
 %leave line break for effective pause
-\pause
+}
+\only<2,3>{
+Recall\notesonly{ that one of the key results of Statistical Learning Theory was the formulation of } the bound on the generalization error, given a finite set of samples:
+\notesonly{
+\begin{equation}
+    P \bigg\{ \sup_{\vec{w} \in \Lambda} \Big| R_{[\vec w]} 
+        - R_{\emp [\vec{w}]}^{(p)} \Big| > \eta \bigg\} 
+    < \underbrace{ 4 \exp \Big( G_{(2p)}^\Lambda - p 
+        \big( \eta - \smallfrac{1}{p} \big)^2 \Big) }_{
+            \eqexcl \epsilon}
+\end{equation}
 
+where $\Lambda$ denotes the model class and $G^{\Lambda}_{(2p)}$ denotes the growth function\footnote{cf. lecture 2.1.3 on Statistical Learning Theory and corresponding notes.}.
+}
+
+With probability larger than $1 - \epsilon$ we obtain:
+
+\begin{equation}
+    R_{[\vec w]} < \underbrace{R_{\emp [\vec{w}]}^{(p)}
+        }_{\substack{\text{empirical}\\\text{error}}} +
+        \underbrace{\bigg(
+        \smallfrac{G_{(2p)}^\Lambda - \ln \frac{\epsilon}{4}}{p}
+        \bigg)^{\frac{1}{2}} + \frac{1}{p}
+        }_{\text{complexity term}}
+        \label{eq:generalizationresultsriskgrowth}
+\end{equation}
+
+\notesonly{For a given $\epsilon$, the ``complexity term''
+only depends on $p$ and $d_\text{VC}$.}}
 \mode<article>{
-Recall that one of the key results of Statistical Learning Theory was how the VC dimensions helps in forulating a bound on the \textbf{generalization ability} of Empirical Risk Minimization (ERM):\\}
+ Therefore, the VC dimensions helps in formulating a bound on the \textbf{generalization ability} of Empirical Risk Minimization (ERM). 
+ Knowing that 
+ }
+ \only<2,3>{
+ \begin{itemize}
+  \notesonly{\item  the risk $R_{[\vec w]}$ and empirical risk $R_{\text{emp}[\vec w]}$ are represented by the generalization $E^{G}_{[\vec w]}$ and training error $E^{T}_{[\vec w]}$, respectivley:\\
+  $R_{[\vec w]} \, \corresponds \, E^{G}_{[\vec w]}\,,$
+  $
+  R_{\text{emp}[\vec w]}  \, \corresponds \, E^{T}_{[\vec w]}
+  $
+  and that} 
+  \item for $p>\dvc$:
+  $$G^{\Lambda}_{p} \le \dvc \big(ln \frac{p}{\dvc} + 1\big)$$
+  \end{itemize}},
+\notesonly{
+\eqref{eq:generalizationresultsriskgrowth} can be reformulated in order to  highlight the relationship between the VC dimension and the generalization ability of the model class:}\\
 
-For a finite training set, the generalization error is bound with probability $1-\epsilon$:
-            \begin{equation}
-				E^{G}_{[\vec w]} \;\le\; E^{T}_{[\vec w]} + 
-                \underbrace{
-                \sqrt{\frac{\dvc \left(\ln \frac{2\,p}{\dvc} + 1\right)-\frac{\epsilon}{4}}{p}}}_{\text{generalization gap}} \quad \text{for } p > \dvc
-				\label{eq:generalizationresults}
-            \end{equation}
-          
+\notesonly{For a finite training set, the generalization error is bound with probability $1-\epsilon$:}
+\only<4>{
+\begin{equation}
+    E^{G}_{[\vec w]} \;\le\; E^{T}_{[\vec w]} + 
+    \underbrace{
+    \sqrt{\frac{\dvc \left(\ln \frac{2\,p}{\dvc} + 1\right)-\frac{\epsilon}{4}}{p}}}_{\text{generalization gap}} \quad \text{for } p > \dvc
+    \label{eq:generalizationresults}
+\end{equation}
+
 \begin{equation}
 \boxed{
 \;
@@ -328,6 +375,7 @@ For a finite training set, the generalization error is bound with probability $1
 \;   
 }
 \end{equation}  
+}
 
 \end{frame}
 
