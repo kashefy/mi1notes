@@ -100,7 +100,7 @@ Consequently,}
 }
 \notesonly{
     \footnotetext{
-    The switch from $\lambda'$ to $\lambda$ is to be more consistent with lecture slides.
+    The switch from $\lambda'$ to $\lambda$ is to be more consistent with the lecture slides.
     }
 }
 % change footnote marks back to original scheme (numbers)
@@ -121,7 +121,7 @@ The \emph{Lagrangian} function reformulates the constrained optimization problem
 
 \only<2,3>{
 \begin{equation}
-L(w_1, w_2, \lambda) \; := \; f(w_1,w_2) + \lambda(g(w_1, w_2)-c)
+L(w_1, w_2, \lambda) \; := \; f(w_1,w_2) + \lambda\big(g(w_1, w_2)-c\big)
 \end{equation}
 
 Setting the gradient $\nabla L$ to zero guarantees a solution at which $\vec \nabla f \;  + \lambda \vec \nabla g = \vec 0$
@@ -137,9 +137,9 @@ Setting the gradient $\nabla L$ to zero guarantees a solution at which $\vec \na
 	}
 =
 \rmat{
-	\frac{\partial f}{\partial w_1} \quad+\quad \lambda \frac{\partial g}{\partial w_1} \\[0.3cm]
-	\frac{\partial f}{\partial w_2} \quad+\quad \lambda \frac{\partial g}{\partial w_2} \\[0.3cm]
-	\underbrace{\frac{\partial f}{\partial \lambda}}_{=0} \;+\; g(w_1, w_2)-c
+	\;\frac{\partial f}{\partial w_1} \quad\;\;+\quad\;\; \lambda \frac{\partial g}{\partial w_1} \;\\[0.3cm]
+	\;\frac{\partial f}{\partial w_2} \quad\;\;+\quad\;\; \lambda \frac{\partial g}{\partial w_2} \;\\[0.3cm]
+	\underbrace{\frac{\partial f}{\partial \lambda}}_{=0} \;+\quad g(w_1, w_2)-c
 	}
 =
 \rmat{
