@@ -274,26 +274,33 @@ Constraints that are not exactly met as equalities, i.e. $-\big\{ y_{T}^{(\alpha
 }
 \only<5,6>{
 \item
-Therefore, $\lambda_\alpha \ne 0$ will correspond to the constraints being met with equality, i.e. $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} {\color{cyan}{=}} 0$. 
+Therefore, $\lambda_\alpha \ne 0$ will correspond to the constraints being met with equality, i.e. $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} {\color{red}{=}} 0$. 
 
-\question{What does ``${\color{cyan}{=}} 0$'' imply w.r.t. misclassification?}
+\question{What does ``${\color{red}{=}} 0$'' imply w.r.t. misclassification?}
 
 \notesonly{
 -This implies that the choice of $\vec w$ and $b$ not only leads to correct classification of that training point but also that the point lies exactly on the margin, indicating that the point for which $\lambda_\alpha \ne 0$ is a \emph{support vector} (cf. \figref{fig:setting}). These are referred to as the \emph{Karush-Kuhn-Tucker (KKT) conditions}.
 }
 }
 \only<6>{
-\vspace{5cm}
-\mode<presentation>{
-\placeimage{5}{7.5}{img/section2_fig13_v2_space}{width=5cm}
-}
-
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=4.5cm]{img/section2_fig18_sv} 
+    \mode<article>{
+    \caption{
+    The constraint for supprt vectors is met with equality.
+    }
+    \label{fig:conditionsv}
+    } 
+\end{figure}
 }
 \end{itemize}
 
 \end{frame}
 
-\begin{frame}
+\subsection{Solving the primal problem}
+
+\begin{frame}\frametitle{\subsecname}
 
 \mode<presentation>{
 \begin{equation*}
@@ -338,7 +345,7 @@ The solution is unique for $\vec w$ but not for the set of multipliers $\{\lambd
 
 \end{frame}
 
-\subsection{From the \emph{primal} problem to the \emph{dual} problem}
+\subsection{From the primal problem to the dual problem}
 
 \begin{frame}\frametitle{\subsecname}
 
