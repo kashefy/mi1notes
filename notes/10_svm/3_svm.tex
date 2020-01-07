@@ -203,13 +203,65 @@ where $\{\lambda_{a} \ge 0\}_{\alpha=1}^{p}$ is the set of Lagrange multipliers.
 This implies that a \emph{saddle point} has to be found for the Lagrangian.
 \slidesonly{\vspace{5mm}}
 
-Equivalent optimization problems:
+Equivalent optimization problems (Kuhn and Tucker theorem):
 
 \begin{equation}
 		{\color{blue}\min_{\vec w, b}}\, L{(\vec{w}, b, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
 		= L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
 		= {\color{darkgreen}\max_{ \lambda_\alpha \geq 0}}\, L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, \{ \lambda_\alpha \})}
 \end{equation}
+
+\end{frame}
+
+
+\subsection{Karush-Kuhn-Tucker (KKT) conditions}
+
+\begin{frame}\frametitle{\subsecname}
+
+What is happening as we optimize the Lagrangian of the primal problem?
+
+Recall the constrained optimization problem:
+
+\begin{itemize}
+\item[] $\min_{\vec w} \frac{1}{2} \lVert \vec w \rVert_{2}^{2}$
+\item[] subject to $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \le 0\;,\quad \text{for all } \alpha = 1,\ldots,p$
+\end{itemize}
+
+and the corresponding Lagrangian of the primal problem:
+
+\mode<presentation>{
+\slidesonly{\vspace{-5mm}}
+\begin{equation}
+L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
+- \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
+,\quad \lambda_{\alpha} \ge 0
+\label{eq:lagrangianprimal}
+\end{equation}
+}
+
+
+
+\begin{equation}
+		{\color{blue}\min_{\vec w, b}}\, L{(\vec{w}, b, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
+		= L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
+		= {\color{darkgreen}\max_{ \lambda_\alpha \geq 0}}\, L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, \{ \lambda_\alpha \})}
+\end{equation}
+
+
+Whenever a constraint is violated, i.e.
+\begin{equation}
+-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \le 0
+\end{equation}
+
+Increasing the value of the corresponding multiplier $\lambda_\alpha$ \emph{\textcolor{darkgreen}{increase}} $L$. 
+This will lead to a change in the primal variables $\vec w$ and $b$ to \emph{\textcolor{blue}{decrease}} $L$.
+\emph{\textcolor{blue}{decrease}} of $L$ by changing $\vec w$ and $b$ prevents terms inside the sum from taking on arbitrarily large negative values.
+
+Constraints that are not exactly met as equalities, i.e. $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} {\color{magenta}{<}} 0$, $L$ can only be maximized by setting the corresponding multiplier $\lambda_\alpha$ to zero.
+
+Therefore, $\lambda_\alpha \ne 0$ will correspond to the constraints being met with equality, i.e. $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} {\color{red}{=}} 0$. This implies that the choice of $\vec w$ and $b$ not only leads to correct classification of that training point but also that the point lies exactly on the margin, indicating that the point for which $\lambda_\alpha \ne 0$ is a \emph{support vector}.
+
+
 
 \end{frame}
 
@@ -258,28 +310,9 @@ The solution is unique for $\vec w$ but not for the set of multipliers $\{\lambd
 
 \end{frame}
 
-
-\subsection{Karush-Kuhn-Tucker (KKT) conditions}
+\subsection{From the \emph{primal} problem to the \emph{dual} problem}
 
 \begin{frame}\frametitle{\subsecname}
-
-What is happening as we optimize the Lagrangian of the primal problem:
-
-\mode<presentation>{
-\slidesonly{\vspace{-5mm}}
-\begin{equation}
-L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
-- \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
-,\quad \lambda_{\alpha} \ge 0
-\label{eq:lagrangianprimal}
-\end{equation}
-}
-
-
-
-\end{frame}
-
-\begin{frame}\frametitle{From the \emph{primal} problem to the \emph{dual} problem}
 
 \mode<presentation>{
 \slidesonly{\vspace{-5mm}}
