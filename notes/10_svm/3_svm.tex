@@ -30,7 +30,7 @@ The binary classification setting:\\
 \end{figure}
 }
 \mode<presentation>{
-\placeimage{8.7}{2.5}{img/section2_fig13_v2_space}{width=5.2cm}
+\placeimage{8.7}{2.2}{img/section2_fig13_v2_space}{width=4.8cm}
 }
 
 
@@ -39,11 +39,11 @@ The binary classification setting:\\
 	$
 	\Big\{ \left(\vec x^{(\alpha)}, y^{(\alpha)}_{T} \right) \Big\}_{\alpha=1}^{p}\,
 	$\\[2mm]
-	where $\vec x \in \R^{N}$, $y_T^{(\alpha)} \in \{-1, 1\}$\\
+	where $\vec x \in \R^{N}$, $y_T \in \{-1, 1\}$\\
 
 	\item \underline{Model}:\\[2mm]
 	$
-	y(\vec x; \vec w) = \sign \big( \vec w^{\top} \vec x + b \big)
+	y(\vec x; \vec w,b) = \sign \big( \vec w^{\top} \vec x + b \big)
 	$
     
     \item \underline{Objective}:
@@ -52,7 +52,9 @@ The binary classification setting:\\
     
     \item \underline{Assumption}:
     
-    Perfect linear separation of both classes:
+    Perfect linear separation of both classes.
+    
+    \pause
     
     In the case of a simple connectionist neuron:
     \begin{equation}
@@ -70,10 +72,10 @@ The binary classification setting:\\
 
 \begin{frame}\frametitle{\subsecname}
     \mode<presentation>{
-\placeimage{8.7}{2.5}{img/section2_fig13_v2_space}{width=5.2cm}
+\placeimage{8.7}{2.5}{img/section2_fig13_v2_space}{width=5.5cm}
 }
-
-Let $\vec w^{*}$ and $b^{*}$ describe the optimal hyperplane that maximizes margin of separation:
+\begin{minipage}{6cm}
+Let $\vec w^{*}$ and $b^{*}$ describe the optimal hyperplane that maximizes the margin of separation:
     \begin{equation}
     \vec w^{*\top} \vec x + b^{*} \;\;
     \left \{ \begin{array}{ll}
@@ -82,7 +84,7 @@ Let $\vec w^{*}$ and $b^{*}$ describe the optimal hyperplane that maximizes marg
 				\end{array} \right.  
     \end{equation}
     
-    For points that lie on the margin are characterized by:
+    Points that lie on the margin are characterized by:
     
     \begin{equation}
     \vec w^{*\top} \vec x + b^{*} \;\;
@@ -92,38 +94,50 @@ Let $\vec w^{*}$ and $b^{*}$ describe the optimal hyperplane that maximizes marg
 				\end{array} \right.  
     \end{equation}
     
+       
+
+\end{minipage}\\
+
     These points will be referred to as the \emph{support vectors}.
+   \notesonly{
+    The shortest distance between points with opposite class labels is $2 \mathrm{d}_{w} = \frac{2}{\lVert \vec w^{*} \rVert}_{2}$, i.e. the distance separating the two classes.
+    }
     
-    The margin of separation between the two classes $= 2 \mathrm{d_{w}} = \frac{2}{\lVert \vec w^{*}\rVert}_{2}$
-    
-    Maximizing the margin $\corresponds$ minimzing the Euclidean norm of $\vec w$ (the solution to this is unique).
+    Maximizing the margin $\corresponds$ minimizing the Euclidean norm of $\vec w$. The solution to this is unique.
 
 \end{frame}
 
-\begin{frame}\frametitle{The primal problem}
+\begin{frame}\frametitle{The primal problem for structured risk minimization (SRM)}
 
 
-The cost function to minimize:
+The cost function\notesonly{ to minimize}:
     
 \begin{equation}
-\frac{1}{2} \vec w^{\top} \vec w = \frac{1}{2} \lVert \rVert_{2}^{2} \eqexcl \min    
+\frac{1}{2} \vec w^{\top} \vec w = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \eqexcl \min    
 \end{equation}
 
-Minimizing the square of the norm turns it into a \emph{convex} minimization problem, which simplifies the optimization procedure.
-Dividing by 2 is simply for convinience.
+\question{Why have we suddenly switched to the squared Euclidean norm and where did the 2 come form?}
 
-We want to restrict the space of solutions to that which leads to correct classification of the training points:
+\mode<article>{
+- Minimizing the square of the norm turns it into a \emph{convex} minimization problem, which simplifies the optimization procedure.
+Dividing by 2 is simply for convinience.
+}
+
+We want to restrict the space of solutions for $\vec w$ to that which leads to correct classification of the training points:
 
 We therefore constrain solutions such that:
 
 \begin{equation}
  y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) \ge 1 \;\;\forall \alpha{}
- \label{eq:constraint}  
+ \label{eq:constraint}
 \end{equation}
 
-\eqref{eq:constraint} provides a linear constraint to our optimization problem.
+\notesonly{
+\eqref{eq:constraint} provides constraints that are linear in $\vec w$. It is sometimes referred to as the \emph{0-1 loss} or \emph{hinge loss}. It is exactly zero whenever a point is correctly classified and 1 whenever it is misclassified.
+}
 
-This gives us the \emph{primal} problem for strucuted risk minimization (SRM) prooblem.
+\notesonly{
+This gives us the \emph{primal} problem for structured risk minimization (SRM) prooblem. }The SRM principle is about balancing the complexity of a model while minimizing the tranining error to avoid overfitting.
     
 \end{frame}
 
@@ -131,58 +145,265 @@ This gives us the \emph{primal} problem for strucuted risk minimization (SRM) pr
 Applying the Lagrange method to the primal problem of SRM:
 
 \begin{equation}
-f_{0}(\vec w,b) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} = \frac{1}{2} \vec w^{\top} \vec w
+f_{0}(\vec w,b) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} = \frac{1}{2} \vec w^{\top} \vec w \eqexcl \min
 \end{equation}
+\notesonly{
+Manipulating the constraints \eqref{eq:constraint} to obtain an expression in the form $f_{\alpha} \le 0$:
+}
+
+A constraint for each data point in the training set:
+
+\pause
+
+\slidesonly{\vspace{-3mm}}
+
+\begin{align}
+ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) \,\ge\, &1\\
+ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \,{\color{blue}\ge}\, &0\\
+ {\color{blue}-}\big\{y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1\big\} \,{\color{blue}\le}\, &0
+\end{align}
 
 \begin{equation}
-f_{\alpha} (\vec w,b) = -\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \le 1\;,\quad \alpha = 1,\ldots,p    
+f_{\alpha} (\vec w,b) = -\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \le 0\;,\quad \alpha = 1,\ldots,p    
 \end{equation}
-
-A constraint for each data point in the training set.
 
 The Lagrangian becomes:
 
-\begin{equation}
+\pause
+
+\slidesonly{\vspace{-5mm}}
+
+\begin{align}
+L(\vec w, b, \{\lambda_{\alpha}\}) 
+\,=&\, f_{0}(\vec w,b) + \sum_{\alpha=1}^{p} \lambda_{\alpha} f_{\alpha}(\vec w,b)\\
+\,=&\, \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
+- \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
+\label{eq:lagrangianprimal}\slidesonly{,\quad \lambda_{\alpha} \ge 0}
+\end{align}
+
+\end{frame}
+
+\begin{frame}
+
+\mode<presentation>{
+\begin{equation*}
 L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
 - \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
-\label{ea:lagrangianprimal}
+,\quad \lambda_{\alpha} \ge 0
+\end{equation*}
+}
+
+where $\{\lambda_{a} \ge 0\}_{\alpha=1}^{p}$ is the set of Lagrange multipliers. \notesonly{Because of the minus sign in front of the multipliers, t}\slidesonly{\\[5mm]T}he Lagrangian is optimized by
+\begin{itemize}
+\item[] \emph{minimizing} w.r.t. $\vec w$ and $b$, the \emph{``primal variables''}, and 
+\item[] \emph{maximizing} w.r.t. all $\lambda_{\alpha}$, the \emph{``dual variables''}.
+\end{itemize}
+
+\slidesonly{\vspace{5mm}}
+This implies that a \emph{saddle point} has to be found for the Lagrangian.
+\slidesonly{\vspace{5mm}}
+
+Equivalent optimization problems:
+
+\begin{equation}
+		{\color{blue}\min_{\vec w, b}}\, L{(\vec{w}, b, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
+		= L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
+		= {\color{darkgreen}\max_{ \lambda_\alpha \geq 0}}\, L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, \{ \lambda_\alpha \})}
 \end{equation}
 
-Where $\{\lambda_{a}\}_{\alpha=1}^{p}$ is the set of Lagrange multipliers.
+\end{frame}
 
-Solving the primal problem by optimizing the Lagrangian in \eqref{eq:lagrangianprimal} yields a unique solution for $\vec w$ but not for $\{\lambda_{a}\}_{\alpha=1}^{p}$ (we haven't forgotton about $b^{*}$, we will get to $b^{*}$ shortly).
+\begin{frame}
+
+\mode<presentation>{
+\begin{equation*}
+L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
+- \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
+,\quad \lambda_{\alpha} \ge 0
+\end{equation*}
+}
+
+\notesonly{
+The Lagrangian of the primal problem is solved by finding the saddle point.} At the saddle point, the derivatives of the Lagrangian $L$ w.r.t to the primal variables goes to zero:
+
+\begin{align}
+\only<1,2>{
+	\frac{\partial L}{\partial {w}_i} \;\eqexcl&\; 0 \quad \text{for } i=1,\ldots,N\\
+	}
+\only<2>{ 
+	{w}_i - \sum\limits_{\alpha = 1}^p \lambda_\alpha
+		y_T^{(\alpha)} \mathrm{x}_i^{(\alpha)} \;\eqexcl&\; 0 \\}
+\only<3->{
+		\Rightarrow\;\; \vec{w}^* =& \kern-4ex\underbrace{\sum_{\alpha = 1}^p \lambda_\alpha 
+		y_T^{(\alpha)} \vec{x}^{(\alpha)}}_{
+			\substack{	\text{expansion of the weight vector} \\
+					\text{in terms of data points}}}	
+					 \label{eq:primalsolution1}
+}
+\end{align}
+\begin{align}
+\only<3>{
+	\frac{\partial L}{\partial b}
+	= -\sum_{\alpha = 1}^p \lambda_\alpha y_T^{(\alpha)} &\eqexcl 0\\
+	}
+\only<4>{
+	\sum_{\alpha = 1}^p \lambda_\alpha y_T^{(\alpha)} &\eqexcl 0
+ \label{eq:primalsolution2}
+	}
+\end{align}
+
+\only<4>{
+The solution is unique for $\vec w$ but not for the set of multipliers $\{\lambda_{a}\}_{\alpha=1}^{p}$ (\notesonly{we haven't forgotten about $b^{*}$, }we will get to $b^{*}$ shortly).
+}
 
 \end{frame}
 
 \begin{frame}\frametitle{From the \emph{primal} problem to the \emph{dual} problem}
-    
-The \emph{dual} problem: Solve the primal problem in addition to find a unique solution for the optimal multipliers.
 
+\mode<presentation>{
+\slidesonly{\vspace{-5mm}}
+\begin{equation}
+L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
+- \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
+,\quad \lambda_{\alpha} \ge 0
+\label{eq:lagrangianprimal}
+\end{equation}
+}
+    
+The \emph{dual} problem: Solving the primal problem \slidesonly{(above)} in addition to finding a unique solution for the set of multipliers.
+
+\pause 
+
+\mode<presentation>{
 Solution of the \emph{primal} problem:
 \begin{equation}
  \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
- \label{eq:primalsolution1}
+					 \label{eq:primalsolution1}
  \end{equation}
 
-and
-
+and the condition
+\slidesonly{\vspace{-3mm}}
 \begin{equation}
- \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} = 0  
- \label{eq:primalsolution2}
+ \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} = 0 
+ \label{eq:primalsolution2} 
+\end{equation}
+}
+
+\eqref{eq:primalsolution1} and \eqref{eq:primalsolution2} are plugged back into the Lagrangian of the primal problem \eqref{eq:lagrangianprimal}.
+\notesonly{From this follows:}
+
+\end{frame}
+
+\begin{frame}\frametitle{From the \emph{primal} problem to the \emph{dual} problem}
+
+\mode<presentation>{
+\vspace{-5mm}
+\begin{equation}
+ \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
+					 \label{eq:primalsolution1}
+ \end{equation}
+\vspace{-3mm}
+\only<1-3>{
+\begin{equation}
+ \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} = 0 
+ \label{eq:primalsolution2} 
 \end{equation}
 
-Plugging the solutions \eqref{eq:primalsolution1} and \eqref{eq:primalsolution2} back into the Lagrangian of the primal problem \eqref{eq:lagrangianprimal} yields:
+\vspace{-2mm}
+}
+}
 
 \begin{align}
-L(\vec w^{*}, b, \{\lambda_{\alpha}\}) &= 
-\frac{1}{2} \vec w^{*\top} \vec w^{*}
-- \sum_{\alpha=1}^{p} \lambda_{\alpha}  y_{T}^{(\alpha)} \vec w^{*\top} \vec x^{(\alpha)}
-- \sum_{\alpha=1}^{p} \lambda_{\alpha}  y_{T}^{(\alpha)} b
+\only<1->{
+L(\vec w^*, b, \only<1-3>{&}\{\lambda_{\alpha}\}) \only<1-3>{=\\}
+}
+\only<1-3>{
+=& \frac{1}{2} \vec w^{*\top} \vec w^{*}
+- \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{*\top} \vec x^{(\alpha)} + b \big) -1 \big\}\\
+}
+\only<2,3>{
+=& \frac{1}{2} \vec w^{*\top} \vec w^{*}
+-  \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\color{blue}\vec w^{*\top}} \vec x^{(\alpha)}
+-  \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\color{blue}b}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
-&= -\frac{1}{2} \sum_{\alpha=1}^{p} \sum_{\beta=1}^{p}
-\lambda_{\alpha} \lambda_{\beta} y_{T}^{(\alpha)} y_{T}^{(\beta)} {\vec x^{(\alpha)}}^{\top} \vec x^{(\beta)}
-+ \sum_{\alpha=1} \lambda_{\alpha} \eqexcl \max
+}
+\only<3>{
+=& \frac{1}{2} \vec w^{*\top} \vec w^{*}
+- {\color{blue}\vec w^{*\top}} \underbrace{\sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}}_{= \vec w^* \text{ (cf. \eqref{eq:primalsolution1})}}
+- {\color{blue}b} \underbrace{\sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)}}_{= 0 \text{ (cf. \eqref{eq:primalsolution2})}}
++ \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
+}
+\only<4->{
+=& \frac{1}{2} \vec w^{*\top} \vec w^{*}
+- {\vec w^{*\top}} \vec w^{*\top}
++ \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
+=& -\frac{1}{2} \vec w^{*\top} \vec w^{*}
++ \sum_{\alpha=1}^{p} \lambda_{\alpha}
+}
+\only<5->{
+\intertext{plugging in the solution \notesonly{\eqref{eq:primalsolution1} }for $\vec w^*$:} 
+=& -\frac{1}{2} \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\vec x^{(\alpha)}}^\top \sum_{\beta=1}^{p} \lambda_{\beta} y_{T}^{(\beta)} \vec x^{(\beta)}
++ \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
+=& -\frac{1}{2} 
+\sum_{\alpha=1}^{p} \sum_{\beta=1}^{p} 
+\lambda_{\alpha} \lambda_{\beta} 
+y_{T}^{(\alpha)} y_{T}^{(\beta)}
+{\vec x^{(\alpha)}}^\top  \vec x^{(\beta)}
++ \sum_{\alpha=1}^{p} \lambda_{\alpha}
+} \eqexcl \max_{\{\lambda_\alpha\}}
+\label{eq:lagrangiandual}
 \end{align}
+
+\mode<article>{
+\eqref{eq:lagrangiandual} gives us the maximization objective of the \emph{dual problem}.
+}
+\end{frame}
+
+\subsection{The dual problem}
+
+\begin{frame}\frametitle{\subsecname}
+
+Find the Lagrange multipliers $\{\lambda_{\alpha}\}$ that maximize:
+
+\mode<presentation>{
+
+
+\begin{equation}
+L(\vec w^*, b, \{\lambda_{\alpha}\})
+= -\frac{1}{2} 
+\sum_{\alpha=1}^{p} \sum_{\beta=1}^{p} 
+\lambda_{\alpha} \lambda_{\beta} 
+y_{T}^{(\alpha)} y_{T}^{(\beta)}
+{\vec x^{(\alpha)}}^\top  \vec x^{(\beta)}
++ \sum_{\alpha=1}^{p} \lambda_{\alpha}
+ \eqexcl \max_{\{\lambda_\alpha\}}
+\label{eq:lagrangiandual}
+\end{equation}
+
+subject to 
+\begin{itemize}
+\item[] $\lambda_\alpha \ge 0,\;\; \alpha = 1,\ldots,p$ and
+\item[]$\sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} = 0$
+\end{itemize}
+
+Reuse the solution of the primal problem for $\vec w^*$:
+\vspace{-5mm}
+\begin{equation}
+ \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
+					 \label{eq:primalsolution1}
+ \end{equation}
+ }
+
+This is optimized numerically using \emph{Sequential Minimal Optimization}
+
+
+\end{frame}
+
+\subsection{Karush-Kuhn-Tucker (KKT) conditions}
+
+\begin{frame}\frametitle{\subsecname}
+
+
 
 \end{frame}
 
