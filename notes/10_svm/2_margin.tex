@@ -21,7 +21,7 @@ Consider the following linearly separable binary classification problem and the 
 \only<1-3>{
 \begin{enumerate}[(a)]
 \item select a hyperplane,
-\item select the traninng point closest to the hyperplane. Call it $\vec x^{*}$. $\vec x^{*}$ has the shortest normal distance to the hyperplane.
+\item select the traninng point closest to the hyperplane. Call it $\vec x^{*}$. \notesonly{$\vec x^{*}$ has the shortest normal distance to the hyperplane.}
 \item measure the normal distance between $\vec x^{*}$ and the hyperplane and call it $\mathrm{d}_{w}$
 \end{enumerate}
 }
@@ -89,8 +89,9 @@ Consider the following linearly separable binary classification problem and the 
 	 }
 	 \label{fig:identifymargin}
 \end{figure}
-
+\only<3>{
 The distance $\mathrm{d}_{w}$ is the \emph{margin} for that hyperplane.
+}
 \only<4>{
 
 \question{What are the implications of a wide vs. narrow margin?}
@@ -310,74 +311,90 @@ $$
 %leave line break for effective pause
 }
 \only<2,3>{
-Recall\notesonly{ that one of the key results of Statistical Learning Theory was the formulation of } the bound on the generalization error, given a finite set of samples:
+Recall\notesonly{ that one of the key results of Statistical Learning Theory was the formulation of the bound on the generalization error, given a finite set of samples:}
 \notesonly{
 \begin{equation}
     P \bigg\{ \sup_{\vec{w} \in \Lambda} \Big| R_{[\vec w]} 
         - R_{\emp [\vec{w}]}^{(p)} \Big| > \eta \bigg\} 
-    < \underbrace{ 4 \exp \Big( G_{(2p)}^\Lambda - p 
-        \big( \eta - \smallfrac{1}{p} \big)^2 \Big) }_{
-            \eqexcl \epsilon}
+    < 4 \exp \Big( G_{(2p)}^\Lambda - p 
+        \big( \eta - \smallfrac{1}{p} \big)^2 \Big)
+    \eqexcl \epsilon
 \end{equation}
 
 where $\Lambda$ denotes the model class and $G^{\Lambda}_{(2p)}$ denotes the growth function\footnote{cf. lecture 2.1.3 on Statistical Learning Theory and corresponding notes.}.
 }
 
-With probability larger than $1 - \epsilon$ we obtain:
+With a probability larger than $\,1 - \epsilon\,$ we obtain:
 
 \begin{equation}
     R_{[\vec w]} < \underbrace{R_{\emp [\vec{w}]}^{(p)}
         }_{\substack{\text{empirical}\\\text{error}}} +
         \underbrace{\bigg(
         \smallfrac{G_{(2p)}^\Lambda - \ln \frac{\epsilon}{4}}{p}
-        \bigg)^{\frac{1}{2}} + \frac{1}{p}
-        }_{\text{complexity term}}
+        \bigg)^{\frac{1}{2}} \,+\, \frac{1}{p}
+        }_{\text{complexity term}~C(p,\dvc)}
         \label{eq:generalizationresultsriskgrowth}
 \end{equation}
 
-\notesonly{For a given $\epsilon$, the ``complexity term''
-only depends on $p$ and $d_\text{VC}$.}}
+\notesonly{For a given $\epsilon$, the complexity term
+only depends on $p$ and $\dvc$.}}
 \mode<article>{
  Therefore, the VC dimensions helps in formulating a bound on the \textbf{generalization ability} of Empirical Risk Minimization (ERM). 
  Knowing that 
  }
  \only<2,3>{
  \begin{itemize}
-  \notesonly{\item  the risk $R_{[\vec w]}$ and empirical risk $R_{\text{emp}[\vec w]}$ are represented by the generalization $E^{G}_{[\vec w]}$ and training error $E^{T}_{[\vec w]}$, respectivley:\\
+  \notesonly{\item the risk $R_{[\vec w]}$ and empirical risk $R_{\text{emp}[\vec w]}$ are represented by the generalization $E^{G}_{[\vec w]}$ and training error $E^{T}_{[\vec w]}$, respectivley:\\
   $R_{[\vec w]} \, \corresponds \, E^{G}_{[\vec w]}\,,$
   $
   R_{\text{emp}[\vec w]}  \, \corresponds \, E^{T}_{[\vec w]}
   $
   and that} 
   \item for $p>\dvc$:
-  $$G^{\Lambda}_{p} \le \dvc \big(ln \frac{p}{\dvc} + 1\big)$$
-  \end{itemize}},
-\notesonly{
+  $$G^{\Lambda}_{(p)} \le \dvc \Big(\ln \frac{p}{\dvc} + 1\Big)\,,$$
+  \end{itemize}
+  }~\notesonly{
 \eqref{eq:generalizationresultsriskgrowth} can be reformulated in order to  highlight the relationship between the VC dimension and the generalization ability of the model class:}\\
 
 \notesonly{For a finite training set, the generalization error is bound with probability $1-\epsilon$:}
-\only<4>{
+\only<4,5>{
+\slidesonly{\vspace{-7mm}}
 \begin{equation}
     E^{G}_{[\vec w]} \;\le\; E^{T}_{[\vec w]} + 
     \underbrace{
-    \sqrt{\frac{\dvc \left(\ln \frac{2\,p}{\dvc} + 1\right)-\frac{\epsilon}{4}}{p}}}_{\text{generalization gap}} \quad \text{for } p > \dvc
+    \sqrt{\frac{\dvc \left(\ln \frac{2\,p}{\dvc} + 1\right)-\ln\frac{\epsilon}{4}}{p}}}_{\text{generalization gap}} + \frac{1}{p} \quad \text{for } p > \dvc
     \label{eq:generalizationresults}
 \end{equation}
 
-\begin{equation}
-\boxed{
-\;
-\uparrow \, \text{margin}
-\quad \leadsto \quad
-\dvc \, \downarrow 
-\quad \leadsto \quad
-\text{generalization gap} \, \downarrow{}
-\;   
+\question{What about $\dvc \rightarrow 0$? Is this ideal?}
+
+%\begin{equation}
+%\boxed{
+%\;
+%\uparrow \, \text{margin}
+%\quad \leadsto \quad
+%\dvc \, \downarrow 
+%\;   
+%}
+%\end{equation}  
 }
-\end{equation}  
+
+\only<5>{
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=3.5cm]{img/section2_fig12_v2} 
+    \mode<article>{
+    \caption{
+    The effect of the VC-dimension and bias-variance tradeoff
+    }
+    \label{fig:dvcbiasvariance}
+    } 
+\end{figure}
+
 }
 
 \end{frame}
+
 
 % illustrations adapted from http://www.cs.columbia.edu/~jebara/4771/notes/class5x.pdf
 % this simplified proof was obtained from the notes http://web.eecs.umich.edu/~jabernet/eecs598course/fall2015/web/notes/lec11_101315.pdf
