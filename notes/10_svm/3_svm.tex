@@ -218,6 +218,7 @@ Equivalent optimization problems (Kuhn and Tucker theorem):
 
 \begin{frame}\frametitle{\subsecname}
 
+\only<1-5>{
 What is happening as we optimize the Lagrangian of the primal problem?
 
 Recall the constrained optimization problem:
@@ -227,7 +228,7 @@ Recall the constrained optimization problem:
 \item[] subject to $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \le 0\;,\quad \text{for all } \alpha = 1,\ldots,p$
 \end{itemize}
 
-and the corresponding Lagrangian of the primal problem:
+and the corresponding Lagrangian:
 
 \mode<presentation>{
 \slidesonly{\vspace{-5mm}}
@@ -246,22 +247,49 @@ L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
 		= L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
 		= {\color{darkgreen}\max_{ \lambda_\alpha \geq 0}}\, L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, \{ \lambda_\alpha \})}
 \end{equation}
-
-
-Whenever a constraint is violated, i.e.
-\begin{equation}
--\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \le 0
-\end{equation}
-
+}
+\begin{itemize}
+\only<1>{\item[]}
+\only<2>{
+\item
+Whenever a constraint is \textcolor{orange}{violated}, i.e.
+$
+-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \,{\color{orange}\le}\, 0
+$
+\notesonly{
 Increasing the value of the corresponding multiplier $\lambda_\alpha$ \emph{\textcolor{darkgreen}{increase}} $L$. 
-This will lead to a change in the primal variables $\vec w$ and $b$ to \emph{\textcolor{blue}{decrease}} $L$.
-\emph{\textcolor{blue}{decrease}} of $L$ by changing $\vec w$ and $b$ prevents terms inside the sum from taking on arbitrarily large negative values.
-
+This will in turn lead to a change in the primal variables $\vec w$ and $b$ to \emph{\textcolor{blue}{decrease}} $L$.
+}
+\slidesonly{
+$\lambda_\alpha \uparrow \quad \leadsto\quad L {\color{darkgreen}\uparrow} \quad \leadsto\quad \text{change in } \vec w,b \quad \leadsto\quad L {\color{blue}\downarrow}$\\
+}
+}
+\only<3>{
+\item
+\emph{\textcolor{blue}{Decrease}} of $L$ by changing $\vec w$ and $b$ prevents terms inside the sum from taking on arbitrarily large negative values.
+}
+\only<4>{
+\item
 Constraints that are not exactly met as equalities, i.e. $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} {\color{magenta}{<}} 0$, $L$ can only be maximized by setting the corresponding multiplier $\lambda_\alpha$ to zero.
+}
+\only<5,6>{
+\item
+Therefore, $\lambda_\alpha \ne 0$ will correspond to the constraints being met with equality, i.e. $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} {\color{cyan}{=}} 0$. 
 
-Therefore, $\lambda_\alpha \ne 0$ will correspond to the constraints being met with equality, i.e. $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} {\color{red}{=}} 0$. This implies that the choice of $\vec w$ and $b$ not only leads to correct classification of that training point but also that the point lies exactly on the margin, indicating that the point for which $\lambda_\alpha \ne 0$ is a \emph{support vector}.
+\question{What does ``${\color{cyan}{=}} 0$'' imply w.r.t. misclassification?}
 
+\notesonly{
+-This implies that the choice of $\vec w$ and $b$ not only leads to correct classification of that training point but also that the point lies exactly on the margin, indicating that the point for which $\lambda_\alpha \ne 0$ is a \emph{support vector} (cf. \figref{fig:setting}). These are referred to as the \emph{Karush-Kuhn-Tucker (KKT) conditions}.
+}
+}
+\only<6>{
+\vspace{5cm}
+\mode<presentation>{
+\placeimage{5}{7.5}{img/section2_fig13_v2_space}{width=5cm}
+}
 
+}
+\end{itemize}
 
 \end{frame}
 
