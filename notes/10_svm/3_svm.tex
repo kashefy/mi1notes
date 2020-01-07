@@ -258,6 +258,27 @@ The solution is unique for $\vec w$ but not for the set of multipliers $\{\lambd
 
 \end{frame}
 
+
+\subsection{Karush-Kuhn-Tucker (KKT) conditions}
+
+\begin{frame}\frametitle{\subsecname}
+
+What is happening as we optimize the Lagrangian of the primal problem:
+
+\mode<presentation>{
+\slidesonly{\vspace{-5mm}}
+\begin{equation}
+L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
+- \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
+,\quad \lambda_{\alpha} \ge 0
+\label{eq:lagrangianprimal}
+\end{equation}
+}
+
+
+
+\end{frame}
+
 \begin{frame}\frametitle{From the \emph{primal} problem to the \emph{dual} problem}
 
 \mode<presentation>{
@@ -395,14 +416,6 @@ Reuse the solution of the primal problem for $\vec w^*$:
  }
 
 This is optimized numerically using \emph{Sequential Minimal Optimization}
-
-
-\end{frame}
-
-\subsection{Karush-Kuhn-Tucker (KKT) conditions}
-
-\begin{frame}\frametitle{\subsecname}
-
 
 
 \end{frame}
