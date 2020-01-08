@@ -422,12 +422,11 @@ The solution is unique for $\vec w$ but not for the set of multipliers $\{\lambd
 \slidesonly{\vspace{-5mm}}
 	\begingroup 
 	\footnotesize
-\begin{equation}
+\begin{equation*}
 L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
 - \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
 ,\quad \lambda_{\alpha} \ge 0
-\label{eq:lagrangianprimal}
-\end{equation}
+\end{equation*}
 	\endgroup
 }
     
@@ -439,21 +438,18 @@ Solving the primal problem \slidesonly{(above)} in addition to finding a unique 
 
 \mode<presentation>{
 Solution of the \emph{primal} problem:
-\begin{equation}
- \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
-					 \label{eq:primalsolution1}
- %\tag{1}
- \end{equation}
-
-and the condition
-\slidesonly{\vspace{-3mm}}
-\begin{equation}
- \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} = 0 
+\begin{align}
+ \vec w^{*} &= \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)} &
+ \label{eq:primalsolution1}
+ &(1)
+\intertext{and the condition}
+ \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} &= 0& 
  \label{eq:primalsolution2} 
-\end{equation}
+ &(2)
+\end{align}
 }
 
-\eqref{eq:primalsolution1} and \eqref{eq:primalsolution2} are plugged back into the Lagrangian of the primal problem \eqref{eq:lagrangianprimal}.
+\eqref{eq:primalsolution1} and \eqref{eq:primalsolution2} are plugged back into the Lagrangian of the primal problem\notesonly{ \eqref{eq:lagrangianprimal}}.
 \notesonly{From this follows:}
 
 \end{frame}
@@ -462,55 +458,59 @@ and the condition
 
 \mode<presentation>{
 \vspace{-5mm}
+\begingroup 
+\footnotesize
 \begin{equation}
- \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
-					 \label{eq:primalsolution1}
+(1)\quad
+    \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
+%\label{eq:primalsolution1}
+    \qquad\text{and}\qquad{}
+(2)\quad 
+    \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} = 0 
+%\label{eq:primalsolution2} 
  \end{equation}
-\vspace{-3mm}
-\only<1-3>{
-\begin{equation}
- \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} = 0 
- \label{eq:primalsolution2} 
-\end{equation}
-
-\vspace{-2mm}
-}
+\endgroup
+\vspace{-5mm}
 }
 
 \begingroup
 \footnotesize
 \begin{align}
-\only<1->{
-L(\vec w^*, b, \only<1-3>{&}\{\lambda_{\alpha}\}) \only<1-3>{=\\}
-}
-\only<1-3>{
+\visible<1->{
+\notesonly{
+L(\vec w^*, b, &\{\lambda_{\alpha}\})\\}
+\slidesonly{
+L(\vec w^*, b, \{\lambda_{\alpha}\})}
 =\,& \frac{1}{2} \vec w^{*\top} \vec w^{*}
 - \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{*\top} \vec x^{(\alpha)} + b \big) -1 \big\}\\
 }
-\only<2,3>{
+\visible<2->{
 =\,& \frac{1}{2} \vec w^{*\top} \vec w^{*}
 -  \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\color{blue}\vec w^{*\top}} \vec x^{(\alpha)}
 -  \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\color{blue}b}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
 }
-\only<3>{
+\visible<3->{
 =\,& \frac{1}{2} \vec w^{*\top} \vec w^{*}
 - {\color{blue}\vec w^{*\top}} \underbrace{\sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}}_{= \vec w^* \text{ (cf. \eqref{eq:primalsolution1})}}
 - {\color{blue}b} \underbrace{\sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)}}_{= 0 \text{ (cf. \eqref{eq:primalsolution2})}}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
 }
-\only<4->{
+\visible<4->{
 =\,& \frac{1}{2} \vec w^{*\top} \vec w^{*}
-- {\vec w^{*\top}} \vec w^{*\top}
-+ \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
-=\,& -\frac{1}{2} \vec w^{*\top} \vec w^{*}
+- {\vec w^{*\top}} \vec w
++ \sum_{\alpha=1}^{p} \lambda_{\alpha}\notesonly{\\}
+=\,\notesonly{&} -\frac{1}{2} \vec w^{*\top} \vec w^{*}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}
 }
-\only<5->{
-\intertext{plugging in the solution \notesonly{\eqref{eq:primalsolution1} }for $\vec w^*$:} 
+\visible<5->{
+\notesonly{
+\intertext{plugging in the solution \notesonly{\eqref{eq:primalsolution1} }for $\vec w^*$:}
+}
+\slidesonly{\\} 
 =\,& -\frac{1}{2} \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\vec x^{(\alpha)}}^\top \sum_{\beta=1}^{p} \lambda_{\beta} y_{T}^{(\beta)} \vec x^{(\beta)}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
-=\,& -\frac{1}{2} 
+L(\{\lambda_{\alpha}\}) =\,& -\frac{1}{2} 
 \sum_{\alpha=1}^{p} \sum_{\beta=1}^{p} 
 \lambda_{\alpha} \lambda_{\beta} 
 y_{T}^{(\alpha)} y_{T}^{(\beta)}
@@ -523,7 +523,7 @@ y_{T}^{(\alpha)} y_{T}^{(\beta)}
 \endgroup
 
 \mode<article>{
-\eqref{eq:lagrangiandual} gives us the maximization objective of the \emph{dual problem}.
+\eqref{eq:lagrangiandual} gives us the maximization objective of the \emph{dual problem}. Note that the Lagriangian of the dual problem is a function of the set of multipliers $\{\lambda_{\alpha}\}$ only.
 }
 \end{frame}
 
@@ -559,21 +559,141 @@ Reuse the solution of the primal problem for $\vec w^*$:
  \end{equation}
  }
 
-This is optimized numerically using \emph{Sequential Minimal Optimization}
+This dual problem is optimized numerically using \emph{Sequential Minimal Optimization}.
 
 
 \end{frame}
 
 \begin{frame}
-Finding $b^{*}$    
+
+\slidesonly{\vspace{-5mm}}
+
+\question{What about the bias?}
+
+\mode<presentation>{
+\placeimage{12.6}{10.2}{img/section2_fig18_sv_nolambda}{width=3.8cm}
+}
+
+\pause
+
+By now we have:
+\pause
+\begin{itemize}
+\item The orientation of the optimal hyperplane with maximum margin: $\vec w^{*}$
+\item The set of multipliers $\{\lambda_{\alpha}\}$. \emph{How can those help in finding the bias?}
+\end{itemize}
+
+\pause
+
+The clue is in the constraints
+\begingroup
+\footnotesize
+	$
+		f_{\alpha}(\vec w^*,b^*) 
+		= - \Big\{ y_T^{(\alpha)} 
+			\Big( \vec{w^*}^\top \vec{x}^{(\alpha)}
+			+ b^* \Big) -1 \Big\} \quad{\le}\quad 0
+	$\endgroup\\
+    
+\pause 
+
+Which is met with \textcolor{red}{equality} by any support vector:
+
+\slidesonly{\vspace{-5mm}}
+	\begin{align}
+		f_{\alpha}(\vec w^*,b^*) 
+		&= - \Big\{ y_T^{(\alpha)} 
+			\Big( \vec{w^*}^\top \vec{x}^{(\alpha)}
+			+ b^* \Big) -1 \Big\}~{\color{red}\stackrel{!}{=}}~0
+        \intertext{Solving for $b^{*}$ yields:}
+		\Rightarrow \quad b^* =&
+		y_T^{(\alpha)} \;\;-\;\;  \vec{w}^{*\top} \vec{x}^{(\alpha)} 
+	\end{align}
+    
+\notesonly{The calculation of $b^{*}$ is }made more robust by averaging over all support vectors:
+
+\begin{equation}
+    b^* = \frac{1}{\#_{\mathrm{SV}}} \sum\limits_{\alpha \in \mathrm{SV}}
+        \Big( y_T^{(\alpha)} - \sum\limits_{\beta \in \mathrm{SV}}
+            \lambda_\beta y_T^{(\beta)} 
+            { \big( \vec{x}^{(\beta)} \big)^\top 
+            \vec{x}^{(\alpha)} }
+        \Big)\slidesonly{\qquad}
+\end{equation}
+
+\question{Why does the inner sum run through the SV's only?}
+
+- Indeed, $w^{*}$ is in expansion of the weight vector in terms of all data points (cf. \eqref{eq:primalsolution1}). However, any point that is \textbf{not} a support vector is associated with a $\lambda$ that is equal to zero. Non-zero $\lambda$'s are only associated with support vectors. Therefore, the sum can be reduced to iterate over the non-zero $\lambda$'s only, which are those associated with the support vectors.
+
 \end{frame}
 
 \begin{frame}
 
 \question{What about non-linearly separable classes?}
 
-kernel trick
+\pause
+{}
+\notesonly{
+- Transformation of the feature space into a new space in which the classes can become linearly seperable:
+}
+			\begin{equation}
+				\underbrace{ \vec{x} }_{\substack{\text{elementary} \\
+								\text{features}}}
+				\longrightarrow \underbrace{ \vec{\phi}_{(\vec{x})} }_{
+						\substack{ \text{monomials of}\\ \text{degree $n$}}}
+			\end{equation}
+\notesonly{
+However, instead of computing the transformation $\vec \phi$ explicitly (possible very costly in terms of memory footprint if the space of $\vec \phi$ has a very high dimensionality), we exploit the fact that }SVMs only ever operate with the scalar product. This is evident from the Lagrangian of the dual problem we use to construct the SVM:
+
+\begin{equation} 
+    L(\{\lambda_\alpha\})
+        \;\;=\;\;  -\frac{1}{2} \sum\limits_{\alpha, \beta = 1}^p 
+        \lambda_\alpha \lambda_\beta y_T^{(\alpha)}
+        y_T^{(\beta)} 
+        \underbrace{\big( \vec{x}^{(\alpha)} \big)^\top 
+            \vec{x}^{(\beta)}}_{ \circledast }
+        + \sum\limits_{\alpha = 1}^p \lambda_\alpha{}
+        \eqexcl \max_{\{\lambda_\alpha\}}
+\end{equation}	
+
+A transformation of the features would result in:
+
+\begin{equation} 
+    L(\{\lambda_\alpha\})
+        \;\;=\;\;  -\frac{1}{2} \sum\limits_{\alpha, \beta = 1}^p 
+        \lambda_\alpha \lambda_\beta y_T^{(\alpha)}
+        y_T^{(\beta)} 
+        \underbrace{\big( \vec \phi_{\vec{x}^{(\alpha)}} \big)^\top 
+            \vec \phi_{\vec{x}^{(\beta)}}}_{ \circledast }
+        + \sum\limits_{\alpha = 1}^p \lambda_\alpha{}
+        \eqexcl \max_{\{\lambda_\alpha\}}
+\end{equation}
     
+\end{frame}
+
+\begin{frame}\frametitle{Induced feature space}
+	$$
+			K(\vec x, \vec x') 
+			%\quad=\quad \sum_{i=0}^{\infty} \,
+			%\lambda_i \; \psi_{i(\vec x)} \, \psi_{i(\vec x')} 
+			\quad=\quad 
+			\sum_{i=1}^{\infty} \,
+			\underbrace{\psi_{i(\vec x)} \, \sqrt{\lambda_i}}_{\phi_{i(\vec x)}}
+			\underbrace{\sqrt{\lambda_i} \, \psi_{i(\vec x')} }_{\phi_{i(\vec x')}} 
+			\quad=\quad \vec \phi_{(\vec x)}^\top \vec \phi_{(\vec x')}
+	$$
+
+	\begin{itemize}
+		\item every positive semi-definite kernel $K$
+			is an \textbf{inner product} in the induced space $\Phi$,
+			spanned by the features
+			$\phi_{i(\vec x)} = \sqrt{\lambda_i} \, \psi_{i(\vec x)}$
+		\vspace{4mm}
+		\item $\Phi$ is often high dimensional
+		\vspace{4mm}
+		\item a linear classifier in $\Phi$ can solve 
+			non-linearly separable problems in the original feature space $\Set X$
+	\end{itemize}
 \end{frame}
 
 \subsection{C-SVM}
