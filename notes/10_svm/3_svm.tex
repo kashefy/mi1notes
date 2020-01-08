@@ -186,30 +186,54 @@ L(\vec w, b, \{\lambda_{\alpha}\})
 \begin{frame}
 
 \mode<presentation>{
+\vspace{-2mm}
+\begin{block}{The Lagrangian of the primal problem:}
+\vspace{-2mm}
+	\begingroup 
+	\footnotesize
 \begin{equation*}
 L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
 - \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
-,\quad \lambda_{\alpha} \ge 0
+,\quad \{\lambda_{a} \ge 0\}_{\alpha=1}^{p}
 \end{equation*}
+	\endgroup
+\end{block}
 }
 
-where $\{\lambda_{a} \ge 0\}_{\alpha=1}^{p}$ is the set of Lagrange multipliers. \notesonly{Because of the minus sign in front of the multipliers, t}\slidesonly{\\[5mm]T}he Lagrangian is optimized by
+\notesonly{where $\{\lambda_{a} \ge 0\}_{\alpha=1}^{p}$ is the set of Lagrange multipliers. Because of the minus sign in front of the multipliers, t}\slidesonly{T}he Lagrangian is optimized by
 \begin{itemize}
-\item[] \emph{minimizing} w.r.t. $\vec w$ and $b$, the \emph{``primal variables''}, and 
-\item[] \emph{maximizing} w.r.t. all $\lambda_{\alpha}$, the \emph{``dual variables''}.
+\item[] \emph{\textcolor{blue}{minimizing}} w.r.t. $\vec w$ and $b$, the \emph{``primal variables''}, and 
+\item[] \emph{\textcolor{darkgreen}{maximizing}} w.r.t. all $\lambda_{\alpha}$, the \emph{``dual variables''}.
 \end{itemize}
 
-\slidesonly{\vspace{5mm}}
+%\slidesonly{\vspace{5mm}}
 This implies that a \emph{saddle point} has to be found for the Lagrangian.
+
+\only<2>{
+\begin{figure}[h]
+    \centering
+    \includegraphics[trim={0cm 0 0 25mm},clip, height=4cm]{img/saddle_point_andrewng} 
+    \mode<article>{
+    \caption{
+    Illustration of a saddle point.
+    }
+    \label{fig:saddle}
+    } 
+\end{figure}
+}
+\only<3>{
 \slidesonly{\vspace{5mm}}
 
-Equivalent optimization problems (Kuhn and Tucker theorem):
+\begin{block}{Equivalent optimization problems (Kuhn and Tucker theorem):}
 
 \begin{equation}
-		{\color{blue}\min_{\vec w, b}}\, L{(\vec{w}, b, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
+		{\color{blue}\min_{\vec w, b}}~L{(\vec{w}, b, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
 		= L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
-		= {\color{darkgreen}\max_{ \lambda_\alpha \geq 0}}\, L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, \{ \lambda_\alpha \})}
+		= {\color{darkgreen}\max_{ \lambda_\alpha \geq 0}}~L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, \{ \lambda_\alpha \})}
 \end{equation}
+
+\end{block}
+}
 
 \end{frame}
 
@@ -218,83 +242,123 @@ Equivalent optimization problems (Kuhn and Tucker theorem):
 
 \begin{frame}\frametitle{\subsecname}
 
+\question{What is happening as we optimize the Lagrangian of the primal problem?}
+
+
+\mode<article>{
+- We will attempt to answer this by looking at the constraints and how different cases for the constraints affect the Lagrangian and in turn the variables we are optimizing.
+This will leads us to the identifying the Karush-Kuhn-Tucker (KKT) conditions.
+}
+
+\end{frame}
+
+\begin{frame}{Only}\frametitle{\subsecname}
+
 \only<1-5>{
-What is happening as we optimize the Lagrangian of the primal problem?
+\slidesonly{\vspace{-3mm}}
+\begin{block}{Recall}
 
-Recall the constrained optimization problem:
+\begin{enumerate}
+\item the constrained optimization problem:
 
-\begin{itemize}
-\item[] $\min_{\vec w} \frac{1}{2} \lVert \vec w \rVert_{2}^{2}$
-\item[] subject to $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \le 0\;,\quad \text{for all } \alpha = 1,\ldots,p$
-\end{itemize}
+	\begin{itemize}
+	\item[] $\min_{\vec w, b} \; \frac{1}{2} \lVert \vec w \rVert_{2}^{2}$
+	\item[] subject to $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \le 0\;,\quad \text{for all } \alpha = 1,\ldots,p,$
+	\end{itemize}
 
-and the corresponding Lagrangian:
+\item the corresponding Lagrangian:
 
-\mode<presentation>{
-\slidesonly{\vspace{-5mm}}
-\begin{equation}
-L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
-- \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
-,\quad \lambda_{\alpha} \ge 0
-\label{eq:lagrangianprimal}
-\end{equation}
+	\slidesonly{\vspace{-3mm}}
+	\begingroup 
+	\footnotesize
+	\begin{equation*}
+		L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
+		- 
+		\notesonly{\sum_{\alpha=1}^{p}}
+		\slidesonly{
+		\only<1,2>{\sum_{\alpha=1}^{p}}
+		\only<3>{{\color{red}\sum_{\alpha=1}^{p}}}
+		\only<4-5>{\sum_{\alpha=1}^{p}}
+		}
+			\lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
+		,\;\; \lambda_{\alpha} \ge 0,
+		%\label{eq:lagrangianprimal}
+	\end{equation*}
+	\endgroup
+
+\item and the equivalent optimization problems:
+
+	\slidesonly{\vspace{-3mm}}
+	\begingroup 
+	\footnotesize
+	\begin{equation*}
+			{\color{blue}\min_{\vec w, b}}~L{(\vec{w}, b, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
+			= L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
+			= {\color{darkgreen}\max_{ \lambda_\alpha \geq 0}}~L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, \{ \lambda_\alpha \})}.
+	\end{equation*}
+	\endgroup
+
+\end{enumerate}
+
+\end{block}%Recall
 }
 
+%\only<1->
+{
+Consider the following cases:
 
+\begin{enumerate}[(a)]
+	\item<only@2> Whenever a constraint is \textcolor{orange}{violated}, i.e.
+	\begingroup 
+	\footnotesize
+	$
+	-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}~{\color{orange}\le}~0
+	$
+	\endgroup 
+	\notesonly{
+	Increasing the value of the corresponding multiplier $\lambda_\alpha$ \emph{\textcolor{darkgreen}{increase}} $L$. 
+	This will in turn lead to a change in the primal variables $\vec w$ and $b$ to \emph{\textcolor{blue}{decrease}} $L$.
+	That is:
+	}
+	\begin{equation}
+	\lambda_\alpha \uparrow \quad \leadsto\quad L {\color{darkgreen}\uparrow} \quad \leadsto\quad \text{change in } \vec w,b \quad \leadsto\quad L {\color{blue}\downarrow}
+	\end{equation}
+	
+	\item<only@3> \emph{\textcolor{blue}{Decrease}} of $L$ by changing $\vec w$ and $b$ prevents terms inside the \slidesonly{\only<3>{\textcolor{red}}{sum}} \notesonly{sum of the Lagrangian } from taking on arbitrarily large negative values.
+	
+	\item<only@4> Constraints that are \textbf{not} met as equalities, i.e.
+	\begingroup 
+	\footnotesize
+	$
+	-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}~{\color{magenta}{<}}~0
+	$\endgroup, $L$ can only be maximized by setting the corresponding multiplier $\lambda_\alpha$ to zero.
+	
+	\item<only@5,6>  This leaves $\lambda_\alpha \ne 0$, which corresponds to the constraints being met with \emph{equality}, i.e. 
+	\begingroup 
+	\footnotesize
+	$
+	-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}~{\color{red}{\eqexcl}}~0
+	$\endgroup. 
 
-\begin{equation}
-		{\color{blue}\min_{\vec w, b}}\, L{(\vec{w}, b, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
-		= L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
-		= {\color{darkgreen}\max_{ \lambda_\alpha \geq 0}}\, L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, \{ \lambda_\alpha \})}
-\end{equation}
-}
-\begin{itemize}
-\only<1>{\item[]}
-\only<2>{
-\item
-Whenever a constraint is \textcolor{orange}{violated}, i.e.
-$
--\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \,{\color{orange}\le}\, 0
-$
-\notesonly{
-Increasing the value of the corresponding multiplier $\lambda_\alpha$ \emph{\textcolor{darkgreen}{increase}} $L$. 
-This will in turn lead to a change in the primal variables $\vec w$ and $b$ to \emph{\textcolor{blue}{decrease}} $L$.
-}
-\slidesonly{
-$\lambda_\alpha \uparrow \quad \leadsto\quad L {\color{darkgreen}\uparrow} \quad \leadsto\quad \text{change in } \vec w,b \quad \leadsto\quad L {\color{blue}\downarrow}$\\
-}
-}
-\only<3>{
-\item
-\emph{\textcolor{blue}{Decrease}} of $L$ by changing $\vec w$ and $b$ prevents terms inside the sum from taking on arbitrarily large negative values.
-}
-\only<4>{
-\item
-Constraints that are not exactly met as equalities, i.e. $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} {\color{magenta}{<}} 0$, $L$ can only be maximized by setting the corresponding multiplier $\lambda_\alpha$ to zero.
-}
-\only<5,6>{
-\item
-Therefore, $\lambda_\alpha \ne 0$ will correspond to the constraints being met with equality, i.e. $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} {\color{red}{=}} 0$. 
+	\question{What does ``${\color{red}{=}} 0$'' imply w.r.t. misclassification?}\\
 
-\question{What does ``${\color{red}{=}} 0$'' imply w.r.t. misclassification?}
-
-\notesonly{
--This implies that the choice of $\vec w$ and $b$ not only leads to correct classification of that training point but also that the point lies exactly on the margin, indicating that the point for which $\lambda_\alpha \ne 0$ is a \emph{support vector} (cf. \figref{fig:setting}). These are referred to as the \emph{Karush-Kuhn-Tucker (KKT) conditions}.
+	\notesonly{
+	-This implies that the choice of $\vec w$ and $b$ not only leads to correct classification of that training point but also that the point lies exactly on the margin, indicating that the point for which $\lambda_\alpha \ne 0$ is a \emph{support vector} (cf. \figref{fig:setting}). These are referred to as the \emph{Karush-Kuhn-Tucker (KKT) conditions}.
+	}
+	\only<6>{
+	\begin{figure}[h]
+		\centering
+		\includegraphics[height=4.5cm]{img/section2_fig18_sv} 
+		\mode<article>{
+		\caption{
+		The constraint for supprt vectors is met with equality.
+		}
+		\label{fig:conditionsv}
+		} 
+	\end{figure}
+	}
+\end{enumerate}
 }
-}
-\only<6>{
-\begin{figure}[h]
-    \centering
-    \includegraphics[height=4.5cm]{img/section2_fig18_sv} 
-    \mode<article>{
-    \caption{
-    The constraint for supprt vectors is met with equality.
-    }
-    \label{fig:conditionsv}
-    } 
-\end{figure}
-}
-\end{itemize}
 
 \end{frame}
 
@@ -303,15 +367,20 @@ Therefore, $\lambda_\alpha \ne 0$ will correspond to the constraints being met w
 \begin{frame}\frametitle{\subsecname}
 
 \mode<presentation>{
+	\begingroup 
+	\footnotesize
 \begin{equation*}
 L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
 - \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
 ,\quad \lambda_{\alpha} \ge 0
 \end{equation*}
+	\endgroup
 }
 
 \notesonly{
 The Lagrangian of the primal problem is solved by finding the saddle point.} At the saddle point, the derivatives of the Lagrangian $L$ w.r.t to the primal variables goes to zero:
+
+\slidesonly{\vspace{-3mm}}
 
 \begin{align}
 \only<1,2>{
@@ -351,15 +420,20 @@ The solution is unique for $\vec w$ but not for the set of multipliers $\{\lambd
 
 \mode<presentation>{
 \slidesonly{\vspace{-5mm}}
+	\begingroup 
+	\footnotesize
 \begin{equation}
 L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
 - \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
 ,\quad \lambda_{\alpha} \ge 0
 \label{eq:lagrangianprimal}
 \end{equation}
+	\endgroup
 }
     
-The \emph{dual} problem: Solving the primal problem \slidesonly{(above)} in addition to finding a unique solution for the set of multipliers.
+\begin{block}{The \emph{dual} problem:}
+Solving the primal problem \slidesonly{(above)} in addition to finding a unique solution for the set of multipliers.
+\end{block}
 
 \pause 
 
@@ -368,6 +442,7 @@ Solution of the \emph{primal} problem:
 \begin{equation}
  \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
 					 \label{eq:primalsolution1}
+ %\tag{1}
  \end{equation}
 
 and the condition
@@ -383,7 +458,7 @@ and the condition
 
 \end{frame}
 
-\begin{frame}\frametitle{From the \emph{primal} problem to the \emph{dual} problem}
+\begin{frame}\frametitle{From the {primal} problem to the {dual} problem}
 
 \mode<presentation>{
 \vspace{-5mm}
@@ -402,46 +477,50 @@ and the condition
 }
 }
 
+\begingroup
+\footnotesize
 \begin{align}
 \only<1->{
 L(\vec w^*, b, \only<1-3>{&}\{\lambda_{\alpha}\}) \only<1-3>{=\\}
 }
 \only<1-3>{
-=& \frac{1}{2} \vec w^{*\top} \vec w^{*}
+=\,& \frac{1}{2} \vec w^{*\top} \vec w^{*}
 - \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{*\top} \vec x^{(\alpha)} + b \big) -1 \big\}\\
 }
 \only<2,3>{
-=& \frac{1}{2} \vec w^{*\top} \vec w^{*}
+=\,& \frac{1}{2} \vec w^{*\top} \vec w^{*}
 -  \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\color{blue}\vec w^{*\top}} \vec x^{(\alpha)}
 -  \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\color{blue}b}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
 }
 \only<3>{
-=& \frac{1}{2} \vec w^{*\top} \vec w^{*}
+=\,& \frac{1}{2} \vec w^{*\top} \vec w^{*}
 - {\color{blue}\vec w^{*\top}} \underbrace{\sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}}_{= \vec w^* \text{ (cf. \eqref{eq:primalsolution1})}}
 - {\color{blue}b} \underbrace{\sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)}}_{= 0 \text{ (cf. \eqref{eq:primalsolution2})}}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
 }
 \only<4->{
-=& \frac{1}{2} \vec w^{*\top} \vec w^{*}
+=\,& \frac{1}{2} \vec w^{*\top} \vec w^{*}
 - {\vec w^{*\top}} \vec w^{*\top}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
-=& -\frac{1}{2} \vec w^{*\top} \vec w^{*}
+=\,& -\frac{1}{2} \vec w^{*\top} \vec w^{*}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}
 }
 \only<5->{
 \intertext{plugging in the solution \notesonly{\eqref{eq:primalsolution1} }for $\vec w^*$:} 
-=& -\frac{1}{2} \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\vec x^{(\alpha)}}^\top \sum_{\beta=1}^{p} \lambda_{\beta} y_{T}^{(\beta)} \vec x^{(\beta)}
+=\,& -\frac{1}{2} \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\vec x^{(\alpha)}}^\top \sum_{\beta=1}^{p} \lambda_{\beta} y_{T}^{(\beta)} \vec x^{(\beta)}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
-=& -\frac{1}{2} 
+=\,& -\frac{1}{2} 
 \sum_{\alpha=1}^{p} \sum_{\beta=1}^{p} 
 \lambda_{\alpha} \lambda_{\beta} 
 y_{T}^{(\alpha)} y_{T}^{(\beta)}
 {\vec x^{(\alpha)}}^\top  \vec x^{(\beta)}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}
-} \eqexcl \max_{\{\lambda_\alpha\}}
+\eqexcl \max_{\{\lambda_\alpha\}}
+} 
 \label{eq:lagrangiandual}
 \end{align}
+\endgroup
 
 \mode<article>{
 \eqref{eq:lagrangiandual} gives us the maximization objective of the \emph{dual problem}.
@@ -452,12 +531,9 @@ y_{T}^{(\alpha)} y_{T}^{(\beta)}
 
 \begin{frame}\frametitle{\subsecname}
 
-Find the Lagrange multipliers $\{\lambda_{\alpha}\}$ that maximize:
+Find the Lagrange multipliers $\{\lambda_{\alpha}\}$ that maximize \notesonly{\eqref{eq:lagrangiandual}}:
 
-\mode<presentation>{
-
-
-\begin{equation}
+\begin{equation*}
 L(\vec w^*, b, \{\lambda_{\alpha}\})
 = -\frac{1}{2} 
 \sum_{\alpha=1}^{p} \sum_{\beta=1}^{p} 
@@ -466,8 +542,7 @@ y_{T}^{(\alpha)} y_{T}^{(\beta)}
 {\vec x^{(\alpha)}}^\top  \vec x^{(\beta)}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}
  \eqexcl \max_{\{\lambda_\alpha\}}
-\label{eq:lagrangiandual}
-\end{equation}
+\end{equation*}
 
 subject to 
 \begin{itemize}
@@ -476,6 +551,7 @@ subject to
 \end{itemize}
 
 Reuse the solution of the primal problem for $\vec w^*$:
+\mode<presentation>{
 \vspace{-5mm}
 \begin{equation}
  \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
