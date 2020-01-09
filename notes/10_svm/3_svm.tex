@@ -111,6 +111,8 @@ Let $\vec w^{*}$ and $b^{*}$ describe the optimal hyperplane that maximizes the 
 
 
 The cost function\notesonly{ to minimize}:
+
+\slidesonly{\vspace{-3mm}}
     
 \begin{equation}
 \frac{1}{2} \vec w^{\top} \vec w = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \eqexcl \min    
@@ -123,9 +125,12 @@ The cost function\notesonly{ to minimize}:
 Dividing by 2 is simply for convenience.
 }
 
-We want to restrict the space of solutions for $\vec w$ to that which leads to correct classification of the training points:
+We want to restrict the space of solutions for $\vec w$ to that which leads to correct classification of the training points
 
-We therefore constrain solutions such that:
+\notesonly{We therefore constrain solutions such that:}
+\slidesonly{Constraint:}
+
+\slidesonly{\vspace{-5mm}}
 
 \begin{equation}
  y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) \ge 1 \;\;\forall \alpha{}
@@ -137,7 +142,21 @@ We therefore constrain solutions such that:
 }
 
 \notesonly{
-This gives us the \emph{primal} problem for structured risk minimization (SRM) prooblem. }The SRM principle is about balancing the complexity of a model while minimizing the training error to avoid overfitting.
+This gives us the \emph{primal} problem for structured risk minimization (SRM) prooblem. }
+\slidesonly{The SRM principle is about:}
+
+
+\slidesonly{\vspace{-5mm}}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[height=2cm]{img/scale} 
+    \mode<article>{
+    \caption{
+    The SRM principle is about balancing the complexity of a model while minimizing the training error to avoid overfitting.
+    }
+    } 
+\end{figure}
     
 \end{frame}
 

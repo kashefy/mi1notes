@@ -11,9 +11,9 @@
 \end{frame}
 }
 
-\subsection{The margin}
+\subsection{Identifying the margin}
 
-\begin{frame}\frametitle{Identifying the margin}
+\begin{frame}\frametitle{\subsecname}
 \mode<article>{
 Consider the following linearly separable binary classification problem and the different hyperplanes for separating the two classes. In order to identify the margn of a hyperplane:
 }
@@ -148,6 +148,8 @@ Remember: We are only dealing with a linearly separable problem.
     
 \end{frame}
 
+\subsection{Margins and the VC-dimension}
+
 \begin{frame}
 
 \slidesonly{\vspace{-5mm}} 
@@ -180,7 +182,7 @@ Remember: We are only dealing with a linearly separable problem.
 Large margins imply a small VC dimension. }A larger margin tightens the upper bound of the VC dimension, regardless of the dimensionality of the problem. 
 
 \begin{block}{\textit{Theorem 10.3} in \citep{Vapnik1998}}
-states that
+\notesonly{states that}
 
 \begin{equation}
     \dvc \quad\leq\quad \min \bigg( \bigg\lfloor 
@@ -224,7 +226,7 @@ To illustrate:
 
 \end{frame}
 
-\begin{frame}\frametitle{Margins and the VC-dimension}
+\begin{frame}\frametitle{\subsecname}
 
 Recall the definition of the $\dvc$ as the \underline{maximal number of training points $p$} that a model can \emph{shatter}.\\
 
