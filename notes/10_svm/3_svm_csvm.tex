@@ -77,23 +77,28 @@
 				&\geq 1 
 				\visible<2->{\color{blue} - \varphi_\alpha}
 			& \substack{\text{normalization \& correct classification} \\[1mm]
-					\text{of all data points}  
+					\text{of all data points, i.e. ``no slack''}  
 					\visible<2->{\color{blue} \text{ for } \varphi_\alpha = 0 } } \\ 
 			\visible<2->{\color{blue} \varphi_\alpha & \color{blue} \geq 0 
 			& \scriptstyle \color{blue} \text{``margin errors'' for } 
-				\varphi_\alpha \neq 0 }
+				\varphi_\alpha \neq 0 \text{ ``with slack''}}
 		\end{array}
 	\end{equation}
 	\end{block}
 	
 	\begin{center}
-		\includegraphics<1>[height=3.25cm]{img/margin_and_weights}	
-		\includegraphics<2>[height=3.25cm]{img/margin_errors}	
+		\includegraphics<1>[height=3.cm]{img/margin_and_weights}	
+		\includegraphics<2>[height=3.cm]{img/margin_errors}	
 	\end{center}
 	%\begin{itemize}
 	%	\itR C: regularization-parameter $\leadsto$ model selection
 	%	\itR Why margin error? $\leadsto$ margin necessary for bounding $\dvc$
 	%\end{itemize}
+	
+	\question{How does ${\color{blue}C}$ control complexity?}
+	
+	\question{How does ${\color{blue}C}$ control complexity?}
+	
 \end{frame}
 
 
@@ -138,12 +143,22 @@
 	\begin{center} 
 		\includegraphics[height=5cm]{img/section2_fig16_v2} 
 	\end{center}
+	
+	\question{Where are the support vectors?}
+	
+	\pause
+	
+	\question{Does $C$ influence the number of support vectors?}
+	
+	
 \end{frame}
 
 % -----------------------------------------------------------------------------
 \begin{frame}\frametitle{The C-SVM classifier}
 
-SVs do not necessarily lie on the margin anymore.
+SVs do not necessarily lie on the margin anymore. The C-SVM has a ``soft'' margin.
+
+\slidesonly{\vspace{-3mm}}
 
 	\begin{eqnarray*}
 		\vec{w} &=& \sum\limits_{\alpha = 1}^p \lambda_\alpha y_T^{(\alpha)}
@@ -173,4 +188,8 @@ SVs do not necessarily lie on the margin anymore.
 			\bigg)
 	\end{equation*}
 	\end{block}
+\end{frame}
+
+\begin{frame}
+C-SVM demo: \href{https://cs.stanford.edu/people/karpathy/svmjs/demo/}{Link to C-SVM applet}
 \end{frame}

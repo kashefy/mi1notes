@@ -104,7 +104,24 @@ The distance $\mathrm{d}_{w}$ is the \emph{margin} for that hyperplane.
  
 Remember: We are only dealing with a linearly separable problem.
 
-TODO figures
+
+	\begin{figure}[h]
+		\centering
+		\slidesonly{
+		\only<1>{
+		\includegraphics[height=4.5cm]{img/section2_fig13_v2_nomargin_h_distr} 
+		}
+		}
+		\only<2>{
+		\includegraphics[height=4.5cm]{img/section2_fig13_v2_nomargin_h_margin_max} 
+		}
+		\mode<article>{
+		\caption{
+		Potential generalization abilities with maximum margin.
+		}
+		\label{fig:conditionsv}
+		} 
+	\end{figure}
  
 \mode<article>{
       The {\em margin} is the smallest distance between a separating hyperplane and a training sample. The training sample closest to the decision boundary is denoted with $\vec x^{(*)}$.\\
@@ -125,7 +142,9 @@ TODO figures
             Consider a second hyperplane with the same orientation $\vec w$ but less than maximum (i.e. more narrow) margin. Shift the second hyperplane so that our sample $\vec x^{(*)}$ also lies on the margin of the second hyperplane. The shifting results in the decision boundaries of both hypeplanes appearing parallel to one another, both make contact with $\vec x^{(*)}$. The difference is that the hyperplane with the smaller margin appears to lie inside the first hyperplane. Now consider an unseen pattern $\vec x_{(test)}$ that is very similar to $\vec x^{(*)}$ (i.e. $\vec x_{(test)} = \vec x^{(*)} + \vec {noise}$). $\vec x_{(test)}$ belongs to the same class as $\vec x^{(*)}$. The noise can result in the $\vec x_{(test)}$ falling inside the margin of the first hyperplane. Because the margin of the second hyperplane is more narrow, the decision boundary of that plane is closer to $\vec x^{(*)}$. This means that $\vec x_{(test)}$ is more likely to fall on the wrong side of the second decision boundary and get misclassified (i.e. higher generlization error). This is less likely to happen for the first hypeplane because the maximum margin pushes the decision boundary away from the $\vec x^{(*)}$. We would need to apply more noise on $\vec x_{(test)}$  until it gets misclassified by the maximum margin hyperplane.\vspace{5cm}
             
 }
+\only<2>{
         \notesonly{Another implication of the maximizing the margin is that}\slidesonly{Also,} the optimal hyperplane with maximum margin is a \emph{unique} solution to the optimization problem.
+    }
     
 \end{frame}
 
