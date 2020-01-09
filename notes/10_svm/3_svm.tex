@@ -120,7 +120,7 @@ The cost function\notesonly{ to minimize}:
 
 \mode<article>{
 - Minimizing the square of the norm turns it into a \emph{convex} minimization problem, which simplifies the optimization procedure.
-Dividing by 2 is simply for convinience.
+Dividing by 2 is simply for convenience.
 }
 
 We want to restrict the space of solutions for $\vec w$ to that which leads to correct classification of the training points:
@@ -137,7 +137,7 @@ We therefore constrain solutions such that:
 }
 
 \notesonly{
-This gives us the \emph{primal} problem for structured risk minimization (SRM) prooblem. }The SRM principle is about balancing the complexity of a model while minimizing the tranining error to avoid overfitting.
+This gives us the \emph{primal} problem for structured risk minimization (SRM) prooblem. }The SRM principle is about balancing the complexity of a model while minimizing the training error to avoid overfitting.
     
 \end{frame}
 
@@ -207,7 +207,7 @@ L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
 \end{itemize}
 
 %\slidesonly{\vspace{5mm}}
-This implies that a \emph{saddle point} has to be found for the Lagrangian.
+This, along with the minimization being \emph{convex} and the constraints being linear, implies that a \emph{saddle point} has to be found for the Lagrangian.
 
 \only<2>{
 \begin{figure}[h]
@@ -351,7 +351,7 @@ Consider the following cases:
 		\includegraphics[height=4.5cm]{img/section2_fig18_sv} 
 		\mode<article>{
 		\caption{
-		The constraint for supprt vectors is met with equality.
+		The constraint for support vectors is met with equality.
 		}
 		\label{fig:conditionsv}
 		} 
@@ -523,7 +523,7 @@ y_{T}^{(\alpha)} y_{T}^{(\beta)}
 \endgroup
 
 \mode<article>{
-\eqref{eq:lagrangiandual} gives us the maximization objective of the \emph{dual problem}. Note that the Lagriangian of the dual problem is a function of the set of multipliers $\{\lambda_{\alpha}\}$ only.
+\eqref{eq:lagrangiandual} gives us the maximization objective of the \emph{dual problem}. Note that the Lagrangian of the dual problem is a function of the set of multipliers $\{\lambda_{\alpha}\}$ only.
 }
 \end{frame}
 
