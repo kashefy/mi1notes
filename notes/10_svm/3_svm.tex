@@ -414,7 +414,7 @@ The solution is unique for $\vec w$ but not for the set of multipliers $\{\lambd
 
 \end{frame}
 
-\subsection{From the primal problem to the dual problem}
+\subsection{From the primal problem to the dual problem}\label{sec:dualtoprimal}
 
 \begin{frame}\frametitle{\subsecname}
 
@@ -571,7 +571,7 @@ This dual problem is optimized numerically using \emph{Sequential Minimal Optimi
 \question{What about the bias?}
 
 \mode<presentation>{
-\placeimage{12.6}{10.2}{img/section2_fig18_sv_nolambda}{width=3.8cm}
+\placeimage{12.7}{10.2}{img/section2_fig18_sv_nolambda}{width=2.2cm}
 }
 
 \pause
@@ -579,8 +579,8 @@ This dual problem is optimized numerically using \emph{Sequential Minimal Optimi
 By now we have:
 \pause
 \begin{itemize}
-\item The orientation of the optimal hyperplane with maximum margin: $\vec w^{*}$
-\item The set of multipliers $\{\lambda_{\alpha}\}$. \emph{How can those help in finding the bias?}
+\item \notesonly{The orientation of the optimal hyperplane with maximum margin: }$\vec w^{*}$
+\item \notesonly{The set of multipliers $\{\lambda_{\alpha}\}$.} \emph{How can those help in finding the bias?}
 \end{itemize}
 
 \pause
@@ -597,28 +597,30 @@ The clue is in the constraints
     
 \pause 
 
-Which is met with \textcolor{red}{equality} by any support vector:
+Which is met with \textcolor{red}{equality} by any of the \textcolor{red}{support vector}:
 
 \slidesonly{\vspace{-5mm}}
 	\begin{align}
 		f_{\alpha}(\vec w^*,b^*) 
 		&= - \Big\{ y_T^{(\alpha)} 
-			\Big( \vec{w^*}^\top \vec{x}^{(\alpha)}
+			\Big( {\vec{w}^*}^\top \vec{x}^{(\alpha)}
 			+ b^* \Big) -1 \Big\}~{\color{red}\stackrel{!}{=}}~0
         \intertext{Solving for $b^{*}$ yields:}
-		\Rightarrow \quad b^* =&
-		y_T^{(\alpha)} \;\;-\;\;  \vec{w}^{*\top} \vec{x}^{(\alpha)} 
+		\Rightarrow \quad b^* 
+		&=
+		y_T^{(\alpha)} \;\;-\;\; {\color{blue}\vec{w}^*}^{\top} \vec{x}^{(\alpha)} 
 	\end{align}
     
 \notesonly{The calculation of $b^{*}$ is }made more robust by averaging over all support vectors:
 
 \begin{equation}
     b^* = \frac{1}{\#_{\mathrm{SV}}} \sum\limits_{\alpha \in \mathrm{SV}}
-        \Big( y_T^{(\alpha)} - \sum\limits_{\beta \in \mathrm{SV}}
+        \big( y_T^{(\alpha)} - {\color{blue}\sum\limits_{\beta \in {\color{red}\mathrm{SV}}}}
+            {\color{blue}
             \lambda_\beta y_T^{(\beta)} 
-            { \big( \vec{x}^{(\beta)} \big)^\top 
-            \vec{x}^{(\alpha)} }
-        \Big)\slidesonly{\qquad}
+             \big( \vec{x}^{(\beta)} \big)}^\top 
+            \vec{x}^{(\alpha)}
+        \big)\slidesonly{\qquad}
 \end{equation}
 
 \question{Why does the inner sum run through the SV's only?}
@@ -627,84 +629,67 @@ Which is met with \textcolor{red}{equality} by any support vector:
 
 \end{frame}
 
-\begin{frame}
+\subsubsection{Making predictions with the SVM}
 
-\question{What about non-linearly separable classes?}
+\begin{frame}{Only}\frametitle{\subsubsecname}
 
-\pause
-{}
-\notesonly{
-- Transformation of the feature space into a new space in which the classes can become linearly seperable:
-}
-			\begin{equation}
-				\underbrace{ \vec{x} }_{\substack{\text{elementary} \\
-								\text{features}}}
-				\longrightarrow \underbrace{ \vec{\phi}_{(\vec{x})} }_{
-						\substack{ \text{monomials of}\\ \text{degree $n$}}}
-			\end{equation}
-\notesonly{
-However, instead of computing the transformation $\vec \phi$ explicitly (possible very costly in terms of memory footprint if the space of $\vec \phi$ has a very high dimensionality), we exploit the fact that }SVMs only ever operate with the scalar product. This is evident from the Lagrangian of the dual problem we use to construct the SVM:
+\begin{enumerate}
+\item<only@1> We started off with a connectionist neuron model:
 
-\begin{equation} 
-    L(\{\lambda_\alpha\})
-        \;\;=\;\;  -\frac{1}{2} \sum\limits_{\alpha, \beta = 1}^p 
-        \lambda_\alpha \lambda_\beta y_T^{(\alpha)}
-        y_T^{(\beta)} 
-        \underbrace{\big( \vec{x}^{(\alpha)} \big)^\top 
-            \vec{x}^{(\beta)}}_{ \circledast }
-        + \sum\limits_{\alpha = 1}^p \lambda_\alpha{}
-        \eqexcl \max_{\{\lambda_\alpha\}}
-\end{equation}	
-
-A transformation of the features would result in:
-
-\begin{equation} 
-    L(\{\lambda_\alpha\})
-        \;\;=\;\;  -\frac{1}{2} \sum\limits_{\alpha, \beta = 1}^p 
-        \lambda_\alpha \lambda_\beta y_T^{(\alpha)}
-        y_T^{(\beta)} 
-        \underbrace{\big( \vec \phi_{\vec{x}^{(\alpha)}} \big)^\top 
-            \vec \phi_{\vec{x}^{(\beta)}}}_{ \circledast }
-        + \sum\limits_{\alpha = 1}^p \lambda_\alpha{}
-        \eqexcl \max_{\{\lambda_\alpha\}}
+\begin{equation}
+y(\vec x; \vec w, b) = 
+			\sign \big( \vec{w}^\top \vec{x} + b \big),
 \end{equation}
-    
-\end{frame}
 
-\begin{frame}\frametitle{Induced feature space}
-	$$
-			K(\vec x, \vec x') 
-			%\quad=\quad \sum_{i=0}^{\infty} \,
-			%\lambda_i \; \psi_{i(\vec x)} \, \psi_{i(\vec x')} 
-			\quad=\quad 
-			\sum_{i=1}^{\infty} \,
-			\underbrace{\psi_{i(\vec x)} \, \sqrt{\lambda_i}}_{\phi_{i(\vec x)}}
-			\underbrace{\sqrt{\lambda_i} \, \psi_{i(\vec x')} }_{\phi_{i(\vec x')}} 
-			\quad=\quad \vec \phi_{(\vec x)}^\top \vec \phi_{(\vec x')}
-	$$
+\item<only@1> optimized it to be a \emph{maximum margin classifier}:
 
-	\begin{itemize}
-		\item every positive semi-definite kernel $K$
-			is an \textbf{inner product} in the induced space $\Phi$,
-			spanned by the features
-			$\phi_{i(\vec x)} = \sqrt{\lambda_i} \, \psi_{i(\vec x)}$
-		\vspace{4mm}
-		\item $\Phi$ is often high dimensional
-		\vspace{4mm}
-		\item a linear classifier in $\Phi$ can solve 
-			non-linearly separable problems in the original feature space $\Set X$
-	\end{itemize}
-\end{frame}
+			\begin{equation} 
+				L(\{\lambda_\alpha\})
+					\;\;=\;\;  -\frac{1}{2} \sum\limits_{\alpha, \beta = 1}^p 
+					\lambda_\alpha \lambda_\beta y_T^{(\alpha)}
+					y_T^{(\beta)} 
+					\big( \vec{x}^{(\alpha)} \big)^\top 
+						\vec{x}^{(\beta)}
+					+ \sum\limits_{\alpha = 1}^p \lambda_\alpha{}
+                    \eqexcl \max_{\{\lambda_\alpha\}}
+			\end{equation}	
+			$\{\lambda_\alpha \geq 0 \}_{\alpha=1}^p\;,\quad 
+			\sum_{\alpha=1}^p \lambda_\alpha \, y_T^{(\alpha)} = 0$	
+			
+\item<only@2,3> This gave us the optimal parameters for our model:
+\begin{equation}
+y(\vec x; \vec w^*, b^*) = 
+			\sign \big( \vec{w}^{*\top} \vec{x} + b^* \big),
+\end{equation}
 
-\subsection{C-SVM}
+\only<3>{
 
-\begin{frame}
+\mode<presentation>{
+\placeimage{11.9}{2.5}{img/section2_fig18_sv}{width=3cm}
+}
 
-\question{What if the two classes are still not perfectly separable?}
+with
 
-- C-SVMs
+\begin{equation}
+ \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
+  = \sum_{\beta \in SV} \lambda_{\beta} y_{T}^{(\beta)} \vec x^{(\beta)}
+ \end{equation}
+ 
+ and
+ 
+ \begin{equation*}
+    b^* = \frac{1}{\#_{\mathrm{SV}}} \sum\limits_{\alpha \in \mathrm{SV}}
+        \big( y_T^{(\alpha)} - {\sum\limits_{\beta \in {\mathrm{SV}}}}
+            {
+            \lambda_\beta y_T^{(\beta)} 
+             \big( \vec{x}^{(\beta)} \big)}^\top 
+            \vec{x}^{(\alpha)}
+        \big)\slidesonly{\qquad}
+\end{equation*}
 
-No longer assume a perfect separation between the classes:
+\notesonly{This reveals that }our SVM classifier is essentially described by the SVs found in the training set. 
+$\vec w^*$ and $b^*$ can be calculated directly from the SVs.
+}
+\end{enumerate}
 
-    
 \end{frame}
