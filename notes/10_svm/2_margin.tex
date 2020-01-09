@@ -201,22 +201,22 @@ where,\\
 \end{tabular}
 \end{block}
 
-
-\end{frame}
-
-\begin{frame}\frametitle{Margins and the VC-dimension}
-
-
 \mode<article>{
 
-The bound in \eqref{eq:dvcmarginbound} assumes a setting as depicted by \figref{fig:dvcmarginboundsetting}. It tells us that, if we draw a sphere around our training data with radius $\mathrm{d}_{R}$ and a second sphere inside of it using the margin $\mathrm{d}_{w}$ as its radius, knowing that the inner sphere is placed in the center and does not contain any datapoints, the theorem then tells us that the VC-dimension is no longer $N+1$ but only as big as the integer component\footnote{According to \citep{hush2001vc} it is debatable whether one should apply $\lfloor \cdot \rfloor$ (floor) or $\lceil \cdot \rceil$ (ceil operation) while pointing out that the latter is possibly incorrect but ``asymptotically sharper'' with reference to \citep{Burges1998}.} on the ratio $\frac{\mathrm{d}_R^2}{\mathrm{d}_{{w}}^2}$.
+The bound in \eqref{eq:dvcmarginbound} assumes a setting as depicted by \figref{fig:dvcmarginboundsetting}. It tells us that, if we draw a sphere around our training data with radius $\mathrm{d}_{R}$ and a second sphere inside of it using the margin $\mathrm{d}_{w}$ as its radius, knowing that the inner sphere is placed in the center and does not contain any datapoints, the theorem then tells us that the VC-dimension is no longer $N+1$ but only as big as the integer component
+\footnote{If interested in a proof for \textit{Theorem 10.3}, see 
+\href{http://web.eecs.umich.edu/\~jabernet/eecs598course/fall2015/web/notes/lec11\_101315.pdf}
+{http://web.eecs.umich.edu/\~jabernet/eecs598course/fall2015/web/notes/lec11\_101315.pdf}
+}
+\footnote{According to \citep{hush2001vc}, it is debatable whether one should apply $\lfloor \cdot \rfloor$ (floor) or $\lceil \cdot \rceil$ (ceil operation) while pointing out that the latter is possibly incorrect but ``asymptotically sharper'' with reference to \citep{Burges1998}.}
+on the ratio $\frac{\mathrm{d}_R^2}{\mathrm{d}_{{w}}^2}$.
+
 }
 
 
 
 
 % illustrations adapted from http://www.cs.columbia.edu/~jebara/4771/notes/class5x.pdf
-% this simplified proof was obtained from the notes http://web.eecs.umich.edu/~jabernet/eecs598course/fall2015/web/notes/lec11_101315.pdf
 
 \mode<article>{
 To illustrate:
