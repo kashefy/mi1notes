@@ -161,17 +161,17 @@ SVs do not necessarily lie on the margin anymore. The C-SVM has a ``soft'' margi
 	\begin{eqnarray*}
 		\vec{w} &=& \sum\limits_{\alpha = 1}^p \lambda_\alpha y_T^{(\alpha)}
 			\vec{x}^{(\alpha)} \qquad
-		\leadsto {\color{red}\lambda_\alpha \neq 0} \text{ only for support vectors }SV\\[2mm]
+		\leadsto {\color{red}\lambda_\alpha \neq 0} \text{ only for support vectors }\mathrm{SV}\\[2mm]
 		\pause
-		b &=& \frac{1}{\# SV_<} \sum\limits_{\alpha \in SV_<} \bigg( y_T^{(\alpha)}
-			- \sum\limits_{\color{red}\beta \in SV} \lambda_\beta y_T^{(\beta)} 
+		b &=& \frac{1}{\# \mathrm{SV}_<} \sum\limits_{\alpha \in \mathrm{SV}_<} \bigg( y_T^{(\alpha)}
+			- \sum\limits_{\color{red}\beta \in \mathrm{SV}} \lambda_\beta y_T^{(\beta)} 
 			\underbrace{ \Big( \vec{x}^{(\beta)} \Big)^{\kern-0.6ex\top} 
 				\kern-0.2ex\vec{x}^{(\alpha)}}_{\text{kernel function}}
 			\bigg)
 	\end{eqnarray*}
 	\vspace{2mm}
-	$SV_<$: $SV$s with $0 < \lambda_\alpha < \frac{C}{p}$ 
-	($SV$s on the margin) 
+	$\mathrm{SV}_<$: $\mathrm{SV}$s with $0 < \lambda_\alpha < \frac{C}{p}$ 
+	($\mathrm{SV}$s on the margin) 
 	
 	\pause
 
@@ -179,7 +179,7 @@ SVs do not necessarily lie on the margin anymore. The C-SVM has a ``soft'' margi
 	\begin{equation*}
 		%\hat 
 		y(\vec x) = \sign \big( \vec{w}^\top \vec{x} + b \big) 
-		= \sign \bigg( \sum\limits_{\alpha \in SV} \lambda_\alpha y_T^{(\alpha)} 
+		= \sign \bigg( \sum\limits_{\alpha \in \mathrm{SV}} \lambda_\alpha y_T^{(\alpha)} 
 			\underbrace{ \Big( \vec{x}^{(\alpha)} \Big)^{\kern-0.6ex\top} 
 				\kern-0.2ex \vec{x}}_{
 				\text{kernel function}} + \;b

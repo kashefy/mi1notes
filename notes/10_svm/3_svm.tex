@@ -64,7 +64,7 @@ The binary classification setting:\\
 					<& 0 \;\;\text{for } {\color{red}y_{T} = -1}
 				\end{array} \right.  
     \end{equation}
-    The solution is not unique.
+    The solution here is not unique.
     
 \end{itemize}
     
@@ -72,47 +72,62 @@ The binary classification setting:\\
 
 \begin{frame}\frametitle{\subsecname}
     \mode<presentation>{
-\placeimage{8.7}{2.5}{img/section2_fig13_v2_space}{width=5.5cm}
+\placeimage{8.7}{2.4}{img/section2_fig13_v2_space}{width=5.5cm}
 }
 \begin{minipage}{6cm}
 Let $\vec w^{*}$ and $b^{*}$ describe the optimal hyperplane that maximizes the margin of separation:
     \begin{equation}
     \vec w^{*\top} \vec x + b^{*} \;\;
-    \left \{ \begin{array}{ll}
-					\ge& 1 \;\;\text{for } {\color{blue}y_{T} = +1}\\
-					\le& -1 \;\;\text{for } {\color{red}y_{T} = -1}
+    \left \{ \begin{array}{lll}
+					\ge& 1 \;&\text{for } {\color{blue}y_{T} = +1}\\
+					\le& -1 \;&\text{for } {\color{red}y_{T} = -1}
 				\end{array} \right.  
     \end{equation}
     
     Points that lie on the margin are characterized by:
     
+    \slidesonly{\vspace{-3mm}}
+    
     \begin{equation}
     \vec w^{*\top} \vec x + b^{*} \;\;
-    \left \{ \begin{array}{ll}
-					=& 1 \;\;\text{for } {\color{blue}y_{T} = +1}\\
-					=& -1 \;\;\text{for } {\color{red}y_{T} = -1}
-				\end{array} \right.  
+    \left \{ \begin{array}{lll}
+					=& 1 \;&\text{for } {\color{blue}y_{T} = +1}\\
+					=& -1 \;&\text{for } {\color{red}y_{T} = -1}
+				\end{array} \right.
+			\quad \longleftarrow\; \text{``support vectors''} 
     \end{equation}
     
        
 
 \end{minipage}\\
-
-    These points will be referred to as the \emph{support vectors}.
+  
    \notesonly{
+    These points will be referred to as the \emph{support vectors}.
     The shortest distance between points with opposite class labels is $2 \mathrm{d}_{w} = \frac{2}{\lVert \vec w^{*} \rVert}_{2}$, i.e. the distance separating the two classes.
     }
     
-    Maximizing the margin $\corresponds$ minimizing the Euclidean norm of $\vec w$. The solution to this is unique.
+    \slidesonly{\vspace{3mm}}
+    
+    Maximizing the margin $\corresponds$ minimizing the Euclidean norm of $\vec w$.
+    
+    
+    \begin{equation}
+    \mathrm{d}_{w} = \frac{1}{\lVert \vec w \rVert_2} \eqexcl \max 
+    \quad \corresponds \quad 
+    \lVert \vec w \rVert_2 \eqexcl \min
+    \end{equation}
+    
+    
+    The solution to this is unique.
 
 \end{frame}
 
-\begin{frame}\frametitle{The primal problem for structured risk minimization (SRM)}
+\begin{frame}\frametitle{structural risk minimization (SRM) applied to binary classification}
 
 
 The cost function\notesonly{ to minimize}:
 
-\slidesonly{\vspace{-3mm}}
+\slidesonly{\vspace{-7mm}}
     
 \begin{equation}
 \frac{1}{2} \vec w^{\top} \vec w = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \eqexcl \min    
@@ -125,12 +140,14 @@ The cost function\notesonly{ to minimize}:
 Dividing by 2 is simply for convenience.
 }
 
-We want to restrict the space of solutions for $\vec w$ to that which leads to correct classification of the training points
 
-\notesonly{We therefore constrain solutions such that:}
-\slidesonly{Constraint:}
+\notesonly{
+We want to restrict the space of solutions for $\vec w$ to that which leads to correct classification of the training points.
+We therefore constrain solutions such that:}
 
-\slidesonly{\vspace{-5mm}}
+\slidesonly{Constraint for correct classification (``\emph{0-1 loss}'' or ``\emph{hinge loss}''):}
+
+\slidesonly{\vspace{-2mm}}
 
 \begin{equation}
  y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) \ge 1 \;\;\forall \alpha{}
@@ -138,24 +155,28 @@ We want to restrict the space of solutions for $\vec w$ to that which leads to c
 \end{equation}
 
 \notesonly{
-\eqref{eq:constraint} provides constraints that are linear in $\vec w$. It is sometimes referred to as the \emph{0-1 loss} or \emph{hinge loss}. It is exactly zero whenever a point is correctly classified and 1 whenever it is misclassified.
-}
+\eqref{eq:constraint} provides constraints that are linear in $\vec w$. It is sometimes referred to as the \emph{0-1 loss} or \emph{hinge loss}. It is exactly zero whenever a point is correctly classified and 1 whenever it is misclassified. It behaves similarly to \emph{parity-check} with the difference that \emph{parity-check} only produces a binary output.
 
-\notesonly{
-This gives us the \emph{primal} problem for structured risk minimization (SRM) prooblem. }
+This gives us the \emph{primal} problem for structural risk minimization (SRM) prooblem. }
 \slidesonly{The SRM principle is about:}
 
 
-\slidesonly{\vspace{-5mm}}
+\slidesonly{\vspace{-3mm}}
 
 \begin{figure}[h]
+	\slidesonly{
+    %\raggedleft
     \centering
-    \includegraphics[height=2cm]{img/scale} 
+    }
+	\notesonly{
+    \centering
+    }
+    \includegraphics[height=3cm]{img/scale} 
     \mode<article>{
     \caption{
     The SRM principle is about balancing the complexity of a model while minimizing the training error to avoid overfitting.
     }
-    } 
+    }
 \end{figure}
     
 \end{frame}
@@ -170,7 +191,7 @@ f_{0}(\vec w,b) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} = \frac{1}{2} \vec w^
 Manipulating the constraints \eqref{eq:constraint} to obtain an expression in the form $f_{\alpha} \le 0$:
 }
 
-A constraint for each data point in the training set:
+A constraint $f_\alpha(\vec w,b) \le 0$ for each data point in the training set:
 
 \pause
 
@@ -275,15 +296,22 @@ This will leads us to the identifying the Karush-Kuhn-Tucker (KKT) conditions.
 
 \only<1-5>{
 \slidesonly{\vspace{-3mm}}
-\begin{block}{Recall}
+\begin{block}{\notesonly{Recall}}
 
 \begin{enumerate}
 \item the constrained optimization problem:
+\slidesonly{\vspace{-2mm}}
 
-	\begin{itemize}
-	\item[] $\min_{\vec w, b} \; \frac{1}{2} \lVert \vec w \rVert_{2}^{2}$
-	\item[] subject to $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \le 0\;,\quad \text{for all } \alpha = 1,\ldots,p,$
-	\end{itemize}
+	\begingroup 
+	\footnotesize
+	\begin{equation*}
+	\begin{array}{ll}
+	\min_{\vec w, b} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2}\\
+	\text{subject to} & 
+	-\big\{ y_{T}^{(\alpha)} \kern-.5ex \cdot \kern-.5ex \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \le 0\;,\quad \text{for all } \alpha = 1,\ldots,p,
+	\end{array}
+	\end{equation*}
+	\endgroup 
 
 \item the corresponding Lagrangian:
 
@@ -299,7 +327,7 @@ This will leads us to the identifying the Karush-Kuhn-Tucker (KKT) conditions.
 		\only<3>{{\color{red}\sum_{\alpha=1}^{p}}}
 		\only<4-5>{\sum_{\alpha=1}^{p}}
 		}
-			\lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
+			\lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \kern-.5ex \cdot \kern-.5ex \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
 		,\;\; \lambda_{\alpha} \ge 0,
 		%\label{eq:lagrangianprimal}
 	\end{equation*}
@@ -327,30 +355,66 @@ This will leads us to the identifying the Karush-Kuhn-Tucker (KKT) conditions.
 Consider the following cases:
 
 \begin{enumerate}[(a)]
-	\item<only@2> Whenever a constraint is \textcolor{orange}{violated}, i.e.
+	\item<only@2> \notesonly{Whenever }a constraint is \textcolor{orange}{violated},\slidesonly{\\} i.e.
 	\begingroup 
 	\footnotesize
 	$
-	-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}~{\color{orange}\le}~0
+	-\big\{ y_{T}^{(\alpha)} \kern-.5ex \cdot \kern-.5ex \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}~{\color{orange}>}~0
 	$
 	\endgroup 
+	
+\mode<presentation>{
+\only<2>{
+\placeimage{13}{10.2}{img/section2_fig18_sv_nolambda_violate_within}{width=2cm}
+\placeimage{9.5}{10.2}{img/section2_fig18_sv_nolambda_violate_misclassification}{width=2cm}
+}}
+	\mode<article>{
+\begin{figure}[ht]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[width=0.22\textwidth]{img/section2_fig18_sv_nolambda_violate_within}}%
+     \begin{subfigure}[t]{0.4\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+         \mode<article>{
+         \caption{No points within the margin!}
+         }
+         \label{fig:violate_within_margin}
+     \end{subfigure}
+     \hspace{10mm}
+     \begin{subfigure}[t]{0.3\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.77\textwidth]{img/section2_fig18_sv_nolambda_violate_misclassification}
+         }
+         \mode<article>{
+         \caption{No misclassifications!}
+         }
+     \end{subfigure}
+     \mode<article>{
+     \caption{Possible causes of violating the constraint.}
+	 }
+	 \label{fig:violate}
+\end{figure}
+	}
+	
 	\notesonly{
 	Increasing the value of the corresponding multiplier $\lambda_\alpha$ \emph{\textcolor{darkgreen}{increase}} $L$. 
 	This will in turn lead to a change in the primal variables $\vec w$ and $b$ to \emph{\textcolor{blue}{decrease}} $L$.
 	That is:
 	}
 	\begin{equation}
-	\lambda_\alpha \uparrow \quad \leadsto\quad L {\color{darkgreen}\uparrow} \quad \leadsto\quad \text{change in } \vec w,b \quad \leadsto\quad L {\color{blue}\downarrow}
+	\lambda_\alpha \uparrow \; \leadsto\quad L {\color{darkgreen}\uparrow} \; \leadsto \; \text{change in } \vec w,b \; \leadsto\; L {\color{blue}\downarrow}\slidesonly{\hspace{5cm}}
 	\end{equation}
 	
 	\item<only@3> \emph{\textcolor{blue}{Decrease}} of $L$ by changing $\vec w$ and $b$ prevents terms inside the \slidesonly{\only<3>{\textcolor{red}}{sum}} \notesonly{sum of the Lagrangian } from taking on arbitrarily large negative values.
 	
-	\item<only@4> Constraints that are \textbf{not} met as equalities, i.e.
+	\item<only@4> Constraints are met but not \textbf{not} as equalities, i.e.
 	\begingroup 
 	\footnotesize
 	$
 	-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}~{\color{magenta}{<}}~0
-	$\endgroup, $L$ can only be maximized by setting the corresponding multiplier $\lambda_\alpha$ to zero.
+	$\endgroup. $\lambda$'s are meant to maximize $L$. In this case, $L$ can only be maximized by setting the corresponding multiplier $\lambda_\alpha$ to zero.
 	
 	\item<only@5,6>  This leaves $\lambda_\alpha \ne 0$, which corresponds to the constraints being met with \emph{equality}, i.e. 
 	\begingroup 
@@ -379,6 +443,31 @@ Consider the following cases:
 \end{enumerate}
 }
 
+\end{frame}
+
+\begin{frame}\frametitle{\subsecname~Overview}
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+\begin{table}[h]
+\begin{tabular}{ccccll}
+\begin{tabular}[c]{@{}c@{}}Where is\\ the point\\ relative to\\ the margin?\end{tabular} & \begin{tabular}[c]{@{}c@{}}label\\ $y_T$\end{tabular} & \begin{tabular}[c]{@{}c@{}}prediction\\ $\vec w^\top \vec x + b$\end{tabular} & \begin{tabular}[c]{@{}c@{}}correctly\\ classified\end{tabular} & \multicolumn{1}{c}{constraint value $f_{\alpha}$}      & \multicolumn{1}{c}{constraint met?}      
+\\ \hline
+outside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-11}$                                                        & no                                                             & $\mbox{\scriptsize-\{+1 * (-11) - 1\} = +12 > 0}$        & {\color[HTML]{F8A102} violated}
+\\ \hline
+outside  & $\mbox{\scriptsize-1}$                                                    & $\mbox{\scriptsize+30}$                                                         & no                                                             & $\mbox{\scriptsize-\{-1 * 30 - 1\} = +31 > 0}$       & {\color[HTML]{F8A102} violated}
+\\ \hline
+inside   & $\mbox{\scriptsize+1}$                                & $\mbox{\scriptsize+0.2}$                                                        & yes                                                            & $\mbox{\scriptsize-\{+1 * 0.2 - 1\} = +0.8 > 0}$        & {\color[HTML]{F8A102} violated}
+\\ \hline
+inside   & $\mbox{\scriptsize-1}$                                                   & $\mbox{\scriptsize-0.2}$                                                        & yes                                                            & $\mbox{\scriptsize-\{-1 * (-0.2) - 1\} = +0.8 > 0}$ & {\color[HTML]{F8A102} violated}
+\\ \hline
+outside  & $\mbox{\scriptsize+1}$                                                   & $\mbox{\scriptsize+200}$                                                        & yes                                                            & $\mbox{\scriptsize--\{+1 * 200 - 1\} = -199 < 0}$                & {\color[HTML]{DF02F8} met}
+\\ \hline
+outside  & $\mbox{\scriptsize-1}$                               & $\mbox{\scriptsize-10}$                                                         & yes                                                            & $\mbox{\scriptsize-\{-1 * (-10) - 1\} = -\{+9\} < 0}$               & {\color[HTML]{DF02F8} met}
+\\ \hline
+on       & $\mbox{\scriptsize-1}$                                & $\mbox{\scriptsize-1}$                                                         & yes                                                            & $\mbox{\scriptsize-\{-1 * (-1) - 1\} = 0}$                              & {\color[HTML]{CB0000} met with equality}
+\end{tabular}
+\end{table}
 \end{frame}
 
 \subsection{Solving the primal problem}
@@ -691,7 +780,7 @@ with
 
 \begin{equation}
  \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
-  = \sum_{\beta \in SV} \lambda_{\beta} y_{T}^{(\beta)} \vec x^{(\beta)}
+  = \sum_{\beta \in \mathrm{SV}} \lambda_{\beta} y_{T}^{(\beta)} \vec x^{(\beta)}
  \end{equation}
  
  and
