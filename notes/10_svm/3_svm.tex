@@ -365,8 +365,15 @@ Consider the following cases:
 	
 \mode<presentation>{
 \only<2>{
-\placeimage{13}{10.2}{img/section2_fig18_sv_nolambda_violate_within}{width=2cm}
-\placeimage{9.5}{10.2}{img/section2_fig18_sv_nolambda_violate_misclassification}{width=2cm}
+\placeimage{13.2}{11}{img/section2_fig18_sv_nolambda_violate_within}{width=2cm}
+\placeimage{9.7}{11}{img/section2_fig18_sv_nolambda_violate_misclassification}{width=2cm}
+
+\begin{textblock}{5}(12.5,15)
+$\mbox{\tiny-\{+1*0.2-1\} = +0.8 > 0}$
+\end{textblock}
+\begin{textblock}{5}(9,10)
+$\mbox{\tiny-\{+1*(-11)-1\} = +12 > 0}$
+\end{textblock}
 }}
 	\mode<article>{
 \begin{figure}[ht]
@@ -451,7 +458,7 @@ Consider the following cases:
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
 \begin{table}[h]
 \begin{tabular}{ccccll}
-\begin{tabular}[c]{@{}c@{}}Where is\\ the point\\ relative to\\ the margin?\end{tabular} & \begin{tabular}[c]{@{}c@{}}label\\ $y_T$\end{tabular} & \begin{tabular}[c]{@{}c@{}}prediction\\ $\vec w^\top \vec x + b$\end{tabular} & \begin{tabular}[c]{@{}c@{}}correctly\\ classified\end{tabular} & \multicolumn{1}{c}{constraint value $f_{\alpha}$}      & \multicolumn{1}{c}{constraint met?}      
+\begin{tabular}[c]{@{}c@{}}Where is\\ the point\\ relative to\\ the margin?\end{tabular} & \begin{tabular}[c]{@{}c@{}}label\\ $y_T$\end{tabular} & \begin{tabular}[c]{@{}c@{}}prediction\\ $\vec w^\top \vec x + b$\end{tabular} & \begin{tabular}[c]{@{}c@{}}correctly\\ classified\end{tabular} & \multicolumn{1}{c}{constraint value $f_{\alpha}$}      & \begin{tabular}[c]{@{}c@{}}constraint\\ met?\end{tabular}      
 \\ \hline
 outside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-11}$                                                        & no                                                             & $\mbox{\scriptsize-\{+1 * (-11) - 1\} = +12 > 0}$        & {\color[HTML]{F8A102} violated}
 \\ \hline
@@ -465,7 +472,7 @@ outside  & $\mbox{\scriptsize+1}$                                               
 \\ \hline
 outside  & $\mbox{\scriptsize-1}$                               & $\mbox{\scriptsize-10}$                                                         & yes                                                            & $\mbox{\scriptsize-\{-1 * (-10) - 1\} = -\{+9\} < 0}$               & {\color[HTML]{DF02F8} met}
 \\ \hline
-on       & $\mbox{\scriptsize-1}$                                & $\mbox{\scriptsize-1}$                                                         & yes                                                            & $\mbox{\scriptsize-\{-1 * (-1) - 1\} = 0}$                              & {\color[HTML]{CB0000} met with equality}
+on       & $\mbox{\scriptsize-1}$                                & $\mbox{\scriptsize-1}$                                                         & yes                                                            & $\mbox{\scriptsize-\{-1 * (-1) - 1\} = 0}$                              & \begin{tabular}[c]{@{}c@{}}{\color[HTML]{CB0000} met with}\\ {\color[HTML]{CB0000}equality}\end{tabular}
 \end{tabular}
 \end{table}
 \end{frame}
