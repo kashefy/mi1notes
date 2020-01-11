@@ -97,12 +97,77 @@ Example: Binary classification, $y_{T} \in \{-1,1\}$:
 
 \end{frame}
 
-\subsection{The $\epsilon$-sensitive cost function for regression}
+\subsection{The $\varepsilon$-sensitive cost function for regression}
 
 \begin{frame}\frametitle{\subsecname}
 
 \begin{equation}
-e    
+e(y(\vec x^{(\alpha)}; \vec w, b), y_{T})
+= e(\underbrace{y(\vec x^{(\alpha)})}_{\substack{\text{for brevity}}}, y_{T})
+= \max(~0~, \big|~y(\vec x^{(\alpha)}) - y_{T}^{(\alpha)}~\big| - \varepsilon~)
 \end{equation}
+
+\begin{itemize}
+\item The cost function is parameterized by $\varepsilon${}
+\item for model output
+\begin{equation}
+y(\vec x) \in \lbrack y_{T}-\varepsilon, y_{T}+\varepsilon\rbrack    
+\end{equation}    
+$\Rightarrow$ no error.
+\item outside this range $\Rightarrow$ linear error
+\end{itemize}
+
+\begin{figure}[h]
+     \centering
+	 \includegraphics[width=0.7\textwidth]{img/cost_eps}%
+     \caption{The cost function}
+	 \label{fig:cost}
+\end{figure}
+    
+\end{frame}
+
+\subsubsection{Deriving the primal problem for $\varepsilon$-SVR}
+
+\begin{frame}\frametitle{\subsubsecname}
+
+\begin{itemize}
+\item[(i)]
+Simplify assumptions (will be relaxed later)
+\begin{enumerate}
+    \item perfect regression solution, i.e. zero error $\varepsilon$-sensitive cost,
+    \item the regression problem
+
+        \begin{equation}
+        \begin{array}{ll}
+        \min_{\vec w, b} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2}\\
+        \text{subject to} & 
+        y(\vec x^{(\alpha)}) - y_{T}^{(\alpha)} \le \varepsilon\\
+        &
+        y_{T}^{(\alpha)} - y(\vec x^{(\alpha)}) \le \varepsilon \quad \text{for }\alpha=1,\ldots,p
+        \end{array}
+        \end{equation}  
+        
+        This is equivalent to:\\
+
+        \begin{equation}
+        \begin{array}{ll}
+        \min_{\vec w, b} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2}\\
+        \text{subject to} & 
+        \vec w^{\top} \vec x^{(\alpha)} + b - y_{T}^{(\alpha)} \le \varepsilon\\
+        &
+        y_{T}^{(\alpha)} - \vec w^{\top} \vec x^{(\alpha)} - b \le \varepsilon \quad \text{for }\alpha=1,\ldots,p
+        \end{array}
+        \end{equation}  
+        
+        \begin{figure}[h]
+     \centering
+	 \includegraphics[width=0.7\textwidth]{img/regression_1d_linear_margin}%
+     \caption{Linear model (no points outside the margin)}
+	 \label{fig:model_margin}
+\end{figure}
+
+
+\end{enumerate}
+\end{itemize}
     
 \end{frame}
