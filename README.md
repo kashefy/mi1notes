@@ -15,6 +15,8 @@ Topics covered throughout the course:
 * Bayesian networks
 * Reinforcement learning
 
+See [Releases](https://github.com/kashefy/mi1notes/releases) to download the latest pdf files.
+
 ## Instructions on compiling the LaTeX sources ##
 
 Ubuntu:

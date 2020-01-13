@@ -1,0 +1,103 @@
+\usepackage[authoryear,round]{natbib}
+\usepackage{multirow}
+
+\newcommand{\sheetnum}{%
+	10
+}
+%\setcounter{section}{\sheetnum-3}
+\newcommand{\tutorialtitle}{%
+    Support Vector Machines
+}
+\newcommand{\tutorialtitleshort}{%
+	SVM
+}
+% for slides
+\subtitle{\sheetnum \tutorialtitle}
+
+\maxdeadcycles=1000 % Workaround for ! Output loop---100 consecutive dead cycles because of too many figures
+
+% The following use of algroithms does not work well with the notes:
+%
+%
+%
+%
+% instead use the following for your algorithms:
+%
+%\begin{figure}[!t]
+%\removelatexerror
+%\begin{algorithm}[H]
+    % your algo here
+    %\label{alg:algolabel}
+    %\caption{algocaption}
+%\end{algorithm}
+%\end{figure}
+%\begin{algorithm}
+% Below is the definition for the command \removelatexerror:
+\makeatletter
+\newcommand{\removelatexerror}{\let\@latex@error\@gobble}
+\makeatother
+
+\begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\sheet{\sheetnum}{\tutorialtitleshort}
+
+\ttopic{\tutorialtitle}
+
+\columnratio{0.2,0.8}\textbf{}
+\begin{paracol}{2}
+%\setlength{\columnseprule}{0.1pt}
+%\setlength{\columnsep}{5em}
+
+\begin{rightcolumn}
+
+% notes version will ignore it
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\mode<all>
+\input{./1_lagrange}
+\mode*
+
+\clearpage
+
+\mode<all>
+\input{./2_margin}
+\mode*
+
+\clearpage
+
+\mode<all>
+\input{./3_svm}
+\mode*
+
+\clearpage
+
+\mode<all>
+\input{./3_svm_kernel}
+\mode*
+
+\clearpage
+
+
+\mode<all>
+\input{./3_svm_csvm}
+\mode*
+
+\clearpage
+
+\section{References}
+\begin{frame}[allowframebreaks] \frametitle{References}
+	\scriptsize
+	\bibliographystyle{plainnat}
+	\bibliography{bibliography}
+\end{frame}
+
+\end{rightcolumn}
+\end{paracol}
+
+\end{document}
