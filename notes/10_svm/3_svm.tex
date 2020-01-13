@@ -35,13 +35,15 @@ The binary classification setting:\\
 
 
 \begin{itemize}
-	\item \underline{Data}:\\[2mm]
+	\item \underline{Data}:\\
+    
 	$
 	\Big\{ \left(\vec x^{(\alpha)}, y^{(\alpha)}_{T} \right) \Big\}_{\alpha=1}^{p}\,
-	$\\[2mm]
+	$\\
 	where $\vec x \in \R^{N}$, $y_T \in \{-1, 1\}$\\
 
-	\item \underline{Model}:\\[2mm]
+	\item \underline{Model}:\\
+    
 	$
 	y(\vec x; \vec w,b) = \sign \big( \vec w^{\top} \vec x + b \big)
 	$
@@ -64,7 +66,7 @@ The binary classification setting:\\
 					<& 0 \;\;\text{for } {\color{red}y_{T} = -1}
 				\end{array} \right.  
     \end{equation}
-    The solution is not unique.
+    The solution here is not unique.
     
 \end{itemize}
     
@@ -72,45 +74,62 @@ The binary classification setting:\\
 
 \begin{frame}\frametitle{\subsecname}
     \mode<presentation>{
-\placeimage{8.7}{2.5}{img/section2_fig13_v2_space}{width=5.5cm}
+\placeimage{8.7}{2.4}{img/section2_fig13_v2_space}{width=5.5cm}
 }
 \begin{minipage}{6cm}
 Let $\vec w^{*}$ and $b^{*}$ describe the optimal hyperplane that maximizes the margin of separation:
     \begin{equation}
     \vec w^{*\top} \vec x + b^{*} \;\;
-    \left \{ \begin{array}{ll}
-					\ge& 1 \;\;\text{for } {\color{blue}y_{T} = +1}\\
-					\le& -1 \;\;\text{for } {\color{red}y_{T} = -1}
+    \left \{ \begin{array}{lll}
+					\ge& 1 \;&\text{for } {\color{blue}y_{T} = +1}\\
+					\le& -1 \;&\text{for } {\color{red}y_{T} = -1}
 				\end{array} \right.  
     \end{equation}
     
     Points that lie on the margin are characterized by:
     
+    \slidesonly{\vspace{-3mm}}
+    
     \begin{equation}
     \vec w^{*\top} \vec x + b^{*} \;\;
-    \left \{ \begin{array}{ll}
-					=& 1 \;\;\text{for } {\color{blue}y_{T} = +1}\\
-					=& -1 \;\;\text{for } {\color{red}y_{T} = -1}
-				\end{array} \right.  
+    \left \{ \begin{array}{lll}
+					=& 1 \;&\text{for } {\color{blue}y_{T} = +1}\\
+					=& -1 \;&\text{for } {\color{red}y_{T} = -1}
+				\end{array} \right.
+			\quad \longleftarrow\; \text{``support vectors''} 
     \end{equation}
     
        
 
 \end{minipage}\\
-
-    These points will be referred to as the \emph{support vectors}.
+  
    \notesonly{
+    These points will be referred to as the \emph{support vectors}.
     The shortest distance between points with opposite class labels is $2 \mathrm{d}_{w} = \frac{2}{\lVert \vec w^{*} \rVert}_{2}$, i.e. the distance separating the two classes.
     }
     
-    Maximizing the margin $\corresponds$ minimizing the Euclidean norm of $\vec w$. The solution to this is unique.
+    \slidesonly{\vspace{3mm}}
+    
+    Maximizing the margin $\corresponds$ minimizing the Euclidean norm of $\vec w$.
+    
+    
+    \begin{equation}
+    \mathrm{d}_{w} = \frac{1}{\lVert \vec w \rVert_2} \eqexcl \max 
+    \quad \corresponds \quad 
+    \lVert \vec w \rVert_2 \eqexcl \min
+    \end{equation}
+    
+    
+    The solution to this is unique.
 
 \end{frame}
 
-\begin{frame}\frametitle{The primal problem for structured risk minimization (SRM)}
+\begin{frame}\frametitle{structural risk minimization (SRM) applied to binary classification}
 
 
 The cost function\notesonly{ to minimize}:
+
+\slidesonly{\vspace{-7mm}}
     
 \begin{equation}
 \frac{1}{2} \vec w^{\top} \vec w = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \eqexcl \min    
@@ -120,12 +139,17 @@ The cost function\notesonly{ to minimize}:
 
 \mode<article>{
 - Minimizing the square of the norm turns it into a \emph{convex} minimization problem, which simplifies the optimization procedure.
-Dividing by 2 is simply for convinience.
+Dividing by 2 is simply for convenience.
 }
 
-We want to restrict the space of solutions for $\vec w$ to that which leads to correct classification of the training points:
 
-We therefore constrain solutions such that:
+\notesonly{
+We want to restrict the space of solutions for $\vec w$ to that which leads to correct classification of the training points.
+We therefore constrain solutions such that:}
+
+\slidesonly{Constraint for correct classification (``\emph{0-1 loss}'' or ``\emph{hinge loss}''):}
+
+\slidesonly{\vspace{-2mm}}
 
 \begin{equation}
  y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) \ge 1 \;\;\forall \alpha{}
@@ -133,11 +157,29 @@ We therefore constrain solutions such that:
 \end{equation}
 
 \notesonly{
-\eqref{eq:constraint} provides constraints that are linear in $\vec w$. It is sometimes referred to as the \emph{0-1 loss} or \emph{hinge loss}. It is exactly zero whenever a point is correctly classified and 1 whenever it is misclassified.
-}
+\eqref{eq:constraint} provides constraints that are linear in $\vec w$. It is sometimes referred to as the \emph{0-1 loss} or \emph{hinge loss}. It is exactly zero whenever a point is correctly classified and 1 whenever it is misclassified. It behaves similarly to \emph{parity-check} with the difference that \emph{parity-check} only produces a binary output.
 
-\notesonly{
-This gives us the \emph{primal} problem for structured risk minimization (SRM) prooblem. }The SRM principle is about balancing the complexity of a model while minimizing the tranining error to avoid overfitting.
+This gives us the \emph{primal} problem for structural risk minimization (SRM) prooblem. }
+\slidesonly{The SRM principle is about:}
+
+
+\slidesonly{\vspace{-3mm}}
+
+\begin{figure}[h]
+	\slidesonly{
+    %\raggedleft
+    \centering
+    }
+	\notesonly{
+    \centering
+    }
+    \includegraphics[height=3cm]{img/scale} 
+    \mode<article>{
+    \caption{
+    The SRM principle is about balancing the complexity of a model while minimizing the training error to avoid overfitting.
+    }
+    }
+\end{figure}
     
 \end{frame}
 
@@ -151,7 +193,7 @@ f_{0}(\vec w,b) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} = \frac{1}{2} \vec w^
 Manipulating the constraints \eqref{eq:constraint} to obtain an expression in the form $f_{\alpha} \le 0$:
 }
 
-A constraint for each data point in the training set:
+A constraint $f_\alpha(\vec w,b) \le 0$ for each data point in the training set:
 
 \pause
 
@@ -186,30 +228,54 @@ L(\vec w, b, \{\lambda_{\alpha}\})
 \begin{frame}
 
 \mode<presentation>{
+\vspace{-2mm}
+\begin{block}{The Lagrangian of the primal problem:}
+\vspace{-2mm}
+	\begingroup 
+	\footnotesize
 \begin{equation*}
 L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
 - \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
-,\quad \lambda_{\alpha} \ge 0
+,\quad \{\lambda_{a} \ge 0\}_{\alpha=1}^{p}
 \end{equation*}
+	\endgroup
+\end{block}
 }
 
-where $\{\lambda_{a} \ge 0\}_{\alpha=1}^{p}$ is the set of Lagrange multipliers. \notesonly{Because of the minus sign in front of the multipliers, t}\slidesonly{\\[5mm]T}he Lagrangian is optimized by
+\notesonly{where $\{\lambda_{a} \ge 0\}_{\alpha=1}^{p}$ is the set of Lagrange multipliers. Because of the minus sign in front of the multipliers, t}\slidesonly{T}he Lagrangian is optimized by
 \begin{itemize}
-\item[] \emph{minimizing} w.r.t. $\vec w$ and $b$, the \emph{``primal variables''}, and 
-\item[] \emph{maximizing} w.r.t. all $\lambda_{\alpha}$, the \emph{``dual variables''}.
+\item[] \emph{\textcolor{blue}{minimizing}} w.r.t. $\vec w$ and $b$, the \emph{``primal variables''}, and 
+\item[] \emph{\textcolor{darkgreen}{maximizing}} w.r.t. all $\lambda_{\alpha}$, the \emph{``dual variables''}.
 \end{itemize}
 
-\slidesonly{\vspace{5mm}}
-This implies that a \emph{saddle point} has to be found for the Lagrangian.
+%\slidesonly{\vspace{5mm}}
+This, along with the minimization being \emph{convex} and the constraints being linear, implies that a \emph{saddle point} has to be found for the Lagrangian.
+
+\only<2>{
+\begin{figure}[h]
+    \centering
+    \includegraphics[trim={0cm 0 0 25mm},clip, height=4cm]{img/saddle_point_andrewng} 
+    \mode<article>{
+    \caption{
+    Illustration of a saddle point.
+    }
+    \label{fig:saddle}
+    } 
+\end{figure}
+}
+\only<3>{
 \slidesonly{\vspace{5mm}}
 
-Equivalent optimization problems (Kuhn and Tucker theorem):
+\begin{block}{Equivalent optimization problems (Kuhn and Tucker theorem):}
 
 \begin{equation}
-		{\color{blue}\min_{\vec w, b}}\, L{(\vec{w}, b, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
+		{\color{blue}\min_{\vec w, b}}~L{(\vec{w}, b, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
 		= L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
-		= {\color{darkgreen}\max_{ \lambda_\alpha \geq 0}}\, L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, \{ \lambda_\alpha \})}
+		= {\color{darkgreen}\max_{ \lambda_\alpha \geq 0}}~L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, \{ \lambda_\alpha \})}
 \end{equation}
+
+\end{block}
+}
 
 \end{frame}
 
@@ -218,93 +284,236 @@ Equivalent optimization problems (Kuhn and Tucker theorem):
 
 \begin{frame}\frametitle{\subsecname}
 
-\only<1-5>{
-What is happening as we optimize the Lagrangian of the primal problem?
-
-Recall the constrained optimization problem:
-
-\begin{itemize}
-\item[] $\min_{\vec w} \frac{1}{2} \lVert \vec w \rVert_{2}^{2}$
-\item[] subject to $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \le 0\;,\quad \text{for all } \alpha = 1,\ldots,p$
-\end{itemize}
-
-and the corresponding Lagrangian:
-
-\mode<presentation>{
-\slidesonly{\vspace{-5mm}}
-\begin{equation}
-L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
-- \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
-,\quad \lambda_{\alpha} \ge 0
-\label{eq:lagrangianprimal}
-\end{equation}
-}
+\question{What is happening as we optimize the Lagrangian of the primal problem?}
 
 
-
-\begin{equation}
-		{\color{blue}\min_{\vec w, b}}\, L{(\vec{w}, b, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
-		= L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
-		= {\color{darkgreen}\max_{ \lambda_\alpha \geq 0}}\, L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, \{ \lambda_\alpha \})}
-\end{equation}
+\mode<article>{
+- We will attempt to answer this by looking at the constraints and how different cases for the constraints affect the Lagrangian and in turn the variables we are optimizing.
+This will leads us to the identifying the Karush-Kuhn-Tucker (KKT) conditions.
 }
-\begin{itemize}
-\only<1>{\item[]}
-\only<2>{
-\item
-Whenever a constraint is \textcolor{orange}{violated}, i.e.
-$
--\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \,{\color{orange}\le}\, 0
-$
-\notesonly{
-Increasing the value of the corresponding multiplier $\lambda_\alpha$ \emph{\textcolor{darkgreen}{increase}} $L$. 
-This will in turn lead to a change in the primal variables $\vec w$ and $b$ to \emph{\textcolor{blue}{decrease}} $L$.
-}
-\slidesonly{
-$\lambda_\alpha \uparrow \quad \leadsto\quad L {\color{darkgreen}\uparrow} \quad \leadsto\quad \text{change in } \vec w,b \quad \leadsto\quad L {\color{blue}\downarrow}$\\
-}
-}
-\only<3>{
-\item
-\emph{\textcolor{blue}{Decrease}} of $L$ by changing $\vec w$ and $b$ prevents terms inside the sum from taking on arbitrarily large negative values.
-}
-\only<4>{
-\item
-Constraints that are not exactly met as equalities, i.e. $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} {\color{magenta}{<}} 0$, $L$ can only be maximized by setting the corresponding multiplier $\lambda_\alpha$ to zero.
-}
-\only<5,6>{
-\item
-Therefore, $\lambda_\alpha \ne 0$ will correspond to the constraints being met with equality, i.e. $-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} {\color{cyan}{=}} 0$. 
-
-\question{What does ``${\color{cyan}{=}} 0$'' imply w.r.t. misclassification?}
-
-\notesonly{
--This implies that the choice of $\vec w$ and $b$ not only leads to correct classification of that training point but also that the point lies exactly on the margin, indicating that the point for which $\lambda_\alpha \ne 0$ is a \emph{support vector} (cf. \figref{fig:setting}). These are referred to as the \emph{Karush-Kuhn-Tucker (KKT) conditions}.
-}
-}
-\only<6>{
-\vspace{5cm}
-\mode<presentation>{
-\placeimage{5}{7.5}{img/section2_fig13_v2_space}{width=5cm}
-}
-
-}
-\end{itemize}
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Only}\frametitle{\subsecname}
+
+\only<1-5>{
+\slidesonly{\vspace{-3mm}}
+\begin{block}{\notesonly{Recall}}
+
+\begin{enumerate}
+\item the constrained optimization problem:
+\slidesonly{\vspace{-2mm}}
+
+	\begingroup 
+	\footnotesize
+	\begin{equation*}
+	\begin{array}{ll}
+	\min_{\vec w, b} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2}\\
+	\text{subject to} & 
+	-\big\{ y_{T}^{(\alpha)} \kern-.5ex \cdot \kern-.5ex \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\} \le 0\;,\quad \text{for all } \alpha = 1,\ldots,p,
+	\end{array}
+	\end{equation*}
+	\endgroup 
+
+\item the corresponding Lagrangian:
+
+	\slidesonly{\vspace{-3mm}}
+	\begingroup 
+	\footnotesize
+	\begin{equation*}
+		L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
+		- 
+		\notesonly{\sum_{\alpha=1}^{p}}
+		\slidesonly{
+		\only<1,2>{\sum_{\alpha=1}^{p}}
+		\only<3>{{\color{red}\sum_{\alpha=1}^{p}}}
+		\only<4-5>{\sum_{\alpha=1}^{p}}
+		}
+			\lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \kern-.5ex \cdot \kern-.5ex \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
+		,\;\; \lambda_{\alpha} \ge 0,
+		%\label{eq:lagrangianprimal}
+	\end{equation*}
+	\endgroup
+
+\item and the equivalent optimization problems:
+
+	\slidesonly{\vspace{-3mm}}
+	\begingroup 
+	\footnotesize
+	\begin{equation*}
+			{\color{blue}\min_{\vec w, b}}~L{(\vec{w}, b, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
+			= L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, {\color{darkgreen} \{ \lambda_\alpha^*\}})}
+			= {\color{darkgreen}\max_{ \lambda_\alpha \geq 0}}~L{({\color{blue}\vec{w}^*}, {\color{blue}b^*}, \{ \lambda_\alpha \})}.
+	\end{equation*}
+	\endgroup
+
+\end{enumerate}
+
+\end{block}%Recall
+}
+
+%\only<1->
+{
+Consider the following cases:
+
+\begin{enumerate}[(a)]
+	\item<only@2> \notesonly{Whenever }a constraint is \textcolor{orange}{violated},\slidesonly{\\} i.e.
+	\begingroup 
+	\footnotesize
+	$
+	-\big\{ y_{T}^{(\alpha)} \kern-.5ex \cdot \kern-.5ex \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}~{\color{orange}>}~0
+	$
+	\endgroup 
+	
+\mode<presentation>{
+\only<2>{
+\placeimage{13.2}{11}{img/section2_fig18_sv_nolambda_violate_within}{width=2cm}
+\placeimage{9.7}{11}{img/section2_fig18_sv_nolambda_violate_misclassification}{width=2cm}
+
+\begin{textblock}{5}(12,15)
+\mbox{\tiny$-\{+1\cdot0.2-1\} = +0.8~{\color{orange}>}~0$}
+\end{textblock}
+\begin{textblock}{5}(8.5,10)
+\mbox{\tiny$-\{+1\cdot(-11)-1\} = +12~{\color{orange}>}~0$}
+\end{textblock}
+}}
+	\mode<article>{
+\begin{figure}[ht]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[width=0.22\textwidth]{img/section2_fig18_sv_nolambda_violate_within}}%
+     \begin{subfigure}[t]{0.4\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+         \mode<article>{
+         \caption{No points within the margin!}
+         }
+         \label{fig:violate_within_margin}
+     \end{subfigure}
+     \hspace{10mm}
+     \begin{subfigure}[t]{0.3\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.77\textwidth]{img/section2_fig18_sv_nolambda_violate_misclassification}
+         }
+         \mode<article>{
+         \caption{No misclassifications!}
+         }
+     \end{subfigure}
+     \mode<article>{
+     \caption{Possible causes of violating the constraint.}
+	 }
+	 \label{fig:violate}
+\end{figure}
+	}
+	
+	\notesonly{
+	Increasing the value of the corresponding multiplier $\lambda_\alpha$ \emph{\textcolor{darkgreen}{increase}} $L$. 
+	This will in turn lead to a change in the primal variables $\vec w$ and $b$ to \emph{\textcolor{blue}{decrease}} $L$.
+	That is:
+	}
+	\begin{equation}
+	\lambda_\alpha \uparrow \; \leadsto\quad L {\color{darkgreen}\uparrow} \; \leadsto \; \text{change in } \vec w,b \; \leadsto\; L {\color{blue}\downarrow}\slidesonly{\hspace{5cm}}
+	\end{equation}
+	
+	% not really a case
+	\item<only@3>[] \emph{\textcolor{blue}{Decrease}} of $L$ by changing $\vec w$ and $b$ prevents terms inside the \slidesonly{\only<3>{\textcolor{red}}{sum}} \notesonly{sum of the Lagrangian } from taking on arbitrarily large negative values.
+	
+	\item<only@4> Constraints are met but not \textbf{not} as equalities, i.e.
+	\begingroup 
+	\footnotesize
+	$
+	-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}~{\color{magenta}{<}}~0
+	$\endgroup. \notesonly{$\lambda$'s are meant to maximize $L$. In this case, }\slidesonly{\\}$L$ can only be maximized by setting \notesonly{the corresponding multiplier }$\lambda_\alpha$ to zero.
+	
+	\mode<presentation>{
+	\only<4>{
+	\placeimage{12}{11}{img/section2_fig18_sv_legend_nolambda_met}{width=2.4cm}
+		
+	\begin{textblock}{5}(11,10.6)
+	\mbox{\tiny$-\{-1\cdot(-11)-1\} = -10~{\color{magenta}<}~0$}
+	\end{textblock}
+	}
+	}%presentation
+	
+	\item<only@5,6>  This leaves $\lambda_\alpha \ne 0$, which corresponds to the constraints being met with \emph{equality}, i.e. 
+	\begingroup 
+	\footnotesize
+	$
+	-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}~{\color{red}{\eqexcl}}~0
+	$\endgroup. 
+
+	\question{What does ``${\color{red}{=}} 0$'' imply w.r.t. misclassification?}\\
+
+	\notesonly{
+	-This implies that the choice of $\vec w$ and $b$ not only leads to correct classification of that training point but also that the point lies exactly on the margin, indicating that the point for which $\lambda_\alpha \ne 0$ is a \emph{support vector} (cf. \figref{fig:setting}). These are referred to as the \emph{Karush-Kuhn-Tucker (KKT) conditions}.
+	}
+	\only<6>{
+	\begin{figure}[h]
+		\centering
+		\includegraphics[height=4.5cm]{img/section2_fig18_sv} 
+		\mode<article>{
+		\caption{
+		The constraint for support vectors is met with equality.
+		}
+		\label{fig:conditionsv}
+		} 
+	\end{figure}
+	}
+\end{enumerate}
+}
+
+\end{frame}
+
+\begin{frame}\frametitle{\subsecname~Overview}
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+
+\begin{table}[h]
+\notesonly{\hskip-2.0cm}% shift table to the left
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ccccll}
+\begin{tabular}[c]{@{}c@{}}Where is\\ the point\\ relative to\\ the margin?\end{tabular} & \begin{tabular}[c]{@{}c@{}}label\\ $y_T$\end{tabular} & \begin{tabular}[c]{@{}c@{}}prediction\\ $\vec w^\top \vec x + b$\end{tabular} & \begin{tabular}[c]{@{}c@{}}correctly\\ classified\end{tabular} & \multicolumn{1}{c}{constraint value $f_{\alpha}$}      & \begin{tabular}[c]{@{}c@{}}constraint\\ met?\end{tabular}      
+\\ \hline
+outside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-11}$                                                        & no                                                             & $\mbox{\scriptsize-\{+1$\cdot$(-11) - 1\} = +12 > 0}$        & {\color[HTML]{F8A102} violated}
+\\ \hline
+outside  & $\mbox{\scriptsize-1}$                                                    & $\mbox{\scriptsize+30}$                                                         & no                                                             & $\mbox{\scriptsize-\{-1$\cdot$30 - 1\} = +31 > 0}$       & {\color[HTML]{F8A102} violated}
+\\ \hline
+inside   & $\mbox{\scriptsize+1}$                                & $\mbox{\scriptsize+0.2}$                                                        & yes                                                            & $\mbox{\scriptsize-\{+1$\cdot$0.2 - 1\} = +0.8 > 0}$        & {\color[HTML]{F8A102} violated}
+\\ \hline
+inside   & $\mbox{\scriptsize-1}$                                                   & $\mbox{\scriptsize-0.2}$                                                        & yes                                                            & $\mbox{\scriptsize-\{-1$\cdot$(-0.2) - 1\} = +0.8 > 0}$ & {\color[HTML]{F8A102} violated}
+\\ \hline
+outside  & $\mbox{\scriptsize+1}$                                                   & $\mbox{\scriptsize+200}$                                                        & yes                                                            & $\mbox{\scriptsize--\{+1$\cdot$200 - 1\} = -\{199\} < 0}$                & {\color[HTML]{DF02F8} met}
+\\ \hline
+outside  & $\mbox{\scriptsize-1}$                               & $\mbox{\scriptsize-10}$                                                         & yes                                                            & $\mbox{\scriptsize-\{-1(-10) - 1\} = -\{9\} < 0}$               & {\color[HTML]{DF02F8} met}
+\\ \hline
+on       & $\mbox{\scriptsize-1}$                                & $\mbox{\scriptsize-1}$                                                         & yes                                                            & $\mbox{\scriptsize-\{-1$\cdot$(-1) - 1\} = 0}$                              & \begin{tabular}[c]{@{}c@{}}{\color[HTML]{CB0000} met with}\\ {\color[HTML]{CB0000}equality}\end{tabular}
+\end{tabular}
+}
+\caption{Example cases for the constraint.}
+\end{table}
+\end{frame}
+
+\subsection{Solving the primal problem}
+
+\begin{frame}\frametitle{\subsecname}
 
 \mode<presentation>{
+	\begingroup 
+	\footnotesize
 \begin{equation*}
 L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
 - \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
 ,\quad \lambda_{\alpha} \ge 0
 \end{equation*}
+	\endgroup
 }
 
 \notesonly{
 The Lagrangian of the primal problem is solved by finding the saddle point.} At the saddle point, the derivatives of the Lagrangian $L$ w.r.t to the primal variables goes to zero:
+
+\slidesonly{\vspace{-3mm}}
 
 \begin{align}
 \only<1,2>{
@@ -338,106 +547,116 @@ The solution is unique for $\vec w$ but not for the set of multipliers $\{\lambd
 
 \end{frame}
 
-\subsection{From the \emph{primal} problem to the \emph{dual} problem}
+\subsection{From the primal problem to the dual problem}\label{sec:dualtoprimal}
 
 \begin{frame}\frametitle{\subsecname}
 
 \mode<presentation>{
 \slidesonly{\vspace{-5mm}}
-\begin{equation}
+	\begingroup 
+	\footnotesize
+\begin{equation*}
 L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
 - \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
 ,\quad \lambda_{\alpha} \ge 0
-\label{eq:lagrangianprimal}
-\end{equation}
+\end{equation*}
+	\endgroup
 }
     
-The \emph{dual} problem: Solving the primal problem \slidesonly{(above)} in addition to finding a unique solution for the set of multipliers.
+\begin{block}{The \emph{dual} problem:}
+Solving the primal problem \slidesonly{(above)} in addition to finding a unique solution for the set of multipliers.
+\end{block}
 
 \pause 
 
 \mode<presentation>{
 Solution of the \emph{primal} problem:
-\begin{equation}
- \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
-					 \label{eq:primalsolution1}
- \end{equation}
-
-and the condition
-\slidesonly{\vspace{-3mm}}
-\begin{equation}
- \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} = 0 
+\begin{align}
+ \vec w^{*} &= \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)} &
+ \label{eq:primalsolution1}
+ &(1)
+\intertext{and the condition}
+ \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} &= 0& 
  \label{eq:primalsolution2} 
-\end{equation}
+ &(2)
+\end{align}
 }
 
-\eqref{eq:primalsolution1} and \eqref{eq:primalsolution2} are plugged back into the Lagrangian of the primal problem \eqref{eq:lagrangianprimal}.
+\eqref{eq:primalsolution1} and \eqref{eq:primalsolution2} are plugged back into the Lagrangian of the primal problem\notesonly{ \eqref{eq:lagrangianprimal}}.
 \notesonly{From this follows:}
 
 \end{frame}
 
-\begin{frame}\frametitle{From the \emph{primal} problem to the \emph{dual} problem}
+\begin{frame}\frametitle{From the {primal} problem to the {dual} problem}
 
 \mode<presentation>{
 \vspace{-5mm}
+\begingroup 
+\footnotesize
 \begin{equation}
- \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
-					 \label{eq:primalsolution1}
+(1)\quad
+    \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
+%\label{eq:primalsolution1}
+    \qquad\text{and}\qquad{}
+(2)\quad 
+    \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} = 0 
+%\label{eq:primalsolution2} 
  \end{equation}
-\vspace{-3mm}
-\only<1-3>{
-\begin{equation}
- \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} = 0 
- \label{eq:primalsolution2} 
-\end{equation}
-
-\vspace{-2mm}
-}
+\endgroup
+\vspace{-5mm}
 }
 
+\begingroup
+\footnotesize
 \begin{align}
-\only<1->{
-L(\vec w^*, b, \only<1-3>{&}\{\lambda_{\alpha}\}) \only<1-3>{=\\}
-}
-\only<1-3>{
-=& \frac{1}{2} \vec w^{*\top} \vec w^{*}
+\visible<1->{
+\notesonly{
+L(\vec w^*, b, &\{\lambda_{\alpha}\})\\}
+\slidesonly{
+L(\vec w^*, b, \{\lambda_{\alpha}\})}
+=\,& \frac{1}{2} \vec w^{*\top} \vec w^{*}
 - \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{*\top} \vec x^{(\alpha)} + b \big) -1 \big\}\\
 }
-\only<2,3>{
-=& \frac{1}{2} \vec w^{*\top} \vec w^{*}
+\visible<2->{
+=\,& \frac{1}{2} \vec w^{*\top} \vec w^{*}
 -  \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\color{blue}\vec w^{*\top}} \vec x^{(\alpha)}
 -  \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\color{blue}b}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
 }
-\only<3>{
-=& \frac{1}{2} \vec w^{*\top} \vec w^{*}
+\visible<3->{
+=\,& \frac{1}{2} \vec w^{*\top} \vec w^{*}
 - {\color{blue}\vec w^{*\top}} \underbrace{\sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}}_{= \vec w^* \text{ (cf. \eqref{eq:primalsolution1})}}
 - {\color{blue}b} \underbrace{\sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)}}_{= 0 \text{ (cf. \eqref{eq:primalsolution2})}}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
 }
-\only<4->{
-=& \frac{1}{2} \vec w^{*\top} \vec w^{*}
-- {\vec w^{*\top}} \vec w^{*\top}
-+ \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
-=& -\frac{1}{2} \vec w^{*\top} \vec w^{*}
+\visible<4->{
+=\,& \frac{1}{2} \vec w^{*\top} \vec w^{*}
+- {\vec w^{*\top}} \vec w
++ \sum_{\alpha=1}^{p} \lambda_{\alpha}\notesonly{\\}
+=\,\notesonly{&} -\frac{1}{2} \vec w^{*\top} \vec w^{*}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}
 }
-\only<5->{
-\intertext{plugging in the solution \notesonly{\eqref{eq:primalsolution1} }for $\vec w^*$:} 
-=& -\frac{1}{2} \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\vec x^{(\alpha)}}^\top \sum_{\beta=1}^{p} \lambda_{\beta} y_{T}^{(\beta)} \vec x^{(\beta)}
+\visible<5->{
+\notesonly{
+\intertext{plugging in the solution \notesonly{\eqref{eq:primalsolution1} }for $\vec w^*$:}
+}
+\slidesonly{\\} 
+=\,& -\frac{1}{2} \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} {\vec x^{(\alpha)}}^\top \sum_{\beta=1}^{p} \lambda_{\beta} y_{T}^{(\beta)} \vec x^{(\beta)}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}\\
-=& -\frac{1}{2} 
+L(\{\lambda_{\alpha}\}) =\,& -\frac{1}{2} 
 \sum_{\alpha=1}^{p} \sum_{\beta=1}^{p} 
 \lambda_{\alpha} \lambda_{\beta} 
 y_{T}^{(\alpha)} y_{T}^{(\beta)}
 {\vec x^{(\alpha)}}^\top  \vec x^{(\beta)}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}
-} \eqexcl \max_{\{\lambda_\alpha\}}
+\eqexcl \max_{\{\lambda_\alpha\}}
+} 
 \label{eq:lagrangiandual}
 \end{align}
+\endgroup
 
 \mode<article>{
-\eqref{eq:lagrangiandual} gives us the maximization objective of the \emph{dual problem}.
+\eqref{eq:lagrangiandual} gives us the maximization objective of the \emph{dual problem}. Note that the Lagrangian of the dual problem is a function of the set of multipliers $\{\lambda_{\alpha}\}$ only.
 }
 \end{frame}
 
@@ -445,12 +664,9 @@ y_{T}^{(\alpha)} y_{T}^{(\beta)}
 
 \begin{frame}\frametitle{\subsecname}
 
-Find the Lagrange multipliers $\{\lambda_{\alpha}\}$ that maximize:
+Find the Lagrange multipliers $\{\lambda_{\alpha}\}$ that maximize \notesonly{\eqref{eq:lagrangiandual}}:
 
-\mode<presentation>{
-
-
-\begin{equation}
+\begin{equation*}
 L(\vec w^*, b, \{\lambda_{\alpha}\})
 = -\frac{1}{2} 
 \sum_{\alpha=1}^{p} \sum_{\beta=1}^{p} 
@@ -459,8 +675,7 @@ y_{T}^{(\alpha)} y_{T}^{(\beta)}
 {\vec x^{(\alpha)}}^\top  \vec x^{(\beta)}
 + \sum_{\alpha=1}^{p} \lambda_{\alpha}
  \eqexcl \max_{\{\lambda_\alpha\}}
-\label{eq:lagrangiandual}
-\end{equation}
+\end{equation*}
 
 subject to 
 \begin{itemize}
@@ -469,6 +684,7 @@ subject to
 \end{itemize}
 
 Reuse the solution of the primal problem for $\vec w^*$:
+\mode<presentation>{
 \vspace{-5mm}
 \begin{equation}
  \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
@@ -476,32 +692,138 @@ Reuse the solution of the primal problem for $\vec w^*$:
  \end{equation}
  }
 
-This is optimized numerically using \emph{Sequential Minimal Optimization}
+This dual problem is optimized numerically using \emph{Sequential Minimal Optimization}.
 
 
 \end{frame}
 
 \begin{frame}
-Finding $b^{*}$    
-\end{frame}
 
-\begin{frame}
+\slidesonly{\vspace{-5mm}}
 
-\question{What about non-linearly separable classes?}
+\question{What about the bias?}
 
-kernel trick
+\mode<presentation>{
+\placeimage{12.7}{10.2}{img/section2_fig18_sv_nolambda}{width=2.2cm}
+}
+
+\pause
+
+By now we have:
+\pause
+\begin{itemize}
+\item \notesonly{The orientation of the optimal hyperplane with maximum margin: }$\vec w^{*}$
+\item \notesonly{The set of multipliers} $\{\lambda_{\alpha}\}$. \emph{How can those help in finding the bias?}
+\end{itemize}
+
+\pause
+
+The clue is in the constraints
+\begingroup
+\footnotesize
+	$
+		f_{\alpha}(\vec w^*,b^*) 
+		= - \Big\{ y_T^{(\alpha)} 
+			\Big( \vec{w^*}^\top \vec{x}^{(\alpha)}pr
+			\Big( \vec{w^*}^\top \vec{x}^{(\alpha)}
+			+ b^* \Big) -1 \Big\} \quad{\le}\quad 0
+	$\endgroup\\
     
+\pause 
+
+Which is met with \textcolor{red}{equality} by any of the \textcolor{red}{support vector}:
+
+\slidesonly{\vspace{-5mm}}
+	\begin{align}
+		f_{\alpha}(\vec w^*,b^*) 
+		&= - \Big\{ y_T^{(\alpha)} 
+			\Big( {\vec{w}^*}^\top \vec{x}^{(\alpha)}
+			+ b^* \Big) -1 \Big\}~{\color{red}\stackrel{!}{=}}~0
+        \intertext{Solving for $b^{*}$ yields:}
+		\Rightarrow \quad b^* 
+		&=
+		y_T^{(\alpha)} \;\;-\;\; {\color{blue}\vec{w}^*}^{\top} \vec{x}^{(\alpha)} 
+	\end{align}
+    
+\notesonly{The calculation of $b^{*}$ is }made more robust by averaging over all support vectors:
+
+\begin{equation}
+    b^* = \frac{1}{\#_{\mathrm{SV}}} \sum\limits_{\alpha \in \mathrm{SV}}
+        \big( y_T^{(\alpha)} - {\color{blue}\sum\limits_{\beta \in {\color{red}\mathrm{SV}}}}
+            {\color{blue}
+            \lambda_\beta y_T^{(\beta)} 
+             \big( \vec{x}^{(\beta)} \big)}^\top 
+            \vec{x}^{(\alpha)}
+        \big)\slidesonly{\qquad}
+\end{equation}
+
+\question{Why does the inner sum run through the SV's only?}
+
+- Indeed, $\vec w^{*}$ is in expansion of the weight vector in terms of all data points (cf. \eqref{eq:primalsolution1}). However, any point that is \textbf{not} a support vector is associated with a $\lambda$ that is equal to zero. Non-zero $\lambda$'s are only associated with support vectors. Therefore, the sum can be reduced to iterate over the non-zero $\lambda$'s only, which are those associated with the support vectors.
+
 \end{frame}
 
-\subsection{C-SVM}
+\subsubsection{Making predictions with the SVM}
 
-\begin{frame}
+\begin{frame}{Only}\frametitle{\subsubsecname}
 
-\question{What if the two classes are still not perfectly separable?}
+\begin{enumerate}
+\item<only@1> We started off with a connectionist neuron model:
 
-- C-SVMs
+\begin{equation}
+y(\vec x; \vec w, b) = 
+			\sign \big( \vec{w}^\top \vec{x} + b \big),
+\end{equation}
 
-No longer assume a perfect separation between the classes:
+\item<only@1> optimized it to be a \emph{maximum margin classifier}:
 
-    
+			\begin{equation} 
+				L(\{\lambda_\alpha\})
+					\;\;=\;\;  -\frac{1}{2} \sum\limits_{\alpha, \beta = 1}^p 
+					\lambda_\alpha \lambda_\beta y_T^{(\alpha)}
+					y_T^{(\beta)} 
+					\big( \vec{x}^{(\alpha)} \big)^\top 
+						\vec{x}^{(\beta)}
+					+ \sum\limits_{\alpha = 1}^p \lambda_\alpha{}
+                    \eqexcl \max_{\{\lambda_\alpha\}}
+			\end{equation}	
+			$\{\lambda_\alpha \geq 0 \}_{\alpha=1}^p\;,\quad 
+			\sum_{\alpha=1}^p \lambda_\alpha \, y_T^{(\alpha)} = 0$	
+			
+\item<only@2,3> This gave us the optimal parameters for our model:
+\begin{equation}
+y(\vec x; \vec w^*, b^*) = 
+			\sign \big( \vec{w}^{*\top} \vec{x} + b^* \big),
+\end{equation}
+
+\only<3>{
+
+\mode<presentation>{
+\placeimage{11.9}{2.5}{img/section2_fig18_sv}{width=3cm}
+}
+
+with
+
+\begin{equation}
+ \vec w^{*} = \sum_{\alpha=1}^{p} \lambda_{\alpha} y_{T}^{(\alpha)} \vec x^{(\alpha)}
+  = \sum_{\beta \in \mathrm{SV}} \lambda_{\beta} y_{T}^{(\beta)} \vec x^{(\beta)}
+ \end{equation}
+ 
+ and
+ 
+ \begin{equation*}
+    b^* = \frac{1}{\#_{\mathrm{SV}}} \sum\limits_{\alpha \in \mathrm{SV}}
+        \big( y_T^{(\alpha)} - {\sum\limits_{\beta \in {\mathrm{SV}}}}
+            {
+            \lambda_\beta y_T^{(\beta)} 
+             \big( \vec{x}^{(\beta)} \big)}^\top 
+            \vec{x}^{(\alpha)}
+        \big)\slidesonly{\qquad}
+\end{equation*}
+
+\notesonly{This reveals that }our SVM classifier is essentially described by the SVs found in the training set. 
+$\vec w^*$ and $b^*$ can be calculated directly from the SVs.
+}
+\end{enumerate}
+
 \end{frame}

@@ -7,7 +7,7 @@
             
             For a finite training set, the generalization error is bound with probability $1-\epsilon$:
             \begin{equation}
-				E^{G}_{[\vec w]} \;\le\; E^{T}_{[\vec w]} + \sqrt{\frac{\dvc \left(\ln \frac{2\,p}{\dvc} + 1\right)-\frac{\epsilon}{4}}{p}} \quad \text{for } p > \dvc
+				E^{G}_{[\vec w]} \;\le\; E^{T}_{[\vec w]} + \sqrt{\frac{\dvc \left(\ln \frac{2\,p}{\dvc} + 1\right)-\ln\frac{\epsilon}{4}}{p}} +\frac{1}{p} \quad \text{for } p > \dvc
 				\label{eq:generalizationresults}
             \end{equation}
             
