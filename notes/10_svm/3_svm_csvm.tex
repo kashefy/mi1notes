@@ -49,6 +49,138 @@
 
 \subsection{From hard-margin to the soft-margin hyperplane}
 
+
+% -----------------------------------------------------------------------------
+\begin{frame}\frametitle{\subsecname}
+
+\underline{Hard-margin SVM}:
+
+The margin we were constructing for the SVM so far is considered a ``hard'' in that it prohibits:
+\begin{enumerate}
+\item miasclassification error, points falling on the \emph{wrong} side of the decision boundary,\\
+
+and
+
+\item points falling \emph{inside} the margin.
+\end{enumerate}
+
+This was formulated using the $0-1$ loss as the constraint:
+
+\begin{equation}
+y_T^{(\alpha)} \Big( \vec{w}^\top \vec{x}^{(\alpha)} + b \Big)
+				\geq 1
+\end{equation}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=3cm]{img/margin_and_weights}%
+	\notesonly{
+	\caption{
+	Hard margin classification.
+	}%
+	}%
+    \label{fig:marginhard}%
+\end{figure}
+
+\end{frame}
+
+\begin{frame}\frametitle{\subsecname}
+
+\underline{Soft-margin SVM (C-SVM)}:
+
+Relaxing the constraint allows for a violating the ``rules'' of the hard margin classifier to a certain extent, which can be controlled.
+This is done by introducing a free parameter to the constraint, namely the slack variables $\{\varphi_{\alpha}\}$.
+The value of every $\varphi_{\alpha}$ is representative of the margin error.
+
+\begin{equation}
+y_T^{(\alpha)} \Big( \vec{w}^\top \vec{x}^{(\alpha)} + b \Big)
+				\geq 1 -~{\color{red}\varphi_{\alpha}}
+\end{equation}
+
+with $\varphi_{\alpha} \ge 0$.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=3cm]{img/margin_errors}%
+	\notesonly{
+	\caption{
+	soft-margin classification.
+	}%
+	}%
+    \label{fig:marginsoft}%
+\end{figure}
+
+\end{frame}
+
+
+\subsubsection{The slack values}
+
+\begin{frame}\frametitle{\subsubsecname~: Example}
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+
+\begin{table}[h]
+\notesonly{\hskip-2.0cm}% shift table to the left
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{cccclc}
+\begin{tabular}[c]{@{}c@{}}Where is\\ the point\\ relative to\\ the margin?\end{tabular} & \begin{tabular}[c]{@{}c@{}}label\\ $y_T$\end{tabular} & \begin{tabular}[c]{@{}c@{}}prediction\\ $\vec w^\top \vec x + b$\end{tabular} & \begin{tabular}[c]{@{}c@{}}correctly\\ classified\end{tabular} & \begin{tabular}[c]{@{}c@{}} $y_T^{(\alpha)} \Big( \vec{w}^\top \vec{x}^{(\alpha)} + b \Big)
+				\geq 1 {\color{blue} - \varphi_\alpha}$\end{tabular}      & \begin{tabular}[c]{@{}c@{}}constraint\\ met for\end{tabular}      
+\\ \hline
+on  & $\mbox{\scriptsize-1}$                                                    & $\mbox{\scriptsize-1}$                                                        & yes                                                             & \mbox{\scriptsize$-1\cdot(-1) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha=0$}
+\\ \hline
+outside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-2}$                                                        & no                                                             & \mbox{\scriptsize$+1\cdot(-2) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 3$}
+\\ \hline
+outside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize+20}$                                                        & yes                                                             & \mbox{\scriptsize$+1\cdot(20) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize $\varphi_\alpha \ge -19 \Rightarrow$ no slack}
+\\ \hline
+on  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-1}$                                                        & no                                                             & \mbox{\scriptsize$+1\cdot(-1) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 2$}
+\\ \hline
+inside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-0.1}$                                                        & no                                                             & \mbox{\scriptsize$+1\cdot(-0.1) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 1.1$}
+\\ \hline
+inside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize+0.001}$                                                        & yes                                                             & \mbox{\scriptsize$+1\cdot(0.001) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 0.999$}
+\\ \hline
+inside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize+0.8}$                                                        & yes                                                             & \mbox{\scriptsize$+1\cdot(0.8) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 0.2$}
+\\ \hline
+\end{tabular}
+}
+\caption{Example cases for the slack values.}
+\end{table}
+\end{frame}
+
+
+\begin{frame}\frametitle{\subsubsecname~: Overview}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\linewidth]{img/slack_values}%
+	\notesonly{
+	\caption{
+	Overview for interpreting slack values.
+	}%
+	}%
+    \label{fig:unconstrained}%
+\end{figure}
+
+\begin{itemize}
+\item $0 \le \varphi < 1$:
+
+The data point falls \emph{inside} the margin \textbf{and} on the \emph{correct} side of the decision boundary 
+
+
+\item $\varphi = 1$:
+
+The data point falls \emph{on} the margin \textbf{and} on the \emph{correct} side of the decision boundary 
+
+
+\item $\varphi > 1$:
+
+The data point falls on the \emph{wrong} side of the decision boundary. Whether it's \emph{inside}, \emph{outside} or exactly \emph{on} the margin does not matter.
+
+\end{itemize}
+
+\end{frame}
+
+
 % -----------------------------------------------------------------------------
 \begin{frame}
 \only<1>{\frametitle{\subsecname~: start with perfect separation - no slack}}
@@ -118,74 +250,6 @@
 	\question{How does ${\color{blue}C}$ control complexity?}\\
 	}
 	
-\end{frame}
-
-
-\subsubsection{The slack values}
-
-\begin{frame}\frametitle{\subsubsecname~: Example}
-% Please add the following required packages to your document preamble:
-% \usepackage[table,xcdraw]{xcolor}
-% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
-
-\begin{table}[h]
-\notesonly{\hskip-2.0cm}% shift table to the left
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{cccclc}
-\begin{tabular}[c]{@{}c@{}}Where is\\ the point\\ relative to\\ the margin?\end{tabular} & \begin{tabular}[c]{@{}c@{}}label\\ $y_T$\end{tabular} & \begin{tabular}[c]{@{}c@{}}prediction\\ $\vec w^\top \vec x + b$\end{tabular} & \begin{tabular}[c]{@{}c@{}}correctly\\ classified\end{tabular} & \begin{tabular}[c]{@{}c@{}} $y_T^{(\alpha)} \Big( \vec{w}^\top \vec{x}^{(\alpha)} + b \Big)
-				\geq 1 {\color{blue} - \varphi_\alpha}$\end{tabular}      & \begin{tabular}[c]{@{}c@{}}constraint\\ met for\end{tabular}      
-\\ \hline
-on  & $\mbox{\scriptsize-1}$                                                    & $\mbox{\scriptsize-1}$                                                        & yes                                                             & \mbox{\scriptsize$-1\cdot(-1) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha=0$}
-\\ \hline
-outside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-2}$                                                        & no                                                             & \mbox{\scriptsize$+1\cdot(-2) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 3$}
-\\ \hline
-outside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize+20}$                                                        & yes                                                             & \mbox{\scriptsize$+1\cdot(20) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize $\varphi_\alpha \ge -19 \Rightarrow$ no slack}
-\\ \hline
-on  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-1}$                                                        & no                                                             & \mbox{\scriptsize$+1\cdot(-1) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 2$}
-\\ \hline
-inside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-0.1}$                                                        & no                                                             & \mbox{\scriptsize$+1\cdot(-0.1) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 1.1$}
-\\ \hline
-inside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize+0.001}$                                                        & yes                                                             & \mbox{\scriptsize$+1\cdot(0.001) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 0.999$}
-\\ \hline
-inside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize+0.8}$                                                        & yes                                                             & \mbox{\scriptsize$+1\cdot(0.8) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 0.2$}
-\\ \hline
-\end{tabular}
-}
-\caption{Example cases for the slack values.}
-\end{table}
-\end{frame}
-
-
-\begin{frame}\frametitle{\subsubsecname~: Overview}
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.6\linewidth]{img/slack_values}%
-	\notesonly{
-	\caption{
-	Overview for interpreting slack values.
-	}%
-	}%
-    \label{fig:unconstrained}%
-\end{figure}
-
-\begin{itemize}
-\item $0 \le \varphi < 1$:
-
-The data point falls \emph{inside} the margin \textbf{and} on the \emph{correct} side of the decision boundary 
-
-
-\item $\varphi = 1$:
-
-The data point falls \emph{on} the margin \textbf{and} on the \emph{correct} side of the decision boundary 
-
-
-\item $\varphi > 1$:
-
-The data point falls on the \emph{wrong} side of the decision boundary. Whether it's inside/outside/on the margin does not matter.
-
-\end{itemize}
-
 \end{frame}
 
 % ----------------------------------------------------------------------------
@@ -259,7 +323,7 @@ SVs do not necessarily lie on the margin anymore. The C-SVM has a ``soft'' margi
 	\end{eqnarray*}
 	\vspace{2mm}
 	$\mathrm{SV}_<$: $\mathrm{SV}$s with $0 < \lambda_\alpha < \frac{C}{p}$ 
-	($\mathrm{SV}$s on the margin) at which $\phi_\alpha = 0$ (''no slack'').
+	($\mathrm{SV}$s on the margin) at which $\varphi_\alpha = 0$ (''no slack'').
 	
 	\notesonly{Further reasoning for why the bias is computed this way is that the bias shifts the hyperplane such that the SVs with zero slack fall on the $\pm1$ lines parallel to the hyperplane.
 	}

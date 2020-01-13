@@ -713,7 +713,7 @@ By now we have:
 \pause
 \begin{itemize}
 \item \notesonly{The orientation of the optimal hyperplane with maximum margin: }$\vec w^{*}$
-\item \notesonly{The set of multipliers $\{\lambda_{\alpha}\}$.} \emph{How can those help in finding the bias?}
+\item \notesonly{The set of multipliers} $\{\lambda_{\alpha}\}$. \emph{How can those help in finding the bias?}
 \end{itemize}
 
 \pause
@@ -724,6 +724,7 @@ The clue is in the constraints
 	$
 		f_{\alpha}(\vec w^*,b^*) 
 		= - \Big\{ y_T^{(\alpha)} 
+			\Big( \vec{w^*}^\top \vec{x}^{(\alpha)}pr
 			\Big( \vec{w^*}^\top \vec{x}^{(\alpha)}
 			+ b^* \Big) -1 \Big\} \quad{\le}\quad 0
 	$\endgroup\\
@@ -758,7 +759,7 @@ Which is met with \textcolor{red}{equality} by any of the \textcolor{red}{suppor
 
 \question{Why does the inner sum run through the SV's only?}
 
-- Indeed, $w^{*}$ is in expansion of the weight vector in terms of all data points (cf. \eqref{eq:primalsolution1}). However, any point that is \textbf{not} a support vector is associated with a $\lambda$ that is equal to zero. Non-zero $\lambda$'s are only associated with support vectors. Therefore, the sum can be reduced to iterate over the non-zero $\lambda$'s only, which are those associated with the support vectors.
+- Indeed, $\vec w^{*}$ is in expansion of the weight vector in terms of all data points (cf. \eqref{eq:primalsolution1}). However, any point that is \textbf{not} a support vector is associated with a $\lambda$ that is equal to zero. Non-zero $\lambda$'s are only associated with support vectors. Therefore, the sum can be reduced to iterate over the non-zero $\lambda$'s only, which are those associated with the support vectors.
 
 \end{frame}
 
