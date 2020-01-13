@@ -47,28 +47,34 @@
 	\end{block}
 \end{frame}
 
-\subsection{The primal problem of the C-SVM}
+\subsection{Finding the soft-margin hyperplane}
 
 % -----------------------------------------------------------------------------
-\begin{frame}\frametitle{\subsecname}
+\begin{frame}
+\only<1>{\frametitle{\subsecname~: start with perfect separation - no slack}}
+\only<2->{\frametitle{\subsecname~: allow for slack}}
+
+	\slidesonly{\vspace{-5mm}}
+
 	\begin{block}{} 
 	\vspace{-4mm}
-	\begin{equation}\label{eq:primal-problem-csvm}
+	\begin{equation}
 		\begin{array}{ll}
 		\frac{1}{2} \|\vec{w}\|^2 
-				\visible<2->{{\color{blue} + \frac{C}{p} 
+				\visible<3->{{\color{blue} + \frac{C}{p} 
 				\sum\limits_{\alpha = 1}^p \varphi_\alpha}}
 			\eqexcl \min \;\;\Bigg\{
 		& \begin{array}{l}
 			\scriptsize{\text{minimize upper bound on VC dimension}} \\
-			\visible<2->{\scriptsize{\text{\color{blue}
+			\visible<3->{\scriptsize{\text{\color{blue}
 				+ minimize (approx.) margin error}}}
 		\end{array}
 		\end{array}
+		\label{eq:csvmmin}
 	\end{equation}
 
 	{constraints ($\forall \alpha$):}
-	\hfill \only<2>{\scriptsize{{\color{blue}($C$: regularization parameter)}} \normalsize}
+	\hfill \only<3>{{{\color{blue}($C > 0$: regularization parameter)}} \normalsize}
 	\begin{equation}
 		\begin{array}{rll}
 			y_T^{(\alpha)} \Big( \vec{w}^\top \vec{x}^{(\alpha)} + b \Big)
@@ -86,19 +92,101 @@
 	
 	\begin{center}
 		\includegraphics<1>[height=3.cm]{img/margin_and_weights}	
-		\includegraphics<2>[height=3.cm]{img/margin_errors}	
+		\includegraphics<2,3,4>[height=3.cm]{img/margin_errors}	
 	\end{center}
+	
 	%\begin{itemize}
 	%	\itR C: regularization-parameter $\leadsto$ model selection
 	%	\itR Why margin error? $\leadsto$ margin necessary for bounding $\dvc$
 	%\end{itemize}
+	\slidesonly{\vspace{-5mm}}
 	
-	\question{How does ${\color{blue}C}$ control complexity?}
 	
-	\question{How does ${\color{blue}C}$ control complexity?}
+	\only<2>{
+	\question{What do different values for ${\color{blue}\varphi_\alpha}$ represent?}\\
+	}
+	
+	\only<3>{
+	\question{Why do we have to add the ${\color{blue}C}$ term?}\\
+	}
+	
+	\mode<article>{
+	Adding The second term to the minimization objective in \eqref{eq:csvmmin} avoids finding the trivial solution where the constrained can be satisifed by making any the slack variable of any point arbitrarily large.
+	}
+	
+	\only<4>{
+	\question{How does ${\color{blue}C}$ control complexity?}\\
+	}
 	
 \end{frame}
 
+
+\subsubsection{The slack values}
+
+\begin{frame}\frametitle{\subsubsecname~: Example}
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+
+\begin{table}[h]
+\notesonly{\hskip-2.0cm}% shift table to the left
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{cccclc}
+\begin{tabular}[c]{@{}c@{}}Where is\\ the point\\ relative to\\ the margin?\end{tabular} & \begin{tabular}[c]{@{}c@{}}label\\ $y_T$\end{tabular} & \begin{tabular}[c]{@{}c@{}}prediction\\ $\vec w^\top \vec x + b$\end{tabular} & \begin{tabular}[c]{@{}c@{}}correctly\\ classified\end{tabular} & \begin{tabular}[c]{@{}c@{}} $y_T^{(\alpha)} \Big( \vec{w}^\top \vec{x}^{(\alpha)} + b \Big)
+				\geq 1 {\color{blue} - \varphi_\alpha}$\end{tabular}      & \begin{tabular}[c]{@{}c@{}}constraint\\ met for\end{tabular}      
+\\ \hline
+on  & $\mbox{\scriptsize-1}$                                                    & $\mbox{\scriptsize-1}$                                                        & yes                                                             & \mbox{\scriptsize$-1\cdot(-1) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha=0$}
+\\ \hline
+outside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-2}$                                                        & no                                                             & \mbox{\scriptsize$+1\cdot(-2) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 3$}
+\\ \hline
+outside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize+20}$                                                        & yes                                                             & \mbox{\scriptsize$+1\cdot(20) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize $\varphi_\alpha \ge -19 \Rightarrow$ no slack}
+\\ \hline
+on  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-1}$                                                        & no                                                             & \mbox{\scriptsize$+1\cdot(-1) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 2$}
+\\ \hline
+inside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-0.1}$                                                        & no                                                             & \mbox{\scriptsize$+1\cdot(-0.1) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 1.1$}
+\\ \hline
+inside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize+0.001}$                                                        & yes                                                             & \mbox{\scriptsize$+1\cdot(0.001) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 0.999$}
+\\ \hline
+inside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize+0.8}$                                                        & yes                                                             & \mbox{\scriptsize$+1\cdot(0.8) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha \ge 0.2$}
+\\ \hline
+\end{tabular}
+}
+\caption{Example cases for the slack values.}
+\end{table}
+\end{frame}
+
+
+\begin{frame}\frametitle{\subsubsecname~: Overview}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\linewidth]{img/slack_values}%
+	\notesonly{
+	\caption{
+	Overview for interpreting slack values.
+	}%
+	}%
+    \label{fig:unconstrained}%
+\end{figure}
+
+\begin{itemize}
+\item $0 \le \varphi < 1$:
+
+The data point falls \emph{inside} the margin \textbf{and} on the \emph{correct} side of the decision boundary 
+
+
+\item $\varphi = 1$:
+
+The data point falls \emph{on} the margin \textbf{and} on the \emph{correct} side of the decision boundary 
+
+
+\item $\varphi > 1$:
+
+The data point falls on the \emph{wrong} side of the decision boundary. Whether it's inside/outside/on the margin does not matter.
+
+\end{itemize}
+
+\end{frame}
 
 % ----------------------------------------------------------------------------
 \begin{frame}\frametitle{The dual problem of the C-SVM}
@@ -115,8 +203,8 @@
 		\end{equation}
 		
 		\notesonly{
-		See \sectionref{sec:dualtoprimal} for the derivation. The Lagrangian is the same for SVMs and C-SVMs.
-		The difference is in the constraints.
+		See \sectionref{sec:dualtoprimal} for the derivation. The Lagrangian of the dual problem is the same for SVMs and C-SVMs. However,
+		the difference is in the constraints.
 		}
 	%\vspace{3mm}
 	\item Constraints:
@@ -171,7 +259,10 @@ SVs do not necessarily lie on the margin anymore. The C-SVM has a ``soft'' margi
 	\end{eqnarray*}
 	\vspace{2mm}
 	$\mathrm{SV}_<$: $\mathrm{SV}$s with $0 < \lambda_\alpha < \frac{C}{p}$ 
-	($\mathrm{SV}$s on the margin) 
+	($\mathrm{SV}$s on the margin) at which $\phi_\alpha = 0$ (''no slack'').
+	
+	\notesonly{Further reasoning for why the bias is computed this way is that the bias shifts the hyperplane such that the SVs with zero slack fall on the $\pm1$ lines parallel to the hyperplane.
+	}
 	
 	\pause
 

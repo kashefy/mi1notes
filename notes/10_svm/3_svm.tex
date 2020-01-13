@@ -370,11 +370,11 @@ Consider the following cases:
 \placeimage{13.2}{11}{img/section2_fig18_sv_nolambda_violate_within}{width=2cm}
 \placeimage{9.7}{11}{img/section2_fig18_sv_nolambda_violate_misclassification}{width=2cm}
 
-\begin{textblock}{5}(12.5,15)
-$\mbox{\tiny-\{+1*0.2-1\} = +0.8 > 0}$
+\begin{textblock}{5}(12,15)
+\mbox{\tiny$-\{+1\cdot0.2-1\} = +0.8~{\color{orange}>}~0$}
 \end{textblock}
-\begin{textblock}{5}(9,10)
-$\mbox{\tiny-\{+1*(-11)-1\} = +12 > 0}$
+\begin{textblock}{5}(8.5,10)
+\mbox{\tiny$-\{+1\cdot(-11)-1\} = +12~{\color{orange}>}~0$}
 \end{textblock}
 }}
 	\mode<article>{
@@ -416,14 +416,25 @@ $\mbox{\tiny-\{+1*(-11)-1\} = +12 > 0}$
 	\lambda_\alpha \uparrow \; \leadsto\quad L {\color{darkgreen}\uparrow} \; \leadsto \; \text{change in } \vec w,b \; \leadsto\; L {\color{blue}\downarrow}\slidesonly{\hspace{5cm}}
 	\end{equation}
 	
-	\item<only@3> \emph{\textcolor{blue}{Decrease}} of $L$ by changing $\vec w$ and $b$ prevents terms inside the \slidesonly{\only<3>{\textcolor{red}}{sum}} \notesonly{sum of the Lagrangian } from taking on arbitrarily large negative values.
+	% not really a case
+	\item<only@3>[] \emph{\textcolor{blue}{Decrease}} of $L$ by changing $\vec w$ and $b$ prevents terms inside the \slidesonly{\only<3>{\textcolor{red}}{sum}} \notesonly{sum of the Lagrangian } from taking on arbitrarily large negative values.
 	
 	\item<only@4> Constraints are met but not \textbf{not} as equalities, i.e.
 	\begingroup 
 	\footnotesize
 	$
 	-\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}~{\color{magenta}{<}}~0
-	$\endgroup. $\lambda$'s are meant to maximize $L$. In this case, $L$ can only be maximized by setting the corresponding multiplier $\lambda_\alpha$ to zero.
+	$\endgroup. \notesonly{$\lambda$'s are meant to maximize $L$. In this case, }\slidesonly{\\}$L$ can only be maximized by setting \notesonly{the corresponding multiplier }$\lambda_\alpha$ to zero.
+	
+	\mode<presentation>{
+	\only<4>{
+	\placeimage{12}{11}{img/section2_fig18_sv_legend_nolambda_met}{width=2.4cm}
+		
+	\begin{textblock}{5}(11,10.6)
+	\mbox{\tiny$-\{-1\cdot(-11)-1\} = -10~{\color{magenta}<}~0$}
+	\end{textblock}
+	}
+	}%presentation
 	
 	\item<only@5,6>  This leaves $\lambda_\alpha \ne 0$, which corresponds to the constraints being met with \emph{equality}, i.e. 
 	\begingroup 
@@ -458,24 +469,29 @@ $\mbox{\tiny-\{+1*(-11)-1\} = +12 > 0}$
 % Please add the following required packages to your document preamble:
 % \usepackage[table,xcdraw]{xcolor}
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+
 \begin{table}[h]
+\notesonly{\hskip-2.0cm}% shift table to the left
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{ccccll}
 \begin{tabular}[c]{@{}c@{}}Where is\\ the point\\ relative to\\ the margin?\end{tabular} & \begin{tabular}[c]{@{}c@{}}label\\ $y_T$\end{tabular} & \begin{tabular}[c]{@{}c@{}}prediction\\ $\vec w^\top \vec x + b$\end{tabular} & \begin{tabular}[c]{@{}c@{}}correctly\\ classified\end{tabular} & \multicolumn{1}{c}{constraint value $f_{\alpha}$}      & \begin{tabular}[c]{@{}c@{}}constraint\\ met?\end{tabular}      
 \\ \hline
-outside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-11}$                                                        & no                                                             & $\mbox{\scriptsize-\{+1 * (-11) - 1\} = +12 > 0}$        & {\color[HTML]{F8A102} violated}
+outside  & $\mbox{\scriptsize+1}$                                                    & $\mbox{\scriptsize-11}$                                                        & no                                                             & $\mbox{\scriptsize-\{+1$\cdot$(-11) - 1\} = +12 > 0}$        & {\color[HTML]{F8A102} violated}
 \\ \hline
-outside  & $\mbox{\scriptsize-1}$                                                    & $\mbox{\scriptsize+30}$                                                         & no                                                             & $\mbox{\scriptsize-\{-1 * 30 - 1\} = +31 > 0}$       & {\color[HTML]{F8A102} violated}
+outside  & $\mbox{\scriptsize-1}$                                                    & $\mbox{\scriptsize+30}$                                                         & no                                                             & $\mbox{\scriptsize-\{-1$\cdot$30 - 1\} = +31 > 0}$       & {\color[HTML]{F8A102} violated}
 \\ \hline
-inside   & $\mbox{\scriptsize+1}$                                & $\mbox{\scriptsize+0.2}$                                                        & yes                                                            & $\mbox{\scriptsize-\{+1 * 0.2 - 1\} = +0.8 > 0}$        & {\color[HTML]{F8A102} violated}
+inside   & $\mbox{\scriptsize+1}$                                & $\mbox{\scriptsize+0.2}$                                                        & yes                                                            & $\mbox{\scriptsize-\{+1$\cdot$0.2 - 1\} = +0.8 > 0}$        & {\color[HTML]{F8A102} violated}
 \\ \hline
-inside   & $\mbox{\scriptsize-1}$                                                   & $\mbox{\scriptsize-0.2}$                                                        & yes                                                            & $\mbox{\scriptsize-\{-1 * (-0.2) - 1\} = +0.8 > 0}$ & {\color[HTML]{F8A102} violated}
+inside   & $\mbox{\scriptsize-1}$                                                   & $\mbox{\scriptsize-0.2}$                                                        & yes                                                            & $\mbox{\scriptsize-\{-1$\cdot$(-0.2) - 1\} = +0.8 > 0}$ & {\color[HTML]{F8A102} violated}
 \\ \hline
-outside  & $\mbox{\scriptsize+1}$                                                   & $\mbox{\scriptsize+200}$                                                        & yes                                                            & $\mbox{\scriptsize--\{+1 * 200 - 1\} = -199 < 0}$                & {\color[HTML]{DF02F8} met}
+outside  & $\mbox{\scriptsize+1}$                                                   & $\mbox{\scriptsize+200}$                                                        & yes                                                            & $\mbox{\scriptsize--\{+1$\cdot$200 - 1\} = -\{199\} < 0}$                & {\color[HTML]{DF02F8} met}
 \\ \hline
-outside  & $\mbox{\scriptsize-1}$                               & $\mbox{\scriptsize-10}$                                                         & yes                                                            & $\mbox{\scriptsize-\{-1 * (-10) - 1\} = -\{+9\} < 0}$               & {\color[HTML]{DF02F8} met}
+outside  & $\mbox{\scriptsize-1}$                               & $\mbox{\scriptsize-10}$                                                         & yes                                                            & $\mbox{\scriptsize-\{-1(-10) - 1\} = -\{9\} < 0}$               & {\color[HTML]{DF02F8} met}
 \\ \hline
-on       & $\mbox{\scriptsize-1}$                                & $\mbox{\scriptsize-1}$                                                         & yes                                                            & $\mbox{\scriptsize-\{-1 * (-1) - 1\} = 0}$                              & \begin{tabular}[c]{@{}c@{}}{\color[HTML]{CB0000} met with}\\ {\color[HTML]{CB0000}equality}\end{tabular}
+on       & $\mbox{\scriptsize-1}$                                & $\mbox{\scriptsize-1}$                                                         & yes                                                            & $\mbox{\scriptsize-\{-1$\cdot$(-1) - 1\} = 0}$                              & \begin{tabular}[c]{@{}c@{}}{\color[HTML]{CB0000} met with}\\ {\color[HTML]{CB0000}equality}\end{tabular}
 \end{tabular}
+}
+\caption{Example cases for the constraint.}
 \end{table}
 \end{frame}
 
