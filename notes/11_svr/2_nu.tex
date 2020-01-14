@@ -88,6 +88,13 @@ $\nu$-SVR extends $\varepsilon$-SVR with: 1 $\times$ new variable, 1 $\times$ ne
 
 \end{frame}
 
+\subsubsection{An intuition for $\nu$}
+
+\begin{frame}\frametitle{\subsubsecname}
+
+
+\end{frame}
+
 \subsection{Deriving the Lagrangian for the primal problem of $\nu$-SVR}
 
 \subsubsection{Idenitfying the Lagrange multipliers}
@@ -125,14 +132,13 @@ Also, re-arrange the constraints to be in the form $f_\alpha \le 0$
 
 \begin{frame}\frametitle{\subsecname}
 
-		\begin{equation*}
+\slidesonly{\vspace{-5mm}}
+
+\begin{equation}
 \left.\begin{aligned}
-				%~ $$
 				L(\underbrace{\vec{w},b,\{\varphi_{\alpha}\},\{\varphi_{\alpha}^*\},\varepsilon}_{\text{primal variables}},
-				\underbrace{\{\lambda_{\alpha}\}, \{\lambda_{\alpha}^*\},\{\eta_{\alpha}\},\{\eta_{\alpha}^*\},\delta}_{\text{dual variables (Lagrange multipliers)}})\\
-				%~ $$\\ 
-			%~ \begin{eqnarray*}
-				= \smallfrac{1}{2} |\vec{w}|^2+C \Big\lbrack \nu \varepsilon 
+				\underbrace{\{\lambda_{\alpha}\}, \{\lambda_{\alpha}^*\},\{\eta_{\alpha}\},\{\eta_{\alpha}^*\},\delta}_{\mathclap{\text{dual variables (Lagrange multipliers)}}})\\
+				= \smallfrac{1}{2} \lVert\vec{w}\rVert^2_2+C \Big\lbrack \nu \varepsilon 
 					+ \smallfrac{1}{p} \sum_{\alpha=1}^p(\varphi_{\alpha}
 					+\varphi_{\alpha}^*) \Big\rbrack \\
 				-\sum_{\alpha=1}^p \lambda_{\alpha} \{\varphi_{\alpha}
@@ -143,9 +149,10 @@ Also, re-arrange the constraints to be in the form $f_\alpha \le 0$
 				-\sum_{\alpha=1}^p \eta_{\alpha} \varphi_{\alpha} 
 				- \sum_{\alpha=1}^p \eta_{\alpha}^* \varphi_{\alpha}^* 
 				- \delta \varepsilon
-			%~ \end{eqnarray*}
 			\end{aligned}\right.
-\end{equation*}
+\end{equation}
+
+\question{How does this help us understand the benefits of $\nu$?}
 
 \end{frame}
 

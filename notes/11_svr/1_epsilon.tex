@@ -96,7 +96,7 @@ Example: Binary classification, $y_{T} \in \{-1,1\}$:
 
 \end{frame}
 
-\subsection{The $\varepsilon$-sensitive cost function for regression}
+\subsection{The $\varepsilon$-insensitive cost function for regression}
 
 \begin{frame}\frametitle{\subsecname}
 
@@ -144,7 +144,7 @@ otherwise,
 \item[(i)]
 Simplify assumptions (will be relaxed later)
 \begin{enumerate}
-    \item<only@1-> perfect regression solution, i.e. zero error $\varepsilon$-sensitive cost,
+    \item<only@1-> perfect regression solution, i.e. zero error $\varepsilon$-insensitive cost,
     \item<only@2,3> the constrained regression problem\\
 		\only<2>{
         \begin{equation}
@@ -246,7 +246,7 @@ Relax constraints by allowing for errors\\
         }
         
         \only<2>{
-        \question{How do prevent solutions with arbitrarily large $\varphi_\alpha, \varphi_\alpha^*$ that prevent any violation of the constraints?}\\
+        \question{How do we prevent solutions with arbitrarily large $\varphi_\alpha, \varphi_\alpha^*$ that prevent any violation of the constraints?}\\
         
         \notesonly{
         - The second term in the minimization objective that is parameterizd by $C$ takes care of this, as it penalizes model error.
@@ -260,3 +260,65 @@ Relax constraints by allowing for errors\\
 \end{itemize}
     
 \end{frame}
+
+\begin{frame}\frametitle{Making predictions using $\varepsilon$-SVR}
+
+
+\slidesonly{\vspace{-5mm}}
+
+\begin{figure}[h]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[width=0.45\textwidth]{img/regression_1d_linear_margin_phi}}%
+     \begin{subfigure}[t]{0.4\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+         \caption{linear regression}
+     \end{subfigure}
+     \hspace{5mm}
+     \visible<2>{
+     \begin{subfigure}[t]{0.4\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.8\textwidth]{img/regression_1d_nonlinear}
+         }
+         \caption{non-linear regression}
+         \label{fig:regression1dnonlinear}
+     \end{subfigure}
+     }
+     \mode<article>{
+     \caption{SVR for linear and non-linear regression}
+     }
+	 \label{fig:svrregression}
+\end{figure}
+
+
+\slidesonly{\vspace{-5mm}}
+
+\begin{equation}
+\vec w^* = \sum_\alpha^p (\varphi_\alpha - \varphi_\alpha^*) \vec x^{(\alpha)} \stackrel{\substack{\varphi_\alpha,\varphi_\alpha^* \ne 0\\\text{for SVs}}}{=} \sum_{\beta\in\mathrm{SV}} (\varphi_\beta - \varphi_\beta^*) \vec x^{(\beta)}
+\end{equation}
+
+\begin{equation}
+y(\vec x) = b^* + \sum_{\beta\in\mathrm{SV}} (\varphi_\beta - \varphi_\beta^*) 
+\only<2>{
+\underbrace
+}
+{
+\big( \vec x^{(\beta)} \big)^\top \vec x
+}
+\only<2>{
+_{\text{kernels!}}
+}
+\end{equation}
+
+\end{frame}
+
+\mode<presentation>{
+\begin{frame}{Embedded Animation}
+\begin{center}
+  \animategraphics[loop,autoplay,width=0.15\linewidth]{20}{img/jonahgif/something-}{0}{10}
+  \end{center}
+\end{frame}
+
+}
