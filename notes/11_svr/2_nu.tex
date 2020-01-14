@@ -6,15 +6,146 @@
         \secname
     \end{center}
     \begin{center}   
+    Essentially $\varepsilon$-SVR but treat $\varepsilon$ as a primal variable instead of a hyperparameter.
     \end{center}
 \end{frame}
 }
 
-\subsection{The margin}
+\subsection{Motivation}
 
-\begin{frame}\frametitle{Identifying the margin}
-\mode<article>{
-Consider the following linearly separable binary classification problem and the different hyperplanes for separating the two classes. In order to identify the margn of a hyperplane:
+\begin{frame}\frametitle{\subsecname~for $\nu$-SVR}
+
+\mode<presentation>{
+
+\begin{figure}[h]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[width=0.4\textwidth]{img/regression_1d_linear_margin_phi}}%
+     \begin{subfigure}[t]{0.4\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+     \end{subfigure}
+     %\hspace{2mm}
+     \begin{subfigure}[t]{0.4\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.99\textwidth]{img/cost_eps_phi}
+         }
+     \end{subfigure}
+\end{figure}
 }
 
+\notesonly{
+Choosing $\varepsilon$ for $\varepsilon$-SVR can be difficult as it depends on the noise in the data and this noise is unknown.
+}$\varepsilon$-SVR requires treating $\varepsilon$ as a hyperparameter.
+\notesonly{We therefore resort to methods such as corss-validation for choosing one value for $\varepsilon$ over another.}
+
+$\nu$-SVR extends $\varepsilon$-SVR, by allowing the width of the ``$\varepsilon$-tube'' to adapt to the data. This is done by turning $\varepsilon$ into a \emph{primal variable}. We can then optimize w.r.t. $\varepsilon$ as we do with $\vec w, b$ and \notesonly{the set of slack variables }$\{\varphi_\alpha\}, \{\varphi_\alpha^*\}$.
+
 \end{frame}
+
+\subsection{Deriving the primal problem for $\nu$-SVR}
+
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+\begin{frame}\frametitle{\subsecname}
+
+\slidesonly{\vspace{-5mm}}
+
+\begin{block}{}
+     \begin{equation}
+        \begin{array}{ll}
+        \min_{\vec w, b,\{\varphi_\alpha\}, \{\varphi_\alpha^*\}\only<2->{, {\color{darkgreen}{\varepsilon}}}} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2} + C \only<2->{\big\lbrack \nu{\color{darkgreen}\varepsilon} + } \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*) \only<2>{\big\rbrack}\\
+        \text{subject to} & 
+        \vec w^{\top} \vec x^{(\alpha)} + b - y_{T}^{(\alpha)} \le \varepsilon + \varphi_\alpha\\
+        &
+        y_{T}^{(\alpha)} - \vec w^{\top} \vec x^{(\alpha)} - b \le \varepsilon^* + \varphi_\alpha^*\\
+        &\varphi_\alpha, \varphi_\alpha^* \ge 0  \qquad\qquad\qquad\qquad\quad \text{for }\alpha=1,\ldots,p \\
+        &\only<2->{{\color{darkgreen}\varepsilon~\ge~0}}
+        \end{array}
+        \label{eq:primalnu}
+     \end{equation}
+     
+     \slidesonly{\vspace{-3mm}}
+        with $C>0$ ($C$ penalizes model error)\only<2->{, $\nu \ge 0$}
+\end{block}
+      \only<3->{
+
+      \notesonly{
+$\nu$-SVR extends $\varepsilon$-SVR with: 1 $\times$ new variable, 1 $\times$ new hyper-parameter, 1 $\times$ new constraint.
+}
+
+     \question{Aren't we just exchanging one hyperparameter for another? How is this better?}\\
+     
+     }
+     \only<4>{
+     - Increased resolution of how we balance model error and model complexity. We will see that $\nu$ acts as a
+     \begin{itemize}
+     \item upper bound on the fraction of errors\notesonly{: $\nu \ge \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*)$}\notesonly{\\}
+     and as a
+     \item lower bound on the fraction of SVs\notesonly{: $\nu \le \frac{\# SV}{p}$}.
+     \end{itemize}
+     }
+
+\end{frame}
+
+\subsection{Deriving the Lagrangian for the primal problem of $\nu$-SVR}
+
+\subsubsection{Idenitfying the Lagrange multipliers}
+
+\begin{frame}\frametitle{\subsecname\\ \subsubsecname}
+
+\mode<presentation>{
+\begin{block}{The primal problem}
+     \begin{equation}
+        \begin{array}{ll}
+        \min_{\vec w, b,\{\varphi_\alpha\}, \{\varphi_\alpha^*\}{, {{\varepsilon}}}} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2} + C {\big\lbrack \nu{\varepsilon} + } \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*) {\big\rbrack}\\
+        \text{subject to}
+        &\vec w^{\top} \vec x^{(\alpha)} + b - y_{T}^{(\alpha)} \le \varepsilon + \varphi_\alpha\\
+        &y_{T}^{(\alpha)} - \vec w^{\top} \vec x^{(\alpha)} - b \le \varepsilon^* + \varphi_\alpha^*\\
+        &\varphi_\alpha \ge 0  \\
+        &\varphi_\alpha^* \ge 0 \qquad\qquad\qquad\qquad\quad \text{for }\alpha=1,\ldots,p \\
+        &\varepsilon \ge 0
+        \end{array}
+        %\label{eq:primalnu}
+     \end{equation}
+        
+        with $C>0$ and $\nu \ge 0$.
+\end{block}
+}
+
+\question{Where are multipliers needed?}\\
+
+\pause 
+
+Also, re-arrange the constraints to be in the form $f_\alpha \le 0$
+
+
+
+\end{frame}
+
+\begin{frame}\frametitle{\subsecname}
+
+		\begin{equation*}
+\left.\begin{aligned}
+				%~ $$
+				L(\underbrace{\vec{w},b,\{\varphi_{\alpha}\},\{\varphi_{\alpha}^*\},\varepsilon}_{\text{primal variables}},
+				\underbrace{\{\lambda_{\alpha}\}, \{\lambda_{\alpha}^*\},\{\eta_{\alpha}\},\{\eta_{\alpha}^*\},\delta}_{\text{dual variables (Lagrange multipliers)}})\\
+				%~ $$\\ 
+			%~ \begin{eqnarray*}
+				= \smallfrac{1}{2} |\vec{w}|^2+C \Big\lbrack \nu \varepsilon 
+					+ \smallfrac{1}{p} \sum_{\alpha=1}^p(\varphi_{\alpha}
+					+\varphi_{\alpha}^*) \Big\rbrack \\
+				-\sum_{\alpha=1}^p \lambda_{\alpha} \{\varphi_{\alpha}
+				+\varepsilon+y_T^{(\alpha)}
+				-\vec{w}^\top\vec{x}^{(\alpha)}-b \}  \\
+				-\sum_{\alpha=1}^p \lambda_{\alpha}^* \{\varphi_{\alpha}^* 
+				+\varepsilon-y_T^{(\alpha)}+\vec{w}^\top\vec{x}^{(\alpha)}+b \} \\ 
+				-\sum_{\alpha=1}^p \eta_{\alpha} \varphi_{\alpha} 
+				- \sum_{\alpha=1}^p \eta_{\alpha}^* \varphi_{\alpha}^* 
+				- \delta \varepsilon
+			%~ \end{eqnarray*}
+			\end{aligned}\right.
+\end{equation*}
+
+\end{frame}
+
