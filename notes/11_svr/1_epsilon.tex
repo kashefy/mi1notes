@@ -1,5 +1,7 @@
 \section{Support Vector Regression (SVR)}
 
+%\footnote{This is based on my understanding of Ch. 9 from \citep{scholkopf2001learning}}
+
 \mode<presentation>{
 \begin{frame} 
     \begin{center} \huge
@@ -225,14 +227,14 @@ Relax constraints by allowing for errors\\
 \only<2->{
 \begin{enumerate}
     \item<only@1-> possibly more robust to noise and outliers,
-    \item<only@2,3> constrained regression problem that allows for errors (with slack variables $\varphi_\alpha$)\\
+    \item<only@2-> constrained regression problem that allows for errors (with slack variables $\varphi_\alpha$)\\
     
 \slidesonly{\vspace{-3mm}}
 
-		\only<2,3>{
+		\only<2->{
         \begin{equation}
         \begin{array}{ll}
-        \min_{\vec w, b\only<3>{,\{\varphi_\alpha, \varphi_\alpha^*\}}} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \only<3>{+ C \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*)}\\
+        \min_{\vec w, b\only<3>{,\{\varphi_\alpha, \varphi_\alpha^*\}}} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \only<3->{+ C \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*)}\\
         \text{subject to} & 
         \vec w^{\top} \vec x^{(\alpha)} + b - y_{T}^{(\alpha)} \le \varepsilon + \varphi_\alpha\\
         &
@@ -242,7 +244,7 @@ Relax constraints by allowing for errors\\
         \label{eq:primaleps}
         \end{equation}
         
-        \only<3>{with $C>0$ ($C$ penalizes model error)}
+        \only<3->{with $C>0$ ($C$ penalizes model error)}
         }
         
         \only<2>{
@@ -253,6 +255,13 @@ Relax constraints by allowing for errors\\
         
         \eqref{eq:epsprimal} gives us the \emph{primal problem} for $\varepsilon$-SVR.
         }
+        }
+        
+        \only<4>{\question{Should we divide the sum by 2 since we're adding $(\varphi_\alpha + \varphi_\alpha^*)$ inside the sum?}}
+        
+        
+        \notesonly{
+        - No, this is not necessary. $\varphi_\alpha$ and $\varphi_\alpha^*$ describe error on opposite sides of the line we are fitting. A point cannot fall below \textbf{and} above a line at the same time. One of the slack variables for any point will always be zero.
         }
         
 \end{enumerate}
@@ -314,11 +323,3 @@ _{\text{kernels!}}
 
 \end{frame}
 
-\mode<presentation>{
-\begin{frame}{Embedded Animation}
-\begin{center}
-  \animategraphics[loop,autoplay,width=0.15\linewidth]{20}{img/jonahgif/something-}{0}{10}
-  \end{center}
-\end{frame}
-
-}
