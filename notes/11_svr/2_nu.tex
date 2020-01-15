@@ -87,67 +87,9 @@ $\nu$-SVR extends $\varepsilon$-SVR with: 1 $\times$ new variable, 1 $\times$ ne
      
      \item lower bound on the fraction of SVs\notesonly{: $\nu \le \frac{\# SV}{p}$}.
      \end{itemize}
+     \notesonly{The solution of the primal problem for $\nu$-SVR will enable us to discuss this in more detail (cf. \sectionref{sec:intuitionnu}}
 \end{frame}
 
-\subsubsection{An intuition for $\nu$}
-
-\begin{frame}\frametitle{\subsubsecname}
-
-\mode<presentation>{
-
-     \placeimage{11}{1}{img/regression_1d_linear_margin_phi_cropped_small_err}{width=3.5cm}
-}
-
-\notesonly{
-We look at the part of the primal problem in which $\nu$ and $\varepsilon$ interact:
-}
-
-\slidesonly{\vspace{-20mm}}
-
-\begin{minipage}{7.5cm}
-
-\begin{block}{The primal problem for $\nu$-SVR (the parts where $\nu$ and $\varepsilon$ interact)}
-\slidesonly{\vspace{-5mm}}
-	\begingroup
-	\footnotesize
-     \begin{equation}
-        \begin{array}{ll}
-        \min_{\vec w, b,\{\varphi_\alpha\}, \{\varphi_\alpha^*\}, \varepsilon} & \\[-1mm]
-        & \kern-11ex\frac{1}{2} \lVert \vec w \rVert_{2}^{2} + C \big\lbrack {\color{blue}\nu \varepsilon} + {\color{magenta}\frac{1}{p} \sum_{\alpha}^p \overbrace{(\varphi_\alpha + \varphi_\alpha^*)}^{\text{errors}}} \big\rbrack\\[2mm]
-        \text{subject to} &
-        \varepsilon~\ge~0\\
-        \end{array}
-        \label{eq:primalnuepsonly}
-     \end{equation}
-     
-     \slidesonly{\vspace{-2mm}}
-        with $C>0$, $\nu \ge 0$, $\alpha=1,\ldots,p$
-     \endgroup
-\end{block}
-\end{minipage}
-
-\begin{enumerate}
-\item $\varepsilon = 0$:
-\begin{itemize}
-\item[$\Rightarrow$] All points are outside the $\varepsilon$-tube. All points are SVs, i.e. $\frac{\#\mathrm{SV}}{p}=1$.
-\item[$\Rightarrow$] The \textcolor{magenta}{sum of errors} will be $> 0$
-\end{itemize}
-\pause
-As $\varepsilon$ increases:
-\begin{itemize}
-\item[$\Rightarrow$] \notesonly{The term }${\color{blue}\nu\varepsilon}$ \textbf{increases} proportionally to $\nu$
-\item[$\Rightarrow$] more points fall \textbf{inside} the $\varepsilon$-tube, \notesonly{leaving }a fraction $\frac{\#\mathrm{SV}}{p}$ of points \notesonly{that }are SVs\\
-\item[$\Rightarrow$] \notesonly{The fraction decreases as $\varepsilon$ increases.} $\varepsilon \uparrow \;\;\leadsto\;\; \frac{\#\mathrm{SV}}{p} \downarrow$
- and the \textcolor{magenta}{sum of errors} \slidesonly{$\downarrow$}\notesonly{will \textbf{decrease}} proprtionally to $\frac{\#\mathrm{SV}}{p}$
- 
-\item[$\Rightarrow$] The fraction $\frac{\#\mathrm{SV}}{p} > \nu$
-\end{itemize}
-$\varepsilon$ stops growing as soon as the \textcolor{magenta}{sum of errors} $\corresponds~\frac{\#\mathrm{SV}}{p}$ stops decreasing. But when?
-
-\end{enumerate}
-
-
-\end{frame}
 
 \subsection{Deriving the Lagrangian for the primal problem of $\nu$-SVR}
 
@@ -280,6 +222,146 @@ Next: re-arrange the constraints to be in the form $f_\alpha \le 0$\notesonly{ t
 \end{equation}
 
 with $\{\lambda_{\alpha}\}, \{\lambda_{\alpha}^*\},\{\eta_{\alpha}\},\{\eta_{\alpha}^*\},\delta \ge 0$
+
+\end{frame}
+
+\subsection{Optimizing $\nu$-SVR}
+
+\begin{frame}\frametitle{\subsecname}
+
+\begin{enumerate}
+\item We start with optimizing the Lagrangian of the \emph{primal problem}. As we did with SVMs and C-SVMs, this is achieved by
+\begin{enumerate}
+\item calculating the derivatives of $L$ w.r.t. \emph{primal variables} $\vec w, b, \varphi_\alpha, \varphi_\alpha^*, \varepsilon$
+\item setting the partial derivatives to zero. (\textbf{see homework})
+\end{enumerate}
+
+\item Substituting the solutions to the \emph{primal problem} back into the Lagrangian yields the Lagrangian of the \emph{dual problem}\notesonly{, which can be expressed in terms of the \emph{dual variables} only}:
+		\begin{equation}
+		  \max_{\lambda_{\alpha}, \lambda_{\alpha}^*}
+		  - \smallfrac{1}{2}\sum_{\alpha,\beta=1}^p(\lambda_{\alpha}^* -
+		  \lambda_{\alpha}) (\lambda_{\beta}^* - \lambda_{\beta})
+		  (\vec{x}^{(\alpha)})^\top\vec{x}^{(\beta)} +
+		  \sum_{\alpha=1}^p(\lambda_{\alpha}^* 
+		  - \lambda_{\alpha})y_T^{(\alpha)}
+		  \nonumber
+		\end{equation}
+		s.t. $\forall \alpha \in \{1,\ldots,p\}$:
+		$$
+		  0 \leq \lambda_{\alpha} \leq \smallfrac{C}{p}
+		  \,, \;\;
+		  0 \leq \lambda_{\alpha}^* \leq \smallfrac{C}{p}
+		  \,, \;\;
+		  \sum_{\alpha=1}^p(\lambda_{\alpha} - \lambda_{\alpha}^*) = 0 
+		  \,, \;\;
+		  \sum_{\alpha=1}^p(\lambda_{\alpha} + \lambda_{\alpha}^*) 
+		  \leq  \nu C \,.  \nonumber
+		$$
+\end{enumerate}
+
+
+\end{frame}
+
+
+\subsubsection{An intuition for $\nu$}\label{sec:intuitionnu}
+
+\begin{frame}{Only}\frametitle{\subsubsecname}
+
+\mode<presentation>{
+
+     \placeimage{11}{1}{img/regression_1d_linear_margin_phi_cropped_small_err}{width=3.5cm}
+}
+
+\notesonly{
+We look at the part of the primal problem in which $\nu$ and $\varepsilon$ interact\footnote{This is based on my understanding of Ch. 9.3 from \citep{scholkopf2001learning} and the paper \citep{scholkopf2000new}}:
+}
+
+\slidesonly{\vspace{-20mm}}
+
+\begin{minipage}{7.5cm}
+
+\begin{block}{The primal problem for $\nu$-SVR (the parts where $\nu$ and $\varepsilon$ interact)}
+\slidesonly{\vspace{-5mm}}
+	\begingroup
+	\footnotesize
+     \begin{equation}
+        \begin{array}{ll}
+        \min_{\vec w, b,\{\varphi_\alpha\}, \{\varphi_\alpha^*\}, \varepsilon} & \\[-1mm]
+        & \kern-11ex\frac{1}{2} \lVert \vec w \rVert_{2}^{2} + C \big\lbrack {\color{blue}\nu \varepsilon} + \frac{1}{p} {\color{magenta}\sum_{\alpha}^p \overbrace{(\varphi_\alpha + \varphi_\alpha^*)}^{\text{errors}}} \big\rbrack\\[2mm]
+        \text{subject to} &
+        \varepsilon~\ge~0\\
+        \end{array}
+        \label{eq:primalnuepsonly}
+     \end{equation}
+     
+     \slidesonly{\vspace{-2mm}}
+        with $C>0$, $\nu \ge 0$, $\alpha=1,\ldots,p$
+     \endgroup
+\end{block}
+\end{minipage}
+
+\begin{enumerate}
+\item<only@1> $\varepsilon = 0$:
+\begin{itemize}
+\item[$\Rightarrow$] All points are \textbf{outside} the $\varepsilon$-tube. All points are SVs, i.e. $\frac{\#\mathrm{SV}}{p}=1$.
+\item[$\Rightarrow$] The \textcolor{magenta}{sum of errors} will be $> 0$
+\end{itemize}
+\pause
+\item[]<only@2->As $\varepsilon$ increases from $0$:
+\begin{itemize}
+\item[$\Rightarrow$]<only@2-> \notesonly{The term }${\color{blue}\nu\varepsilon}$ \textbf{increases} proportionally to $\nu$
+\item[$\Rightarrow$]<only@2,3> more points fall \textbf{inside} the $\varepsilon$-tube, \notesonly{leaving }a fraction $\frac{\#\mathrm{SV}}{p}$ of points outside the $\varepsilon$-tube \notesonly{which }are SVs\\
+\item[$\Rightarrow$]<only@4-> \notesonly{The fraction decreases as $\varepsilon$ increases.} $\varepsilon \uparrow \;\;\leadsto\;\; \frac{\#\mathrm{SV}}{p} \downarrow$
+ and the \textcolor{magenta}{sum of errors} \slidesonly{$\downarrow$}\notesonly{will \textbf{decrease}} proprtionally to $\frac{\#\mathrm{SV}}{p}$
+
+\only<5,6>{ 
+\question{Does $\varepsilon$ grow indefinitely?}\\
+}
+
+\only<6,7>{
+\only<6>{- No, }$\varepsilon$ stops growing as soon as the \textcolor{magenta}{sum of errors} $\corresponds~\frac{\#\mathrm{SV}}{p}$ stops decreasing. But when?\\
+}
+
+\only<7->{
+$\varepsilon$ stops growing as soon as $\frac{\#\mathrm{SV}}{p} \le \nu$
+
+\question{Where does $\frac{\#\mathrm{SV}}{p} \le \nu$ come from?} 
+}
+
+\mode<article>{
+
+- Justifying this requires part of the solution of the primal problem:
+ 
+\begin{eqnarray}
+				\frac{\partial L}{\partial \varepsilon} &=& \nu C - \smallsum{\alpha=1}{p} \lambda_\alpha
+				- \smallsum{\alpha=1}{p} \lambda_\alpha^* - \delta
+				\;\;\stackrel{!}{=}\;\; 0\\
+				&\Rightarrow& \; \delta \;\;=\;\; \nu C - \smallsum{\alpha=1}{p} 
+				(\lambda_\alpha + \lambda_\alpha^*) \\
+				&\stackrel{\delta \geq 0}{\Rightarrow}&
+				\nu C \;\geq\; \smallsum{\alpha=1}{p} 
+				(\lambda_\alpha + \lambda_\alpha^*)
+\end{eqnarray}
+}
+
+\only<7->{
+\slidesonly{
+ \begingroup
+ \footnotesize
+$$
+				\frac{\partial L}{\partial \varepsilon} \stackrel{!}{=} 0\;\; \stackrel{\text{at } \varepsilon^{\mathrm{opt}}}{\Rightarrow} \;\; 
+				\nu C \geq~{\color{red}\smallsum{\alpha=1}{p} 
+				(\lambda_\alpha + \lambda_\alpha^*)}
+				$$
+\endgroup
+}
+}%only
+
+\end{itemize}
+
+
+\end{enumerate}
+
 
 \end{frame}
 
