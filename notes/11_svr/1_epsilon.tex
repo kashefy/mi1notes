@@ -46,7 +46,7 @@ Example: Binary classification, $y_{T} \in \{-1,1\}$:
 
 \end{frame}
 
-\begin{frame}\frametitle{Regression setting}
+\begin{frame}\frametitle{The regression setting}
 
 \mode<article>{
 \underline{The Setting}:
@@ -57,13 +57,17 @@ Example: Binary classification, $y_{T} \in \{-1,1\}$:
 
     \item[]$
     \big\{ \big(\vec x^{(\alpha)}, y_{T}^{(\alpha)}\big)\big\}_{\alpha=1}^{p}
-    $\\
-    \item[] with $\vec x \in \R^{N}$ and $y_{T} \in \R${}
+    $ with $\vec x \in \R^{N}$ and $y_{T} \in \R${}
 
 \item[] \underline{Model}:\\
     linear neuron: $
         y(\vec x; \vec w, b) = \vec w^{\top} \vec x + b$
-
+        
+\item[] \underline{Objective}:\\
+    \begin{itemize}
+    \item ERM: $\min_{\vec w,b} E^{T}$
+    \item SRM: $\min_{\vec w,b} \frac{1}{2} \lVert \vec w \rVert + C R_{\text{emp}}(\vec w,b)$
+    \end{itemize}
 
     
 \end{itemize}
@@ -110,20 +114,34 @@ e(y(\vec x; \vec w, b), y_{T})
 
 \begin{itemize}
 \item The cost function is parameterized by $\varepsilon$ that is chosen a priori.
-\item[$\leadsto$] no error for $
+\notesonly{\item[$\leadsto$] no error for $
 y(\vec x) \in \lbrack y_{T}-\varepsilon, y_{T}+\varepsilon\rbrack$
 otherwise,
 \item[$\leadsto$] linear error
+}
 \end{itemize}
+
+\slidesonly{\vspace{-2mm}}
 
 \begin{figure}[h]
      \centering
-	 \includegraphics[width=0.7\textwidth]{img/cost_eps}%
+	 \includegraphics[width=0.6\textwidth]{img/cost_eps}%
 	 \mode<article>{
      \caption{The cost function}
      }
 	 \label{fig:cost}
 \end{figure}
+
+The SRM objective becomes:
+
+\slidesonly{\vspace{-5mm}}
+
+\begin{equation}
+    \min_{\vec w,b} \frac{1}{2} \lVert \vec w \rVert + C R^{\varepsilon}_{\text{emp}}(\vec w,b)
+    \quad
+    \text{using}\quad R^{\varepsilon}_{\text{emp}}(\vec w,b) = \frac{1}{p}\sum_{\alpha=1}^{p} \max(0, \big|y(\vec x) - y_{T}\big|-\varepsilon)
+    \label{eq:srmeps}
+\end{equation}
     
 \end{frame}
 
@@ -142,7 +160,7 @@ otherwise,
 
 \begin{itemize}
 \item[(i)]
-Simplify assumptions (will be relaxed later)\footnote{This is based on my understanding of Ch. 9 from \citep{scholkopf2001learning} and \citep{scholkopf2000new}}
+Simplify assumptions (will be relaxed later)\notesonly{\footnote{This is based on my understanding of Ch. 9 from \citep{scholkopf2001learning} and \citep{scholkopf2000new}}}
 
 \begin{enumerate}
     \item<only@1-> perfect regression solution, i.e. zero error $\varepsilon$-insensitive cost,
@@ -226,7 +244,7 @@ Relax constraints by allowing for errors\\
 \only<2->{
 \begin{enumerate}
     \item<only@1-> possibly more robust to noise and outliers,
-    \item<only@2-> constrained regression problem that allows for errors (with slack variables $\varphi_\alpha$)\\
+    \item<only@2-> constrained regression problem\notesonly{ that allows for errors} (with slack variables $\varphi_\alpha$)\\
     
 \slidesonly{\vspace{-3mm}}
 
@@ -261,6 +279,23 @@ Relax constraints by allowing for errors\\
         
         \notesonly{
         - No, this is not necessary. $\varphi_\alpha$ and $\varphi_\alpha^*$ describe error on opposite sides of the line we are fitting. A point cannot fall below \textbf{and} above a line at the same time. One of the slack variables for any point will always be zero.
+        
+        At this point we can define the empirical risk term $R^{\varepsilon}_{\text{emp}}$ in \eqref{eq:srmeps} in terms of the slack variables:
+        
+        }
+        \only<5>{
+
+\slidesonly{\vspace{-5mm}}
+\slidesonly{
+\begingroup
+\footnotesize
+}
+        \begin{equation}
+        \min_{\vec w,b} \frac{1}{2} \lVert \vec w \rVert + C \; \overbrace{\frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*)}^{=:R^{\varepsilon}_{\text{emp}}(\vec w,b)}
+    \end{equation}
+\slidesonly{
+\endgroup
+}
         }
         
 \end{enumerate}
