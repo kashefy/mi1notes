@@ -11,43 +11,6 @@
 \end{frame}
 }
 
-\begin{frame}\frametitle{The classification setting}
-
-\mode<article>{
-\underline{The classification setting}:\\
-}
-
-Classification problems have labels with only finite many possible values.
-
-Example: Binary classification, $y_{T} \in \{-1,1\}$:
-
-\begin{figure}[ht]
-     \centering
-     \savebox{\imagebox}{
-	 \includegraphics[width=0.35\textwidth]{img/classification_1d_sign}}%
-     \begin{subfigure}[t]{0.35\textwidth}
-         \centering
-         \usebox{\imagebox}% Place largest image
-         \caption{1D input}
-         \label{fig:classification1d}
-     \end{subfigure}
-     \hspace{10mm}
-     \begin{subfigure}[t]{0.35\textwidth}
-         \centering
-         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
-         \includegraphics[width=0.99\textwidth]{img/circular}
-         }
-         \caption{2D input}
-         \label{fig:classification2d}
-     \end{subfigure}
-     \caption{binary classification}
-	 \label{fig:classification}
-\end{figure}
-
-\end{frame}
-
-\newpage
-
 \begin{frame}\frametitle{The regression setting}
 
 \mode<article>{
@@ -147,7 +110,7 @@ The SRM objective becomes:
     
 \end{frame}
 
-\subsubsection{Deriving the primal problem for $\varepsilon$-SVR}
+\subsection{Deriving the primal problem for $\varepsilon$-SVR}
 
 \begin{frame}{Only}\frametitle{\subsubsecname}
 
