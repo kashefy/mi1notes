@@ -1,5 +1,7 @@
 \section{$\nu$-SVR}
 
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+
 \mode<presentation>{
 \begin{frame} 
     \begin{center} \huge
@@ -42,11 +44,17 @@ Choosing $\varepsilon$ for $\varepsilon$-SVR can be difficult as it depends on t
 
 $\nu$-SVR extends $\varepsilon$-SVR, by allowing the width of the ``$\varepsilon$-tube'' to adapt to the data. This is done by turning $\varepsilon$ into a \emph{primal variable}. We can then optimize w.r.t. $\varepsilon$ as we do with $\vec w, b$ and \notesonly{the set of slack variables }$\{\varphi_\alpha\}, \{\varphi_\alpha^*\}$.
 
+The SRM objective for $\nu$-SVR becomes:
+
+    \begin{equation}
+        \min_{\vec w,b,\varepsilon} \frac{1}{2} \lVert \vec w \rVert + C \; \frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*){}
+        \label{eq:srmnu}
+    \end{equation}
+
 \end{frame}
 
 \subsection{Deriving the primal problem for $\nu$-SVR}
 
-\definecolor{darkgreen}{rgb}{0,0.6,0}
 \begin{frame}\frametitle{\subsecname}
 
 \slidesonly{\vspace{-4mm}}
