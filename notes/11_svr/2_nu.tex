@@ -47,7 +47,7 @@ $\nu$-SVR extends $\varepsilon$-SVR, by allowing the width of the ``$\varepsilon
 The SRM objective for $\nu$-SVR becomes:
 
     \begin{equation}
-        \min_{\vec w,b,\varepsilon} \frac{1}{2} \lVert \vec w \rVert + C \; \frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*){}
+        \min_{\vec w,b,\varepsilon} \frac{1}{2} \lVert \vec w \rVert + C \;\Big\lbrack \nu \varepsilon + \frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*) \Big\rbrack
         \label{eq:srmnu}
     \end{equation}
 
@@ -315,22 +315,43 @@ We look at the part of the primal problem in which $\nu$ and $\varepsilon$ inter
 \item[$\Rightarrow$] The \textcolor{magenta}{sum of errors} will be $> 0$
 \end{itemize}
 \pause
-\item[]<only@2->As $\varepsilon$ increases from $0$:
+\item[]<only@2->As $\varepsilon$ \textbf{increases} from $0$:
 \begin{itemize}
 \item[$\Rightarrow$]<only@2-> \notesonly{The term }${\color{blue}\nu\varepsilon}$ \textbf{increases} proportionally to $\nu$
-\item[$\Rightarrow$]<only@2,3> more points fall \textbf{inside} the $\varepsilon$-tube, \notesonly{leaving }a fraction $\frac{\#\mathrm{SV}}{p}$ of points outside the $\varepsilon$-tube \notesonly{which }are SVs\\
-\item[$\Rightarrow$]<only@4-> \notesonly{The fraction decreases as $\varepsilon$ increases.} $\varepsilon \uparrow \;\;\leadsto\;\; \frac{\#\mathrm{SV}}{p} \downarrow$
- and the \textcolor{magenta}{sum of errors} \slidesonly{$\downarrow$}\notesonly{will \textbf{decrease}} proprtionally to $\frac{\#\mathrm{SV}}{p}$
+\item[$\Rightarrow$]<only@2,3> more points fall \textbf{inside} the $\varepsilon$-tube
+%, \notesonly{leaving }a fraction $\frac{\#\mathrm{SV}}{p}$ of points  \textbf{on or outside} the $\varepsilon$-tube \notesonly{which }are SVs\\
+\item[$\Rightarrow$]<only@4-> \notesonly{The fraction of points \textbf{outside} decreases as $\varepsilon$ increases.} 
+$\varepsilon \uparrow \;\;\leadsto\;\;$ \textcolor{magenta}{sum of errors} \slidesonly{$\downarrow$}
+%$\varepsilon \uparrow \;\;\leadsto\;\; \frac{\#\mathrm{SV}}{p} \downarrow$
+ %and the \textcolor{magenta}{sum of errors} \slidesonly{$\downarrow$}\notesonly{will \textbf{decrease}} proprtionally to $\frac{\#\mathrm{SV}}{p}$
 
 \only<5,6>{ 
 \question{Does $\varepsilon$ grow indefinitely?}\\
 }
 
 \only<6,7>{
-\only<6>{- No, }$\varepsilon$ stops growing as soon as the \textcolor{magenta}{sum of errors} $\corresponds~\frac{\#\mathrm{SV}}{p}$ stops decreasing. But when?\\
+\only<6>{- No, }$\varepsilon$ stops growing as soon as the \textcolor{magenta}{sum of errors} stops decreasing. But when?\\
+
+Remember\notesonly{ from \eqref{eq:srmnu}}, $\nu$-SVR \emph{optimize} the value of $\varepsilon$. At optimum, we would have:
+\begin{align}
+\frac{\partial}{\partial \varepsilon}
+ \Big\lbrack 
+ {\color{blue}\nu \varepsilon}& 
+ + \frac{1}{p} {\color{magenta}\sum_{\alpha}^p \overbrace{(\varphi_\alpha + \varphi_\alpha^*)}^{\text{errors}}} 
+ \Big\rbrack
+ \eqexcl 0 
+\end{align}
+
+
+When $\varepsilon$
 }
 
-\only<7->{
+\end{itemize}
+\item<only@8> As $\varepsilon$ \textbf{decreases}, starting from some large positive value:
+\begin{itemize}
+\item[$\Rightarrow$]<only@2-> \notesonly{The term }${\color{blue}\nu\varepsilon}$ \textbf{decreases} proportionally to $\nu$
+
+\only<8->{
 $\varepsilon$ stops growing as soon as $\frac{\#\mathrm{SV}}{p} \le \nu$
 
 \question{Where does $\frac{\#\mathrm{SV}}{p} \le \nu$ come from?} 
@@ -352,20 +373,25 @@ $\varepsilon$ stops growing as soon as $\frac{\#\mathrm{SV}}{p} \le \nu$
 \end{eqnarray}
 }
 
-\only<7->{
+\only<9->{
 \slidesonly{
  \begingroup
  \footnotesize
 $$
 				\frac{\partial L}{\partial \varepsilon} \stackrel{!}{=} 0\;\; \stackrel{\text{at } \varepsilon^{\mathrm{opt}}}{\Rightarrow} \;\; 
 				\nu C \geq~{\color{red}\smallsum{\alpha=1}{p} 
-				(\lambda_\alpha + \lambda_\alpha^*)}
+				\overbrace{(\lambda_\alpha + \lambda_\alpha^*)}^{> 0 \text{ for SVs only}}} {\propto} \frac{\#\mathrm{SV}}{p}
 				$$
 \endgroup
+     %\begin{itemize}
+     %\item upper bound on the fraction of errors\notesonly{: $\nu \ge \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*)$}\notesonly{\\ and as a \\}
+     
+     %\end{itemize}
 }
 }%only
-
+\item[$\Rightarrow$]<only@10> $\nu$ acts as a \emph{lower bound} on the fraction of SVs, i.e. $\nu \le \frac{\# SV}{p}$.
 \end{itemize}
+
 
 
 \end{enumerate}
