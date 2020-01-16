@@ -40,7 +40,7 @@
 \notesonly{
 Choosing $\varepsilon$ for $\varepsilon$-SVR can be difficult as it depends on the noise in the data and this noise is unknown.
 }$\varepsilon$-SVR requires treating $\varepsilon$ as a hyperparameter.
-\notesonly{We therefore resort to methods such as corss-validation for choosing one value for $\varepsilon$ over another.}
+\notesonly{We therefore resort to methods such as cross-validation for choosing one value for $\varepsilon$ over another.}
 
 $\nu$-SVR extends $\varepsilon$-SVR, by allowing the width of the ``$\varepsilon$-tube'' to adapt to the data. This is done by turning $\varepsilon$ into a \emph{primal variable}. We can then optimize w.r.t. $\varepsilon$ as we do with $\vec w, b$ and \notesonly{the set of slack variables }$\{\varphi_\alpha\}, \{\varphi_\alpha^*\}$.
 
@@ -80,7 +80,7 @@ The SRM objective for $\nu$-SVR becomes:
 \pause
 
       \notesonly{
-$\nu$-SVR extends $\varepsilon$-SVR with: 1 $\times$ new variable, 1 $\times$ new hyper-parameter, 1 $\times$ new constraint.
+$\nu$-SVR extends $\varepsilon$-SVR with: 1$\times$ new variable, 1$\times$ new hyper-parameter, 1$\times$ new constraint.
 }
 
      \slidesonly{\vspace{-3mm}}
@@ -89,20 +89,20 @@ $\nu$-SVR extends $\varepsilon$-SVR with: 1 $\times$ new variable, 1 $\times$ ne
      
 \pause
 
-     - Increased resolution of how we balance model error and model complexity. We %will see that 
+     - Yes, but with increased resolution of how we balance model error and model complexity. %We will see that 
      $\nu$ acts as a
      \begin{itemize}
      \item upper bound on the fraction of errors: $\nu \ge \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*)$\notesonly{\\ and as a \\}
-     
-     \item lower bound on the fraction of SVs: $\nu \le \frac{\# SV}{p}$.
+     \item lower bound on the fraction of SVs: $\nu \le \frac{\# SV}{p}$\notesonly{\footnote{If interested, see details in Ch. 9.3 from \citep{scholkopf2001learning} and the paper \citep{scholkopf2000new}}}.
      \end{itemize}
-     \notesonly{The solution of the primal problem for $\nu$-SVR will enable us to discuss this in more detail (cf. \sectionref{sec:intuitionnu}}
+     %\notesonly{The solution of the primal problem for $\nu$-SVR will enable us to discuss this in more detail (cf. \sectionref{sec:intuitionnu}}
 \end{frame}
 
+\newpage
 
 \subsection{Deriving the Lagrangian for the primal problem of $\nu$-SVR}
 
-\subsubsection{Idenitfying the Lagrange multipliers}
+\subsubsection{Identifying the Lagrange multipliers}
 
 \begin{frame}\frametitle{\subsecname\\ \subsubsecname}
 

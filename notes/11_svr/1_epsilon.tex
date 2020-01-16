@@ -14,7 +14,7 @@
 \begin{frame}\frametitle{The classification setting}
 
 \mode<article>{
-The classification setting:\\
+\underline{The classification setting}:\\
 }
 
 Classification problems have labels with only finite many possible values.
@@ -46,10 +46,12 @@ Example: Binary classification, $y_{T} \in \{-1,1\}$:
 
 \end{frame}
 
+\newpage
+
 \begin{frame}\frametitle{The regression setting}
 
 \mode<article>{
-\underline{The Setting}:
+\underline{The regression setting}:
 }
 
 \begin{itemize}
@@ -160,7 +162,7 @@ The SRM objective becomes:
 
 \begin{itemize}
 \item[(i)]
-Simplify assumptions (will be relaxed later)\notesonly{\footnote{This is based on my understanding of Ch. 9 from \citep{scholkopf2001learning} and \citep{scholkopf2000new}}}
+Simplify assumptions (will be relaxed later)\notesonly{\footnote{This is based on my understanding of Ch. 9 from \citep{scholkopf2001learning}.}}
 
 \begin{enumerate}
     \item<only@1-> perfect regression solution, i.e. zero error $\varepsilon$-insensitive cost,
@@ -194,6 +196,7 @@ Simplify assumptions (will be relaxed later)\notesonly{\footnote{This is based o
     
 \end{frame}
 
+\newpage
 
 \begin{frame}{Only}\frametitle{\subsubsecname}
 
@@ -202,8 +205,8 @@ Simplify assumptions (will be relaxed later)\notesonly{\footnote{This is based o
 \begin{figure}[h]
      \centering
      \savebox{\imagebox}{
-	 \includegraphics[width=0.4\textwidth]{img/regression_1d_linear_margin_phi}}%
-     \begin{subfigure}[t]{0.4\textwidth}
+	 \includegraphics[width=0.35\textwidth]{img/regression_1d_linear_margin_phi}}%
+     \begin{subfigure}[t]{0.35\textwidth}
          \centering
          \usebox{\imagebox}% Place largest image
          \mode<article>{
@@ -212,7 +215,7 @@ Simplify assumptions (will be relaxed later)\notesonly{\footnote{This is based o
          \label{fig:violate_within_margin}
      \end{subfigure}
      %\hspace{2mm}
-     \begin{subfigure}[t]{0.4\textwidth}
+     \begin{subfigure}[t]{0.35\textwidth}
          \centering
          \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
          \includegraphics[width=0.99\textwidth]{img/cost_eps_phi}
@@ -256,7 +259,7 @@ Relax constraints by allowing for errors\\
         \vec w^{\top} \vec x^{(\alpha)} + b - y_{T}^{(\alpha)} \le \varepsilon + \varphi_\alpha\\
         &
         y_{T}^{(\alpha)} - \vec w^{\top} \vec x^{(\alpha)} - b \le \varepsilon + \varphi_\alpha^*\\
-        & \varphi_\alpha, \varphi_\alpha^* \ge 0 \qquad\qquad\qquad\qquad\qquad \text{for } \alpha=1,\ldots,p
+        & \varphi_\alpha, \varphi_\alpha^* \ge 0 \qquad\qquad\qquad\slidesonly{\qquad\qquad} \text{for } \alpha=1,\ldots,p
         \end{array}
         \label{eq:primaleps}
         \end{equation}
@@ -268,9 +271,9 @@ Relax constraints by allowing for errors\\
         \question{How do we prevent solutions with arbitrarily large $\varphi_\alpha, \varphi_\alpha^*$ that prevent any violation of the constraints?}\\
         
         \notesonly{
-        - The second term in the minimization objective that is parameterizd by $C$ takes care of this, as it penalizes model error.
+        - The second term in the minimization objective that is parameterized by $C$ takes care of this, as it penalizes model error.\\
         
-        \eqref{eq:epsprimal} gives us the \emph{primal problem} for $\varepsilon$-SVR.
+        \eqref{eq:primaleps} gives us the \emph{primal problem} for $\varepsilon$-SVR.
         }
         }
         
