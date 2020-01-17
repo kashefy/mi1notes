@@ -72,8 +72,8 @@
 \slidesonly{\vspace{-5mm}}
 
 \begin{equation}
-e(y(\vec x; \vec w, b), y_{T})
-= e(\underbrace{y(\vec x)}_{\mathclap{\text{for brevity}}}, y_{T})
+e(y(\vec x; \vec w, b), y_{T}; \varepsilon)
+= e(\underbrace{y(\vec x)}_{\mathclap{\text{for brevity}}}, y_{T}; \varepsilon)
 = \max(~0~, \big|y(\vec x) - y_{T}\big|-\varepsilon~)
 \end{equation}
 
@@ -103,10 +103,23 @@ The SRM objective becomes:
 
 \begin{equation}
     \min_{\vec w,b} \frac{1}{2} \lVert \vec w \rVert + C R^{\varepsilon}_{\text{emp}}(\vec w,b)
+    \slidesonly{
     \quad
-    \text{using}\quad R^{\varepsilon}_{\text{emp}}(\vec w,b) = \frac{1}{p}\sum_{\alpha=1}^{p} \max(0, \big|y(\vec x) - y_{T}\big|-\varepsilon)
+    \text{using}\quad R^{\varepsilon}_{\text{emp}}(\vec w,b) = \frac{1}{p}\sum_{\alpha=1}^{p} e(y(\vec x), y_{T}; \varepsilon)
+     %\max(0, \big|y(\vec x) - y_{T}\big|-\varepsilon)
+     }
     \label{eq:srmeps}
 \end{equation}
+
+\notesonly{
+using 
+\begin{align}
+    R^{\varepsilon}_{\text{emp}}(\vec w,b) &= \frac{1}{p}\sum_{\alpha=1}^{p} e(y(\vec x), y_{T}; \varepsilon)\\
+    &= 
+    \frac{1}{p}\sum_{\alpha=1}^{p} \max(0, \big|y(\vec x) - y_{T}\big|-\varepsilon)
+    \label{eq:srmepscost}
+\end{align}
+}
     
 \end{frame}
 
@@ -305,11 +318,11 @@ Relax constraints by allowing for errors\\
 \slidesonly{\vspace{-5mm}}
 
 \begin{equation}
-\vec w^* = \sum_\alpha^p (\varphi_\alpha - \varphi_\alpha^*) \vec x^{(\alpha)} \stackrel{\substack{\varphi_\alpha,\varphi_\alpha^* \ne 0\\\text{for SVs}}}{=} \sum_{\beta\in\mathrm{SV}} (\varphi_\beta - \varphi_\beta^*) \vec x^{(\beta)}
+\vec w^* = \sum_{\alpha=1}^p (\lambda_\alpha - \lambda_\alpha^*) \vec x^{(\alpha)} \stackrel{\substack{\text{either}\\ \lambda_\alpha \text{ or } \lambda_\alpha^* \ne 0\\\text{for SVs}}}{=} \sum_{\beta\in\mathrm{SV}} (\lambda_\beta - \lambda_\beta^*) \vec x^{(\beta)}
 \end{equation}
 
 \begin{equation}
-y(\vec x) = b^* + \sum_{\beta\in\mathrm{SV}} (\varphi_\beta - \varphi_\beta^*) 
+y(\vec x) = b^* + \sum_{\beta\in\mathrm{SV}} (\lambda_\beta - \lambda_\beta^*) 
 \only<2>{
 \underbrace
 }

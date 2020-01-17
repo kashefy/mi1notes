@@ -76,6 +76,10 @@ do
 end
 \end{itemize}
 
+\slidesonly{
+\only<1>{\textbf{see blackboard}}
+}
+
 }
 \only<2,3>{
 %\slidesonly{
@@ -130,7 +134,7 @@ Actually: one-vs-rest classification for SVMs is good enough for many problems.
 
 \begin{frame}\frametitle{\subsecname}
 
-$\frac{K(K-1)}{2}$ binary classifiers
+\# binary classifiers = $\frac{K(K-1)}{2}$ 
 
 \begin{itemize}
 \item[:-(] long test times.\\
@@ -141,8 +145,10 @@ $\frac{K(K-1)}{2}$ binary classifiers
 
 \begin{figure}[h]
      \centering
-	 \includegraphics[width=5cm]{img/3classes_onevsone}
+	 \includegraphics[width=5cm]{img/3classes_onevsone_majority}
+	 \mode<article>{
      \caption{One-vs-one classification}
+     }
 	 \label{fig:onevsone}
 \end{figure}
     
