@@ -66,7 +66,7 @@ The SRM objective for $\nu$-SVR becomes:
         \text{subject to} & 
         \vec w^{\top} \vec x^{(\alpha)} + b - y_{T}^{(\alpha)} \le \varepsilon + \varphi_\alpha\\
         &
-        y_{T}^{(\alpha)} - \vec w^{\top} \vec x^{(\alpha)} - b \le \varepsilon^* + \varphi_\alpha^*\\
+        y_{T}^{(\alpha)} - \vec w^{\top} \vec x^{(\alpha)} - b \le \varepsilon + \varphi_\alpha^*\\
         &\varphi_\alpha, \varphi_\alpha^* \ge 0  \qquad\qquad\qquad\qquad\quad \text{for }\alpha=1,\ldots,p \\
         &\only<2->{{\color{darkgreen}\varepsilon~\ge~0}}
         \end{array}
@@ -118,7 +118,7 @@ $\nu$-SVR extends $\varepsilon$-SVR with: 1$\times$ new variable, 1$\times$ new 
         \min_{\vec w, b,\{\varphi_\alpha\}, \{\varphi_\alpha^*\}{, {{\varepsilon}}}} && \frac{1}{2} \lVert \vec w \rVert_{2}^{2} + C {\big\lbrack \nu{\varepsilon} + } \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*) {\big\rbrack}			&\\
         \text{subject to}
         &&\vec w^{\top} \vec x^{(\alpha)} + b - y_{T}^{(\alpha)} \le \varepsilon + \varphi_\alpha		&\visible<2>{\leadsto\{\lambda_{\alpha}\}}\\
-        &&y_{T}^{(\alpha)} - \vec w^{\top} \vec x^{(\alpha)} - b \le \varepsilon^* + \varphi_\alpha^*	&\visible<2>{\leadsto\{\lambda_{\alpha}^*\}}\\
+        &&y_{T}^{(\alpha)} - \vec w^{\top} \vec x^{(\alpha)} - b \le \varepsilon + \varphi_\alpha^*	&\visible<2>{\leadsto\{\lambda_{\alpha}^*\}}\\
         &&\varphi_\alpha \ge 0  												&\visible<2>{\leadsto\{\eta_{\alpha}\}}\\
         &&\varphi_\alpha^* \ge 0 \qquad\qquad \text{for }\alpha=1,\ldots,p 		&\visible<2>{\leadsto\{\eta_{\alpha}^*\}}\\
         &&\varepsilon \ge 0														&\visible<2>{\leadsto\delta}
@@ -153,7 +153,7 @@ Next: re-arrange the constraints to be in the form $f_\alpha \le 0$\notesonly{ t
         \min_{\vec w, b,\{\varphi_\alpha\}, \{\varphi_\alpha^*\}{, {{\varepsilon}}}} && \frac{1}{2} \lVert \vec w \rVert_{2}^{2} + C {\big\lbrack \nu{\varepsilon} + } \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*) {\big\rbrack}			&\\
         \text{subject to}
         &&\vec w^{\top} \vec x^{(\alpha)} + b - y_{T}^{(\alpha)} \le \varepsilon + \varphi_\alpha		&\leadsto\{\lambda_{\alpha}\}\\
-        &&y_{T}^{(\alpha)} - \vec w^{\top} \vec x^{(\alpha)} - b \le \varepsilon^* + \varphi_\alpha^*	&\leadsto\{\lambda_{\alpha}^*\}\\
+        &&y_{T}^{(\alpha)} - \vec w^{\top} \vec x^{(\alpha)} - b \le \varepsilon + \varphi_\alpha^*	&\leadsto\{\lambda_{\alpha}^*\}\\
         &&\varphi_\alpha \ge 0  												&\leadsto\{\eta_{\alpha}\}\\
         &&\varphi_\alpha^* \ge 0 \qquad\qquad \text{for }\alpha=1,\ldots,p 		&\leadsto\{\eta_{\alpha}^*\}\\
         &&\varepsilon \ge 0														&\leadsto\delta
@@ -173,7 +173,7 @@ Next: re-arrange the constraints to be in the form $f_\alpha \le 0$\notesonly{ t
         \min_{\vec w, b,\{\varphi_\alpha\}, \{\varphi_\alpha^*\}{, {{\varepsilon}}}} && \frac{1}{2} \lVert \vec w \rVert_{2}^{2} + C {\big\lbrack \nu{\varepsilon} + } \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*) {\big\rbrack}			&\\
         \text{subject to}
         &&\vec w^{\top} \vec x^{(\alpha)} + b - y_{T}^{(\alpha)} - \varepsilon - \varphi_\alpha	\le 0	&\leadsto\{\lambda_{\alpha}\}\\
-        &&y_{T}^{(\alpha)} - \vec w^{\top} \vec x^{(\alpha)} - b - \varepsilon^* - \varphi_\alpha^*	\le 0 &\leadsto\{\lambda_{\alpha}^*\}\\
+        &&y_{T}^{(\alpha)} - \vec w^{\top} \vec x^{(\alpha)} - b - \varepsilon - \varphi_\alpha^*	\le 0 &\leadsto\{\lambda_{\alpha}^*\}\\
         &&- \varphi_\alpha \le 0  												&\leadsto\{\eta_{\alpha}\}\\
         && - \varphi_\alpha^* \le 0 \qquad\qquad \text{for }\alpha=1,\ldots,p 		&\leadsto\{\eta_{\alpha}^*\}\\
         && - \varepsilon \le 0														&\leadsto\delta

@@ -138,7 +138,7 @@ Actually: one-vs-rest classification for SVMs is good enough for many problems.
 
 \begin{itemize}
 \item[:-(] long test times.\\
-    Testing speed can be improved by organizing the pair classifiers into a DAG to reduce to a subset of $K-1$ only.
+    Testing speed can be improved by organizing the pair classifiers into a DAG\footnote{Directed Acyclic Graph, a tree would qualify.} to reduce to a subset of $K-1$ only.
 \item[:-)] Training is fast as each only requires a very small subset of the data. 
 \item[:-(] We still have ambiguous regions:    
 \end{itemize}
