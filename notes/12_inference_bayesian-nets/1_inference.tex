@@ -1,0 +1,41 @@
+\section{Inference and Uncertainty}
+
+\mode<presentation>{
+\begin{frame} 
+    \begin{center} \huge
+        \secname
+    \end{center}
+    \begin{center}
+    SVMs for regression problems   
+    \end{center}
+\end{frame}
+}
+
+\begin{frame}\frametitle{The regression setting}
+
+\mode<article>{
+\underline{The regression setting}:
+}
+
+\begin{itemize}
+\item[] \underline{Data}:\\
+
+    \item[]$
+    \big\{ \big(\vec x^{(\alpha)}, y_{T}^{(\alpha)}\big)\big\}_{\alpha=1}^{p}
+    $ with $\vec x \in \R^{N}$ and $y_{T} \in \R${}
+
+\item[] \underline{Model}:\\
+    linear neuron: $
+        y(\vec x; \vec w, b) = \vec w^{\top} \vec x + b$
+        
+\item[] \underline{Objective}:\\
+    \begin{itemize}
+    \item ERM: $\min_{\vec w,b} E^{T}$
+    \item SRM: $\min_{\vec w,b} \frac{1}{2} \lVert \vec w \rVert + C R_{\text{emp}}(\vec w,b)$
+    \end{itemize}
+
+    
+\end{itemize}
+\end{frame}
+
+
