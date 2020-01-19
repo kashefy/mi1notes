@@ -96,12 +96,140 @@ P(cavity | toothache \wedge Diagnosis cavity = false) = 0
 
 \end{frame}
 
-Observing event e rules out events where e is false. This leaves a set where $P(e)>0$.
+Observing event $e$ rules out events where e is false. This leaves a set where $P(e)>0$.
 We look within that set for the fraction that satisfies $x$ and $e$.
 
-This fraction is
+This fraction can be calculated using the following:
+
+\begin{equation}
+P(x|e) = \frac{P(x,e)}{P(e)}
+\end{equation}
+
+which brings us to the \emph{product rule}:
+
+\begin{equation}
+P(x,e) = P(x|e) P(e)
+\label{eq:productrule}    
+\end{equation}
 
 
 \begin{frame}
+
+\question{What information do I need to calculate the probability of any proposition?}
+
+- The full joint probability distribution\notesonly{ provides all the information to calculate the probability of any proposition.}
+
+Example:\\
+
+%\footnotesize
+	%\begin{center}
+     \begin{table}[h] 
+	\begin{tabular}{|c|c|c|}
+		\hline
+		& $toothache = \text{true}$ & $toothache = \text{false}$ \\
+		\begin{tabular}{c}
+			\\ 
+			$cavity = \text{true}$ \\
+			$cavity = \text{false}$
+		\end{tabular} 
+		& 
+		\begin{tabular}{c|c}
+			$catch = \text{true}$ & $catch = \text{false}$\\ 
+			\hline 
+			$0.108$ & $0.012$ \\
+			$0.016$ & $0.064$
+		\end{tabular} 
+		& 
+		\begin{tabular}{c|c}
+			$catch = \text{true}$ & $catch = \text{false}$\\ 
+			\hline 
+			$0.072$ & $0.008$ \\
+			$0.144$ & $0.576$
+		\end{tabular} 
+		\\ \hline
+	\end{tabular}
+    \end{table}
+	
+
+\end{frame}
+
+\subsubsection{Marginalisation}
+
+
+
+\begin{frame}\frametitle{\subsubsecname~(``summing out'')}
+
+\notesonly{\subsecname~$\corresponds$~``summing out''}
+
+\begin{align}
+P(x | \vec e)
+&= \frac{x, \vec e}{P(\vec e)}\\
+&= \alpha \sum_{\vec y \in \vec Y} P(\vec x, \vec e, \vec y)
+\end{align}
+
+where
+\begin{itemize}
+\item[] $x$: query variable
+\item[] $\vec e$: evidence variable(s)
+\item[] $\vec y$: \textbf{un}observed variables in the table
+\item[] $\alpha$: normalization factor:
+
+\question{How do we calculate the normalization factor $\alpha$?}
+
+- Via
+\begin{enumerate}
+\item evidence prior:
+\begin{equation}
+\alpha := P(\vec e) = \sum_{x, \vec y} P(x, \vec e, \vec y)  
+\end{equation}
+\item or simply via whatever ensures $\sum_{\vec x} P(x, \vec e) = 1$
+\end{enumerate}
+
+\end{itemize}
     
+\end{frame}
+
+\subsubsection{Applying the product rule}
+
+\begin{frame}\frametitle{\subsubsecname}
+    
+\begin{align}
+P(cavity | toothache=true) &= \frac{cavity,toothache}{P(toothache)}\\
+&= \frac{0.108 + 0.012}{0.108 + 0.012 + 0.016 + 0.064}\\
+&= 0.6   
+\end{align}
+
+
+\begin{equation*}
+P(cavity=false | toothache=true) = ?
+\end{equation*}
+
+\question{What should we expect?}
+
+\pause
+
+\begin{align}
+P(cavity=false | toothache=true) &= \frac{cavity=false,toothache}{P(toothache)}\\
+&= \frac{0.016 + 0.0064}{0.108 + 0.012 + 0.016 + 0.064}\\
+&= 0.4 = 1 - 0.6   
+\end{align}
+
+\textbf{Remark}: The denominator remains constant no matter which value of cavity we are interested in.\\
+$\Rightarrow$ use $1/P(toothache)$ as the normalization factor for $P(cavity | toothache)$.
+
+\begin{align}
+P(Cavity|toothache) &= \alpha P(Cavity, toothache) \\
+&= \alpha \big\lbrack
+P(Cavity, toothache, catch) + P(Cavity, toothache, catch=false) 
+\big\rbrack\\
+&= \alpha \big\lbrack{}
+\rmat{0.108\\0.016} + \rmat{0.012\\0.064}
+\big\rbrack\\
+&= \alpha \rmat{0.12\\0.08} \stackrel{\alpha=1/P(toothache)}{=} \rmat{0.6\\0.4}
+\intertext{OR normalize s.t. $\sum_{\vec x} P(x, \vec e) \eqexcl 1$}
+&= \alpha \rmat{0.12\\0.08} \stackrel{\alpha=\frac{1}{0.12+0.08}}{=} \rmat{0.6\\0.4}
+\end{align}
+
+
+
 \end{frame}
