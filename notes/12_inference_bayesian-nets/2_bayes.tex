@@ -138,4 +138,33 @@ i.e. \emph{conditional} independence of toothache and catch \underline{given} ca
 \subsection{Naive Bayes}
 
 \begin{frame}\frametitle{\subsecname}
+
+We need to an alternate expression for the full joint distribution.
+
+We start with the product rule:
+
+\begin{equation}
+P(X,Y) = P(X|Y)P(Y)    
+\end{equation}
+
+\begin{equation}
+P(Toothache,Catch,Cavity) = P(Toothache,Catch|Cavity)\underbrace{P(Cavity)}_{\text{prior}} 
+\end{equation}
+
+Exploit conditional independence:
+
+\begin{equation}
+P(Toothache,Catch,Cavity) = P(Toothache|Cavity)P(Catch|Cavity) \underbrace{P(Cavity)}_{\text{prior}} 
+\end{equation}
+
+In terms of cause and effect:
+
+\begin{equation}
+P(Cause,Effect_1,Effect_2,\ldots,Effect_n) = \underbrace{P(Cause)}_{\text{prior}} \prod_{i=1}^{n} P(Effect_{i}|Cause)
+\end{equation}
+
+\question{Which is the effect? Which is the cause}
+
+Complexity reduced!
+
 \end{frame}

@@ -1,5 +1,6 @@
+\section{Bayesian Networks}
 
-\section{Bayesian Networks}\label{sec:intuitionnu}
+see Russel Norvig Ch. 14
 
 \mode<presentation>{
 \begin{frame} 
@@ -7,8 +8,50 @@
         \secname
     \end{center}
     \begin{center}   
-    Essentially $\varepsilon$-SVR but treat $\varepsilon$ as a primal variable instead of a hyperparameter.
+    A representation of the full joint distribution that exploits conditional independence
     \end{center}
 \end{frame}
 }
 
+\begin{frame}\frametitle{\secname}
+    
+A factorization of the full joint distribution:
+
+\begin{equation}
+P(X_{1},\ldots,X_{n}) = \prod_{i=1}^{n} P(X_{i} | parents(X_{i}))
+\end{equation}
+    
+Remember: independence is important. Independence can be identified via the 
+\underline{Markov blanket}
+
+The Markov blanket of a node includes:
+\begin{itemize}
+\item its parents
+\item its children
+other parents of the children    
+\end{itemize}
+    
+\end{frame}
+
+\subsection{Preparations to perform inference}
+
+\begin{frame}\frametitle{\subsecname}
+    
+    \begin{enumerate}
+     \item use topological representation to ensure a compact representation
+     \item turn into a moral graph i.e.
+     \begin{enumerate}
+     \item turn DAG into an undirected graph + new edges s.t. each node of the original DAG is now directly connected to the nodes of its \emph{Markov blanket}
+     \item to be continued next week.
+     \end{enumerate}   
+    \end{enumerate}
+    
+\end{frame}
+
+\begin{frame}
+
+Example DAG to moral graph
+
+\textbf{see blackboard}
+    
+\end{frame}
