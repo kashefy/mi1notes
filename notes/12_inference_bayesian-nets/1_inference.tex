@@ -1,16 +1,28 @@
 \section{Inference and Uncertainty}
 
-\mode<presentation>{
 \begin{frame} 
+
+\begin{center} \footnotesize
+\textit{``As far as the laws of mathematics refer to reality, they are not certain; and as far as they are certain, they do not refer to reality."}
+\end{center} 
+\begin{flushright} \footnotesize
+Albert Einstein, 1921
+\end{flushright}
+
+\mode<presentation>{
+    \vspace{10mm}
     \begin{center} \huge
         \secname
     \end{center}
-    \begin{center}
-    quanitfying degree of belief/\\
-    quanitfying uncertainty
-    \end{center}
+    \vspace{10mm}
+    }
+Because we need to
+    \begin{itemize}
+    \item[] quantify our degree of belief/\\
+	\item[] quantify our uncertainty
+    \end{itemize}
+    
 \end{frame}
-}
 
 \subsection{The probabilistic model}
 
@@ -19,16 +31,16 @@
 \begin{itemize}
     \item \underline{The model:}\\
         \begin{align}
-            P(H): H \rightarrow [0,1]&&\\
-            P(H) = 0 && \iff H \text{ is false (i.e. impossible)} \\
-            P(H) = 1 && \iff H \text{ is true (i.e. certain)} \\
-            0 < P(H) < 1 && \text{quantifies our degree of belief}
+            P(H): H \rightarrow [0,1]&\\
+            P(H) = 0 & \quad\iff H \text{ is false (i.e. impossible)} \\
+            P(H) = 1 & \quad\iff H \text{ is true (i.e. certain)} \\
+            0 < P(H) < 1 & \quad\;\;\text{quantifies our degree of belief}
         \end{align}
     \pause
-    \item \textbf{events}: assignment to a set of cases\\
+    \item \underline{events}: assignment to a set of cases\\
     (e.g. two dice add up to 11)
     \pause
-    \item \textbf{proposition}: disjunction of \textbf{events}\\
+    \item \underline{proposition}: disjunction of \textbf{events}\\
     (i.e. isolate the sets of \textbf{events} in which the \textbf{proposition} holds)\\
     
 \end{itemize}
