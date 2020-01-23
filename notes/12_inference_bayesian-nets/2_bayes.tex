@@ -8,7 +8,7 @@
         \secname
     \end{center}
     \begin{center}   
-    Essentially $\varepsilon$-SVR but treat $\varepsilon$ as a primal variable instead of a hyperparameter.
+    come up with a more compact representation of the full joint distribution
     \end{center}
 \end{frame}
 }
@@ -20,42 +20,94 @@
 The full joint distribution has everything we need to perform inference,
 but it scales badly with more and more variables (e.g. adding weather (e.g. \# of weather conditions = 4) leads to a table with $2\times2\times2\times4=32$ entries)
 
+\pause
+
 \question{Should the weather be influenced by a cavity?}
+
+\pause
+
+\slidesonly{\vspace{-5mm}}
 
 \begin{equation}
 P(cloudy | toothache, catch, cavity) \stackrel{!}{=} P(cloudy)
 \end{equation}
 
+\pause
+
 \question{Should the weather have any influence on cavities, toothache or the dentist?}
 
+\pause
+
+\notesonly{
 -No, this independence can be formulated by:
+}
 
-\begin{equation}
-P(toothache, catch, cavity, Weather) \stackrel{!}{=} P(toothache, catch, cavity)P(Weather)
-\end{equation}
+\slidesonly{\vspace{-5mm}}
 
-The 32 elements in the table can be split into the original 8 + 4 (new table with 4 entries for the weather)
+\begin{align}
+P(toothache, catch, cavity, Weather) &\\
+\stackrel{!}{=} P(toothache, &catch, cavity)P(Weather)
+\end{align}
 
 
-Extreme case: $n$ independent coint flips: $2^n$ combinations. Independence allows us to reduce this to $n \times$ single-variable distributions. 
+The 32 elements in the table can be split into \notesonly{the original} 8 + 4 \notesonly{(new table with 4 entries for the weather)}.
+
+\end{frame} 
+
+\begin{frame}\secname:~\subsecname
+
+Extreme case: $n$ independent coin flips: $2^n$ combinations. Independence allows us to reduce this to $n \times$ single-variable distributions.
 
 \end{frame}
 
 \subsection{Bayes' theorem}
 
-\begin{frame}
+\mode<presentation>{
+\begin{frame} 
+    \begin{center} \huge
+        \subsecname
+    \end{center}
+    
+    \begin{equation*}
+P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}
+\end{equation*}
+    
+    \begin{center}   
+   How do we get there? - product rule\\
+     Why is it important? $\Rightarrow$ Conditional independence
+    \end{center}
+\end{frame}
+}
 
-start with the product rule:
+\begin{frame}\frametitle{\subsecname}
+
+Start with the product rule:
 
 \begin{align}
-P(X|Y)P(Y) = P(Y,X) &= P(X,Y) = P(Y|X)P(X)\\
-P(X|Y)P(Y) &= P(Y|X)P(X)
+P(X|Y)P(Y) = P(Y,X) &= P(X,Y) \visible<2->{= P(Y|X)P(X)\\
+P(X|Y)P(Y) &= P(Y|X)P(X)}
+\visible<3->{
 \intertext{solve for $P(Y|X)$}
 P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}
+}
+%\tag{Bayes' theorem}
 \label{eq:bayes}
 \end{align}
 
-How to read this:
+\end{frame}
+
+\begin{frame}\frametitle{How to read Bayes' theorem}
+\notesonly{
+How to read Bayes' theorem:
+}
+
+\mode<presentation>{
+    \begin{equation*}
+P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}
+\end{equation*}
+}
+
+\pause
 
 \begin{equation}
 \underbrace{P(cause|effect)}_{\text{diagnositc}} = \frac{\overbrace{P(effect|cause)}^{\text{causal}}P(cause)}{P(effect)}
@@ -69,38 +121,51 @@ P(Y|X) = \alpha P(X|Y)P(Y)
 
 $\alpha$ is chosen to whatever will make the entries in $P(Y|X)$ sum up to $1$.
 
+
 \end{frame}
 
 \subsection{Using Bayes' theorem}
 
 \begin{frame}\frametitle{\subsecname}
 
+\only<1>{
 \begin{equation}
 P(Y|X) = \alpha P(X|Y)P(Y)
 \end{equation}
 
-\begin{equation}
-P(Cavity|toothache=true, catch=true) = \alpha \underbrace{P(toothache=true, catch=true}_{*} | Cavity)P(Cavity)
+\begin{align}
+P(Cavity|toothache=true, catch=true) &\\ 
+=\alpha \underbrace{P(toothache=true, catch=true}_{\circledast} &| Cavity)P(Cavity)
 \label{eq:applybayes}
-\end{equation}
+\end{align}
 
-$*$ similar scaling problem, not much better then the case of using the full joint distribution.
+$\circledast$ similar scaling problem, not much better then the case of using the full joint distribution.
 
-\question{Can we use independence tp further mitigate the scaling problem here?}
+}
+
+\only<1,2>{
+
+\question{Can we use independence to further mitigate the scaling problem here?}
+
+}
+
+\only<2>{
 
 \begin{center}
-Toothache and Catch are not independent.\\
+$Toothache$ and $Catch$ are not independent.\\
 But\\
-Toothache given cavity is independent of catch given cavity
+$Toothache$ given $cavity$ is independent of $Catch$ given $cavity$
 \end{center}
 
-toothache depends on cavity: nerves, tolerance for pain
+\begin{itemize}
+\item $toothache$ depends on $cavity$: nerves \& tolerance for pain.
+\item $catch$ depends on $cavity$: dependent on how skillful the dentist is.
+\item ``nerves \& tolerance for pain'' is \underline{independent} of ``how skillful the dentist is''.
+\end{itemize}
 
-catch depends on a cavity: dependent on how skillfull the dentist is
+%TODO figure
 
-nerves, tolerance for pain is independent of how skillfull the dentist is
-
-TODO figure
+}
 
 
 
@@ -109,37 +174,55 @@ TODO figure
 
 \begin{frame}
 
+\mode<presentation>{
+\slidesonly{\vspace{-5mm}
+}
 
-toothache depends on cavity: nerves, tolerance for pain
+\begin{align}
+P(Cavity|toothache=true, catch=true) &\\ 
+=\alpha \underbrace{P(toothache=true, catch=true}_{\circledast} &| Cavity)P(Cavity)
+\label{eq:applybayes}
+\end{align}
 
-catch depends on a cavity: dependent on how skillfull the dentist is
-
-nerves, tolerance for pain is independent of how skillfull the dentist is
-
+\begin{itemize}
+\item $toothache$ depends on $cavity$: nerves \& tolerance for pain.
+\item $catch$ depends on $cavity$: dependent on how skillful the dentist is.
+\item ``nerves \& tolerance for pain'' is \underline{independent} of ``how skillful the dentist is''.
+\end{itemize}
+}
 
 Therefore:
+\slidesonly{\vspace{-5mm}
+}
 
-\begin{equation}
-P(toothache=true, catch=true | Cavity) = P(toothache=true| Cavity) P(catch=true| Cavity)
+\begin{align}
+P(toothache=\text{true}, catch=\text{true} | cavity) &\\
+= P(toothache=\text{true}| cavity) &P(catch=\text{true}| cavity)
 \label{eq:condindep}
-\end{equation}
+\end{align}
 
-i.e. \emph{conditional} independence of toothache and catch \underline{given} cavity
+i.e. \emph{conditional} independence of $toothache$ and $catch$ \underline{given} $cavity$
+
+\pause
 
 Plugging \eqref{eq:condindep} into \eqref{eq:applybayes} yields:
 
-\begin{equation}
-P(toothache=true, catch=true | Cavity) = \alpha P(toothache=true| Cavity) P(catch=true| Cavity) P(Cavity)
-\end{equation}
+\slidesonly{\vspace{-4mm}}
 
-i.e. \emph{conditional} independence of toothache and catch \underline{given} cavity
+\begin{align}
+P(toothache, catch | Cavity) &\\
+= \alpha P(toothache| Cavity) &
+P(catch| Cavity) P(Cavity)
+\end{align}
+
+i.e. \emph{conditional} independence of $toothache$ and $catch$ \underline{given} $Cavity$
 \end{frame}
 
 \subsection{Naive Bayes}
 
 \begin{frame}\frametitle{\subsecname}
 
-We need to an alternate expression for the full joint distribution.
+An alternate expression for the full joint distribution by exploiting conditional independence.
 
 We start with the product rule:
 
@@ -148,22 +231,33 @@ P(X,Y) = P(X|Y)P(Y)
 \end{equation}
 
 \begin{equation}
-P(Toothache,Catch,Cavity) = P(Toothache,Catch|Cavity)\underbrace{P(Cavity)}_{\text{prior}} 
+P(Toothache,Catch,Cavity) = P(Toothache,Catch|Cavity) \underbrace{P(Cavity)}_{\text{prior}} 
 \end{equation}
 
-Exploit conditional independence:
+Exploiting conditional independence yields:
 
-\begin{equation}
-P(Toothache,Catch,Cavity) = P(Toothache|Cavity)P(Catch|Cavity) \underbrace{P(Cavity)}_{\text{prior}} 
-\end{equation}
+\begin{align}
+P(Toothache,Catch,Cavity) &\\
+= P(Toothache|Cavity) &P(Catch|Cavity) \underbrace{P(Cavity)}_{\text{prior}} 
+\end{align}
+
+\end{frame}
+
+\begin{frame}\frametitle{\subsecname}
+
+\mode<presentation>{
+\begin{align*}
+P(Toothache,Catch,Cavity) &\\
+= P(Toothache|Cavity) &P(Catch|Cavity) \underbrace{P(Cavity)}_{\text{prior}} 
+\end{align*}
+}
 
 In terms of cause and effect:
 
-\begin{equation}
-P(Cause,Effect_1,Effect_2,\ldots,Effect_n) = \underbrace{P(Cause)}_{\text{prior}} \prod_{i=1}^{n} P(Effect_{i}|Cause)
-\end{equation}
-
-\question{Which is the effect? Which is the cause}
+\begin{align}
+P(Cause,Effect_1,Effect_2,\ldots,Effect_n) &\\
+= \underbrace{P(Cause)}_{\text{prior}} &\prod_{i=1}^{n} P(Effect_{i}|Cause)
+\end{align}
 
 Complexity reduced!
 

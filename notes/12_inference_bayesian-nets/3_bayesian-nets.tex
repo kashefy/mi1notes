@@ -1,6 +1,6 @@
-\section{Bayesian Networks}
+\section{Bayesian Networks (part 1/2)}
 
-see Russel Norvig Ch. 14
+
 
 \mode<presentation>{
 \begin{frame} 
@@ -8,14 +8,110 @@ see Russel Norvig Ch. 14
         \secname
     \end{center}
     \begin{center}   
-    A representation of the full joint distribution that exploits conditional independence
+    Towards an efficient representation of the full joint distribution that exploits conditional independence
     \end{center}
 \end{frame}
 }
 
+
+
+% =============================================================================
+\subsection{Directed Acyclic Graphs (DAG)}
+
+
+\begin{frame}\frametitle{\subsecname}
+
+A graphical representation of conditional independence:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\linewidth]{img/cond}%
+	\notesonly{
+	\caption{
+	The conditional independence between $A$ and $B$ given $C$.
+	}%
+	}%
+    \label{fig:cond}%
+\end{figure}
+
+This leads to the factorization of the full joint distribution:
+
+\begin{equation}
+P(A,B,C) = P(A|C)P(B|C)P(C)
+\end{equation}
+
+\end{frame}
+
+
+\begin{frame}\frametitle{\subsecname}
+
+
+     \begin{table}[h] 
+\resizebox{\textwidth}{!}{%
+	\begin{tabular}{|c|c|c|}
+		\hline
+		& $toothache = \text{true}$ & $toothache = \text{false}$ \\
+		\begin{tabular}{c}
+			\\ 
+			$cavity = \text{true}$ \\
+			$cavity = \text{false}$
+		\end{tabular} 
+		& 
+		\begin{tabular}{c|c}
+			$catch = \text{true}$ & $catch = \text{false}$\\ 
+			\hline 
+			$0.108$ & $0.012$ \\
+			$0.016$ & $0.064$
+		\end{tabular} 
+		& 
+		\begin{tabular}{c|c}
+			$catch = \text{true}$ & $catch = \text{false}$\\ 
+			\hline 
+			$0.072$ & $0.008$ \\
+			$0.144$ & $0.576$
+		\end{tabular} 
+		\\ \hline
+	\end{tabular}
+	}
+    \end{table}
+    
+\question{What does the DAG representation of this full joint distribution look like?}
+
+(\textbf{see blackboard})
+
+\end{frame}
+
+
+% -----------------------------------------------------------------------------
+\begin{frame} \frametitle{A ``Californian'' example}
+	\begin{center}
+		\includegraphics<1>[width=8.5cm]{img/section3_fig5_v2_1} 
+%		\includegraphics<2>[width=8cm]{img/section3_fig5_v2_2}
+		\includegraphics<2>[width=8.5cm]{img/section3_fig5_v2_2}  
+	\end{center}
+	
+%	\only<2>{
+%	\begin{itemize}
+%		\item set of random variables 
+%			$\leadsto$ nodes of the graph
+%		\item direct influences between variables 
+%			$\leadsto$ directed links between nodes
+%		\item nodes $x_i$ are annotated with the conditional probabilities\\
+%			\quad$P\big(X_i\,|\, \text{parents}(X_i)\big)$
+%	\end{itemize}
+%	} 
+Considering statistical dependencies, only 10 instead of 31 entries have to be stored.
+	{ \small
+		\begin{eqnarray*} 
+			P(J,M,A,B,E) &=& 
+			P(J|M,A,B,E) \, P(M|A,B,E) \, P(A|B,E) \, P(B|E) \, P(E) \\
+			&=& P(J|A) \, P(M|A) \, P(A|B,E) \, P(B) \, P(E)
+		\end{eqnarray*}
+	}
+\end{frame}
+
 \begin{frame}\frametitle{\secname}
     
-A factorization of the full joint distribution:
+A factorization of the full joint distribution\footnote{See Ch. 14 from \citep{russell2016artificial} for more details.}:
 
 \begin{equation}
 P(X_{1},\ldots,X_{n}) = \prod_{i=1}^{n} P(X_{i} | parents(X_{i}))
@@ -38,20 +134,149 @@ other parents of the children
 \begin{frame}\frametitle{\subsecname}
     
     \begin{enumerate}
-     \item use topological representation to ensure a compact representation
+     \item use topological representation to ensure a compact representation.
+     The purpose of topological sorting is to identify cliques in the chordal decomposable graph (next week)
      \item turn into a moral graph i.e.
      \begin{enumerate}
      \item turn DAG into an undirected graph + new edges s.t. each node of the original DAG is now directly connected to the nodes of its \emph{Markov blanket}
-     \item to be continued next week.
+     \item (to be continued)
      \end{enumerate}   
     \end{enumerate}
     
 \end{frame}
 
+
+% -----------------------------------------------------------------------------
+\begin{frame} \frametitle{Topological sorting}
+	\begin{textblock}{}(10.5,10)
+		\includegraphics[width=4cm]{img/section3_fig17}
+	\end{textblock}
+
+	\begin{itemize}
+		\item Factorization of the unconditional probability:
+		$$
+				P(X_1,\ldots, X_n) \quad=\quad 
+				{\textstyle\prod\limits_{i=1}^n} P\big(X_i\,|\,parents(X_i)\big)
+		$$
+		\vspace{4mm}
+		\item Edges should always be directed from nodes with lower 
+			to nodes with higher indices.
+		\vspace{8mm}
+		\item Topological sorting: From parents to children:
+			\begin{enumerate}
+				\item select and queue a node without parents
+				\item delete that node from the DAG
+				\item repeat until DAG is empty
+				\item renumber nodes
+			\end{enumerate}
+		
+	\end{itemize}
+\end{frame}
+
+
+% -----------------------------------------------------------------------------
+\begin{frame} \frametitle{Topological sorting}
+	\begin{minipage}{12.1cm}
+		\begin{minipage}{7cm}
+			\begin{itemize}
+				\item example:
+					\begin{itemize}
+						\item ${\color{red}x_3},
+							\visible<2->{x_6,}
+							\visible<3->{x_5,}
+							\visible<4->{x_4,}
+							\visible<5->{x_2,}
+							\visible<6->{x_1}$
+					\end{itemize}
+				\vspace{5mm}
+				\item<7-> other possible topological orderings:
+					\begin{itemize}
+						\item $x_6,
+							\visible<2->{x_5,}
+							\visible<3->{x_4,}
+							\visible<4->{{\color{red}x_3},}
+							\visible<5->{x_2,}
+							\visible<6->{x_1}$
+						\item $x_6,
+							\visible<2->{x_5,}
+							\visible<3->{{\color{red}x_3},}
+							\visible<4->{x_4,}
+							\visible<5->{x_2,}
+							\visible<6->{x_1}$
+						\item $x_6,
+							\visible<2->{{\color{red}x_3},}
+							\visible<3->{x_5,}
+							\visible<4->{x_4,}
+							\visible<5->{x_2,}
+							\visible<6->{x_1}$
+					\end{itemize}
+			\end{itemize}
+		\end{minipage}
+		\begin{minipage}{4cm}
+			\includegraphics<1>[width=4cm]{img/section3_fig17_step1}
+			\includegraphics<2>[width=4cm]{img/section3_fig17_step2}
+			\includegraphics<3>[width=4cm]{img/section3_fig17_step3}
+			\includegraphics<4>[width=4cm]{img/section3_fig17_step4}
+			\includegraphics<5>[width=4cm]{img/section3_fig17_step5}
+			\includegraphics<6>[width=4cm]{img/section3_fig17_step6}
+			\includegraphics<7>[width=4cm]{img/section3_fig17}
+		\end{minipage}
+	\end{minipage}
+\end{frame}
+
 \begin{frame}
 
-Example DAG to moral graph
+Exercise: topological sorting
 
-\textbf{see blackboard}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\linewidth]{img/cond}%
+	\notesonly{
+	\caption{
+	DAG
+	}%
+	}%
+    \label{fig:cond}%
+\end{figure}
+
+	\begin{itemize}
+		\item Topological sorting: From parents to kids:
+			\begin{enumerate}
+				\item select and queue a node without parents
+				\item delete that node from the DAG
+				\item repeat until DAG is empty
+				\item renumber nodes
+			\end{enumerate}
+	\end{itemize}
+
+
+\textbf{(see blackboard)}
+
+
+\end{frame}
+
+\begin{frame}
+
+Exercise: DAG to moral graph
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\linewidth]{img/dag1}%
+	\notesonly{
+	\caption{
+	DAG
+	}%
+	}%
+    \label{fig:cond}%
+\end{figure}
+
+\begin{enumerate}
+\item make the edges undirected
+\item identify the Markov blanket of each node (parents, children, other parents of the children)
+\item add edges such that all nodes are directly connected to the Markov blanket.
+\end{enumerate}
+
+
+\textbf{(see blackboard)}
     
 \end{frame}
