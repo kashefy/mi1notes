@@ -240,7 +240,39 @@ Exercise: topological sorting
 \end{figure}
 
 	\begin{itemize}
-		\item Topological sorting: From parents to kids:
+		\item Topological sorting: From parents to children:
+			\begin{enumerate}
+				\item select and queue a node without parents
+				\item delete that node from the DAG
+				\item repeat until DAG is empty
+				\item renumber nodes
+			\end{enumerate}
+	\end{itemize}
+
+
+\textbf{(see blackboard)}
+
+
+\end{frame}
+
+
+\begin{frame}
+
+Exercise: topological sorting
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\linewidth]{img/dag1}%
+	\notesonly{
+	\caption{
+	DAG
+	}%
+	}%
+    \label{fig:cond}%
+\end{figure}
+
+	\begin{itemize}
+		\item Topological sorting: From parents to children:
 			\begin{enumerate}
 				\item select and queue a node without parents
 				\item delete that node from the DAG

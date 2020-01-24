@@ -18,23 +18,23 @@
 \begin{frame}\frametitle{\secname:~\subsecname}
 
 The full joint distribution has everything we need to perform inference,
-but it scales badly with more and more variables (e.g. adding weather (e.g. \# of weather conditions = 4) leads to a table with $2\times2\times2\times4=32$ entries)
+but it scales badly with more and more variables (e.g. adding $\mathit{Weather}$ (e.g. \# of weather conditions = 4) leads to a table with $2\times2\times2\times4=32$ entries)
 
 \pause
 
-\question{Should the weather be influenced by a cavity?}
+\question{Should the weather be influenced by a $\mathit{cavity}$?}
 
 \pause
 
 \slidesonly{\vspace{-5mm}}
 
 \begin{equation}
-P(cloudy | toothache, catch, cavity) \stackrel{!}{=} P(cloudy)
+P(\mathit{cloudy} | \mathit{toothache}, \mathit{catch}, \mathit{cavity}) \stackrel{!}{=} P(\mathit{cloudy})
 \end{equation}
 
 \pause
 
-\question{Should the weather have any influence on cavities, toothache or the dentist?}
+\question{Should the weather have any influence on cavities, $\mathit{toothache}$ or the dentist?}
 
 \pause
 
@@ -45,8 +45,8 @@ P(cloudy | toothache, catch, cavity) \stackrel{!}{=} P(cloudy)
 \slidesonly{\vspace{-5mm}}
 
 \begin{align}
-P(toothache, catch, cavity, Weather) &\\
-\stackrel{!}{=} P(toothache, &catch, cavity)P(Weather)
+P(\mathit{toothache}, \mathit{catch}, \mathit{cavity}, \mathit{Weather}) &\\
+\stackrel{!}{=} P(\mathit{toothache}, &\mathit{catch}, \mathit{cavity})P(\mathit{Weather})
 \end{align}
 
 
@@ -110,10 +110,10 @@ P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}
 \pause
 
 \begin{equation}
-\underbrace{P(cause|effect)}_{\text{diagnositc}} = \frac{\overbrace{P(effect|cause)}^{\text{causal}}P(cause)}{P(effect)}
+\underbrace{P(\mathit{cause}|\mathit{effect})}_{\text{diagnositc}} = \frac{\overbrace{P(\mathit{effect}|\mathit{cause})}^{\text{causal}}P(\mathit{cause})}{P(\mathit{effect})}
 \end{equation}
 
-If $P(effect)$ is missing, we can still normalize using:
+If $P(\mathit{effect})$ is missing, we can still normalize using:
 
 \begin{equation}
 P(Y|X) = \alpha P(X|Y)P(Y)
@@ -134,8 +134,8 @@ P(Y|X) = \alpha P(X|Y)P(Y)
 \end{equation}
 
 \begin{align}
-P(Cavity|toothache=true, catch=true) &\\ 
-=\alpha \underbrace{P(toothache=true, catch=true}_{\circledast} &| Cavity)P(Cavity)
+P(\mathit{Cavity}|\mathit{toothache}=\text{true}, \mathit{catch}=\text{true}) &\\ 
+=\alpha \underbrace{P(\mathit{toothache}=\text{true}, \mathit{catch}=\text{true}}_{\circledast} &| \mathit{Cavity})P(\mathit{Cavity})
 \label{eq:applybayes}
 \end{align}
 
@@ -152,14 +152,14 @@ $\circledast$ similar scaling problem, not much better then the case of using th
 \only<2>{
 
 \begin{center}
-$Toothache$ and $Catch$ are not independent.\\
+$\mathit{Toothache}$ and $\mathit{Catch}$ are not independent.\\
 But\\
-$Toothache$ given $cavity$ is independent of $Catch$ given $cavity$
+$\mathit{Toothache}$ given $\mathit{cavity}$ is independent of $\mathit{Catch}$ given $\mathit{cavity}$
 \end{center}
 
 \begin{itemize}
-\item $toothache$ depends on $cavity$: nerves \& tolerance for pain.
-\item $catch$ depends on $cavity$: dependent on how skillful the dentist is.
+\item $\mathit{toothache}$ depends on $\mathit{cavity}$: nerves \& tolerance for pain.
+\item $\mathit{catch}$ depends on $\mathit{cavity}$: dependent on how skillful the dentist is.
 \item ``nerves \& tolerance for pain'' is \underline{independent} of ``how skillful the dentist is''.
 \end{itemize}
 
@@ -179,14 +179,14 @@ $Toothache$ given $cavity$ is independent of $Catch$ given $cavity$
 }
 
 \begin{align}
-P(Cavity|toothache=true, catch=true) &\\ 
-=\alpha \underbrace{P(toothache=true, catch=true}_{\circledast} &| Cavity)P(Cavity)
+P(\mathit{Cavity}|\mathit{toothache}=\text{true}, \mathit{catch}=\text{true}) &\\ 
+=\alpha \underbrace{P(\mathit{toothache}=\text{true}, \mathit{catch}=\text{true}}_{\circledast} &| \mathit{Cavity}) P(\mathit{Cavity})
 \label{eq:applybayes}
 \end{align}
 
 \begin{itemize}
-\item $toothache$ depends on $cavity$: nerves \& tolerance for pain.
-\item $catch$ depends on $cavity$: dependent on how skillful the dentist is.
+\item $\mathit{toothache}$ depends on $\mathit{cavity}$: nerves \& tolerance for pain.
+\item $\mathit{catch}$ depends on $\mathit{cavity}$: dependent on how skillful the dentist is.
 \item ``nerves \& tolerance for pain'' is \underline{independent} of ``how skillful the dentist is''.
 \end{itemize}
 }
@@ -196,12 +196,20 @@ Therefore:
 }
 
 \begin{align}
-P(toothache=\text{true}, catch=\text{true} | cavity) &\\
-= P(toothache=\text{true}| cavity) &P(catch=\text{true}| cavity)
+P(\mathit{toothache}
+%=\text{true}
+, \mathit{catch}
+%=\text{true}
+ | \mathit{cavity}) &\\
+= P(\mathit{toothache}
+%=\text{true}
+| \mathit{cavity}) &P(\mathit{catch}
+%=\text{true}
+| \mathit{cavity})
 \label{eq:condindep}
 \end{align}
 
-i.e. \emph{conditional} independence of $toothache$ and $catch$ \underline{given} $cavity$
+i.e. \emph{conditional} independence of $\mathit{toothache}$ and $\mathit{catch}$ \underline{given} $\mathit{cavity}$
 
 \pause
 
@@ -210,12 +218,12 @@ Plugging \eqref{eq:condindep} into \eqref{eq:applybayes} yields:
 \slidesonly{\vspace{-4mm}}
 
 \begin{align}
-P(toothache, catch | Cavity) &\\
-= \alpha P(toothache| Cavity) &
-P(catch| Cavity) P(Cavity)
+P(\mathit{toothache}, \mathit{catch} | \mathit{Cavity}) &\\
+= \alpha P(\mathit{toothache}| \mathit{Cavity}) &
+P(\mathit{catch}| \mathit{Cavity}) P(\mathit{Cavity})
 \end{align}
 
-i.e. \emph{conditional} independence of $toothache$ and $catch$ \underline{given} $Cavity$
+i.e. \emph{conditional} independence of $\mathit{toothache}$ and $\mathit{catch}$ \underline{given} $\mathit{Cavity}$
 \end{frame}
 
 \subsection{Naive Bayes}
@@ -231,14 +239,14 @@ P(X,Y) = P(X|Y)P(Y)
 \end{equation}
 
 \begin{equation}
-P(Toothache,Catch,Cavity) = P(Toothache,Catch|Cavity) \underbrace{P(Cavity)}_{\text{prior}} 
+P(\mathit{Toothache},\mathit{Catch},\mathit{Cavity}) = P(\mathit{Toothache},\mathit{Catch}|\mathit{Cavity}) \underbrace{P(\mathit{Cavity})}_{\text{prior}} 
 \end{equation}
 
 Exploiting conditional independence yields:
 
 \begin{align}
-P(Toothache,Catch,Cavity) &\\
-= P(Toothache|Cavity) &P(Catch|Cavity) \underbrace{P(Cavity)}_{\text{prior}} 
+P(\mathit{Toothache},\mathit{Catch},\mathit{Cavity}) &\\
+= P(\mathit{Toothache}|\mathit{Cavity}) &P(\mathit{Catch}|\mathit{Cavity}) \underbrace{P(\mathit{Cavity})}_{\text{prior}} 
 \end{align}
 
 \end{frame}
@@ -247,16 +255,16 @@ P(Toothache,Catch,Cavity) &\\
 
 \mode<presentation>{
 \begin{align*}
-P(Toothache,Catch,Cavity) &\\
-= P(Toothache|Cavity) &P(Catch|Cavity) \underbrace{P(Cavity)}_{\text{prior}} 
+P(\mathit{Toothache},\mathit{Catch},\mathit{Cavity}) &\\
+= P(\mathit{Toothache}|\mathit{Cavity}) &P(\mathit{Catch}|\mathit{Cavity}) \underbrace{P(\mathit{Cavity})}_{\text{prior}} 
 \end{align*}
 }
 
 In terms of cause and effect:
 
 \begin{align}
-P(Cause,Effect_1,Effect_2,\ldots,Effect_n) &\\
-= \underbrace{P(Cause)}_{\text{prior}} &\prod_{i=1}^{n} P(Effect_{i}|Cause)
+P(\mathit{Cause}, \mathit{Effect}_1, \mathit{Effect}_2,\ldots, \mathit{Effect}_n) &\\
+= \underbrace{P(\mathit{Cause})}_{\text{prior}} &\prod_{i=1}^{n} P(\mathit{Effect}_{i}|\mathit{Cause})
 \end{align}
 
 Complexity reduced!

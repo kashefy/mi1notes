@@ -76,12 +76,12 @@ Because we need to
     \pause
     \item \underline{proposition}: disjunction of \textbf{events}\\
     (i.e. isolate the sets of \textbf{events} in which the \textbf{proposition} holds)\\
-    			\iitem{ e.g.~$cavity = \text{true}$ is equivalent to: \\
+    			\iitem{ e.g.~$\mathit{cavity} = \text{true}$ is equivalent to: \\
 				{\small
-				$(cavity = \text{true} \wedge toothache = \text{false} 
-				\wedge catch = \text{false}) \vee$ \\
-				$(cavity = \text{true} \wedge toothache = \text{true} 
-				\wedge catch = \text{true}) \vee ...$ }
+				$(\mathit{cavity} = \text{true} \wedge \mathit{toothache} = \text{false} 
+				\wedge \mathit{catch} = \text{false}) \vee$ \\
+				$(\mathit{cavity} = \text{true} \wedge \mathit{toothache} = \text{true} 
+				\wedge \mathit{catch} = \text{true}) \vee ...$ }
 			}
     
 \end{itemize}
@@ -103,6 +103,12 @@ Example with dice:
         &= 1 / 36 + 1/36\\
         &= 1/18
 \end{align}
+
+\mode<presentation>{
+\only<2->{
+\placeimage{11}{4}{img/dice}{width=2cm}
+}
+}
 
 The terms A,B and C are \emph{unconditional} or \emph{prior} probabilities.\\
 They represent the degree of belief in the absence of any other information.\\
@@ -137,9 +143,9 @@ The prior is valid even after the outcome.
 
 e.g.\\
 \begin{itemize}
- \item[] $P( \kern-1ex \overbrace{cavity}^{\substack{\text{shorthand for}\\{cavity}=\text{true}}} \kern-1ex) = 0.2$
- \item[] $P(cavity | \overbrace{toothache}^{{toothache}=\text{true}}) = 0.6$
- \item[] If we observe that a cavity has actually occurred, we don't have to change our prior on cavities.\\
+ \item[] $P( \kern-1ex \overbrace{\mathit{cavity}}^{\substack{\text{shorthand for}\\{\mathit{cavity}}=\text{true}}} \kern-1ex) = 0.2$
+ \item[] $P(\mathit{cavity} | \overbrace{\mathit{toothache}}^{{\mathit{toothache}}=\text{true}}) = 0.6$
+ \item[] If we observe that a $\mathit{cavity}$ has actually occurred, we don't have to change our prior on cavities.\\
  However, the prior becomes less useful if we proceed to infer other things.
 \end{itemize}
 
@@ -147,16 +153,20 @@ e.g.\\
 \end{frame}
 
 \begin{frame}\frametitle{A thing about priors}
+
+\mode<presentation>{
+$$P(\mathit{cavity} | \mathit{toothache}) = 0.6$$
+}
     
 \textbf{Caution}\\
 \begin{itemize}
-\item[$\times$] Whenever $toothache$=true, then $cavity$ is true with probability of 0.6
-\item[\checkmark] Whenever $toothache$=true, \underline{and no other information} is available, then $cavity$ is true with probability of 0.6.
+\item[$\times$] Whenever $\mathit{toothache}$=true, then $\mathit{cavity}$ is true with probability of 0.6
+\item[\checkmark] Whenever $\mathit{toothache}$=true, \underline{and no other information} is available, then $\mathit{cavity}$ is true with probability of 0.6.
 \end{itemize}
 
-\textit{other information}: Diagnosis was \underline{no} cavity. In this case, the probability is no longer 0.6, but:
+\textit{other information}: Diagnosis was \underline{no} $\mathit{cavity}$. In this case, the probability is no longer 0.6, but:
 \begin{equation}
-P(cavity \,|\, toothache \wedge diagnosis_{cavity} = \text{false}) = 0
+P(\mathit{cavity} \,|\, \mathit{toothache} \wedge diagnosis_{\mathit{cavity}} = \text{false}) = 0.02
 \end{equation}
 
 \end{frame}
@@ -188,7 +198,7 @@ P(x,e) = P(x|e) P(e)
 
 - The full joint probability distribution\notesonly{ provides all the information to calculate the probability of any proposition.}
 
-Example of a full joint distribution between $Cavity,Toothache$ and $Catch$:\\
+Example of a full joint distribution between $\mathit{Cavity},Toothache$ and $\mathit{Catch}$:\\
 
 %\footnotesize
 	%\begin{center}
@@ -196,22 +206,22 @@ Example of a full joint distribution between $Cavity,Toothache$ and $Catch$:\\
 \resizebox{\textwidth}{!}{%
 	\begin{tabular}{|c|c|c|}
 		\hline
-		& $toothache = \text{true}$ & $toothache = \text{false}$ \\
+		& $\mathit{toothache} = \text{true}$ & $\mathit{toothache} = \text{false}$ \\
 		\begin{tabular}{c}
 			\\ 
-			$cavity = \text{true}$ \\
-			$cavity = \text{false}$
+			$\mathit{cavity} = \text{true}$ \\
+			$\mathit{cavity} = \text{false}$
 		\end{tabular} 
 		& 
 		\begin{tabular}{c|c}
-			$catch = \text{true}$ & $catch = \text{false}$\\ 
+			$\mathit{catch} = \text{true}$ & $\mathit{catch} = \text{false}$\\ 
 			\hline 
 			$0.108$ & $0.012$ \\
 			$0.016$ & $0.064$
 		\end{tabular} 
 		& 
 		\begin{tabular}{c|c}
-			$catch = \text{true}$ & $catch = \text{false}$\\ 
+			$\mathit{catch} = \text{true}$ & $\mathit{catch} = \text{false}$\\ 
 			\hline 
 			$0.072$ & $0.008$ \\
 			$0.144$ & $0.576$
@@ -271,22 +281,22 @@ where
 \resizebox{\textwidth}{!}{%
 	\begin{tabular}{|c|c|c|}
 		\hline
-		& $toothache = \text{true}$ & $toothache = \text{false}$ \\
+		& $\mathit{toothache} = \text{true}$ & $\mathit{toothache} = \text{false}$ \\
 		\begin{tabular}{c}
 			\\ 
-			$cavity = \text{true}$ \\
-			$cavity = \text{false}$
+			$\mathit{cavity} = \text{true}$ \\
+			$\mathit{cavity} = \text{false}$
 		\end{tabular} 
 		& 
 		\begin{tabular}{c|c}
-			$catch = \text{true}$ & $catch = \text{false}$\\ 
+			$\mathit{catch} = \text{true}$ & $\mathit{catch} = \text{false}$\\ 
 			\hline 
 			$0.108$ & $0.012$ \\
 			$0.016$ & $0.064$
 		\end{tabular} 
 		& 
 		\begin{tabular}{c|c}
-			$catch = \text{true}$ & $catch = \text{false}$\\ 
+			$\mathit{catch} = \text{true}$ & $\mathit{catch} = \text{false}$\\ 
 			\hline 
 			$0.072$ & $0.008$ \\
 			$0.144$ & $0.576$
@@ -298,7 +308,7 @@ where
 }
 
 \begin{align}
-P(cavity | toothache=\text{true}) \only<1>{&= \frac{P(cavity,toothache)}{P(toothache)}\\
+P(\mathit{cavity} | \mathit{toothache}=\text{true}) \only<1>{&= \frac{P(\mathit{cavity},\mathit{toothache})}{P(\mathit{toothache})}\\
 &= \frac{0.108 + 0.012}{0.108 + 0.012 + 0.016 + 0.064}\\}
 &= 0.6   
 \end{align}
@@ -307,7 +317,7 @@ P(cavity | toothache=\text{true}) \only<1>{&= \frac{P(cavity,toothache)}{P(tooth
 
 
 \begin{equation*}
-P(cavity=\text{false} | toothache=\text{true}) = ?
+P(\mathit{cavity}=\text{false} | \mathit{toothache}=\text{true}) = ?
 \end{equation*}
 
 \question{What should we expect?}
@@ -317,7 +327,7 @@ P(cavity=\text{false} | toothache=\text{true}) = ?
 \slidesonly{\vspace{-7mm}}
 
 \begin{align}
-P(cavity=\text{false} | toothache=\text{true}) &= \frac{P(cavity=\text{false},toothache)}{P(toothache)}\\
+P(\mathit{cavity}=\text{false} | \mathit{toothache}=\text{true}) &= \frac{P(\mathit{cavity}=\text{false},\mathit{toothache})}{P(\mathit{toothache})}\\
 &= \frac{0.016 + 0.0064}{0.108 + 0.012 + 0.016 + 0.064}\\
 &= 0.4 = 1 - 0.6   
 \end{align}
@@ -333,22 +343,22 @@ P(cavity=\text{false} | toothache=\text{true}) &= \frac{P(cavity=\text{false},to
 \resizebox{\textwidth}{!}{%
 	\begin{tabular}{|c|c|c|}
 		\hline
-		& $toothache = \text{true}$ & $toothache = \text{false}$ \\
+		& $\mathit{toothache} = \text{true}$ & $\mathit{toothache} = \text{false}$ \\
 		\begin{tabular}{c}
 			\\ 
-			$cavity = \text{true}$ \\
-			$cavity = \text{false}$
+			$\mathit{cavity} = \text{true}$ \\
+			$\mathit{cavity} = \text{false}$
 		\end{tabular} 
 		& 
 		\begin{tabular}{c|c}
-			$catch = \text{true}$ & $catch = \text{false}$\\ 
+			$\mathit{catch} = \text{true}$ & $\mathit{catch} = \text{false}$\\ 
 			\hline 
 			$0.108$ & $0.012$ \\
 			$0.016$ & $0.064$
 		\end{tabular} 
 		& 
 		\begin{tabular}{c|c}
-			$catch = \text{true}$ & $catch = \text{false}$\\ 
+			$\mathit{catch} = \text{true}$ & $\mathit{catch} = \text{false}$\\ 
 			\hline 
 			$0.072$ & $0.008$ \\
 			$0.144$ & $0.576$
@@ -362,13 +372,13 @@ P(cavity=\text{false} | toothache=\text{true}) &= \frac{P(cavity=\text{false},to
 \mode<presentation>{
 \only<1>{
 \begin{align}
-P(cavity=\text{false} | toothache=\text{true}) &= \frac{P(cavity=\text{false},toothache)}{P(toothache)}\\
+P(\mathit{cavity}=\text{false} | \mathit{toothache}=\text{true}) &= \frac{P(\mathit{cavity}=\text{false},\mathit{toothache})}{P(\mathit{toothache})}\\
 &= \frac{0.016 + 0.0064}{0.108 + 0.012 + 0.016 + 0.064}\\
 &= 0.4 = 1 - 0.6   
 \end{align}
 
-\textbf{Remark}: The denominator remains constant no matter which value of cavity we are interested in.\\
-$\Rightarrow$ use $1/P(toothache)$ as the normalization factor for $P(Cavity | toothache)$.
+\textbf{Remark}: The denominator remains constant no matter which value of $\mathit{cavity}$ we are interested in.\\
+$\Rightarrow$ use $1/P(\mathit{toothache})$ as the normalization factor for $P(\mathit{Cavity} | \mathit{toothache})$.
 }
 }
 
@@ -377,15 +387,15 @@ $\Rightarrow$ use $1/P(toothache)$ as the normalization factor for $P(Cavity | t
 \footnotesize
 }
 \begin{align}
-P(\kern-4ex\overbrace{Cavity}^{\footnotesize\rmat{cavity=\text{true}\\cavity=\text{false}}} \kern-4ex |toothache) &= \alpha P(Cavity, toothache) \\
+P(\kern-4ex\overbrace{\mathit{Cavity}}^{\footnotesize\rmat{\mathit{cavity}=\text{true}\\\mathit{cavity}=\text{false}}} \kern-4ex |\mathit{toothache}) &= \alpha P(\mathit{Cavity}, \mathit{toothache}) \\
 &= \alpha \big\lbrack
-P(Cavity, toothache, catch) \\
-&\qquad+ P(Cavity, toothache, catch=\text{false}) 
+P(\mathit{Cavity}, \mathit{toothache}, \mathit{catch}) \\
+&\qquad+ P(\mathit{Cavity}, \mathit{toothache}, \mathit{catch}=\text{false}) 
 \big\rbrack\\
 &= \alpha \bigg\lbrack
 \rmat{0.108\\0.016} + \rmat{0.012\\0.064}
 \bigg\rbrack\\
-&= \alpha \rmat{0.12\\0.08} \stackrel{\substack{\alpha=\\1/P(toothache)}}{=} \rmat{0.6\\0.4}
+&= \alpha \rmat{0.12\\0.08} \stackrel{\substack{\alpha=\\1/P(\mathit{toothache})}}{=} \rmat{0.6\\0.4}
 \intertext{OR normalize s.t. $\sum_{\vec x} P(x, \vec e) \eqexcl 1$}
 &= \alpha \rmat{0.12\\0.08} \stackrel{\alpha=\frac{1}{0.12+0.08}}{=} \rmat{0.6\\0.4}
 \end{align}\slidesonly{
