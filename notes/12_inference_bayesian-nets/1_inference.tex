@@ -44,6 +44,8 @@ Because we need to
 
 \begin{frame}\frametitle{\subsecname}
 
+\slidesonly{\vspace{-3mm}}
+
 \begin{figure}[h]
      \centering
 	 \includegraphics[width=0.7\textwidth]{img/farabet}%
@@ -64,7 +66,9 @@ Because we need to
     \pause
     
     \mode<presentation>{
+    \only<2->{
     \placeimage{11}{9}{img/dice}{width=2cm}
+	}
 	}
     
     \item \underline{events}: assignment to a set of cases\\
@@ -112,6 +116,10 @@ Priors are also referred to as \emph{domain knowledge}.
 
 What if we already \emph{know} (i.e. observed) something?\\
 
+    \mode<presentation>{
+    \placeimage{12}{4}{img/dice_obs}{width=2cm}
+	}
+
 e.g. We've already rolled the first die and got 5.\\
 Now we're waiting to roll the second die.\\
 
@@ -125,7 +133,7 @@ P(\;\;{total}= 11 \kern-1.5ex  \underbrace{\big| }_{\text{``given''}} \kern-1.5e
 
 \begin{frame}\frametitle{A thing about priors}
 
-The prior is valid event after the outcome.
+The prior is valid even after the outcome.
 
 e.g.\\
 \begin{itemize}
