@@ -109,6 +109,30 @@ Considering statistical dependencies, only 10 instead of 31 entries have to be s
 	}
 \end{frame}
 
+%\begin{frame} \frametitle{A ``Californian'' example: Inferemce}
+	%\begin{center}
+		%\includegraphics[width=7.5cm]{img/section3_fig5_v2_2}  
+	%\end{center}
+	
+
+%\begin{equation}
+	%\begin{array}{lll}
+	%P(B|J=true, M=true) 
+	%& = & \underbrace{ \alpha P(B, J=true, M=true) }_{
+		%\substack{ \text{normalization} \\ \text{c.f. section 3.1.3}}} \\\\
+	%& = & \underbrace{ \alpha \sum\limits_{a,e} P(B, e, a, 
+				%J=true, M=true) }_{
+		%\text{marginalization}} \\\\
+	%& = & \alpha P(B) \sum\limits_e P(e) \sum\limits_a P(a|B,e) \\
+	%&& \cdot P(J=true|a) P(M=true|a) \\\\
+	%& = & \alpha \cdot \left \{ \begin{array}{ll}
+			%0.00059224 & \text{for } B=true \\\\
+			%0.0014919 & \text{for } B=false
+		%\end{array} \right.
+	%\end{array}
+%\end{equation}
+%\end{frame}
+
 \begin{frame}\frametitle{\secname}
     
 A factorization of the full joint distribution\footnote{See Ch. 14 from \citep{russell2016artificial} for more details.}:
@@ -136,11 +160,10 @@ other parents of the children
     \begin{enumerate}
      \item use topological representation to ensure a compact representation.
      The purpose of topological sorting is to identify cliques in the chordal decomposable graph (next week)
-     \item turn into a moral graph i.e.
-     \begin{enumerate}
-     \item turn DAG into an undirected graph + new edges s.t. each node of the original DAG is now directly connected to the nodes of its \emph{Markov blanket}
-     \item (to be continued)
-     \end{enumerate}   
+     \item turn DAG into a \emph{moral graph} i.e. \\
+     an undirected graph + new edges s.t. each node of the original DAG is now directly connected to the nodes of its \emph{Markov blanket}
+     \item Perform inference efficiently (next week)\\
+     \textcolor{gray}{ by applying \emph{message passing} on the \emph{Junction tree}}
     \end{enumerate}
     
 \end{frame}

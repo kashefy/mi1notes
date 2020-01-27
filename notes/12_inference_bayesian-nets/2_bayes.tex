@@ -7,9 +7,7 @@
     \begin{center} \huge
         \secname
     \end{center}
-    \begin{center}   
-    come up with a more compact representation of the full joint distribution
-    \end{center}
+    $$P(X,Y) = P(X)P(Y)$$
 \end{frame}
 }
 
@@ -54,9 +52,11 @@ The 32 elements in the table can be split into \notesonly{the original} 8 + 4 \n
 
 \end{frame} 
 
-\begin{frame}\secname:~\subsecname
+\begin{frame}\frametitle{\secname:~\subsecname}
 
-Extreme case: $n$ independent coin flips: $2^n$ combinations. Independence allows us to reduce this to $n \times$ single-variable distributions.
+``Extreme'' case:\\
+ $n$ independent coin flips: $2^n$ combinations.\\
+ Independence allows us to reduce this to $n \times$ single-variable distributions.
 
 \end{frame}
 
@@ -105,6 +105,19 @@ How to read Bayes' theorem:
     \begin{equation*}
 P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}
 \end{equation*}
+}
+
+\pause 
+
+\only<2>{
+
+
+\begin{figure}[h]
+     \centering
+	 \includegraphics[width=0.33\textwidth]{img/xkcd_seashell}%
+	 \caption{Bayes' Theorem example from \href{https://imgs.xkcd.com/comics/seashell.png}{xkcd.com}}
+\end{figure}
+
 }
 
 \pause
@@ -160,7 +173,8 @@ $\mathit{Toothache}$ given $\mathit{cavity}$ is independent of $\mathit{Catch}$ 
 \begin{itemize}
 \item $\mathit{toothache}$ depends on $\mathit{cavity}$: nerves \& tolerance for pain.
 \item $\mathit{catch}$ depends on $\mathit{cavity}$: dependent on how skillful the dentist is.
-\item ``nerves \& tolerance for pain'' is \underline{independent} of ``how skillful the dentist is''.
+\item \textbf{But}\ldots
+\notesonly{``nerves \& tolerance for pain'' is \underline{independent} of ``how skillful the dentist is''.}
 \end{itemize}
 
 %TODO figure
@@ -187,7 +201,7 @@ P(\mathit{Cavity}|\mathit{toothache}=\text{true}, \mathit{catch}=\text{true}) &\
 \begin{itemize}
 \item $\mathit{toothache}$ depends on $\mathit{cavity}$: nerves \& tolerance for pain.
 \item $\mathit{catch}$ depends on $\mathit{cavity}$: dependent on how skillful the dentist is.
-\item ``nerves \& tolerance for pain'' is \underline{independent} of ``how skillful the dentist is''.
+\item \textbf{But}\ldots ``nerves \& tolerance for pain'' is \underline{independent} of ``how skillful the dentist is''.
 \end{itemize}
 }
 
@@ -200,12 +214,12 @@ P(\mathit{toothache}
 %=\text{true}
 , \mathit{catch}
 %=\text{true}
- | \mathit{cavity}) &\\
+ | \mathit{Cavity}) &\\
 = P(\mathit{toothache}
 %=\text{true}
-| \mathit{cavity}) &P(\mathit{catch}
+| \mathit{Cavity}) &P(\mathit{catch}
 %=\text{true}
-| \mathit{cavity})
+| \mathit{Cavity})
 \label{eq:condindep}
 \end{align}
 

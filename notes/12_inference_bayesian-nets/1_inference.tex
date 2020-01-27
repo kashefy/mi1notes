@@ -30,7 +30,7 @@ Because we need to
 
 % Please add the following required packages to your document preamble:
 % \usepackage{graphicx}
-\begin{table}[]
+\begin{table}[h]
 \centering
 %\resizebox{\textwidth}{!}{%
 \begin{tabular}{rclllllllc}
@@ -160,13 +160,13 @@ $$P(\mathit{cavity} | \mathit{toothache}) = 0.6$$
     
 \textbf{Caution}\\
 \begin{itemize}
-\item[$\times$] Whenever $\mathit{toothache}$=true, then $\mathit{cavity}$ is true with probability of 0.6
-\item[\checkmark] Whenever $\mathit{toothache}$=true, \underline{and no other information} is available, then $\mathit{cavity}$ is true with probability of 0.6.
+\item[$\times$] Whenever $\mathit{toothache}$ is true, then $\mathit{cavity}$ is true with probability of 0.6
+\item[\checkmark] Whenever $\mathit{toothache}$ is true, \underline{and no other information} is available, then $\mathit{cavity}$ is true with probability of 0.6.
 \end{itemize}
 
 \textit{other information}: Diagnosis was \underline{no} $\mathit{cavity}$. In this case, the probability is no longer 0.6, but:
 \begin{equation}
-P(\mathit{cavity} \,|\, \mathit{toothache} \wedge diagnosis_{\mathit{cavity}} = \text{false}) = 0.02
+P(\mathit{cavity} \,|\, \mathit{toothache} \wedge diagnosis_{\mathit{cavity}} = \text{false}) \stackrel{\text{e.g.}}{=} 0.02
 \end{equation}
 
 \end{frame}
