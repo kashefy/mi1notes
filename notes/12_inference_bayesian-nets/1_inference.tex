@@ -91,7 +91,7 @@ Because we need to
 \begin{frame}
 
 $\underbrace{\text{\emph{Summing over}}}_{\text{marginalisation}}$ the probabilities of the \textbf{events} \\
-$\qquad\qquad\qquad\leadsto$ probability of \textbf{proposition}.\\
+$\slidesonly{\qquad\qquad\qquad}\leadsto$ probability of \textbf{proposition}.\\
 
 \pause
 
@@ -158,13 +158,13 @@ e.g.\\
 $$P(\mathit{cavity} | \mathit{toothache}) = 0.6$$
 }
     
-\textbf{Caution}\\
+\textbf{Caution}\notesonly{ in interpreting conditional probabilities:}\\
 \begin{itemize}
 \item[$\times$] Whenever $\mathit{toothache}$ is true, then $\mathit{cavity}$ is true with probability of 0.6
 \item[\checkmark] Whenever $\mathit{toothache}$ is true, \underline{and no other information} is available, then $\mathit{cavity}$ is true with probability of 0.6.
 \end{itemize}
 
-\textit{other information}: Diagnosis was \underline{no} $\mathit{cavity}$. In this case, the probability is no longer 0.6, but:
+\textit{other information}: e.g. diagnosis was \underline{no} $\mathit{cavity}$. In this case, the probability is no longer 0.6, but:
 \begin{equation}
 P(\mathit{cavity} \,|\, \mathit{toothache} \wedge diagnosis_{\mathit{cavity}} = \text{false}) \stackrel{\text{e.g.}}{=} 0.02
 \end{equation}
@@ -183,7 +183,7 @@ This fraction can be calculated using the following:
 P(x|e) = \frac{P(x,e)}{P(e)}
 \end{equation}
 
-which brings us to the \emph{product rule}:
+which brings us to the \emph{\textbf{product rule}}:
 
 \begin{equation}
 P(x,e) = P(x|e) P(e)
@@ -194,16 +194,20 @@ P(x,e) = P(x|e) P(e)
 
 \begin{frame}
 
-\question{What information do I need to calculate the probability of any proposition?}
+\question{What information do I need to calculate the probability of any proposition?}\\
 
-- The full joint probability distribution\notesonly{ provides all the information to calculate the probability of any proposition.}
+- The full joint probability distribution\notesonly{ provides all the information to calculate the probability of any proposition.}\\
+
+\pause
+
+\newpage
 
 Example of a full joint distribution between $\mathit{Cavity},Toothache$ and $\mathit{Catch}$:\\
 
 %\footnotesize
 	%\begin{center}
      \begin{table}[h] 
-\resizebox{\textwidth}{!}{%
+\resizebox{\notesonly{0.9}\textwidth}{!}{%
 	\begin{tabular}{|c|c|c|}
 		\hline
 		& $\mathit{toothache} = \text{true}$ & $\mathit{toothache} = \text{false}$ \\

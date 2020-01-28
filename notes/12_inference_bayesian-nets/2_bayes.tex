@@ -87,7 +87,7 @@ Start with the product rule:
 P(X|Y)P(Y) = P(Y,X) &= P(X,Y) \visible<2->{= P(Y|X)P(X)\\
 P(X|Y)P(Y) &= P(Y|X)P(X)}
 \visible<3->{
-\intertext{solve for $P(Y|X)$}
+\intertext{solve for $P(Y|X)$ to get Bayes' rule}
 P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}
 }
 %\tag{Bayes' theorem}
@@ -122,6 +122,8 @@ P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}
 
 \pause
 
+\notesonly{As a $\mathit{cause}$ and $\mathit{effect}$ relationship:}
+
 \begin{equation}
 \underbrace{P(\mathit{cause}|\mathit{effect})}_{\text{diagnositc}} = \frac{\overbrace{P(\mathit{effect}|\mathit{cause})}^{\text{causal}}P(\mathit{cause})}{P(\mathit{effect})}
 \end{equation}
@@ -132,10 +134,12 @@ If $P(\mathit{effect})$ is missing, we can still normalize using:
 P(Y|X) = \alpha P(X|Y)P(Y)
 \end{equation}
 
-$\alpha$ is chosen to whatever will make the entries in $P(Y|X)$ sum up to $1$.
+$\alpha$ can be chosen to whatever will make the entries in $P(Y|X)$ sum up to $1$.
 
 
 \end{frame}
+
+\newpage
 
 \subsection{Using Bayes' theorem}
 
@@ -205,10 +209,7 @@ P(\mathit{Cavity}|\mathit{toothache}=\text{true}, \mathit{catch}=\text{true}) &\
 \end{itemize}
 }
 
-Therefore:
-\slidesonly{\vspace{-5mm}
-}
-
+Therefore:\slidesonly{\\ \vspace{-5mm}}
 \begin{align}
 P(\mathit{toothache}
 %=\text{true}
@@ -240,7 +241,7 @@ P(\mathit{catch}| \mathit{Cavity}) P(\mathit{Cavity})
 i.e. \emph{conditional} independence of $\mathit{toothache}$ and $\mathit{catch}$ \underline{given} $\mathit{Cavity}$
 \end{frame}
 
-\subsection{Naive Bayes}
+\subsection{The Naive Bayes model}
 
 \begin{frame}\frametitle{\subsecname}
 
@@ -279,8 +280,11 @@ In terms of cause and effect:
 \begin{align}
 P(\mathit{Cause}, \mathit{Effect}_1, \mathit{Effect}_2,\ldots, \mathit{Effect}_n) &\\
 = \underbrace{P(\mathit{Cause})}_{\text{prior}} &\prod_{i=1}^{n} P(\mathit{Effect}_{i}|\mathit{Cause})
+\label{eq:naive}
 \end{align}
 
 Complexity reduced!
+
+\eqref{eq:naive} is the formulation of the \emph{Naive Bayes model}.
 
 \end{frame}

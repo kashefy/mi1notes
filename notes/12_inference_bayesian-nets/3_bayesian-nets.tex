@@ -43,50 +43,23 @@ P(A,B,C) = P(A|C)P(B|C)P(C)
 
 
 \begin{frame}\frametitle{\subsecname}
-
-
-     \begin{table}[h] 
-\resizebox{\textwidth}{!}{%
-	\begin{tabular}{|c|c|c|}
-		\hline
-		& $toothache = \text{true}$ & $toothache = \text{false}$ \\
-		\begin{tabular}{c}
-			\\ 
-			$cavity = \text{true}$ \\
-			$cavity = \text{false}$
-		\end{tabular} 
-		& 
-		\begin{tabular}{c|c}
-			$catch = \text{true}$ & $catch = \text{false}$\\ 
-			\hline 
-			$0.108$ & $0.012$ \\
-			$0.016$ & $0.064$
-		\end{tabular} 
-		& 
-		\begin{tabular}{c|c}
-			$catch = \text{true}$ & $catch = \text{false}$\\ 
-			\hline 
-			$0.072$ & $0.008$ \\
-			$0.144$ & $0.576$
-		\end{tabular} 
-		\\ \hline
-	\end{tabular}
-	}
-    \end{table}
     
-\question{What does the DAG representation of this full joint distribution look like?}
+\question{What does the DAG representation of this full joint distribution look like for toothache example?}
 
 (\textbf{see blackboard})
 
 \end{frame}
 
+\subsubsection{A ``Californian'' example}
 
 % -----------------------------------------------------------------------------
-\begin{frame} \frametitle{A ``Californian'' example}
+\begin{frame} \frametitle{\subsubsecname}
 	\begin{center}
-		\includegraphics<1>[width=8.5cm]{img/section3_fig5_v2_1} 
+	\slidesonly{
+		\includegraphics<1>[width=7cm]{img/section3_fig5_v2_1} 
+		}
 %		\includegraphics<2>[width=8cm]{img/section3_fig5_v2_2}
-		\includegraphics<2>[width=8.5cm]{img/section3_fig5_v2_2}  
+		\includegraphics<2>[width=7cm]{img/section3_fig5_v2_2}  
 	\end{center}
 	
 %	\only<2>{
@@ -101,11 +74,11 @@ P(A,B,C) = P(A|C)P(B|C)P(C)
 %	} 
 Considering statistical dependencies, only 10 instead of 31 entries have to be stored.
 	{ \small
-		\begin{eqnarray*} 
-			P(J,M,A,B,E) &=& 
-			P(J|M,A,B,E) \, P(M|A,B,E) \, P(A|B,E) \, P(B|E) \, P(E) \\
-			&=& P(J|A) \, P(M|A) \, P(A|B,E) \, P(B) \, P(E)
-		\end{eqnarray*}
+		\begin{align} 
+			P(J,M,A,B,E) \stackrel{\substack{\text{product}\\\text{rule}}}{=}& 
+			P(J|M,A,B,E) \, P(M|A,B,E) \, P(A|B,E) \, P(B|E) \, P(E) \\\slidesonly{\vspace{-5mm}}
+			\stackrel{\substack{\text{cond.}\\\text{indep.}}}{=}& P(J|A) \, P(M|A) \, P(A|B,E) \, P(B) \, P(E)
+		\end{align}
 	}
 \end{frame}
 
@@ -168,20 +141,35 @@ other parents of the children
     
 \end{frame}
 
+\subsubsection{Topological sorting}
+
 
 % -----------------------------------------------------------------------------
-\begin{frame} \frametitle{Topological sorting}
+\begin{frame} \frametitle{\subsubsecname}
+
+\mode<presentation>{
 	\begin{textblock}{}(10.5,10)
 		\includegraphics[width=4cm]{img/section3_fig17}
 	\end{textblock}
+	}
 
 	\begin{itemize}
+	\mode<presentation>{
 		\item Factorization of the unconditional probability:
 		$$
 				P(X_1,\ldots, X_n) \quad=\quad 
 				{\textstyle\prod\limits_{i=1}^n} P\big(X_i\,|\,parents(X_i)\big)
 		$$
 		\vspace{4mm}
+		}
+		
+\mode<article>{
+	\begin{figure}[h]
+		 \centering
+		 \includegraphics[width=0.4\textwidth]{img/section3_fig17}%
+		 \caption{Example DAG}
+	\end{figure}
+}
 		\item Edges should always be directed from nodes with lower 
 			to nodes with higher indices.
 		\vspace{8mm}
@@ -192,13 +180,12 @@ other parents of the children
 				\item repeat until DAG is empty
 				\item renumber nodes
 			\end{enumerate}
-		
 	\end{itemize}
 \end{frame}
 
 
 % -----------------------------------------------------------------------------
-\begin{frame} \frametitle{Topological sorting}
+\begin{frame} \frametitle{\subsubsecname}
 	\begin{minipage}{12.1cm}
 		\begin{minipage}{7cm}
 			\begin{itemize}
@@ -242,7 +229,9 @@ other parents of the children
 			\includegraphics<4>[width=4cm]{img/section3_fig17_step4}
 			\includegraphics<5>[width=4cm]{img/section3_fig17_step5}
 			\includegraphics<6>[width=4cm]{img/section3_fig17_step6}
+			\mode<presentation>{
 			\includegraphics<7>[width=4cm]{img/section3_fig17}
+			}
 		\end{minipage}
 	\end{minipage}
 \end{frame}
@@ -293,7 +282,7 @@ Exercise: topological sorting
 	}%
     \label{fig:cond}%
 \end{figure}
-
+\mode<presentation>{
 	\begin{itemize}
 		\item Topological sorting: From parents to children:
 			\begin{enumerate}
@@ -303,7 +292,7 @@ Exercise: topological sorting
 				\item renumber nodes
 			\end{enumerate}
 	\end{itemize}
-
+}
 
 \textbf{(see blackboard)}
 
@@ -312,8 +301,9 @@ Exercise: topological sorting
 
 \begin{frame}
 
-Exercise: DAG to moral graph
+Exercise: DAG (same as before) to moral graph
 
+\mode<presentation>{
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.3\linewidth]{img/dag1}%
@@ -324,13 +314,14 @@ Exercise: DAG to moral graph
 	}%
     \label{fig:cond}%
 \end{figure}
-
+}
+\mode<presentation>{
 \begin{enumerate}
 \item make the edges undirected
 \item identify the Markov blanket of each node (parents, children, other parents of the children)
 \item add edges such that all nodes are directly connected to the Markov blanket.
 \end{enumerate}
-
+}
 
 \textbf{(see blackboard)}
     
