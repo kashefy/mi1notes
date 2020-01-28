@@ -162,7 +162,7 @@ The Junction tree algorithm converts into a tree structure mad eup of \emph{cliq
 \begin{figure}
 	\centering
 	\includegraphics[width=4cm]{img/section3_fig9}
-	\notesonly{\caption}\slidesonly{\caption*}{undirected graph $G_V$ with vertices $V$ and edges $K$} 
+	 \caption{undirected graph $G_V$ with vertices $V$ and edges $K$} 
 \end{figure}
 \end{frame}
 
@@ -180,14 +180,12 @@ $C$ can also be a set of nodes (cf. ).
 % -----------------------------------------------------------------------------
 \begin{frame} \frametitle{Separators}
 
-
-
 \only<1>{
 \mode<presentation>{
 	\begin{figure}
 	\centering
 	\includegraphics[width=5cm]{img/section3_fig10}
-	\notesonly{\caption}\slidesonly{\caption*}{node $C$ separates subsets $A$ and $B$} 
+	\notesonly{\caption}\slidesonly{\caption*}{node C separates subsets A and B} 
 	\end{figure}
 }
 }
@@ -200,7 +198,7 @@ $C$ can also be a set of nodes (cf. ).
          \centering
          \usebox{\imagebox}% Place largest image
          \caption{node C}
-         \label{fig:regression1dlinear}
+         \label{fig:nodes}
      \end{subfigure}
      \hspace{10mm}
      \begin{subfigure}[t]{0.45\textwidth}
@@ -209,16 +207,55 @@ $C$ can also be a set of nodes (cf. ).
          \includegraphics[width=0.99\textwidth]{img/section3_fig10_cset}
          }
          \caption{set of nodes C}
-         \label{fig:regression1dnonlinear}
+         \label{fig:setc}
      \end{subfigure}
-     \notesonly{\caption}\slidesonly{\caption*}{subsets A and B separated by C}
+     \caption{subsets A and B separated by C}
 	 \label{fig:regression}
 \end{figure}
 }
 	\slidesonly{\vspace{-2mm}}
 	\begin{block}{Separator}
-		A set $C$ of nodes {\bf separates} two undirected subgraphs $G_A$ and $G_B$ 
-		if {\em every} path from node set $A$ to node set $B$ 
+		A set $C$ of nodes \textbf{separates} two undirected subgraphs $G_A$ and $G_B$ 
+		if \emph{every} path from node set $A$ to node set $B$ 
 		has to pass through an element of $C$.
 	\end{block}
 \end{frame}
+
+
+% -----------------------------------------------------------------------------
+\begin{frame} \frametitle{Decomposable graphs}
+	\vspace{-2mm}
+	\begin{itemize}
+		\item $A,B,C$ are a \textbf{proper decomposition} 
+			of an undirected graph $G = (V,K)$ if:
+			\vspace{0mm}
+			\begin{itemize}
+				\item $A,B,C$ are non-empty and 
+					disjoint subsets with $V=A \cup B \cup C$,
+				\item $C$ separates $G_A$ and $G_B$, and
+				\item subgraph $G_C$ is complete.
+			\end{itemize}
+		\vspace{2mm}
+		\item<2-> G is \textbf{decomposable} if it is complete, 
+			or a proper decomposition $A,B,C$ exist,
+			where $G_{A\cup C}$ and $G_{B \cup C}$ are decomposable.
+	\end{itemize}
+	\begin{center}
+		\begin{tabular}{cc}
+				\includegraphics<1-2>[height=3.75cm]{img/section3_fig12}
+				\includegraphics<3>[height=3.75cm]{img/section3_fig13}
+			& \visible<2->{
+				\includegraphics<1-2>[height=3.75cm]{img/section3_fig12_v2}
+				\includegraphics<3>[height=3.75cm]{img/section3_fig13_v2}
+			}\\
+				\only<1>{a proper decomposition}
+				\only<2>{not a decomposable graph }
+				\only<3>{a decomposable graph}
+			& 
+				\only<2>{$G_{A \cup C}$ is not decomposable}
+				\only<3>{$G_{A \cup C}$ is decomposable and \\
+            &   $G_{B \cup C}$ is complete}
+		\end{tabular}
+	\end{center}	
+\end{frame}
+
