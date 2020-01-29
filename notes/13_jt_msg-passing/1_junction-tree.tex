@@ -38,6 +38,23 @@
 
 \end{frame}
 
+\subsubsection{A road to efficient inference}
+
+\begin{frame}\frametitle{\subsubsecname \only<2>{~and \textcolor{blue}{WHY}}}
+
+\begin{figure}[h]
+	 \centering
+	 \mode<presentation>{\only<1>{
+	 \includegraphics[width=0.9\textwidth]{img/jt_roadmap_nojust}%
+	 }}
+	 \only<2>{
+	 \includegraphics[width=0.9\textwidth]{img/jt_roadmap}%
+	 \caption{A road to efficient inference and \textcolor{blue}{why}}
+	 }
+\end{figure}
+
+\end{frame}
+
 \subsection{Constructing Bayesian Networks}
 
 \begin{frame} \frametitle{\subsubsecname}
@@ -124,20 +141,6 @@ The Junction tree algorithm converts into a tree structure mad eup of \emph{cliq
 	\end{itemize}
 \end{frame}
 
-\subsubsection{Overview of the Junction Tree algorithm}
-
-\begin{frame}\frametitle{\subsubsecname}
-
-\begin{align*}
-\text{DAG}
-\longrightarrow \substack{\text{moral}\\\text{graph}}
-\longrightarrow \substack{\text{decomposable}\\\text{graph}}
-\longrightarrow \substack{\text{bipartite}\\\text{graph}}
-\longrightarrow \substack{\text{Junction}\\\text{Tree}}
-\end{align*}
-
-\end{frame}
-
 \subsection{Decomposable Undirected Graphs}
 
 \mode<presentation>{
@@ -145,15 +148,20 @@ The Junction tree algorithm converts into a tree structure mad eup of \emph{cliq
     \begin{center} \huge
         \secname
     \end{center}
-    \begin{center}   
-		\begin{align*}
-		\text{DAG}
-		\longrightarrow \substack{\text{moral}\\\text{graph}}
-		\longrightarrow \substack{\text{\textcolor{blue}{decomposable}}\\\text{\textcolor{blue}{graph}}}
-		\longrightarrow \substack{\text{bipartite}\\\text{graph}}
-		\longrightarrow \substack{\text{Junction}\\\text{Tree}}
-		\end{align*}
-    \end{center}
+    \begin{figure}[h]
+	 \centering
+	 \includegraphics[width=0.8\textwidth]{img/jt_roadmap}%
+	 \caption{A road to efficient inference and \textcolor{blue}{why}}
+\end{figure}
+    %\begin{center}   
+		%\begin{align*}
+		%\text{DAG}
+		%\longrightarrow \substack{\text{moral}\\\text{graph}}
+		%\longrightarrow \substack{\text{\textcolor{blue}{decomposable}}\\\text{\textcolor{blue}{graph}}}
+		%\longrightarrow \substack{\text{bipartite}\\\text{graph}}
+		%\longrightarrow \substack{\text{Junction}\\\text{Tree}}
+		%\end{align*}
+    %\end{center}
 \end{frame}
 }
 
@@ -193,23 +201,23 @@ $C$ can also be a set of nodes (cf. ).
 \begin{figure}[h]
      \centering
      \savebox{\imagebox}{
-	 \includegraphics[width=0.45\textwidth]{img/section3_fig10}}%
+	 \includegraphics[width=0.4\textwidth]{img/section3_fig10}}%
      \begin{subfigure}[t]{0.35\textwidth}
          \centering
          \usebox{\imagebox}% Place largest image
          \caption{node C}
          \label{fig:nodes}
      \end{subfigure}
-     \hspace{10mm}
-     \begin{subfigure}[t]{0.45\textwidth}
+     \hspace{3mm}
+     \begin{subfigure}[t]{0.4\textwidth}
          \centering
          \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
-         \includegraphics[width=0.99\textwidth]{img/section3_fig10_cset}
+         \includegraphics[width=0.95\textwidth]{img/section3_fig10_cset}
          }
          \caption{set of nodes C}
          \label{fig:setc}
      \end{subfigure}
-     \caption{subsets A and B separated by C}
+     \caption{subgraphs A and B separated by C}
 	 \label{fig:regression}
 \end{figure}
 }
@@ -223,39 +231,128 @@ $C$ can also be a set of nodes (cf. ).
 
 
 % -----------------------------------------------------------------------------
-\begin{frame} \frametitle{Decomposable graphs}
+\begin{frame}{Only} \frametitle{Decomposable graphs}
 	\vspace{-2mm}
+	\begingroup
+	\small
 	\begin{itemize}
 		\item $A,B,C$ are a \textbf{proper decomposition} 
 			of an undirected graph $G = (V,K)$ if:
-			\vspace{0mm}
+	\slidesonly{\vspace{-4mm}}
 			\begin{itemize}
 				\item $A,B,C$ are non-empty and 
 					disjoint subsets with $V=A \cup B \cup C$,
 				\item $C$ separates $G_A$ and $G_B$, and
 				\item subgraph $G_C$ is complete.
 			\end{itemize}
-		\vspace{2mm}
-		\item<2-> G is \textbf{decomposable} if it is complete, 
+		\item $G$ is \textbf{decomposable} if it is complete, 
 			or a proper decomposition $A,B,C$ exist,
-			where $G_{A\cup C}$ and $G_{B \cup C}$ are decomposable.
+			\underline{where} $G_{A\cup C}$ and $G_{B \cup C}$ are decomposable.
 	\end{itemize}
-	\begin{center}
-		\begin{tabular}{cc}
-				\includegraphics<1-2>[height=3cm]{img/section3_fig12}
-				\includegraphics<3>[height=3cm]{img/section3_fig13}
-			& \visible<2->{
-				\includegraphics<1-2>[height=3cm]{img/section3_fig12_v2}
-				\includegraphics<3>[height=3cm]{img/section3_fig13_v2}
-			}\\
-				\only<1>{a proper decomposition}
-				\only<2>{not a decomposable graph }
-				\only<3>{a decomposable graph}
+	\endgroup
+	
+	\slidesonly{\vspace{-4mm}}
+	
+	\pause
+	
+	\question{Are the following (i) a proper decomposition, (ii) decomposable graphs?}
+
+	\slidesonly{\vspace{-9mm}}
+	
+	\begin{itemize}
+	\item<only@2,3>[]
+		\begin{figure}[h]
+		\centering
+		\includegraphics[width=5cm]{img/section3_fig10_sub}
+		\only<3>{\caption{proper decomposition \\but not decomposable}
+		}
+		\end{figure}
+	\item<only@4,5>[]
+		\begin{figure}[h]
+		\centering
+		\includegraphics[width=5cm]{img/section3_fig10_sub_2}
+		\only<5>{\caption{a proper decomposition\\ and decomposable}
+		}
+		\end{figure}
+	\item<only@6,7>[]
+			\begin{tabular}{crc}
 			& 
-				\only<2>{$G_{A \cup C}$ is not decomposable}
-				\only<3>{$G_{A \cup C}$ is decomposable and \\
-            &   $G_{B \cup C}$ is complete}
+			\underline{Hint}:
+			&\\
+			\vspace{-5mm}
+				\includegraphics<6-7>[height=3cm]{img/section3_fig12}
+			& \visible<6-7>{
+			
+			&
+			\vspace{-5mm}
+			\includegraphics<6-7>[height=3cm]{img/section3_fig12_v2}
+			}\\
+				\only<7>{a proper decomposition\\not a decomposable graph }
+			& &
+				\only<7>{because $G_{A \cup C}$ is not decomposable}
 		\end{tabular}
-	\end{center}	
+	
+		%\begin{figure}[h]
+		%\centering
+		%\includegraphics[width=3.5cm]{img/section3_fig12_v2}
+		%\only<7>{
+		%\notesonly{\caption}\slidesonly{\caption*}{There is no proper decomposition for $G_{A \cup C}$ and it is not decomposable. $G_{B \cup C}$ is complete and therefore decomposable.}
+		%}
+		%\end{figure}
+	\item<only@8,9>[]
+		\begin{figure}[h]
+		\centering
+		\includegraphics[width=3.5cm]{img/section3_fig12}
+		\only<9>{\caption{a proper decomposition but not a decomposable graph because $G_{A \cup C}$ is not decomposable.X}
+		}
+		\end{figure}
+	\item<only@10,11>[]
+		\begin{figure}[h]
+		\centering
+		\includegraphics[width=3.5cm]{img/section3_fig13}
+		\only<11>{\caption{a proper decomposition and a decomposable graph.}
+		}
+		\end{figure}
+	
+	\end{itemize}
+	
 \end{frame}
+
+%\begin{frame}
+	%\begin{center}
+		%\only<2-3>{
+		%\begin{tabular}{cc}
+				%\includegraphics<2-3>[height=3cm]{img/section3_fig10_sub}
+			%&\\
+				%\only<3>{a proper decomposition and not a decomposable graph}
+			%&
+		%\end{tabular}
+		%}
+		%\only<4-5>{
+		%\begin{tabular}{cc}
+				%\includegraphics<4-5>[height=3cm]{img/section3_fig10_sub}
+			%&\\
+				%\only<5>{not a proper decomposition and not a decomposable graph}
+			%&
+		%\end{tabular}
+		%}
+		%\only<6->{
+		%\begin{tabular}{cc}
+				%\includegraphics<6-8>[height=3cm]{img/section3_fig12}
+				%\includegraphics<9>[height=3cm]{img/section3_fig13}
+			%& \visible<6->{
+				%\includegraphics<6-8>[height=3cm]{img/section3_fig12_v2}
+				%\includegraphics<9>[height=3cm]{img/section3_fig13_v2}
+			%}\\
+				%\only<7>{a proper decomposition}
+				%\only<8>{not a decomposable graph }
+				%\only<9>{a decomposable graph}
+			%& 
+				%\only<8>{$G_{A \cup C}$ is not decomposable}
+				%\only<9>{$G_{A \cup C}$ is decomposable and \\
+            %&   $G_{B \cup C}$ is complete}
+		%\end{tabular}
+		%}
+	%\end{center}	
+%\end{frame}
 
