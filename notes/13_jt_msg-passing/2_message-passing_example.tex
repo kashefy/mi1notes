@@ -1,0 +1,228 @@
+\section{Message Passing}
+
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+
+
+% -----------------------------------------------------------------------------
+\begin{frame} \frametitle{Message passing}
+	%\iitem{a third pass can calculate all other marginals}
+	\begin{minipage}[c]{12.1cm}
+		\begin{minipage}[][1cm][c]{8cm}
+			\begin{itemize}
+				\item first pass from root to leaves: ``request''
+			\end{itemize}
+		\end{minipage}
+		\hfill \raisebox{-4mm}{\includegraphics[width=4cm]{img/section3_fig20}} \\
+		\begin{minipage}[c]{8cm}
+			\begin{itemize}
+				\item second pass from leaves to root: ``collect''
+			\end{itemize}
+		\end{minipage}
+		\hfill \raisebox{-8mm}{\includegraphics[width=4cm]{img/section3_fig21}} \\
+		\pause
+		\begin{minipage}{8cm}
+			\begin{itemize}
+				\item a third pass can calculate all other \\
+					marginals: ``distribute''
+					% third pass from root to leaves: ``distribute''
+			\end{itemize}
+		\end{minipage}
+		\hfill \raisebox{-6mm}{\includegraphics[width=4cm]{img/section3_fig22}} \\
+	\end{minipage}
+\end{frame}
+
+
+% -----------------------------------------------------------------------------
+\begin{frame} \frametitle{The sum-product algorithm}
+	\vspace{-4mm}
+	%\begin{minipage}{12cm}
+		%\begin{minipage}{6.5cm}
+			%\vspace{5mm}
+			%\includegraphics[height=3.5cm]{img/tree_inference_product_message_v2}
+			%\begin{itemize}
+				%\item product message from $X_m$ to $f_s$
+			%\end{itemize}
+		%\end{minipage}
+		%\hfill
+		%\visible<2>{\begin{minipage}{6cm}
+			%\hfill
+			%\includegraphics[height=3.65cm]{img/tree_inference_sum_message_v2}
+			%\vspace{2mm} 
+			%\begin{itemize}
+				%\item sum message from $f_s$ to $X_i$
+			%\end{itemize}
+		%\end{minipage}}
+	%\end{minipage}
+
+	\hspace{-4mm}
+	\begin{align}
+		\mu_{X_m \to f_s}(X_m) &\;:=&&\kern-4ex
+			\kern-3ex\prod_{l \in \text{neighbor}(X_m) \setminus\{f_s\}}\kern-3ex
+			\mu_{f_l \to X_m}(X_m) \tag{product}\\[1mm] 
+		\visible<2>{
+		\mu_{f_s \to X_i}(X_i) &\;:=&&\kern-3ex 
+			\sum_{X_m, \ldots, X_M}\kern-2ex f_s(X_i, X_m,\ldots, X_M) 
+			\kern-5ex\prod_{k \in \text{neighbor}(f_s)\setminus\{X_i\}}\kern-5ex 
+			\mu_{X_k \to f_s}(X_k) 
+			\only<1>{\nonumber\hspace{10mm}}
+			\only<2>{\tag{sum}}
+		}
+	\end{align}
+	
+	\hfill{\footnotesize  Bishop 2006 (p.~402)}
+\end{frame}
+
+\begin{frame} \frametitle{Inference}
+	\begin{textblock}{14}(0.5,3)
+	\begin{enumerate}
+		\item<1-> initialization of the clique potentials $f_k(\mathcal X_k)$
+			\only<1>{ \begin{itemize}
+				\item in the order established by 
+					topological sorting	\\(e.g.
+					$A \to B \to C \to E \to D \to F$) \\[2mm]
+					{\small\begin{tabular}{|c|c|c|c|}
+					\hline 
+					$f_1(A,B,C)$ & $f_2(B,C,E)$ & $f_3(B,D)$ & $f_4(B,E,F)$ \\
+					\hline 
+					%\hline
+					%$P(A,B,C)$ & $\frac{P(B,C,E)}{P(B,C)}$ & $\frac{P(B,D)}{P(B)}$ 
+					%	& $\frac{P(B,E,F)}{P(B,E)}$ \\
+					%\hline
+					$P(C|A)\,P(B|A)\,P(A)$ & $P(E|C)$ & $P(D|B)$ & $P(F|B,E)$ \\
+					\hline
+					\end{tabular} }
+			\end{itemize} }
+		\only<1>{\vspace{4mm}
+			{\small $$ \hspace{-4mm} 
+				P(A,B,C,D,E,F) \;\;=\;\; 
+				P(A) \, P(B|A) \, P(C|A) \, P(D|B) \, P(E|C) \, P(F|B,E) 
+			$$}
+		}
+		\item<2-> modification of the clique potentials by the observed evidence
+			\only<2>{\begin{itemize}
+				\item for each observation $Y=y$ find {\em one} 
+					$f_k$ with $Y \in \mathcal X_k$
+				\item add a separator node 
+					{\footnotesize $
+						f_k(Y) = 
+						\left\{\begin{array}{c} 
+							1, \; Y=y \\[-1mm]
+							0, \; Y \neq y 
+						\end{array}\right.
+					$}
+				\item example: $D=d$ and $E=e$ 
+			\end{itemize} }
+		\vspace{2mm}
+		\item<3-> message passing 
+			\only<3>{\begin{itemize}
+				\item begin {\color{red}``request'' pass} 
+					from arbitrary node $N$, e.g.~$A$
+				\item wait for all message of {\color{blue}``collect'' pass} 
+							to return
+				\item send last {\color{darkgreen}``distribute'' pass} from $N$
+				\itR  all marginals are computed simultaneously
+			\end{itemize}}
+		\vspace{2mm}
+		\item<4-> calculate marginals from messages
+			\only<4>{ \small
+				$$
+					P(C, \,D = d, E = e) 
+						\quad=\quad \sum_{B}{} \;
+							{\color{blue}\mu_{f_1 \to BC}(B,C)} \cdot 
+							{\color{darkgreen} \mu_{f_2 \to BC}(B,C)} 
+				$$
+			}
+		\item<5-> normalization yields conditional marginals
+			\only<5>{ \small
+				$$
+					P(C\, | D = d, E = e) = \alpha \, \underbrace{P(C, \,D = d, E = e)}_{\tilde P(C)}, \quad\qquad\qquad \alpha = \frac{1}{\sum_C \tilde P(C)}
+				$$ 
+			}
+	\end{enumerate}	
+	\end{textblock}
+	
+	\begin{textblock}{15}(1.5,9.5)
+		\begin{minipage}{12cm}
+			\begin{minipage}{4cm}
+				\includegraphics[width=3cm]{img/graph_example_dag.jpg}
+			\end{minipage}
+			\begin{minipage}{7cm}
+				\includegraphics<1>[height=3cm]%
+					{img/graph_example_junction_tree_init_v2.pdf}
+				\includegraphics<2>[height=3.5cm]%
+					{img/graph_example_junction_tree_evidence_v2.pdf}
+				\includegraphics<3->[height=3.55cm]%
+					{img/graph_example_junction_tree_messages_v2.pdf}
+			\end{minipage}
+		\end{minipage}
+	\end{textblock}
+\end{frame}
+
+\begin{frame}
+ $\msg{A}{f_{1}}(A)$   
+\end{frame}
+
+\subsubsection{The running intersection property}
+
+\begin{frame}\frametitle{\subsubsecname}
+ 
+    \begin{minipage}{0.4\textwidth}
+        \begin{block}{The running intersection property}
+            \small
+            All nodes on the path between two 
+            cliques, which both contain variable $X$, 
+            also contain $X$.
+        \end{block} 
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\textwidth}
+        %\begin{figure}[h]
+            %\centering 
+            \includegraphics[width=5cm]{img/junction_tree_bipartite}
+            \mode<article>{
+            \captionof{figure}{The running intersection property}
+            }
+        %\end{figure}
+    \end{minipage}
+
+\only<2>{
+
+
+\question{Is the following a valid junction tree?}
+
+        \begin{figure}[h]
+            \centering 
+            \includegraphics[width=5cm]{img/graph_example_isvalid_junction_tree}
+            \mode<article>{
+            \caption{A valid junction tree}
+            }
+        \end{figure}
+}
+
+\only<3,4>{
+\question{Which of the following remains a valid junction tree? (irrespective of being useful for exact inference)}
+}
+
+\only<3>{
+
+        \begin{figure}[h]
+            \centering 
+            \includegraphics[width=5cm]{img/graph_example_isvalid2_junction_tree}
+            \mode<article>{
+            \caption{This graph remains a valid junction tree}
+            }
+        \end{figure}
+}
+\only<4>{
+        \begin{figure}[h]
+            \centering 
+            \includegraphics[width=5cm]{img/graph_example_isvalid3_junction_tree}
+            \mode<article>{
+            \caption{This graph no longer qualifies as a junction tree}
+            }
+        \end{figure}
+}
+
+\end{frame}
+
+
