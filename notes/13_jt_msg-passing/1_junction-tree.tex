@@ -49,7 +49,9 @@
 	 }}
 	 \only<2>{
 	 \includegraphics[width=0.9\textwidth]{img/jt_roadmap}%
-	 \caption{A road to efficient inference and \textcolor{blue}{why}}
+	 }
+	 \notesonly{
+	 \caption{A road to efficient inference and a handwavy justification for the different steps}%
 	 }
 \end{figure}
 
@@ -62,7 +64,7 @@
 	\begin{figure}[h]
 		 \centering
 		 \includegraphics[width=0.5\textwidth]{img/section3_fig5_v2_2}%
-		 \caption{DAG of the ``Californian'' example}
+		 \caption{DAG of the Californian example}
 	\end{figure}
 	
 %	\only<2>{
@@ -146,13 +148,12 @@ The Junction tree algorithm converts into a tree structure mad eup of \emph{cliq
 \mode<presentation>{
 \begin{frame} 
     \begin{center} \huge
-        \secname
+        \subsecname
     \end{center}
     \begin{figure}[h]
 	 \centering
 	 \includegraphics[width=0.8\textwidth]{img/jt_roadmap}%
-	 \caption{A road to efficient inference and \textcolor{blue}{why}}
-\end{figure}
+	\end{figure}
     %\begin{center}   
 		%\begin{align*}
 		%\text{DAG}
@@ -170,7 +171,7 @@ The Junction tree algorithm converts into a tree structure mad eup of \emph{cliq
 \begin{figure}
 	\centering
 	\includegraphics[width=4cm]{img/section3_fig9}
-	 \caption{undirected graph $G_V$ with vertices $V$ and edges $K$} 
+	 \caption{undirected graph \ensuremath{G_V} with vertices \ensuremath{V} and edges \ensuremath{K}} 
 \end{figure}
 \end{frame}
 
@@ -229,16 +230,17 @@ $C$ can also be a set of nodes (cf. ).
 	\end{block}
 \end{frame}
 
+\subsubsection{Decomposable graphs}
 
 % -----------------------------------------------------------------------------
-\begin{frame}{Only} \frametitle{Decomposable graphs}
+\begin{frame}{Only} \frametitle{\subsubsecname}
 	\vspace{-2mm}
 	\begingroup
-	\small
+	\slidesonly{\footnotesize}
 	\begin{itemize}
 		\item $A,B,C$ are a \textbf{proper decomposition} 
 			of an undirected graph $G = (V,K)$ if:
-	\slidesonly{\vspace{-4mm}}
+	%\slidesonly{\vspace{-4mm}}
 			\begin{itemize}
 				\item $A,B,C$ are non-empty and 
 					disjoint subsets with $V=A \cup B \cup C$,
@@ -259,38 +261,83 @@ $C$ can also be a set of nodes (cf. ).
 
 	\slidesonly{\vspace{-9mm}}
 	
-	\begin{itemize}
+	\begin{enumerate}
 	\item<only@2,3>[]
 		\begin{figure}[h]
 		\centering
 		\includegraphics[width=5cm]{img/section3_fig10_sub}
-		\only<3>{\caption{proper decomposition \\but not decomposable}
+		\only<3>{\caption{not proper decomposition \notesonly{\\}and not decomposable}
 		}
 		\end{figure}
 	\item<only@4,5>[]
 		\begin{figure}[h]
 		\centering
 		\includegraphics[width=5cm]{img/section3_fig10_sub_2}
-		\only<5>{\caption{a proper decomposition\\ and decomposable}
+		\only<5>{\caption{a proper decomposition\notesonly{\\} and decomposable}
 		}
 		\end{figure}
 	\item<only@6,7>[]
-			\begin{tabular}{crc}
-			& 
-			\underline{Hint}:
-			&\\
-			\vspace{-5mm}
-				\includegraphics<6-7>[height=3cm]{img/section3_fig12}
-			& \visible<6-7>{
+	
+		\begin{figure}[h]
+		 \centering
+		 \savebox{\imagebox}{
+		 \includegraphics[width=0.3\textwidth]{img/section3_fig12}}%
+		 \begin{subfigure}[t]{0.35\textwidth}
+			 \centering
+			 \usebox{\imagebox}% Place largest image
+			 \caption{example decomposition}
+			 \label{fig:propernotdecompgraph}
+		 \end{subfigure}
+		 \hspace{7mm}
+		 \begin{subfigure}[t]{0.3\textwidth}
+			 \centering
+			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+			 \includegraphics[width=0.99\textwidth]{img/section3_fig12_v2}
+			 }
+			 \caption{\underline{Hint}
+			 \only<7>{: because $G_{A \cup C}$ is not decomposable}%
+			 }
+			 \label{fig:hintnotdecomp}
+		 \end{subfigure}
+		 \only<7>{\caption{a proper decomposition but not decomposable}}
+		 \label{fig:propernotdecompexample}
+		\end{figure}
+	
+	%\begin{center}
+	%\begin{minipage}{\textwidth}
+		%\begin{minipage}{0.4\textwidth}
+			%\begin{figure}[h]
+				%\includegraphics<6-7>[height=3cm]{img/section3_fig12}
+			%\end{figure}
+		%\end{minipage}
+		%\underline{Hint}:
+		%\begin{minipage}{0.4\textwidth}			
+		%\begin{figure}[h]
+				%\includegraphics<6-7>[height=3cm]{img/section3_fig12_v2}
+			%\end{figure}
+		%\end{minipage}
+	%\end{minipage}
+	%\end{center}
 			
-			&
-			\vspace{-5mm}
-			\includegraphics<6-7>[height=3cm]{img/section3_fig12_v2}
-			}\\
-				\only<7>{a proper decomposition\\not a decomposable graph }
-			& &
-				\only<7>{because $G_{A \cup C}$ is not decomposable}
-		\end{tabular}
+	%\slidesonly{\vspace{-5mm}}
+			%\begin{tabular}{crc}
+			%& 
+			%\underline{Hint}:
+			%&\\
+			\%%vspace{-5mm}
+			%\begin{figure}[h]
+				%\includegraphics<6-7>[height=3cm]{img/section3_fig12}
+			%\end{figure}
+			%& \visible<6-7>{
+			
+			%&
+			%%\vspace{-2mm}
+			%\includegraphics<6-7>[height=3cm]{img/section3_fig12_v2}
+			%}\\
+				%\only<7>{a proper decomposition\\not decomposable}
+			%& &
+				%\only<7>{because $G_{A \cup C}$ is not decomposable}
+		%\end{tabular}
 	
 		%\begin{figure}[h]
 		%\centering
@@ -300,59 +347,247 @@ $C$ can also be a set of nodes (cf. ).
 		%}
 		%\end{figure}
 	\item<only@8,9>[]
+	
 		\begin{figure}[h]
-		\centering
-		\includegraphics[width=3.5cm]{img/section3_fig12}
-		\only<9>{\caption{a proper decomposition but not a decomposable graph because $G_{A \cup C}$ is not decomposable.X}
-		}
-		\end{figure}
-	\item<only@10,11>[]
-		\begin{figure}[h]
-		\centering
-		\includegraphics[width=3.5cm]{img/section3_fig13}
-		\only<11>{\caption{a proper decomposition and a decomposable graph.}
-		}
+		 \centering
+		 \savebox{\imagebox}{
+		 \includegraphics[width=0.3\textwidth]{img/section3_fig13}}%
+		 \begin{subfigure}[t]{0.35\textwidth}
+			 \centering
+			 \usebox{\imagebox}% Place largest image
+			 \caption{example decomposition}
+			 \label{fig:propernotdecompgraph}
+		 \end{subfigure}
+		 \hspace{7mm}
+		 \begin{subfigure}[t]{0.3\textwidth}
+			 \centering
+			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+			 \includegraphics[width=0.99\textwidth]{img/section3_fig13_v2}
+			 }
+			 \caption{\underline{Hint}
+			 \only<9>{: because $G_{A \cup C}$ is decomposable and $G_{A \cup B}$ is complete}%
+			 }
+			 \label{fig:hintnotdecomp}
+		 \end{subfigure}
+		 \only<9>{\caption{a proper decomposition and decomposable}}
+		 \label{fig:propernotdecompexample}
 		\end{figure}
 	
-	\end{itemize}
+	\end{enumerate}
 	
 \end{frame}
 
-%\begin{frame}
-	%\begin{center}
-		%\only<2-3>{
-		%\begin{tabular}{cc}
-				%\includegraphics<2-3>[height=3cm]{img/section3_fig10_sub}
-			%&\\
-				%\only<3>{a proper decomposition and not a decomposable graph}
-			%&
-		%\end{tabular}
-		%}
-		%\only<4-5>{
-		%\begin{tabular}{cc}
-				%\includegraphics<4-5>[height=3cm]{img/section3_fig10_sub}
-			%&\\
-				%\only<5>{not a proper decomposition and not a decomposable graph}
-			%&
-		%\end{tabular}
-		%}
-		%\only<6->{
-		%\begin{tabular}{cc}
-				%\includegraphics<6-8>[height=3cm]{img/section3_fig12}
-				%\includegraphics<9>[height=3cm]{img/section3_fig13}
-			%& \visible<6->{
-				%\includegraphics<6-8>[height=3cm]{img/section3_fig12_v2}
-				%\includegraphics<9>[height=3cm]{img/section3_fig13_v2}
-			%}\\
-				%\only<7>{a proper decomposition}
-				%\only<8>{not a decomposable graph }
-				%\only<9>{a decomposable graph}
-			%& 
-				%\only<8>{$G_{A \cup C}$ is not decomposable}
-				%\only<9>{$G_{A \cup C}$ is decomposable and \\
-            %&   $G_{B \cup C}$ is complete}
-		%\end{tabular}
-		%}
-	%\end{center}	
-%\end{frame}
+\begin{frame}\frametitle{\subsubsecname}
+
+	\question{What are we interested in decomposable graphs?}\\
+	
+	\slidesonly{\vspace{-5mm}}
+	
+	\pause	
+	
+	\begin{figure}[h]
+	\centering
+	\includegraphics[height=5cm]{img/jt_roadmap_requirement}
+	\notesonly{\caption{The construction of a junction tree requires a decomposable graph of cliques.}}
+	\end{figure}
+	
+	\slidesonly{\vspace{-5mm}}
+	
+	
+	- The short answer\notesonly{\footnote{Not required but if interested in more formal justifications see Ch 3.4 and Ch 4 from \citep{koller2009probabilistic}}}:
+	\begin{enumerate}[(a)]
+	\item it is a requirement for the construction of junction trees \notesonly{(cf. \sectionref{sec:jtdef})}
+	\item decomposable graphs allow us to form a \emph{bipartite graph} of cliques and separators.
+	\end{enumerate}
+	
+\end{frame}
+% -----------------------------------------------------------------------------
+\begin{frame} \frametitle{\secname}
+
+	\begin{block}{Cliques and separators}
+	\begin{itemize}
+		\item \textbf{cliques} are \underline{maximally complete subgraphs}
+		\item decomposable graphs can be decomposed into cliques and separators
+		\item cliques and separators form a \emph{bipartite graph}
+	\end{itemize}
+	\end{block}
+	
+	\slidesonly{\vspace{4mm}}
+	
+	\begin{figure}[h]
+	\centering
+	\includegraphics[height=3.5cm]{img/section3_fig15}
+	\caption{a decomposable graph and corresponding bipartite graph}
+	\end{figure}
+	
+		
+\end{frame}
+
+
+\begin{frame}\frametitle{\subsubsecname}
+
+\only<1>{
+\mode<presentation>{
+		\begin{figure}[h]
+		 \centering
+		 \savebox{\imagebox}{
+		 \includegraphics[width=0.3\textwidth]{img/section3_fig12}}%
+		 \begin{subfigure}[t]{0.35\textwidth}
+			 \centering
+			 \usebox{\imagebox}% Place largest image
+			 \caption{example decomposition}
+		 \end{subfigure}
+		 \hspace{7mm}
+		 \begin{subfigure}[t]{0.3\textwidth}
+			 \centering
+			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+			 \includegraphics[width=0.99\textwidth]{img/section3_fig12_v2}
+			 }
+			 \caption{because $G_{A \cup C}$ is not decomposable}%
+		 \end{subfigure}
+		 \caption{a proper decomposition but not decomposable}
+		\end{figure}
+}
+}
+	
+
+	\question{What if we don't have a decomposable graph \notesonly{as in \figref{fig:propernotdecompexample}}?}\\
+	
+	\pause 
+	
+	- We apply triangulation. We add a chord, i.e. ``shortcut'' edges to eliminate any ``circles'' of 4+ vetices.
+	
+	\pause 
+	
+	According to Ch 9.4.3 in \citep{koller2009probabilistic}, constructing the chordal graph is actually a heurisitic of elimination ordering. It plays a role in keeping the size of cliques small. Smaller cliques allow for a more ``modular'' bipartite graph which leads to faster computation during inference.
+	
+\end{frame}
+
+
+\subsubsection{Triangulation}
+
+\begin{frame}\frametitle{\subsubsecname}
+
+\begin{block}{Triangulation}
+Construct a chordal graph by adding chords (``shortcut'' edges) all circles of length 4+.
+\end{block} 
+
+Consider the following graph with vertices $A,B,C,E$ and add chords where necessary:
+
+
+	\begin{figure}[h]
+	\centering
+	\includegraphics[height=3.5cm]{img/graph_example_triangulate}
+	\caption{a non-decomposable graph}
+	\end{figure}
+
+\mode<article>{
+		\begin{figure}[h]
+		 \centering
+		 \savebox{\imagebox}{
+		 \includegraphics[width=0.3\textwidth]{img/graph_example_triangulate_sol1}}%
+		 \begin{subfigure}[t]{0.35\textwidth}
+			 \centering
+			 \usebox{\imagebox}% Place largest image
+			 %\caption{example decomposition}
+		 \end{subfigure}
+		 \hspace{7mm}
+		 \begin{subfigure}[t]{0.3\textwidth}
+			 \centering
+			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+			 \includegraphics[width=0.99\textwidth]{img/graph_example_triangulate_sol2}
+			 }
+			 %\caption{because $G_{A \cup C}$ is not decomposable}%
+		 \end{subfigure}
+		 \caption{Possible triangulations.}
+		\end{figure}
+}
+
+
+\end{frame}
+
+
+\begin{frame}\frametitle{\subsubsecname}
+
+\begin{block}{Triangulation}
+Construct a chordal graph by adding chords (``shortcut'' edges) all circles of length 4+.
+\end{block} 
+
+Consider the following graph with vertices $A,B,C,E$ and add chords where necessary:\\
+\slidesonly{\textbf{(see blackboard)}}
+
+
+		\begin{figure}[h]
+		 \centering
+		 \savebox{\imagebox}{
+		 \includegraphics[width=0.3\textwidth]{img/graph_example2_triangulate}}%
+		 \begin{subfigure}[t]{0.35\textwidth}
+			 \centering
+			 \usebox{\imagebox}% Place largest image
+			 \caption{example graph to triangulate}
+		 \end{subfigure}
+		 \hspace{7mm}
+		 \visible<2>{
+		 \begin{subfigure}[t]{0.3\textwidth}
+			 \centering
+			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+			 \includegraphics[width=0.99\textwidth]{img/graph_example2_triangulate_sol1}
+			 }
+			 \caption{One possible and non-unique triangulation}%
+		 \end{subfigure}
+		 \caption{Triangulation example}
+		 }
+		\end{figure}
+
+\end{frame}
+
+
+\begin{frame}\frametitle{\subsubsecname}
+
+\begin{block}{Triangulation}
+Construct a chordal graph by adding chords (``shortcut'' edges) all circles of length 4+.
+\end{block} 
+
+\question{Is this a chordal graph? i.e. does it contain cycles with 4+ vertices?}\\
+
+
+		\begin{figure}[h]
+		 \centering
+		 \savebox{\imagebox}{
+		 \includegraphics[width=0.3\textwidth]{img/graph_example3_triangulate}}%
+		 \begin{subfigure}[t]{0.35\textwidth}
+			 \centering
+			 \usebox{\imagebox}% Place largest image
+			 \caption{example graph}
+		 \end{subfigure}
+		 \hspace{7mm}
+		 \visible<2>{
+		 \begin{subfigure}[t]{0.3\textwidth}
+			 \centering
+			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+			 \includegraphics[width=0.99\textwidth]{img/graph_example3_triangulate_HINT}
+			 }
+			 \caption{The cycle CEZX requires a chord for the graph to be chordal.}%
+		 \end{subfigure}
+		 \caption{Determining if a graph is chordal}
+		 }
+		\end{figure}
+
+\end{frame}
+
+\subsection{Construction of the Junction Tree}
+
+\begin{frame} 
+\mode<presentation>{
+    \begin{center} \huge
+        \secname
+    \end{center}
+    \begin{figure}[h]
+	 \centering
+	 \includegraphics[width=0.8\textwidth]{img/jt_roadmap}%
+	\end{figure}
+}
+\textbf{(switch to lecture slides, come back for message passing example)}
+\end{frame}
+
 

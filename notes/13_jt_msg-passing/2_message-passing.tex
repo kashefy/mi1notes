@@ -7,6 +7,45 @@
     \begin{center} \huge
         \secname
     \end{center}
-    $$P(X,Y) = P(X)P(Y)$$
+    kinda like look-up-table
 \end{frame}
 }
+
+\begin{frame}
+
+Inference in  a junction tree:
+
+\begin{enumerate}
+\item clique potentials (non-negative function) for each clique (get definitions from DAG)
+\item order initialization according to topological sorting (parent -> child)
+\item add clique potential(s) for observed evidence(s)
+\item perform message passing
+\item extract marginals form messages
+\item perform normalization
+\end{enumerate}
+\end{frame}
+
+\subsection{Overview}
+
+\begin{frame}\frametitle{Message Passing: Overview}
+
+\begin{itemize}
+\item essentially storage of local computations for faster look-up
+\item will be used to calculate conditional probabilities in a junction tree by only using local ``simpler'' computations.
+\item scales well with no. of veriables.
+\end{itemize}
+
+\end{frame}
+
+\subsection{Procedure}
+
+
+\begin{frame}\frametitle{\secname: \subsecname}
+
+\begin{enumerate}
+\item request pass: selecting the root (for tree structures any node can be the root, so not sensitive to choice of root node)
+\item collect pass: collect messages from other neighbors
+\item distribute pass: 
+\end{enumerate}
+
+\end{frame}
