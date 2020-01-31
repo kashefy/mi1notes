@@ -1,87 +1,19 @@
-\section{Message Passing}
+\section{Message Passing Example}
 
 \definecolor{darkgreen}{rgb}{0,0.6,0}
 
 
-% -----------------------------------------------------------------------------
-\begin{frame} \frametitle{Message passing}
-	%\iitem{a third pass can calculate all other marginals}
-	\begin{minipage}[c]{12.1cm}
-		\begin{minipage}[][1cm][c]{8cm}
-			\begin{itemize}
-				\item first pass from root to leaves: ``request''
-			\end{itemize}
-		\end{minipage}
-		\hfill \raisebox{-4mm}{\includegraphics[width=4cm]{img/section3_fig20}} \\
-		\begin{minipage}[c]{8cm}
-			\begin{itemize}
-				\item second pass from leaves to root: ``collect''
-			\end{itemize}
-		\end{minipage}
-		\hfill \raisebox{-8mm}{\includegraphics[width=4cm]{img/section3_fig21}} \\
-		\pause
-		\begin{minipage}{8cm}
-			\begin{itemize}
-				\item a third pass can calculate all other \\
-					marginals: ``distribute''
-					% third pass from root to leaves: ``distribute''
-			\end{itemize}
-		\end{minipage}
-		\hfill \raisebox{-6mm}{\includegraphics[width=4cm]{img/section3_fig22}} \\
-	\end{minipage}
-\end{frame}
-
-\subsection{The sum-product algorithm}
-% -----------------------------------------------------------------------------
-\begin{frame} \frametitle{\subsecname}
-	\vspace{-4mm}
-	%\begin{minipage}{12cm}
-		%\begin{minipage}{6.5cm}
-			%\vspace{5mm}
-			%\includegraphics[height=3.5cm]{img/tree_inference_product_message_v2}
-			%\begin{itemize}
-				%\item product message from $X_m$ to $f_s$
-			%\end{itemize}
-		%\end{minipage}
-		%\hfill
-		%\visible<2>{\begin{minipage}{6cm}
-			%\hfill
-			%\includegraphics[height=3.65cm]{img/tree_inference_sum_message_v2}
-			%\vspace{2mm} 
-			%\begin{itemize}
-				%\item sum message from $f_s$ to $X_i$
-			%\end{itemize}
-		%\end{minipage}}
-	%\end{minipage}
-    
-    Definining the messages between the different types of nodes in a bipartite graph (e.g. separators and cliques)\footnote{for details, see p. 402 in \citep{bishop2006pattern}}
-
-	%\hspace{-4mm}
-	\begin{align}
-		\mu_{X_m \to f_s}(X_m) &\;:=&&\kern-4ex
-			\kern-3ex\prod_{l \in \text{neighbor}(X_m) \setminus\{f_s\}}\kern-3ex
-			\mu_{f_l \to X_m}(X_m) \tag{product}\\[1mm] 
-		\visible<2>{
-		\mu_{f_s \to X_i}(X_i) &\;:=&&\kern-3ex 
-			\sum_{X_m, \ldots, X_M}\kern-2ex f_s(X_i, X_m,\ldots, X_M) 
-			\kern-5ex\prod_{k \in \text{neighbor}(f_s)\setminus\{X_i\}}\kern-5ex 
-			\mu_{X_k \to f_s}(X_k) 
-			\only<1>{\nonumber\hspace{10mm}}
-			\only<2>{\tag{sum}}
-		}
-        \label{eq:sumproduct}
-	\end{align}
-	
-\end{frame}
 
 \begin{frame} \frametitle{Inference}
-	\begin{textblock}{14}(0.5,3)
+	%\begin{textblock}{14}(0.5,3)
 	\begin{enumerate}
 		\item<1-> initialization of the clique potentials $f_k(\mathcal X_k)$
 			\only<1>{ \begin{itemize}
 				\item in the order established by 
 					topological sorting	\\(e.g.
-					$A \to B \to C \to E \to D \to F$) \\[2mm]
+					$A \to B \to C \to E \to D \to F$) \\
+					
+					\vspace{2mm}
 					{\small\begin{tabular}{|c|c|c|c|}
 					\hline 
 					$f_1(A,B,C)$ & $f_2(B,C,E)$ & $f_3(B,D)$ & $f_4(B,E,F)$ \\
@@ -95,10 +27,11 @@
 					\end{tabular} }
 			\end{itemize} }
 		\only<1>{\vspace{4mm}
-			{\small $$ \hspace{-4mm} 
+			{\small 
+			\begin{equation} \slidesonly{\hspace{-4mm}}
 				P(A,B,C,D,E,F) \;\;=\;\; 
 				P(A) \, P(B|A) \, P(C|A) \, P(D|B) \, P(E|C) \, P(F|B,E) 
-			$$}
+			\end{equation}}
 		}
 		\item<2-> modification of the clique potentials by the observed evidence
 			\only<2>{\begin{itemize}
@@ -118,7 +51,7 @@
 		\item<3-> message passing 
 			\only<3>{\begin{itemize}
 				\item begin {\color{red}``request'' pass} 
-					from arbitrary node $N$, e.g.~$A$
+					from arbitrary node $N$, e.g.~$D=d$
 				\item wait for all message of {\color{blue}``collect'' pass} 
 							to return
 				\item send last {\color{darkgreen}``distribute'' pass} from $N$
@@ -136,14 +69,16 @@
 			}
 		\item<5-> normalization yields conditional marginals
 			\only<5>{ \small
-				$$
-					P(C\, | D = d, E = e) = \alpha \, \underbrace{P(C, \,D = d, E = e)}_{\tilde P(C)}, \quad\qquad\qquad \alpha = \frac{1}{\sum_C \tilde P(C)}
-				$$ 
+				\begin{equation}
+					P(C\, | D = d, E = e) = \alpha \, \underbrace{P(C, \,D = d, E = e)}_{\tilde P(C)}, \slidesonly{\quad\qquad}\qquad \alpha = \frac{1}{\sum_C \tilde P(C)}
+				\end{equation}
 			}
 	\end{enumerate}	
-	\end{textblock}
+	%\end{textblock}
 	
-	\begin{textblock}{15}(1.5,9.5)
+	%\begin{textblock}{15}(1.5,9.5)
+	
+	\slidesonly{\vspace{-10mm}}
 		\begin{minipage}{12cm}
 			\begin{minipage}{4cm}
 				\includegraphics[width=3cm]{img/graph_example_dag.jpg}
@@ -157,7 +92,7 @@
 					{img/graph_example_junction_tree_messages_v2.pdf}
 			\end{minipage}
 		\end{minipage}
-	\end{textblock}
+	%\end{textblock}
 \end{frame}
 
 \begin{frame}{Only}\frametitle{Message passing exercise}
@@ -190,135 +125,86 @@ Define the messages by applying the sum-product-algorithm\notesonly{ from \eqref
 \begingroup
 \footnotesize
 \begin{enumerate}
- \item<only@1> Pick root (e.g. $f_{5}$), doesn't matter much%, no effect on the messages, but possibly affects the order in which we will define them   
- %\item<only@1> assume we've done the request
+ \item<only@1> Define potentials for observed variables (in this case $D=d$ and $E=e$):
+ \begin{enumerate}[(a)]
+ \item $f_5(D) = 
+						\left\{\begin{array}{c} 
+							1, \; D=d \\[-1mm]
+							0, \; D \neq d 
+						\end{array}\right.$
+ \item $f_6(E) = 
+						\left\{\begin{array}{c} 
+							1, \; E=e \\[-1mm]
+							0, \; E \neq e 
+						\end{array}\right.$
+ \end{enumerate}
+ \item<only@1> Pick root (e.g. $f_{5}$), doesn't matter much. \notesonly{It will affect the order in which we the messages are defined (either in the collect or in the distribute pass)}.
  \item<only@1-5> \textcolor{blue}{collect} (start at leaf node):
- \begin{itemize}
+ \begin{enumerate}[(a)]
   \item<only@2> `branch on the right`:
-  \begin{itemize}
+  \begin{enumerate}[(i)]
   \item $\msg{f_{1}}{B,C}(B,C) := \sum_{A} f_{1}(A,B,C) \overbrace{\hcancel{\prod_{k \in \text{neigh.}(f_s)\setminus\{X_i\}}\kern-5ex 
 			\mu_{X_k \to f_s}(X_k)}}^{\text{no other neighbors}}$
   \item $\msg{B,C}{f_{2}}(B,C) := \msg{f_{1}}{B,C}(B,C) = \sum_{A} f_{1}(A,B,C)$
-  \end{itemize}
+  \end{enumerate}
   \item<only@3> `top branch`:
-  \begin{itemize}
+  \begin{enumerate}[(i)]
   \item $\msg{f_{4}}{B,E}(B,E) := \sum_{F} f_{4}(B,E,F)$
   \item $\msg{B,E}{f_{2}}(B,E) := \msg{f_{4}}{B,E}(B,E) = \sum_{F} f_{4}(B,E,F)$
-  \end{itemize}
+  \end{enumerate}
   \item<only@4> `bottom branch`:
-  \begin{itemize}
+  \begin{enumerate}[(i)]
   \item $\msg{f_{6}}{E}(E) := f_{6}(E)$
   \item $\msg{E}{f_{2}}(E) := \msg{f_{6}}{E}(E) = f_{6}(E)$
-  \end{itemize}
+  \end{enumerate}
   \item<only@5> `left branch`:
-  \begin{itemize}
+  \begin{enumerate}[(i)]
   \item $\msg{f_{2}}{B}(B) := \sum_{C,E} f_{2}(B,C,E) \cdot \msg{E}{f_{2}}(E) \cdot \msg{B,E}{f_{2}}(B,E) \cdot \msg{B,C}{f_{2}}(B,C)$
   \item $\msg{B}{f_{3}}(B) := \msg{f_{2}}{B}(B)$
   \item $\msg{f_{3}}{D}(D) := \sum_{B} f_{3}(B,D) \cdot \msg{B}{f_{3}}(B)$
   \item $\msg{D}{f_{5}}(D) := \msg{f_{3}}{D}(D)$
-  \end{itemize}
- \end{itemize}
- \item<only@6->  \textcolor{darkgreen}{dsitribute} (start at root node):
- \begin{itemize}
+  \end{enumerate}
+ \end{enumerate}
+ \item<only@6->  \textcolor{darkgreen}{distribute} (start at root node):
+ \begin{enumerate}[(a)]
   \item<only@7> go right:
-  \begin{itemize}
+  \begin{enumerate}[(i)]
     \item $\msg{f_{5}}{D}(D) := f_{5}$
     \item $\msg{D}{f_{3}}(D) := \msg{f_{5}}{D}(D) = f_{5}$
     \item $\msg{f_{3}}{B}(B) := \sum_{D} f_{3}(B,D) \cdot \msg{D}{f_{3}}(D)$  
     \item $\msg{B}{f_{2}}(B) := \msg{f_{3}}{B}(B)$    
-    \end{itemize}
+    \end{enumerate}
   \item<only@8-9> go further to the right:
-  \begin{itemize}
+  \begin{enumerate}[(i)]
   \item $\msg{f_{2}}{B,C}(B,C) := \sum_{E} f_{2}(B,C,E) \cdot \msg{E}{f_{2}}(E) \cdot \msg{B,E}{f_{2}}(B,E)$
   \item $\msg{B,C}{f_{1}}(B,C) := \ldots$ 
-  \end{itemize}
-  \item go up: $\ldots$
-  \item go down: $\ldots$
-  \end{itemize}
+  \end{enumerate}
+  \item<only@9> go up: $\ldots$
+  \item<only@9> go down: $\ldots$
+  \end{enumerate}
   \item<only@10> calculate marginals:
-  \begin{itemize}
+  \begin{enumerate}[(a)]
   \item \begin{align}
 					P(C, \,D = d, E = e) 
 						\;\; =& \;\; \sum_{B}{} \;
 							{\color{blue}\mu_{f_1 \to BC}(B,C)} \cdot 
 							{\color{darkgreen} \mu_{f_2 \to BC}(B,C)} 
 		\end{align}
-  \end{itemize}
+  \item other queries you are interested in $\ldots$
+  \end{enumerate}
   \item<only@11> normalize to compute conditional marginals:
-  \begin{itemize}
+  \begin{enumerate}
   \item[]
   \slidesonly{\vspace{-3mm}}
    \begin{align}
             P(C\, | D = d, E = e) &= \alpha \, \underbrace{P(C, \,D = d, E = e)}_{\tilde P(C)},\\
             \text{where} \;\; \alpha &= \frac{1}{\sum_C \tilde P(C)}
 		\end{align}
-  \end{itemize}
+  \end{enumerate}
   
 \end{enumerate}
  \endgroup
 \end{frame}
 
-\subsubsection{The running intersection property}
-
-\begin{frame}\frametitle{\subsubsecname}
- 
-    \begin{minipage}{0.4\textwidth}
-        \begin{block}{The running intersection property}
-            \small
-            All nodes on the path between two 
-            cliques, which both contain variable $X$, 
-            also contain $X$.
-        \end{block} 
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.4\textwidth}
-        %\begin{figure}[h]
-            %\centering 
-            \includegraphics[width=5cm]{img/junction_tree_bipartite}
-            \mode<article>{
-            \captionof{figure}{The running intersection property}
-            }
-        %\end{figure}
-    \end{minipage}
-
-\only<2>{
-
-
-\question{Is the following a valid junction tree?}
-
-        \begin{figure}[h]
-            \centering 
-            \includegraphics[width=5cm]{img/graph_example_isvalid_junction_tree}
-            \mode<article>{
-            \caption{A valid junction tree}
-            }
-        \end{figure}
-}
-
-\only<3,4>{
-\question{Which of the following remains a valid junction tree? (irrespective of being useful for exact inference)}
-}
-
-\only<3>{
-
-        \begin{figure}[h]
-            \centering 
-            \includegraphics[width=5cm]{img/graph_example_isvalid2_junction_tree}
-            \mode<article>{
-            \caption{This graph remains a valid junction tree}
-            }
-        \end{figure}
-}
-\only<4>{
-        \begin{figure}[h]
-            \centering 
-            \includegraphics[width=5cm]{img/graph_example_isvalid3_junction_tree}
-            \mode<article>{
-            \caption{This graph no longer qualifies as a junction tree}
-            }
-        \end{figure}
-}
-
-\end{frame}
 
 

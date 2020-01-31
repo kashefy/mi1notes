@@ -32,7 +32,7 @@
 \item \underline{Today}:
 \begin{itemize}
 \item the Junction tree algorithm
-\item the message passsing algorithm (factor analysis anyone?)
+\item the message passing algorithm (factor analysis anyone?)
 \end{itemize}
 \end{itemize}
 
@@ -113,9 +113,9 @@ P(X_{1},\ldots,X_{n}) = \prod_{i=1}^{n} P(X_{i} | parents(X_{i}))
 
 \begin{frame}\frametitle{\subsecname}
 
-We need a representation that scales well for large DAGs to perform maginalisation (``summing out'') and conditioning more efficiently.
+We need a representation that scales well for large DAGs to perform marginalisation (``summing out'') and conditioning more efficiently.
 
-The Junction tree algorithm converts into a tree structure mad eup of \emph{cliques} and \emph{separators}.
+The Junction tree algorithm converts into a tree structure made up of \emph{cliques} and \emph{separators}.
 
 \question{What is a difference between a DAG and a tree?}
 
@@ -455,11 +455,11 @@ $C$ can also be a set of nodes (cf. ).
 	
 	\pause 
 	
-	- We apply triangulation. We add a chord, i.e. ``shortcut'' edges to eliminate any ``circles'' of 4+ vetices.
+	- We apply triangulation. We add a chord, i.e. ``shortcut'' edges to eliminate any ``circles'' of 4+ vertices.
 	
 	\pause 
 	
-	According to Ch 9.4.3 in \citep{koller2009probabilistic}, constructing the chordal graph is actually a heurisitic of elimination ordering. It plays a role in keeping the size of cliques small. Smaller cliques allow for a more ``modular'' bipartite graph which leads to faster computation during inference.
+	According to Ch 9.4.3 in \citep{koller2009probabilistic}, constructing the chordal graph is actually a heuristic of elimination ordering. It plays a role in keeping the size of cliques small. Smaller cliques allow for a more ``modular'' bipartite graph which leads to faster computation during inference.
 	
 \end{frame}
 
@@ -587,7 +587,69 @@ Construct a chordal graph by adding chords (``shortcut'' edges) all circles of l
 	 \includegraphics[width=0.8\textwidth]{img/jt_roadmap}%
 	\end{figure}
 }
-\textbf{(switch to lecture slides, come back for message passing example)}
+\textbf{(switch to lecture slides, come back for running intersection property and message passing example)}
 \end{frame}
 
 
+\subsubsection{The running intersection property}
+
+\begin{frame}\frametitle{\subsubsecname}
+ 
+    \begin{minipage}{0.4\textwidth}
+        \begin{block}{The running intersection property}
+            \small
+            All nodes on the path between two 
+            cliques, which both contain variable $X$, 
+            also contain $X$.
+        \end{block} 
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.4\textwidth}
+        %\begin{figure}[h]
+            %\centering 
+            \includegraphics[width=5cm]{img/junction_tree_bipartite}
+            \mode<article>{
+            \captionof{figure}{The running intersection property}
+            }
+        %\end{figure}
+    \end{minipage}
+
+\only<2>{
+
+
+\question{Is the following a valid junction tree?}
+
+        \begin{figure}[h]
+            \centering 
+            \includegraphics[width=5cm]{img/graph_example_isvalid_junction_tree}
+            \mode<article>{
+            \caption{A valid junction tree}
+            }
+        \end{figure}
+}
+
+\only<3,4>{
+\question{Which of the following remains a valid junction tree? (irrespective of being useful for exact inference)}
+}
+
+\only<3>{
+
+        \begin{figure}[h]
+            \centering 
+            \includegraphics[width=5cm]{img/graph_example_isvalid2_junction_tree}
+            \mode<article>{
+            \caption{This graph remains a valid junction tree}
+            }
+        \end{figure}
+}
+\only<4>{
+        \begin{figure}[h]
+            \centering 
+            \includegraphics[width=5cm]{img/graph_example_isvalid3_junction_tree}
+            \mode<article>{
+            \caption{This graph no longer qualifies as a junction tree}
+            }
+        \end{figure}
+}
+
+\end{frame}
