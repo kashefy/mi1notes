@@ -127,12 +127,12 @@
 		\vspace{2mm}
 		\item<4-> calculate marginals from messages
 			\only<4>{ \small
-				$$
+				\begin{equation}
 					P(C, \,D = d, E = e) 
 						\quad=\quad \sum_{B}{} \;
 							{\color{blue}\mu_{f_1 \to BC}(B,C)} \cdot 
 							{\color{darkgreen} \mu_{f_2 \to BC}(B,C)} 
-				$$
+				\end{equation}
 			}
 		\item<5-> normalization yields conditional marginals
 			\only<5>{ \small
@@ -160,13 +160,14 @@
 	\end{textblock}
 \end{frame}
 
-\begin{frame}{Only}
+\begin{frame}{Only}\frametitle{Message passing exercise}
 
 \mode<presentation>{
 
-\placeimage{9.}{1}{img/graph_example_junction_tree_messages_v2_noextra}{height=2.5cm}
+\placeimage{9.}{0.8}{img/graph_example_junction_tree_messages_v2_noextra}{height=2.5cm}
 
 \begin{block}{sum-product}
+\slidesonly{\vspace{-4mm}}
 \begingroup
 \small
 	\begin{align}
@@ -190,8 +191,8 @@ Define the messages by applying the sum-product-algorithm\notesonly{ from \eqref
 \footnotesize
 \begin{enumerate}
  \item<only@1> Pick root (e.g. $f_{5}$), doesn't matter much%, no effect on the messages, but possibly affects the order in which we will define them   
- \item<only@1> assume we've done the request
- \item<only@1-> \textcolor{blue}{collect} (start at leaf node):
+ %\item<only@1> assume we've done the request
+ \item<only@1-5> \textcolor{blue}{collect} (start at leaf node):
  \begin{itemize}
   \item<only@2> `branch on the right`:
   \begin{itemize}
@@ -211,12 +212,48 @@ Define the messages by applying the sum-product-algorithm\notesonly{ from \eqref
   \end{itemize}
   \item<only@5> `left branch`:
   \begin{itemize}
-  \item $\msg{f_{2}}{B}(B) := \sum_{B,E} f_{2}(B,C,E) \cdot \msg{E}{f_{2}}(E) \cdot \msg{B,E}{f_{2}}(B,E) \cdot \msg{B,E}{f_{2}}(B,E)$
+  \item $\msg{f_{2}}{B}(B) := \sum_{C,E} f_{2}(B,C,E) \cdot \msg{E}{f_{2}}(E) \cdot \msg{B,E}{f_{2}}(B,E) \cdot \msg{B,C}{f_{2}}(B,C)$
   \item $\msg{B}{f_{3}}(B) := \msg{f_{2}}{B}(B)$
   \item $\msg{f_{3}}{D}(D) := \sum_{B} f_{3}(B,D) \cdot \msg{B}{f_{3}}(B)$
   \item $\msg{D}{f_{5}}(D) := \msg{f_{3}}{D}(D)$
   \end{itemize}
  \end{itemize}
+ \item<only@6->  \textcolor{darkgreen}{dsitribute} (start at root node):
+ \begin{itemize}
+  \item<only@7> go right:
+  \begin{itemize}
+    \item $\msg{f_{5}}{D}(D) := f_{5}$
+    \item $\msg{D}{f_{3}}(D) := \msg{f_{5}}{D}(D) = f_{5}$
+    \item $\msg{f_{3}}{B}(B) := \sum_{D} f_{3}(B,D) \cdot \msg{D}{f_{3}}(D)$  
+    \item $\msg{B}{f_{2}}(B) := \msg{f_{3}}{B}(B)$    
+    \end{itemize}
+  \item<only@8-9> go further to the right:
+  \begin{itemize}
+  \item $\msg{f_{2}}{B,C}(B,C) := \sum_{E} f_{2}(B,C,E) \cdot \msg{E}{f_{2}}(E) \cdot \msg{B,E}{f_{2}}(B,E)$
+  \item $\msg{B,C}{f_{1}}(B,C) := \ldots$ 
+  \end{itemize}
+  \item go up: $\ldots$
+  \item go down: $\ldots$
+  \end{itemize}
+  \item<only@10> calculate marginals:
+  \begin{itemize}
+  \item \begin{align}
+					P(C, \,D = d, E = e) 
+						\;\; =& \;\; \sum_{B}{} \;
+							{\color{blue}\mu_{f_1 \to BC}(B,C)} \cdot 
+							{\color{darkgreen} \mu_{f_2 \to BC}(B,C)} 
+		\end{align}
+  \end{itemize}
+  \item<only@11> normalize to compute conditional marginals:
+  \begin{itemize}
+  \item[]
+  \slidesonly{\vspace{-3mm}}
+   \begin{align}
+            P(C\, | D = d, E = e) &= \alpha \, \underbrace{P(C, \,D = d, E = e)}_{\tilde P(C)},\\
+            \text{where} \;\; \alpha &= \frac{1}{\sum_C \tilde P(C)}
+		\end{align}
+  \end{itemize}
+  
 \end{enumerate}
  \endgroup
 \end{frame}
