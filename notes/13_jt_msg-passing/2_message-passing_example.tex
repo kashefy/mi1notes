@@ -31,9 +31,9 @@
 	\end{minipage}
 \end{frame}
 
-
+\subsection{The sum-product algorithm}
 % -----------------------------------------------------------------------------
-\begin{frame} \frametitle{The sum-product algorithm}
+\begin{frame} \frametitle{\subsecname}
 	\vspace{-4mm}
 	%\begin{minipage}{12cm}
 		%\begin{minipage}{6.5cm}
@@ -53,8 +53,10 @@
 			%\end{itemize}
 		%\end{minipage}}
 	%\end{minipage}
+    
+    Definining the messages between the different types of nodes in a bipartite graph (e.g. separators and cliques)\footnote{for details, see p. 402 in \citep{bishop2006pattern}}
 
-	\hspace{-4mm}
+	%\hspace{-4mm}
 	\begin{align}
 		\mu_{X_m \to f_s}(X_m) &\;:=&&\kern-4ex
 			\kern-3ex\prod_{l \in \text{neighbor}(X_m) \setminus\{f_s\}}\kern-3ex
@@ -67,9 +69,9 @@
 			\only<1>{\nonumber\hspace{10mm}}
 			\only<2>{\tag{sum}}
 		}
+        \label{eq:sumproduct}
 	\end{align}
 	
-	\hfill{\footnotesize  Bishop 2006 (p.~402)}
 \end{frame}
 
 \begin{frame} \frametitle{Inference}
@@ -158,8 +160,65 @@
 	\end{textblock}
 \end{frame}
 
-\begin{frame}
- $\msg{A}{f_{1}}(A)$   
+\begin{frame}{Only}
+
+\mode<presentation>{
+
+\placeimage{9.}{1}{img/graph_example_junction_tree_messages_v2_noextra}{height=2.5cm}
+
+\begin{block}{sum-product}
+\begingroup
+\small
+	\begin{align}
+		\mu_{X_m \to f_s}(X_m) &\;:=&&\kern-4ex
+			\kern-3ex\prod_{l \in \text{neighbor}(X_m) \setminus\{f_s\}}\kern-3ex
+			\mu_{f_l \to X_m}(X_m) \tag{product}\\[1mm] 
+		\mu_{f_s \to X_i}(X_i) &\;:=&&\kern-3ex 
+			\sum_{X_m, \ldots, X_M}\kern-2ex f_s(X_i, X_m,\ldots, X_M) 
+			\kern-5ex\prod_{k \in \text{neighbor}(f_s)\setminus\{X_i\}}\kern-5ex 
+			\mu_{X_k \to f_s}(X_k) 
+			\only<1>{\nonumber\hspace{10mm}}
+			\only<2>{\tag{sum}}
+	\end{align}
+\endgroup
+    \end{block}
+    }
+    
+Define the messages by applying the sum-product-algorithm\notesonly{ from \eqref{eq:suproduct}}:
+
+\begingroup
+\footnotesize
+\begin{enumerate}
+ \item<only@1> Pick root (e.g. $f_{5}$), doesn't matter much%, no effect on the messages, but possibly affects the order in which we will define them   
+ \item<only@1> assume we've done the request
+ \item<only@1-> \textcolor{blue}{collect} (start at leaf node):
+ \begin{itemize}
+  \item<only@2> `branch on the right`:
+  \begin{itemize}
+  \item $\msg{f_{1}}{B,C}(B,C) := \sum_{A} f_{1}(A,B,C) \overbrace{\hcancel{\prod_{k \in \text{neigh.}(f_s)\setminus\{X_i\}}\kern-5ex 
+			\mu_{X_k \to f_s}(X_k)}}^{\text{no other neighbors}}$
+  \item $\msg{B,C}{f_{2}}(B,C) := \msg{f_{1}}{B,C}(B,C) = \sum_{A} f_{1}(A,B,C)$
+  \end{itemize}
+  \item<only@3> `top branch`:
+  \begin{itemize}
+  \item $\msg{f_{4}}{B,E}(B,E) := \sum_{F} f_{4}(B,E,F)$
+  \item $\msg{B,E}{f_{2}}(B,E) := \msg{f_{4}}{B,E}(B,E) = \sum_{F} f_{4}(B,E,F)$
+  \end{itemize}
+  \item<only@4> `bottom branch`:
+  \begin{itemize}
+  \item $\msg{f_{6}}{E}(E) := f_{6}(E)$
+  \item $\msg{E}{f_{2}}(E) := \msg{f_{6}}{E}(E) = f_{6}(E)$
+  \end{itemize}
+  \item<only@5> `left branch`:
+  \begin{itemize}
+  \item $\msg{f_{2}}{B}(B) := \sum_{B,E} f_{2}(B,C,E) \cdot \msg{E}{f_{2}}(E) \cdot \msg{B,E}{f_{2}}(B,E) \cdot \msg{B,E}{f_{2}}(B,E)$
+  \item $\msg{B}{f_{3}}(B) := \msg{f_{2}}{B}(B)$
+  \item $\msg{f_{3}}{D}(D) := \sum_{B} f_{3}(B,D) \cdot \msg{B}{f_{3}}(B)$
+  \item $\msg{D}{f_{5}}(D) := \msg{f_{3}}{D}(D)$
+  \end{itemize}
+ \end{itemize}
+\end{enumerate}
+ \endgroup
 \end{frame}
 
 \subsubsection{The running intersection property}
