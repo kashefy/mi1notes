@@ -31,7 +31,9 @@
 			\begin{equation} \slidesonly{\hspace{-4mm}}
 				P(A,B,C,D,E,F) \;\;=\;\; 
 				P(A) \, P(B|A) \, P(C|A) \, P(D|B) \, P(E|C) \, P(F|B,E) 
-			\end{equation}}
+			\end{equation}
+			\slidesonly{\vspace{-10mm}}
+			}
 		}
 		\item<2-> modification of the clique potentials by the observed evidence
 			\only<2>{\begin{itemize}
@@ -139,7 +141,7 @@ Define the messages by applying the sum-product-algorithm\notesonly{ from \eqref
 						\end{array}\right.$
  \end{enumerate}
  \item<only@1> Pick root (e.g. $f_{5}$), doesn't matter much. \notesonly{It will affect the order in which we the messages are defined (either in the collect or in the distribute pass)}.
- \item<only@1-5> \textcolor{blue}{collect} (start at leaf node):
+ \item<only@1-5> \textcolor{blue}{collect} (start at leaf node): \slidesonly{\only<1>{\textbf{(see blackboard)}}}
  \begin{enumerate}[(a)]
   \item<only@2> `branch on the right`:
   \begin{enumerate}[(i)]

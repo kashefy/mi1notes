@@ -7,23 +7,11 @@
     \begin{center} \huge
         \secname
     \end{center}
-    kinda like look-up-table
+    \begin{center}
+    a compact look-up-table
+    \end{center}
 \end{frame}
 }
-
-\begin{frame}
-
-Inference in  a junction tree:
-
-\begin{enumerate}
-\item clique potentials (non-negative function) for each clique (get definitions from DAG)
-\item order initialization according to topological sorting (parent -> child)
-\item add clique potential(s) for observed evidence(s)
-\item perform message passing
-\item extract marginals form messages
-\item perform normalization
-\end{enumerate}
-\end{frame}
 
 \subsection{Overview}
 
@@ -45,14 +33,14 @@ Inference in  a junction tree:
 	\begin{minipage}[c]{12.1cm}
 		\begin{minipage}[][1cm][c]{8cm}
 			\begin{itemize}
-				\item first pass from root to leaves: ``request''\\
+				\item first pass from root to leaves: \textcolor{red}{``request''}\\
 				selecting the root (for tree structures any node can be the root, so not sensitive to choice of root node)
 			\end{itemize}
 		\end{minipage}
 		\hfill \raisebox{-4mm}{\includegraphics[width=4cm]{img/section3_fig20}} \\
 		\begin{minipage}[c]{8cm}
 			\begin{itemize}
-				\item second pass from leaves to root: ``collect''\\
+				\item second pass from leaves to root: \textcolor{blue}{``collect''}\\
 				collect messages from other neighbors
 			\end{itemize}
 		\end{minipage}
@@ -61,7 +49,7 @@ Inference in  a junction tree:
 		\begin{minipage}{8cm}
 			\begin{itemize}
 				\item a third pass can calculate all other \\
-					marginals: ``distribute''\\
+					marginals: \textcolor{darkgreen}{``distribute''}\\
 					third pass from root to leaves to compute the remaining messages.
 			\end{itemize}
 		\end{minipage}
