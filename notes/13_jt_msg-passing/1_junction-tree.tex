@@ -365,8 +365,8 @@ $C$ can also be a set of nodes (cf. ).
 			 \includegraphics[width=0.99\textwidth]{img/section3_fig13_v2}
 			 }
 			 \caption{\underline{Hint}
-			 \only<9>{: because $G_{A \cup C}$ is decomposable and $G_{A \cup B}$ is complete}%
-			 }
+			 \only<9>{: because $G_{A \cup C}$ is decomposable and $G_{A \cup B}$ is complete}
+			 }%
 			 \label{fig:hintnotdecomp}
 		 \end{subfigure}
 		 \only<9>{\caption{a proper decomposition and decomposable}}
@@ -393,17 +393,18 @@ $C$ can also be a set of nodes (cf. ).
 	%\end{figure}
 	\begin{figure}[h]
 		 \centering
+		 \hspace{-10mm}
 		 \savebox{\imagebox}{
-		 \includegraphics[width=0.6\textwidth]{img/jt_roadmap_requirement}}%
-		 \begin{subfigure}[t]{0.4\textwidth}
+		 \includegraphics[width=0.5\textwidth]{img/jt_roadmap_requirement}}%
+		 \begin{subfigure}[t]{0.3\textwidth}
 			 \centering
 			 \usebox{\imagebox}% Place largest image
 		 \end{subfigure}
 		 \hspace{15mm}
-		 \begin{subfigure}[t]{0.4\textwidth}
+		 \begin{subfigure}[t]{0.35\textwidth}
 			 \centering
 			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
-			 \includegraphics[width=0.4\textwidth]{img/directed_chordal_undirected_vertical}
+			 \includegraphics[width=0.3\textwidth]{img/directed_chordal_undirected_vertical}
 			 }
 		 \end{subfigure}
 		 \mode<article>{\caption{The construction of a junction tree requires a decomposable graph of cliques.}
@@ -482,6 +483,7 @@ $C$ can also be a set of nodes (cf. ).
 	
 \end{frame}
 
+\clearpage
 
 \subsubsection{Triangulation}
 
@@ -512,14 +514,27 @@ Construct a chordal graph by adding \emph{chords} (``shortcut'' edges) all cycle
 \end{frame}
 
 
+\newpage
+
+\subsubsection{Triangulation: Examples}
+
+
 \begin{frame}\frametitle{\subsubsecname}
 
+\mode<presentation>{
+\begin{block}{Triangulation}
+Construct a chordal graph by adding \emph{chords} (``shortcut'' edges) all cycles of length 4+.
+\end{block} 
+}
+
+\only<1>{
 Consider the following graph with vertices $A,B,C,E$ and add chords where necessary:
+\slidesonly{\textbf{(see blackboard)}}
 
 
 	\begin{figure}[h]
 	\centering
-	\includegraphics[height=3.5cm]{img/graph_example_triangulate}
+	\includegraphics[height=2.5cm]{img/graph_example_triangulate}
 	\caption{a non-decomposable graph}
 	\end{figure}
 
@@ -527,33 +542,25 @@ Consider the following graph with vertices $A,B,C,E$ and add chords where necess
 		\begin{figure}[h]
 		 \centering
 		 \savebox{\imagebox}{
-		 \includegraphics[width=0.3\textwidth]{img/graph_example_triangulate_sol1}}%
-		 \begin{subfigure}[t]{0.35\textwidth}
+		 \includegraphics[width=0.2\textwidth]{img/graph_example_triangulate_sol1}}%
+		 \begin{subfigure}[t]{0.25\textwidth}
 			 \centering
 			 \usebox{\imagebox}% Place largest image
-			 %\caption{example decomposition}
+			 %\caption{...}
 		 \end{subfigure}
 		 \hspace{7mm}
-		 \begin{subfigure}[t]{0.3\textwidth}
+		 \begin{subfigure}[t]{0.2\textwidth}
 			 \centering
 			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
 			 \includegraphics[width=0.99\textwidth]{img/graph_example_triangulate_sol2}
 			 }
-			 %\caption{because $G_{A \cup C}$ is not decomposable}%
+			 %\caption{...}%
 		 \end{subfigure}
 		 \caption{Possible triangulations.}
 		\end{figure}
 }
-
-
-\end{frame}
-
-
-\begin{frame}\frametitle{\subsubsecname}
-
-\begin{block}{Triangulation}
-Construct a chordal graph by adding chords (``shortcut'' edges) all circles of length 4+.
-\end{block} 
+}
+\only<2-3>{
 
 Consider the following graph with vertices $A,B,C,W,E,F$ and add chords where necessary:\\
 \slidesonly{\textbf{(see blackboard)}}
@@ -562,15 +569,15 @@ Consider the following graph with vertices $A,B,C,W,E,F$ and add chords where ne
 		\begin{figure}[h]
 		 \centering
 		 \savebox{\imagebox}{
-		 \includegraphics[width=0.3\textwidth]{img/graph_example2_triangulate}}%
-		 \begin{subfigure}[t]{0.35\textwidth}
+		 \includegraphics[width=0.25\textwidth]{img/graph_example2_triangulate}}%
+		 \begin{subfigure}[t]{0.25\textwidth}
 			 \centering
 			 \usebox{\imagebox}% Place largest image
 			 \caption{example graph to triangulate}
 		 \end{subfigure}
 		 \hspace{7mm}
-		 \visible<2>{
-		 \begin{subfigure}[t]{0.3\textwidth}
+		 \visible<3>{
+		 \begin{subfigure}[t]{0.25\textwidth}
 			 \centering
 			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
 			 \includegraphics[width=0.99\textwidth]{img/graph_example2_triangulate_sol1}
@@ -580,15 +587,8 @@ Consider the following graph with vertices $A,B,C,W,E,F$ and add chords where ne
 		 \caption{Triangulation example}
 		 }
 		\end{figure}
-
-\end{frame}
-
-
-\begin{frame}\frametitle{\subsubsecname}
-
-\begin{block}{Triangulation}
-Construct a chordal graph by adding chords (``shortcut'' edges) all circles of length 4+.
-\end{block} 
+}
+\only<4-5>{
 
 \question{Is this a chordal graph? i.e. does it contain chordless cycles with 4+ vertices?}\\
 
@@ -603,7 +603,7 @@ Construct a chordal graph by adding chords (``shortcut'' edges) all circles of l
 			 \caption{example graph}
 		 \end{subfigure}
 		 \hspace{7mm}
-		 \visible<2>{
+		 \visible<5>{
 		 \begin{subfigure}[t]{0.3\textwidth}
 			 \centering
 			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
@@ -618,8 +618,11 @@ Construct a chordal graph by adding chords (``shortcut'' edges) all circles of l
 		 }
 		 }
 		\end{figure}
+		}
 
 \end{frame}
+
+\clearpage
 
 % =============================================================================
 \subsection{Construction of the Junction Tree}
@@ -709,7 +712,7 @@ Construct a chordal graph by adding chords (``shortcut'' edges) all circles of l
 					\slidesonly{\vspace{5mm}}
 				\begin{itemize}
 					\item cliques are \underline{maximally} complete subgraphs\\
-					(i.e. sub-cliques are automatically absorbed)
+					(sub-cliques are automatically absorbed)
 					\item cliques can be found by elimination \\
 					\slidesonly{\vspace{10mm}}
 					\textbf{Caution: only eliminate a node if it is not part of another clique}
