@@ -257,25 +257,30 @@ $C$ can also be a set of nodes (cf. ).
 	
 	\pause
 	
-	\question{Are the following (i) a proper decomposition, (ii) decomposable graphs?}
+	\question{Are the following (i) a proper decomposition, (ii) decomposable graphs? \notesonly{(cf. \figref{fig:decompex1}, \figref{fig:decompex2}, \figref{fig:propernotdecompexample} and \figref{fig:propernotdecompexample4})} }
 
 	\slidesonly{\vspace{-9mm}}
 	
 	\begin{enumerate}
 	\item<only@2,3>[]
-		\begin{figure}[h]
-		\centering
+		%\begin{figure}[h]
+		\begin{center}
+		%\centering
 		\includegraphics[width=5cm]{img/section3_fig10_sub}
-		\only<3>{\caption{not proper decomposition \notesonly{\\}and not decomposable}
+		\only<3>{\captionof{figure}{not a proper decomposition \notesonly{\\}and not decomposable}
 		}
-		\end{figure}
+		\label{fig:decompex1}
+		\end{center}
 	\item<only@4,5>[]
-		\begin{figure}[h]
-		\centering
+		%\begin{figure}[h]
+		%\centering
+		\begin{center}
 		\includegraphics[width=5cm]{img/section3_fig10_sub_2}
-		\only<5>{\caption{a proper decomposition\notesonly{\\} and decomposable}
+		\only<5>{\captionof{figure}{a proper decomposition\notesonly{\\} and decomposable}
 		}
-		\end{figure}
+		\label{fig:decompex2}
+		%\end{figure}
+		\end{center}
 	\item<only@6,7>[]
 	
 		\begin{figure}[h]
@@ -295,7 +300,7 @@ $C$ can also be a set of nodes (cf. ).
 			 \includegraphics[width=0.99\textwidth]{img/section3_fig12_v2}
 			 }
 			 \caption{\underline{Hint}
-			 \only<7>{: because $G_{A \cup C}$ is not decomposable}%
+			 \only<7>{: because $G_{A \cup C}$ is not decomposable}
 			 }
 			 \label{fig:hintnotdecomp}
 		 \end{subfigure}
@@ -303,49 +308,6 @@ $C$ can also be a set of nodes (cf. ).
 		 \label{fig:propernotdecompexample}
 		\end{figure}
 	
-	%\begin{center}
-	%\begin{minipage}{\textwidth}
-		%\begin{minipage}{0.4\textwidth}
-			%\begin{figure}[h]
-				%\includegraphics<6-7>[height=3cm]{img/section3_fig12}
-			%\end{figure}
-		%\end{minipage}
-		%\underline{Hint}:
-		%\begin{minipage}{0.4\textwidth}			
-		%\begin{figure}[h]
-				%\includegraphics<6-7>[height=3cm]{img/section3_fig12_v2}
-			%\end{figure}
-		%\end{minipage}
-	%\end{minipage}
-	%\end{center}
-			
-	%\slidesonly{\vspace{-5mm}}
-			%\begin{tabular}{crc}
-			%& 
-			%\underline{Hint}:
-			%&\\
-			\%%vspace{-5mm}
-			%\begin{figure}[h]
-				%\includegraphics<6-7>[height=3cm]{img/section3_fig12}
-			%\end{figure}
-			%& \visible<6-7>{
-			
-			%&
-			%%\vspace{-2mm}
-			%\includegraphics<6-7>[height=3cm]{img/section3_fig12_v2}
-			%}\\
-				%\only<7>{a proper decomposition\\not decomposable}
-			%& &
-				%\only<7>{because $G_{A \cup C}$ is not decomposable}
-		%\end{tabular}
-	
-		%\begin{figure}[h]
-		%\centering
-		%\includegraphics[width=3.5cm]{img/section3_fig12_v2}
-		%\only<7>{
-		%\notesonly{\caption}\slidesonly{\caption*}{There is no proper decomposition for $G_{A \cup C}$ and it is not decomposable. $G_{B \cup C}$ is complete and therefore decomposable.}
-		%}
-		%\end{figure}
 	\item<only@8,9>[]
 	
 		\begin{figure}[h]
@@ -366,11 +328,11 @@ $C$ can also be a set of nodes (cf. ).
 			 }
 			 \caption{\underline{Hint}
 			 \only<9>{: because $G_{A \cup C}$ is decomposable and $G_{A \cup B}$ is complete}
-			 }%
+			 }
 			 \label{fig:hintnotdecomp}
 		 \end{subfigure}
 		 \only<9>{\caption{a proper decomposition and decomposable}}
-		 \label{fig:propernotdecompexample}
+		 \label{fig:propernotdecompexample4}
 		\end{figure}
 	
 	\end{enumerate}
@@ -391,6 +353,7 @@ $C$ can also be a set of nodes (cf. ).
 	%\includegraphics[height=5cm]{img/jt_roadmap_requirement}
 	%\notesonly{\caption{The construction of a junction tree requires a decomposable graph of cliques.}}
 	%\end{figure}
+	
 	\begin{figure}[h]
 		 \centering
 		 \hspace{-10mm}
@@ -416,11 +379,14 @@ $C$ can also be a set of nodes (cf. ).
 	
 	- The short answer\notesonly{\footnote{Not required but if interested in more formal justifications see Ch 3.4 and Ch 4 from \citep{koller2009probabilistic}}}:
 	\begin{enumerate}[(a)]
-	\item it is a requirement for the construction of junction trees \notesonly{(cf. \sectionref{sec:jtdef})}
+	\item it is a requirement for the construction of junction trees \notesonly{(cf. \sectionref{sec:constructjt})}
 	\item decomposable graphs allow us to form a \emph{bipartite graph} of cliques and separators.
 	\end{enumerate}
 	
 \end{frame}
+
+\newpage
+
 % -----------------------------------------------------------------------------
 \begin{frame} \frametitle{\secname}
 
@@ -428,17 +394,20 @@ $C$ can also be a set of nodes (cf. ).
 	\begin{itemize}
 		\item \textbf{cliques} are \underline{maximally complete subgraphs}
 		\item decomposable graphs can be decomposed into cliques and separators
-		\item cliques and separators form a \emph{bipartite graph}
+		\item cliques and separators form a \emph{bipartite graph} (cf. \figref{fig:cliquessepformbipartite})
 	\end{itemize}
 	\end{block}
 	
 	\slidesonly{\vspace{4mm}}
 	
-	\begin{figure}[h]
+	%\begin{figure}[h]
+	{
 	\centering
 	\includegraphics[height=3.5cm]{img/section3_fig15}
-	\caption{a decomposable graph and corresponding bipartite graph}
-	\end{figure}
+	\captionof{figure}{a decomposable graph and corresponding bipartite graph}
+	\label{fig:cliquessepformbipartite}
+	%\end{figure
+	}
 	
 		
 \end{frame}
@@ -463,7 +432,7 @@ $C$ can also be a set of nodes (cf. ).
 			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
 			 \includegraphics[width=0.99\textwidth]{img/section3_fig12_v2}
 			 }
-			 \caption{because $G_{A \cup C}$ is not decomposable}%
+			 \caption{because $G_{A \cup C}$ is not decomposable}
 		 \end{subfigure}
 		 \caption{a proper decomposition but not decomposable}
 		\end{figure}
@@ -483,352 +452,3 @@ $C$ can also be a set of nodes (cf. ).
 	
 \end{frame}
 
-\clearpage
-
-\subsubsection{Triangulation}
-
-\begin{frame}\frametitle{Cycles and chords}
-
-\slidesonly{\vspace{-3mm}}
-
-\begin{figure}[h]
-\centering
-	\includegraphics[height=2.5cm]{img/cycles2}
-\end{figure}
-
-\slidesonly{\vspace{-2mm}}
-
-\begin{itemize}
-\item \emph{Cycle}: A closed path with \textbf{no} repeated vertices \slidesonly{except}\notesonly{other than} $V_{\text{start}}=V_{\text{end}}$.
-\item \emph{Chordless} cycle: Any two \textbf{non}-adjacent vertices on the cycle are \textbf{not} joined by any edge.
-\item \emph{Triangulated graph} ($\corresponds$ \emph{Chordal graph}): A graph without chordless cycles of 4+ vetices.\notesonly{\footnote{credit: \citep{Jebaraslides}}}
-\begin{flushright}
-{\footnotesize(too many double negatives!!!)}
-\end{flushright}
-\end{itemize}
-
-\begin{block}{Triangulation}
-Construct a chordal graph by adding \emph{chords} (``shortcut'' edges) all cycles of length 4+.
-\end{block} 
-
-\end{frame}
-
-
-\newpage
-
-\subsubsection{Triangulation: Examples}
-
-
-\begin{frame}\frametitle{\subsubsecname}
-
-\mode<presentation>{
-\begin{block}{Triangulation}
-Construct a chordal graph by adding \emph{chords} (``shortcut'' edges) all cycles of length 4+.
-\end{block} 
-}
-
-\only<1>{
-Consider the following graph with vertices $A,B,C,E$ and add chords where necessary:
-\slidesonly{\textbf{(see blackboard)}}
-
-
-	\begin{figure}[h]
-	\centering
-	\includegraphics[height=2.5cm]{img/graph_example_triangulate}
-	\caption{a non-decomposable graph}
-	\end{figure}
-
-\mode<article>{
-		\begin{figure}[h]
-		 \centering
-		 \savebox{\imagebox}{
-		 \includegraphics[width=0.2\textwidth]{img/graph_example_triangulate_sol1}}%
-		 \begin{subfigure}[t]{0.25\textwidth}
-			 \centering
-			 \usebox{\imagebox}% Place largest image
-			 %\caption{...}
-		 \end{subfigure}
-		 \hspace{7mm}
-		 \begin{subfigure}[t]{0.2\textwidth}
-			 \centering
-			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
-			 \includegraphics[width=0.99\textwidth]{img/graph_example_triangulate_sol2}
-			 }
-			 %\caption{...}%
-		 \end{subfigure}
-		 \caption{Possible triangulations.}
-		\end{figure}
-}
-}
-\only<2-3>{
-
-Consider the following graph with vertices $A,B,C,W,E,F$ and add chords where necessary:\\
-\slidesonly{\textbf{(see blackboard)}}
-
-
-		\begin{figure}[h]
-		 \centering
-		 \savebox{\imagebox}{
-		 \includegraphics[width=0.25\textwidth]{img/graph_example2_triangulate}}%
-		 \begin{subfigure}[t]{0.25\textwidth}
-			 \centering
-			 \usebox{\imagebox}% Place largest image
-			 \caption{example graph to triangulate}
-		 \end{subfigure}
-		 \hspace{7mm}
-		 \visible<3>{
-		 \begin{subfigure}[t]{0.25\textwidth}
-			 \centering
-			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
-			 \includegraphics[width=0.99\textwidth]{img/graph_example2_triangulate_sol1}
-			 }
-			 \caption{One possible and non-unique triangulation}%
-		 \end{subfigure}
-		 \caption{Triangulation example}
-		 }
-		\end{figure}
-}
-\only<4-5>{
-
-\question{Is this a chordal graph? i.e. does it contain chordless cycles with 4+ vertices?}\\
-
-
-		\begin{figure}[h]
-		 \centering
-		 \savebox{\imagebox}{
-		 \includegraphics[width=0.3\textwidth]{img/graph_example3_triangulate}}%
-		 \begin{subfigure}[t]{0.35\textwidth}
-			 \centering
-			 \usebox{\imagebox}% Place largest image
-			 \caption{example graph}
-		 \end{subfigure}
-		 \hspace{7mm}
-		 \visible<5>{
-		 \begin{subfigure}[t]{0.3\textwidth}
-			 \centering
-			 \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
-			 \includegraphics[width=0.99\textwidth]{img/graph_example3_triangulate_HINT}
-			 }
-		 \mode<article>{
-			 \caption{The cycles CEKX and CEZX both require chords for the graph to be chordal.}%
-			 }
-		 \end{subfigure}
-		 \mode<article>{
-		 \caption{Determining if a graph is chordal}%
-		 }
-		 }
-		\end{figure}
-		}
-
-\end{frame}
-
-\clearpage
-
-% =============================================================================
-\subsection{Construction of the Junction Tree}
-
-\begin{frame} 
-\mode<presentation>{
-    \begin{center} \huge
-        \secname
-    \end{center}
-    \begin{figure}[h]
-	 \centering
-	 \includegraphics[width=0.8\textwidth]{img/jt_roadmap}%
-	\end{figure}
-}
-\textbf{(switch to lecture slides, come back for running intersection property and message passing example, dont't forget to tell them about eliminating nodes)}
-\end{frame}
-
-
-\subsubsection{The running intersection property}
-
-\begin{frame}\frametitle{\subsubsecname}
- 
-    \begin{minipage}{0.4\textwidth}
-        \begin{block}{The running intersection property}
-            \small
-            All nodes on the path between two 
-            cliques, which both contain variable $X$, 
-            also contain $X$.
-        \end{block} 
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.4\textwidth}
-        %\begin{figure}[h]
-            %\centering 
-            \includegraphics[width=5cm]{img/junction_tree_bipartite}
-            \mode<article>{
-            \captionof{figure}{The running intersection property}
-            }
-        %\end{figure}
-    \end{minipage}
-
-\only<2>{
-
-
-\question{Is the following a valid junction tree?}
-
-        \begin{figure}[h]
-            \centering 
-            \includegraphics[width=5cm]{img/graph_example_isvalid_junction_tree}
-            \mode<article>{
-            \caption{A valid junction tree}
-            }
-        \end{figure}
-}
-
-\only<3,4>{
-\question{Which of the following remains a valid junction tree? (irrespective of being useful for exact inference)}
-}
-
-\only<3>{
-
-        \begin{figure}[h]
-            \centering 
-            \includegraphics[width=5cm]{img/graph_example_isvalid2_junction_tree}
-            \mode<article>{
-            \caption{This graph remains a valid junction tree}
-            }
-        \end{figure}
-}
-\only<4>{
-        \begin{figure}[h]
-            \centering 
-            \includegraphics[width=5cm]{img/graph_example_isvalid3_junction_tree}
-            \mode<article>{
-            \caption{This graph no longer qualifies as a junction tree}
-            }
-        \end{figure}
-}
-
-\end{frame}
-
-\subsection{Identify cliques and separators to form a bipartite graph}
-
-% -----------------------------------------------------------------------------
-\begin{frame} \frametitle{\subsecname
-}
-					\slidesonly{\vspace{5mm}}
-				\begin{itemize}
-					\item cliques are \underline{maximally} complete subgraphs\\
-					(sub-cliques are automatically absorbed)
-					\item cliques can be found by elimination \\
-					\slidesonly{\vspace{10mm}}
-					\textbf{Caution: only eliminate a node if it is not part of another clique}
-					\slidesonly{\vspace{5mm}}
-					%\item sub-cliques $\{A,B\} \subseteq \{A,B,C\}$ are absorbed
-					\item requires variable ordering by topological sorting: 
-						F, D, E, C, B, A
-				\end{itemize}
-	
-	\mode<presentation>{
-	\begin{textblock}{}(12,2.5)
-		\includegraphics<1->[width=3.cm]{img/graph_example_dag_highlight}
-		%\includegraphics<2->[width=3.cm]{img/graph_example_cliques_chordal.jpg}
-	\end{textblock}
-	}
-	
-	\mode<article>{
-		\begin{figure}[h]
-		\centering
-		\includegraphics[height=3.5cm]{img/graph_example_dag_highlight}
-		\mode<article>{\caption{Example graph from the lecture.}}
-		\label{fig:lecexamplecdecompgraph}
-		\end{figure}
-	}
-	
-	
-	%\begin{textblock}{15}(.5,8.5)
-		%\begin{center}
-		%\includegraphics<1>[height=3.5cm]{img/graph_example_dag.jpg}
-		%\includegraphics<2>[height=3.5cm]{img/graph_example_amoral}
-		%\only<2>{\hspace{1cm}}
-		%\includegraphics<2>[height=3.5cm]{img/graph_example_moral.png}
-		%\includegraphics<3>[height=3.5cm]{img/graph_example_chordal}
-		%\only<3>{\hspace{1cm}}
-		%\includegraphics<3>[height=3.5cm]{img/graph_example_chordal2}
-		%\only<4>{\vspace{7mm}}
-		\begin{figure}[h]
-		\centering
-		\includegraphics<2>[height=2.5cm]{img/graph_example_clique_elimination}
-		\mode<article>{
-		\caption{Identifying cliques by elimination}
-		}
-		\end{figure}
-		%\includegraphics<3>[height=3.5cm]{img/graph_example_clique_graph}
-		%\includegraphics<6>[height=3.5cm]{img/graph_example_junction_tree_v2}
-		%\end{center}
-	%\end{textblock}
-\end{frame}
-
-\subsection{From bipartite graph to junction tree}
-
-\begin{frame} \frametitle{\subsecname
-}
-		\begin{itemize}		
-			\item construct bipartite graph: 
-				\only<1>{ \begin{itemize}
-					\item edges weighted by separator size 
-						$\rightarrow$ number of nodes within separator
-					\item find a {\em maximal spanning tree} 
-				\end{itemize}}	
-			\item<2-> junction tree for inference
-				\only<2>{ \begin{itemize}
-					\item maximal spanning tree of the clique graph
-					\item data structure for \\ belief propagation
-					\item not always unique
-				\end{itemize}}			
-		\end{itemize}
-	
-	\mode<presentation>{
-	\begin{textblock}{}(12,2.5)
-		\includegraphics<1->[width=3cm]{img/graph_example_cliques_chordal.jpg}
-	\end{textblock}
-	}
-	\mode<article>{
-		\begin{figure}[h]
-		\centering
-		\includegraphics<1>[height=3.5cm]{img/graph_example_cliques_chordal.jpg}
-		\mode<article>{\caption{Idnetification of cliques and separators in example graph form \figref{fig:lecexamplecdecompgraph}}}
-		\label{fig:lecexamplecliques}
-		\end{figure}
-	}
-	
-		\begin{figure}[h]
-		\centering
-		\includegraphics<1>[height=3.5cm]{img/graph_example_clique_graph}
-		\mode<article>{\caption{bipartite graph for \figref{fig:lecexamplecliques}}}
-		\label{fig:lecbipartitegraph}
-		\end{figure}
-		
-		\begin{figure}[h]
-		\centering
-		\includegraphics<2>[height=3.5cm]{img/graph_example_junction_tree_v2}
-		\mode<article>{\caption{junction tree to bipartite graph in \figref{fig:lecbipartitegraph}}}
-		\end{figure}
-		
-\end{frame}
-
-\subsection{Inference in a junction tree}
-
-\begin{frame}\frametitle{\subsecname}
-
-\begin{enumerate}
-\item clique potentials (non-negative function) for each clique (get definitions from DAG)
-\item order initialization according to topological sorting (parent $\rightarrow$ child)
-\item add clique potential(s) for observed evidence(s)
-\item perform message passing
-\item extract marginals form messages
-\item perform normalization
-\end{enumerate}
-
-
-\mode<presentation>{
-	\begin{figure}[h]
-	\centering
-		\includegraphics[height=3.5cm]{img/graph_example_junction_tree_v2}
-	\end{figure}
-}
-
-\end{frame}

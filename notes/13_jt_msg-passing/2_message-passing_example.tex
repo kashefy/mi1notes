@@ -84,14 +84,28 @@
 		\begin{minipage}{12cm}
 			\begin{minipage}{4cm}
 				\includegraphics[width=3cm]{img/graph_example_dag.jpg}
+				\mode<article>{
+				\captionof{figure}{Original DAG}
+				}
 			\end{minipage}
 			\begin{minipage}{7cm}
+			\mode<presentation>{
 				\includegraphics<1>[height=3cm]%
 					{img/graph_example_junction_tree_init_v2.pdf}
+				%\mode<article>{
+				%\captionof{figure}{Corresponding junction tree with clique potentials}
+				%}
+				}
 				\includegraphics<2>[height=3.5cm]%
 					{img/graph_example_junction_tree_evidence_v2.pdf}
+				\mode<article>{
+				\captionof{figure}{Adding clique potentials for observed variables to the corresponding junction tree}
+				}
 				\includegraphics<3->[height=3.55cm]%
 					{img/graph_example_junction_tree_messages_v2.pdf}
+				\mode<article>{
+				\captionof{figure}{Flow during the 3 passes.}
+				}
 			\end{minipage}
 		\end{minipage}
 	%\end{textblock}
@@ -122,7 +136,7 @@
     \end{block}
     }
     
-Define the messages by applying the sum-product-algorithm\notesonly{ from \eqref{eq:suproduct}}:
+Define the messages by applying the sum-product-algorithm\notesonly{ from \eqref{eq:sumproduct}}:
 
 \begingroup
 \footnotesize

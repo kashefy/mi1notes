@@ -80,7 +80,7 @@
 		%\end{minipage}}
 	%\end{minipage}
     
-    Defining the messages between the different types of nodes in a bipartite graph (e.g. separators and cliques)\footnote{for details, see p. 402 in \citep{bishop2006pattern}}
+    Defining the messages between the different types of nodes in a bipartite graph (e.g. separators and cliques)\footnote{for details, see Ch. 8.4.4, p. 402 in \citep{bishop2006pattern}}
 
 	%\hspace{-4mm}
 	\begin{align}
@@ -98,4 +98,11 @@
         \label{eq:sumproduct}
 	\end{align}
 	
+	\mode<article>{
+	\begin{itemize}
+	\item The arguments of the messages follow the variables in the separator node.
+	\item For the \emph{product} formula, the product runs over all clique potentials that are neighbors of the separator $X_m$, except for $f_s$ that the message is going to.
+	\item For the \emph{sum} formula, the sum takes care of marginalizing over all the variables that are present in the outgoing clique potential $f_s$ but are absent from the variables inside the target separator. This is weighted by the product of messages that arrive at $f_s$ from other neighbors (i.e. we exclude the separator that the message is going to).
+	\end{itemize}
+	}
 \end{frame}
