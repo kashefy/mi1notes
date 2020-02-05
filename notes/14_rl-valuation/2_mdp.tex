@@ -55,7 +55,21 @@ TODO mouse maze
 
 \end{itemize}
 
-\question{Why do we discount future rewards?}\\
+\mode<article>{
+\figref{fig:discount} illustrates how the choice of $\gamma$ controls how fast the discount factors decay over time.
+}
+
+\begin{center}
+\includegraphics[width=6cm]{img/delay_discount}
+\captionof{figure}{modulating returns with different discount factors}
+\label{fig:discount}
+\end{center}
+
+\end{frame}
+
+\begin{frame}
+
+\question{Why do we discount future rewards? What criteria goes into choosing $\gamma$}\\
 
 \begin{itemize}
 \item Uncertainty of the future
@@ -91,11 +105,19 @@ The value function $\corresponds$ the expected sum of discounted future rewards
 \item We have a preference for high expectations and MDPs maximize this quantity
 \end{itemize}
 
+\end{frame}
+
+\begin{frame}
+
+\mode<presentation>{
+The value function $\corresponds$ the expected sum of discounted future rewards
+}
+
 For a fixed policy ${\color{policy}}\Pi$:
 
 
 	\begin{itemize}
-		\item a {\bf value function} measures the quality 
+		\item a \textbf{value function} measures the quality 
 			of a policy $\pi$ in state $\vec x^{(0)}$
 			\iitem{$V^\pi(\vec x^{(0)})$ is
 				the {\em \visible<1->{{\color{expect}expected}} 
@@ -108,7 +130,7 @@ For a fixed policy ${\color{policy}}\Pi$:
 				\visible<1->{{\color{reward}reward\visible<2->{s}}}}}
 	\end{itemize}
 	\only<1,3>{\vspace{1mm}}
-	$$
+	\begin{equation}
 				V^\pi(\vec x^{(0)}) 
 				\;\;=\;\; \visible<1->{{ \color{expect}	\E\bigg[ }} 
 					\visible<2->{{\color{chain}\sum_{t=0}^{
@@ -135,10 +157,7 @@ For a fixed policy ${\color{policy}}\Pi$:
 					\bigg]
 				} 
 				\visible<3->{\,,\quad {\color{discount}\gamma \in [0, 1)} \,.}
-	$$
+	\end{equation}
 
-\begin{equation}
-
-\end{equation}
 
 \end{frame}
