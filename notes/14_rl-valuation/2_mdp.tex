@@ -1,4 +1,4 @@
-\section{Markov Decision Process}
+\section{Markov Decision Process (MDP)}
 
 \definecolor{darkgreen}{rgb}{0,0.6,0}
 
@@ -7,14 +7,138 @@
     \begin{center} \huge
         \secname
     \end{center}
-    $$P(X,Y) = P(X)P(Y)$$
+    A formalized description of the environment in RL
 \end{frame}
 }
 
-\subsection{Motivation}
 
-\begin{frame}\frametitle{\secname:~\subsecname}
+\begin{frame}\frametitle{\secname}
+
+\begin{block}{Assumption of MDP}
+The environment is fully observable. There is a complete charactrization of what's going on and where everything is.
+\end{block}
+
+The other case would be \emph{partially observable} MDP (POMDP)
+
+\begin{block}{What do we want to do}
+Maximize, not just immediate rewards but the \emph{cumulative sum of rewards} or ``return''
+
+\begin{equation}
+\text{return
+} := \sum_{k=0}^{\infty} \gamma^k r(\vec x^{(t)}, \vec a^{(t+k+1)}),
+\end{equation}
+
+where $\gamma \in \lbrack0,1)$ is referred to as the \emph{discount factor}.
+ 
+\end{block}
+
+About the \emph{discount factor} $\gamma$:
+
+\begin{itemize}
+\item It is possible for $\gamma$ to be $=1$.\\
+
+\question{Under what condition can $\gamma$ be $=1$}\\
+
+\mode<article>{
+- $\gamma$ can be $=1$ if the length of the sequence is guaranteed to be finite.
+}
+
+TODO mouse maze
+
+\item \question{What does $\gamma \rightarrow 0$ imply?}\\
+
+- preference for short term rewards
+
+\item \question{What does $\gamma \rightarrow 1$ imply?}\\
+
+- emphasis on long-term returns, indifference to delay.
+
+\end{itemize}
+
+\question{Why do we discount future rewards?}\\
+
+\begin{itemize}
+\item Uncertainty of the future
+\item Imperfections in the model (we don't trust its decisions completely)
+\item mathematically convinient, the sum does not explode
+\item avoids $\infty$ returns due to cycles in our MDP
+\item behavioral arguments (animals and humans seem to apply a similar discounting)\\
+``A bird in the hand is worth two in the bush''
+\item financially realistic (accounts for inflation)
+\end{itemize}
 
 \citep{sutton1998introduction}
 
 \end{frame} 
+
+\subsection{The value function}
+
+
+\definecolor{darkgreen}{rgb}{0,.5,0}
+\definecolor{discount}{rgb}{.75,0,.75}
+\definecolor{expect}{rgb}{0,.5,.5}
+\definecolor{chain}{rgb}{.75,.5,0}
+
+\begin{frame}\frametitle{\subsecname}
+
+The value function $\corresponds$ the expected sum of discounted future rewards
+
+\question{What does the value function represent?}
+
+\begin{itemize}
+\item long-term value of some state $\vec x$
+\item expected return from starting in $\vec x^{(0)}$
+\item We have a preference for high expectations and MDPs maximize this quantity
+\end{itemize}
+
+For a fixed policy ${\color{policy}}\Pi$:
+
+
+	\begin{itemize}
+		\item a {\bf value function} measures the quality 
+			of a policy $\pi$ in state $\vec x^{(0)}$
+			\iitem{$V^\pi(\vec x^{(0)})$ is
+				the {\em \visible<1->{{\color{expect}expected}} 
+				\visible<2->{{\color{chain}{%
+						\only<3>{\color{discount}}%
+						\visible<3->{infinite} 
+					}sum} of}
+				\visible<3->{{\color{discount} discounted}} 
+				\visible<2->{future}
+				\visible<1->{{\color{reward}reward\visible<2->{s}}}}}
+	\end{itemize}
+	\only<1,3>{\vspace{1mm}}
+	$$
+				V^\pi(\vec x^{(0)}) 
+				\;\;=\;\; \visible<1->{{ \color{expect}	\E\bigg[ }} 
+					\visible<2->{{\color{chain}\sum_{t=0}^{
+						\only<2>{H}%
+						\only<3->{{\color{discount}\infty}}}}}
+				\visible<3->{{\color{discount} \gamma^t} \,}
+				{\color{reward} r(
+					\only<1>{{\color{black} \vec x^{(0)}}}
+					\only<2->{{\color{trans} \vec x^{(t)}}}, 
+					{\color{policy}\vec a^{(\only<1>{0}\only<2->{t})}}
+				) } 
+				{ \color{expect}
+					\,\bigg| \begin{array}{c}
+							\scriptstyle {\color{policy}
+								\vec a^{(\only<1>{0}\only<2->{t})} 
+								\;\sim\; \pi(\cdot\,|\,
+									\vec x^{(\only<1>{0}\only<2->{t})}) 
+								}\;\;\;\\
+							\visible<2->{{\color{trans}
+								\scriptstyle \vec x^{(t+1)} \;\sim\; 
+								P(\cdot \,|\, \vec x^{(t)}, \vec a^{(t)})
+							}}
+					\end{array}\kern-1ex 
+					\bigg]
+				} 
+				\visible<3->{\,,\quad {\color{discount}\gamma \in [0, 1)} \,.}
+	$$
+
+\begin{equation}
+
+\end{equation}
+
+\end{frame}
