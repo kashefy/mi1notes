@@ -69,13 +69,13 @@ TODO mouse maze
 
 \begin{frame}
 
-\question{Why do we discount future rewards? What criteria goes into choosing $\gamma$}\\
+\question{Why do we discount future rewards? What criteria goes into choosing $\gamma$?}\\
 
 \begin{itemize}
 \item Uncertainty of the future
 \item Imperfections in the model (we don't trust its decisions completely)
 \item mathematically convinient, the sum does not explode
-\item avoids $\infty$ returns due to cycles in our MDP
+\item avoids $\infty$ returns due to possible cycles in our MDP
 \item behavioral arguments (animals and humans seem to apply a similar discounting)\\
 ``A bird in the hand is worth two in the bush''
 \item financially realistic (accounts for inflation)
@@ -95,14 +95,14 @@ TODO mouse maze
 
 \begin{frame}\frametitle{\subsecname}
 
-The value function $\corresponds$ the expected sum of discounted future rewards
+The (state) value function $\corresponds$ the expected sum of discounted future rewards
 
 \question{What does the value function represent?}
 
 \begin{itemize}
-\item long-term value of some state $\vec x$
-\item expected return from starting in $\vec x^{(0)}$
-\item We have a preference for high expectations and MDPs maximize this quantity
+\item The long-term value of some state $\vec x$,
+\item the expected return from starting in $\vec x^{(0)}$,
+\item we have a preference for high expectations and MDPs maximize this quantity
 \end{itemize}
 
 \end{frame}
@@ -132,7 +132,7 @@ For a fixed policy ${\color{policy}}\Pi$:
 	\only<1,3>{\vspace{1mm}}
 	\begin{equation}
 				V^\pi(\vec x^{(0)}) 
-				\;\;=\;\; \visible<1->{{ \color{expect}	\E\bigg[ }} 
+				\;\;=\;\; \visible<1->{{ \color{expect}	\E\bigg\lbrack }} 
 					\visible<2->{{\color{chain}\sum_{t=0}^{
 						\only<2>{H}%
 						\only<3->{{\color{discount}\infty}}}}}
@@ -154,10 +154,21 @@ For a fixed policy ${\color{policy}}\Pi$:
 								P(\cdot \,|\, \vec x^{(t)}, \vec a^{(t)})
 							}}
 					\end{array}\kern-1ex 
-					\bigg]
+					\bigg\rbrack
 				} 
-				\visible<3->{\,,\quad {\color{discount}\gamma \in [0, 1)} \,.}
+				\visible<3->{\,,\quad {\color{discount}\gamma \in \lbrack0, 1)} \,.}
 	\end{equation}
+	
+	In other textbooks you may find:
+	
+	\begin{align}
+	V^\pi(\vec x_i) = \kern-1ex \overbrace{V^\pi_i}^{\text{shorthand}} \kern-1ex = 
+	\E \bigg\lbrack
+	\sum_{t=0}^{\infty} \gamma^t r(\vec x^{(t)}, \vec a^{(t)}) \;\bigg|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack\,, \; i=1,\ldots,S
+	\end{align}
+	
+	$\E\lbrack\cdot\rbrack$ is w.r.t $\{\vec x^{(t)}, \vec a^{(t)}\}$
 
 
 \end{frame}

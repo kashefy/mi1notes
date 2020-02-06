@@ -1,16 +1,254 @@
 \section{Model-based evaluation of the policy}
 
-
-
-\mode<presentation>{
 \begin{frame} 
+\mode<presentation>{
     \begin{center} \huge
         \secname
-    \end{center}
-    \begin{center}   
-    Towards an efficient representation of the full joint distribution that exploits conditional independence
+    \end{center}  
+    }
+    \begin{center} 
+    Model-based $\corresponds$ offline-planning.\\
+    We are told everything about the enivronment, so we can simulate ``looking ahead'' and determine if one policy is better than another.
     \end{center}
 \end{frame}
+
+\subsection{The Bellman equation}
+
+\begin{frame}\frametitle{\subsecname}
+
+The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.
+
+	\begin{align}
+	V^\pi_i =\;& 
+	\E \bigg\lbrack
+	\sum_{t=0}^{\infty} \gamma^t \; \overbrace{r(\vec x^{(t)}, \vec a^{(t)})}^{\substack{\text{shorthand}\\=:r^{(t)}}} \;\bigg|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack\,, \; i=1,\ldots,S\\
+	=\;& 
+	\E \bigg\lbrack
+	\sum_{t=0}^{\infty} \gamma^t r^{(t)} \;\bigg|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack\\
+	=\;& 
+	\E \bigg\lbrack
+	\gamma^0 \kern-1.5ex \underbrace{r^{(0)}}_{\substack{\text{immediate}\\ \text{reward}}} \kern-1.5ex + \gamma^1 r^{(1)} + \gamma^2 r^{(2)}+\ldots\;\bigg|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack\\
+	=\;& 
+	\E \bigg\lbrack
+	r^{(0)} + 
+	\underbrace{\gamma \big( r^{(1)} + \gamma r^{(2)}+\ldots\big)
+	}_{\substack{
+	\text{discounted value of}\\ \text{successor state}}}\;\bigg|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack\\
+	=\;& 
+	\E \bigg\lbrack
+	r^{(0)} + 
+	\gamma V^\pi(x^{(1)})\;\bigg|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack
+	\intertext{split expectation of sum into sum of expectations}
+	=\;& 
+	\E \bigg\lbrack
+	r^{(0)} \;\bigg|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack
+	+
+	\E \bigg\lbrack
+	{\color{red}\gamma} V^\pi(x^{(1)})\;\bigg|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack\\
+	=\;& 
+	\E \bigg\lbrack
+	r^{(0)} \;\bigg|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack
+	+
+	{\color{red}\gamma}\,
+	\E \bigg\lbrack
+	 V^\pi(x^{(1)})\;\bigg|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack
+	\end{align}
+	
+
+
+
+\end{frame}
+
+\begin{frame}\frametitle{\subsecname (cont'd)}
+
+\slidesonly{\vspace{-5mm}}
+
+\mode<presentation>{
+	\begin{align}
+		V^\pi_i =\;& 
+		\E \bigg\lbrack
+		r^{(0)} \;\bigg|\; \vec x^{(0)} := \vec x_i
+		\bigg\rbrack
+		+
+		\gamma\,
+		\E \bigg\lbrack
+		 V^\pi(x^{(1)})\;\bigg|\; \vec x^{(0)} := \vec x_i
+		\bigg\rbrack
+	\end{align}
 }
 
+\question{What does the $\E \lbrack \cdot \rbrack$ boil down to?}
 
+\pause
+
+\slidesonly{\vspace{-10mm}}
+
+	\begin{align}
+		V^\pi_i 
+		&=& \underbrace{
+		{\color{policy} \sum_{k=1}^A \pi(\vec a_k \,|\, \vec x_i)}
+			 {\color{reward} r(\vec x_i, \vec a_k)}
+			 }_{\substack{\text{``controlled'' reward function }\\
+			 \text{(immediate reward)} =: {\color{reward} r_i^\pi}}
+			 }
+			+ \underbrace{
+			\gamma {\color{policy} \sum_{k=1}^A \pi(\vec a_k \,|\, \vec x_i)} {\color{trans}\smallsum{j=1}{S} 
+				P(\vec x_j \,|\, \vec x_i, \vec a_k)} \kern-1.2ex
+				\overbrace{V^\pi_j}^{=V^\pi(\vec x_j)}
+				}_{\text{expected discounted value of successor state}} \\
+		&=& 
+			\underbrace{{\color{policy} \smallsum{k=1}A 
+				\pi(\vec a_k \,|\, \vec x_i)} 
+				{\color{reward} r(\vec x_i, \vec a_k)}
+			}_{\kern-4ex\text{``controlled'' reward function }
+					{\color{reward} r_i^\pi}\kern-4ex}
+			\;+\; \gamma {\color{trans} \smallsum{j=1}{S}}
+			\underbrace{
+				{\color{policy} \smallsum{k=1}A 
+				\pi(\vec a_k \,|\, \vec x_i)} 
+				{\color{trans} P(\vec x_j \,|\, \vec x_i, \vec a_k)}
+			}_{\text{``controlled'' transition model }
+					{\color{trans} P^\pi_{ij}}}  V^\pi_j
+	\end{align}
+	
+	\notesonly{
+	Thus, the Bellman equation can be expressed using:
+	
+	\begin{equation}
+	V^\pi_i
+	= {\color{reward}\vec r^\pi_i} 
+			+ \gamma {\color{trans}\vec P^\pi_{ij}} \vec v^\pi_{j}
+	\end{equation}
+	}
+	\mode<presentation>{
+	$$
+	\vec v^\pi
+	= {\color{reward}\vec r^\pi} 
+			+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi
+	$$
+	}
+	
+	
+\end{frame}
+
+\begin{frame}
+	
+
+	\begin{equation}
+		\vec v^\pi
+		= \; {\color{reward}\vec r^\pi} 
+			+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi \; =: \kern-3ex\overbrace{\hat B^\pi[\vec v^\pi]}^{\text{the Bellman operator}}\kern-3ex,
+	\end{equation}
+	
+	where $\vec v^\pi \in \R^S$: vector containing all values $V^\pi$,
+	
+	\begin{align}
+		\quad \text{with}  \underbrace{ \left\{ \begin{array}{rcl} 
+				{\color{reward}r^\pi_i} &\kern-1ex:=\kern-1ex& 
+					{\color{policy} \smallsum{k=1}{A} 
+					\pi(\vec a_k \,|\, \vec x_i)} \, 
+					{\color{reward} r(\vec x_i, \vec a_k)} \\
+				{\color{trans}P^\pi_{ij}} &\kern-1ex:=\kern-1ex& 
+					{\color{policy}\smallsum{k=1}{A} 
+					\pi(\vec a_k \,|\, \vec x_i)} \, 
+					{\color{trans}P(\vec x_j | \vec x_i, \vec a_k)} \\
+			\end{array} 
+			\right.\kern-2ex}_{
+				\text{``controlled'' models }
+				{\color{reward}\vec r^\pi \in \R^S}
+				\text{ and }{\color{trans}\vec P^\pi \in \R^{S \times S}}
+			}
+	\end{align}
+	
+\end{frame}
+
+\subsection{Finding the value}
+
+\begin{frame}\frametitle{Finding $\vec v^\pi$}
+
+\mode<presentation>{
+	$$
+	\vec v^\pi
+	= {\color{reward}\vec r^\pi} 
+			+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi
+	$$
+	
+}
+There are two approaches to finding $\vec v^\pi$:
+
+\begin{enumerate}
+\item analytically
+\item through fixed-point iteration
+\end{enumerate}
+
+\end{frame}
+
+\subsubsection{Analytical solution of the Bellman equation}
+
+\begin{frame}\frametitle{\subsubsecname}
+\mode<presentation>{
+	$$
+	\vec v^\pi
+	= {\color{reward}\vec r^\pi} 
+			+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi
+	$$
+	
+}
+Essentially solve for $\vec v^\pi$ (get \underline{all} $\vec v^\pi$ on one side):
+
+	\begin{align}
+		\vec v^\pi &= {\color{reward}\vec r^\pi} 
+		+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi
+		\vec I \vec v^\pi &= {\color{reward}\vec r^\pi} \\
+		+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi
+	\\
+		\vec I \vec v^\pi - \gamma {\color{trans}\vec P^\pi} \vec v^\pi
+		&= {\color{reward}\vec r^\pi}
+	\\
+		\big(\vec I - \gamma {\color{trans}\vec P^\pi}\big) \vec v^\pi
+		&= {\color{reward}\vec r^\pi}
+	\\
+	\vec v^\pi &= \big(\vec I 
+			- \gamma {\color{trans}\vec P^\pi}\big)^{-1}
+		 {\color{reward}\vec r^\pi}
+	\end{align}
+	
+	\question{When is the term $big(\vec I 
+			- \gamma {\color{trans}\vec P^\pi}\big)$ invertible?}
+		
+\begin{enumerate}
+\item $|\lambda_k| \leq 1$ for all eigenvalues 
+				$\lambda_k$ of transition matrix ${\color{trans}\vec P^\pi}$
+\item $\gamma < 1$
+\item[$\Rightarrow$] it is always invertible
+\end{enumerate}
+
+\question{Any disadvantages to the analytical solution?}
+
+\pause 
+- It could be very costly for very large state spaces.
+
+\end{frame}
+
+
+\subsubsection{Value iteration}
+
+\begin{frame}\frametitle{\subsubsecname}
+
+Value iteration: a fixed-point iteration for finding $\vec v^\pi$
+
+\begin{itemize}
+\item A fixed point: $x=g(x)$
+\item Fixed point iteration:
+\end{itemize}
+
+\end{frame}
