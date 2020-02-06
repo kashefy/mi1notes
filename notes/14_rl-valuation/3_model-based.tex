@@ -195,23 +195,17 @@ There are two approaches to finding $\vec v^\pi$:
 \subsubsection{Analytical solution of the Bellman equation}
 
 \begin{frame}\frametitle{\subsubsecname}
-\mode<presentation>{
-	$$
-	\vec v^\pi
-	= {\color{reward}\vec r^\pi} 
-			+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi
-	$$
-	
-}
+
 Essentially solve for $\vec v^\pi$ (get \underline{all} $\vec v^\pi$ on one side):
 
 	\begin{align}
 		\vec v^\pi &= {\color{reward}\vec r^\pi} 
-		+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi
-		\vec I \vec v^\pi &= {\color{reward}\vec r^\pi} \\
+		+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi \\
+		\vec I~\vec v^\pi 
+        &= {\color{reward}\vec r^\pi}
 		+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi
 	\\
-		\vec I \vec v^\pi - \gamma {\color{trans}\vec P^\pi} \vec v^\pi
+		\vec I~\vec v^\pi - \gamma {\color{trans}\vec P^\pi} \vec v^\pi
 		&= {\color{reward}\vec r^\pi}
 	\\
 		\big(\vec I - \gamma {\color{trans}\vec P^\pi}\big) \vec v^\pi
@@ -222,7 +216,7 @@ Essentially solve for $\vec v^\pi$ (get \underline{all} $\vec v^\pi$ on one side
 		 {\color{reward}\vec r^\pi}
 	\end{align}
 	
-	\question{When is the term $big(\vec I 
+	\question{When is the term $\big(\vec I 
 			- \gamma {\color{trans}\vec P^\pi}\big)$ invertible?}
 		
 \begin{enumerate}
@@ -232,7 +226,9 @@ Essentially solve for $\vec v^\pi$ (get \underline{all} $\vec v^\pi$ on one side
 \item[$\Rightarrow$] it is always invertible
 \end{enumerate}
 
-\question{Any disadvantages to the analytical solution?}
+\slidesonly{\vspace{-5mm}}
+
+\question{Any disadvantages to the analytical solution?}\\
 
 \pause 
 - It could be very costly for very large state spaces.
@@ -247,8 +243,164 @@ Essentially solve for $\vec v^\pi$ (get \underline{all} $\vec v^\pi$ on one side
 Value iteration: a fixed-point iteration for finding $\vec v^\pi$
 
 \begin{itemize}
-\item A fixed point: $x=g(x)$
+\item A fixed point: $x=g(x)=g(g(\ldots g(x)\ldots))$\\
+
+Example:
+\begin{align}
+    g(x) &= x^{2} - 3x + 4\\
+    g(2) &= 2^{2} - 3\cdot 2 + 4 = 4 - 6 + 4 = 2
+\end{align}
+
 \item Fixed point iteration:
+\begin{equation}
+x^{(t+1)} = g(x^{(t)}), t=0,1,2,\ldots
+\end{equation}
 \end{itemize}
+
+\begin{center}
+    \includegraphics[height=3.5cm]{img/fixed_point_iter_cos} 
+    \mode<article>{
+    \captionof{figure}{
+    Fixed point iteration example
+    }
+    \label{fig:fixedpointcos}
+    } 
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}\frametitle{\subsubsecname}
+\mode<presentation>{
+Value iteration: a fixed-point iteration for finding $\vec v^\pi$
+}
+
+\begin{equation}
+	\vec {\tilde v}^{\pi (t+1)} = {\color{reward}\vec r^\pi} 
+		+ \gamma {\color{trans}\vec P^\pi} \vec {\tilde v}^{\pi (t)} 
+\end{equation}
+
+\begin{itemize}
+\item 
+The ``~$\tilde{}$~'' is to denote that it has not necessarily converged 
+at time step $t$
+\item initialize $\vec {\tilde v}^{\pi (0)}$ with some state $\vec {\tilde v}^{\pi (0)} \in \R^{S}$
+\item value iteration converges in the limit $t \rightarrow \infty$
+\item The speed of convergence depends on $\gamma$
+\end{itemize}
+
+\question{How does convergence depend on $\gamma$?}
+
+\pause 
+
+\begin{itemize}
+\item small $\gamma$: fast convergence
+\item $\gamma \rightarrow 1$: slow convergence, slower than the analytical solution
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}\frametitle{\subsubsecname}
+    
+\mode<presentation>{
+\begin{equation}
+	\vec {\tilde v}^{\pi (t+1)} = {\color{reward}\vec r^\pi} 
+		+ \gamma {\color{trans}\vec P^\pi} \vec {\tilde v}^{\pi (t)} 
+\end{equation}
+}
+
+\begin{itemize}
+\item We start \emph{value iteration} assuming $\vec {\tilde v}^{\pi (0)}$ is the optimal value function
+\item Use the one-step \emph{lookahead} (i.e. next step) to work our way \emph{backwards}\\
+
+	\begin{equation*}
+		\hat B^\pi[\vec v^\pi] := \vec v^\pi
+		= \; {\color{reward}\vec r^\pi} 
+			+ \gamma {\color{trans}\vec P^\pi} \underbrace{\vec v^\pi}_{\text{lookahead}}
+	\end{equation*}
+\end{itemize}
+
+Analytical solution vs. value iteration:
+
+\begin{itemize}
+\item Complexity: 
+\begin{itemize}
+\item Analytical solution: $O(S^{3})$
+\item value iteration: $O(S^{2})$
+\end{itemize}   
+\item intermediate solutions of \emph{value iteration} don't necessarily belong to valid policies. We have to wait for convergence.
+\end{itemize}
+
+\end{frame}
+
+\subsection{Finding the optimal policy}
+
+\begin{frame}\frametitle{\subsecname}
+
+Multiple optimal policies can exist. A policy is optimal if it maximizes the state value function:
+
+\begin{equation}
+V^{*}(\vec x) = \max_{\pi} V^{\pi} (\vec x)   
+\end{equation}
+
+\begin{block}{Optimal Policy}
+
+For all optimal policies $\pi^{*}$:
+
+\begin{equation}
+    V^{\pi^{*}}(\vec x) = V^{*}(\vec x) 
+\end{equation}
+
+A ploicy $\pi$ that maximizes the value function and yields $\vec v^{*}(\vec x)$ is an optimal policy $\pi^{*}$.
+    
+\end{block}
+
+    
+\end{frame}
+
+\subsection{Extracting the policy from an optimal value function}
+
+\begin{frame}\frametitle{\subsecname}
+
+\slidesonly{\vspace{-3mm}} 
+
+\begin{center}
+    \includegraphics[trim={15cm 0 0 0mm},clip, height=3.5cm]{img/nav_policy_and_value} 
+    \mode<article>{
+    \captionof{figure}{
+    Extract optimal policy from optimal value function
+    }
+    \label{fig:selectoptimalpolicy}
+    } 
+\end{center}
+
+\pause
+
+\slidesonly{\vspace{-5mm}}
+
+\begin{equation}
+\pi^{*}(\vec a_{k} | \vec x_{i}) = \argmax_{\vec a} \sum_{j=1}^{S} {\color{trans} P(\vec x_{j}| \vec x_{i}, \vec a)} \Big( {\color{reward}r(\vec x_{j}, \vec a)} + \gamma V^{\pi}(\vec x_{j}) \Big)    
+\end{equation}   
+
+\slidesonly{\vspace{-5mm}} 
+
+\only<3>{
+\question{What is going on here?}
+
+\begin{enumerate}
+%\item An optimal policy selects the action that maximizes this 
+\item When at $\vec x_{i}$, look at the actions $\vec a$ that lead to all possible future states $\vec x_{j}$.
+\item Select action $\vec a_{k}$ that maximizes the immediate reward + discounted sucessive value.
+\end{enumerate}
+}
+
+\only<4>{
+\question{What are the implications of selecting the optimal policy this way?}
+
+\begin{itemize}
+\item The above does not scale well for large state spaces.
+\item The resuling $\pi^{*}$ is a \emph{greedy} policy, because it greedily selects using only value function at hand. 
+\end{itemize}
+}
 
 \end{frame}
