@@ -2,27 +2,35 @@
 
 \definecolor{darkgreen}{rgb}{0,0.6,0}
 
-\mode<presentation>{
 \begin{frame} 
+\mode<presentation>{
     \begin{center} \huge
         \secname
     \end{center}
-    A formalized description of the environment in RL
-\end{frame}
 }
+    \begin{center}
+    A formalized description of the environment in RL\footnote{Recommended reading 
+\citep{sutton1998introduction} also video lectures by David Silver}
+    \end{center}
+\end{frame}
 
 
 \begin{frame}\frametitle{\secname}
-
+    
 \begin{block}{Assumption of MDP}
-The environment is fully observable. There is a complete charactrization of what's going on and where everything is.
+The environment is fully observable. There is a complete characterization of what's going on and where everything is.
 \end{block}
 
 The other case would be \emph{partially observable} MDP (POMDP)
 
-\begin{block}{What do we want to do}
-Maximize, not just immediate rewards but the \emph{cumulative sum of rewards} or ``return''
+\end{frame}
 
+
+\begin{frame}\frametitle{\secname}
+
+\begin{block}{What do we want to do}
+Maximize, not just immediate rewards but the \emph{cumulative sum of rewards} or ``return''.
+\slidesonly{\vspace{-3mm}}
 \begin{equation}
 \text{return
 } := \sum_{k=0}^{\infty} \gamma^k r(\vec x^{(t)}, \vec a^{(t+k+1)}),
@@ -32,28 +40,47 @@ where $\gamma \in \lbrack0,1)$ is referred to as the \emph{discount factor}.
  
 \end{block}
 
+\only<1>{
 About the \emph{discount factor} $\gamma$:
+}
 
 \begin{itemize}
+\only<1>{
 \item It is possible for $\gamma$ to be $=1$.\\
 
 \question{Under what condition can $\gamma$ be $=1$}\\
 
+
 \mode<article>{
 - $\gamma$ can be $=1$ if the length of the sequence is guaranteed to be finite.
 }
+}
 
-TODO mouse maze
+\pause
 
 \item \question{What does $\gamma \rightarrow 0$ imply?}\\
 
 - preference for short term rewards
+
+\pause
 
 \item \question{What does $\gamma \rightarrow 1$ imply?}\\
 
 - emphasis on long-term returns, indifference to delay.
 
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}\frametitle{The discount factor}
+ 
+\mode<presentation>{
+\begin{equation}
+\text{return
+} := \sum_{k=0}^{\infty} \gamma^k r(\vec x^{(t)}, \vec a^{(t+k+1)}),\quad \text{where }\gamma \in \lbrack0,1)
+\end{equation}
+
+}
 
 \mode<article>{
 \figref{fig:discount} illustrates how the choice of $\gamma$ controls how fast the discount factors decay over time.
@@ -65,6 +92,9 @@ TODO mouse maze
 \label{fig:discount}
 \end{center}
 
+\slidesonly{\vspace{-3mm}}
+\slidesonly{\textbf{(see blackboard)}}
+
 \end{frame}
 
 \begin{frame}
@@ -74,14 +104,12 @@ TODO mouse maze
 \begin{itemize}
 \item Uncertainty of the future
 \item Imperfections in the model (we don't trust its decisions completely)
-\item mathematically convinient, the sum does not explode
+\item mathematically convenient, the sum does not explode
 \item avoids $\infty$ returns due to possible cycles in our MDP
 \item behavioral arguments (animals and humans seem to apply a similar discounting)\\
 ``A bird in the hand is worth two in the bush''
 \item financially realistic (accounts for inflation)
 \end{itemize}
-
-\citep{sutton1998introduction}
 
 \end{frame} 
 
@@ -107,13 +135,13 @@ The (state) value function $\corresponds$ the expected sum of discounted future 
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}\frametitle{\subsecname}
 
 \mode<presentation>{
 The value function $\corresponds$ the expected sum of discounted future rewards
 }
 
-For a fixed policy ${\color{policy}}\Pi$:
+For a fixed policy ${\color{policy}\pi}$:
 
 
 	\begin{itemize}
@@ -159,16 +187,19 @@ For a fixed policy ${\color{policy}}\Pi$:
 				\visible<3->{\,,\quad {\color{discount}\gamma \in \lbrack0, 1)} \,.}
 	\end{equation}
 	
+    \visible<4>{
+    
 	In other textbooks you may find:
 	
 	\begin{align}
 	V^\pi(\vec x_i) = \kern-1ex \overbrace{V^\pi_i}^{\text{shorthand}} \kern-1ex = 
 	\E \bigg\lbrack
-	\sum_{t=0}^{\infty} \gamma^t r(\vec x^{(t)}, \vec a^{(t)}) \;\bigg|\; \vec x^{(0)} := \vec x_i
+	\sum_{t=0}^{\infty} \gamma^t r(\vec x^{(t)}, \vec a^{(t)}) \;\Big|\; \vec x^{(0)} := \vec x_i
 	\bigg\rbrack\,, \; i=1,\ldots,S
 	\end{align}
 	
 	$\E\lbrack\cdot\rbrack$ is w.r.t $\{\vec x^{(t)}, \vec a^{(t)}\}$
 
+    }
 
 \end{frame}

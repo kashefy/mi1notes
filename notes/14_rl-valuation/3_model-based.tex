@@ -8,7 +8,7 @@
     }
     \begin{center} 
     Model-based $\corresponds$ offline-planning.\\
-    We are told everything about the enivronment, so we can simulate ``looking ahead'' and determine if one policy is better than another.
+    We are told everything about the environment, so we can simulate ``looking ahead'' and determine if one policy is better than another.
     \end{center}
 \end{frame}
 
@@ -16,59 +16,64 @@
 
 \begin{frame}\frametitle{\subsecname}
 
-The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.
+The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.{}
+
+\slidesonly{\vspace{-4mm}}
 
 	\begin{align}
-	V^\pi_i =\;& 
+	V^\pi_i 
+    \only<1>{
+    =\;&
 	\E \bigg\lbrack
-	\sum_{t=0}^{\infty} \gamma^t \; \overbrace{r(\vec x^{(t)}, \vec a^{(t)})}^{\substack{\text{shorthand}\\=:r^{(t)}}} \;\bigg|\; \vec x^{(0)} := \vec x_i
+	\sum_{t=0}^{\infty} \gamma^t \; \overbrace{r(\vec x^{(t)}, \vec a^{(t)})}^{\substack{\text{shorthand}\\=:r^{(t)}}} \;\Big|\; \vec x^{(0)} := \vec x_i
 	\bigg\rbrack\,, \; i=1,\ldots,S\\
 	=\;& 
 	\E \bigg\lbrack
-	\sum_{t=0}^{\infty} \gamma^t r^{(t)} \;\bigg|\; \vec x^{(0)} := \vec x_i
+	\sum_{t=0}^{\infty} \gamma^t r^{(t)} \;\Big|\; \vec x^{(0)} := \vec x_i
 	\bigg\rbrack\\
 	=\;& 
 	\E \bigg\lbrack
-	\gamma^0 \kern-1.5ex \underbrace{r^{(0)}}_{\substack{\text{immediate}\\ \text{reward}}} \kern-1.5ex + \gamma^1 r^{(1)} + \gamma^2 r^{(2)}+\ldots\;\bigg|\; \vec x^{(0)} := \vec x_i
+	\gamma^0 \kern-1.5ex \underbrace{r^{(0)}}_{\substack{\text{immediate}\\ \text{reward}}} \kern-1.5ex + \gamma^1 r^{(1)} + \gamma^2 r^{(2)}+\ldots\;\Big|\; \vec x^{(0)} := \vec x_i
 	\bigg\rbrack\\
 	=\;& 
 	\E \bigg\lbrack
 	r^{(0)} + 
 	\underbrace{\gamma \big( r^{(1)} + \gamma r^{(2)}+\ldots\big)
 	}_{\substack{
-	\text{discounted value of}\\ \text{successor state}}}\;\bigg|\; \vec x^{(0)} := \vec x_i
-	\bigg\rbrack\\
-	=\;& 
+	\text{discounted value of}\\ \text{successor state}}}\;\Big|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack\\}
+    \only<1,2>{
+	=\;&
 	\E \bigg\lbrack
 	r^{(0)} + 
-	\gamma V^\pi(x^{(1)})\;\bigg|\; \vec x^{(0)} := \vec x_i
+	\gamma V^\pi(x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
 	\bigg\rbrack
-	\intertext{split expectation of sum into sum of expectations}
+    }
+    \only<2>{
+	\intertext{split ``expectation of sum'' into ``sum of expectations'':}
 	=\;& 
 	\E \bigg\lbrack
-	r^{(0)} \;\bigg|\; \vec x^{(0)} := \vec x_i
+	r^{(0)} \;\Big|\; \vec x^{(0)} := \vec x_i
 	\bigg\rbrack
 	+
 	\E \bigg\lbrack
-	{\color{red}\gamma} V^\pi(x^{(1)})\;\bigg|\; \vec x^{(0)} := \vec x_i
+	{\color{red}\gamma} V^\pi(x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
 	\bigg\rbrack\\
 	=\;& 
 	\E \bigg\lbrack
-	r^{(0)} \;\bigg|\; \vec x^{(0)} := \vec x_i
+	r^{(0)} \;\Big|\; \vec x^{(0)} := \vec x_i
 	\bigg\rbrack
 	+
 	{\color{red}\gamma}\,
 	\E \bigg\lbrack
-	 V^\pi(x^{(1)})\;\bigg|\; \vec x^{(0)} := \vec x_i
+	 V^\pi(x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
 	\bigg\rbrack
+    }
 	\end{align}
 	
-
-
-
 \end{frame}
 
-\begin{frame}\frametitle{\subsecname (cont'd)}
+\begin{frame}\frametitle{\subsecname~(cont'd)}
 
 \slidesonly{\vspace{-5mm}}
 
@@ -76,12 +81,12 @@ The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.
 	\begin{align}
 		V^\pi_i =\;& 
 		\E \bigg\lbrack
-		r^{(0)} \;\bigg|\; \vec x^{(0)} := \vec x_i
+		r^{(0)} \;\Big|\; \vec x^{(0)} := \vec x_i
 		\bigg\rbrack
 		+
 		\gamma\,
 		\E \bigg\lbrack
-		 V^\pi(x^{(1)})\;\bigg|\; \vec x^{(0)} := \vec x_i
+		 V^\pi(x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
 		\bigg\rbrack
 	\end{align}
 }
@@ -142,14 +147,13 @@ The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.
 
 \begin{frame}
 	
-
 	\begin{equation}
 		\vec v^\pi
 		= \; {\color{reward}\vec r^\pi} 
 			+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi \; =: \kern-3ex\overbrace{\hat B^\pi[\vec v^\pi]}^{\text{the Bellman operator}}\kern-3ex,
 	\end{equation}
 	
-	where $\vec v^\pi \in \R^S$: vector containing all values $V^\pi$,
+	where $\vec v^\pi \in \R^S$ is a vector containing all values $V^\pi(\vec x_{i})\;\forall i$,
 	
 	\begin{align}
 		\quad \text{with}  \underbrace{ \left\{ \begin{array}{rcl} 
@@ -300,6 +304,7 @@ at time step $t$
 
 \end{frame}
 
+
 \begin{frame}\frametitle{\subsubsecname}
     
 \mode<presentation>{
@@ -311,12 +316,12 @@ at time step $t$
 
 \begin{itemize}
 \item We start \emph{value iteration} assuming $\vec {\tilde v}^{\pi (0)}$ is the optimal value function
-\item Use the one-step \emph{lookahead} (i.e. next step) to work our way \emph{backwards}\\
+\item Use the one-step \emph{look-ahead} (i.e. next step) to work our way \emph{backwards}\\
 
 	\begin{equation*}
 		\hat B^\pi[\vec v^\pi] := \vec v^\pi
 		= \; {\color{reward}\vec r^\pi} 
-			+ \gamma {\color{trans}\vec P^\pi} \underbrace{\vec v^\pi}_{\text{lookahead}}
+			+ \gamma {\color{trans}\vec P^\pi} \kern-1.2ex \underbrace{\vec v^\pi}_{\text{look-ahead}}
 	\end{equation*}
 \end{itemize}
 
@@ -331,6 +336,108 @@ Analytical solution vs. value iteration:
 \item intermediate solutions of \emph{value iteration} don't necessarily belong to valid policies. We have to wait for convergence.
 \end{itemize}
 
+\end{frame}
+
+\subsubsection{Convergence of value iteration}
+
+
+% -----------------------------------------------------------------------------
+\begin{frame} \frametitle{\subsubsecname}
+    
+	\begin{block}{Contraction mapping}
+		\small
+		A mapping function $f(x)$ is a contraction with $0 < \gamma < 1$ if for any $x, x'$, $\lVert f(x) - f(x') \rVert \le \gamma \lVert x - x' \rVert$.
+	\normalsize
+	\end{block}
+    
+    \mode<article>{
+    We specify this a little further:
+    }
+    
+\end{frame}
+
+% -----------------------------------------------------------------------------
+\begin{frame} \frametitle{\subsubsecname}
+	\begin{block}{Contraction mapping (in supremum norm)}
+		\small
+		A function $\hat B : \R^S \to \R^S$ is called a 
+		{\em contraction mapping} 
+		with Lipschitz constant\notesonly{\footnote{i.e. the function is continuous}} $0 \leq \lambda < 1$ if 
+		$\max\limits_{j} 
+		\big|(\hat B[\tilde{\vec v}] - \hat B[\tilde{\vec w}])_j \big| 
+		\;\leq\; \lambda \max\limits_{j} \big|\tilde v_j - \tilde w_j \big|,
+		\forall \tilde{\vec v}, \tilde{\vec w} \in \R^S$.
+	\normalsize
+	\end{block}
+	\only<1>{ 
+		\vspace{2mm}
+		\iitem{application to the Bellman operator 
+				$\hat B^\pi[\tilde{\vec v}] =
+				{\color{reward}\vec r^\pi} 
+				+ \gamma {\color{trans}\vec P^\pi} \tilde{\vec v}$}
+		\begin{eqnarray*}
+			\max_j \big| \hat B^\pi[\tilde{\vec v}]_j 
+				- \hat B^\pi[\tilde{\vec w}]_j \big| 
+			&=& \max_j
+				\big| {\color{reward} r^\pi_j} 
+					+ \gamma {\color{trans}(\vec P^\pi \tilde{\vec v})_j}
+					- {\color{reward}r^\pi_j} 
+					- \gamma {\color{trans}(\vec P^\pi \tilde{\vec w})_j} 
+				\big| \\[-2mm]
+			&\stackrel{\text{(i)}}{\leq}& 
+				\max_j \gamma \, \big({\color{trans}\vec P^\pi} 
+				|\tilde{\vec v} - \tilde{\vec w}|\big)_j 
+			\quad\stackrel{\text{(ii)}}{\leq}\quad  
+				\gamma \, \max_j |\tilde v_j - \tilde w_j|
+		\end{eqnarray*}
+		\vspace{2mm}
+		\begin{eqnarray*}
+			\text{(i)} \quad 
+			 \Big|{\color{trans}\smallsum{i=1}{S} P^\pi_{ji}} \,x_i \Big|
+			 	&\leq & 
+				 {\color{trans} \smallsum{i=1}{S} P^\pi_{ji}} \, |x_i| \,,
+				 \qquad\; \forall \vec x \in \R^S 
+				 \hspace{1.2cm}\text{(Jensen's inequality)} \\[-1mm]
+			\text{(ii)} \quad
+			{\color{trans}\smallsum{i=1}{S} P^\pi_{ji}} \, |x_i|
+				& \leq &
+				{\color{trans} \smallsum{i=1}{S} P^\pi_{ji}}
+					\max_{1\leq k\leq S} |x_k|
+				\quad = \;\;\; \max_{1\leq k\leq S} |x_k| 
+				\hspace{1.1cm}
+				\text{(${\color{trans}\smallsum{i=1}{S} P^\pi_{ji} = 1}$)}
+		\end{eqnarray*}
+	} \only<2>{
+		\vspace{1mm}
+		\begin{itemize}
+			\item $\hat B^\pi$ is a contraction mapping 
+				with Lipschitz constant $0 < \gamma < 1$ 
+			\vspace{2mm}
+			\begin{align} \tag{value iteration}
+				\tilde{\vec v}^{\pi(t+1)} 
+				\quad=\quad \hat B^\pi\lbrack\tilde{\vec v}^{\pi(t)}]\rbrack
+				\quad=\quad {\color{reward}\vec r^\pi} 
+					+ \gamma {\color{trans}\vec P^\pi} \tilde{\vec v}^{\pi(t)}
+			\end{align}
+			\vspace{-2mm}
+			\item Let $\vec v^\pi$ be the unique fixed point. Then:\\[10pt]
+			\hspace{-3mm}$\max\limits_j \big|
+				(\hat B^\pi \lbrack \vec v^{\pi(t)} \rbrack)_j - (\hat B^\pi \lbrack \vec v^{\pi} \rbrack)_j \big| 
+				\leq \gamma \max\limits_j 
+					\big|v^{\pi(t)}_j - v^\pi_j \big| $ 
+				for {\em any} $\vec v^{\pi(t)} \in \R^S$
+			\vspace{3mm}
+			\item[$\Rightarrow$] value iteration converges in the limit $t\to\infty$
+%					to unique fixed-point $\vec v^\pi$
+				\vspace{1mm}
+				\iitem{number of iterations until convergence 
+					$\sim -\frac{1}{\log(\gamma)}$
+				 \vspace{1mm}
+				 \item analytic solution is faster for large values of $\gamma$
+				}
+		\end{itemize} 
+		\vspace{4mm}
+	}
 \end{frame}
 
 \subsection{Finding the optimal policy}
@@ -351,7 +458,7 @@ For all optimal policies $\pi^{*}$:
     V^{\pi^{*}}(\vec x) = V^{*}(\vec x) 
 \end{equation}
 
-A ploicy $\pi$ that maximizes the value function and yields $\vec v^{*}(\vec x)$ is an optimal policy $\pi^{*}$.
+A policy $\pi$ that maximizes the value function and yields $\vec v^{*}(\vec x)$ is an optimal policy $\pi^{*}$.
     
 \end{block}
 
@@ -379,7 +486,7 @@ A ploicy $\pi$ that maximizes the value function and yields $\vec v^{*}(\vec x)$
 \slidesonly{\vspace{-5mm}}
 
 \begin{equation}
-\pi^{*}(\vec a_{k} | \vec x_{i}) = \argmax_{\vec a} \sum_{j=1}^{S} {\color{trans} P(\vec x_{j}| \vec x_{i}, \vec a)} \Big( {\color{reward}r(\vec x_{j}, \vec a)} + \gamma V^{\pi}(\vec x_{j}) \Big)    
+\pi^{*}(\vec a_{k} | \vec x_{i}) = \argmax_{\vec a} \sum_{j=1}^{S} {\color{trans} P(\vec x_{j}| \vec x_{i}, \vec a)} \Big( {\color{reward}r(\vec x_{j}, \vec a)} + \gamma V^{*}(\vec x_{j}) \Big)    
 \end{equation}   
 
 \slidesonly{\vspace{-5mm}} 
@@ -390,7 +497,7 @@ A ploicy $\pi$ that maximizes the value function and yields $\vec v^{*}(\vec x)$
 \begin{enumerate}
 %\item An optimal policy selects the action that maximizes this 
 \item When at $\vec x_{i}$, look at the actions $\vec a$ that lead to all possible future states $\vec x_{j}$.
-\item Select action $\vec a_{k}$ that maximizes the immediate reward + discounted sucessive value.
+\item Select action $\vec a_{k}$ that maximizes the immediate reward + discounted successive value.
 \end{enumerate}
 }
 
@@ -399,7 +506,7 @@ A ploicy $\pi$ that maximizes the value function and yields $\vec v^{*}(\vec x)$
 
 \begin{itemize}
 \item The above does not scale well for large state spaces.
-\item The resuling $\pi^{*}$ is a \emph{greedy} policy, because it greedily selects using only value function at hand. 
+\item The resulting $\pi^{*}$ is a \emph{greedy} policy, because it greedily selects using only value function at hand. 
 \end{itemize}
 }
 
