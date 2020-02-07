@@ -1,2 +1,30 @@
-\section{The Reinforcement Learning (RL) setting}
+\section{Recap of Markov Decision Process (MDP)}
 
+\begin{frame}\frametitle{\secname}
+
+\begin{itemize}
+\item[] states $\vec x \in \mathcal{X} = \{ \vec x_1, \ldots, \vec x_S\}$
+\item[] actions $\vec a \in \mathcal{A} = \{ \vec a_1, \ldots, \vec a_A\}$
+\item[] transition model
+\begin{equation}
+P(\vec x_j | \vec x_i, \vec a_k)
+\end{equation}
+\pause
+\item[] reward function $r(\vec x_i, \vec a_k)$
+\item[] policy 
+\begin{equation}
+P(\vec a_k | \vec x_i)
+\end{equation}
+
+\end{itemize}
+
+	\begin{align}
+	V^\pi(\vec x_i) = \kern-1ex \overbrace{V^\pi_i}^{\text{shorthand}} \kern-1ex = 
+	\E \bigg\lbrack
+	\sum_{t=0}^{\infty} \gamma^t r(\vec x^{(t)}, \vec a^{(t)}) \;\Big|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack\,, \; i=1,\ldots,S
+	\end{align}
+	
+	$\E\lbrack\cdot\rbrack$ is w.r.t $\{\vec x^{(t)}, \vec a^{(t)}\}$
+
+\end{frame}
