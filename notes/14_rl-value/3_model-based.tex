@@ -16,7 +16,14 @@
 
 \begin{frame}\frametitle{\subsecname}
 
-The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.{}
+The Bellman equation relates the value of a state with the values of its successor states, given some policy $\pi$.
+
+The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.
+
+\end{frame}
+
+\begin{frame}\frametitle{\subsecname}
+
 
 \slidesonly{\vspace{-4mm}}
 
@@ -24,50 +31,50 @@ The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.{}
 	V^\pi_i 
     \only<1>{
     =\;&
-	\E \bigg\lbrack
-	\sum_{t=0}^{\infty} \gamma^t \; \overbrace{r(\vec x^{(t)}, \vec a^{(t)})}^{\substack{\text{shorthand}\\=:r^{(t)}}} \;\Big|\; \vec x^{(0)} := \vec x_i
-	\bigg\rbrack\,, \; i=1,\ldots,S\\
+	\E \Big\lbrack
+	\sum_{t=0}^{\infty} \gamma^t \; \overbrace{r(\vec x^{(t)}, \vec a^{(t)})}^{\substack{\text{shorthand}\\=: r^{(t)}}} \;\Big|\; \vec x^{(0)} := \vec x_i
+	\Big\rbrack\,, \; i=1,\ldots,S\\
 	=\;& 
-	\E \bigg\lbrack
+	\E \Big\lbrack
 	\sum_{t=0}^{\infty} \gamma^t r^{(t)} \;\Big|\; \vec x^{(0)} := \vec x_i
-	\bigg\rbrack\\
+	\Big\rbrack\\
 	=\;& 
-	\E \bigg\lbrack
+	\E \Big\lbrack
 	\gamma^0 \kern-1.5ex \underbrace{r^{(0)}}_{\substack{\text{immediate}\\ \text{reward}}} \kern-1.5ex + \gamma^1 r^{(1)} + \gamma^2 r^{(2)}+\ldots\;\Big|\; \vec x^{(0)} := \vec x_i
-	\bigg\rbrack\\
+	\Big\rbrack\\
 	=\;& 
-	\E \bigg\lbrack
+	\E \Big\lbrack
 	r^{(0)} + 
 	\underbrace{\gamma \big( r^{(1)} + \gamma r^{(2)}+\ldots\big)
 	}_{\substack{
 	\text{discounted value of}\\ \text{successor state}}}\;\Big|\; \vec x^{(0)} := \vec x_i
-	\bigg\rbrack\\}
+	\Big\rbrack\\}
     \only<1,2>{
 	=\;&
-	\E \bigg\lbrack
+	\E \Big\lbrack
 	r^{(0)} + 
-	\gamma V^\pi(x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
-	\bigg\rbrack
+	\gamma V^\pi(\vec x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
+	\Big\rbrack
     }
     \only<2>{
 	\intertext{split ``expectation of sum'' into ``sum of expectations'':}
 	=\;& 
-	\E \bigg\lbrack
+	\E \Big\lbrack
 	r^{(0)} \;\Big|\; \vec x^{(0)} := \vec x_i
-	\bigg\rbrack
+	\Big\rbrack
 	+
-	\E \bigg\lbrack
-	{\color{red}\gamma} V^\pi(x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
-	\bigg\rbrack\\
+	\E \Big\lbrack
+	{\color{red}\gamma} V^\pi( \vec x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
+	\Big\rbrack\\
 	=\;& 
-	\E \bigg\lbrack
+	\E \Big\lbrack
 	r^{(0)} \;\Big|\; \vec x^{(0)} := \vec x_i
-	\bigg\rbrack
+	\Big\rbrack
 	+
 	{\color{red}\gamma}\,
-	\E \bigg\lbrack
-	 V^\pi(x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
-	\bigg\rbrack
+	\E \Big\lbrack
+	 V^\pi( \vec x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
+	\Big\rbrack
     }
 	\end{align}
 	
@@ -86,7 +93,7 @@ The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.{}
 		+
 		\gamma\,
 		\E \bigg\lbrack
-		 V^\pi(x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
+		 V^\pi( \vec x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
 		\bigg\rbrack
 	\end{align}
 }
@@ -506,7 +513,7 @@ A policy $\pi$ that maximizes the value function and yields $\vec v^{*}(\vec x)$
 
 \begin{itemize}
 \item The above does not scale well for large state spaces.
-\item The resulting $\pi^{*}$ is a \emph{greedy} policy, because it greedily selects using only value function at hand. 
+\item The resulting $\pi^{*}$ is a \emph{greedy} policy, because it greedily selects using only the value function at hand. 
 \end{itemize}
 }
 

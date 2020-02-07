@@ -9,7 +9,7 @@
     \end{center}
 }
     \begin{center}
-    A formalized description of the environment in RL\footnote{Recommended reading 
+    A formalized description of the \underline{environment} in RL\footnote{Recommended reading 
 \citep{sutton1998introduction} also video lectures by David Silver}
     \end{center}
 \end{frame}
@@ -33,7 +33,7 @@ Maximize, not just immediate rewards but the \emph{cumulative sum of rewards} or
 \slidesonly{\vspace{-3mm}}
 \begin{equation}
 \text{return
-} := \sum_{k=0}^{\infty} \gamma^k r(\vec x^{(t)}, \vec a^{(t+k+1)}),
+}(t) := \sum_{k=0}^{\infty} \gamma^k r(\vec x^{(t+k+1)}, \vec a^{(t+k+1)}) = \sum_{k=0}^{\infty} \gamma^k r^{(t+k+1)},
 \end{equation}
 
 where $\gamma \in \lbrack0,1)$ is referred to as the \emph{discount factor}.
@@ -65,6 +65,8 @@ About the \emph{discount factor} $\gamma$:
 \pause
 
 \item \question{What does $\gamma \rightarrow 1$ imply?}\\
+
+\pause
 
 - emphasis on long-term returns, indifference to delay.
 
@@ -162,20 +164,20 @@ For a fixed policy ${\color{policy}\pi}$:
 				V^\pi(\vec x^{(0)}) 
 				\;\;=\;\; \visible<1->{{ \color{expect}	\E\bigg\lbrack }} 
 					\visible<2->{{\color{chain}\sum_{t=0}^{
-						\only<2>{H}%
+						\slidesonly{\only<2>{H}}%
 						\only<3->{{\color{discount}\infty}}}}}
 				\visible<3->{{\color{discount} \gamma^t} \,}
 				{\color{reward} r(
-					\only<1>{{\color{black} \vec x^{(0)}}}
+					\slidesonly{\only<1>{{\color{black} \vec x^{(0)}}}}
 					\only<2->{{\color{trans} \vec x^{(t)}}}, 
-					{\color{policy}\vec a^{(\only<1>{0}\only<2->{t})}}
+					{\color{policy}\vec a^{(\slidesonly{\only<1>{0}}\only<2->{t})}}
 				) } 
 				{ \color{expect}
 					\,\bigg| \begin{array}{c}
 							\scriptstyle {\color{policy}
-								\vec a^{(\only<1>{0}\only<2->{t})} 
+								\vec a^{(\slidesonly{\only<1>{0}}\only<2->{t})} 
 								\;\sim\; \pi(\cdot\,|\,
-									\vec x^{(\only<1>{0}\only<2->{t})}) 
+									\vec x^{(\slidesonly{\only<1>{0}}\only<2->{t})}) 
 								}\;\;\;\\
 							\visible<2->{{\color{trans}
 								\scriptstyle \vec x^{(t+1)} \;\sim\; 
