@@ -6,25 +6,31 @@
 
 \begin{figure}[h]
 \centering
-	\includegraphics[height=2.5cm]{img/cycles2}
+	\includegraphics[height=2.cm]{img/cycles2}
 	\mode<article>{
 	\caption{Identifying cycles in an undirected graph}
 	}
 \end{figure}
 
-\slidesonly{\vspace{-2mm}}
+\slidesonly{\vspace{-3mm}}
 
 \begin{itemize}
 \item \emph{Cycle}: A closed path with \textbf{no} repeated vertices \slidesonly{except}\notesonly{other than} $V_{\text{start}}=V_{\text{end}}$.
-\item \emph{Chordless} cycle: Any two \textbf{non}-adjacent vertices on the cycle are \textbf{not} joined by any edge.
-\item \emph{Triangulated graph} ($\corresponds$ \emph{Chordal graph}): A graph without chordless cycles of 4+ vetices.\notesonly{\footnote{credit: \citep{Jebaraslides}}}
+\item \emph{Chords}: Given a cycle, an edge is a chord if it connects two nodes that are non-adjacent on the cycle.
+\item \emph{Chordless} cycle: \textbf{All} two \textbf{non}-adjacent vertices on the cycle are \textbf{not} joined by any edge.
+\item \emph{Triangulated graph} ($\corresponds$ \emph{Chordal graph}): A graph \textbf{without} chordless cycles of 4+ vetices.\notesonly{\footnote{cf: Definition 2.24 on Ch. 2.2.4 in \citep{koller2009probabilistic}
+%\citep{Jebaraslides}
+}
+}
 \begin{flushright}
 {\footnotesize(too many double negatives!!!)}
 \end{flushright}
 \end{itemize}
 
+\slidesonly{\vspace{-2mm}}
+
 \begin{block}{Triangulation}
-Construct a chordal graph by adding \emph{chords} (``shortcut'' edges) all cycles of length 4+.
+Construct a chordal graph by adding \emph{chords} (``shortcut'' edges) to all cycles of length 4+.
 \end{block} 
 
 \end{frame}
