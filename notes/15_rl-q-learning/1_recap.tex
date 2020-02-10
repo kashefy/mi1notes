@@ -20,7 +20,7 @@ P(\vec x_j | \vec x_i, \vec a_k)
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}\frametitle{Recap (cont'd)}
 
 The value function to evaluate a policy:
 
@@ -31,16 +31,27 @@ The value function to evaluate a policy:
 	\bigg\rbrack\,, \; i=1,\ldots,S
 	\end{align}
 	
+	\mode<article>{
 	$\E\lbrack\cdot\rbrack$ is w.r.t $\{\vec x^{(t)}, \vec a^{(t)}\}$
+	}
 	
 Comparing policies:
 
-pi > pi
+\begin{equation}
+\pi~
+\overset{\mathclap{\substack{%
+					\text{``better'' or}\\[1mm]\text{equally ``good''}\\ \big\downarrow
+					}}}{{\color{gray}\ge}}
+~\pi' 
+\quad \text{\textbf{iff}} \quad V^{\pi} (\vec x) \ge V^{\pi'} (\vec x)\,,\quad \forall\; \vec x \in \mathcal{X}
+\end{equation}
 
 The optimal value function and optimal policies:
 
 \begin{equation}
-V^{*}(\vec x) = \max_{\pi} V^{\pi} (\vec x) = V^{\pi*}(\vec x)\,,\quad \forall \vec x \in \mathcal{X}
+\underbrace{V^{*}(\vec x)}_{\substack{\text{optimal}\\ \text{value}}} \;\;=\;\; \max_{\pi} V^{\pi} (\vec x) \;\;=\;\; \underbrace{V^{\pi*}(\vec x)}_{\substack{\text{value of}\\ \text{optimal policy}}}\,,\quad \forall \vec x \in \mathcal{X}
 \end{equation}
 
 \end{frame}
+
+

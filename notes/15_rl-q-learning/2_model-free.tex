@@ -1,16 +1,30 @@
-\section{Markov Decision Process (MDP)}
-
-\definecolor{darkgreen}{rgb}{0,0.6,0}
+\section{Model-free evaluation of policy}
 
 \begin{frame} 
 \mode<presentation>{
     \begin{center} \huge
         \secname
-    \end{center}
-}
+    \end{center}  
+    }
     \begin{center}
-    A formalized description of the \underline{environment} in RL\footnote{Recommended reading 
-\citep{sutton1998introduction} also video lectures by David Silver}
+    \underline{Last time}: Model-based $\corresponds$ offline-planning.\\
+    \underline{Today}: Model-free $\corresponds$ inductive online-planning.\\
     \end{center}
 \end{frame}
 
+\begin{frame}\frametitle{\secname}
+
+The MDP is not explicitly available, i.e. $P$ and $r$ are unknown and have to be ``experienced''.
+
+Options:
+\begin{itemize}
+\item Monte-Carlo estimation of $V^\pi(\vec x)$ (TODO slide)
+\item Inductive value estimation through temporal difference learning (TD-Learning)
+\end{itemize}
+
+\end{frame}
+
+\subsection{Temporal difference learning}
+
+\begin{frame}\frametitle{\subsecname}
+\end{frame}
