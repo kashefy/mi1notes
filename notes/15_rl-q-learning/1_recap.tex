@@ -13,10 +13,16 @@ P(\vec x_j | \vec x_i, \vec a_k)
 \item[] reward function $r(\vec x_i, \vec a_k)$
 \item[] policy 
 \begin{equation}
-P(\vec a_k | \vec x_i)
+\pi(\vec a_k | \vec x_i)
 \end{equation}
 
 \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+
+The value function to evaluate a policy:
 
 	\begin{align}
 	V^\pi(\vec x_i) = \kern-1ex \overbrace{V^\pi_i}^{\text{shorthand}} \kern-1ex = 
@@ -26,5 +32,15 @@ P(\vec a_k | \vec x_i)
 	\end{align}
 	
 	$\E\lbrack\cdot\rbrack$ is w.r.t $\{\vec x^{(t)}, \vec a^{(t)}\}$
+	
+Comparing policies:
+
+pi > pi
+
+The optimal value function and optimal policies:
+
+\begin{equation}
+V^{*}(\vec x) = \max_{\pi} V^{\pi} (\vec x) = V^{\pi*}(\vec x)\,,\quad \forall \vec x \in \mathcal{X}
+\end{equation}
 
 \end{frame}
