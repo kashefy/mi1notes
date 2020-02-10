@@ -31,7 +31,8 @@ $\\
 
 \only<1->{
 Data in Reinforcement Learning:
-
+}
+\only<1>{
 A sequence of random states $\vec x$ resulting from taking actions $\vec a$ over time which result in some reward $r$.
 }
 \pause
@@ -51,7 +52,8 @@ $\vec a \in \mathcal{A}$ or $\vec a \in \R^M$,\\
 \end{itemize}
 \pause
 \mode<article>{Each time step describes what reward was received when performing some action while in some state. 
-The sequence we observe becomes:}
+}
+The sequence we observe becomes:
 
 \slidesonly{\vspace{-4mm}}
 
@@ -70,7 +72,7 @@ The sequence we observe becomes:}
 \only<1>{    
 \begin{block}{Markov property}
 
-The probability of transitioning form state $\vec x_i$ to $\vec x_j$ only depends on state $\vec x_j$ and the action $\vec a_k$ that was taken. It does not depend on earlier history.
+The probability of transitioning form state $\vec x_i$ to $\vec x_j$ only depends on state $\vec x_i$ and the action $\vec a_k$ that was taken. It does not depend on earlier history.
 \end{block}
 
 This leads to the following }\textcolor{trans}{transition model (transition matrix)}:
@@ -87,8 +89,11 @@ P(\vec x_j | \vec x_i, \vec a_k)
 which
 \begin{itemize}
 	\item measures the probability to end up in $\vec x_j$ 
-		after choosing $\vec a_k$ in $\vec x_i$,
-	\item is a stationary distribution (consequence of the Markov property)\\
+		after choosing $\vec a_k$ when in $\vec x_i$,
+	\item is a stationary distribution
+	\begin{equation}
+	P(\vec x_j^{(t+1+\tau)} | \vec x_i^{(t+\tau)}, \vec a_k^{(t+\tau)}) = P(\vec x_j^{(t+1)} | \vec x_i^{(t)}, \vec a_k^{(t)})\,,\quad \tau \in \{0,1,\ldots\}
+	\end{equation}
 \end{itemize}
 
 and where

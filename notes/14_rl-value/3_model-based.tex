@@ -106,18 +106,24 @@ The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.
 
 	\begin{align}
 		V^\pi_i 
-		&=& \underbrace{
+		&=& \visible<2->{
+		\underbrace{
 		{\color{policy} \sum_{k=1}^A \pi(\vec a_k \,|\, \vec x_i)}
 			 {\color{reward} r(\vec x_i, \vec a_k)}
 			 }_{\substack{\text{``controlled'' reward function }\\
 			 \text{(immediate reward)} =: {\color{reward} r_i^\pi}}
 			 }
-			+ \underbrace{
+		+
+		}
+		\visible<3->{
+			 \underbrace{
 			\gamma {\color{policy} \sum_{k=1}^A \pi(\vec a_k \,|\, \vec x_i)} {\color{trans}\smallsum{j=1}{S} 
 				P(\vec x_j \,|\, \vec x_i, \vec a_k)} \kern-1.2ex
 				\overbrace{V^\pi_j}^{=V^\pi(\vec x_j)}
-				}_{\text{expected discounted value of successor state}} \\
+				}_{\text{expected discounted value of successor state}} \\	
 		&=& 
+		}
+		\visible<4->{
 			\underbrace{{\color{policy} \smallsum{k=1}A 
 				\pi(\vec a_k \,|\, \vec x_i)} 
 				{\color{reward} r(\vec x_i, \vec a_k)}
@@ -130,6 +136,7 @@ The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.
 				{\color{trans} P(\vec x_j \,|\, \vec x_i, \vec a_k)}
 			}_{\text{``controlled'' transition model }
 					{\color{trans} P^\pi_{ij}}}  V^\pi_j
+		}
 	\end{align}
 	
 	\notesonly{
@@ -141,12 +148,15 @@ The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.
 			+ \gamma {\color{trans}\vec P^\pi_{ij}} \vec v^\pi_{j}
 	\end{equation}
 	}
+	\visible<4>{
+	
 	\mode<presentation>{
-	$$
-	\vec v^\pi
-	= {\color{reward}\vec r^\pi} 
-			+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi
-	$$
+		$$
+		\vec v^\pi
+		= {\color{reward}\vec r^\pi} 
+				+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi
+		$$
+		}
 	}
 	
 	
@@ -197,15 +207,15 @@ The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.
 There are two approaches to finding $\vec v^\pi$:
 
 \begin{enumerate}
-\item analytically
-\item through fixed-point iteration
+\item[\ref{sec:findvanalytical} -] analytically
+\item[\ref{sec:findviter} -] through fixed-point iteration
 \end{enumerate}
 
 \end{frame}
 
-\subsubsection{Analytical solution of the Bellman equation}
+\subsubsection{Analytical solution of the Bellman equation}\label{sec:findvanalytical}
 
-\begin{frame}\frametitle{\subsubsecname}
+\begin{frame}\frametitle{Finding $\vec v^\pi$:~\subsubsecname}
 
 Essentially solve for $\vec v^\pi$ (get \underline{all} $\vec v^\pi$ on one side):
 
@@ -247,9 +257,9 @@ Essentially solve for $\vec v^\pi$ (get \underline{all} $\vec v^\pi$ on one side
 \end{frame}
 
 
-\subsubsection{Value iteration}
+\subsubsection{Value iteration}\label{sec:findviter}
 
-\begin{frame}\frametitle{\subsubsecname}
+\begin{frame}\frametitle{Finding $\vec v^\pi$:~\subsubsecname}
 
 Value iteration: a fixed-point iteration for finding $\vec v^\pi$
 
@@ -281,7 +291,7 @@ x^{(t+1)} = g(x^{(t)}), t=0,1,2,\ldots
 \end{frame}
 
 
-\begin{frame}\frametitle{\subsubsecname}
+\begin{frame}\frametitle{Finding $\vec v^\pi$:~\subsubsecname}
 \mode<presentation>{
 Value iteration: a fixed-point iteration for finding $\vec v^\pi$
 }
@@ -312,7 +322,7 @@ at time step $t$
 \end{frame}
 
 
-\begin{frame}\frametitle{\subsubsecname}
+\begin{frame}\frametitle{Finding $\vec v^\pi$:~\subsubsecname}
     
 \mode<presentation>{
 \begin{equation}
@@ -326,16 +336,22 @@ at time step $t$
 \item Use the one-step \emph{look-ahead} (i.e. next step) to work our way \emph{backwards}\\
 
 	\begin{equation*}
-		\hat B^\pi[\vec v^\pi] := \vec v^\pi
-		= \; {\color{reward}\vec r^\pi} 
-			+ \gamma {\color{trans}\vec P^\pi} \kern-1.2ex \underbrace{\vec v^\pi}_{\text{look-ahead}}
+		\hat B^\pi[\vec v^\pi] :=
+		{\color{reward}\vec r^\pi} 
+			+ \gamma {\color{trans}\vec P^\pi} \kern-1.7ex \underbrace{\vec v^\pi}_{\text{look-ahead}}
 	\end{equation*}
 \end{itemize}
 
+\end{frame}
+
+\begin{frame}\frametitle{Analytical solution vs. value iteration}
+
+\mode<article>{
 Analytical solution vs. value iteration:
+}
 
 \begin{itemize}
-\item Complexity: 
+\item complexity: 
 \begin{itemize}
 \item Analytical solution: $O(S^{3})$
 \item value iteration: $O(S^{2})$
@@ -351,6 +367,7 @@ Analytical solution vs. value iteration:
 % -----------------------------------------------------------------------------
 \begin{frame} \frametitle{\subsubsecname}
     
+    \only<1,2>{
 	\begin{block}{Contraction mapping}
 		\small
 		A mapping function $f(x)$ is a contraction with $0 < \gamma < 1$ if for any $x, x'$, $\lVert f(x) - f(x') \rVert \le \gamma \lVert x - x' \rVert$.
@@ -360,11 +377,9 @@ Analytical solution vs. value iteration:
     \mode<article>{
     We specify this a little further:
     }
+    }
     
-\end{frame}
-
-% -----------------------------------------------------------------------------
-\begin{frame} \frametitle{\subsubsecname}
+    \only<2->{
 	\begin{block}{Contraction mapping (in supremum norm)}
 		\small
 		A function $\hat B : \R^S \to \R^S$ is called a 
@@ -376,7 +391,8 @@ Analytical solution vs. value iteration:
 		\forall \tilde{\vec v}, \tilde{\vec w} \in \R^S$.
 	\normalsize
 	\end{block}
-	\only<1>{ 
+	}
+	\only<3>{ 
 		\vspace{2mm}
 		\iitem{application to the Bellman operator 
 				$\hat B^\pi[\tilde{\vec v}] =
@@ -414,7 +430,7 @@ Analytical solution vs. value iteration:
 				\hspace{1.1cm}
 				\text{(${\color{trans}\smallsum{i=1}{S} P^\pi_{ji} = 1}$)}
 		\end{eqnarray*}
-	} \only<2>{
+	} \only<4>{
 		\vspace{1mm}
 		\begin{itemize}
 			\item $\hat B^\pi$ is a contraction mapping 
@@ -449,12 +465,32 @@ Analytical solution vs. value iteration:
 
 \subsection{Finding the optimal policy}
 
-\begin{frame}\frametitle{\subsecname}
+\subsubsection{Comparing two policies}
 
-Multiple optimal policies can exist. A policy is optimal if it maximizes the state value function:
+\begin{frame}\frametitle{My policy is better than yours}
+
+\notesonly{
+A policy $\pi$ is regarded as better or equal to another policy $\pi'$ if $\pi$ yields an expected return which is greater or equal to that of the other policy $\pi'$ for all possible states.
+That is,
+}
 
 \begin{equation}
-V^{*}(\vec x) = \max_{\pi} V^{\pi} (\vec x)   
+\pi~
+\overset{\mathclap{\substack{%
+					\text{``better'' or}\\[1mm]\text{equally ``good''}\\ \big\downarrow
+					}}}{{\color{gray}\ge}}
+~\pi' 
+\quad \text{\textbf{iff}} \quad V^{\pi} (\vec x) \ge V^{\pi'} (\vec x)\,,\quad \forall\; \vec x \in \mathcal{X}
+\end{equation}
+
+\end{frame}
+
+\begin{frame}\frametitle{\subsecname}
+
+Multiple \emph{optimal policies} can exist. A policy is optimal if it maximizes the state value function\notesonly{\footnote{For more information, see Ch 3.6 in \citep{sutton1998introduction}}}:
+
+\begin{equation}
+V^{*}(\vec x) = \max_{\pi} V^{\pi} (\vec x)\,,\quad \forall\; \vec x \in \mathcal{X}
 \end{equation}
 
 \begin{block}{Optimal Policy}
@@ -465,7 +501,7 @@ For all optimal policies $\pi^{*}$:
     V^{\pi^{*}}(\vec x) = V^{*}(\vec x) 
 \end{equation}
 
-A policy $\pi$ that maximizes the value function and yields $\vec v^{*}(\vec x)$ is an optimal policy $\pi^{*}$.
+A policy $\pi$ that maximizes the value function and yields $\vec v^{*}$ is an optimal policy $\pi^{*}$.
     
 \end{block}
 
