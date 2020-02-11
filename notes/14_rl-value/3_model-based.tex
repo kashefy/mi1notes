@@ -96,6 +96,18 @@ The policy is fixed beforehand, i.e. $V$ ``follows'' the policy $\pi$.
 		 V^\pi( \vec x^{(1)})\;\Big|\; \vec x^{(0)} := \vec x_i
 		\bigg\rbrack
 	\end{align}
+
+\only<1-3>{
+Recall:
+\begin{itemize}
+\item[] states $\vec x \in \{ \vec x_1, \ldots, \vec x_S\}$, 
+actions $\vec a \in \{ \vec a_1, \ldots, \vec a_A\}$,\\
+reward function $r(\vec x_i, \vec a_k)$,
+\item[]
+transition model ${\color{trans} P(\vec x_j | \vec x_i, \vec a_k)}$ and
+policy ${\color{policy} \pi(\vec a_k | \vec x_i)}$
+\end{itemize}
+}
 }
 
 \question{What does the $\E \lbrack \cdot \rbrack$ boil down to?}
