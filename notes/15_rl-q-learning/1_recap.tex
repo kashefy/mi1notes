@@ -1,21 +1,22 @@
 \section{Recap of Markov Decision Process (MDP)}
 
+\definecolor{reward}{rgb}{0,0.5,0}
+\definecolor{policy}{rgb}{0.75,0,0}
+\definecolor{trans}{rgb}{0,0,1}
+
 \begin{frame}\frametitle{\secname}
 
 \begin{itemize}
 \item[] states $\vec x \in \mathcal{X} = \{ \vec x_1, \ldots, \vec x_S\}$
 \item[] actions $\vec a \in \mathcal{A} = \{ \vec a_1, \ldots, \vec a_A\}$
 \item[] transition model
-\begin{equation}
-P(\vec x_j | \vec x_i, \vec a_k)
-\end{equation}
+$$P(\vec x_j | \vec x_i, \vec a_k)$$
 \pause
-\item[] reward function $r(\vec x_i, \vec a_k)$
-\item[] policy 
-\begin{equation}
-\pi(\vec a_k | \vec x_i)
-\end{equation}
-
+\item[] reward function
+$$r(\vec x_i, \vec a_k)$$
+\item[] policy
+$$
+\pi(\vec a_k | \vec x_i)$$
 \end{itemize}
 
 \end{frame}
