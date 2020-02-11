@@ -157,7 +157,7 @@ policy ${\color{policy} \pi(\vec a_k | \vec x_i)}$
 	\begin{equation}
 	V^\pi_i
 	= {\color{reward}\vec r^\pi_i} 
-			+ \gamma {\color{trans}\vec P^\pi_{ij}} \vec v^\pi_{j}
+			+ \gamma {\color{trans}\vec P^\pi_{ij}} V^\pi_{j}
 	\end{equation}
 	}
 	\visible<4>{
@@ -175,6 +175,8 @@ policy ${\color{policy} \pi(\vec a_k | \vec x_i)}$
 \end{frame}
 
 \begin{frame}
+
+\notesonly{We can also use vector notation to represent the value of all states collectively:}
 	
 	\begin{equation}
 		\vec v^\pi
