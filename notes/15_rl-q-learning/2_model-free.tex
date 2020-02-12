@@ -134,68 +134,39 @@ Temporal difference learning (TD learning) is also a form of inductive value est
 
 \pause 
 
-\vspace{5mm}
+\vspace{2mm}
 
 TD learning is the asynchronous on-line update of the value function one state at a time
-	\slidesonly{\vspace{-5mm}}
+	\slidesonly{\vspace{-8mm}}
 	
 	\begin{equation}
-		\tilde V^{\pi}_{t+1}(\vec x^{(t)}) \quad = \quad 
-		\tilde V^{\pi}_t(\vec x^{(t)}) \;+\;
+		\tilde V^{\pi}_{(t+1)}(\vec x^{(t)}) \quad = \quad 
+		\tilde V^{\pi}_{(t)}(\vec x^{(t)}) \;+\;
 		\lr \Big( \underbrace{{\color{reward}r^{(t)}} 
 		+ \overbrace{
-		\gamma \tilde V^{\pi}_t({\color{trans}\vec x^{(t+1)}})
+		\gamma \tilde V^{\pi}_{(t)}({\color{trans}\vec x^{(t+1)}})
 		}^{\substack{\text{discounted value of}\\ \text{the next step}}} 
-		- \tilde V^{\pi}_t{(\vec x^{(t)})}}_{\text{TD-error }\Delta V_t} \Big) 
+		- \tilde V^{\pi}_{(t)}{(\vec x^{(t)})}}_{\text{TD-error }\Delta V_t} \Big) 
 	\end{equation}
 	
 	where $\eta$ is the learning rate, ${\color{reward}r^{(t)}}$ is short for the immediate ${\color{reward}r(\vec x^{(t)},\vec a^{(t)})}$.
+	
+	\only<2>{
+	Basically,
+	\begin{equation}
+		\mathit{Esimate_{New}} = \mathit{Esimate_{old}} + \lr \Big(\mathit{Target} - \mathit{Esimate_{old}} \Big)
+	\end{equation}
+	}
+	\only<3>{
 
 	\begin{itemize}
 	
 	\item  Model knowledge is not required.\notesonly{ We  don't need the complete reward function or the transition model.}
-
-	%\vspace{2mm}
 	
-	\item \notesonly{TD learning} named after the difference $\Delta V_t$ in value function estimates (TD-error)
+	\item \notesonly{TD learning} named after the difference $\Delta V_{(t)}$ in value function estimates (TD-error)
 	
-	%\end{itemize}
-		
-	%\vspace{3mm}
-		
-	%\item TD learning performs value iteration \emph{on average}
-		%\vspace{1mm}
-		%\begin{itemize}
-			%\item the expectation over all Markov chains 
-			%that pass~$\vec x_i$~at~time~$t$~reads~$(\vec x^{(t)} = \vec x_i):$
-			 %\vspace{2mm}
-			%$$
-		%\underbrace{\E\big\lbrack\tilde V^\pi_{t+1}(\vec x^{(t)})\big\rbrack
-			%}_{\tilde v_i^{\pi(t+1)}}
-		%\quad=\quad 
-		%(1 - \lr)\underbrace{\E\big\lbrack \tilde V^\pi_t(\vec x^{(t)}) \big\rbrack
-			%}_{\tilde v_i^{\pi(t)}}
-		%\;+\; \lr \Big( \underbrace{\E\lbrack{\color{reward} r_t}\rbrack
-		%+ \gamma \E\big\lbrack\tilde V^\pi_t({\color{trans}\vec x^{(t+1)}})\big\rbrack
-		%}_{({\color{reward} \vec r^\pi} 
-			%+ \gamma {\color{trans} \vec P^\pi} \tilde{\vec v}^{\pi(t)})_i}\Big)
-	%$$
-		%\end{itemize}
-	
-	
-%	\vspace{2mm}
-%	\item {\em asynchronous online estimate} of 
-%			$\hat B^\pi[\tilde{\vec v}^{\pi(t)}] = {\color{reward}\vec r^\pi} 
-%			+ \gamma {\color{trans}\vec P^\pi} \tilde{\vec v}^{\pi(t)}$
-%		\vspace{1mm}
-%		\begin{itemize}
-%%			\setlength{\itemindent}{-1.8em}
-%			\item asynchronous update of one state at a time
-%					\vspace{1mm}
-%			\item model knowledge not required!
-%		\end{itemize}
-
 	\end{itemize}
+	}
 	
 \end{frame}
 
@@ -212,13 +183,13 @@ TD learning is the asynchronous on-line update of the value function one state a
 			that pass~$\vec x_i$~at~time~$t$~reads~$(\vec x^{(t)} = \vec x_i)$ yields:
 			
 			\begin{equation}
-		\underbrace{\E\big\lbrack\tilde V^\pi_{t+1}(\vec x^{(t)})\big\rbrack
+		\underbrace{\E\big\lbrack\tilde V^\pi_{(t+1)}(\vec x^{(t)})\big\rbrack
 			}_{\tilde v_i^{\pi(t+1)}}
 		\quad=\quad 
-		(1 - \lr)\underbrace{\E\big\lbrack \tilde V^\pi_t(\vec x^{(t)}) \big\rbrack
+		(1 - \lr)\underbrace{\E\big\lbrack \tilde V^\pi_{(t)}(\vec x^{(t)}) \big\rbrack
 			}_{\tilde v_i^{\pi(t)}}
-		\;+\; \lr \Big( \underbrace{\E\lbrack{\color{reward} r_t}\rbrack
-		+ \gamma \E\big\lbrack\tilde V^\pi_t({\color{trans}\vec x^{(t+1)}})\big\rbrack
+		\;+\; \lr \Big( \underbrace{\E\lbrack{\color{reward} r^{(t)}}\rbrack
+		+ \gamma \E\big\lbrack\tilde V^\pi_{(t)}({\color{trans}\vec x^{(t+1)}})\big\rbrack
 		}_{({\color{reward} \vec r^\pi} 
 			+ \gamma {\color{trans} \vec P^\pi} \tilde{\vec v}^{\pi(t)})_i}\Big)
 			\end{equation}
@@ -264,7 +235,7 @@ and will not stop fluctuating. Holds for ergodic Markov chains
 
 \begin{frame}\frametitle{\subsecname}
 
-Example with stochastic Markov chain with 10 states:
+Random walk example with stochastic Markov chain with 10 states:
 	\begin{itemize}
 		\item two randomly initialized 
 			value functions ({\color{red}red}/{\color{blue}blue})
@@ -275,9 +246,10 @@ Example with stochastic Markov chain with 10 states:
 		\end{itemize}	
 
 	\begin{center}
-		\includegraphics[width=0.999\textwidth]{img/rl_chain_valuecontraction}
+		\hspace{-15mm}
+		\includegraphics[width=\notesonly{0.9}\slidesonly{0.999}\textwidth]{img/rl_chain_valuecontraction}
 		\mode<article>{
-		\captionof{figure}{TD learning will continue fluctuating around the true value but not converge to it.}
+		\captionof{figure}{A random walk example in which TD learning will continue fluctuating around the true value but not converge to it.}
 		}
 	\end{center}
 
