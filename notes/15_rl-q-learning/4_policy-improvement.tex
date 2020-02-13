@@ -171,7 +171,7 @@ Q-learning \citep{Watkins92}:
 \item Q-learning is a contraction mapping for \emph{any} ergodic Markov chain
 			\begin{equation}
 				\lim\limits_{p \to \infty} \E \Big\lbrack
-					\smallsum{t=0}{p} \Delta Q_t \Big\rbrack
+					\smallsum{t=0}{p} \Delta Q_{(t)} \Big\rbrack
 				= Q^{\pi^*}
 			\end{equation}
 \item Q-learning is the only on-line off-policy algorithm for policy improvement.

@@ -185,10 +185,10 @@ TD learning is the asynchronous on-line update of the value function one state a
 			\begin{equation}
 		\underbrace{\E\big\lbrack\tilde V^\pi_{(t+1)}(\vec x^{(t)})\big\rbrack
 			}_{\tilde v_i^{\pi(t+1)}}
-		\quad=\quad 
+		\,=\, 
 		(1 - \lr)\underbrace{\E\big\lbrack \tilde V^\pi_{(t)}(\vec x^{(t)}) \big\rbrack
 			}_{\tilde v_i^{\pi(t)}}
-		\;+\; \lr \Big( \underbrace{\E\lbrack{\color{reward} r^{(t)}}\rbrack
+		\,+\, \lr \Big( \underbrace{\E\lbrack{\color{reward} r^{(t)}}\rbrack
 		+ \gamma \E\big\lbrack\tilde V^\pi_{(t)}({\color{trans}\vec x^{(t+1)}})\big\rbrack
 		}_{({\color{reward} \vec r^\pi} 
 			+ \gamma {\color{trans} \vec P^\pi} \tilde{\vec v}^{\pi(t)})_i}\Big)
