@@ -1,14 +1,107 @@
-\section{Model-based evaluation of the policy}
+\section{Exploration vs. Exploitation}
 
 \begin{frame} 
 \mode<presentation>{
     \begin{center} \huge
         \secname
     \end{center}  
+    \vspace{5mm}
     }
-    \begin{center} 
-    Model-based $\corresponds$ offline-planning.\\
-    We are told everything about the environment, so we can simulate ``looking ahead'' and determine if one policy is better than another.
-    \end{center}
+	\begin{table}[h]
+	\centering
+	\resizebox{0.8\textwidth}{!}{%
+	\begin{tabular}{ccc}
+	exploration                                                                               &  & exploitation                                                                                                         \\
+	\multicolumn{3}{c}{$\xleftrightarrow{\hspace*{5cm}}$}                                                                                                                                                                               \\
+	\begin{tabular}[c]{@{}c@{}}visit all state-action pairs\\ sufficiently often\end{tabular} & \hspace{2cm} & \begin{tabular}[c]{@{}c@{}}converge fast and generate\\ as much reward as possible\\ \\ (greedy policy)\end{tabular}
+	\end{tabular}%
+	}
+\end{table}
+	
+\mode<presentation>{
+%\begin{center}
+		%\includegraphics[width=2cm]{img/explore}
+%\end{center} 
+%\begin{table}[]
+%\centering
+%\resizebox{0.2\textwidth}{!}{%
+%\begin{tabular}{|c|c|c|}
+%\hline
+ %&                   &                       \\  \hline
+ %& &  \\ \hline
+ %&                       &                       \\ \hline
+%\end{tabular}%
+%}
+%\end{table}
+	\slidesonly{\textbf{(see blackboard)}}
+}
+\end{frame}
+
+\subsection{Finding a balance}
+
+\begin{frame}\frametitle{\subsecname}
+
+
+Some of the possible approaches:
+\begin{enumerate}
+
+	\item parametrize the extraction of the policy from the Q-values:
+
+		\begin{enumerate}[a.]
+		
+		\item $\varepsilon$-greedy\only<2>{:
+
+			\begin{equation}
+			   \begin{array}{cc}
+				 &\varepsilon\text{-greedy}\\
+				 &\text{policy}
+			   \end{array}
+			   \pi(\vec a_k | \vec x_i) = \left\{
+			   \begin{array}{ll}
+				 {1-\varepsilon}, &\text{if } k = \argmax_{1 \leq l \leq A} Q(\vec x_i, \vec a_l) \\
+				 {\frac{\varepsilon}
+				 {A-1}}, &\text{otherwise.}
+			   \end{array}
+				 \right.
+			\end{equation}
+			
+			\question{How does $\varepsilon$ control the balance?}
+			}
+			
+		%\item 
+		
+		%\begin{equation}
+			%\pi(\vec a_k \,|\, \vec x_i) 
+				%\quad=\quad 
+				%\frac{\exp\big( \beta \, Q(\vec x_i, \vec a_k)\big)}
+				%{\sum_{l=1}^A \exp\big( \beta \, Q(\vec x_i, \vec a_l) \big)}
+		%\end{equation}
+		
+
+		\end{enumerate}
+
+	\item Optimistic Initialization
+	
+	\only<3>{
+	A greedy sampling policy would fail at exploration,\\
+	unless all Q-values are initialized with high values.
+	
+	\begin{itemize}
+		\item initializing all Q-values with high 
+			$Q_{(0)} \geq \frac{r_\text{max}}{1-\gamma}$ directs exploration
+		\vspace{1mm}
+		\item unexplored actions are initially made very attractive
+		
+		\question{How does the transition to exploration happen?}\\
+		
+		\notesonly{
+		- Through experience, as Q-values are reduced over time exploitation takes over.
+		}
+	\end{itemize}
+	}
+
+
+\end{enumerate}
+
 \end{frame}
 
