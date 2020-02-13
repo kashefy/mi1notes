@@ -146,7 +146,7 @@ TD learning is the asynchronous on-line update of the value function one state a
 		+ \overbrace{
 		\gamma \tilde V^{\pi}_{(t)}({\color{trans}\vec x^{(t+1)}})
 		}^{\substack{\text{discounted value of}\\ \text{the next step}}} 
-		- \tilde V^{\pi}_{(t)}{(\vec x^{(t)})}}_{\text{TD-error }\Delta V_t} \Big) 
+		- \tilde V^{\pi}_{(t)}{(\vec x^{(t)})}}_{\text{TD-error }\Delta V_{(t)}} \Big) 
 	\end{equation}
 	
 	where $\eta$ is the learning rate, ${\color{reward}r^{(t)}}$ is short for the immediate ${\color{reward}r(\vec x^{(t)},\vec a^{(t)})}$.
@@ -276,7 +276,7 @@ Random walk example with stochastic Markov chain with 10 states:
 		\item { small $\eta$: 
 			slow learning, small variance}
 		\vspace{1mm}
-		\item { $\eta_t$ should decay over time, but finding a good annealing schedule may be difficult in practice}
+		\item { $\eta_{(t)}$ should decay over time, but finding a good annealing schedule may be difficult in practice}
 	\end{itemize}
 
 \end{frame}

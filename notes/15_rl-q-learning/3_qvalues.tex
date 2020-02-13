@@ -279,7 +279,7 @@ Q^{*}(\vec x, \vec a) = \max_{\pi} Q^{\pi} (\vec x, \vec a)\,,\quad \forall\; \v
 	\begin{itemize}
 		\item Online learning requires sampling from a long Markov chain:\\
 		\begin{center}
-			(State$_{(t)}$-Action$_{(t)}$-{\color{reward} Reward$_{(t)}$}-{\color{trans} State$_{(t+1)}$}-{\color{policy} Action$_{(t+1)}$})
+			(State$^{(t)}$-Action$^{(t)}$-{\color{reward} Reward$^{(t)}$}-{\color{trans} State$^{(t+1)}$}-{\color{policy} Action$^{(t+1)}$})
 		\end{center}
 		\vspace{2mm}
 		\item This enables the asynchronous on-line update of the value function one state at a time (cf. TD($0$)\notesonly{ in \eqref{eq:tdlearningvalue}}):
@@ -293,7 +293,7 @@ Q^{*}(\vec x, \vec a) = \max_{\pi} Q^{\pi} (\vec x, \vec a)\,,\quad \forall\; \v
 			+ \overbrace{
 			\gamma \tilde V^{\pi}_{(t)}({\color{trans}\vec x^{(t+1)}})
 			}^{\substack{\text{discounted value of}\\ \text{the next step}}} 
-			- \tilde V^{\pi}_{(t)}{(\vec x^{(t)})}}_{\text{TD-error }\Delta V_t} \Big) 
+			- \tilde V^{\pi}_{(t)}{(\vec x^{(t)})}}_{\text{TD-error }\Delta V_{(t)}} \Big) 
 		\end{equation}
 		
 		\slidesonly{\vspace{-3mm}}
