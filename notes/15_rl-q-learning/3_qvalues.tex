@@ -282,12 +282,12 @@ Q^{*}(\vec x, \vec a) = \max_{\pi} Q^{\pi} (\vec x, \vec a)\,,\quad \forall\; \v
 			(State$^{(t)}$-Action$^{(t)}$-{\color{reward} Reward$^{(t)}$}-{\color{trans} State$^{(t+1)}$}-{\color{policy} Action$^{(t+1)}$})
 		\end{center}
 		\vspace{2mm}
-		\item This enables the asynchronous on-line update of the value function one state at a time (cf. TD($0$)\notesonly{ in \eqref{eq:tdlearningvalue}}):
+		\item This enables the asynchronous on-line update of the value function one state at a time (cf. TD($0$)\notesonly{ in \eqref{eq:tdlearningvalue}})
 		
 		\slidesonly{\vspace{-7mm}}
-		
+		\mode<presentation>{
 		\begin{equation}
-			\tilde V^{\pi}_{(t+1)}(\vec x^{(t)}) \quad = \quad 
+			\tilde V^{\pi}_{(t+1)}(\vec x^{(t)}) \; = \; 
 			\tilde V^{\pi}_{(t)}(\vec x^{(t)}) \;+\;
 			\lr \Big( \underbrace{{\color{reward}r^{(t)}} 
 			+ \overbrace{
@@ -295,6 +295,7 @@ Q^{*}(\vec x, \vec a) = \max_{\pi} Q^{\pi} (\vec x, \vec a)\,,\quad \forall\; \v
 			}^{\substack{\text{discounted value of}\\ \text{the next step}}} 
 			- \tilde V^{\pi}_{(t)}{(\vec x^{(t)})}}_{\text{TD-error }\Delta V_{(t)}} \Big) 
 		\end{equation}
+		}
 		
 		\slidesonly{\vspace{-3mm}}
 	
@@ -304,7 +305,7 @@ Q^{*}(\vec x, \vec a) = \max_{\pi} Q^{\pi} (\vec x, \vec a)\,,\quad \forall\; \v
 	
 		\begin{align}
 			\tilde{Q}^\pi_{(t+1)}(\vec x^{(t)},\, \vec a^{(t)} ) &\\
-			 = \, \tilde{Q}^\pi_{(t)} ( \vec x^{(t)},\, \vec a^{(t)} )& \, + \, \eta \, \underbrace{ \big( {\color{reward} r^{(t)}} \, + \, \gamma \, \tilde{Q}^\pi_{(t)} ({\color{trans}  \vec x^{(t+1)}},\,{\color{policy}  \vec a^{(t+1)}} ) - \tilde{Q}^\pi_{(t)} ( \vec x^{(t)},\, \vec a^{(t)} ) \big)}_{\Delta Q_{(t)}}
+			 = \, \tilde{Q}^\pi_{(t)} ( \vec x^{(t)},\, \vec a^{(t)} )& \, + \, \eta \, \underbrace{ \big( {\color{reward} r^{(t)}} \, + \, \gamma \, \tilde{Q}^\pi_{(t)} ({\color{trans}  \vec x^{(t+1)}},\,{\color{policy}  \vec a^{(t+1)}} ) - \tilde{Q}^\pi_{(t)} ( \vec x^{(t)},\, \vec a^{(t)} ) \big)}_{\Delta Q_{(t)}} \nonumber
 		\end{align}
 		
 		\slidesonly{\vspace{-3mm}}
@@ -379,9 +380,9 @@ Q^{*}(\vec x, \vec a) = \max_{\pi} Q^{\pi} (\vec x, \vec a)\,,\quad \forall\; \v
 				\label{eq:deltaqOFFpolicy}
 		\end{equation}
 		
-		The $\circledast$ represents the discounted value of the next step\notesonly{ in both \eqref{deltaqONpolicy} and \eqref{deltaqOFFpolicy}}.
+		\notesonly{In both \eqref{eq:deltaqONpolicy} and \eqref{eq:deltaqOFFpolicy},} the $\circledast$ represents the discounted value of the next step.
 		
-		\notesonly{What is happening \eqref{eq:deltaqoffpolicy} is that the discounted value\notesonly{\footnote{in this particular case, the value is the state-action value, but TD learning can be applied to etimating the state value function just as well.}} of the next step is weighted by the probability of the action being sampled by the policy $\pi$ which is being evaluated as it may differ from the sampling policy $\pi'$.}
+		\notesonly{What is happening \eqref{eq:deltaqOFFpolicy} is that the discounted value\notesonly{\footnote{in this particular case, the value is the state-action value, but TD learning can be applied to etimating the state value function just as well.}} of the next step is weighted by the probability of the action being sampled by the policy $\pi$ which is being evaluated as it may differ from the sampling policy $\pi'$.}
 		
 	\item<only@3> Advantage of off-policy: Data (i.e. Markov chains) can be reused as the policy ${\color{policy}\pi}$, the one we want to opitimize, changes (e.g. policy iteration)
 	\item<only@3> contracts for ergodic Markov chain, i.e.

@@ -140,13 +140,14 @@ TD learning is the asynchronous on-line update of the value function one state a
 	\slidesonly{\vspace{-8mm}}
 	
 	\begin{equation}
-		\tilde V^{\pi}_{(t+1)}(\vec x^{(t)}) \quad = \quad 
+		\tilde V^{\pi}_{(t+1)}(\vec x^{(t)}) \; = \; 
 		\tilde V^{\pi}_{(t)}(\vec x^{(t)}) \;+\;
 		\lr \Big( \underbrace{{\color{reward}r^{(t)}} 
 		+ \overbrace{
 		\gamma \tilde V^{\pi}_{(t)}({\color{trans}\vec x^{(t+1)}})
 		}^{\substack{\text{discounted value of}\\ \text{the next step}}} 
 		- \tilde V^{\pi}_{(t)}{(\vec x^{(t)})}}_{\text{TD-error }\Delta V_{(t)}} \Big) 
+		\label{eq:tdlearningvalue}
 	\end{equation}
 	
 	where $\eta$ is the learning rate, ${\color{reward}r^{(t)}}$ is short for the immediate ${\color{reward}r(\vec x^{(t)},\vec a^{(t)})}$.
@@ -215,11 +216,13 @@ TD learning is the asynchronous on-line update of the value function one state a
 
 \end{frame}
 
+\newpage
+
 \subsubsection{TD learning contracts but does not converge}
 
 \begin{frame}\frametitle{\subsecname}
 
-\notesonly{To contract but to \underline{not} converge means that }\slidesonly{i.e.} for $t\rightarrow \infty$ TD learning will \underline{fluctuate} around the true value
+\notesonly{To contract but to \underline{not} converge means that}\slidesonly{ i.e.} for $t\rightarrow \infty$ and $\eta > 0$ TD learning will \underline{fluctuate} around the true value
 and will not stop fluctuating. Holds for ergodic Markov chains
 
 	\begin{block}{Ergodicity}
@@ -305,7 +308,7 @@ Cons:
 	\item sensitive to the initial state.
 \end{itemize}
 
-Other model free approaches discussed in the lecture.%: Eligibility Traces \& TD($\lambda$), Batch Value Estimation, ...
+cf. lecture for more model0free approaches.%: Eligibility Traces \& TD($\lambda$), Batch Value Estimation, ...
 
 \end{frame}
 
