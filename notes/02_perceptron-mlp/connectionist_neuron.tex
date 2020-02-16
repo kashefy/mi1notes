@@ -194,7 +194,7 @@ $\frac{\vec w^\top \widetilde{\vec x}}{\,||\vec w||_2} = \frac{\theta}{\,||\vec 
 \begin{enumerate}
 \item binary classification, either $f(h) \in \{0,1\}$ or $f(h) \in \{-1,1\}$
 \item interpret $f(h)$ as a probability. The logistic sigmoidal where $f(h) = \frac{1}{1+exp(-h)}$ yields values in the range of (0,1). The logistic sigmoidal can also be obtained by shifting and scaling the tanh function (see \sectionref{sec:tanh_to_sigmoid}.
-\item a multilayer perceptron with only linear transfer functions can be reduced to single layer. The hidden layers become redundant \footnote{Recent literature reveals interesting insights in what kind of representations are found across the layers of linear networks. For more information see Saxe, A. M., McClelland, J. L., \& Ganguli, S. (2019). A mathematical theory of semantic development in deep neural networks. Proceedings of the National Academy of Sciences, 116(23), 11537-11546.}:\\
+\item a multilayer perceptron with only linear transfer functions can be reduced to a single layer. The hidden layers become redundant \footnote{Recent literature reveals interesting insights in what kind of representations are found across the layers of linear networks. For more information see Saxe, A. M., McClelland, J. L., \& Ganguli, S. (2019). A mathematical theory of semantic development in deep neural networks. Proceedings of the National Academy of Sciences, 116(23), 11537-11546.}:\\
 
      \begin{tabular}{c c c }
      		\raisebox{-9mm}{\includegraphics[height=2.25cm]{img/section1_fig16.pdf}}
