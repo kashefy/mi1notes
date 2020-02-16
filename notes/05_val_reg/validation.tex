@@ -27,11 +27,11 @@
     \text{batch training error:}\quad \ETw=\frac{1}{p}\sum_{\alpha=1}^{p} \underbrace{e\tyxwalpha}_{e^{(\alpha)}}
     \end{equation}
     \mode<presentation>{
-    or mini-batch and stochastic online apprximations of $E^T_{[\vec w]}$ 
+    or mini-batch and stochastic online approximations of $E^T_{[\vec w]}$ 
     }
     \mode<article>{
     where $e\tyxwalpha$ (or $e^{(\alpha)}$ for brevity) is the cost computed from the prediction for a specific observation $y(\vec x^{(\alpha)};\vec w)$ and its corresponding label $y_T^{(\alpha)}$. The superscript $^{(\alpha)}$ is used to index a specific point (sample) in the dataset.
-    We have also seen that $E^T$ can be furhter approximated by changing its ``scope'' to a set of smaples in a mini-batch or a single randomly selected sample (i.e. stochastic online learning)
+    We have also seen that $E^T$ can be further approximated by changing its ``scope'' to a set of samples in a mini-batch or a single randomly selected sample (i.e. stochastic online learning)
     
     This leaves us with the question:
     }
@@ -85,7 +85,7 @@ This implies that we need a set of data.
 We use the original training set $\{\vec x_{\text{train}}^{(\alpha)}, {y_T}_{\text{train}}^{(\alpha)}\}_{\alpha=1}^{p}$ for model selection.
 Model selection uses the training data to find $\vec w^* = \argmin_{\vec w} E^T_{[\vec w]}$. 
 
-We use the new hold-out set to \emph{validate} ($\{\vec x_{\text{val.}}^{(\beta)}, {y_T}_{\text{val.}}^{(\beta)}\}_{\beta=1}^{q}$) to esimtate the generalization error for this particular solution (i.e. $\widehat E^G_{[\vec w^*]})$
+We use the new hold-out set to \emph{validate} ($\{\vec x_{\text{val.}}^{(\beta)}, {y_T}_{\text{val.}}^{(\beta)}\}_{\beta=1}^{q}$) to estimate the generalization error for this particular solution (i.e. $\widehat E^G_{[\vec w^*]})$
 }
 \slidesonly{
 \begin{itemize}
@@ -102,7 +102,7 @@ We use the new hold-out set to \emph{validate} ($\{\vec x_{\text{val.}}^{(\beta)
 \end{frame}
 
 \mode<article>{
-Let us look at the following scenerio where we've trained 
+Let us look at the following scenario where we've trained 
 }
 
 \subsection{Overfitting vs. Underfitting}
@@ -291,7 +291,7 @@ Compare ${\color{red}E^T}$ and ${\color{darkgreen} \widehat E^G}$:\\
 
 \begin{frame}{\subsubsecname}
 \slidesonly{\vspace{-2mm}}
-\notesonly{Assuming has performed diagnostics of comapring $E^T$ and $\widehat E^G$ to identify if a model is overfitting or underfitting. How would one mitigate one or the other?\\
+\notesonly{Assuming one has performed diagnostics of comparing $E^T$ and $\widehat E^G$ to identify if a model is overfitting or underfitting. How would one mitigate one or the other?\\
 
 }
 
@@ -324,9 +324,9 @@ Compare ${\color{red}E^T}$ and ${\color{darkgreen} \widehat E^G}$:\\
 \notesonly{
 \textbf{Remember: it's always a bias-variance \underline{tradeoff}}\\
 
-The above ``fixes'' rely on having concluded that the model is either overfitting or underfitting. And that this can potentially be mitigated by taking these different measures. However it is important to understand how overfitting and underfitting reflect where we are on the bias-variance tradeoff. This means that repeatedly applying one solution to an  overfitting model can eventually cause the model to underfit and vice-versa. One should also note that if one of the above doesn't work. It does not conclude that the model was not overfitting or underfitting. The above are simply guidelines on how to understand why a model has poor generalization performance and come up with simple techniques for finding a different bias-variance tradeoff.
+The above ``fixes'' rely on having concluded that the model is either overfitting or underfitting. And that this can potentially be mitigated by taking these different measures. However, it is important to understand how overfitting and underfitting reflect where we are on the bias-variance tradeoff. This means that repeatedly applying one solution to an overfitting model can eventually cause the model to underfit and vice-versa. One should also note that if one of the above doesn't work. It does not conclude that the model was not overfitting or underfitting. The above are simply guidelines on how to understand why a model has poor generalization performance and come up with simple techniques for finding a different bias-variance tradeoff.
 
-Although we've just talked about how increasing the size of the training set can help mitigate overfitting. Observing how $E^T$ and $\widehat E^G$ behave as a function of the training set size $p$ is a way of determining if an overfitting problem even exists. Keep in mind that $\widehat E^G$ would not directly depend on the size of training set as it is only evaluated on the hold-out set, which we won't change in size. Nevertheless, eveytime with train our nodel with a larger training set, we evaluate both $E^T$ and $\widehat E^G$ for this trained model.
+Although we've just talked about how increasing the size of the training set can help mitigate overfitting. Observing how $E^T$ and $\widehat E^G$ behave as a function of the training set size $p$ is a way of determining if an overfitting problem even exists. Keep in mind that $\widehat E^G$ would not directly depend on the size of the training set as it is only evaluated on the hold-out set, which we won't change in size. Nevertheless, every time we train our model with a larger training set, we evaluate both $E^T$ and $\widehat E^G$ for this trained model.
 }
 
 Using a larger training set (i.e. increasing $p$) to identify potential overfitting vs. underfitting of the model:
@@ -384,7 +384,7 @@ Using a larger training set (i.e. increasing $p$) to identify potential overfitt
 
 \notesonly{
 - Other than disentangling high bias from high variance, we also get an assessment of how much 
- we would would gain in generalization performance if we paid to increase the training set by x\% (i.e. cost-benefit analysis).
+we would gain in generalization performance if we paid to increase the training set by x\% (i.e. cost-benefit analysis).
 }
 
 \end{frame}
@@ -398,7 +398,7 @@ Using a larger training set (i.e. increasing $p$) to identify potential overfitt
 \question{Why should we care about how we estimate $\widehat E^G$?}
 
 \notesonly{
-- It's simply to identify potential overfitting or underfitting. Are we memorizing the training data or did we underestimate the complexity of function we're trying to fit? Once we identify what kind of problem we have with our model it implies which ``fixes'' are relevant and which would simply not help at all.
+- It's simple to identify potential overfitting or underfitting. Are we memorizing the training data or did we underestimate the complexity of function we're trying to fit? Once we identify what kind of problem we have with our model it implies which ``fixes'' are relevant and which would simply not help at all.
 }
 
 \end{frame}
@@ -456,7 +456,7 @@ Using a larger training set (i.e. increasing $p$) to identify potential overfitt
 
 \newpage
 % -----------------------------------------------------------------------------
-\begin{frame}\frametitle{Validation: nested cross validation}
+\begin{frame}\frametitle{Validation: nested cross-validation}
 	\begin{itemize}
 	\item[\textcircled{1}]
 	$ \begin{array}{ll}
@@ -499,9 +499,9 @@ Using a larger training set (i.e. increasing $p$) to identify potential overfitt
 \end{frame}
 
 \mode<article>{
-Every cross-validation (inner loop) above yields a model with some generlization performance.
-The parameters (incl. hyperparameter selection) of each cross validation can be different from the next.
-The purpose of the outer loop is to estimate generlization performance that is less sensitive to the selection of the validation set, hyperparamerer selection and model selection procedure.
+Every cross-validation (inner loop) above yields a model with some generalization performance.
+The parameters (incl. hyperparameter selection) of each cross-validation can be different from the next.
+The purpose of the outer loop is to estimate generalization performance that is less sensitive to the selection of the validation set, hyperparameter selection, and model selection procedure.
 }
 
 % -----------------------------------------------------------------------------
