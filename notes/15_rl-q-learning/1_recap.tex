@@ -26,7 +26,7 @@ $$
 The value function to evaluate a policy:
 
 	\begin{align}
-	V^\pi(\vec x_i) = \kern-1ex \overbrace{V^\pi_i}^{\text{shorthand}} \kern-1ex = 
+	V^\pi(\vec x_i) =
 	\E \bigg\lbrack
 	\sum_{t=0}^{\infty} \gamma^t r(\vec x^{(t)}, \vec a^{(t)}) \;\Big|\; \vec x^{(0)} := \vec x_i
 	\bigg\rbrack\,, \; i=1,\ldots,S
@@ -50,7 +50,9 @@ Comparing policies:
 The optimal value function and optimal policies:
 
 \begin{equation}
-\underbrace{V^{*}(\vec x)}_{\substack{\text{optimal}\\ \text{value}}} \;\;=\;\; \max_{\pi} V^{\pi} (\vec x) \;\;=\;\; \underbrace{V^{\pi*}(\vec x)}_{\substack{\text{value of}\\ \text{optimal policy}}}\,,\quad \forall \vec x \in \mathcal{X}
+\underbrace{V^{*}(\vec x)}_{\substack{\text{optimal}\\ \text{value}}}
+\;\;=\;\; \max_{\pi} V^{\pi} (\vec x)
+\;\;=\;\; \underbrace{V^{\pi*}(\vec x)}_{\mathclap{\substack{\text{value of}\\ \text{optimal policy}}}}\,,\quad \forall \vec x \in \mathcal{X}
 \end{equation}
 
 \end{frame}

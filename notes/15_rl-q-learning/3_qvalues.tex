@@ -272,6 +272,20 @@ Q^{*}(\vec x, \vec a) = \max_{\pi} Q^{\pi} (\vec x, \vec a)\,,\quad \forall\; \v
 
 \end{frame}
 
+%\begin{frame} 
+%\mode<presentation>{
+%switch to lecture slides for
+%\vspace{10mm}
+    %\begin{center} \large
+        %4.2.5 Approximate Reinforcement Learning\\
+        %and\\
+        %4.2.6 End-to-End RL
+    %\end{center}  
+    %}
+%\vspace{10mm}
+    %and hopefully come back
+%\end{frame}
+
 \subsection{\notesonly{On-policy} TD learning of Q-values (SARSA)}
 
 % -----------------------------------------------------------------------------
@@ -345,16 +359,22 @@ Q^{*}(\vec x, \vec a) = \max_{\pi} Q^{\pi} (\vec x, \vec a)\,,\quad \forall\; \v
 	
 	TD learning of Q-values in general:
 	\begin{equation}
-			\tilde{Q}^\pi_{(t+1)}(\vec x^{(t)},\, \vec a^{(t)} )
+			\tilde{Q}^\pi_{(t+1)}\notesonly{(\vec x^{(t)},\, \vec a^{(t)} )}
 			\,= \,
-			\tilde{Q}^\pi_{(t)} ( \vec x^{(t)},\, \vec a^{(t)} ) \, + \, \eta \, {\color{magenta}\Delta Q_{(t)}}
+			\tilde{Q}^\pi_{(t)}\notesonly{ ( \vec x^{(t)},\, \vec a^{(t)} )} \, + \, \eta \, {\color{magenta}\Delta Q_{(t)}}
 	\end{equation}
 	
 	\only<1>{
+		\slidesonly{
+		\vspace{30mm}
+		}
 	When going from on to off-policy, what changes is that the actions that lead to the next state are sampled using a \textbf{different} \emph{sampling} policy $\pi'$\\
 		\begin{equation}
 		\vec a^{(t)} \sim \pi'(\vec a | \vec x^{(t)})
 		\end{equation}
+		\slidesonly{
+		\vfill
+		}
 		}
 	
 	\notesonly{In the case of TD learning, on- or off-policy becomes apparent from ${\color{magenta}\Delta Q_{(t)}}$:}
@@ -380,7 +400,7 @@ Q^{*}(\vec x, \vec a) = \max_{\pi} Q^{\pi} (\vec x, \vec a)\,,\quad \forall\; \v
 				\label{eq:deltaqOFFpolicy}
 		\end{equation}
 		
-		\notesonly{In both \eqref{eq:deltaqONpolicy} and \eqref{eq:deltaqOFFpolicy},} the $\circledast$ represents the discounted value of the next step.
+		\notesonly{In both \eqref{eq:deltaqONpolicy} and \eqref{eq:deltaqOFFpolicy}, the }$\circledast$ represents the discounted value of the next step.
 		
 		\notesonly{What is happening \eqref{eq:deltaqOFFpolicy} is that the discounted value\notesonly{\footnote{in this particular case, the value is the state-action value, but TD learning can be applied to estimating the state value function just as well.}} of the next step is weighted by the probability of the action being sampled by the policy $\pi$ which is being evaluated as it may differ from the sampling policy $\pi'$.}
 		

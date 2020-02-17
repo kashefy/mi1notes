@@ -16,9 +16,13 @@
 
 \begin{frame}\frametitle{\secname}
 
-Motivation for model-free evaluation methods:
+Motivation for model-free evaluation methods:\\
 
-The MDP is not explicitly available, i.e. $P$ and $r$ are unknown and have to be ``experienced''.
+\slidesonly{\vspace{5mm}}
+
+The MDP is not explicitly available, i.e. \notesonly{\textcolor{trans}the transition model }${\color{trans}P}$ and \notesonly{\textcolor{reward}the reward function }${\color{reward}r}$ are unknown and have to be ``experienced''.\\
+
+\slidesonly{\vspace{5mm}}
 
 Options:
 \begin{enumerate}[A]
@@ -70,11 +74,9 @@ Monte-Carlo estimation:
 					\pi(\vec a_k \,|\, \vec x_i)}~
 					{\color{trans} P(\vec x_j \,|\, \vec x_i, \vec a_k)} V^\pi(\vec x_j)
 	\end{equation}
-
-	\pause 
 		
 	\begin{itemize}
-		\item The reward, ${\color{reward} r(\vec x_i, \vec a_k)}$, and the transition model, ${\color{trans}P(\vec  x_j | \vec  x_i, \vec  a_k)}$
+		\item But the reward, ${\color{reward} r(\vec x_i, \vec a_k)}$, and the transition model, ${\color{trans}P(\vec  x_j | \vec  x_i, \vec  a_k)}$
 		 may not be available to the agent (motivation for model-free evaluation)
 		 
 		 \pause
@@ -90,7 +92,7 @@ Monte-Carlo estimation:
 					${\color{trans}\vec x^{(t+1)}
 					\sim P(\cdot|\vec x^{(t)},\vec a^{(t)})}$
 					
-				\item and yield {\color{reward} rewards 
+				\item and yield immediate {\color{reward} rewards 
 					$r(\vec x^{(t)},\vec a^{(t)})$}
 			\end{enumerate}
 	\end{itemize}
@@ -102,7 +104,7 @@ Monte-Carlo estimation:
 
 Options:
 \begin{enumerate}[A]
-\item Monte-Carlo estimation of $V^\pi(\vec x)$
+\item \textcolor{gray}{Monte-Carlo estimation of $V^\pi(\vec x)$}
 \item Inductive value estimation through temporal difference learning (TD learning)
 \end{enumerate}
 
@@ -127,8 +129,8 @@ Temporal difference learning (TD learning) is also a form of inductive value est
 		 		${\color{trans}\vec x^{(t+1)}
 		 		\sim P(\cdot|\vec x^{(t)},\vec a^{(t)})}$
 		 		
-			\item and yield {\color{reward} rewards 
-		 		$r(\vec x^{(t)},\vec a^{(t)})$}
+			\item and yield immediate {\color{reward} rewards 
+		 		$r(\vec x^{(t)},\vec a^{(t)}) =: r{(t)}$}
 		\end{enumerate}
 }
 
@@ -150,7 +152,7 @@ TD learning is the asynchronous on-line update of the value function one state a
 		\label{eq:tdlearningvalue}
 	\end{equation}
 	
-	where $\eta$ is the learning rate, ${\color{reward}r^{(t)}}$ is short for the immediate ${\color{reward}r(\vec x^{(t)},\vec a^{(t)})}$.
+	where $\eta$ is the learning rate\notesonly{, ${\color{reward}r^{(t)}}$ is short for the immediate ${\color{reward}r(\vec x^{(t)},\vec a^{(t)})}$.}
 	
 	\only<2>{
 	Basically,
@@ -163,9 +165,9 @@ TD learning is the asynchronous on-line update of the value function one state a
 	\begin{itemize}
 	
 	\item  Model knowledge is not required.\notesonly{ We  don't need the complete reward function or the transition model.}
-	
+	\notesonly{
 	\item \notesonly{TD learning} named after the difference $\Delta V_{(t)}$ in value function estimates (TD-error)
-	
+	}
 	\end{itemize}
 	}
 	
@@ -178,6 +180,8 @@ TD learning is the asynchronous on-line update of the value function one state a
 \begin{itemize}
 	\item TD learning performs value iteration \emph{on average}
 		\vspace{1mm}
+		
+		\pause
 		
 		\begin{itemize}
 			\item Taking the expectation over all Markov chains 
@@ -195,7 +199,7 @@ TD learning is the asynchronous on-line update of the value function one state a
 			+ \gamma {\color{trans} \vec P^\pi} \tilde{\vec v}^{\pi(t)})_i}\Big)
 			\end{equation}
 			
-		Which we recognize as \emph{value iteration} \slidesonly{from last time}.
+		\notesonly{Which we recognize as \emph{value iteration} \slidesonly{from last time}.}
 			
 		\end{itemize}
 	
@@ -233,6 +237,16 @@ and will not stop fluctuating. Holds for ergodic Markov chains
 		eventually return to it) and \textbf{aperiodic} 
 		(returns to the same state occur at irregular times).
 	\end{block}
+	
+	\slidesonly{
+	\vspace{5mm}
+	}
+	
+	\question{For what transition probabilities would this markov chain become ergodic?}
+	
+	\begin{center}
+	\includegraphics[width=0.4\textwidth]{img/markov_chain_ergodic}
+	\end{center}
 
 \end{frame}
 
@@ -250,7 +264,7 @@ Random walk example with stochastic Markov chain with 10 states:
 
 	\begin{center}
 		\hspace{-15mm}
-		\includegraphics[width=\notesonly{0.9}\slidesonly{0.999}\textwidth]{img/rl_chain_valuecontraction}
+		\includegraphics[width=\notesonly{0.9}\slidesonly{0.92}\textwidth]{img/rl_chain_valuecontraction}
 		\mode<article>{
 		\captionof{figure}{A random walk example in which TD learning will continue fluctuating around the true value but not converge to it.}
 		}
