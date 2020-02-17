@@ -35,7 +35,7 @@ Options:
 Monte-Carlo estimation:
 
 	\begin{itemize}
-		\item sampling of sequnces: step-by-step construction of states, actions and rewards to form possible markov chains
+		\item sampling of sequences: step-by-step construction of states, actions and rewards to form possible markov chains
 		\item We deal with a finite approximation of infinite Markov chains. This implies:
 			\begin{itemize}
 				\item rewards weighted by $\gamma^H < \epsilon$ are neglected
@@ -201,7 +201,7 @@ TD learning is the asynchronous on-line update of the value function one state a
 	
 	
 	\vspace{2mm}
-	\item TD learning proivdes an {\em asynchronous online estimate} of 
+	\item TD learning provides an {\em asynchronous online estimate} of 
 			$\hat B^\pi[\tilde{\vec v}^{\pi(t)}] = {\color{reward}\vec r^\pi} 
 			+ \gamma {\color{trans}\vec P^\pi} \tilde{\vec v}^{\pi(t)}$
 		\vspace{1mm}
@@ -308,7 +308,7 @@ Cons:
 	\item sensitive to the initial state.
 \end{itemize}
 
-cf. lecture for more model0free approaches.%: Eligibility Traces \& TD($\lambda$), Batch Value Estimation, ...
+cf. lecture for more model-free approaches.%: Eligibility Traces \& TD($\lambda$), Batch Value Estimation, ...
 
 \end{frame}
 

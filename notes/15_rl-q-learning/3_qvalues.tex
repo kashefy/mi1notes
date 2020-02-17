@@ -335,7 +335,7 @@ Q^{*}(\vec x, \vec a) = \max_{\pi} Q^{\pi} (\vec x, \vec a)\,,\quad \forall\; \v
 	\end{align}
 	}
 	
-	SARSA estimates the Q-values for a fixed ploicy which generates the Markov chain. Therefore, SARSA is on-policy
+	SARSA estimates the Q-values for a fixed policy which generates the Markov chain. Therefore, SARSA is on-policy
 \end{frame}
 
 \subsection{Off-policy TD learning of Q-values}
@@ -357,7 +357,7 @@ Q^{*}(\vec x, \vec a) = \max_{\pi} Q^{\pi} (\vec x, \vec a)\,,\quad \forall\; \v
 		\end{equation}
 		}
 	
-	\notesonly{In the case of TD learning, on- or off-policy becomes apparant from ${\color{magenta}\Delta Q_{(t)}}$:}
+	\notesonly{In the case of TD learning, on- or off-policy becomes apparent from ${\color{magenta}\Delta Q_{(t)}}$:}
 	
 	\begin{itemize}
 		\item<only@2> On-policy TD learning of Q-values (SARSA):
@@ -382,9 +382,9 @@ Q^{*}(\vec x, \vec a) = \max_{\pi} Q^{\pi} (\vec x, \vec a)\,,\quad \forall\; \v
 		
 		\notesonly{In both \eqref{eq:deltaqONpolicy} and \eqref{eq:deltaqOFFpolicy},} the $\circledast$ represents the discounted value of the next step.
 		
-		\notesonly{What is happening \eqref{eq:deltaqOFFpolicy} is that the discounted value\notesonly{\footnote{in this particular case, the value is the state-action value, but TD learning can be applied to etimating the state value function just as well.}} of the next step is weighted by the probability of the action being sampled by the policy $\pi$ which is being evaluated as it may differ from the sampling policy $\pi'$.}
+		\notesonly{What is happening \eqref{eq:deltaqOFFpolicy} is that the discounted value\notesonly{\footnote{in this particular case, the value is the state-action value, but TD learning can be applied to estimating the state value function just as well.}} of the next step is weighted by the probability of the action being sampled by the policy $\pi$ which is being evaluated as it may differ from the sampling policy $\pi'$.}
 		
-	\item<only@3> Advantage of off-policy: Data (i.e. Markov chains) can be reused as the policy ${\color{policy}\pi}$, the one we want to opitimize, changes (e.g. policy iteration)
+	\item<only@3> Advantage of off-policy: Data (i.e. Markov chains) can be reused as the policy ${\color{policy}\pi}$, the one we want to optimize, changes (e.g. policy iteration)
 	\item<only@3> contracts for ergodic Markov chain, i.e.
 	\begin{equation}
 	\lim\limits_{p\to\infty} \E\Big\lbrack
