@@ -1,14 +1,16 @@
 \usepackage[authoryear,round]{natbib}
+\usepackage{multirow}
 
 \newcommand{\sheetnum}{%
-	06
+	15
 }
 %\setcounter{section}{\sheetnum-3}
 \newcommand{\tutorialtitle}{%
-    Reccurent neural networks
+    Reinforcement Learning Pt 2/2 
+    (Q-Learning)
 }
 \newcommand{\tutorialtitleshort}{%
-	RNNs
+	RL (Q-Learning)
 }
 % for slides
 \subtitle{\sheetnum \tutorialtitle}
@@ -58,35 +60,44 @@
 \tableofcontents
 \end{frame}
 
+\newpage
+
 \mode<all>
-\input{./rnn}
+\input{./1_recap}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./vanishingexploding}
+\input{./2_model-free}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./echostate}
+\input{./3_qvalues}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./rnn2lstm}
+\input{./4_policy-improvement}
 \mode*
 
 \clearpage
 
-%\mode<all>
-%\input{./lstm_unroll}
-%\mode*
+\mode<all>
+\input{./5_explore}
+\mode*
 
 %\clearpage
+
+\section{References}
+\begin{frame}[allowframebreaks] \frametitle{References}
+	\scriptsize
+	\bibliographystyle{plainnat}
+	\bibliography{bibliography}
+\end{frame}
 
 \end{rightcolumn}
 \end{paracol}

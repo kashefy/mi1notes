@@ -75,7 +75,7 @@ The sequence we observe becomes:
 The probability of transitioning form state $\vec x_i$ to $\vec x_j$ only depends on state $\vec x_i$ and the action $\vec a_k$ that was taken. It does not depend on earlier history.
 \end{block}
 
-This leads to the following }\textcolor{trans}{transition model (transition matrix)}:
+This leads to the following }\textcolor{trans}{transition model (transition ``matrix'')}:
 
 \slidesonly{\vspace{-3mm}}
 
@@ -98,18 +98,19 @@ which
 
 and where
 \begin{align}
-{\color{trans}P(\vec x_j | \vec x_i, \vec a_k)} &\ge 0 \quad \forall i,j\\
-\text{and}~ \sum_j {\color{trans}P(\vec x_j | \vec x_i, \vec a_k)} &= 1 \quad \forall i \quad \text{i.e. every row sums to 1}
+{\color{trans}P(\vec x_j | \vec x_i, \vec a_k)} &\ge 0 \quad \forall i,j,k\\
+\text{and}~ \sum_{j} {\color{trans}P(\vec x_j | \vec x_i, \vec a_k)} &= 1 \quad \forall i,k \quad \text{i.e. every ``row'' sums to 1}
 \end{align}
 }
 
-\slidesonly{\vspace{-3mm}}
+\slidesonly{\vspace{-4mm}}
 
-\question{What would $\sum_j {P(\vec x_j | \vec x_i, \vec a_k)} = 0 \;\; \forall \; k$ imply?}
+\question{What would $\sum_{\substack{j\\j \ne i}} {P(\vec x_j | \vec x_i, \vec a_k)} = 0 \;\; \forall \; k$ imply?}
 
 \pause
 
-- $\vec x_i$ \notesonly{is a state which leads nowhere, regardless of the action. It }is a \emph{terminal state}.
+\slidesonly{\vspace{-3mm}}
+- $\vec x_i$ \notesonly{is a state which leads nowhere else, regardless of the action. It }is a \emph{terminal state}.
 
 \question{What does an entry ${P(\vec x_j | \vec x_i, \vec a_k)} = 0$ represent?}
 
@@ -122,7 +123,7 @@ and where
 
 \pause
 
-- $\vec a_k$ can never lead to $\vec x_j$, regardless of the action.
+- It is impossible to go from $\vec x_i$ to $\vec x_j$, regardless of the action.
 
 \question{What does an entry ${P(\vec x_j | \vec x_i, \vec a_k)} = 1$ represent?}
 
