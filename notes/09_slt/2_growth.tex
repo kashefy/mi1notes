@@ -120,7 +120,7 @@ It is closely related to the \emph{VC dimension}.
 \begin{frame}\frametitle{Defining the growth function $G_{(p)}^\Lambda$}
 
 	\mode<article>{	
-		There are various reasons for $N^\Lambda$ to fall below $2^p$. Maybe we didn't sample enough classifiers from $\Lambda$. To eliminate the effects of this ``sampling'' we look for the maximum value \emph{that can be obtained} (supremum) for $N^\Lambda$ and by looking at how this value behaves as a function of $p$ we arrive at the the growth function:
+		There are various reasons for $N^\Lambda$ to fall below $2^p$. Maybe we didn't sample enough classifiers from $\Lambda$. To eliminate the effects of this ``sampling'' we look for the maximum value \emph{that can be obtained} (supremum) for $N^\Lambda$ and by looking at how this value behaves as a function of $p$ we arrive at the growth function:
 		}
 		
 	%\begin{equation} 
@@ -190,7 +190,7 @@ However, for $p > \dvc$ the growth function behaves differently, namely
 		G^{\Lambda}_{(p)} \le \dvc (1+ ln \frac{p}{\dvc}
 	\end{equation}
 	
-	In this case  $\lim_{p \to \infty} G_{(p)}^\Lambda$ converges to zero, and there is no more complete ambiguity. There is at least one region in feature space where all different classifiers from $\Lambda$ will agree on what class to assign to points in that region. There may still exist regions for which  predictions will be ambiguous but the complete ambiguity is gone. The more points we add, the less likely a model will find a solution, but if it does, they will no longer be ambiguous.
+	In this case  $\lim_{p \to \infty} G_{(p)}^\Lambda$ converges to zero, and there is no more complete ambiguity. There is at least one region in feature space where all different classifiers from $\Lambda$ will agree on what class to assign to points in that region. There may still exist regions for which predictions will be ambiguous but the complete ambiguity is gone. The more points we add, the less likely a model will find a solution, but if it does, they will no longer be ambiguous.
 
 %Maybe this provokes the question: Why is the plot even useful? If I change my model to something with a lower d_VC, all I'm doing is that I allow the linear part of G to stop and switch to the curvy part earlier. A lower d_VC means that the curvy part happens for less p where the p ln 2 is also lower. The range of ambiguous predictions becomes lower and I'm able to generalize with fewer training samples.
 \end{frame}
@@ -269,7 +269,7 @@ However, for $p > \dvc$ the growth function behaves differently, namely
 			
 			\textbf{But} Our dataset is never going to be infinitely large. Therefore, a more realistic formulation would be that ERM converges to some small $\epsilon$.
 			
-			The takeaway from the growth function and the bounds is that it defines the value of $\eta$ in \eqref{eq:convergenceeps} that can be targeted when tranining a specific model with a finite set of $p$ points.
+			The takeaway from the growth function and the bounds is that it defines the value of $\eta$ in \eqref{eq:convergenceeps} that can be targeted when training a specific model with a finite set of $p$ points.
 			
 			
 \end{frame}
