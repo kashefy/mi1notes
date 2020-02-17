@@ -5,7 +5,7 @@ Connectionist neurons, or perceptrons, are limited in the variety of functions t
 When dealing with classification problems, a perceptron can only find a linear separation between any two classes. Irrespective of the neuron's non-linear activation function, the perceptron is regarded as a \emph{linear classifier}. Whether something falls on one side of the decision boundary or the other, is entirely based on applying a linear filter (i.e. $\vec w^{\top} \vec x$). The non-linearity $f(h)$ merely controls the value range of the neuron's response ($\{0,1\}, (-1,+1)$, \ldots) which helps in interpreting the neuron's response.\\
 
 If observations for two different classes are distributed such that one cannot draw a line to separate them, then the two classes
-are not linearly separable. In this case the perceptron will fail to find a suitable classification boundary between the two classes.
+are not linearly separable. In this case, the perceptron will fail to find a suitable classification boundary between the two classes.
 }
 
 \begin{frame}\frametitle{Linear classifiers/linear decision boundaries}
@@ -277,7 +277,7 @@ To formulate how neuron $(v', i)$ processes its input requires identifying the s
 }
 
 \mode<article>{
-We now assume that an architecture with \emph{fully connected layers}. This implies that every node in layer $v$ is connected to all nodes in the subsequent layer $v'$ (except for the bias node in $v'$ because it has no parents). This type of connectivity allows us to simplify the notation as it implies that the set of parents $P(v',\,i)$ is essentially a vector of all activations in layer $v$:
+We now assume an architecture with \emph{fully connected layers}. This implies that every node in layer $v$ is connected to all nodes in the subsequent layer $v'$ (except for the bias node in $v'$ because it has no parents). This type of connectivity allows us to simplify the notation as it implies that the set of parents $P(v',\,i)$ is essentially a vector of all activations in layer $v$:
 }
 
 \only<2>{
