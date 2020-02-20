@@ -39,7 +39,7 @@ Options:
 Monte-Carlo estimation:
 
 	\begin{itemize}
-		\item sampling of sequences: step-by-step construction of states, actions and rewards to form possible markov chains
+		\item sampling of sequences: step-by-step construction of states, actions, and rewards to form possible Markov chains
 		\item We deal with a finite approximation of infinite Markov chains. This implies:
 			\begin{itemize}
 				\item rewards weighted by $\gamma^H < \epsilon$ are neglected
@@ -157,7 +157,7 @@ TD learning is the asynchronous on-line update of the value function one state a
 	\only<2>{
 	Basically,
 	\begin{equation}
-		\mathit{Esimate_{New}} = \mathit{Esimate_{old}} + \lr \Big(\mathit{Target} - \mathit{Esimate_{old}} \Big)
+		\mathit{Estimate_{New}} = \mathit{Estimate_{old}} + \lr \Big(\mathit{Target} - \mathit{Estimate_{old}} \Big)
 	\end{equation}
 	}
 	\only<3>{
