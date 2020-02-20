@@ -95,6 +95,47 @@ About the \emph{discount factor} $\gamma$:
 \slidesonly{\vspace{-3mm}}
 \slidesonly{\textbf{(see blackboard)}}
 
+\mode<article>{
+
+\newpage
+
+\textbf{Example}: big reward further away vs. closer smaller reward\\
+
+\figref{fig:mouse_walk}) illustrates a simple environment. The mouse can move one tile at a time to the \textbf{R}ight or to the \textbf{L}eft. We'll compare the return of two different strategies for different discount factors.
+
+\begin{center}
+\includegraphics[width=8cm]{img/mouse_walk}
+\captionof{figure}{Environment with two rewards placed at different distances from the initial position of the mouse.}
+\label{fig:mouse_walk}
+\end{center}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[h]
+\centering
+\resizebox{0.7\textwidth}{!}{%
+\begin{tabular}{lcrl}
+\multicolumn{1}{c|}{strategy}   & \multicolumn{1}{c|}{$\gamma$}                       & return(1)                                                                  &                                                 \\ \hline \hline
+                                %& \multicolumn{1}{l}{}                                & \multicolumn{1}{l}{}                                                       &                                                 \\ \hline
+%\multicolumn{1}{|c|}{strategy}  & \multicolumn{1}{c|}{$\gamma$}      & return(1)                                                                  & \multicolumn{1}{l|}{}                           \\ \hline \hline
+                                %& \multicolumn{1}{l}{}               & \multicolumn{1}{l}{}                                                       &                                                 \\ \hline
+\multicolumn{1}{|l|}{R,R,...}   & \multicolumn{1}{c|}{\multirow{2}{*}{$\frac{1}{2}$}} & $\frac{1}{2} \cdot 0 + \frac{1}{4} \cdot 1 + \ldots$                       & \multicolumn{1}{l|}{$\ge {0.25}$}             \\   \cline{1-1} \cline{3-4}
+\multicolumn{1}{|l|}{L,L,L,...} & \multicolumn{1}{c|}{}              & $\frac{1}{2} \cdot 0 + \frac{1}{4} \cdot 0 + \frac{1}{8} \cdot 3 + \ldots$ & \multicolumn{1}{l|}{$\ge \mathbf{0.375}$} \\ \hline
+                                & \multicolumn{1}{l}{}               & \multicolumn{1}{l}{}                                                       &                                                 \\   \hline
+\multicolumn{1}{|l|}{R,R,...}   & \multicolumn{1}{c|}{\multirow{2}{*}{$0.7$}}         & $0.7 \cdot 0 + 0.7^2 \cdot 1 + \ldots$                                     & \multicolumn{1}{l|}{$\ge {0.48}$}                 \\ \cline{1-1} \cline{3-4}
+\multicolumn{1}{|l|}{L,L,L,...} & \multicolumn{1}{c|}{}         & $0.7 \cdot 0 + 0.7^2 \cdot 0 + 0.7^3 \cdot 3 + \ldots$                     & \multicolumn{1}{l|}{$\ge \mathbf{1.02}$}                 \\ \hline
+                                & \multicolumn{1}{l}{}               & \multicolumn{1}{l}{}                                                       &                                                 \\ \hline
+\multicolumn{1}{|l|}{R,R,...}   & \multicolumn{1}{c|}{\multirow{2}{*}{$0.2$}}         & $0.2 \cdot 0 + 0.2^2 \cdot 1 + \ldots$                                     & \multicolumn{1}{l|}{$\ge \mathbf{0.04}$}                  \\   \cline{1-1} \cline{3-4}
+\multicolumn{1}{|l|}{L,L,L,...} & \multicolumn{1}{l|}{}              & $0.2 \cdot 0 + 0.2^2 \cdot 0 + 0.2^3 \cdot 3 +\ldots$              & \multicolumn{1}{l|}{$\ge {0.024}$}                \\ \hline
+\end{tabular}%
+}
+\captionof{table}{Comparing returns under different discount factors.}
+
+\end{table}
+}
+
+
+
 \end{frame}
 
 \begin{frame}
@@ -114,6 +155,8 @@ About the \emph{discount factor} $\gamma$:
 \end{itemize}
 
 \end{frame} 
+
+\newpage
 
 \subsection{The value function}
 
