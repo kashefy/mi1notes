@@ -135,7 +135,7 @@ The cost function\notesonly{ to minimize}:
 \frac{1}{2} \vec w^{\top} \vec w = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \eqexcl \min    
 \end{equation}
 
-\question{Why have we suddenly switched to the squared Euclidean norm and where did the 2 come form?}
+\question{Why have we suddenly switched to the squared Euclidean norm and where did the 2 come from?}
 
 \mode<article>{
 - Minimizing the square of the norm turns it into a \emph{convex} minimization problem, which simplifies the optimization procedure.
@@ -144,7 +144,7 @@ Dividing by 2 is simply for convenience.
 
 
 \notesonly{
-We want to restrict the space of solutions for $\vec w$ to that which leads to correct classification of the training points.
+We want to restrict the space of solutions for $\vec w$ to that which leads to the correct classification of the training points.
 We therefore constrain solutions such that:}
 
 \slidesonly{Constraint for correct classification (``\emph{0-1 loss}'' or ``\emph{hinge loss}''):}
@@ -159,7 +159,7 @@ We therefore constrain solutions such that:}
 \notesonly{
 \eqref{eq:constraint} provides constraints that are linear in $\vec w$. It is sometimes referred to as the \emph{0-1 loss} or \emph{hinge loss}. It is exactly zero whenever a point is correctly classified and 1 whenever it is misclassified. It behaves similarly to \emph{parity-check} with the difference that \emph{parity-check} only produces a binary output.
 
-This gives us the \emph{primal} problem for structural risk minimization (SRM) prooblem. }
+This gives us the \emph{primal} problem for structural risk minimization (SRM) problem. }
 \slidesonly{The SRM principle is about:}
 
 
@@ -289,7 +289,7 @@ This, along with the minimization being \emph{convex} and the constraints being 
 
 \mode<article>{
 - We will attempt to answer this by looking at the constraints and how different cases for the constraints affect the Lagrangian and in turn the variables we are optimizing.
-This will leads us to the identifying the Karush-Kuhn-Tucker (KKT) conditions.
+This will leads us to identifying the Karush-Kuhn-Tucker (KKT) conditions.
 }
 
 \end{frame}
@@ -757,9 +757,9 @@ Which is met with \textcolor{red}{equality} by any of the \textcolor{red}{suppor
         \big)\slidesonly{\qquad}
 \end{equation}
 
-\question{Why does the inner sum run through the SV's only?}
+\question{Why does the inner sum run through the SVs only?}
 
-- Indeed, $\vec w^{*}$ is in expansion of the weight vector in terms of all data points (cf. \eqref{eq:primalsolution1}). However, any point that is \textbf{not} a support vector is associated with a $\lambda$ that is equal to zero. Non-zero $\lambda$'s are only associated with support vectors. Therefore, the sum can be reduced to iterate over the non-zero $\lambda$'s only, which are those associated with the support vectors.
+- Indeed, $\vec w^{*}$ is an expansion of the weight vector in terms of all data points (cf. \eqref{eq:primalsolution1}). However, any point that is \textbf{not} a support vector is associated with a $\lambda$ that is equal to zero. Non-zero $\lambda$'s are only associated with support vectors. Therefore, the sum can be reduced to iterate over the non-zero $\lambda$'s only, which are those associated with the support vectors.
 
 \end{frame}
 

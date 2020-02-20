@@ -32,7 +32,7 @@ The feature space is transformed into a new space in which the classes can becom
 						\substack{ \text{monomials of}\\ \text{degree $n$}}}
 			\end{equation}
 \notesonly{
-However, instead of computing the transformation $\vec \phi$ explicitly (possible very costly in terms of memory footprint if the space of $\vec \phi$ has a very high dimensionality), we exploit the fact that }SVMs only ever operate with the scalar product. This is evident from the Lagrangian of the dual problem we use to construct the SVM:
+However, instead of computing the transformation $\vec \phi$ explicitly (possibly very costly in terms of memory footprint if the space of $\vec \phi$ has a very high dimensionality), we exploit the fact that }SVMs only ever operate with the scalar product. This is evident from the Lagrangian of the dual problem we use to construct the SVM:
 
 \begin{equation} 
     L(\{\lambda_\alpha\})
@@ -148,7 +148,7 @@ The Lagrangian of the dual problem for transformed features involves computing $
 
 \notesonly{
 - Constructing the matrix has the advantage of parallelizing applying the kernel on all the different pairs to speed up computation.
-However, it requires storage of a $p \times p$ values, which could be costly if the number of training points $p$ is very large.
+However, it requires the storage of $p \times p$ values, which could be costly if the number of training points $p$ is very large.
 }
 
 \end{frame}
