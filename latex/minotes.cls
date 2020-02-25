@@ -22,6 +22,7 @@
 \newsavebox{\imagebox}
 \usepackage{paralist}
 \usepackage{xcolor,cancel}
+\usepackage{soul} % for strikethrough
 
 
 \setlength{\oddsidemargin}{0.25 in}
