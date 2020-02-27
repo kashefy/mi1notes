@@ -3,6 +3,7 @@
 
 % packages and classes, scrartcle is an extended article 
 \LoadClass[a4paper]{scrartcl}
+\RequirePackage{etex} % to work with older latex that give the error "No room for a new \dimen"
 \RequirePackage{scrlayer-scrpage, times, amsmath, amssymb, bm}
 \RequirePackage{etoolbox, comment} % not ifthen, xstring, 
 \RequirePackage[latin9]{inputenc}
