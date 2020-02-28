@@ -321,6 +321,50 @@ However, for $p > \dvc$ the growth function behaves differently, namely
 	\end{enumerate}
 \end{frame}
 
+\mode<presentation>{
+\begin{frame}\frametitle{Re-thinking $\eta$}
+\begin{figure}
+	\mode<article>{ \centering }
+	\mode<presentation>{ \raggedright \vspace{-2mm}}
+	\includegraphics[height=\slidesonly{6.7cm}{\notesonly{8cm}}]{img/PdeltaReta}
+	\caption{Distribution of absolute risk differences for larger number of training points $p_{1} < p_{2} < p_{3} < p_{4}$}
+	\label{fig:PdeltaReta}
+\end{figure}
+
+			\begin{equation}
+				\lim_{p \to \infty} P\bigg\{ 
+					{
+						\Big|R_{(\vec w_p)} - R_{(\vec w_0)}\Big| 
+					}
+				\geq \eta \bigg\}\;\;<\;\; \epsilon \,, \quad \forall \eta > 0
+				\label{eq:risktozero}
+			\end{equation}
+\end{frame}
+}
+
+\mode<article>{
+Recall that we were using \figref{fig:PdeltaReta} to see how the probability of scoring non-zero training error vanishes with more data points.
+More data is good and the distribution of errors shifts to the left of $\eta$. While doing so, we were treating $\eta$ as a constant.
+
+After learning about the growth function, we discover that $\eta$ is not necessarily an arbitrary constant but a value that is tied to the growth function of the model class \underline{and} the number of training points $p$\footnote{If interested, the supplementary material derives the relationship between $\eta$, the growth function and $p$}. Knowing that this relationship exists we learn that the vertical line we drew at $\eta$ is capable of shifting as a result of varying $p$ and the growth function.
+
+Increasing $p$ not only causes the distribution to shift to the left but also
+causes $\eta$ to shift to the left. Both will not necessarily shift at the same rate but
+it just means that increasing $p$ no longer guarantees probability of
+zero. The bound gets \textit{lower} with larger $p$. Why should we not be surprised by
+this? One word: underfitting. Increasing $p$ and not getting rid of error is
+indicative of a bias in our model class. It will not benefit from throwing
+more data at it.
+
+A larger growth function shifts the $\eta$ line to the right. The
+distribution shifts to the right, so both are moving away from each other. The
+probability of error vanishes and we get zero error on the training set. It's important to remember that the zero
+error will only occur on the training set. Forgetting about it will make us
+think choosing a larger growth function will always make us generalize
+better and this is simply not the case. This is why we need to bound the probability by the
+generalization capabilities of the model class which leads us to the following formulation:
+}
+
 \begin{frame}\frametitle{The solution to learning problem 3} 
 	\begin{center}
 		\includegraphics[width=9cm]{img/section2_fig1_question2_lessw}
