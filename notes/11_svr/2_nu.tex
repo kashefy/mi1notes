@@ -47,7 +47,7 @@ $\nu$-SVR extends $\varepsilon$-SVR, by allowing the width of the ``$\varepsilon
 The SRM objective for $\nu$-SVR becomes:
 
     \begin{equation}
-        \min_{\vec w,b,\varepsilon} \frac{1}{2} \lVert \vec w \rVert + C \;\Big\lbrack \nu \varepsilon + \frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*) \Big\rbrack
+        \min_{\vec w,b,\varepsilon} \frac{1}{2} \lVert \vec w \rVert^2_2 + C \;\Big\lbrack \nu \varepsilon + \frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*) \Big\rbrack
         \label{eq:srmnu}
     \end{equation}
 
