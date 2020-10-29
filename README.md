@@ -21,7 +21,11 @@ See [Releases](https://github.com/kashefy/mi1notes/releases) to download the lat
 
 Ubuntu:
 
-    apt install texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended latex-beamer texlive-science
+    apt install texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended texlive-science texlive-lang-german
+    
+Additional packages for Ubuntu releases 14.04:
+    
+    apt install latex-beamer
     
 ## Contributing ##
 
@@ -29,7 +33,7 @@ Any contribution to add content, visualization and increase the quality of the n
 
 Post [Issues](https://github.com/kashefy/mi1notes/issues) to report mistakes (e.g. mistakes in the writing, layout mistakes, problems with referencing)
 
-Making [Pull request](https://github.com/kashefy/mi1notes/pulls) that fix any issues is very much encouraged and appreciated. 
+Making [Pull requests](https://github.com/kashefy/mi1notes/pulls) that fix any issues is very much encouraged and appreciated. 
 Feel free to make a pull request that resolves an issue with the content and eliminates any mistakes.
 Any advice on writing better Latex is welcome as well.
 Please keep the scope of changes small to make it easier to spot the differences and identify the contribution in order to speed up the review process and get your changes merges as fast as possible.
