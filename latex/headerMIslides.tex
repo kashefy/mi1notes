@@ -1,6 +1,6 @@
 \documentclass[pdfetex,ignorenonframetext]{beamer}
 \usetheme{TUBerlin}
-\RequirePackage{etex} % to work with older latex that give the error "No room for a new \dimen"
+\usepackage{etex}
 \usepackage{latexsym,listings,graphicx}
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
@@ -27,6 +27,27 @@
 \usetikzlibrary{shapes.geometric}
 \tikzset{myrect/.style={rectangle, fill=#1!20, draw=#1!75, text=black}}
 \tikzstyle{axes}=[]
+
+% sticky note
+\usepackage{xparse}
+\usetikzlibrary{shadows}
+\definecolor{myyellow}{RGB}{242,226,149}
+\NewDocumentCommand\StickyNote{O{6cm}mO{6cm}}{%
+\begin{tikzpicture}
+\node[
+drop shadow={
+  shadow xshift=2pt,
+  shadow yshift=-4pt
+},
+inner xsep=7pt,
+fill=myyellow,
+xslant=0.05,
+yslant=-0.05,
+inner ysep=10pt
+]
+{\parbox[t][#1][c]{#3}{#2}};
+\end{tikzpicture}%
+}
 
 % from tex.stackexchange useful to align substacks
 
@@ -73,10 +94,11 @@
 \setbeamertemplate{navigation symbols}{}
 \usefonttheme[onlymath]{serif}
 
-\title[MI 1 Tutorial]{Machine Intelligence 1 Tutorial}
+\title[MI 2 Tutorial]{Machine Intelligence 1 Tutorial}
 \institute[www.ni.tu-berlin.de]{Fachgebiet Neuronale Informationsverarbeitung (NI)}
 \author[Kashef]{Youssef Kashef}
-\date{WS 20/21}
+\date{WiSe 20/21}
+%\date{}
 
 \graphicspath{{../../../../../figures/pdf/}}
 
@@ -98,14 +120,12 @@
 	% makes more sense to keep the numbering in the notes version but not so much for the slides
 	%\thesheetno.\arabic{question}: ~ \textit{#1}%
 	}\\[5mm]%
-	%\addtocounter{question}{1}%
+	\addtocounter{question}{1}%
 }
 
 % Include in notes but exclude from slides
 % see corresponding \slidessonly for opposite behavior
 \newcommand{\notesonly}[1]{}
-
-\newcommand\labelitemi{\textbullet}
 
 \newcommand{\inparaenum}{\enumerate}
 
