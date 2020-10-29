@@ -76,7 +76,7 @@
 \title[MI 1 Tutorial]{Machine Intelligence 1 Tutorial}
 \institute[www.ni.tu-berlin.de]{Fachgebiet Neuronale Informationsverarbeitung (NI)}
 \author[Kashef]{Youssef Kashef}
-\date{WS 19/20}
+\date{WS 20/21}
 
 \graphicspath{{../../../../../figures/pdf/}}
 
@@ -93,9 +93,12 @@
 
 \newcommand{\question}[2]{%
 	\vspace{4mm}%
-	{Q\thesheetno.\arabic{question}: ~ \textit{#1}%
+	{Q:~\textit{#1}
+	%Omit question number from slides because pause and similar will increment anyway
+	% makes more sense to keep the numbering in the notes version but not so much for the slides
+	%\thesheetno.\arabic{question}: ~ \textit{#1}%
 	}\\[5mm]%
-	\addtocounter{question}{1}%
+	%\addtocounter{question}{1}%
 }
 
 % Include in notes but exclude from slides
@@ -105,3 +108,6 @@
 \newcommand\labelitemi{\textbullet}
 
 \newcommand{\inparaenum}{\enumerate}
+
+% vertical space for slides only
+\newcommand{\svspace}[1]{\slidesonly{\vspace{#1}}}

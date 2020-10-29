@@ -104,3 +104,5 @@
 % see corresponding \notesonly for what to include in notes but not in slides mode
 \newcommand{\slidesonly}[1]{}
 
+% vertical space for slides only
+\newcommand{\svspace}[1]{}
