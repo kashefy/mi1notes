@@ -9,6 +9,7 @@ There are three learning paradigms in machine learning:
 \item Supervised learning\notesonly{. Learning with a teacher (cf. \sectionref{sec:supervised}).}
 \item Unsupervised learning\notesonly{. Learning only from observations, without a teacher (cf. \sectionref{sec:unsupervised}).}
 \item Reinforcement learning\notesonly{. This is about maximizing reward (cf. \sectionref{sec:reinforcement}).}
+\item \textcolor{gray}{Evolutionary learning}\notesonly{. Not covered.}
 \end{itemize}
 \mode<article>{
 It is possible to understand the differences between them by describing
@@ -38,9 +39,10 @@ Differences: Data \& objective model.
 	\captionof*{figure}{example image recognition}
 \end{center}
 \end{minipage}
+\hspace{1cm}
 \begin{minipage}{0.4\textwidth}
 \begin{center}
-	\includegraphics[height=5cm]{img/meme_choose}
+	\includegraphics[height=4cm]{img/meme_choose}
 \end{center}
 \end{minipage}
 \end{center}
@@ -60,7 +62,7 @@ We are given data that is made up of tuples.
 Supervised methods try to fit a function that maps $\vec x$ to some attribute $\vec y$ (labels/ground truth).
 
 \begin{center}
-	\includegraphics[height=3cm]{img/tigerente}
+	\includegraphics[height=2cm]{img/tigerente}
 	\captionof*{figure}{example image recognition}
 \end{center}
 
@@ -247,7 +249,7 @@ The sequence we observe becomes:}
     \begin{figure}[h]
         \centering
         \only<1>{
-        \includegraphics[height=5cm]{img/handheld-game-console-2134571_640}
+        \includegraphics[height=4cm]{img/handheld-game-console-2134571_640}
         }
         \only<2>{
         \includegraphics[height=3cm]{img/babyrajeshraj-1087832_640}
@@ -309,7 +311,7 @@ Reinforcement learning can be used to:
 \begin{tabular}[c]{@{}l@{}}Supervised\\ learning\end{tabular}    & \begin{tabular}[c]{@{}l@{}}\multicolumn{1}{c}{$\left( \vec x^{(1)}, \vec y_T^{(1)} \right) \,,\, \ldots  \,,\, \left( \vec x^{(p)}, \vec y_T^{(p)} \right)$}
 \\[2mm] \qquad\qquad \rotatebox[origin=c]{180}{$\Lsh$} label $\R$, $\R^M$,$\{0,1\}$,\\ \qquad\qquad\qquad$\{0,\ldots,K-1\}$\\[2mm] \,\quad\, \rotatebox[origin=c]{180}{$\Lsh$} observation $\R^N$, often iid.\end{tabular} & \begin{tabular}[c]{@{}l@{}}\\[1mm]discrimination function\\ $\vec y = \vec f(\vec x)$\\ \\ conditional distribution\\ $P(\vec y | \vec x)$\\[1mm]\end{tabular}                                                   \\ \hline
 \begin{tabular}[c]{@{}l@{}}Unsupervised\\ learning\end{tabular}   & \begin{tabular}[c]{@{}l@{}}\multicolumn{1}{c}{$\vec x^{(1)},\ldots,\vec x^{(p)} \in \R^N$}\\[2mm] observations often iid.\end{tabular}         & \begin{tabular}[c]{@{}l@{}}\\generative model/\\ data distribution $P(\vec x)$ \\[2mm] clustering: \\ $f(\vec x): \R^N \mapsto \{0,\ldots,K-1\}$\\[2mm] dimensionality reduction: \\ $\vec f(\vec x): \R^N \mapsto \R^M $\\[2mm]\end{tabular} \\ \hline
-\begin{tabular}[c]{@{}l@{}}Reinforcement\\ learning\end{tabular}  & \begin{tabular}[c]{@{}l@{}} \\ \multicolumn{1}{c}{$\left( \vec x^{(0)}, \vec a^{(0)}, r^{(0)} \right) \,,\, \ldots \,,\, \left(\vec x^{(p)}, \vec a^{(p)}, r^{(p)} \right)$}\\[2mm] \;\qquad\qquad\quad \rotatebox[origin=c]{180}{$\Lsh$} reward $r \in \R$\\ \;\qquad\quad \rotatebox[origin=c]{180}{$\Lsh$} action $\vec a \in \R^M$ or $\{0,1\}^A$\\ \;\quad \rotatebox[origin=c]{180}{$\Lsh$} state $\vec x \in \R^N$ or $\{0,1\}^S$\\[2mm] \end{tabular}   & \begin{tabular}[c]{@{}l@{}}select optimal action:\\ $\vec a^* = \vec f(\vec x,r)$\\[1mm] transition model:\\ $P(\vec x^{(t)}\,|\,\vec x{(t-1)}, \vec a^{(t-1)})$\end{tabular}                                                          
+\begin{tabular}[c]{@{}l@{}}Reinforcement\\ learning\end{tabular}  & \begin{tabular}[c]{@{}l@{}} \\ \multicolumn{1}{c}{$\left( \vec x^{(0)}, \vec a^{(0)}, r^{(0)} \right) \,,\, \ldots \,,\, \left(\vec x^{(p)}, \vec a^{(p)}, r^{(p)} \right)$}\\[2mm] \;\qquad\qquad\quad \rotatebox[origin=c]{180}{$\Lsh$} reward $r \in \R$\\ \;\qquad\quad \rotatebox[origin=c]{180}{$\Lsh$} action $\vec a \in \R^M$ or $\{0,1\}^A$\\ \;\quad \rotatebox[origin=c]{180}{$\Lsh$} state $\vec x \in \R^N$ or $\{0,1\}^S$\\[2mm] \end{tabular}   & \begin{tabular}[c]{@{}l@{}}select optimal action:\\ $\vec a^* = \vec f(\vec x,r)$\\[1mm] transition model:\\ $P(\vec x^{(t)}\,|\,\vec x^{(t-1)}, \vec a^{(t-1)})$\end{tabular}                                                          
 \\ \hline
 \end{tabular}
 } %close resize
