@@ -1,0 +1,63 @@
+\subsection{Unsupervised learning} \label{sec:unsupervised}
+
+\begin{frame}\frametitle{\subsecname}
+
+\mode<article>
+Unsupervised learning tries to find 
+\mode<all>
+ interesting directions and/or structure in the data using only observations $\vec x \in \R^N$.
+
+\underline{Data}:
+
+A dataset of observations:
+\begin{equation}
+\label{eq:observations}
+%\vec x^{(1)} \,,\, \ldots \,,\, \vec x^{(\alpha)} \,,\, \ldots \,,\, \vec x^{(p)}
+\vec X = 
+\left(
+\begin{array}{cccccc}
+\Big| & \Big| & & \Big| & & \Big| \\[3mm]
+\vec x^{(1)} & \vec x^{(2)} & \cdots & \vec x^{(\alpha)} & \cdots & \vec x^{(p)}\\[2mm]
+\Big| & \Big| & & \Big| & & \Big|
+\end{array}
+\right) \in \R^{N \times p}
+\end{equation}
+\notesonly{
+where $p$ denotes the number of observations (i.e. size of the dataset) and $N$ denotes the number of dimensions.}
+\slidesonly{
+where 
+\begin{itemize}
+\item[] $p$ \corresponds\, no. of observations (often \iid)
+\item[] $N$ \corresponds\, no. of dimensions
+\end{itemize}
+}
+\notesonly{
+The samples are often assumed to be \iid, but algorithms for handling sequential data also exist.
+
+Example: $\vec x$ could represent user ratings, pixel values in images.
+}
+\end{frame}
+\begin{frame}
+
+\underline{Objective model}:
+\mode<presentation>{\vspace{5mm}}
+\mode<article>{
+An unsupervised learning algorithm is used to capture structure or directions in the data. This can be achieved by finding:
+}
+\begin{itemize}
+\item the underlying distribution $P(\vec x)$ that generated this data (e.g. density estimation),
+\item $\vec z := \vec f(\vec x)$, where $\vec z$ is a measure of 
+\begin{itemize}
+\item possible structure such as clustering or grouping in the data ($\vec z \in {0,\ldots,K-1}$), \\
+
+and/or
+
+\item possible directions in the data, by finding another continuous space for describing this data. \\
+
+Example: dimensionality reduction, $\vec z \in \R^M$ with $M < N$.
+
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
