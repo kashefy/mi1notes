@@ -1,11 +1,9 @@
 sudo: required
-dist: trusty
 before_install:
-#- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-full
-- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended latex-beamer texlive-science
+- sudo apt-get -qq update && sudo apt-get install -qq -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended latex-beamer texlive-science
+install: skip
 script:
 - bash .ci/travis/make_all.sh
-
 after_success:
 - bash .ci/travis/zip_pdfs.sh
 deploy:
@@ -19,3 +17,4 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
+
