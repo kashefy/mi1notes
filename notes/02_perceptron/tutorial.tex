@@ -1,12 +1,12 @@
 \newcommand{\sheetnum}{%
-	01
+	02
 }
 %\setcounter{section}{\sheetnum-3}
 \newcommand{\tutorialtitle}{%
-    Introduction and the Connectionist Neuron
+    Connectionist Neuron
 }
 \newcommand{\tutorialtitleshort}{%
-	Intro \& Perceptron
+	Perceptron
 }
 % for slides
 \subtitle{\sheetnum \tutorialtitle}
@@ -36,6 +36,8 @@
 
 \begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\maxdeadcycles=1000 % Workaround for ! Output loop---100 consecutive dead cycles because of too many figures
+
 \sheet{\sheetnum}{\tutorialtitleshort}
 
 \ttopic{\tutorialtitle}
@@ -57,13 +59,13 @@
 \end{frame}
 
 \mode<all>
-\input{./connectionist_neuron}
+\input{./0_connectionist_neuron}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./mlp_intro}
+\input{./1_mlp_intro}
 \mode*
 
 \end{rightcolumn}
