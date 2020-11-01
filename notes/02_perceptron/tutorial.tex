@@ -1,14 +1,12 @@
-\usepackage[authoryear,round]{natbib}
-
 \newcommand{\sheetnum}{%
-	07
+	02
 }
 %\setcounter{section}{\sheetnum-3}
 \newcommand{\tutorialtitle}{%
-    Recurrent neural networks
+    Connectionist Neuron
 }
 \newcommand{\tutorialtitleshort}{%
-	RNNs
+	Perceptron
 }
 % for slides
 \subtitle{\sheetnum \tutorialtitle}
@@ -25,7 +23,7 @@
 %\begin{figure}[!t]
 %\removelatexerror
 %\begin{algorithm}[H]
-    % your algo here
+    % your aglo here
     %\label{alg:algolabel}
     %\caption{algocaption}
 %\end{algorithm}
@@ -34,9 +32,11 @@
 % Below is the definition for the command \removelatexerror:
 \makeatletter
 \newcommand{\removelatexerror}{\let\@latex@error\@gobble}
-\makeatother
+\makeatother{}
 
 \begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\maxdeadcycles=1000 % Workaround for ! Output loop---100 consecutive dead cycles because of too many figures
 
 \sheet{\sheetnum}{\tutorialtitleshort}
 
@@ -59,34 +59,14 @@
 \end{frame}
 
 \mode<all>
-\input{./rnn}
+\input{./0_connectionist_neuron}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./vanishingexploding}
+\input{./1_mlp_intro}
 \mode*
-
-\clearpage
-
-\mode<all>
-\input{./echostate}
-\mode*
-
-\clearpage
-
-\mode<all>
-\input{./rnn2lstm}
-\mode*
-
-\clearpage
-
-%\mode<all>
-%\input{./lstm_unroll}
-%\mode*
-
-%\clearpage
 
 \end{rightcolumn}
 \end{paracol}

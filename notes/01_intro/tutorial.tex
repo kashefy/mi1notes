@@ -1,15 +1,20 @@
+\usepackage[authoryear,round]{natbib}
+\usepackage{multirow}
+
 \newcommand{\sheetnum}{%
 	01
 }
 %\setcounter{section}{\sheetnum-3}
 \newcommand{\tutorialtitle}{%
-    Introduction and the Connectionist Neuron
+    Introduction and Learning Paradigms
 }
 \newcommand{\tutorialtitleshort}{%
-	Intro \& Perceptron
+	Intro \& Learning Paradigms
 }
 % for slides
 \subtitle{\sheetnum \tutorialtitle}
+
+\maxdeadcycles=1000 % Workaround for ! Output loop---100 consecutive dead cycles because of too many figures
 
 % The following use of algroithms does not work well with the notes:
 %
@@ -21,7 +26,7 @@
 %\begin{figure}[!t]
 %\removelatexerror
 %\begin{algorithm}[H]
-    % your aglo here
+    % your algo here
     %\label{alg:algolabel}
     %\caption{algocaption}
 %\end{algorithm}
@@ -30,7 +35,7 @@
 % Below is the definition for the command \removelatexerror:
 \makeatletter
 \newcommand{\removelatexerror}{\let\@latex@error\@gobble}
-\makeatother{}
+\makeatother
 
 \begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -54,21 +59,48 @@
 \tableofcontents
 \end{frame}
 
+\newpage
+
 \mode<all>
-\input{./learning_paradigms}
+\input{./0_intro}
+\mode*
+
+\mode<all>
+\input{./1_learning_paradigms}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./connectionist_neuron}
+\input{./2_learning_paradigms_sup}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./mlp_intro}
+\input{./3_learning_paradigms_unsup}
 \mode*
+
+\clearpage
+
+\mode<all>
+\input{./4_learning_paradigms_rl}
+\mode*
+
+\clearpage
+
+\mode<all>
+\input{./5_learning_paradigms_overview}
+\mode*
+
+\clearpage
+
+%\section{References}
+%\begin{frame}[allowframebreaks] \frametitle{References}
+	%\scriptsize
+	%\bibliographystyle{plainnat}
+	%\bibliography{bibliography}
+%\end{frame}
 
 \end{rightcolumn}
 \end{paracol}
