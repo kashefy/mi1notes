@@ -1,4 +1,15 @@
-\subsection{Limitations of Perceptrons}
+\section{Limitations of Perceptrons}
+
+\mode<presentation>{
+\begin{frame} 
+    \begin{center} \huge
+        \secname
+    \end{center}
+    \begin{center}
+    From neurons to neural networks
+    \end{center}
+\end{frame}
+}
 
 \mode<article>{
 Connectionist neurons, or perceptrons, are limited in the variety of functions they are able to fit. 
@@ -69,6 +80,27 @@ If you're familiar with Boolean algebra, you might recognize the following expre
 
 \end{frame}
 
+\begin{frame}{Inversion/NOT-Gate}
+
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+	\includegraphics[width=0.9\textwidth]{img/neuron_3d_grid_hyperplane}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+	\includegraphics[width=0.9\textwidth]{img/neuron_3d_grid_hyperplane_flip}
+\end{minipage}
+
+\end{center}
+\end{minipage}
+\captionof{figure}{Inverting a neuron's response by flipping the hyperplane}
+\end{center}
+
+\end{frame}
+
+
 \mode<article>{
 For instance, the first perceptron ${\color{magenta}s^1_1}$ is tasked to separate the bottom-right cloud of points from the rest. 
 A second perceptron ${\color{green}s^1_2}$ is used to separate the top-left cloud from the rest.
@@ -78,6 +110,16 @@ A third perceptron ${\color{blue}s^2_1}$ will then use the responses of both and
 }
 
 \begin{frame}
+
+\slidesonly{
+\begin{equation}
+\label{eq:xor}
+\mathrm{XOR}(x_1, x_2) = 
+({\color{magenta}\,{x_1} \; \mathrm{AND} \; \overline{x}_2 \,})
+ \;\; \mathrm{OR} \;\; 
+({\color{green}\, \overline{x}_1 \; \mathrm{AND} \; x_2 \,})
+\end{equation}
+}
 
 \begin{figure}[ht]
     \centering

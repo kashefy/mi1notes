@@ -1,3 +1,4 @@
+\usepackage[authoryear,round]{natbib}
 \newcommand{\sheetnum}{%
 	02
 }
@@ -65,8 +66,15 @@
 \clearpage
 
 \mode<all>
-\input{./1_mlp_intro}
+\input{./1_perceptron-limitations}
 \mode*
+
+\section{References}
+\begin{frame}[allowframebreaks] \frametitle{References}
+	\scriptsize
+	\bibliographystyle{plainnat}
+	\bibliography{bibliography}
+\end{frame}
 
 \end{rightcolumn}
 \end{paracol}

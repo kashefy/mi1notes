@@ -14,10 +14,12 @@ A neuron is a computational unit for processing information.
 \begin{frame}
 A connectionist neuron's response to 1D data:
 
+\slidesonly{
+\only<1>{
 \begin{figure}[ht]
      \centering
      \savebox{\imagebox}{
-	 \includegraphics[width=0.3\textwidth]{img/neuron_1d_sigmoid.png}}%
+	 \includegraphics[width=0.3\textwidth]{img/neuron_1d_sigmoid_no-plane}}%
      \begin{subfigure}[t]{0.35\textwidth}
          \centering
          \usebox{\imagebox}% Place largest image
@@ -28,7 +30,7 @@ A connectionist neuron's response to 1D data:
      \begin{subfigure}[t]{0.35\textwidth}
          \centering
          \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
-         \includegraphics[width=0.9\textwidth]{img/neuron_1d_sign.png}
+         \includegraphics[width=0.9\textwidth]{img/neuron_1d_sign_no-plane}
          }
          \caption{}
          \label{fig:neuron_1d_sign}
@@ -38,6 +40,34 @@ A connectionist neuron's response to 1D data:
 	 }
 	 \label{fig:neuron_1d}
 \end{figure}
+}
+}
+\only<2>{
+\begin{figure}[ht]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[width=0.3\textwidth]{img/neuron_1d_sigmoid}}%
+     \begin{subfigure}[t]{0.35\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+         \caption{}
+         \label{fig:neuron_1d_sigmoid}
+     \end{subfigure}
+     \hspace{10mm}
+     \begin{subfigure}[t]{0.35\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.9\textwidth]{img/neuron_1d_sign}
+         }
+         \caption{}
+         \label{fig:neuron_1d_sign}
+     \end{subfigure}
+     \mode<article>{
+     \caption{Examples of different neuron responses to scalar input of two types: $\times$ and $\circ$. In \ref{fig:neuron_1d_sigmoid}: The neuron's response $y$ is continuous. In \ref{fig:neuron_1d_sign} the neuron repsonse is $+1$ for positive input and $-1$ otherwise. The red lines act as a decision boundary.}
+	 }
+	 \label{fig:neuron_1d}
+\end{figure}
+}
 
 \end{frame}
 
@@ -46,7 +76,10 @@ A connectionist neuron's response to 3D data:}
 
 \begin{figure}[ht]
      \centering
-	\includegraphics[width=0.4\textwidth]{img/neuron_3d_grid}
+     \slidesonly{
+	\includegraphics<1>[width=0.4\textwidth]{img/neuron_3d_grid_no-plane}
+     }
+	\includegraphics<2>[width=0.4\textwidth]{img/neuron_3d_grid}
      \mode<article>{
 	\caption{Examples of a neuron's response to 3D input of types $\times$ and $\circ$. Inputs of different types fall on opposite sides of a plane. The red plane acts as a decision boundary}
 	}
@@ -60,10 +93,14 @@ A connectionist neuron's response to 3D data:}
     
     \begin{figure}[h]
         \centering
-        \includegraphics[height=2.5cm]{img/linearNeuron_y.pdf}
-        \caption{The input-output relationship for a connectionist neuron. $w_{j}$ describes the connection from the $j$-th input.}
+        \includegraphics[height=2.3cm]{img/linearNeuron_y.pdf}
+        \only<1>{
+        \caption{A graphical representation of the input-output relationship for a connectionist neuron. $w_{j}$ describes the connection from the $j$-th input.}
+        }
         \label{fig:neuron_diagram}
     \end{figure}
+    
+	\visible<2->{
     \notesonly{
     \figref{fig:neuron_diagram} is a diagram of a connectionist neuron.} Given an input vector $\vec x \in \R^{N}$ with components $x_{j}$,
     the connectionist neuron is composed of the following elements:
@@ -79,16 +116,27 @@ A connectionist neuron's response to 3D data:}
         }
         \item The scalar output of the neuron: $y$.
     \end{enumerate}
+    }
+    
+	\visible<3->{
     
     \question{How does one interpret the scalar product $\vec w^\top \vec x$?}\\
     
+    }
+    
+	\visible<4->{
     \mode<article>{
     The scalar product (dot product) acts as measure of similarity between $\vec w$ and $\vec x$.
     By looking at the geometric interpretation of the scalar product (dot product):
+    }
+    
+    \svspace{-3mm}
+    
     \begin{equation}
-    \vec w\top\vec x = ||\vec w||\;||\vec x||\,\cos{\beta}
+    \vec w^\top\vec x = ||\vec w||\;||\vec x||\,\cos{\beta}
     \end{equation}
     
+    \mode<article>{
     where $\beta$ is the angle between the two vectors. Therefore, $\vec w^\top \vec x$:
     
     \begin{itemize}
@@ -96,6 +144,7 @@ A connectionist neuron's response to 3D data:}
     \item It is zero if both vectors are orthogonal.
     \item It is maximally negative when both vectors point in opposite direction.
     \end{itemize}
+    }
     }
    
 \end{frame}
@@ -159,10 +208,13 @@ $\frac{\vec w^\top \widetilde{\vec x}}{\,||\vec w||_2} = \frac{\theta}{\,||\vec 
 
 \subsection{Linear vs. non-linear transfer functions}
 
-\begin{frame}
+\begin{frame}{Only}
 
+\svspace{-4mm}
 
 \question{What are the advantages of using a non-linear transfer function instead of a linear one?}
+
+\svspace{-7mm}
 
 \begin{figure}[ht]
      \centering
@@ -190,12 +242,16 @@ $\frac{\vec w^\top \widetilde{\vec x}}{\,||\vec w||_2} = \frac{\theta}{\,||\vec 
 \end{figure}
 
 \pause
+
+\svspace{-7mm}
+
 - Advantages:
 \begin{enumerate}
-\item binary classification, either $f(h) \in \{0,1\}$ or $f(h) \in \{-1,1\}$
-\item interpret $f(h)$ as a probability. The logistic sigmoidal where $f(h) = \frac{1}{1+exp(-h)}$ yields values in the range of (0,1). The logistic sigmoidal can also be obtained by shifting and scaling the tanh function (see \sectionref{sec:tanh_to_sigmoid}.
-\item a multilayer perceptron with only linear transfer functions can be reduced to a single layer. The hidden layers become redundant \footnote{Recent literature reveals interesting insights in what kind of representations are found across the layers of linear networks. For more information see Saxe, A. M., McClelland, J. L., \& Ganguli, S. (2019). A mathematical theory of semantic development in deep neural networks. Proceedings of the National Academy of Sciences, 116(23), 11537-11546.}:\\
+\item<only@2> binary classification, either $f(h) \in \{0,1\}$ or $f(h) \in (-1,1)$
+\item<only@3> interpret $f(h)$ as a probability. The logistic sigmoidal where $f(h) = \frac{1}{1+exp(-h)}$ yields values in the range of (0,1). \notesonly{The logistic sigmoidal can also be obtained by shifting and scaling the tanh function (see \sectionref{sec:tanh_to_sigmoid}.}
+\item<only@4> a multilayer perceptron with only linear transfer functions can be reduced to a single layer.\notesonly{ The hidden layers become redundant }\only<4>{\footnote{Recent literature reveals interesting insights into what kind of representations arise during learning across the layers of linear networks. For more information see \citep{saxe2019mathematical}.}:\\
 
+\notesonly{
      \begin{tabular}{c c c }
      		\raisebox{-9mm}{\includegraphics[height=2.25cm]{img/section1_fig16.pdf}}
      	& 
@@ -212,10 +268,15 @@ $\frac{\vec w^\top \widetilde{\vec x}}{\,||\vec w||_2} = \frac{\theta}{\,||\vec 
 		      & \corresponds & \text{connectionist neuron}
 		    \end{eqnarray*}}
 	\end{tabular}
+}
+}
 \end{enumerate}
 
 
 \end{frame}
+
+\subsubsection{From logistic sigmoidal to tanh}
+\label{sec:tanh_to_sigmoid}
 
 \begin{frame}
 
@@ -223,15 +284,16 @@ $\frac{\vec w^\top \widetilde{\vec x}}{\,||\vec w||_2} = \frac{\theta}{\,||\vec 
 
 \mode<presentation>{
 
-	\only<1,2>{\placeimage{9.5}{4}{img/neuron_1d_sigm_tanh}{width=4.cm}}
+	\only<1,2>{\placeimage{10}{4}{img/neuron_1d_sigm_tanh}{width=4.cm}}
 }
 
 \mode<article>{
 
 We observe in \figref{fig:sigmoid_tanh} that the logistic sigmoidal function (sigmoid) function is a shifted and scaled variant of the tanh function.
-}
 
 From this follows:
+}
+
 	\begin{align}
 	f_{{\text{sigmoid}}}(h) 
     & = \frac{1}{1 + e^{-h}} \\
@@ -251,7 +313,7 @@ From this follows:
 
 \subsection{Shortcut notation for weights and bias}
 
-\begin{frame}
+\begin{frame}{\subsecname}
 
 \mode<article>{
 The bias is effectively a connection between the neuron and an input that is always on. 
@@ -260,7 +322,14 @@ We can absorb the bias into the weight vector by prepending it to $\vec w$ and p
 
     \begin{figure}[h]
         \centering
-        \includegraphics[height=3cm]{img/section1_fig6}
+        \only<1>{
+        \includegraphics[height=3cm]{img/section1_fig6_highlight-bias}
+        }
+        \slidesonly{
+        \only<2->{
+        \includegraphics[height=2.2cm]{img/section1_fig6_highlight-bias}
+        }
+        }
          \caption{Absorb bias into weight vector.}
          \label{fig:weight_with_bias}
     \end{figure}
@@ -285,15 +354,16 @@ Note that the sum in \eqref{eq:weight_with_bias} now iterates from ${\color{blue
 
 \only<2>{
 
+\svspace{-5mm}
 
 	$\vec{w}$ will be used for $\rmat{ \mathrm{w}_1 \\ \vdots\;\,\\ \mathrm{w}_N}$ 
-	as well as for $\rmat{ \mathrm{w}_0 \\ \mathrm{w}_1 \\ \vdots\;\, \\ \mathrm{w}_N}$. \\
+	as well as for $\rmat{ \mathrm{w}_{\color{blue}0} \\ \mathrm{w}_1 \\ \vdots\;\, \\ \mathrm{w}_N}$. \\
 	
 	\rule{2cm}{0pt}
 	
 	Accordingly,
 	$\vec{x}$ will be used for $\rmat{ \mathrm{x}_1 \\ \vdots\;\,\\ \mathrm{x}_N}$ 
-	as well as for $\rmat{ \mathrm{x}_0 \\ \mathrm{x}_1 \\ \vdots\;\,\\ \mathrm{x}_N}$.
+	as well as for $\rmat{ \mathrm{x}_{\color{blue}0} \\ \mathrm{x}_1 \\ \vdots\;\,\\ \mathrm{x}_N}$.
 	
 	\mode<article>{
 	Whether the bias is absorbed or not should become apparent from the context or explicitly from the limits of the sum.
