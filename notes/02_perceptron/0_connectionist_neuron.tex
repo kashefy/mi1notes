@@ -209,6 +209,7 @@ $\frac{\vec w^\top \widetilde{\vec x}}{\,||\vec w||_2} = \frac{\theta}{\,||\vec 
 \subsection{Linear vs. non-linear transfer functions}
 
 \begin{frame}{Only}
+\frametitle{Transfer functions}
 
 \svspace{-4mm}
 
@@ -284,7 +285,7 @@ $\frac{\vec w^\top \widetilde{\vec x}}{\,||\vec w||_2} = \frac{\theta}{\,||\vec 
 
 \mode<presentation>{
 
-	\only<1,2>{\placeimage{10}{4}{img/neuron_1d_sigm_tanh}{width=4.cm}}
+	\only<1,2>{\placeimage{10}{3.5}{img/neuron_1d_sigm_tanh}{width=4.cm}}
 }
 
 \mode<article>{
@@ -302,7 +303,11 @@ From this follows:
 		\underbrace{\frac{e^{\frac{h}{2}} - e^{-\frac{h}{2}}}{
 			e^{\frac{h}{2}} + e^{-\frac{h}{2}}}}_{
 				= \tanh \frac{h}{2}}
-		+ \underbrace{\frac{e^{\frac{h}{2}} + e^{-\frac{h}{2}}}{
+		+ \underbrace{\frac{
+				e^{\frac{h}{2}} + e^{-\frac{h}{2}}
+				%e^{h/2} + e^{-h/2}
+				}
+				{
 				e^{\frac{h}{2}} + e^{-\frac{h}{2}}}}_{= 1}
 		\Bigg) \\
 	& = \frac{1}{2} \left( \tanh \frac{h}{2} + 1 \right)
