@@ -1,5 +1,24 @@
 \section{Gradient-based learning}
 
+\mode<presentation>{
+
+\begin{frame}
+\begin{center}
+    \begin{center} \huge
+        \secname
+    \end{center}
+    
+    \begin{center}
+		\includegraphics[width=0.25\textwidth]{img/meme_slide}
+    \end{center}
+    
+    \begin{center}
+    Iterative, step-by-step minimization of the training error.
+    \end{center}
+\end{center}
+\end{frame}
+}
+
 \begin{frame}\frametitle{Minimizing the training error}
 	Training error $E^T$ for the training set $\left\{\vec x^{(\alpha)}, y^{(\alpha)}_{T}\right\}$: 
     \begin{equation}
@@ -126,7 +145,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     The learning step (learning rate) $\eta$ modulates the magnitude of our update. $\eta$ can be treated as a constant but we will also see how the value of $\eta$ can change over time, i.e. $\eta(t)$.
     }
     \only<3>{
-    \mode<presentation>{\vspace{-3mm}}
+    \mode<presentation>{\vspace{-4mm}}
     \question{Why do we \underline{subtract} the gradient from $w_{ij}^{v'v}(t)$?}
     }
     
@@ -258,9 +277,10 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     }
     
 \mode<article>{
-    The model-specific contribution to the error function appears in the second factor:}
+    The model-specific contribution to the error function appears in the second factor:
     
     Continuing with our connectionist neuron \notesonly{from \figref{fig:neuron}}:
+    }
 
     \mode<presentation>{\vspace{-5mm}}
     \only<2>{
@@ -292,6 +312,54 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     }
     
 \end{frame}
+
+\mode<presentation>{
+\begin{frame}
+
+	\begin{align}
+		\frac{\partial \ETw}
+			{\partial {w}_{j}}
+		\;=\;& \frac{1}{p} \sum_{\alpha=1}^p	\underbrace{
+			\textcolor{blue}{
+			\frac{\partial e\tyxwalpha}{\partial 
+					y(\vec{x}^{(\alpha)}, \vec{w})} }}_{
+						\substack{\text{factor depending} \\
+							\text{on cost function}}}
+				  \;\cdot \underbrace{
+			\textcolor{orange}{
+			\frac{\partial y(\vec{x}^{(\alpha)}, \vec{w})}{
+					\partial {w}_{j}}} }_{
+						\substack{\text{factor depending on} \\
+							\text{model class}\\
+                            \text{(e.g. perceptron, MLP)}}}\\
+            \;=\;& \frac{1}{p} \sum_{\alpha=1}^p
+            \textcolor{blue}{y{(\vec{x}^{(\alpha)}; \vec{w}) - y_T^{(\alpha)}}}
+            \cdot
+            \textcolor{orange}{
+            \underbrace{f'(h(\vec x^{(\alpha)}; \vec w))}_{\substack{\text{depends on}\\ \text{transfer function}}}
+            \cdot
+            x_{j}
+            }
+	\end{align}
+
+\begin{center}
+
+\begin{minipage}{0.4\textwidth}
+\begin{center}
+	\includegraphics<2->[width=0.4\textwidth]{img/meme_perceptron_grad}
+\end{center}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\hspace{-30mm}
+\begin{center}
+	\includegraphics<3>[width=0.7\textwidth]{img/meme_showme_mlp}
+\end{center}
+\end{minipage}
+
+\end{center}
+
+\end{frame}
+}
 
 \begin{frame}\frametitle{Computing gradients for an MLP}
 
