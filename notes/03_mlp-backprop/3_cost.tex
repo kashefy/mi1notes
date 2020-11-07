@@ -256,6 +256,14 @@ $\dkl(P||Q)$ is a measure of how much a probability distribution $P$ differs fro
 \right)
 \end{align}
 
+\only<1>{
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/kl_normal}
+	\notesonly{\captionof{figure}{The KL divergence for comparing two distributions.}
+	}
+\end{center}
+}
+\only<2>{
 Properties of the KL-divergence:
 
 \begin{itemize}
@@ -266,6 +274,7 @@ Properties of the KL-divergence:
 	\dkl(P||Q) \ne \dkl(Q||P)
 	\end{equation}
 \end{itemize}
+}
 
 \end{frame}
 
@@ -275,7 +284,7 @@ From KL-divergence to binary cross entropy loss:
 \only<1>{
 
 \begin{align}
-\dkl\left(\, P_{\text{data}}(\vec x, ) \,||\, P_{\text{model}}(\vec x, y) \,\right)
+\dkl\left(\, P_{\text{data}}(\vec x, y) \,||\, P_{\text{model}}(\vec x, y) \,\right)
 = \iint d \vec x dy P_{\text{data}}(\vec x, y)
 \ln 
 \left( 
@@ -484,10 +493,10 @@ $
 \begin{tabular}[c]{@{}l@{}}multi-class \\ classification\\ with $M$ classes\end{tabular} 
 &  
 \begin{tabular}[c]{@{}c@{}}
-$y_{T} \in \{0,1\}^{M}$\\
-1-out-of-M encoding/\\
+$\vec {y}_{T} \in \{0,1\}^{M}$\\
+1-out-of-$M$ encoding/\\
 1-hot-encoding\\
-e.g. $y_{T}=(0,0,1,0)^{\top}$\\ $\corresponds$ class 3 out of 4
+e.g. $\vec {y}_{T}=(0,0,1,0)^{\top}$\\ $\corresponds$ class 3 out of 4
 \end{tabular}
 & \begin{tabular}[c]{@{}c@{}}softmax\\ 
 $y_{k} = \frac{exp(h_{k}^{L})}{\sum_{k=1}^{M} exp(h_{k}^{L})}$\\[5mm]

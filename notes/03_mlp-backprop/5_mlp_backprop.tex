@@ -426,7 +426,18 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
 
 \begin{frame}\frametitle{\subsubsecname}
     \mode<presentation>{
+    \only<-2>{
     \placeimage{7.4}{1}{img/section1_fig14_fc_nolayers}{width=6.7cm}
+    }
+    \only<3,4>{
+    \placeimage{7.4}{1}{img/section1_fig14_fc_nolayers_v2}{width=6.7cm}
+    }
+    \only<5,6>{
+    \placeimage{7.4}{1}{img/section1_fig14_fc_nolayers_v1}{width=6.7cm}
+    }
+    \only<7->{
+    \placeimage{7.4}{1}{img/section1_fig14_fc_nolayers}{width=6.7cm}
+    }
     \begin{textblock}{4}(0.5,2)
     \begin{equation}
     \boxed{
@@ -452,9 +463,10 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
         \begin{flalign}
             y(\vec x; \vec w) &= f^L_{1}(h^{L}_{1})&&\\
             f^L_{1}(h) &= \text{e.g. logistic function (sigmoid)}\\
-            {\color{red}\delta^{L}_{1}}  &= \frac{\partial y(\vec{x}; \vec{w})} {{\color{blue}\partial h_1^{L}}} =
+            {\color{red}\delta^{L}_{1}}  &= \frac{\partial y(\vec{x}; \vec{w})} {\partial{\color{darkgreen} h_1^{L}}} =
         \only<2>{
-                [f_1^{L}]'({\color{blue} h_1^{L}})
+                [f_1^{L}]'({\color{darkgreen} h_1^{L}}) \cdot \textcolor{gray}{1}
+                & (\textcolor{gray}{C(L,1) \text{ is an empty set}})
         }
         \end{flalign}
     }
@@ -463,16 +475,28 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
         \item $v=2$ (2\textsuperscript{nd} hidden layer with $N_{2} \text{ nodes}$):\\ \slidesonly{\vspace{-7mm}}
         \begin{flalign}
             f^2_{i}(h) :\kern-0.5ex&= \text{e.g. }\tanh(h), &i=1,\ldots,N_{2}&&\\
-            f^2_{0}(h) :\kern-0.5ex&= h &\text{(identity for bias)}\\
+            f^2_{\color{blue}0}(h) :\kern-0.5ex&= h &\text{(identity for \textcolor{blue}{bias})}\\
             {\color{red}\delta^{2}_{i}} &=
         \only<4>{
                 [f_i^{2}]'({\color{darkgreen}h_i^{2}})\;
                 {\color{red}\delta_1^{L}} \,
-                {w}_{1i}^{L2}
-                &(\text{bias }{\scriptsize{w}_{0i}^{L2}}\text{ excl.})\\
-             {\color{red} \vec \delta^{2}} &=\; [\vec f^{2}]'({\color{darkgreen}\widetilde{\vec h}^{2}}) \odot ({\color{red}\delta_1^{L}} \cdot {\widetilde{\vec w}_{1}^{L2}})
-        \notesonly{ \footnotemark }
+                {w}_{1i}^{L2} 
+                %&(\text{bias }{\scriptsize{w}_{0i}^{L2}}\text{ excl.})\\
+                &\\
+             {\color{red} \vec \delta^{2}} &=\; [\vec f^{2}]'({\color{darkgreen}\widetilde{\vec h}^{2}})
+             \odot
+             (
+             {\widetilde{\vec w}_{1}^{L2}}
+             \cdot
+             {\color{red}\delta_1^{L}}
+             )
+        \notesonly{ \footnotemark }\\
         %\notesonly{ \footnotemark }
+             {\color{red}\delta^{2}_{\color{blue}0}} &=
+                \; 1 \cdot \,
+                {\color{red}\delta_1^{L}} \,
+                {w}_{1{\color{blue}0}}^{L2} 
+                & (\text{local error for \textcolor{blue}{bias}})\\
         }
         \end{flalign}
         \notesonly{
@@ -489,20 +513,21 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
     \only<5,6>{
         \item $v=1$ (1\textsuperscript{st} hidden layer with $N_{1} \text{ nodes}$):\\ \slidesonly{\vspace{-5mm}}
         \begin{flalign}
-            f^1_{j}(h) :\kern-0.5ex&= \text{e.g. }\tanh(h),  &j=1,\ldots,N_{1}\\ f^1_{0}(h) :\kern-0.5ex&= h &\text{(identity for bias)}&&\\
+            f^1_{j}(h) :\kern-0.5ex&= \text{e.g. }\tanh(h),  &j=1,\ldots,N_{1}\\ 
+            f^1_{\color{magenta}0}(h) :\kern-0.5ex&= h &\text{(identity for \textcolor{magenta}{bias})}&&\\
             {\color{red}\delta^{1}_{j}}
              &=
         \only<6>{
                 [f_j^{1}]'({\color{darkgreen}h_j^{1}}) 
-                \kern-.5ex\sum_{k=1}^{N_{2}}\kern-.5ex
+                \kern-.5ex\sum_{{k=1}}^{N_{2}}\kern-.5ex
                 {\color{red}\delta_k^{2}} \,
-                {w}_{{\color{magenta}kj}}^{21} %\\%&
+                {w}_{{k}j}^{21} %\\%&
                 %\notesonly{\\&}
                 %= 
                 %[f_j^{1}]'({\color{darkgreen}h_j^{1}})\,
                 %{\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}}
                 %\widetilde{\vec {w}}_{j}^{21}
-                &(\text{bias k=0  excl.})\\%TODO: vector notation for this
+                &(\text{\textcolor{blue}{bias} }\textcolor{blue}{k=0}\text{  excl.})\\%TODO: vector notation for this
                 %\notesonly{\\[3mm]}\slidesonly{\\}
                 %(\text{skip }k=0)\\
                 %}
@@ -515,7 +540,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
                 [\vec f^{1}]'({\color{darkgreen}\widetilde{\vec h}^{1}})
                 \odot
                 (
-                \kern-.5ex\cdot
+                %\kern-.5ex\cdot
                 \widetilde{\vec {W}}^{21}
                 {\color{red} {\vec \delta^{2}}}) \notesonly{ \footnotemark }
                 & \\
@@ -526,6 +551,13 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
                 %\kern-.7ex\cdot
                 %{\color{red} {\vec{\widetilde{\delta}}^{2}}^{\top}})
                 %& (\vec A\, \vec B)^{\kern-.5ex\top}\kern-1ex=\vec B^{\top}\kern-.8ex\vec A^{\kern-.5ex\top}
+                {\color{red}\delta^{1}_{\color{magenta}0}}
+				&=
+				\; 1 \, \cdot
+                \kern-.5ex\sum_{{k=1}}^{N_{2}}\kern-.5ex
+                {\color{red}\delta_k^{2}} \,
+                {w}_{{k}{\color{magenta}0}}^{21}
+                &(\text{local error for \textcolor{magenta}{bias}})\\
         }
         \end{flalign}
         \notesonly{
@@ -540,7 +572,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
         \item $v=0$ (input layer):\\ \slidesonly{\vspace{-3mm}}
         \begin{flalign}
                 f^0_{j}(h) :\kern-0.5ex&= h & \text{ (identity function)}&&\\
-                \vec f^0(\vec h) :\kern-0.5ex&= \vec x &\text{ (bias included)}
+                \vec f^0(\vec h) :\kern-0.5ex&= \vec x &\text{ (bias } x_0 \text{ included)}
                 \\
             {\color{red}\delta^{0}_{j}}
              &\;

@@ -20,7 +20,7 @@
 }
 
 \begin{frame}\frametitle{Minimizing the training error}
-	Training error $E^T$ for the training set $\left\{\vec x^{(\alpha)}, y^{(\alpha)}_{T}\right\}$: 
+	Training error $E^T$ for the training set $\left\{(\vec x^{(\alpha)}, y^{(\alpha)}_{T})\right\}$: 
     \begin{equation}
         \ETw = \frac{1}{p} \sum\limits_{\alpha = 1}^p 
 					e\tyxwalpha
@@ -333,7 +333,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 							\text{model class}\\
                             \text{(e.g. perceptron, MLP)}}}\\
             \;=\;& \frac{1}{p} \sum_{\alpha=1}^p
-            \textcolor{blue}{y{(\vec{x}^{(\alpha)}; \vec{w}) - y_T^{(\alpha)}}}
+            \textcolor{blue}{(y{(\vec{x}^{(\alpha)}; \vec{w}) - y_T^{(\alpha)})}}
             \cdot
             \textcolor{orange}{
             \underbrace{f'(h(\vec x^{(\alpha)}; \vec w))}_{\substack{\text{depends on}\\ \text{transfer function}}}
