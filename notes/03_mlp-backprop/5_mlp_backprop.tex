@@ -427,7 +427,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
 \begin{frame}\frametitle{\subsubsecname}
     \mode<presentation>{
     \only<-2>{
-    \placeimage{7.4}{1}{img/section1_fig14_fc_nolayers}{width=6.7cm}
+    \placeimage{7.4}{1}{img/section1_fig14_fc_nolayers_L}{width=6.7cm}
     }
     \only<3,4>{
     \placeimage{7.4}{1}{img/section1_fig14_fc_nolayers_v2}{width=6.7cm}
@@ -683,7 +683,8 @@ $v=L$
 		\placeimage{10.75}{5.5}{img/MLP_forward.pdf}{width=3.75cm}
 		\placeimage{10.75}{8.7}{img/MLP_backward.pdf}{width=3.75cm}
 	}}
-	
+
+\only<1>{	
 	%\begin{algorithm}[H] 
 		%\scriptsize
 		\footnotesize
@@ -745,6 +746,15 @@ $v=L$
 		}
 		%\caption{Backpropagation in feedforward networks}
 	%\end{algorithm}
+}
+\only<2>{
+\mode<presentation>{
+
+\begin{center}
+	\includegraphics[width=0.4\textwidth]{img/meme_learning_backprop}
+\end{center}
+	}
+}
 \end{frame}
 
 \subsubsection{Complexity}
@@ -796,7 +806,7 @@ However, numerical differentiation such as finite differences remains a useful t
 \pause
 
 \slidesonly{
-Complexity of finite differences increases to.$\mathcal{O}(n^{2})$. But still good for gradient checks.
+Complexity of finite differences increases to $\mathcal{O}(n^{2})$. But still good for gradient checks.
 }
 
 
