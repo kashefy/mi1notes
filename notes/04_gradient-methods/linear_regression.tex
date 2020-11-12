@@ -260,6 +260,34 @@ using the product rule
 
 \subsection{Represent gradient and Hessian in matrix form}
 
+\mode<presentation>{
+\begin{frame}
+
+For the quadratic error:
+
+\begin{equation}
+\vec g
+\;\;=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)} y_{T}^{(\alpha)} \big)
+\end{equation}
+
+\begin{equation}
+\vec H
+\;\;=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\vec x^{(\alpha)}~{\vec x^{(\alpha)}}^\top
+\end{equation}
+
+\pause
+
+\begin{center}
+	\includegraphics[width=0.3\textwidth]{img/meme_matrix-notation}
+\end{center}
+
+\end{frame}
+}
+
 \begin{frame}
 
 Let $\vec X$ represent the observations for all training points:
@@ -284,6 +312,10 @@ and let $\vec y_{\text{True}}$ represent the true labels for all training points
 \notesonly{
 From this follows:
 }
+
+\pause
+
+\svspace{-3mm}
 
 \begin{align}
 \vec g
@@ -347,6 +379,7 @@ positive definiteness:
 $L_2$ regularization cost:
 \begin{equation}
 E^R_{[\vec w]} := \frac{1}{2} \sum_{(i, j, v', v)} 
+			\kern-2ex
 			\big( \mathrm{w}_{ij}^{v'v} \big)^2 = \frac{1}{2} \lVert \vec w \rVert_2^2 = \frac{1}{2} \vec w^\top \vec w 
 \end{equation}
 \renewcommand{\CancelColor}{\color{gray}}
