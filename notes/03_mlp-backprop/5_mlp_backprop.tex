@@ -412,7 +412,7 @@ We will apply the Backpropagation algorithm to an MLP as depicted by \figref{fig
         h^{L}_{1} &=
         \slidesonly{\only<7>{&&}}
         \only<8>{
-            \smallsum{i=0}{N_{2}} w_{1i}^{L2}\;  f_i^1\big( {h_i^1} \big) = {\vec w_{1}^{21}}^{\top} \vec f^{2}(\vec h^2) &(\text{bias included})&&\\
+            \smallsum{i=0}{N_{2}} w_{1i}^{L2}\;  f_i^{\textcolor{red}{2}}\big( {h_i^{\textcolor{red}{2}}} \big) = {\vec w_{1}^{\textcolor{red}{L2}}}^{\top} \vec f^{2}(\vec h^2) &(\text{bias included})&&\\
             y(\vec x; \vec w) &= f^L_{1}(h^{L}_{1})&&\\
             f^L_{1}(h) :\kern-0.5ex&= \text{e.g. logistic function (sigmoid)}\\
         }
