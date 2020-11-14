@@ -433,12 +433,22 @@ Extendable to multi-class cross entropy alongside \emph{softmax} normalization.
 
 \end{frame}
 
+\newpage
+
 \begin{frame}
     
-{\renewcommand{\arraystretch}{1.2} %<- control vertical spacing
-\begin{table}[h!]
-\caption{Cost functions \& output layers}\slidesonly{\vspace{-5mm}}
-\resizebox{\textwidth}{!}{%
+{
+\notesonly{
+\renewcommand{\arraystretch}{1.4} %<- control vertical spacing
+}
+\slidesonly{
+\renewcommand{\arraystretch}{1.2} %<- control vertical spacing
+}
+\begin{center}
+%\begin{table}[h!]
+\notesonly{\captionof{table}{Cost functions \& output layers}\slidesonly{\vspace{-5mm}}}
+\resizebox{0.9\textwidth}{!}{%
+\hskip-2.0cm
 \begin{tabular}{|l|c|c|l|}
 \hline
 task 
@@ -514,7 +524,8 @@ $
 \hline
 \end{tabular}
 }
-\end{table}
+%\end{table}
+\end{center}
 } % arraystretch
 
 \end{frame}
