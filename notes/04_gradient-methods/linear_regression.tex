@@ -237,6 +237,7 @@ $}
 %$}
 \;\;&=\;\;
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
+\bigg(
 \frac{\partial}{\partial \vec w}
 ~\vec w^{\top}{\vec x^{(\alpha)}}~{\vec x^{(\alpha)}}^{\top}
 -
@@ -246,7 +247,8 @@ $}
 \vec x^{(\alpha)} y_{T}^{(\alpha)} 
 }_{\text{indep. of }\vec w}
 \Big)^\top
-%\Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)}^\top y_{T}^{(\alpha)} \Big)\\
+%\Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)}^\top y_{T}^{(\alpha)}
+\bigg)
 \intertext{
 using the product rule
 }
@@ -259,6 +261,34 @@ using the product rule
 \end{frame}
 
 \subsection{Represent gradient and Hessian in matrix form}
+
+\mode<presentation>{
+\begin{frame}
+
+For the quadratic error:
+
+\begin{equation}
+\vec g
+\;\;=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)} y_{T}^{(\alpha)} \big)
+\end{equation}
+
+\begin{equation}
+\vec H
+\;\;=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\vec x^{(\alpha)}~{\vec x^{(\alpha)}}^\top
+\end{equation}
+
+\pause
+
+\begin{center}
+	\includegraphics[width=0.3\textwidth]{img/meme_matrix-notation}
+\end{center}
+
+\end{frame}
+}
 
 \begin{frame}
 
@@ -285,6 +315,10 @@ and let $\vec y_{\text{True}}$ represent the true labels for all training points
 From this follows:
 }
 
+\pause
+
+\svspace{-3mm}
+
 \begin{align}
 \vec g
 \;\;&=\;\;
@@ -300,6 +334,16 @@ From this follows:
 \end{frame}
 
 \begin{frame}
+
+\slidesonly{
+\only<1>{
+\begin{equation}
+\vec g
+\;\;=\;\;
+\frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right)
+\end{equation}
+}
+}
 
 stationary point:
 
@@ -347,6 +391,7 @@ positive definiteness:
 $L_2$ regularization cost:
 \begin{equation}
 E^R_{[\vec w]} := \frac{1}{2} \sum_{(i, j, v', v)} 
+			\kern-2ex
 			\big( \mathrm{w}_{ij}^{v'v} \big)^2 = \frac{1}{2} \lVert \vec w \rVert_2^2 = \frac{1}{2} \vec w^\top \vec w 
 \end{equation}
 \renewcommand{\CancelColor}{\color{gray}}

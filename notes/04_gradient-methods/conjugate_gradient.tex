@@ -2,11 +2,47 @@
 
 \subsubsection{Motivation}
 
-We have seen how line search allows us to reach the minimum along the direction of the gradient $\vec g_t$ computed at time step $t$.
-Looking at what happens over multiple time steps we observe the following drawbacks:
+\notesonly{
+We have seen how line search allows us to reach the minimum along the direction of the gradient $\vec g_t$ computed at time step $t$. It achieves this by manipulating the magnitude of the step we take towards a lower cost.
+Looking at what happens over multiple time steps we observe the following movements on the surface of the cost function:
+}
+\begin{frame}{Limitations of line search}
 
-\begin{enumerate}
-\end
+\begin{center}
+	\includegraphics[width=0.6\textwidth]{img/section1_fig23_clean_ls}
+	\captionof{figure}{Weight updates by following line search 
+	%(\textcolor{red}{red}).}
+	(red).}
+\end{center}
+
+\mode<presentation>{
+	\only<2>{
+		\begin{center}
+			\includegraphics[width=0.3\textwidth]{img/meme_point}
+		\end{center}
+	}
+	\only<3>{
+		\begin{center}
+			\includegraphics[width=0.3\textwidth]{img/meme_deeper}
+		\end{center}
+	}
+	\only<4>{
+		\begin{center}
+			\includegraphics[width=0.3\textwidth]{img/meme_direction}
+		\end{center}
+	}
+}
+
+\end{frame}
+
+\begin{frame}{Limitations of line search}
+		\begin{center}
+			\includegraphics[width=0.8\textwidth]{img/conjugate_direction_c}
+			\notesonly{
+			\captionof{figure}{The conjugate direction avoids undoing progress made in the previous step.}
+			}
+		\end{center}
+\end{frame}
 
 \begin{frame}\frametitle{Conjugate gradient method}
 \mode<article>{
@@ -95,5 +131,6 @@ remain zero along the new direction $\vec d_{t+1}$
 \placeimage{0.5}{2}{img/section1_fig23_clean}{width=6cm}
 \placeimage{8}{2}{img/section1_fig24_clean}{width=6cm}
 \placeimage{0.5}{8}{img/section1_fig23_clean_ls}{width=6cm}
+\placeimage{8}{8}{img/section1_fig23_clean_conj}{width=6cm}
 \end{frame}
 }

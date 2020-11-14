@@ -1,6 +1,22 @@
 \section{Gradient methods}
 
+\mode<presentation>{
+\begin{frame}
+	
+    \begin{center} \huge
+        \secname
+    \end{center}
+    
+    \pause
+    \begin{center}
+		\includegraphics[width=0.3\textwidth]{img/meme_analytical}
+    \end{center}
+	
+\end{frame}
+}
+
 \subsection{The need for gradient-based optimization}
+
 
 \begin{frame}
 
@@ -24,10 +40,10 @@ We have some cost function we want to minimize but solving the problem analytica
     \vec w^{*} = (\vec X \, \vec X^\top)^{-1}\vec X \, \vec y_{True}^\top
     $$
     \pause
-    but $(\vec X \, \vec X^\top)^{-1}$ is not invertible
+    but $\vec X \, \vec X^\top$ is not invertible
     }
     \item \notesonly{There is no closed-form solution for the model we're using (e.g. MLP)}
-    \slidesonly{no closed form solution for our model (e.g. MLP with non-linearities)}
+    \slidesonly{no closed-form solution for our model (e.g. MLP with non-linearities)}
 	\item Computing the Hessian is too costly. Newton's method also not applicable.\notesonly{\footnote{
 	Newton's method finds the root of a function iteratively using the second-order Taylor expansion of the cost function around a point $\vec w_t$. For more details see Haykin Ch. 3.3.
 	}}
