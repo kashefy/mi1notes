@@ -237,6 +237,7 @@ $}
 %$}
 \;\;&=\;\;
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
+\bigg(
 \frac{\partial}{\partial \vec w}
 ~\vec w^{\top}{\vec x^{(\alpha)}}~{\vec x^{(\alpha)}}^{\top}
 -
@@ -246,7 +247,8 @@ $}
 \vec x^{(\alpha)} y_{T}^{(\alpha)} 
 }_{\text{indep. of }\vec w}
 \Big)^\top
-%\Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)}^\top y_{T}^{(\alpha)} \Big)\\
+%\Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)}^\top y_{T}^{(\alpha)}
+\bigg)
 \intertext{
 using the product rule
 }
@@ -332,6 +334,16 @@ From this follows:
 \end{frame}
 
 \begin{frame}
+
+\slidesonly{
+\only<1>{
+\begin{equation}
+\vec g
+\;\;=\;\;
+\frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right)
+\end{equation}
+}
+}
 
 stationary point:
 
