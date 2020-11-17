@@ -25,7 +25,7 @@
 \subsection{L2 regularization: weight decay}
 
 % -----------------------------------------------------------------------------
-\begin{frame}\frametitle{Regularization example: weight decay}
+\begin{frame}\frametitle{Regularization example: $L_2$ regularization (weight decay)}
 
 
 	\begin{center}
@@ -54,9 +54,12 @@
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}\frametitle{$L_2$ regularization cost}
 
-$L_2$ regularization cost:
+\notesonly{$L_2$ regularization cost:}
+
+\svspace{-5mm}
+
 \begin{equation}
 E^R_{[\vec w]} := \frac{1}{2} \sum_{(i, j, v', v)} 
 			\big( \mathrm{w}_{ij}^{v'v} \big)^2 = \frac{1}{2} \lVert \vec w \rVert_2^2 = \frac{1}{2} \vec w^\top \vec w 
@@ -81,6 +84,7 @@ Using vector notation to compute the gradient:
 \end{equation}
 }
 
+\only<3>{
 The regularized cost function:
 
 \begin{equation}
@@ -96,6 +100,7 @@ where
 	\item $E^R \; \corresponds \; $ prior knowledge of solution
 	\item $\lambda:$ regularization parameter 
 \end{itemize}
+}
 
 \end{frame}
 
@@ -154,7 +159,18 @@ Gradient:
 
 \begin{frame}\frametitle{L2 vs. L1 regularization}
 
-L2, weight decay:
+\slidesonly{
+\only<1->{
+	\placeimage{12}{2.5}{img/RegularizationTypesIntersect_clean_l2}{width=1.5cm}
+	}
+\only<2->{
+	\placeimage{12}{7.5}{img/RegularizationTypesIntersect_clean_l1}{width=1.5cm}
+	}
+}
+
+\svspace{5mm}
+
+$L2$, weight decay:
 \begin{itemize}
 \item ``standard'' regularizer
 \item differentiable (simple integration into gradient descent procedure)
@@ -164,7 +180,7 @@ L2, weight decay:
 
 \pause
 
-L1, Lasso, ``sparsify'':
+$L1$, Lasso, ``sparsify'':
 
 \begin{itemize}
 \item sparse (good for interpretable models, e.g. medical applications)
