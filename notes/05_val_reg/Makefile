@@ -10,6 +10,7 @@ projnameA = $(projname).notes
 
 slides: $(projname).slides.tex $(projname).tex
 	$(compile) $(projname).slides.tex
+	$(compile) $(projname).slides.tex
 	mv $(projname).slides.pdf $(targetname).slides.pdf 
 
 handout: $(projname).handout.tex $(projname).tex
