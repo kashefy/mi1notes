@@ -1,0 +1,229 @@
+\subsection{From KL-divergence to the cross-entropy cost in numbers}
+
+\subsubsection{First: The KL-divergence in numbers}
+
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+\begin{align}
+\dkl&\left(\, P_{\text{data}}(\vec x, y) \,||\, P_{\text{model}}(\vec x, y) \,\right)\\
+&= \underbrace{
+	\int_{\R^N} d \vec x \,
+	{ \color{darkgreen} P_{\text{data}}(\vec x) }
+	\sum_{y \in \{\textcolor{red}{0},\textcolor{blue}{1}\}}
+	P_{\text{data}}(y | \vec x)
+	\ln 
+	\lbrack { \color{violet} P_{\text{data}}(y | \vec x) } \rbrack
+	}_{\text{indep. of } \vec w~\Rightarrow~\text{treat as const. =}~c} \\
+	&\qquad- \int_{\R^N} d \vec x \,
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+			\sum_{y \in \{\textcolor{red}{0},\textcolor{blue}{1}\}}
+			P_{\text{data}}(y | \vec x)
+			\ln
+			\lbrack {\color{brown} P_{\text{model}}(y | \vec x) } \rbrack\\
+&= c \; - \int_{\R^N} d \vec x \,
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+			\sum_{y \in \{\textcolor{red}{0},\textcolor{blue}{1}\}}
+			P_{\text{data}}(y | \vec x)
+			\ln
+			\lbrack {\color{brown} P_{\text{model}}(y | \vec x) } \rbrack\\
+&= c \; - \int_{\R^N} d \vec x \,
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\Big\lbrack
+			P_{\text{data}}(\textcolor{red}{y=0} | \vec x)
+			\ln
+			\lbrack {\color{brown} P_{\text{model}}(\textcolor{red}{y=0} | \vec x) } \rbrack\\
+	&\qquad\qquad\qquad\qquad +
+			P_{\text{data}}(\textcolor{blue}{y=1} | \vec x)
+			\ln
+			\lbrack {\color{brown} P_{\text{model}}(\textcolor{blue}{y=1} | \vec x) } \rbrack
+		\Big\rbrack\\
+&= c \; - \int_{\R^N} d \vec x \,
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+			P_{\text{data}}(\textcolor{red}{y=0} | \vec x)
+			\ln
+			\lbrack {\color{brown} P_{\text{model}}(\textcolor{red}{y=0} | \vec x) } \rbrack\\
+	&\qquad- \int_{\R^N} d \vec x \,
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+			P_{\text{data}}(\textcolor{blue}{y=1} | \vec x)
+			\ln
+			\lbrack {\color{brown} P_{\text{model}}(\textcolor{blue}{y=1} | \vec x) } \rbrack
+\end{align}
+
+\begin{enumerate}
+\item \textbf{Correctly} classifiying a single \textcolor{blue}{positive} sample:\\
+	A \textcolor{blue}{positive} sample implies:
+	\begin{itemize}
+	\item $P_{\text{data}}(\textcolor{red}{y=0} | \vec x) = 0.01$
+	\item $P_{\text{data}}(\textcolor{blue}{y=1} | \vec x) = 0.99$
+	\end{itemize}
+	A \textbf{correct} classification implies:
+	\begin{itemize}
+	\item ${\color{brown} P_{\text{model}}(\textcolor{red}{y=0} | \vec x) } = 0.2$
+	\item ${\color{brown} P_{\text{model}}(\textcolor{blue}{y=1} | \vec x) } = 0.8$
+	\end{itemize}
+	Plugging it into the equation above. Only a single sample, so no integration:
+	\begin{align}
+\dkl
+&= c \; -
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\cdot
+		0.01 \cdot 
+			\ln(0.2)
+		-
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\cdot
+		0.99 \cdot 
+			\ln(0.8)\\
+&= c \; +
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\cdot
+		\lbrack
+		-0.01 \cdot 
+			\ln(0.2)
+		-0.99 \cdot 
+			\ln(0.8)
+		\rbrack\\
+&= c \; +
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\cdot
+		\lbrack
+		0.016 + 0.221
+		\rbrack\\
+&= c \; +
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\cdot
+		0.237
+	\end{align}
+\item \textbf{Misclassifiying} a single \textcolor{blue}{positive} sample:\\
+	A \textcolor{blue}{positive} sample implies:
+	\begin{itemize}
+	\item $P_{\text{data}}(\textcolor{red}{y=0} | \vec x) = 0.01$
+	\item $P_{\text{data}}(\textcolor{blue}{y=1} | \vec x) = 0.99$
+	\end{itemize}
+	A \textbf{misclassification} implies:
+	\begin{itemize}
+	\item ${\color{brown} P_{\text{model}}(\textcolor{red}{y=0} | \vec x) } = 0.7$
+	\item ${\color{brown} P_{\text{model}}(\textcolor{blue}{y=1} | \vec x) } = 0.3$
+	\end{itemize}
+	Plugging it into the equation above. Only a single sample, so no integration:
+	\begin{align}
+\dkl
+&= c \; -
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\cdot
+		0.01 \cdot 
+			\ln(0.7)
+		-
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\cdot
+		0.99 \cdot 
+			\ln(0.3)\\
+&= c \; +
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\cdot
+		\lbrack
+		-0.01 \cdot 
+			\ln(0.7)
+		-0.99 \cdot 
+			\ln(0.3)
+		\rbrack\\
+&= c \; +
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\cdot
+		\lbrack
+		0.004 + 1.19
+		\rbrack\\
+&= c \; +
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\cdot
+		1.194
+	\end{align}
+\item[]
+\begin{align}
+\dkl(\text{correct classification})
+&\;\;<\;\;
+\dkl(\text{misclassification})\\
+c \; +
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\cdot
+		0.237
+&\;\;<\;\;
+	c \; +
+		{ \color{darkgreen} P_{\text{data}}(\vec x) }
+		\cdot
+		1.194
+\end{align}
+\end{enumerate}
+
+\subsubsection{Second: binary cross-entropy in numbers}
+
+binary cross-entropy for an indivudal sample:
+\begin{equation}
+e(y_T, y(\vec x;\vec w)) = 
+-
+{\color{blue}y_T} \cdot
+	 \ln \lbrack {\color{blue}y(\vec x;\vec w)} \rbrack
+	 - ( {\color{red}1-y_T} ) \cdot
+	 \ln \lbrack {\color{red}1-y(\vec x;\vec w)} \rbrack 
+\label{eq:bincrossentropysample}
+\end{equation}
+
+\begin{enumerate}
+\item \textbf{Correctly} classifiying a single \textcolor{blue}{positive} sample:\\
+	A \textcolor{blue}{positive} sample implies:
+	\begin{itemize}
+	\item $y_T = 1$
+	\end{itemize}
+	A \textbf{correct} classification implies:
+	\begin{itemize}
+	\item $y(\vec x;\vec w) = 0.8$
+	\end{itemize}
+	Plugging it into \eqref{eq:bincrossentropysample} above:
+	\begin{align}
+	e(1, 0.8)
+	=& 
+	-
+	{\color{blue}1} \cdot
+		 \ln \lbrack {\color{blue}0.8} \rbrack
+		 - ( {\color{red}1-1} ) \cdot
+		 \ln \lbrack {\color{red}1-0.8} \rbrack\\
+	=& 
+	-
+		 \ln \lbrack {\color{blue}0.8} \rbrack
+		 - ( {\color{red}0} ) \cdot
+		 \ln \lbrack {\color{red}0.2} \rbrack\\
+	=&\,0.223
+	\end{align}	
+\item \textbf{Misclassifying} a single \textcolor{blue}{positive} sample:\\
+	A \textcolor{blue}{positive} sample implies:
+	\begin{itemize}
+	\item $y_T = 1$
+	\end{itemize}
+	A \textbf{wrong} classification implies:
+	\begin{itemize}
+	\item $y(\vec x;\vec w) = 0.3$
+	\end{itemize}
+	Plugging it into \eqref{eq:bincrossentropysample} above:
+	\begin{align}
+	e(1, 0.3)
+	=& 
+	-
+	{\color{blue}1} \cdot
+		 \ln \lbrack {\color{blue}0.3} \rbrack
+		 - ( {\color{red}1-1} ) \cdot
+		 \ln \lbrack {\color{red}1-0.3} \rbrack\\
+	=& -
+		 \ln \lbrack {\color{blue}0.3} \rbrack
+		 - ( {\color{red}0} ) \cdot
+		 \ln \lbrack {\color{red}0.7} \rbrack\\
+	=&\,1.204
+	\end{align}	
+\item[]
+\begin{align}
+e(\text{correct})
+&\;\;<\;\;
+e(\text{wrong})\\
+		0.223
+&\;\;<\;\;
+		1.204
+\end{align}
+\end{enumerate}
