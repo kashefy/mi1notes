@@ -56,41 +56,51 @@
 \end{frame}
 
 \begin{frame}
-\tableofcontents
+\tableofcontents[hideallsubsections]
 \end{frame}
 
+\mode<all>
+\input{./0_mlp_feedfwd}
+\mode*
+
 \mode<article>
-\input{./mlp_universal}
+\input{./1_mlp_universal}
 \mode*
 
 \newpage
 
 \mode<all>
-\input{./learning_components}
+\input{./2_learning_components}
 \mode*
 
 \newpage
 
 \mode<all>
-\input{./cost}
+\input{./3_cost}
+\mode*
+
+\clearpage
+
+\mode<article>
+\input{./3_cost-crossentropy-example}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./grad_descent}
+\input{./4_grad_descent}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./mlp_backprop}
+\input{./5_mlp_backprop}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./mlp_symmetries}
+\input{./6_mlp_symmetries}
 \mode*
 
 \end{rightcolumn}

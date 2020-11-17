@@ -1,0 +1,311 @@
+\section{Dealing with imbalanced data}
+
+\subsection{Motivation}
+
+\begin{frame}\frametitle{\subsecname}
+
+\only<1>{
+Proportion of class labels in the dataset is not uniform.
+Not the same as ``easy vs. difficult'' classes. This is only about class frequency.
+}
+
+\slidesonly{\vspace{-5mm}}
+
+\begin{figure}[ht]
+     \centering
+     \savebox{\imagebox}{
+	 \includegraphics[width=0.28\textwidth]{img/hist_balanced}}%
+     \begin{subfigure}[t]{0.28\textwidth}
+         \centering
+         \usebox{\imagebox}% Place largest image
+         \caption{balanced $\approx 1:1$}
+     \end{subfigure}
+     \hspace{5mm}
+     \begin{subfigure}[t]{0.28\textwidth}
+         \centering
+         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
+         \includegraphics[width=0.99\textwidth]{img/hist_imbalanced}
+         }
+         \caption{highly unbalanced}
+         \label{fig:linear}
+     \end{subfigure}
+\end{figure} 
+
+\only<2>{     
+A strong imbalance leads to the classifier learning a trivial solution that indeed minimizes the average cost over the training samples.
+}
+\only<2>{
+\begin{equation}
+E^T = \sum_{\alpha=1}^p e^{(\alpha)}
+\end{equation}
+}
+\only<3>{
+\begin{equation}
+E^T = 
+{\color{blue}\sum_{\beta\,\in D_{+}}^{|D_{+}|} e^{(\beta)}}
++
+{\color{red}\sum_{\beta\,\in D_{-}}^{|D_{-}|} e^{(\beta)}}
+\end{equation}
+
+\mode<article>{
+where set $D_{+}$ and $D_{-}$ are the subsets of data of only positive and negative samples, respectively:
+
+\begin{equation}
+{
+\color{blue}
+D_{+} := 
+\Big\{ \left(\vec x^{(\alpha)}, \vec y^{(\alpha)}_{T} \right) \Big|\,y^{(\alpha)}_{T} > 0 \,\Big\}
+\quad \text{(subset of positive samples)}
+}
+\end{equation}
+
+and 
+
+\begin{equation}
+{
+\color{red}
+D_{-} := 
+\Big\{ \left(\vec x^{(\alpha)}, \vec y^{(\alpha)}_{T} \right) \Big|\,y^{(\alpha)}_{T} \le 0 \,\Big\}
+\quad \text{(subset of positive samples)}
+}
+\end{equation}
+
+}
+
+By always predicting ``0'' it will be correct 95\% of the time.
+}
+\end{frame}
+
+\subsection{Confusion matrix}
+
+\begin{frame}\frametitle{\subsecname}
+
+The confusion matrix differentiates between the types of mistakes a classifier makes.
+
+\begin{tabular}{ll|l|l|l}
+\cline{3-4}
+												  &          & \multicolumn{2}{c|}{Ground truth label}                        &  \\ \cline{3-4}
+												  &          & \multicolumn{1}{c|}{Positive} & \multicolumn{1}{c|}{Negative}  &  \\ \cline{3-4}
+												  &          & \multicolumn{1}{c|}{``Cat''} & \multicolumn{1}{c|}{``not Cat''}  &  \\ \cline{1-4}
+\multicolumn{1}{|r|}{\multirow{2}{*}{Prediction}} & Positive & \textbf{T}rue \textbf{P}ositives & \textbf{F}alse \textbf{P}ositives &  \\ \cline{2-4}
+\multicolumn{1}{|r|}{}                            & Negative &  \textbf{F}alse \textbf{N}egatives & \textbf{T}rue \textbf{N}egatives &  \\ \cline{1-4}
+												  &          & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$N$}  &  \\ \cline{3-4}
+\end{tabular}	
+
+
+\end{frame}
+
+\subsection{Performance metrics}
+
+\begin{frame}\frametitle{\subsecname}
+
+\mode<presentation>{
+\begin{tabular}{ll|l|l|l}
+\cline{3-4}
+												  &          & \multicolumn{2}{c|}{Ground truth label}                        &  \\ \cline{3-4}
+												  &          & \multicolumn{1}{c|}{Positive} & \multicolumn{1}{c|}{Negative}  &  \\ \cline{3-4}
+												  &          & \multicolumn{1}{c|}{``Cat''} & \multicolumn{1}{c|}{``not Cat''}  &  \\ \cline{1-4}
+\multicolumn{1}{|r|}{\multirow{2}{*}{Prediction}} & Positive & \textbf{T}rue \textbf{P}ositives & \textbf{F}alse \textbf{P}ositives &  \\ \cline{2-4}
+\multicolumn{1}{|r|}{}                            & Negative &  \textbf{F}alse \textbf{N}egatives & \textbf{T}rue \textbf{N}egatives &  \\ \cline{1-4}
+												  &          & \multicolumn{1}{c|}{$P$} & \multicolumn{1}{c|}{$N$}  &  \\ \cline{3-4}
+\end{tabular}	
+
+}
+
+\begin{equation}
+ \text{ fraction of correct classifications } 
+ \corresponds \text{ Accuracy }
+ = \frac{T\kern-.4ex P+T\kern-.4exN}{P+N}
+\end{equation}
+
+\only<2>{
+\slidesonly{
+{\placeimage{12.5}{10.}{img/hist_imbalanced}{width=25mm}}
+}
+
+In our imbalanced example:
+\begin{equation}
+\frac{T\kern-.4exP+T\kern-.5exN}{P+N} = \frac{0+9500}{500+9500} = 0.95
+\end{equation}
+
+\notesonly{
+Accuracy is a misleading metric when the classes are imbalanced.
+}
+}
+
+\only<3>{
+Other metrics:
+
+How many of the positive labels did we get:
+
+\begin{equation}
+\text{sensitivity (recall) }
+ = \frac{T\kern-.4exP}{P}
+\end{equation}
+
+and how often were we correct, whenever we predicted positive?
+
+\begin{equation}
+\text{precision }
+ = \frac{T\kern-.4exP}{T\kern-.4exP+F\kern-.5exP}
+\end{equation}
+
+Recall and precision can be combined into:
+
+\begin{equation}
+\text{F1 score }
+ = 2 \cdot \frac{\mathrm{recall} \times \mathrm{precision}}{\mathrm{recall} + \mathrm{precision}}
+\end{equation}
+
+Similarly, for the negative class. How many of the negative class did we get:
+
+\begin{equation}
+\text{specificity}
+ = \frac{T\kern-.5exN}{N}
+\end{equation}
+
+
+Recall and specificity can be combined into:
+
+
+\begin{equation}
+\text{Balanced Accuracy }
+ = \frac{1}{2} (\mathrm{recall} + \mathrm{specificity})
+\end{equation}
+
+``F1 score'' and ``Balanced Accuracy'' are common choices for assessing performance of a classifier evaluated on imbalanced data with different implications with regards to how ``consistent'' this imbalance is. 
+
+}
+
+\end{frame}
+
+\subsection{Further considerations}
+
+\begin{frame}\frametitle{\subsecname}
+
+\begin{enumerate}
+\item
+Is there only one recall value for my classifier that predicts with\\
+ $y(\vec x) \in \lbrack0,1\rbrack$ (or $\lbrack-1,1\rbrack$, $(0,1)$)?
+\item
+What if the proportions in my training set is different from that of the validation/test set?
+\end{enumerate}
+
+
+\end{frame}
+
+\subsubsection{Calibration}
+
+\begin{frame}\frametitle{\subsubsecname}
+
+\mode<article>{Calibrating the classifier: }
+Finding an operating point by adjusting the threshold that converts the prediction of classifier into a hard decision.
+
+General procedure:
+\begin{enumerate}
+\item train binary classifier (assuming $y(\vec x) \in \lbrack0,1\rbrack$)
+\pause
+\item make predictions on a \emph{hold-out} set (\notesonly{selecting an operating point}\slidesonly{this} counts as a hyper-parameter selection)
+\pause
+\item Save ``probabilistic'' output, no thresholding.
+\pause
+\item for threshold $\mathrm{thr} \in \lbrack0,1\rbrack$ do:
+\begin{enumerate}
+	\item assign predictions to classes using current threshold $\mathrm{thr}$
+\pause
+	\item compute confusion matrix (e.g. $T\kern-.4exP$ and $F\kern-.5exP$)
+	\item[]repeat
+\end{enumerate}
+\item Compute metrics as a function of $\mathrm{thr}_i$
+\end{enumerate}
+
+\question{What does $thr$ effectively represent?}
+
+\notesonly{
+- Effectively the bias of the output neuron. Changing $thr$ corresponds to shifting/translating the hyperplane that divides the two classes.
+The orientation of the hyperplane remains the same.
+}
+
+
+\end{frame}
+
+\begin{frame}
+Example for the calibration procedure: \emph{Receiver operating characteristics (ROC)}. Keep track of $T\kern-.4exP$ and $F\kern-.4exP$ as a function of different threshold values.
+
+\begin{figure}[h]
+    \centering
+	\includegraphics[width=0.35\textwidth]{img/curves_roc}
+	\caption{ROC curve. $T\kern-.4exP/P\,\corresponds $ true positive rate (TPR) and $F\kern-.4exP/N\,\corresponds$ false positive rate (FPR)}
+\end{figure}
+
+\only<1>{
+The higher the area under the curve (ROC AUC) the better the classifier.
+
+\question{What does the dashed diagonal line represent?}
+
+}
+\only<2>{
+
+\textbf{But} at the end of the day I need to pick an operating point \notesonly{(i.e. one threshold value)}.
+
+\question{What criterion could I use to favor one threshold over another?}
+}
+
+\end{frame}
+
+\mode<article>{
+- Assign a ``decision cost $\$_{ij}$'' for different classes 
+where $\$_{ij}$ denotes the cost of predicting class $C_{i}$ when the true label is $C_{j}$
+(cf. lecture slides 1.4)
+}
+
+\begin{frame}
+
+What if the proportions in my training set are different from those of the validation/test set? Which metrics are robust to changes in proportions between different splits of the data.\footnote{cf. jupyter notebook on ISIS for a comparison of different metrics under different conditions.}
+
+\slidesonly{\vspace{-2mm}}
+
+\begin{figure}[h]
+	\includegraphics[width=0.8\textwidth]{img/compare_metrics}
+	\mode<article>{
+	\caption{Comparing metrics under different conditions}
+	}
+\end{figure}
+
+
+
+\end{frame}
+
+\begin{frame}
+
+All we did so far is measure generalization performance and tune our operating point.
+
+\question{Is there anything else we can do about imbalanced data?}
+
+\pause
+
+\begin{enumerate}
+\item Train the classifier on a synthetically balanced dataset by
+\begin{itemize}
+\item sub-sampling from the majority class (no one likes to throw away data)
+\item oversampling the minority class
+\end{itemize}
+
+\question{Any downsides to oversampling?}
+
+\pause
+
+- the resulting dataset could be too large.
+\item class weighted loss function:
+e.g. weighted cross entropy:
+\begin{equation}
+e^{(\alpha)} = -\, \gamma \, y_T^{(\alpha)} \cdot \ln \lbrack y^{(\alpha)} \rbrack - \beta \, (1-y_T^{(\alpha)}) \cdot \ln \lbrack 1-y^{(\alpha)} \rbrack
+\end{equation}
+where $\beta$ and $\gamma$ represent ``class weights''
+\end{enumerate}
+
+
+\end{frame}
+
+
+

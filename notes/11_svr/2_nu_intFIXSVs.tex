@@ -1,0 +1,184 @@
+
+\subsection{An intuition for $\nu$}\label{sec:intuitionnu}
+
+\mode<presentation>{
+\begin{frame}\frametitle{\subsecname}
+\mode<presentation>{
+
+     \placeimage{11}{3.5}{img/regression_1d_linear_margin_phi_cropped_small_err}{width=3.5cm}
+}
+
+\begin{minipage}{7.5cm}
+
+\begin{block}{The primal problem for $\nu$-SVR (the parts where $\nu$ and $\varepsilon$ interact)}
+\slidesonly{\vspace{-5mm}}
+	\begingroup
+	\footnotesize
+     \begin{equation}
+        \begin{array}{ll}
+        \min_{\vec w, b,\{\varphi_\alpha\}, \{\varphi_\alpha^*\}, \varepsilon} & \\[-1mm]
+        & \kern-11ex\frac{1}{2} \lVert \vec w \rVert_{2}^{2} + C \big\lbrack {\color{blue}\nu \varepsilon} + \frac{1}{p} {\color{magenta}\sum_{\alpha}^p \overbrace{(\varphi_\alpha + \varphi_\alpha^*)}^{\text{errors}}} \big\rbrack\\[2mm]
+        \text{subject to} &
+        \varepsilon~\ge~0\\
+        \end{array}
+        \label{eq:primalnuepsonly}
+     \end{equation}
+     
+     \slidesonly{\vspace{-2mm}}
+        with $C>0$, $\nu \ge 0$, $\alpha=1,\ldots,p$
+     \endgroup
+\end{block}
+\end{minipage}
+
+\slidesonly{\vspace{10mm}}
+
+We can try to understand the role of $\nu$ by looking at cases for $\varepsilon$:
+\begin{enumerate}
+\item When $\varepsilon=0$ 
+\item As $\varepsilon$ \textbf{increases} from $0$, thus lowering the \textcolor{magenta}{sum of errors}
+\item As $\varepsilon$ \textbf{decreases} from some large positive value, thus increasing the fraction of support vectors $\frac{\#\mathrm{SV}}{p}$
+\end{enumerate}
+    
+\end{frame}
+}
+
+\begin{frame}%{Only}\frametitle{\subsubsecname}
+
+\mode<presentation>{
+
+     \placeimage{11}{1}{img/regression_1d_linear_margin_phi_cropped_small_err}{width=3.5cm}
+}
+
+\notesonly{
+We look at the part of the primal problem in which $\nu$ and $\varepsilon$ interact\footnote{This is based on my understanding of Ch. 9.3 from \citep{scholkopf2001learning} and the paper \citep{scholkopf2000new}}:
+}
+
+%\slidesonly{\vspace{-20mm}}
+
+\begin{minipage}{7.5cm}
+
+\begin{block}{%The primal problem for $\nu$-SVR (the parts where $\nu$ and $\varepsilon$ interact)
+}
+\slidesonly{\vspace{-5mm}}
+	\begingroup
+	\footnotesize
+     \begin{equation}
+        \begin{array}{ll}
+        \min_{\vec w, b,\{\varphi_\alpha\}, \{\varphi_\alpha^*\}, \varepsilon} & \\[-1mm]
+        & \kern-11ex\frac{1}{2} \lVert \vec w \rVert_{2}^{2} + C \big\lbrack {\color{blue}\nu \varepsilon} + \frac{1}{p} {\color{magenta}\sum_{\alpha}^p \overbrace{(\varphi_\alpha + \varphi_\alpha^*)}^{\text{errors}}} \big\rbrack\\[2mm]
+        \text{subject to} &
+        \varepsilon~\ge~0\\
+        \end{array}
+        \label{eq:primalnuepsonly}
+     \end{equation}
+     
+     \slidesonly{\vspace{-2mm}}
+        with $C>0$, $\nu \ge 0$, $\alpha=1,\ldots,p$
+     \endgroup
+\end{block}
+\end{minipage}
+
+\begin{enumerate}
+\item<only@1> $\varepsilon = 0$:
+\begin{itemize}
+\item[$\Rightarrow$] All points are \textbf{outside} the $\varepsilon$-tube.{}
+\item[$\Rightarrow$] All points are SVs, i.e. $\frac{\#\mathrm{SV}}{p}=1$.
+\item[$\Rightarrow$] The \textcolor{magenta}{sum of errors} will be $> 0$
+\end{itemize}
+\pause
+\item<only@2-6>As $\varepsilon$ \textbf{increases} from $0$:
+\begin{itemize}
+\item[$\Rightarrow$]<only@3> \notesonly{The term }${\color{blue}\nu\varepsilon}$ \textbf{increases} proportionally to $\nu$
+\item[$\Rightarrow$]<only@3> more points fall \textbf{inside} the $\varepsilon$-tube
+
+\item[$\Rightarrow$]<only@3-> \notesonly{The fraction of points \textbf{outside} decreases as $\varepsilon$ increases, i.e} 
+$\varepsilon \uparrow \;\;\leadsto\;\;$ \textcolor{magenta}{sum of errors} $\downarrow$
+
+\only<3>{ 
+\question{Does $\varepsilon$ grow indefinitely?}\\
+}
+
+\only<4-6>{\notesonly{{- No, }}$\varepsilon$ stops growing as soon as the \textcolor{magenta}{sum of errors} stops decreasing. But when?\\
+
+\slidesonly{\underline{Hint}:}\notesonly{Remember from \eqref{eq:srmnu},} $\nu$-SVR \emph{optimizes} $\varepsilon$.} 
+
+\only<5,6>{
+	\begingroup
+	\slidesonly{\scriptsize}
+    \begin{align}
+\only<5,6>{   
+\frac{\partial}{\partial \varepsilon}
+ \Big\lbrack 
+ {\color{blue}\nu \varepsilon}& 
+ + \frac{1}{p} {\color{magenta}\sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*)} 
+ \Big\rbrack
+ \eqexcl 0\notesonly{\\}\slidesonly{\quad}
+ \Leftrightarrow \quad \frac{\partial}{\partial \varepsilon} {\color{blue}\nu \varepsilon} \notesonly{&}= -\frac{\partial}{\partial \varepsilon} 
+ \Big(
+ \frac{1}{p} {\color{magenta}\sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*)}
+ \Big)
+}
+\only<6>{
+ \intertext{At optimum, we have:}
+ \Rightarrow \;  &-\frac{\partial}{\partial \varepsilon} 
+ \Big(
+ \overbrace{
+ \frac{1}{p} {\color{magenta}\sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*)}
+ }^{
+ \text{fraction of errors}}
+ \Big) \bigg|_{\varepsilon^{\mathrm{opt}}} = \nu{}
+ }
+\end{align}
+\endgroup
+
+\only<6>{
+$\varepsilon$ grows as long as $\frac{1}{p} {\color{magenta}\sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*)} \le \nu$\\
+$\nu$ is an \emph{upper bound} on the \emph{fraction of errors}.
+}
+}
+
+\end{itemize}
+\item<only@7-> As $\varepsilon$ \textbf{decreases}, starting from some large positive value:
+\begin{itemize}
+\item[$\Rightarrow$]<only@2-> \notesonly{The term }${\color{blue}\nu\varepsilon}$ \textbf{decreases} proportionally to $\nu$
+
+\only<8->{
+$\varepsilon$ decreases as long as $\frac{\#\mathrm{SV}}{p} \ge \nu$
+
+\question{Where does $\frac{\#\mathrm{SV}}{p} \ge \nu$ come from?} 
+}
+
+\mode<article>{
+%TODO FIX from here, this should lead to lower bound NOT upper bound
+- Justifying this requires looking at the solution of the primal problem:
+ 
+\begin{eqnarray}
+				\frac{\partial L}{\partial \varepsilon} &=& \nu C - \smallsum{\alpha=1}{p} \lambda_\alpha
+				- \smallsum{\alpha=1}{p} \lambda_\alpha^* - \delta
+				\;\;\stackrel{!}{=}\;\; 0\\
+				&\Rightarrow& \; \delta \;\;=\;\; \nu C - \smallsum{\alpha=1}{p} 
+				(\lambda_\alpha + \lambda_\alpha^*) \\
+				&\stackrel{\delta \geq 0}{\Rightarrow}&
+				\nu C \;\geq\; \smallsum{\alpha=1}{p} 
+				(\lambda_\alpha + \lambda_\alpha^*)
+\end{eqnarray}
+}
+
+\only<9->{
+\slidesonly{
+ \begingroup
+ \footnotesize
+$$
+				\frac{\partial L}{\partial \varepsilon} \stackrel{!}{=} 0\;\; \stackrel{\text{at } \varepsilon^{\mathrm{opt}}}{\Rightarrow} \;\; 
+				\nu C \geq~{\color{red}\smallsum{\alpha=1}{p} 
+				\overbrace{(\lambda_\alpha + \lambda_\alpha^*)}^{> 0 \text{ for SVs only}}} {\propto} \frac{\#\mathrm{SV}}{p}
+				$$
+\endgroup
+}
+}%only
+\item[$\Rightarrow$]<only@10> $\nu$ acts as a \emph{lower bound} on the fraction of SVs, i.e. $\nu \le \frac{\# SV}{p}$.
+\end{itemize}
+\end{enumerate}
+
+
+\end{frame}

@@ -8,7 +8,7 @@
 
 \begin{table}[h]
 \begin{tabular}{rl}
-obserrvations & $x \in \R$ \\
+observations & $x \in \R$ \\
 label         & $y_{T} \in \R$ \\
 Dataset       & 
 $
@@ -51,7 +51,7 @@ E^{T} &= \frac{1}{p} \sum_{\alpha=1}^{p} \;
 \end{align}
 
 \mode<article>{
-The term $\frac{1}{2}$ is merely for convinience when computing the gradient later.
+The term $\frac{1}{2}$ is merely for convenience when computing the gradient later.
 }
 
 \pause
@@ -157,8 +157,9 @@ E^{T} &\eqexcl \min_{\vec w}\\
 \subsection{Finding minima}
 
 \begin{frame}\frametitle{\subsecname}
-
+\notesonly{
 Constructing the Hessian matrix $\vec H$ to identify minima among the solutions that satisfy \eqref{eq:extremacond}:
+}
 \begin{equation}
 \vec{H} \equiv \frac{\partial^2 E^T}{\partial\vec{w}^2} =
 \left(\begin{array}{cccc}  
@@ -175,11 +176,22 @@ Constructing the Hessian matrix $\vec H$ to identify minima among the solutions 
 \end{array}\right)
 \end{equation}
 
-Let $\vec g$ denote the gradient vector: $\vec g = \frac{\partial E^{T}}{\partial \vec w}$. 
-We recognize that the i-th \underline{row} in $\vec H$ resembles $\frac{\partial}{\partial w_i}\vec g^\top$.
+\notesonly{
+Let $\vec g$ denote the gradient vector:}
+\slidesonly{with }
+ $\vec g = \frac{\partial E^{T}}{\partial \vec w}$ 
+\pause
+\notesonly{. We recognize that }the i-th \underline{row} in $\vec H$ resembles $\frac{\partial}{\partial w_i}\vec g^\top$.
 
 Therefore,
+\slidesonly{
+$$
+\vec H := \frac{\partial}{\partial \vec w}\vec g^\top
+$$
+}
 
+\end{frame}
+\begin{frame}
 \begin{align}
 \vec H := \frac{\partial}{\partial \vec w}\vec g^\top
 \;\;&=\;\;
@@ -225,6 +237,7 @@ $}
 %$}
 \;\;&=\;\;
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
+\bigg(
 \frac{\partial}{\partial \vec w}
 ~\vec w^{\top}{\vec x^{(\alpha)}}~{\vec x^{(\alpha)}}^{\top}
 -
@@ -234,9 +247,10 @@ $}
 \vec x^{(\alpha)} y_{T}^{(\alpha)} 
 }_{\text{indep. of }\vec w}
 \Big)^\top
-%\Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)}^\top y_{T}^{(\alpha)} \Big)\\
+%\Big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)}^\top y_{T}^{(\alpha)}
+\bigg)
 \intertext{
-using product rule
+using the product rule
 }
 \vec H
 \;\;&=\;\;
@@ -247,6 +261,34 @@ using product rule
 \end{frame}
 
 \subsection{Represent gradient and Hessian in matrix form}
+
+\mode<presentation>{
+\begin{frame}
+
+For the quadratic error:
+
+\begin{equation}
+\vec g
+\;\;=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)} y_{T}^{(\alpha)} \big)
+\end{equation}
+
+\begin{equation}
+\vec H
+\;\;=\;\;
+\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\vec x^{(\alpha)}~{\vec x^{(\alpha)}}^\top
+\end{equation}
+
+\pause
+
+\begin{center}
+	\includegraphics[width=0.3\textwidth]{img/meme_matrix-notation}
+\end{center}
+
+\end{frame}
+}
 
 \begin{frame}
 
@@ -269,7 +311,13 @@ and let $\vec y_{\text{True}}$ represent the true labels for all training points
 \vec y_{\text{True}} := (y_T^{(1)}, \ldots, y_T^{(p)}) \in \R^{1 \times p}
 \end{equation}
 
+\notesonly{
 From this follows:
+}
+
+\pause
+
+\svspace{-3mm}
 
 \begin{align}
 \vec g
@@ -282,6 +330,20 @@ From this follows:
 \;\;&=\;\;
 \frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right)
 \end{align}
+
+\end{frame}
+
+\begin{frame}
+
+\slidesonly{
+\only<1>{
+\begin{equation}
+\vec g
+\;\;=\;\;
+\frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right)
+\end{equation}
+}
+}
 
 stationary point:
 
@@ -298,7 +360,7 @@ stationary point:
 \end{align}
 
 $\vec w^*$ is a global minimum because
-
+\pause
 \begin{enumerate}[1.]
 \item it is a unique solution of $\vec g = \vec 0$ and
 \item 
@@ -311,12 +373,13 @@ $\vec w^*$ is a global minimum because
 where $\vec C$ is the \emph{empirical covariance matrix} which is positive definite for invertible $\vec X\, \vec X^\top$.
 \end{enumerate}
 
+\pause
 positive definiteness:
-
+%\slidesonly{\vspace{-3mm}}
 \begin{align}
 \forall \vec z \in \R^2: \quad \vec z^\top \vec H\, \vec z 
-\, &= \frac{1}{p} \, \vec z^\top \vec X \, \vec X^\top \vec z\\
-\, &= \frac{1}{p} \, \Big \lVert \, \vec X^\top \vec z \, \Big \rVert_2^2 > 0 \quad \mathrm{iff.} \; \vec z \ne \vec 0
+\, &= \frac{1}{p} \, \vec z^\top \vec X \, \vec X^\top \vec z\notesonly{\\
+\, &}= \frac{1}{p} \, \Big \lVert \, \vec X^\top \vec z \, \Big \rVert_2^2 > 0 \quad \mathrm{iff.} \; \vec z \ne \vec 0
 \end{align}
 
 \end{frame}
@@ -328,13 +391,14 @@ positive definiteness:
 $L_2$ regularization cost:
 \begin{equation}
 E^R_{[\vec w]} := \frac{1}{2} \sum_{(i, j, v', v)} 
+			\kern-2ex
 			\big( \mathrm{w}_{ij}^{v'v} \big)^2 = \frac{1}{2} \lVert \vec w \rVert_2^2 = \frac{1}{2} \vec w^\top \vec w 
 \end{equation}
 \renewcommand{\CancelColor}{\color{gray}}
 \begin{equation}
 \frac{\partial}{\partial \vec w} E^R_{[\vec w]} = \frac{1}{\wcancel{2}} \cdot \wcancel{2} \cdot \vec w = \vec w
 \end{equation}
-
+\pause
 The regularized cost function:
 
 \begin{equation}
@@ -350,9 +414,19 @@ where
 	\item $E^R \; \corresponds \; $ prior knowledge of solution
 	\item $\lambda:$ regularization parameter 
 \end{itemize}
-
+\end{frame}
+\begin{frame}
 Gradient:
-
+\slidesonly{
+\begin{equation*}
+	R_{[\vec{w}]} = \underbrace{ E_{[\vec{w}]}^T }_{
+			\substack{\text{training} \\ \text{error} \\ \text{e.g. quadratic cost}}}
+		+ \underbrace{ \lambda E_{[\vec{w}]}^R }_{
+			\substack{\text{regularization} \\ \text{term}}}
+		\eqexcl \min_{\vec w}
+\end{equation*}
+}
+\pause
 \begin{align}
 \vec g^R :=  \frac{\partial}{\partial \vec w} R_{[\vec w]}
 &= \frac{\partial}{\partial \vec w} E^T_{[\vec w]} + \frac{\partial}{\partial \vec w} E^R_{[\vec w]}\\

@@ -1,0 +1,14 @@
+\documentclass[handout,ignorenonframetext]{beamer} 
+\newcounter{baslide}
+\setcounter{baslide}{1}
+
+\let\oldframe
+\frame                                                             
+\let\oldendframe
+\endframe
+
+\def\frame{\oldframe \label{baslide\roman{baslide}}%
+\addtocounter{baslide}{1}}  
+\def\endframe{\oldendframe}
+
+\input{tutorial}

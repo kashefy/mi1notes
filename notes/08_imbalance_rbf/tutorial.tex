@@ -1,0 +1,88 @@
+\usepackage[authoryear,round]{natbib}
+\usepackage{multirow}
+
+\newcommand{\sheetnum}{%
+	08
+}
+%\setcounter{section}{\sheetnum-3}
+\newcommand{\tutorialtitle}{%
+    Class Imbalance and RBF-Networks
+}
+\newcommand{\tutorialtitleshort}{%
+	RBF
+}
+% for slides
+\subtitle{\sheetnum \tutorialtitle}
+
+\maxdeadcycles=1000 % Workaround for ! Output loop---100 consecutive dead cycles because of too many figures
+
+% The following use of algroithms does not work well with the notes:
+%
+%
+%
+%
+% instead use the following for your algorithms:
+%
+%\begin{figure}[!t]
+%\removelatexerror
+%\begin{algorithm}[H]
+    % your algo here
+    %\label{alg:algolabel}
+    %\caption{algocaption}
+%\end{algorithm}
+%\end{figure}
+%\begin{algorithm}
+% Below is the definition for the command \removelatexerror:
+\makeatletter
+\newcommand{\removelatexerror}{\let\@latex@error\@gobble}
+\makeatother
+
+\begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\sheet{\sheetnum}{\tutorialtitleshort}
+
+\ttopic{\tutorialtitle}
+
+\columnratio{0.2,0.8}\textbf{}
+\begin{paracol}{2}
+%\setlength{\columnseprule}{0.1pt}
+%\setlength{\columnsep}{5em}
+
+\begin{rightcolumn}
+
+% notes version will ignore it
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\mode<all>
+\input{./1_imbalance}
+\mode*
+
+\mode<all>
+\input{./2_knn}
+\mode*
+
+\clearpage
+
+\mode<all>
+\input{./3_parzen}
+\mode*
+
+\clearpage
+
+\mode<all>
+\input{./4_rbf-networks}
+\mode*
+
+\clearpage
+
+
+\end{rightcolumn}
+\end{paracol}
+
+\end{document}

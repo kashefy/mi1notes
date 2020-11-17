@@ -1,0 +1,60 @@
+\section{Recap of Markov Decision Process (MDP)}
+
+\definecolor{reward}{rgb}{0,0.5,0}
+\definecolor{policy}{rgb}{0.75,0,0}
+\definecolor{trans}{rgb}{0,0,1}
+
+\begin{frame}\frametitle{\secname}
+
+\begin{itemize}
+\item[] states $\vec x \in \mathcal{X} = \{ \vec x_1, \ldots, \vec x_S\}$
+\item[] actions $\vec a \in \mathcal{A} = \{ \vec a_1, \ldots, \vec a_A\}$
+\item[] transition model
+$$P(\vec x_j | \vec x_i, \vec a_k)$$
+\pause
+\item[] reward function
+$$r(\vec x_i, \vec a_k)$$
+\item[] policy
+$$
+\pi(\vec a_k | \vec x_i)$$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}\frametitle{Recap (cont'd)}
+
+The value function to evaluate a policy:
+
+	\begin{align}
+	V^\pi(\vec x_i) =
+	\E \bigg\lbrack
+	\sum_{t=0}^{\infty} \gamma^t r(\vec x^{(t)}, \vec a^{(t)}) \;\Big|\; \vec x^{(0)} := \vec x_i
+	\bigg\rbrack\,, \; i=1,\ldots,S
+	\end{align}
+	
+	\mode<article>{
+	$\E\lbrack\cdot\rbrack$ is w.r.t $\{\vec x^{(t)}, \vec a^{(t)}\}$
+	}
+	
+Comparing policies:
+
+\begin{equation}
+\pi~
+\overset{\mathclap{\substack{%
+					\text{``better'' or}\\[1mm]\text{equally ``good''}\\ \big\downarrow
+					}}}{{\color{gray}\ge}}
+~\pi' 
+\quad \text{\textbf{iff}} \quad V^{\pi} (\vec x) \ge V^{\pi'} (\vec x)\,,\quad \forall\; \vec x \in \mathcal{X}
+\end{equation}
+
+The optimal value function and optimal policies:
+
+\begin{equation}
+\underbrace{V^{*}(\vec x)}_{\substack{\text{optimal}\\ \text{value}}}
+\;\;=\;\; \max_{\pi} V^{\pi} (\vec x)
+\;\;=\;\; \underbrace{V^{\pi*}(\vec x)}_{\mathclap{\substack{\text{value of}\\ \text{optimal policy}}}}\,,\quad \forall \vec x \in \mathcal{X}
+\end{equation}
+
+\end{frame}
+
+
