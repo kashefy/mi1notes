@@ -550,8 +550,7 @@ The purpose of the outer loop is to estimate generalization performance that is 
 % -----------------------------------------------------------------------------
 \begin{frame} 
 	\begin{itemize}
-		\item Never use test data for model selection 
-			(including hyper-parameter search).
+		\item Never use test data for model selection.
 		\item Always embed the whole selection procedure (including 
 			hyper-parameter search) within an $n$-fold cross-validation run.
 		\item Watch out for validation data ``leaking'' into the training set.

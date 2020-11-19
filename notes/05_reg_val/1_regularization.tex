@@ -71,8 +71,8 @@ Computing individual components of the gradient vector:
 
 	\begin{align}
 		\frac{\partial{E_{[\vec{w}]}^R}}{\partial {w}_{ij}^{v'v}}
-		\;&=\; \frac{1}{2} \sum_{(i, j, v', v)} \frac{\partial}{\partial {w}_{ij}^{v'v}} \big( {w}_{ij}^{v'v} \big)^2\\
-		\;&=\; \frac{1}{2} \sum_{(i, j, v', v)} 0 + \ldots + \frac{\partial}{\partial {w}_{ij}^{v'v}} \big( {w}_{ij}^{v'v} \big)^2 + \ldots + 0
+		\;&=\; \frac{1}{2} \sum_{(k, l, \mu, \gamma)} \frac{\partial}{\partial {w}_{ij}^{v'v}} \big( {w}_{kl}^{\mu\gamma} \big)^2\\
+		\;&=\; 0 + \ldots + \frac{1}{2} \frac{\partial}{\partial {w}_{ij}^{v'v}} \big( {w}_{ij}^{v'v} \big)^2 + \ldots + 0
 		\;=\; \frac{1}{\cancel{2}} \; \cancel{2} \; {w}_{ij}^{v'v}
 	\end{align}
 }
@@ -121,7 +121,7 @@ Gradient:
 
 \begin{align}
 \vec g^R :=  \frac{\partial}{\partial \vec w} R_{[\vec w]}
-&= \frac{\partial}{\partial \vec w} E^T_{[\vec w]} + \frac{\partial}{\partial \vec w} E^R_{[\vec w]}\\
+&= \frac{\partial}{\partial \vec w} E^T_{[\vec w]} + \lambda \frac{\partial}{\partial \vec w} E^R_{[\vec w]}\\
 &= \frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right) + \vec I_N \, \lambda \, \vec w\\[2mm]
 \iff& \quad \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top + p \lambda \, \vec I_N \,  \vec w \eqexcl \vec 0\\[2mm]
 \vec w^* &=  {\underbrace{
