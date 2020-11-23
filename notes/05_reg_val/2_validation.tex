@@ -1,5 +1,18 @@
 \section{Validation}
 
+\mode<presentation>{
+\begin{frame}
+
+	\begin{center}
+	\huge
+	\secname
+	\end{center}
+	\begin{center}
+	\includegraphics[width=0.4\textwidth]{img/meme_validation}
+	\end{center}
+\end{frame}
+}
+
 \begin{frame}\frametitle{\secname}
 \underline{Recall}:
     \notesonly{
@@ -55,8 +68,10 @@ Today:
 
 \end{frame}
 
+\definecolor{darkgreen}{rgb}{0,0.6,0}
 
-\begin{frame}
+
+\begin{frame}{Training error alone is not enough}
 
 \notesonly{
 Optimizing model parameters to training data and obtaining some solution }$\vec w^* = \argmin_{\vec w} E^T_{[\vec w]}$ does not imply good generalization performance.
@@ -68,6 +83,10 @@ Expected:
 \begin{equation}
 E^T_{[\vec w^*]} \quad <\quad E^G_{[\vec w^*]}
 \end{equation}
+
+\end{frame}
+
+\begin{frame}{Validation: Estimating generalization performance}
 
 Validation: evaluate the generalization of a model (and its training procedure) by estimating
 
@@ -89,12 +108,12 @@ We use the new hold-out set to \emph{validate} ($\{\vec x_{\text{val.}}^{(\beta)
 }
 \slidesonly{
 \begin{itemize}
-\item $\{\vec x_{\text{train}}^{(\alpha)}, {y_T}_{\text{train}}^{(\alpha)}\}_{\alpha=1}^{p}$ for model selection
-\item $\leadsto \vec w^* = \argmin_{\vec w} E^T_{[\vec w]}$
+\item $\{\vec x_{\text{train}}^{(\alpha)}, {y_T}_{\text{train}}^{(\alpha)}\}_{\alpha=1}^{\color{red}p}$ for model selection
+\item $\leadsto \vec w^* = \argmin_{\vec w} {\color{red}E^T_{[\vec w]}}$
 \pause
-\item $\{\vec x_{\text{val.}}^{(\beta)}, {y_T}_{\text{val.}}^{(\beta)}\}_{\beta=1}^{q}$ for validation
+\item $\{\vec x_{\text{val.}}^{(\beta)}, {y_T}_{\text{val.}}^{(\beta)}\}_{\beta=1}^{\color{darkgreen}q}$ for validation
 \pause
-\item $\widehat E^G_{[\vec w^*]}$
+\item $\leadsto {\color{darkgreen}\widehat E^G_{[\vec w^*]}}$
 \end{itemize}
 }
 
@@ -125,7 +144,7 @@ Let us look at the following scenario where we've trained
 \end{frame}
 
 % -----------------------------------------------------------------------------
-\definecolor{darkgreen}{rgb}{0,0.6,0}
+
 \begin{frame} \frametitle{\subsecname}
 Compare ${\color{red}E^T}$ and ${\color{darkgreen} \widehat E^G}$:\\
 
@@ -321,23 +340,60 @@ Compare ${\color{red}E^T}$ and ${\color{darkgreen} \widehat E^G}$:\\
 
 \begin{frame}{\subsubsecname}
 
-\notesonly{
 \textbf{Remember: it's always a bias-variance \underline{tradeoff}}\\
 
+\notesonly{
 The above ``fixes'' rely on having concluded that the model is either overfitting or underfitting. And that this can potentially be mitigated by taking these different measures. However, it is important to understand how overfitting and underfitting reflect where we are on the bias-variance tradeoff. This means that repeatedly applying one solution to an overfitting model can eventually cause the model to underfit and vice-versa. One should also note that if one of the above doesn't work. It does not conclude that the model was not overfitting or underfitting. The above are simply guidelines on how to understand why a model has poor generalization performance and come up with simple techniques for finding a different bias-variance tradeoff.
 
 Although we've just talked about how increasing the size of the training set can help mitigate overfitting. Observing how $E^T$ and $\widehat E^G$ behave as a function of the training set size $p$ is a way of determining if an overfitting problem even exists. Keep in mind that $\widehat E^G$ would not directly depend on the size of the training set as it is only evaluated on the hold-out set, which we won't change in size. Nevertheless, every time we train our model with a larger training set, we evaluate both $E^T$ and $\widehat E^G$ for this trained model.
 }
+\end{frame}
 
-Using a larger training set (i.e. increasing $p$) to identify potential overfitting vs. underfitting of the model:
+\begin{frame}{\subsubsecname}
 
-\question{What $E^T$ vs. $p$ relationship do we expect for an \emph{underfitting} model?}
+%\only<1>{
+Change the size of the training set $p$ to identify potential overfitting vs. underfitting of the model:
 
-\question{What $E^T$ vs. $p$ relationship do we expect for an \emph{overfitting} model?}
+\question{What $\color{red}E^T$ vs. $p$ relationship do we expect for an \emph{underfitting} model?}
 
-\question{What $\widehat E^G$ vs. $p$ relationship do we expect for an \emph{underfitting} model?}
+\pause
 
-\question{What $\widehat E^G$ vs. $p$ relationship do we expect for an \emph{overfitting} model?}
+\question{What $\color{red}E^T$ vs. $p$ relationship do we expect for an \emph{overfitting} model?}
+
+\pause
+
+\question{What ${\color{darkgreen}\widehat E^G}$ vs. $p$ relationship do we expect for an \emph{underfitting} model?}
+
+\pause
+
+\question{What ${\color{darkgreen}\widehat E^G}$ vs. $p$ relationship do we expect for an \emph{overfitting} model?}
+%}
+
+%\only<2>{
+%TODO meme
+%}
+
+\end{frame}
+
+\begin{frame}{\subsubsecname}
+
+\begin{figure}[ht]
+     \centering
+	\includegraphics[width=0.5\textwidth]{img/bias_var_p_annot}
+     \mode<article>{
+	\caption{The bias-variance tradeoff for different number of training samples}
+	}
+	\label{fig:bias_var_p}
+\end{figure}
+
+\pause
+
+\question{What is the benefit of looking at the bias-variance tradeoff as a function of $p$?}
+
+\notesonly{
+- Other than disentangling high bias from high variance, we also get an assessment of how much 
+we would gain in generalization performance if we paid to increase the training set by x\% (i.e. cost-benefit analysis).
+}
 
 \end{frame}
 
@@ -366,36 +422,23 @@ Using a larger training set (i.e. increasing $p$) to identify potential overfitt
 
 \end{frame}
 
-
-\begin{frame}{\subsubsecname}
-
-\begin{figure}[ht]
-     \centering
-	\includegraphics[width=0.5\textwidth]{img/bias_var_p_annot}
-     \mode<article>{
-	\caption{The bias-variance tradeoff for different number of training samples}
-	}
-	\label{fig:bias_var_p}
-\end{figure}
-
-\pause
-
-\question{What is the benefit of looking at the bias-variance tradeoff as a function of $p$?}
-
-\notesonly{
-- Other than disentangling high bias from high variance, we also get an assessment of how much 
-we would gain in generalization performance if we paid to increase the training set by x\% (i.e. cost-benefit analysis).
-}
-
-\end{frame}
-
 \newpage
 
 \subsection{Improving how we estimate $\widehat E^G$}
 
-\begin{frame}
+\begin{frame}{\subsecname}
 
+\pause
+
+\slidesonly{
+\begin{center}
+	\includegraphics[width=0.4\textwidth]{img/meme_need_good_eg}
+\end{center}
+}
+
+\notesonly{
 \question{Why should we care about how we estimate $\widehat E^G$?}
+}
 
 \notesonly{
 - It's simply to identify potential overfitting or underfitting. Are we memorizing the training data or did we underestimate the complexity of function we're trying to fit? Once we identify what kind of problem we have with our model it implies which ``fixes'' are relevant and which would simply not help at all.
@@ -507,8 +550,7 @@ The purpose of the outer loop is to estimate generalization performance that is 
 % -----------------------------------------------------------------------------
 \begin{frame} 
 	\begin{itemize}
-		\item Never use test data for model selection 
-			(including hyper-parameter search).
+		\item Never use test data for model selection.
 		\item Always embed the whole selection procedure (including 
 			hyper-parameter search) within an $n$-fold cross-validation run.
 		\item Watch out for validation data ``leaking'' into the training set.

@@ -3,10 +3,10 @@
 }
 %\setcounter{section}{\sheetnum-3}
 \newcommand{\tutorialtitle}{%
-    Validation and Regularization
+    Regularization and Validation
 }
 \newcommand{\tutorialtitleshort}{%
-	Validation \& Regularization
+    Regularization and Validation
 }
 % for slides
 \subtitle{\sheetnum \tutorialtitle}
@@ -53,25 +53,26 @@
 \end{frame}
 
 \begin{frame}
+\slidesonly{
+\setcounter{tocdepth}{2}
+}
 \tableofcontents
 \end{frame}
 
 \mode<all>
-\input{./regularization}
+\input{./1_regularization}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./validation}
+\input{./2_validation}
 \mode*
 
 \clearpage
 
-
-
 \mode<all>
-\input{./basis}
+\input{./3_basis}
 \mode*
 
 \clearpage
