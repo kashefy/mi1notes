@@ -6,7 +6,119 @@
 
 \begin{frame}\frametitle{What is an LSTM?}
 The long short-term memory (LSTM) cell is an extension of the basic RNN
-architecture with memory cells.
+architecture with memory state cells.
+\end{frame}
+
+\begin{frame}\frametitle{The simple RNN unrolled in time}
+
+\mode<presentation>{
+\begin{textblock}{}(14.5,2.5)
+	\includegraphics[height=2cm]{img/rnn_superscript}
+\end{textblock}
+}
+    
+\begin{center}
+	\includegraphics<1>[width=0.8\textwidth]{img/lstm_delay_unroll_simple}
+	\notesonly{
+	\captionof{figure}{We start constructing our LSTM from a simple RNN unrolled in time.}
+	}
+\end{center}
+
+\mode<presentation>{
+\begin{eqnarray}
+		\vec y^{(t)} &=& f\Big( \vec V^\mathrm{y} \, \vec s^{(t)} + \vec b^\mathrm{y}
+					\Big) \,,
+					\qquad \text{e.g.}\;f(\cdot)=\text{softmax}(\cdot) \\[-1mm]
+		\vec s^{(t)} &=& \tanh\Big( \vec U^\mathrm{h} \, \vec x^{(t)}  
+				+ \vec W^\mathrm{h} \, \vec s^{(t-1)} + \vec b^\mathrm{s}
+				\Big)
+	\end{eqnarray}	
+}
+
+\end{frame}
+
+
+\begin{frame}
+\only<1>{\frametitle{Ssimple RNN + memory state cells}}
+\only<2>{\frametitle{Ssimple RNN + memory state cells + input gates}}
+\only<3>{\frametitle{Ssimple RNN + memory state cells + input gates + output gates}}
+   
+\only<1>{
+\begin{center}
+	\includegraphics<1>[width=0.8\textwidth]{img/lstm_delay_unroll_memory}
+	\notesonly{
+	\captionof{figure}{Adding memory state cells to the simple RNN unrolled in time.}
+	}
+\end{center}
+}
+\only<2>{
+\begin{center}
+	\includegraphics<2>[width=0.8\textwidth]{img/lstm_delay_unroll_write}
+	\notesonly{
+	\captionof{figure}{Adding input gates.}
+	}
+\end{center}
+}
+\only<3->{
+\begin{center}
+	\includegraphics<3>[width=0.7\textwidth]{img/lstm_delay_unroll_write_read}
+	\notesonly{
+	\captionof{figure}{Adding input and output gates.}
+	}
+\end{center}
+}
+
+\mode<presentation>{
+	\svspace{-5mm}
+	\begin{eqnarray*}
+		\vec c^{(t)} &=& {\color{magenta}1.0}~\vec c^{(t-1)} 
+				+  {\color{blue} \visible<2->{ \vec g^{\mathrm{i}(t)} \odot}  \tanh\Big( 
+					\vec W^\mathrm{c} \vec s^{(t-1)} \Big)
+					 } \\[-1mm]
+		\vec y^{(t)} &=& f\Big( \vec V^\mathrm{y} \, \vec s^{(t)} + \vec b^\mathrm{y}
+					+ {\color{darkgreen} \vec U^\mathrm{y} 
+					\visible<3->{\big(} \vec c^{(t)} 
+					\visible<3->{\odot \vec g^{\mathrm{o}(t)} \big)} } 
+					\Big) \,,
+					\qquad \text{e.g.}\;f(\cdot)=\text{softmax}(\cdot) \\[-1mm]
+		\vec s^{(t)} &=& \tanh\Big( \vec U^\mathrm{h} \, \vec x^{(t)}  
+				+ \vec W^\mathrm{h} \, \vec s^{(t-1)} + \vec b^\mathrm{s}
+				+ {\color{darkgreen} \vec V^\mathrm{h} 
+					\visible<3->{\big(} \vec c^{(t-1)} 
+					\visible<3->{\odot \vec g^{\mathrm{o}(t)} \big)} }
+				\Big) \\[-1mm]
+		\visible<2->{\color{blue} \vec g^{\mathrm{i}(t)}} 
+			&\visible<2->{\color{blue}=}& 
+			\visible<2->{\color{blue}
+				\sigma\Big(\vec U^\mathrm{i} \, \vec x^{(t)} 
+				+ \vec V^\mathrm{i} \, \vec c^{(t-1)} 
+				+ \vec W^\mathrm{i} \, \vec s^{(t-1)} 
+				+ \vec b^\mathrm{i} \Big) } \\[-1mm]
+		\visible<3->{\color{darkgreen} \vec g^{\mathrm{o}(t)}} 
+			&\visible<3->{\color{darkgreen}=}& 
+			\visible<3->{\color{darkgreen}
+				\sigma\Big(\vec U^\mathrm{o} \, \vec x^{(t)} 
+				+ \vec V^\mathrm{o} \, \vec c^{(t-1)} 
+				+ \vec W^\mathrm{o} \, \vec s^{(t-1)} 
+				+ \vec b^\mathrm{o} \Big) } 
+	\end{eqnarray*}	
+	}
+
+\end{frame}
+
+\begin{frame}{Building an LSTM from an RNN}
+
+\mode<presentation>{
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/lstm_delay_unroll_write_read}
+\end{center}
+
+\pause
+
+\begin{center}
+	\includegraphics[width=0.4\textwidth]{img/meme_lstm_spaghetti}
+\end{center}
+}
 \end{frame}
 
 % ------------------------------------------------------------------------------
@@ -33,14 +145,14 @@ architecture with memory cells.
 	
 	\begin{textblock}{10}(0.4,2.5)
 		\only<1>{ \small
-			\iitem{extend the simple RNN with state nodes $\vec s$}
+			\iitem{extend the simple RNN with state nodes $\vec c$}
 			\vspace{-5mm}
-			\iitem{leaky unit $s_i$ with $\alpha_i=1$}
+			\iitem{leaky unit $c_i$ with $\alpha_i=1$}
 			\vspace{-5mm}
 			\iitem{{\color{darkgreen}time delayed feedback} to hidden layer}
 			\vspace{-5mm}
-			\iitem{{\color{blue} transfer function} 
-					$\sigma(x) = \big( 1 + e^{-x} \big)^{-1}$
+			\iitem{{\color{blue} time delayed storage} into state layer 
+					%$\sigma(x) = \big( 1 + e^{-x} \big)^{-1}$
 					}
 		} \only<2>{ \small
 			\iitem{introducing an {\color{blue}input (``write'') gate 
@@ -51,10 +163,10 @@ architecture with memory cells.
 			\vspace{-4mm}
 			\iitem{state input is multiplied ($\color{blue}\otimes$) with gate}
 			\vspace{-5mm}
-			\iitem{state $s_i$ only changes when 
+			\iitem{state $c_i$ only changes when 
 					{\color{blue}$g_i^{\mathrm{i}(t)} \gg 0$}}
 			\vspace{-5mm}
-			\iitem{local errors $\delta_i^{(t)}$ still accumulate in $s_i$}
+			%\iitem{local errors $\delta_i^{(t)}$ still accumulate in $c_i$}
 		} \only<3>{ \small
 			\iitem{introducing an {\color{darkgreen}output 
 					(``read'') gate $g_i^\mathrm{o}$}
@@ -68,7 +180,7 @@ architecture with memory cells.
 			\iitem{error $\delta_i^{(t)}$ only changes when 
 					{\color{darkgreen}$g_i^{\mathrm{o}(t)} \gg 0$}}
 			\vspace{-4mm}
-			\iitem{both gates and the state form a {\color{darkyellow}LSTM cell}}
+			\iitem{both gates and the state form an {\color{darkyellow}LSTM cell}}
 		} \only<4>{ \small\vspace{-1mm}
 			\iitem{gates determine access to the state $s_i$
 				\vspace{-1mm}
@@ -129,6 +241,9 @@ architecture with memory cells.
 	
 	\question{Why does ${\color{blue}\tanh(\cdot)}$ make sense here?
 	}
+	
+	\notesonly{
+	}
 	}
 	
 	\end{textblock}
@@ -175,7 +290,9 @@ Consequently:
 
 \end{frame}
 
-\begin{frame}\frametitle{Complexity}
+\subsection{Complexity}
+
+\begin{frame}\frametitle{\subsecname}
 \mode<presentation>{
 \only<1>{
 			\placeimage{13}{1}{img/rnn_superscript}{width=2cm}
@@ -217,11 +334,26 @@ Consequently:
 			\item and for the forget gate $\leadsto \color{magenta}\vec U^{\mathrm{f}}, \color{magenta}\vec V^{\mathrm{f}}, \color{magenta}\vec W^{\mathrm{f}}$ and $\color{magenta}\vec b^{\mathrm{f}}$
 			\end{itemize}
 		\end{itemize}
-        
-        \pause
+		
+		\only<4->{
+		\slidesonly{
+		\placeimage{12}{9.5}{img/meme_lstm_cost}{height=1.7cm}
+		}
+		}
+       
+\end{frame}
+
+\begin{frame}\frametitle{\subsecname}
+
 		\question{What about the complexity of echo state networks?}
 
 \mode<article>{
         - The hidden-output weights $\vec V$ are the only trainable parameters in echo state networks.
+}
+
+\mode<presentation>{
+\begin{center}
+	\includegraphics[height=3cm]{img/rnn}
+\end{center}
 }
 \end{frame}
