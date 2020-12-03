@@ -1,5 +1,13 @@
 \section{Vanishing and exploding of gradients}
 
+\mode<presentation>{
+\begin{frame} 
+    \begin{center} \huge
+        \secname
+    \end{center}
+\end{frame}
+}
+
 \definecolor{darkgreen}{rgb}{0,0.5,0}
 \definecolor{darkyellow}{rgb}{0.5,0.5,0}
 \definecolor{midgreen}{rgb}{0,0.75,0}
@@ -18,48 +26,55 @@
 	\end{itemize}
 \end{frame}
 
-\subsection{The Vanishing Gradient Problem leads to exponential forgetting}
+\subsection{Vanishing gradients lead to exponential forgetting}
 
-\begin{frame}\frametitle{A simple RNN}
-	\begin{minipage}{\textwidth}
-		\begin{minipage}{0.21\textwidth}
-        \mode<presentation>{
-			{\includegraphics<1>[width=\textwidth]{img/rnn.pdf}}
-            }
-			{\includegraphics<2>[width=\textwidth]{img/rnn_superscript.pdf}}
-		\end{minipage}	
-		\hspace{0.6cm}
-		\begin{minipage}{0.6\textwidth}
+%\begin{frame}\frametitle{A simple RNN}
+	%\begin{minipage}{\textwidth}
+		%\begin{minipage}{0.21\textwidth}
+        %\mode<presentation>{
+			%{\includegraphics<1>[width=\textwidth]{img/rnn.pdf}}
+            %}
+			%{\includegraphics<2>[width=\textwidth]{img/rnn_superscript.pdf}}
+		%\end{minipage}	
+		%\hspace{0.6cm}
+		%\begin{minipage}{0.6\textwidth}
 		
-		\begin{textblock}{10}(5.0,3.5)
-			\only<2> {\small add superscripts to the different weight matrices}
-		\end{textblock}
-			\begin{eqnarray*}
-             \slidesonly{  
-			\only<1>{
-				\vec s^{(t)} &=& \tanh\Big({\vec U \, \vec x^{(t)}} 
-						{ + \vec W \, \vec s^{(t-1)}}
-						+ \vec b^\mathrm{s} \Big) \,,
-						\\
-				\vec y^{(t)} &=& f\Big({\vec V \, s^{(t)}} + \vec b^\mathrm{y}\Big) \,,\\[0.7cm]
-					\;\text{e.g.}\;f(\cdot) &:=& \text{e.g. } \mathrm{softmax}(\cdot) \text{ for classification}\\
-					}
-                    }
-			\only<2>{
-				\vec s^{(t)} &=& \tanh\Big({\vec U^\mathrm{h} \, \vec x^{(t)}} 
-						{ + \vec W^\mathrm{h} \, \vec s^{(t-1)}}
-						+ \vec b^\mathrm{s} \Big) \,,
-						\\
-				\vec y^{(t)} &=& f\Big({\vec V^\mathrm{y} \, \vec s^{(t)}} + \vec b^\mathrm{y}\Big) \,,\\[0.7cm]
-					\;\text{e.g.}\;f(\cdot) &:=& \text{e.g. } \mathrm{softmax}(\cdot) \text{ for classification}\\
-					}
-			\end{eqnarray*}
-		\end{minipage}
-	\end{minipage}
-\end{frame}
+		%\begin{textblock}{10}(5.0,3.5)
+			%\only<2> {\small add superscripts to the different weight matrices}
+		%\end{textblock}
+			%\begin{eqnarray*}
+             %\slidesonly{  
+			%\only<1>{
+				%\vec s^{(t)} &=& \tanh\Big({\vec U \, \vec x^{(t)}} 
+						%{ + \vec W \, \vec s^{(t-1)}}
+						%+ \vec b^\mathrm{s} \Big) \,,
+						%\\
+				%\vec y^{(t)} &=& f\Big({\vec V \, s^{(t)}} + \vec b^\mathrm{y}\Big) \,,\\[0.7cm]
+					%\;\text{e.g.}\;f(\cdot) &:=& \text{e.g. } \mathrm{softmax}(\cdot) \text{ for classification}\\
+					%}
+                    %}
+			%\only<2>{
+				%\vec s^{(t)} &=& \tanh\Big({\vec U^\mathrm{h} \, \vec x^{(t)}} 
+						%{ + \vec W^\mathrm{h} \, \vec s^{(t-1)}}
+						%+ \vec b^\mathrm{s} \Big) \,,
+						%\\
+				%\vec y^{(t)} &=& f\Big({\vec V^\mathrm{y} \, \vec s^{(t)}} + \vec b^\mathrm{y}\Big) \,,\\[0.7cm]
+					%\;\text{e.g.}\;f(\cdot) &:=& \text{e.g. } \mathrm{softmax}(\cdot) \text{ for classification}\\
+					%}
+			%\end{eqnarray*}
+		%\end{minipage}
+	%\end{minipage}
+%\end{frame}
 
 % ------------------------------------------------------------------------------
 \begin{frame}\frametitle{Exponential forgetting}
+
+\mode<presentation>{
+\begin{textblock}{}(14.0,2.5)
+	\includegraphics[height=3cm]{img/rnn_superscript_grayed}
+\end{textblock}
+}
+
 	\iitem{an RNN with no inputs and a linear transfer function}
 	\vspace{1mm}
 	$$
