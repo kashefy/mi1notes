@@ -55,38 +55,48 @@
 \end{frame}
 
 \begin{frame}
-\tableofcontents
+\tableofcontents[hideallsubsections]
 \end{frame}
 
 \mode<all>
-\input{./rnn}
+\input{./0_rnn}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./vanishingexploding}
+\input{./1_vanishingexploding}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./echostate}
+\input{./2_echostate}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./rnn2lstm}
+\input{./3_rnn2lstm_unroll}
+\mode*
+
+\mode<all>
+\input{./3_rnn2lstm}
 \mode*
 
 \clearpage
 
 %\mode<all>
-%\input{./lstm_unroll}
+%\input{./4_lstm_unroll}
 %\mode*
 
 %\clearpage
+\section{References}
+\begin{frame}[allowframebreaks] \frametitle{References}
+	\scriptsize
+	\bibliographystyle{plainnat}
+	\bibliography{bibliography}
+\end{frame}
 
 \end{rightcolumn}
 \end{paracol}

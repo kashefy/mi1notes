@@ -60,14 +60,14 @@
 \begin{frame}\frametitle{\subsecname}
 
 %Omitting sequence index $\alpha$
-\begin{figure}[ht]
-     \centering
-	\includegraphics[width=0.4\textwidth]{img/rnn_time_delay}
+\begin{center}
+
+	\includegraphics[width=\slidesonly{0.4}\notesonly{0.2}\textwidth]{img/rnn_time_delay}
      \mode<article>{
-	\caption{Basic RNN architecture}
+	\captionof{figure}{Basic RNN architecture}
 	}
 	\label{fig:rnn_time_delay} 
-\end{figure}
+\end{center}
 
 
 \end{frame}
@@ -79,14 +79,13 @@
 \begin{frame}\frametitle{\subsubsecname}
 
 \mode<article>{
-\begin{figure}[ht]
-     \centering
-	\includegraphics[width=0.2\textwidth]{img/rnn_colored}
+\begin{center}
+	\includegraphics[width=0.1\textwidth]{img/rnn_colored}
      \mode<article>{
-	\caption{Basic RNN architecture}
+	\captionof{figure}{Basic RNN architecture}
 	}
 	\label{fig:rnn} 
-\end{figure}
+\end{center}
 }
 \mode<presentation>{
 \placeimage{13}{1}{img/rnn_colored}{width=2cm}
@@ -100,6 +99,8 @@ Let
 \end{itemize}
 
 \pause
+
+\newpage
 
 Identify the free parameters (trainable weights) of the network:
 
@@ -115,7 +116,7 @@ Identify the free parameters (trainable weights) of the network:
 \end{frame}
 
 \begin{frame}\frametitle{Weight matrices in basic RNN}
-Remark: The weight matrices are constructed slightly differently than how we defined them for MLPs. We now stack row vectors instead of column vectors
+Remark: The weight matrices are constructed slightly differently than how we defined them for MLPs. We now stack \textbf{row} vectors instead of \textbf{column} vectors.\\
 Reason: brevity, to avoid putting transpose everywhere
 
 \begin{itemize}
@@ -124,7 +125,7 @@ Reason: brevity, to avoid putting transpose everywhere
 
 The weights from each input $x_j$ to each hidden node $h_i$:
 \begin{equation}
-\vec u_i = (\vec u_{i1},\ldots, \vec u_{ij}, \ldots,\vec u_{iN}) \text{ with } j=1,\ldots,N \text{ and } i=1,\ldots,H
+\vec u_i = ( u_{i1},\ldots,  u_{ij}, \ldots, u_{iN}) \text{ with } j=1,\ldots,N \text{ and } i=1,\ldots,H
 \end{equation}
 
 \begin{equation}
@@ -144,7 +145,7 @@ The weights from each input $x_j$ to each hidden node $h_i$:
 
 The weights to each hidden node $h_i$:
 \begin{equation}
-\vec w_i = (\vec w_{i1},\ldots, \vec w_{ij}, \ldots,\vec w_{iH}) \text{ with } i,j=1,\ldots,H
+\vec w_i = ( w_{i1},\ldots,  w_{ij}, \ldots, w_{iH}) \text{ with } i,j=1,\ldots,H
 \end{equation}
 
 \begin{equation}
@@ -164,7 +165,7 @@ The weights to each hidden node $h_i$:
 
 The weights to each output node $y_k$:
 \begin{equation}
-\vec v_k = (\vec v_{k1},\ldots, \vec v_{kj}, \ldots,\vec v_{kH}) \text{ with } k=1,\ldots,M
+\vec v_k = (\mathrm v_{k1},\ldots,  \mathrm v_{kj}, \ldots, \mathrm v_{kH}) \text{ with } k=1,\ldots,M
 \end{equation}
 
 \begin{equation}
@@ -183,10 +184,18 @@ The weights to each output node $y_k$:
 
 \end{frame}
 
+\newpage
+
 \subsubsection{Measure the activities of the neurons in a basic RNN}
 
 % ------------------------------------------------------------------------------
 \begin{frame}\frametitle{A simple RNN}
+
+
+		\notesonly{
+		First we define $s_i^{(t)}$ and $y_k^{(t)}$, then we switch from component-wise notation to vector notation
+		}
+		
 	\begin{minipage}{\textwidth}
 		\begin{minipage}{0.21\textwidth}
 			{\includegraphics[width=\textwidth]{img/rnn.pdf}}
@@ -194,10 +203,12 @@ The weights to each output node $y_k$:
 		\hspace{0.6cm}
 		\begin{minipage}{0.6\textwidth}
 		
+		\slidesonly{
 		\begin{textblock}{10}(5.0,3.5)
 			\only<1> {\small define $s_i^{(t)}$ and $y_k^{(t)}$:}
 			\only<2> {\small switch from element-wise notation to vector notation}
 		\end{textblock}
+		}
 			\begin{eqnarray*}
 			\only<1>{
 				s_i^{(t)} &=& \tanh \Big({\smallsum{k=1}{N} U_{ik} \, x_k^{(t)}} 
@@ -221,11 +232,14 @@ The weights to each output node $y_k$:
 	\end{minipage}
 \end{frame}
 
+\newpage
+
 \subsection{Training RNNs}
 \subsubsection{Using the chain rule}
 
 % ------------------------------------------------------------------------------
 \begin{frame}\frametitle{\subsecname: \subsubsecname}
+\slidesonly{
 	\begin{minipage}{\textwidth} \hspace{5mm}
 		\includegraphics<1->[height=4cm]{img/rnn.pdf}
 		\hspace{12mm}
@@ -233,6 +247,7 @@ The weights to each output node $y_k$:
 		%\includegraphics<2>[height=4cm]{img/rnn_unfolded_backprop.pdf}
 	\end{minipage}
 	\vspace{1mm}
+}
 	\begin{itemize}
 		\item<1-> cost function $e^{(\alpha,t)}$ for time 
 				step $t$ of training sequence $\alpha$ 
@@ -291,7 +306,7 @@ The weights to each output node $y_k$:
 				e.g.~$\color{blue}\vec W^{(t)}$, are independent
 		\vspace{1mm}
 		\item<2-> compute gradients of deep MLP with backpropagation 
-				($ \Set O(N)$, where $N$ is the total number of weights)
+				($ \Set O(n)$, where $n$ is the total number of all weights in the unrolled network)
 		\vspace{1mm}
 		\item<3-> average all computed gradients, i.e.  
 				${\color{blue} \frac{\partial e^{(\alpha,t)}}%
