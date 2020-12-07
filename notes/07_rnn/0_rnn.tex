@@ -306,7 +306,7 @@ The weights to each output node $y_k$:
 				e.g.~$\color{blue}\vec W^{(t)}$, are independent
 		\vspace{1mm}
 		\item<2-> compute gradients of deep MLP with backpropagation 
-				($ \Set O(N)$, where $N$ is the total number of weights)
+				($ \Set O(n)$, where $n$ is the total number of all weights in the unrolled network)
 		\vspace{1mm}
 		\item<3-> average all computed gradients, i.e.  
 				${\color{blue} \frac{\partial e^{(\alpha,t)}}%
