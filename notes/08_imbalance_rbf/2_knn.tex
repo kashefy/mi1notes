@@ -1,3 +1,5 @@
+\section{Non-parametric classification}
+
 \mode<presentation>{
 \begin{frame} 
     \begin{center} \huge
@@ -7,11 +9,10 @@
 \end{frame}
 }
 
-\section{Non-parametric classification}
-
 \subsection{The setting}
 
-\begin{frame}\frametitle{\subsecname~for M-way classification}
+
+\begin{frame}\frametitle{\subsecname~for $M$-way classification}
 
 \mode<article>{
 Specifying the data and model for a multi-class classification with $M$ classes (i.e. $M$-way classification)
@@ -49,16 +50,22 @@ Specifying the data and model for a multi-class classification with $M$ classes 
 \subsection{k nearest neighbor classifier}
 
 \begin{frame}\frametitle{\subsecname}
-Prediction follows an \emph{electoral committee}; the majority vote of the $k$ nearest neighbors around the query point.
+Prediction follows an \emph{electoral committee}; the majority vote of the $k$ nearest neighbors around a query point.
 
-\begin{figure}[h]
-	\includegraphics[width=0.3\textwidth]{img/knn}
+\svspace{-4mm}
+
+\begin{figure}[ht]
+	\includegraphics[width=0.5\textwidth]{img/knn}
 	\mode<article>{
 	\caption{$k$NN with $k=3$}
 	}
 \end{figure}
 
+\svspace{-5mm}
+
 Let $k$NN$(\vec x)$ be the indices $\{\beta_1, \beta_2,\ldots,\beta_k\}$ of the $k$ data points closest to $\vec x$ w.r.t. Euclidean norm:
+
+\svspace{-5mm}
 
 \begin{equation}
 \beta_j = 
@@ -84,7 +91,7 @@ $\vec y(\vec x)$ \notesonly{in \eqref{eq:knn_classifier}} is effectively an arit
 \end{frame}
 
 \begin{frame}
-Example k=3, M=4
+Example $k=3$, $M=4$:
 
 \begin{equation}
 \vec y(\vec x) = \frac{1}{3}
@@ -132,10 +139,12 @@ y(\vec x) \ge\,0\,:\,
 
 \question{What is the role of $k$ in terms of model complexity? $k = 1$ vs. $k = p$}
 
+Hint: Jitter the data (or the query points) and see which choice of $k$ leads to different (more noisy) predictions.
+
 \mode<presentation>{
 
 \begin{figure}[h]
-	\includegraphics[width=0.4\textwidth]{img/knn}
+	\includegraphics[width=0.5\textwidth]{img/knn}
 	\mode<article>{
 	\caption{$k$NN with $k=3$}
 	}
@@ -145,13 +154,18 @@ y(\vec x) \ge\,0\,:\,
 
 \pause
 
+\svspace{-5mm}
+
 \question{How would you select the $k$ nearest neighbors for some query point $\vec x$?}
 
-\pause
-
-Hint: Jitter the data (or the query points) and see which choice of $k$ leads to different (more noisy) predictions.
-
 \mode<article>{
+
+- The $k$ nearest neighboars can be found by
+\begin{enumerate}
+\item computing the Euclidean distance between the query point and all training points,
+\item sorting the distances in ascending order
+\item selecting the first $k$ points
+\end{enumerate}
 
 Remarks:
 \begin{enumerate}
