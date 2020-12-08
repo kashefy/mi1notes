@@ -139,24 +139,26 @@ y(\vec x) \ge\,0\,:\,
 
 \question{What is the role of $k$ in terms of model complexity? $k = 1$ vs. $k = p$}
 
-Hint: Jitter the data (or the query points) and see which choice of $k$ leads to different (more noisy) predictions.
+Hint: Jitter the data (or the query points, but not both) and see which choice of $k$ leads to different (more noisy) predictions.
 
 \mode<presentation>{
 
+%\visible<2>{
 \begin{figure}[h]
 	\includegraphics[width=0.5\textwidth]{img/knn}
 	\mode<article>{
 	\caption{$k$NN with $k=3$}
 	}
 \end{figure}
+%}
 
 }
 
 \pause
 
-\svspace{-5mm}
+\svspace{-7mm}
 
-\question{How would you select the $k$ nearest neighbors for some query point $\vec x$?}
+\question{How would you programatically find the $k$ nearest neighbors for some query point $\vec x$?}
 
 \mode<article>{
 
