@@ -1,4 +1,4 @@
-\section{Convergence of empirical risk minimization (ERM)}
+\section{Convergence of Empirical Risk Minimization (ERM)}
 
 \mode<presentation>{
 \begin{frame} 
@@ -12,20 +12,20 @@
     \mode<article>{
     \begin{figure}[h]
         \centering
-		\includegraphics[height=4cm]{img/section2_fig1.pdf}
+		\includegraphics[height=4cm]{img/section2_fig1_highlight}
 		\caption{Comparing risk with empirical risk using a finite set with $p$ points.}
 	\end{figure}
     }
     \mode<presentation>{
-	\placeimage{8}{3}{img/section2_fig1}{width=6cm}
+		\placeimage{8}{3}{img/section2_fig1_highlight}{width=6cm}
     }
     \underline{Setting}:\\
     
 	\begin{itemize}
 		\item {\footnotesize samples are drawn \iid~from $P(\vec x, y_T)$\\[1mm]
 			 $\quad \leadsto \quad$ $\vec w$ are random variables}
-        \item $R_{[\vec w_p]}\,\corresponds\,E^{T}_{[\vec w]}$ \notesonly{:the empirical risk obtained from training the model using a finite set with $p$ points, and}
-        \item $R_{[\vec w_{\color{red}0}]}\,\corresponds\,E^{G}_{[\vec w]}$ \\
+        \item $R_{(\vec w_p)}\,\corresponds\,E^{T}_{[\vec w]}$ \notesonly{:the empirical risk obtained from training the model using a finite set with $p$ points, and}
+        \item $R_{(\vec w_{\color{red}0})}\,\corresponds\,E^{G}_{[\vec w]}$ \\
         \slidesonly{\vspace{5mm}}
         
         Recall that
@@ -75,8 +75,8 @@
 			 }
 		\item 
 			\vspace{1mm}
-			\iitem{$R_{\text{emp}[\vec w_p]}$ 
-				should reflect the true optimal risk $R_{[\vec w_0]}$ 
+			\iitem{$R_{\text{emp}(\vec w_p)}$ 
+				should reflect the true optimal risk $R_{(\vec w_0)}$ 
 				in the limit $p \to \infty$:}
 			\vspace{1mm}
 			\begin{equation}
@@ -90,22 +90,22 @@
 		\end{enumerate}
 	} \only<2>{
 		\begin{enumerate} \setcounter{enumi}{1}
-			\item How strongly does $R_{[\vec{w}_p]}$ differ 
-				from $R_{[\vec{w}_0]}$ for  \textbf{finite} samples?
+			\item How strongly does $R_{(\vec{w}_p)}$ differ 
+				from $R_{(\vec{w}_0)}$ for  \textbf{finite} samples?
 				\vspace{1mm}
 				\iitem{For a given confidence $\epsilon$, find $\eta$ such that}
 				\vspace{1mm}
 				\begin{equation}
 					P \Big\{ {\color{question1} 
-							\big| R_{[\vec{w}_p]} - R_{[\vec{w}_0]} \big| 
+							\big| R_{(\vec{w}_p)} - R_{(\vec{w}_0)} \big| 
 						} \geq \eta \Big\} \;\;<\;\; \epsilon \,.
 						\label{eq:convergenceeps}
 				\end{equation}
 		\end{enumerate}
 	} \only<3>{
 		\begin{enumerate} \setcounter{enumi}{2}
-			\item Do training errors $R_{\text{emp}[\vec w]}$ 
-				reflect generalization performance $R_{[\vec w]}$?
+			\item Do training errors $R_{\text{emp}(\vec w)}$ 
+				reflect generalization performance $R_{(\vec w)}$?
 				\vspace{1mm}
 				\iitem{\footnotesize Avoid overfitting for finite samples,
 				i.e.~given confidence $\epsilon$, find $\eta$ such that: 
@@ -114,7 +114,7 @@
 				\vspace{1mm}
 				\begin{equation}
 					P \Big\{ {\color{question2}
-							\big| R_{[\vec w]} - R_{\mathrm{emp}[\vec w]} \big|
+							\big| R_{(\vec w)} - R_{\mathrm{emp}(\vec w)} \big|
 						} > \eta \Big\} \;\;<\;\; \epsilon \,, 
 						\qquad \forall \vec w \in \Lambda \,.
 						\label{eq:convergenceepsgeneral}
@@ -128,7 +128,7 @@
 \label{sec:convergence_erm}
 \frametitle{ Understanding what $P\big\{ 
 	{\color{question1}
-		\big|R_{[\vec w_p]} - R_{[\vec w_0]}\big| 
+		\big|R_{(\vec w_p)} - R_{(\vec w_0)}\big| 
 	} \geq \eta \big\}$ represents
 }
 

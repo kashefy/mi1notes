@@ -8,17 +8,17 @@
 \end{frame}
 }
 
-\begin{frame}\frametitle{Shattering p points}
+\begin{frame}\frametitle{Shattering $p$ points}
 
 \question{Can a perceptron classify any 3 points in 2D?}\\
 
-\textbf{see blackboard...}
+- Yes.%\textbf{see blackboard...}
 
 
 \question{Can a perceptron classify any 4 points in 2D?}\\
 
 
-\textbf{see blackboard...}
+- Yes, that also.%\textbf{see blackboard...}
 
 \end{frame}
 
@@ -50,6 +50,32 @@ then the model class $\Lambda$ with that number of tunable parameters in $\vec w
 
 Shattering requires finding \underline{at least one arrangement} of the $p$ points for which the model can be fitted to all $2^p$ label configurations.
 
+\pause 
+
+\svspace{10mm}
+
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/shatter_arrangement_1}
+	\notesonly{
+	\captionof{figure}{A perceptron cannot always separate this arrangement.}
+	}
+\end{center}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/shatter_arrangement_2}
+	\notesonly{
+	\captionof{figure}{A perceptron can always separate this arrangement.}
+	}
+\end{center}
+\end{minipage}
+	\notesonly{
+	\captionof{figure}{An arrangement of 3 points in 2D.}
+	}
+\end{center}
+
 \mode<article>{
 It does not have to be able to for all possible arrangements (placements) of the $p$ points.
 If there exists at least \textbf{one} dataset for which it can perfectly predict all label configurations, then the model shatters this.
@@ -57,6 +83,13 @@ If there exists at least \textbf{one} dataset for which it can perfectly predict
 \end{frame}
 
 \begin{frame}\frametitle{\secname}
+
+
+\mode<presentation>{
+\begin{center}
+	\includegraphics<1>[width=0.4\textwidth]{img/meme_vc_notdim}
+\end{center}
+}
 
 $\dvc$ is not actually a dimension but a single number \emph{capacity measure} 
 of a model class that is parameterized by $\vec w$.\\[5mm]
@@ -79,6 +112,30 @@ If (at least) one dataset $\{(\vec x^{(\alpha)}, y_{T}^{(\alpha)})\}_{\alpha=1}^
 \end{frame}
 
 \begin{frame}
+
+\mode<presentation>{
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/shatter_arrangement_1}
+	\notesonly{
+	\captionof{figure}{A perceptron cannot always separate this arrangement.}
+	}
+\end{center}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/shatter_arrangement_2}
+	\notesonly{
+	\captionof{figure}{A perceptron can always separate this arrangement.}
+	}
+\end{center}
+\end{minipage}
+	\notesonly{
+	\captionof{figure}{An arrangement of 3 points in 2D.}
+	}
+\end{center}
+}
 
 \question{What was the $\dvc$ for our model in the previous example?}
 
