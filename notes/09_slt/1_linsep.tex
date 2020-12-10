@@ -214,6 +214,7 @@ The relevance of \notesonly{\eqref{eq:c_relation}}\slidesonly{ this} relationshi
 
 \begin{frame}
 \mode<presentation>{
+\only<1,2>{Show that}
 \vspace{-5mm}
 }
 
@@ -226,6 +227,8 @@ The relevance of \notesonly{\eqref{eq:c_relation}}\slidesonly{ this} relationshi
     \notesonly{
 	\intertext{Plugging in \eqref{eq:cwithbias} for each:}
 	}
+}
+\only<1-4>{
     2 \sum_{k=0}^{N} \left(\kern-1ex \begin{array}{c}
 	p-1\\
 	k
@@ -239,10 +242,13 @@ The relevance of \notesonly{\eqref{eq:c_relation}}\slidesonly{ this} relationshi
     2 \sum_{k=0}^{N} \left(\kern-1ex \begin{array}{c}
 	p+1-1\\
 	k
-	\end{array} \kern-1ex \right)\\
+	\end{array} \kern-1ex \right)\only<4->{\slidesonly{\\[-20mm]}
 }
-\only<2,3,4>{
-	\intertext{Simplify the LHS by modifying the sums such that they share the same limits:}
+}
+\only<2-4>{
+	\intertext{Simplify the LHS by modifying the sums \notesonly{such that}\slidesonly{s.t.} they share the same limits.}
+}
+\only<2-5>{
 	{\color{magenta}
     2 \left(\kern-1ex \begin{array}{c}
 	p-1\\
@@ -254,43 +260,44 @@ The relevance of \notesonly{\eqref{eq:c_relation}}\slidesonly{ this} relationshi
 	k
 	\end{array} \kern-1ex \right)
     +
-    2 \sum_{k=0}^{N{\color{red}-1}} \left(\kern-1ex \begin{array}{c}
+    2 \sum_{k=0}^{N{\only<3,4>{\color{red}}-1}} \left(\kern-1ex \begin{array}{c}
 	p-1\\
 	k
 	\end{array}\kern-1ex\right)
     &= 
     2 \sum_{k=0}^{N} \left(\begin{array}{c}
 	p\\k
-	\end{array}\right)
-	\\
+	\end{array}\right)\\
 }
-\only<3,4>{
+\only<3-5>{
+	{\color{magenta}
     2 \left(\kern-1ex \begin{array}{c}
 	p-1\\ 0
-	\end{array} \kern-1ex \right)
-    + 2
+	\end{array} \kern-1ex \right)}
+    + 2~
     {\color{blue}
     \sum_{k=1}^{N}
     }\left(\kern-1ex \begin{array}{c}
 	p-1\\ k
 	\end{array} \kern-1ex \right)
-    + 2
+    + 2~
     {\color{blue}
     \sum_{k=1}^{N}
     } \left(\kern-1ex \begin{array}{c}
 	p-1\\ k{\color{red}-1}
 	\end{array} \kern-1ex \right)
-    &=
+    &=\\
     %2 \sum_{k=0}^{N} \left( \begin{array}{c}
 	%p\\ k
 	%\end{array}\right)
-	\\
+	%\\
 }
-\only<4>{
+\only<4-5>{
+	{\color{magenta}
     2 \left(\kern-1ex \begin{array}{c}
 	p-1\\ 0
-	\end{array} \kern-1ex \right)
-    + 2
+	\end{array} \kern-1ex \right)}
+    + 2~
     {\color{blue}
     \sum_{k=1}^{N}
     }
@@ -309,25 +316,27 @@ The relevance of \notesonly{\eqref{eq:c_relation}}\slidesonly{ this} relationshi
 	\end{array}\right)\text{ (using the recursive property)}}
     \bigg 
     \rbrack
-    &=
-	\\
+    &=\\
 }
-\only<5>{
-    2 \; \underbrace{\kern-0.8ex\left( \begin{array}{c}
-	p-1\\ 0
-	\end{array}\right)\kern-0.8ex}_{=1=\left( \begin{array}{c}
+\only<5,6>{
+    {\color{magenta}2} \underbrace{
+		{\color{magenta}
+		\left(\kern-1ex \begin{array}{c}
+		p-1\\ 0
+		\end{array} \kern-1ex \right)}
+	}_{=1=\left( \begin{array}{c}
 	p\\ 0
 	\end{array}\right)}
     +
-    2 {\color{blue}\sum_{k=1}^{N}}\left( \begin{array}{c}
+    2~{\color{blue}\sum_{k=1}^{N}}\left( \begin{array}{c}
 	p\\ k
 	\end{array}\right)
     &= 2 \sum_{k=0}^{N}
     \left( \begin{array}{c}
 	p\\ k
 	\end{array}\right)\\
-\intertext{$\left({p \atop 0}\right)$ can now be absorbed into the sum:}
-2 \sum_{k=0}^{N}
+\intertext{$\left({p \atop 0}\right)$ can now be \textcolor{red}{absorbed} into the sum.}
+2 \sum_{k={\color{red}0}}^{N}
     \left( \begin{array}{c}
 	p\\ k
 	\end{array}\right)
@@ -340,7 +349,7 @@ The relevance of \notesonly{\eqref{eq:c_relation}}\slidesonly{ this} relationshi
 \end{align}
 }
 \mode<presentation>{
-\only<5>{
+\only<6>{
 \begin{equation*}
 \tilde C_{(p,N)}+\tilde C_{(p,N-1)}=\tilde C_{(p+1,N)}
 \end{equation*}

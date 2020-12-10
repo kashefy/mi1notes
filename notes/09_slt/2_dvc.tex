@@ -91,8 +91,10 @@ If there exists at least \textbf{one} dataset for which it can perfectly predict
 \end{center}
 }
 
+\only<1>{
 $\dvc$ is not actually a dimension but a single number \emph{capacity measure} 
 of a model class that is parameterized by $\vec w$.\\[5mm]
+}
 
 \underline{Definition}:\\
 \only<1>{
@@ -105,7 +107,7 @@ $\vec X = \left(\vec x^{(1)}, \ldots, \vec x^{(p)}\right)^\top $ for which all
 $2^p$ label configurations can be solved with zero error.\\
 }
 \only<3>{
-In more words: $\dvc$ is \underline{maximal number of data points $p$} for which \emph{all} possible label configurations $\{y_{T}^{(\alpha)} \in \{-1,1\}\}_{\alpha=1}^{p}$ can be perfectly trained (i.e. $E^{T}_{[\vec w]} = R_{\text{emp}[\vec w]} = 0$) by tuning the model parameters $\vec w$.
+In more words: $\dvc$ is the \underline{maximal number of data points $p$} for which \emph{all} possible label configurations $\{y_{T}^{(\alpha)} \in \{-1,1\}\}_{\alpha=1}^{p}$ can be perfectly trained (i.e. $E^{T}_{[\vec w]} = R_{\text{emp}[\vec w]} = 0$) by tuning the model parameters $\vec w$.
 If (at least) one dataset $\{(\vec x^{(\alpha)}, y_{T}^{(\alpha)})\}_{\alpha=1}^{p}$ with $p$ points exists such that the model can be tuned to perfectly classify any label configuration for that dataset, then the $\dvc$ for this model class is $p$.
 }
 

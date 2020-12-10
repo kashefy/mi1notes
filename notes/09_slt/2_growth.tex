@@ -5,6 +5,12 @@
     \begin{center} \huge
         \secname
     \end{center}
+    
+    \svspace{7mm}
+    
+    \begin{center}
+		\includegraphics[width=0.6\textwidth]{img/meme_growth}
+    \end{center}
 \end{frame}
 }
 
@@ -348,7 +354,7 @@ However, for $p > \dvc$ the growth function behaves differently, namely
 			\vspace{-2mm}
 			\begin{equation}
 				P\bigg\{ {%\color{question1} 
-				\Big| R_{(\vec w_p)} - R_{(\vec w_0)} \Big| }
+				{\color{blue}\Big| R_{(\vec w_p)} - R_{(\vec w_0)} \Big|} }
 					> \Big(\smallfrac{G^\Lambda_{(2p)} 
 						- \ln \frac{\epsilon}{8}}{p} \Big)^\frac{1}{2}
 					+ \Big(-\smallfrac{\ln \frac{\epsilon}{2}}{2p} 
@@ -367,13 +373,23 @@ However, for $p > \dvc$ the growth function behaves differently, namely
 \begin{center}
 	\includegraphics[height=6cm]{img/PdeltaReta}
 \end{center}
-			\begin{equation}
-				\lim_{p \to \infty} P\bigg\{ 
-					{
-						\Big|R_{(\vec w_p)} - R_{(\vec w_0)}\Big| 
-					}
-				\geq \eta \bigg\}\;\;<\;\; \epsilon \,, \quad \forall \eta > 0
-				\label{eq:risktozero}
+			%\begin{equation}
+				%\lim_{p \to \infty} P\bigg\{ 
+					%{
+						%\Big|R_{(\vec w_p)} - R_{(\vec w_0)}\Big| 
+					%}
+				%\geq \eta \bigg\}\;\;<\;\; \epsilon \,, \quad \forall \eta > 0
+				%\label{eq:risktozero}
+			%\end{equation}
+						\begin{equation}
+				P\bigg\{ {%\color{question1} 
+				{\color{blue}\Big| R_{(\vec w_p)} - R_{(\vec w_0)} \Big|} }
+					> \Big(\smallfrac{G^\Lambda_{(2p)} 
+						- \ln \frac{\epsilon}{8}}{p} \Big)^\frac{1}{2}
+					+ \Big(-\smallfrac{\ln \frac{\epsilon}{2}}{2p} 
+						\Big)^\frac{1}{2} + \smallfrac{1}{p}
+				\bigg\} < \epsilon
+					\label{eq:boundgenerlizationdeviation}
 			\end{equation}
 \end{frame}
 }
