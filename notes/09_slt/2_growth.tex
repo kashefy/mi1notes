@@ -203,9 +203,34 @@ It is closely related to the \emph{VC dimension}.
 		}
 		\includegraphics<4>[width=0.3\textwidth]{img/dichotomy_ambiguous_decision_boundaries}
 		\notesonly{
-		\captionof{figure}{Complete ambiguity over the label of a third point, when we only have the predictions of two points in 2D by a linear neuron.}
+		\captionof{figure}{Ambiguous regions. No complete ambiguity for this particular case yet, but still possible.}
 		}
 	\end{center}
+\slidesonly{
+\only<4>{
+	\begin{center}
+		Ambiguity not \textbf{yet} complete.
+	\end{center}
+		}
+		}
+
+\only<5>{
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/dichotomy_ambiguous_decision_boundaries_2}
+\end{center}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/dichotomy_ambiguous_decision_boundaries_3}
+\end{center}
+\end{minipage}
+	\notesonly{
+	\captionof{figure}{Complete ambiguity over the label of a third point, when we only have the predictions of two points in 2D by a linear neuron.}
+	}
+\end{center}
+}
     
     \mode<article>{Any linear neuron can find a hyperplane to separate two specific points in 2-D space. It does not tell us anything about the neuron's ability to separate an additional 3rd test point in that same space. Therefore $p = 2$ is still ambiguous for the linear neuron.}
     
