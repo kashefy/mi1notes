@@ -1,6 +1,18 @@
-
-
 \subsection{Parzen window classification}
+
+\mode<presentation>{
+\begin{frame} 
+    \begin{center} \huge
+        \subsecname
+    \end{center}
+    \begin{center}
+    \includegraphics[width=0.4\textwidth]{img/meme_wow_parzen}
+    \end{center}
+    \begin{center}
+    $k$NN with all points, but weighted by a window.
+    \end{center}
+\end{frame}
+}
 
 
 \begin{frame}\frametitle{\subsecname}
@@ -23,7 +35,7 @@ Z := \sum_{\alpha=1}^{p} \kappa(\vec x, \vec x^{(\alpha)})
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{The Gaussian kernel}
 
 An example for the window/``kernel'' function $\kappa(\vec x, \vec x')$ would be the Gaussian function:
 
@@ -61,9 +73,11 @@ where $\sigma_{\kappa}$ is referred to as the \emph{width} of the kernel.
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Binary classification example with 2D data}
 
+\notesonly{
 Binary classification example with 2D data:
+}
 
 \begin{figure}[ht]
      \centering
@@ -72,8 +86,7 @@ Binary classification example with 2D data:
      \begin{subfigure}[t]{0.3\textwidth}
          \centering
          \usebox{\imagebox}% Place largest image
-         \caption{For data in 1D}
-         \label{fig:quadratic}
+         \caption{Binary classification data in 2D}
      \end{subfigure}
      \hspace{2mm}
      \visible<2>{
@@ -82,8 +95,9 @@ Binary classification example with 2D data:
          \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
          \includegraphics[width=0.99\textwidth]{img/parzen_circles}
          }
-         \caption{For data in 2D}
-         \label{fig:linear}
+         \notesonly{
+         \caption{A Gaussian window around each training point}
+         }
      \end{subfigure}
      }
 \end{figure}
