@@ -2,6 +2,19 @@
 
 \section{RBF-Networks}
 
+\mode<presentation>{
+\begin{frame} 
+    \begin{center} \huge
+        \secname
+    \end{center}
+    \begin{center}
+    \includegraphics[width=0.4\textwidth]{img/meme_wow_rbf}
+    \end{center}
+    \begin{center}
+    Parzen window classification with ``representatives''
+    \end{center}
+\end{frame}
+}
 
 \begin{frame}\frametitle{\secname}
 
@@ -143,6 +156,8 @@ y_M(\vec \phi(\vec x))
 = \vec W^\top \kern-.5ex \phi(\vec x)
 \end{equation}
 
+\svspace{-3mm}
+
 with $\vec W \in \R^{k+1,M}$
 
 closed form solution for quadratic cost: 
@@ -162,7 +177,9 @@ closed form solution for quadratic cost:
 
 \pause
 
-where $\vec Y_{\text{True}} := \left( \vec y_{\text{True}}^{(1)},\ldots,\vec y_{\text{True}}^{(p)}\right) \in \R^{M,p}$
+\svspace{-3mm}
+
+\notesonly{where} $\vec Y_{\text{True}} := \left( \vec y_{\text{True}}^{(1)},\ldots,\vec y_{\text{True}}^{(p)}\right) \in \R^{M,p}$
 
 \end{frame}
 
@@ -200,6 +217,8 @@ For weight decay:
 \question{Which model class is a generalization of the other?}
 
 \pause 
+
+\svspace{-3mm}
 
 \question{How would you construct an RBF-Network to mimic a Parzen window classifier?}
 
@@ -246,6 +265,8 @@ For weight decay:
 
 \end{frame}
 
+\newpage
+
 \subsection{MLPs vs. RBF-Networks}
 
 \notesonly{cf. Haykin 5.11}
@@ -283,7 +304,7 @@ global approximation                                                            
 \begin{tabular}[c]{@{}l@{}}common neuronal mode \\between hidden and output neurons\end{tabular}                  & \begin{tabular}[c]{@{}l@{}}The hidden layer serves a \\very different purpose\\than the output layer\end{tabular} \\ 
 \hline\pause
 
-\begin{tabular}[c]{@{}l@{}}total input of a hidden neuron\\determined via inner product\\$\vec w_i^\top x$\end{tabular}                  & \begin{tabular}[c]{@{}l@{}}total input is based on a Euclidean distance\end{tabular} \\ 
+\begin{tabular}[c]{@{}l@{}}total input of a hidden neuron\\determined via inner product\\$\vec w_i^\top \vec x$\end{tabular}                  & \begin{tabular}[c]{@{}l@{}}total input is based on a Euclidean distance\end{tabular} \\ 
 \hline\pause
 
 \begin{tabular}[c]{@{}l@{}}\end{tabular}                  & \begin{tabular}[c]{@{}l@{}}restricted function class (many \\ basis functions needed\\ for complicated approximations)\end{tabular} \\ 
