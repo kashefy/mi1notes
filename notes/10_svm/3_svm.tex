@@ -2,11 +2,16 @@
 
 \mode<presentation>{
 \begin{frame} 
+    \svspace{20mm}
     \begin{center} \huge
         \secname
     \end{center}
     \begin{center}
      Finding the separating hyperplane with maximum margin\\+ the ``kernel trick''   
+    \end{center}
+    
+    \begin{center}
+		\includegraphics[width=0.3\textwidth]{img/meme_svm}
     \end{center}
 \end{frame}
 }
@@ -124,18 +129,21 @@ Let $\vec w^{*}$ and $b^{*}$ describe the optimal hyperplane that maximizes the 
 
 \end{frame}
 
-\begin{frame}\frametitle{structural risk minimization (SRM) applied to binary classification}
+\subsection{Structural risk minimization (SRM)}
 
+\begin{frame}\frametitle{\subsecname~applied to binary classification}
 
 The cost function\notesonly{ to minimize}:
 
-\slidesonly{\vspace{-7mm}}
+\svspace{-7mm}
     
 \begin{equation}
 \frac{1}{2} \vec w^{\top} \vec w = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \eqexcl \min    
 \end{equation}
 
+\only<2>{
 \question{Why have we suddenly switched to the squared Euclidean norm and where did the 2 come from?}
+}
 
 \mode<article>{
 - Minimizing the square of the norm turns it into a \emph{convex} minimization problem, which simplifies the optimization procedure.
@@ -147,39 +155,36 @@ Dividing by 2 is simply for convenience.
 We want to restrict the space of solutions for $\vec w$ to that which leads to the correct classification of the training points.
 We therefore constrain solutions such that:}
 
+\visible<3->{
+\svspace{5mm}
 \slidesonly{Constraint for correct classification (``\emph{0-1 loss}'' or ``\emph{hinge loss}''):}
 
-\slidesonly{\vspace{-2mm}}
+\svspace{-2mm}
 
 \begin{equation}
  y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) \ge 1 \;\;\forall \alpha{}
  \label{eq:constraint}
 \end{equation}
+}
 
 \notesonly{
 \eqref{eq:constraint} provides constraints that are linear in $\vec w$. It is sometimes referred to as the \emph{0-1 loss} or \emph{hinge loss}. It is exactly zero whenever a point is correctly classified and 1 whenever it is misclassified. It behaves similarly to \emph{parity-check} with the difference that \emph{parity-check} only produces a binary output.
 
 This gives us the \emph{primal} problem for structural risk minimization (SRM) problem. }
+\visible<4->{
 \slidesonly{The SRM principle is about:}
 
+\svspace{-3mm}
 
-\slidesonly{\vspace{-3mm}}
-
-\begin{figure}[h]
-	\slidesonly{
-    %\raggedleft
-    \centering
-    }
-	\notesonly{
-    \centering
-    }
+\begin{center}
     \includegraphics[height=3cm]{img/scale} 
     \mode<article>{
-    \caption{
+    \captionof{figure}{
     The SRM principle is about balancing the complexity of a model while minimizing the training error to avoid overfitting.
     }
     }
-\end{figure}
+\end{center}
+}
     
 \end{frame}
 
@@ -187,13 +192,13 @@ This gives us the \emph{primal} problem for structural risk minimization (SRM) p
 Applying the Lagrange method to the primal problem of SRM:
 
 \begin{equation}
-f_{0}(\vec w,b) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} = \frac{1}{2} \vec w^{\top} \vec w \eqexcl \min
+f_{0}(\vec w,b) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \notesonly{= \frac{1}{2} \vec w^{\top} \vec w }\eqexcl \min
 \end{equation}
 \notesonly{
 Manipulating the constraints \eqref{eq:constraint} to obtain an expression in the form $f_{\alpha} \le 0$:
 }
 
-A constraint $f_\alpha(\vec w,b) \le 0$ for each data point in the training set:
+A constraint $f_\alpha(\vec w,b) \le 0$ for \textbf{each data point} in the training set:
 
 \pause
 
@@ -228,7 +233,7 @@ L(\vec w, b, \{\lambda_{\alpha}\})
 \begin{frame}
 
 \mode<presentation>{
-\vspace{-2mm}
+
 \begin{block}{The Lagrangian of the primal problem:}
 \vspace{-2mm}
 	\begingroup 
@@ -252,16 +257,16 @@ L(\vec w, b, \{\lambda_{\alpha}\}) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
 This, along with the minimization being \emph{convex} and the constraints being linear, implies that a \emph{saddle point} has to be found for the Lagrangian.
 
 \only<2>{
-\begin{figure}[h]
-    \centering
+
+\begin{center}
     \includegraphics[trim={0cm 0 0 25mm},clip, height=4cm]{img/saddle_point_andrewng} 
     \mode<article>{
-    \caption{
+    \captionof{figure}{
     Illustration of a saddle point.
     }
     \label{fig:saddle}
     } 
-\end{figure}
+\end{center}
 }
 \only<3>{
 \slidesonly{\vspace{5mm}}
@@ -354,7 +359,9 @@ This will leads us to identifying the Karush-Kuhn-Tucker (KKT) conditions.
 
 %\only<1->
 {
+\only<1-2,4->{
 Consider the following cases:
+}
 
 \begin{enumerate}[(a)]
 	\item<only@2> \notesonly{Whenever }a constraint is \textcolor{orange}{violated},\slidesonly{\\} i.e.
@@ -521,7 +528,7 @@ The Lagrangian of the primal problem is solved by finding the saddle point.} At 
 	}
 \only<2>{ 
 	{w}_i - \sum\limits_{\alpha = 1}^p \lambda_\alpha
-		y_T^{(\alpha)} \mathrm{x}_i^{(\alpha)} \;\eqexcl&\; 0 \\}
+		y_T^{(\alpha)} x_i^{(\alpha)} \;\eqexcl&\; 0 \\}
 \only<3->{
 		\Rightarrow\;\; \vec{w}^* =& \kern-4ex\underbrace{\sum_{\alpha = 1}^p \lambda_\alpha 
 		y_T^{(\alpha)} \vec{x}^{(\alpha)}}_{
@@ -699,12 +706,22 @@ This dual problem is optimized numerically using \emph{Sequential Minimal Optimi
 
 \begin{frame}
 
-\slidesonly{\vspace{-5mm}}
+\mode<presentation>{
+\begin{center}
+	\includegraphics<1>[width=0.3\textwidth]{img/meme_forgot_bias}
+\end{center}
+}
+
+\pause
+
+\slidesonly{\vspace{-7mm}}
 
 \question{What about the bias?}
 
 \mode<presentation>{
+\only<2->{
 \placeimage{12.7}{10.2}{img/section2_fig18_sv_nolambda}{width=2.2cm}
+}
 }
 
 \pause
@@ -747,6 +764,8 @@ Which is met with \textcolor{red}{equality} by any of the \textcolor{red}{suppor
     
 \notesonly{The calculation of $b^{*}$ is }made more robust by averaging over all support vectors:
 
+\svspace{-2mm}
+
 \begin{equation}
     b^* = \frac{1}{\#_{\mathrm{SV}}} \sum\limits_{\alpha \in \mathrm{SV}}
         \big( y_T^{(\alpha)} - {\color{blue}\sum\limits_{\beta \in {\color{red}\mathrm{SV}}}}
@@ -763,9 +782,9 @@ Which is met with \textcolor{red}{equality} by any of the \textcolor{red}{suppor
 
 \end{frame}
 
-\subsubsection{Making predictions with the SVM}
+\subsection{Making predictions with the SVM}
 
-\begin{frame}{Only}\frametitle{\subsubsecname}
+\begin{frame}{Only}\frametitle{\subsecname}
 
 \begin{enumerate}
 \item<only@1> We started off with a connectionist neuron model:
