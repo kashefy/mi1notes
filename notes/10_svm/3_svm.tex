@@ -142,7 +142,7 @@ The cost function\notesonly{ to minimize}:
 \end{equation}
 
 \only<2>{
-\question{Why have we suddenly switched to the squared Euclidean norm and where did the 2 come from?}
+\question{Why have we suddenly switched to the squared Euclidean norm and where did the $1/2$ come from?}
 }
 
 \mode<article>{
@@ -152,26 +152,43 @@ Dividing by 2 is simply for convenience.
 
 
 \notesonly{
-We want to restrict the space of solutions for $\vec w$ to that which leads to the correct classification of the training points.
+We want to restrict the space of solutions for $\vec w$ to that which leads to
+\begin{enumerate}
+\item the correct classification of the training points.
+\item training points fall on or outside the margin, but \textbf{not in}side the margin (see Table \ref{table:constraintcases} for example cases).
+\end{enumerate}
 We therefore constrain solutions such that:}
 
 \visible<3->{
 \svspace{5mm}
-\slidesonly{Constraint for correct classification (``\emph{0-1 loss}'' or ``\emph{hinge loss}''):}
+\slidesonly{Constraint for correct classification (modified ``\emph{0-1 loss}'' or ``\emph{hinge loss}'') \underline{and} \textbf{not} inside the margin:}
 
 \svspace{-2mm}
 
 \begin{equation}
- y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) \ge 1 \;\;\forall \alpha{}
+ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) \ge 1 \quad\forall \alpha{}
  \label{eq:constraint}
 \end{equation}
+
+\only<3>{
+\svspace{2mm}
+}
+
+\begin{center}
+	\includegraphics<4>[width=\notesonly{1.}\slidesonly{1.02}\textwidth]{img/section2_fig18_sv_nolambda_constraint_cases}
+	\notesonly{
+	\captionof{figure}{Example cases for meeting or violating the constraint. The constraint is violated whenever a point is misclassified or falls inside the margin. It is met whenever it is correctly classified and falls outside of the margin and met with equality whenever it is correctly classifiied and falls exactly on the margin}
+	}
+\end{center}
+
 }
 
 \notesonly{
-\eqref{eq:constraint} provides constraints that are linear in $\vec w$. It is sometimes referred to as the \emph{0-1 loss} or \emph{hinge loss}. It is exactly zero whenever a point is correctly classified and 1 whenever it is misclassified. It behaves similarly to \emph{parity-check} with the difference that \emph{parity-check} only produces a binary output.
+\eqref{eq:constraint} provides constraints that are linear in $\vec w$. It builds on the \emph{0-1 loss} or \emph{hinge loss}. In its original form, the \emph{0-1 loss} is exactly zero whenever a point is correctly classified and 1 whenever it is misclassified. It behaves similarly to \emph{parity-check} with the difference that \emph{parity-check} only produces a binary output.\\
+We modify the \emph{0-1 loss} to also detect whether a point has fallen inside a margin.
 
 This gives us the \emph{primal} problem for structural risk minimization (SRM) problem. }
-\visible<4->{
+\visible<5->{
 \slidesonly{The SRM principle is about:}
 
 \svspace{-3mm}
@@ -188,8 +205,11 @@ This gives us the \emph{primal} problem for structural risk minimization (SRM) p
     
 \end{frame}
 
-\begin{frame}
-Applying the Lagrange method to the primal problem of SRM:
+\subsubsection{Applying the Lagrange method to the primal problem of SRM}
+
+\begin{frame}\frametitle{\subsubsecname}
+
+\svspace{-5mm}
 
 \begin{equation}
 f_{0}(\vec w,b) = \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \notesonly{= \frac{1}{2} \vec w^{\top} \vec w }\eqexcl \min
@@ -216,16 +236,22 @@ f_{\alpha} (\vec w,b) = -\big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec 
 
 The Lagrangian becomes:
 
-\pause
-
 \slidesonly{\vspace{-5mm}}
 
 \begin{align}
+\visible<3->{
 L(\vec w, b, \{\lambda_{\alpha}\}) 
-\,=&\, f_{0}(\vec w,b) + \sum_{\alpha=1}^{p} \lambda_{\alpha} f_{\alpha}(\vec w,b)\\
-\,=&\, \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
+\,=&\, f_{0}(\vec w,b) + \sum_{\alpha=1}^{p} \lambda_{\alpha} f_{\alpha}(\vec w,b)
+\only<3>{
+\slidesonly{~,\quad \lambda_{\alpha} \ge 0}
+}\\
+\,=&
+}
+\visible<4->{\, \frac{1}{2} \lVert \vec w \rVert_{2}^{2}
 - \sum_{\alpha=1}^{p} \lambda_{\alpha} \big\{ y_{T}^{(\alpha)} \cdot \big( \vec w^{\top} \vec x^{(\alpha)} + b \big) -1 \big\}
-\label{eq:lagrangianprimal}\slidesonly{,\quad \lambda_{\alpha} \ge 0}
+\label{eq:lagrangianprimal}
+\slidesonly{~,\quad \lambda_{\alpha} \ge 0}
+}
 \end{align}
 
 \end{frame}
@@ -499,6 +525,7 @@ on       & $\mbox{\scriptsize-1}$                                & $\mbox{\scrip
 \end{tabular}
 }
 \caption{Example cases for the constraint.}
+\label{table:constraintcases}
 \end{table}
 \end{frame}
 
