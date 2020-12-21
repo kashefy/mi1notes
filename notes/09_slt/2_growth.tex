@@ -5,10 +5,16 @@
     \begin{center} \huge
         \secname
     \end{center}
+    
+    \svspace{7mm}
+    
+    \begin{center}
+		\includegraphics[width=0.6\textwidth]{img/meme_growth}
+    \end{center}
 \end{frame}
 }
 
-\begin{frame}\frametitle{\secname - What is it?}
+\begin{frame}\frametitle{\secname~- What is it?}
 
 The growth function is the measure of \emph{sample} complexity for a model class.\\[5mm]
 
@@ -67,14 +73,22 @@ It is closely related to the \emph{VC dimension}.
 			The classifiers in this set come from the same model class (e.g. connectionist neurons with weights $\vec w$).
 			Each classifier describes a different hyperplane (different $\vec w$) to separate the two classes in the data.
 			
-		\vspace{5mm}
-		\item<2-> {\textbf binary label vector:} $\vec y_{(\vec{w})} = \Big( 
+		\vspace{3mm}
+		\item<2-> {\textbf{binary label vector}:} $\vec y_{(\vec{w})} = \Big( 
 			y_{(\vec{x}^{(1)}, \vec{w})}, 
 			y_{(\vec{x}^{(2)}, \vec{w})}, \ldots, 
 			y_{(\vec{x}^{(p)}, \vec{w})} \Big)$
 			\begin{itemize}	
 				\item different classifiers can induce the 
-					same label vector on the training set 
+					same label vector on the training set\notesonly{ (cf. \figref{fig:dichotomy_redundant})}
+					
+				%\begin{center}
+					%\includegraphics<2>[width=0.25\textwidth]{img/dichotomy_redundant}
+					%\notesonly{
+					%\captionof{figure}{Different weight vectors that produce identical labelng of the points.}
+					%}
+					%\label{fig:dichotomy_redundant}
+				%\end{center}
 			\end{itemize}
 			
 			Each classifier in $\Lambda$ describes a different hyperplane.
@@ -82,7 +96,7 @@ It is closely related to the \emph{VC dimension}.
 			Looking at the predictions each one produces for the $p$ points will produce some label vector $\vec y_{(\vec{w})}$ with $p$ elements. A prediction for every point.
 			}
 		\vspace{5mm}
-		\item<3> {\textbf number} of different vectors $\vec y_{(\vec{w})}$ 
+		\item<3> \textbf{number} of different vectors $\vec y_{(\vec{w})}$ 
 			induced by all $\vec w \in \Lambda$:
 			\vspace{-2mm}
 			\begin{equation}
@@ -129,7 +143,7 @@ It is closely related to the \emph{VC dimension}.
 				%N_{(\vec{x}^{(1)}, \ldots, \vec{x}^{(p)})}^\Lambda \bigg) }_{
 					%\text{worst case}}
 	%\end{equation}
-	
+	\svspace{-3mm}
 	\begin{equation}
 	G_{(p)}^\Lambda = \ln \bigg( 
 				\sup_{\vec{x}^{(1)}, \ldots \vec{x}^{(p)}}
@@ -141,8 +155,8 @@ It is closely related to the \emph{VC dimension}.
 	Before we proceed, we turn back to the convergence of ERM, specifically \eqref{eq:absdeltaconvergence0}:
     }
 	\mode<presentation>{
-    Recall:\\
-    
+    Recall:
+    \svspace{-3mm}
 				\begin{equation*}
 				\lim_{p \to \infty} P\bigg\{ 
 					{
@@ -152,7 +166,7 @@ It is closely related to the \emph{VC dimension}.
 			\end{equation*}
 	}
 	
-	This convergence is equivalent to\footnote{We don't dig into how they are equivalent. If interested, see Ch. 5.5 \citep{scholkopf2001learning} for a description of the approach and \citep{vapnik1999overview} for the detailed derivation.
+	This convergence is equivalent to\footnote{\notesonly{We don't dig into how they are equivalent. }If interested, see Ch. 5.5 \citep{scholkopf2001learning} for a description of the approach and \citep{vapnik1999overview} for the detailed derivation.
 	}:
 	\begin{equation}
 	\lim_{p \to \infty} G_{(p)}^\Lambda / p \eqexcl 0
@@ -169,18 +183,76 @@ It is closely related to the \emph{VC dimension}.
 
 \end{frame}
 
-\begin{frame}
-    The growth function does not tell us how many points we need to separate the two classes but how many points we need to exclude ambiguous predictions.\\
+\begin{frame}{Complete ambiguity}
+    The growth function does not tell us how many points we need to separate the two classes but how many points we need to exclude completely ambiguous predictions.\\
     
-    Example:\\
+\end{frame}
+
+\begin{frame}{Example with complete ambiguity}
+    \notesonly{Example with complete ambiguity:\\}
     \mode<presentation>{
     
-    Linear neuron 2 points in 2D\\
-    \textbf{see blackboard\ldots}
+    Linear neuron, 2 points in 2D. We do not have access to the hyperplane $\vec w$. We only have access to the predictions made by the neuron:\\
+    %\textbf{see blackboard\ldots}
     }
+    
+	\begin{center}
+\slidesonly{
+		\includegraphics<2>[width=0.3\textwidth]{img/dichotomy_ambiguous}
+		\includegraphics<3>[width=0.3\textwidth]{img/dichotomy_ambiguous_new_point}
+		}
+		\includegraphics<4>[width=0.3\textwidth]{img/dichotomy_ambiguous_decision_boundaries}
+		\notesonly{
+		\captionof{figure}{Ambiguous regions. No complete ambiguity for this particular case yet, but still possible.}
+		}
+	\end{center}
+\slidesonly{
+\only<4>{
+	\begin{center}
+		Ambiguity not \textbf{yet} complete.
+	\end{center}
+		}
+		}
+
+\only<5>{
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/dichotomy_ambiguous_decision_boundaries_2}
+\end{center}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\begin{center}
+	\includegraphics[width=0.7\textwidth]{img/dichotomy_ambiguous_decision_boundaries_3}
+\end{center}
+\end{minipage}
+	\notesonly{
+	\captionof{figure}{Complete ambiguity over the label of a third point, when we only have the predictions of two points in 2D by a linear neuron.}
+	}
+\end{center}
+}
     
     \mode<article>{Any linear neuron can find a hyperplane to separate two specific points in 2-D space. It does not tell us anything about the neuron's ability to separate an additional 3rd test point in that same space. Therefore $p = 2$ is still ambiguous for the linear neuron.}
     
+\end{frame}
+
+\begin{frame}{Example with \textbf{non}complete ambiguity}
+    \notesonly{An example with \textbf{no complete} ambiguity:\\}
+    \mode<presentation>{
+    
+    Linear neuron, 3 points in 2D:\\
+    %\textbf{see blackboard\ldots}
+    }
+    
+	\begin{center}
+\slidesonly{
+		\includegraphics<1>[width=0.3\textwidth]{img/dichotomy_nonambiguous_new_point}
+		}
+		\includegraphics<2>[width=0.3\textwidth]{img/dichotomy_nonambiguous_decision_boundaries}
+		\notesonly{
+		\captionof{figure}{No complete ambiguity over the label of the third point in 2D.}
+		}
+	\end{center}
 \end{frame}
 
 \mode<article>{
@@ -307,7 +379,7 @@ However, for $p > \dvc$ the growth function behaves differently, namely
 			\vspace{-2mm}
 			\begin{equation}
 				P\bigg\{ {%\color{question1} 
-				\Big| R_{(\vec w_p)} - R_{(\vec w_0)} \Big| }
+				{\color{blue}\Big| R_{(\vec w_p)} - R_{(\vec w_0)} \Big|} }
 					> \Big(\smallfrac{G^\Lambda_{(2p)} 
 						- \ln \frac{\epsilon}{8}}{p} \Big)^\frac{1}{2}
 					+ \Big(-\smallfrac{\ln \frac{\epsilon}{2}}{2p} 
@@ -322,22 +394,27 @@ However, for $p > \dvc$ the growth function behaves differently, namely
 \end{frame}
 
 \mode<presentation>{
-\begin{frame}\frametitle{Re-thinking $\eta$}
-\begin{figure}
-	\mode<article>{ \centering }
-	\mode<presentation>{ \raggedright \vspace{-2mm}}
-	\includegraphics[height=\slidesonly{6.7cm}{\notesonly{8cm}}]{img/PdeltaReta}
-	\caption{Distribution of absolute risk differences for larger number of training points $p_{1} < p_{2} < p_{3} < p_{4}$}
-	\label{fig:PdeltaReta}
-\end{figure}
-
-			\begin{equation}
-				\lim_{p \to \infty} P\bigg\{ 
-					{
-						\Big|R_{(\vec w_p)} - R_{(\vec w_0)}\Big| 
-					}
-				\geq \eta \bigg\}\;\;<\;\; \epsilon \,, \quad \forall \eta > 0
-				\label{eq:risktozero}
+\begin{frame}\frametitle{Re-thinking $\eta$: bounded by the growth function}
+\begin{center}
+	\includegraphics[height=6cm]{img/PdeltaReta}
+\end{center}
+			%\begin{equation}
+				%\lim_{p \to \infty} P\bigg\{ 
+					%{
+						%\Big|R_{(\vec w_p)} - R_{(\vec w_0)}\Big| 
+					%}
+				%\geq \eta \bigg\}\;\;<\;\; \epsilon \,, \quad \forall \eta > 0
+				%\label{eq:risktozero}
+			%\end{equation}
+						\begin{equation}
+				P\bigg\{ {%\color{question1} 
+				{\color{blue}\Big| R_{(\vec w_p)} - R_{(\vec w_0)} \Big|} }
+					> \Big(\smallfrac{G^\Lambda_{(2p)} 
+						- \ln \frac{\epsilon}{8}}{p} \Big)^\frac{1}{2}
+					+ \Big(-\smallfrac{\ln \frac{\epsilon}{2}}{2p} 
+						\Big)^\frac{1}{2} + \smallfrac{1}{p}
+				\bigg\} < \epsilon
+					\label{eq:boundgenerlizationdeviation}
 			\end{equation}
 \end{frame}
 }
