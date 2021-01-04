@@ -88,18 +88,18 @@ otherwise,
 
 \slidesonly{\vspace{-2mm}}
 
-\begin{figure}[h]
-     \centering
+\begin{center}
 	 \includegraphics[width=0.6\textwidth]{img/cost_eps}%
 	 \mode<article>{
-     \caption{The cost function}
+     \captionof{figure}{The cost function}
      }
 	 \label{fig:cost}
-\end{figure}
+\end{center}
 
+\visible<2>{
 The SRM objective becomes:
 
-\slidesonly{\vspace{-5mm}}
+\svspace{-5mm}
 
 \begin{equation}
     \min_{\vec w,b} \frac{1}{2} \lVert \vec w \rVert + C R^{\varepsilon}_{\text{emp}}(\vec w,b)
@@ -110,6 +110,7 @@ The SRM objective becomes:
      }
     \label{eq:srmeps}
 \end{equation}
+}
 
 \notesonly{
 using 
@@ -138,7 +139,7 @@ using
 
 \begin{itemize}
 \item[(i)]
-Simplify assumptions (will be relaxed later)\notesonly{\footnote{This is based on my understanding of Ch. 9 from \citep{scholkopf2001learning}.}}
+Simplify assumptions (will be relaxed later){\footnote{This is based on my understanding of Ch. 9 from \citep{scholkopf2001learning}.}}
 
 \begin{enumerate}
     \item<only@1-> perfect regression solution, i.e. zero error $\varepsilon$-insensitive cost,
@@ -230,7 +231,7 @@ Relax constraints by allowing for errors\\
 		\only<2->{
         \begin{equation}
         \begin{array}{ll}
-        \min_{\vec w, b\only<3>{,\{\varphi_\alpha, \varphi_\alpha^*\}}} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \only<3->{+ C \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*)}\\
+        \min_{\vec w, b\only<3>{,\{\varphi_\alpha, \varphi_\alpha^*\}}} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \only<3->{+ C \frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*)}\\
         \text{subject to} & 
         \vec w^{\top} \vec x^{(\alpha)} + b - y_{T}^{(\alpha)} \le \varepsilon + \varphi_\alpha\\
         &

@@ -62,7 +62,7 @@ The SRM objective for $\nu$-SVR becomes:
 \begin{block}{}
      \begin{equation}
         \begin{array}{ll}
-        \min_{\vec w, b,\{\varphi_\alpha\}, \{\varphi_\alpha^*\}\only<2->{, {\color{darkgreen}{\varepsilon}}}} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2} + C \only<2->{\big\lbrack \nu{\color{darkgreen}\varepsilon} + } \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*) \only<2>{\big\rbrack}\\
+        \min_{\vec w, b,\{\varphi_\alpha\}, \{\varphi_\alpha^*\}\only<2->{, {\color{darkgreen}{\varepsilon}}}} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2} + C \only<2->{\big\lbrack \nu{\color{darkgreen}\varepsilon} + } \frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*) \only<2->{\big\rbrack}\\
         \text{subject to} & 
         \vec w^{\top} \vec x^{(\alpha)} + b - y_{T}^{(\alpha)} \le \varepsilon + \varphi_\alpha\\
         &
@@ -73,7 +73,7 @@ The SRM objective for $\nu$-SVR becomes:
         \label{eq:primalnu}
      \end{equation}
      
-     \slidesonly{\vspace{-3mm}}
+     \svspace{-3mm}
         with $C>0$ ($C$ penalizes model error)\only<2->{, $\nu \ge 0$}
 \end{block}
 
@@ -83,7 +83,7 @@ The SRM objective for $\nu$-SVR becomes:
 $\nu$-SVR extends $\varepsilon$-SVR with: 1$\times$ new variable, 1$\times$ new hyper-parameter, 1$\times$ new constraint.
 }
 
-     \slidesonly{\vspace{-3mm}}
+     \svspace{-3mm}
 
      \question{Aren't we just exchanging one hyperparameter for another? How is this better?}\\
      
@@ -92,8 +92,8 @@ $\nu$-SVR extends $\varepsilon$-SVR with: 1$\times$ new variable, 1$\times$ new 
      - Yes, but with increased resolution of how we balance model error and model complexity. %We will see that 
      $\nu$ acts as a
      \begin{itemize}
-     \item upper bound on the fraction of errors: $\nu \ge \frac{1}{p} \sum_{\alpha}^p (\varphi_\alpha + \varphi_\alpha^*)$\notesonly{\\ and as a \\}
-     \item lower bound on the fraction of SVs: $\nu \le \frac{\# SV}{p}$\notesonly{\footnote{If interested, see details in Ch. 9.3 from \citep{scholkopf2001learning} and the paper \citep{scholkopf2000new}}}.
+     \item upper bound on the fraction of errors: $\nu \ge \frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*)$\notesonly{\\ and as a \\}
+     \item lower bound on the fraction of SVs: $\nu \le \frac{\# SV}{p}${\footnote{\slidesonly{\tiny} If interested, see details in Ch. 9.3 from \citep{scholkopf2001learning} and the paper \citep{scholkopf2000new}}}.
      \end{itemize}
      %\notesonly{The solution of the primal problem for $\nu$-SVR will enable us to discuss this in more detail (cf. \sectionref{sec:intuitionnu}}
 \end{frame}
