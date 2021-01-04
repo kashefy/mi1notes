@@ -65,7 +65,7 @@ Remains an open issue for SVMs.
 
 \begin{frame}\frametitle{\subsecname}
 
-\only<1,2>{
+\only<1-3>{
 \begin{itemize}
 \item[] for each class $c_{k}$ in $\{c_{1},c_{2},\ldots,c_{K}\}$\\
 do
@@ -77,31 +77,38 @@ end
 \end{itemize}
 
 \slidesonly{
-\only<1>{\textbf{see blackboard}}
+\only<1>{
+%\textbf{see blackboard}
+\begin{center}
+	 \includegraphics[width=4cm]{img/3classes}
+\end{center}
+}
 }
 
 }
-\only<2,3>{
+\only<2->{
+
+\svspace{-5mm}
 %\slidesonly{
 	%\begin{textblock}{}(10,5)
 %}
-\begin{figure}[h]
-     \centering
+\begin{center}
 	 \includegraphics[width=4cm]{img/3classes_onevsall}
-     \caption{$K$ one-vs-all classifiers}
+     \captionof{figure}{$K$ one-vs-all classifiers}
 	 \label{fig:multiclassification}
-\end{figure}
+\end{center}
 %\slidesonly{
 	%\end{textblock}
 %}
 
-\slidesonly{\vspace{-5mm}}
-
+\svspace{-5mm}
+\only<3>{
 \question{Any potential problems with training $K$ one-vs-all classifiers?}
 }
+}
 
-\only<3>{
-\slidesonly{\vspace{-5mm}}
+\only<4>{
+\svspace{-3mm}
 
 \begin{itemize}
 \item ambiguous regions
@@ -143,20 +150,19 @@ Actually: one-vs-rest classification for SVMs is good enough for many problems.
 \item[:-(] We still have ambiguous regions:    
 \end{itemize}
 
-\begin{figure}[h]
-     \centering
-	 \includegraphics[width=5cm]{img/3classes_onevsone_majority}
+\begin{center}
+	 \includegraphics[width=4.8cm]{img/3classes_onevsone_majority}
 	 \mode<article>{
-     \caption{One-vs-one classification}
+     \captionof{figure}{One-vs-one classification}
      }
 	 \label{fig:onevsone}
-\end{figure}
+\end{center}
     
 \end{frame}
 
-\subsection{Extend with error-correcting outputs}
+\subsection{Binary classification with error-correcting outputs}
 
-\begin{frame}
+\begin{frame}{\subsecname}
 
 A rough outline of this ensemble method:
 

@@ -115,7 +115,7 @@ with $\varphi_{\alpha} \ge 0$.
 
 \subsubsection{The slack values}
 
-\begin{frame}\frametitle{\subsubsecname~: Example}
+\begin{frame}\frametitle{\subsubsecname: Example values}
 % Please add the following required packages to your document preamble:
 % \usepackage[table,xcdraw]{xcolor}
 % If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
@@ -148,7 +148,7 @@ inside  & $\mbox{\scriptsize+1}$                                                
 \end{frame}
 
 
-\begin{frame}\frametitle{\subsubsecname~: Overview}
+\begin{frame}\frametitle{\subsubsecname: Overview}
 
 \begin{figure}[h]
 	\centering
@@ -162,7 +162,7 @@ inside  & $\mbox{\scriptsize+1}$                                                
 \end{figure}
 
 \begin{itemize}
-\item $0 \le \varphi < 1$:
+\item $0 < \varphi < 1$:
 
 The data point falls \emph{inside} the margin \textbf{and} on the \emph{correct} side of the decision boundary 
 
@@ -183,8 +183,8 @@ The data point falls on the \emph{wrong} side of the decision boundary. Whether 
 
 % -----------------------------------------------------------------------------
 \begin{frame}
-\only<1>{\frametitle{\subsecname~: start with perfect separation - no slack}}
-\only<2->{\frametitle{\subsecname~: allow for slack}}
+\only<1>{\frametitle{\subsecname: start with perfect separation - no slack}}
+\only<2->{\frametitle{\subsecname: allow for slack}}
 
 	\slidesonly{\vspace{-5mm}}
 
@@ -194,12 +194,15 @@ The data point falls on the \emph{wrong} side of the decision boundary. Whether 
 		\begin{array}{ll}
 		\frac{1}{2} \|\vec{w}\|^2 
 				\visible<3->{{\color{blue} + \frac{C}{p} 
-				\sum\limits_{\alpha = 1}^p \varphi_\alpha}}
+				\sum\limits_{\alpha = 1}^p}
+				{\color{red}\varphi_\alpha}
+				}
 			\eqexcl \min \;\;\Bigg\{
 		& \begin{array}{l}
 			\scriptsize{\text{minimize upper bound on VC dimension}} \\
-			\visible<3->{\scriptsize{\text{\color{blue}
-				+ minimize (approx.) margin error}}}
+			\visible<3->{\scriptsize{
+			\text{\textcolor{blue}{
+				+ minimize (approx.)} \textcolor{red}{margin error}}}}
 		\end{array}
 		\end{array}
 		\label{eq:csvmmin}
@@ -211,12 +214,12 @@ The data point falls on the \emph{wrong} side of the decision boundary. Whether 
 		\begin{array}{rll}
 			y_T^{(\alpha)} \Big( \vec{w}^\top \vec{x}^{(\alpha)} + b \Big)
 				&\geq 1 
-				\visible<2->{\color{blue} - \varphi_\alpha}
+				\visible<2->{\color{red} - \varphi_\alpha}
 			& \substack{\text{normalization \& correct classification} \\[1mm]
 					\text{of all data points, i.e. ``no slack''}  
-					\visible<2->{\color{blue} \text{ for } \varphi_\alpha = 0 } } \\ 
-			\visible<2->{\color{blue} \varphi_\alpha & \color{blue} \geq 0 
-			& \scriptstyle \color{blue} \text{``margin errors'' for } 
+					\visible<2->{\color{red} \text{ for } \varphi_\alpha = 0 } } \\ 
+			\visible<2->{\color{red} \varphi_\alpha & \color{red} \geq 0 
+			& \scriptstyle \color{red} \text{``margin errors'' for } 
 				\varphi_\alpha \neq 0 \text{ ``with slack''}}
 		\end{array}
 	\end{equation}
@@ -235,7 +238,7 @@ The data point falls on the \emph{wrong} side of the decision boundary. Whether 
 	
 	
 	\only<2>{
-	\question{What do different values for ${\color{blue}\varphi_\alpha}$ represent?}\\
+	\question{What do different values for ${\color{red}\varphi_\alpha}$ represent?}\\
 	}
 	
 	\only<3>{
