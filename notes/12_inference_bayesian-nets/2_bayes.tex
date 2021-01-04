@@ -116,32 +116,37 @@ P(Y|X) = \frac{P(X|Y)P(Y)}{P(X)}
 
 \only<2>{
 
-
-\begin{figure}[h]
-     \centering
+\begin{center}
 	 \includegraphics[width=0.33\textwidth]{img/xkcd_seashell}%
-	 \caption{Bayes' Theorem example from \href{https://imgs.xkcd.com/comics/seashell.png}{xkcd.com}}
-\end{figure}
+	 \captionof{figure}{Bayes' Theorem example from \href{https://imgs.xkcd.com/comics/seashell.png}{xkcd.com}}
+\end{center}
 
 }
 
 \pause
 
+\only<3->{
 \notesonly{As a $\mathit{cause}$ and $\mathit{effect}$ relationship:}
 
 \begin{equation}
 \underbrace{P(\mathit{cause}|\mathit{effect})}_{\text{diagnositc}} = \frac{\overbrace{P(\mathit{effect}|\mathit{cause})}^{\text{causal}}P(\mathit{cause})}{P(\mathit{effect})}
 \end{equation}
+}
 
-If $P(\mathit{effect})$ is missing, we can still normalize using:
+\only<4->{
+If $P(X)$ is missing, we can still normalize using:
 
 \begin{equation}
 P(Y|X) = \alpha P(X|Y)P(Y)
 \end{equation}
-
+}
+\only<5->{
 $\alpha$ can be chosen to whatever will make the entries in $P(Y|X)$ sum up to $1$.
 
-
+\mode<presentation>{
+\placeimage{12}{9}{img/meme_sumto1}{width=3cm}
+}
+}
 \end{frame}
 
 \newpage
@@ -150,7 +155,6 @@ $\alpha$ can be chosen to whatever will make the entries in $P(Y|X)$ sum up to $
 
 \begin{frame}\frametitle{\subsecname}
 
-\only<1>{
 \begin{equation}
 P(Y|X) = \alpha P(X|Y)P(Y)
 \end{equation}
@@ -158,69 +162,97 @@ P(Y|X) = \alpha P(X|Y)P(Y)
 \begin{align}
 P(\mathit{Cavity}|\mathit{toothache}=\text{true}, \mathit{catch}=\text{true}) &\\ 
 =\alpha \underbrace{P(\mathit{toothache}=\text{true}, \mathit{catch}=\text{true}}_{\circledast} &| \mathit{Cavity})P(\mathit{Cavity})
-\label{eq:applybayes}
+\notesonly{\label{eq:applybayes}}
 \end{align}
 
 $\circledast$ similar scaling problem, not much better than the case of using the full joint distribution.
 
+\end{frame}
+
+\begin{frame}\frametitle{\subsecname~+ independence?}
+
+\svspace{-10mm}
+
+\slidesonly{
+\begin{align}
+P(\mathit{Cavity}|\mathit{toothache}, \mathit{catch}) &\\ 
+=\alpha {P(\mathit{toothache}, \mathit{catch}} &| \mathit{Cavity}) P(\mathit{Cavity})
+\end{align}
 }
 
 \only<1,2>{
 
-\question{Can we use independence to further mitigate the scaling problem here?}
-
+\question{Can we use independence to further mitigate the scaling problem here?}=
 }
 
+\mode<presentation>{
 \only<2>{
+	\begin{center}
+		\includegraphics[width=0.3\textwidth]{img/meme_exploitindep}
+	\end{center}
+}
+}
+
+\end{frame}
+
+\begin{frame}\frametitle{\subsecname~+ independence}
+
+\svspace{9mm}
+
+\slidesonly{
+\begin{align}
+P(\mathit{Cavity}|\mathit{toothache}, \mathit{catch}) &\\ 
+=\alpha {P(\mathit{toothache}, \mathit{catch}} &| \mathit{Cavity}) P(\mathit{Cavity})
+\end{align}
+}
+
+\svspace{-3mm}
 
 \begin{center}
-$\mathit{Toothache}$ and $\mathit{Catch}$ are not independent.\\
-But\\
-$\mathit{Toothache}$ given $\mathit{cavity}$ is independent of $\mathit{Catch}$ given $\mathit{cavity}$
+$\mathit{Toothache}$ and $\mathit{Catch}$ are not independent\\
+but\\
+$\mathit{Toothache}$ given $\mathit{cavity}$ is independent of $\mathit{Catch}$ given $\mathit{cavity}.$
 \end{center}
 
+\only<2->{
 \begin{itemize}
 \item $\mathit{toothache}$ depends on $\mathit{cavity}$: nerves \& tolerance for pain.
 \item $\mathit{catch}$ depends on $\mathit{cavity}$: dependent on how skillful the dentist is.
 \item \textbf{But}\ldots
-\notesonly{``nerves \& tolerance for pain'' is \underline{independent} of ``how skillful the dentist is''.}
+\only<3>{``nerves \& tolerance for pain'' is \underline{independent} of ``how skillful the dentist is''.}
 \end{itemize}
-
-%TODO figure
-
 }
-
-
-
-
+\slidesonly{
+\only<3>{
+	\placeimage{12.8}{0.8}{img/meme_vader}{width=2.5cm}
+}
+}
 \end{frame}
 
 \begin{frame}
 
 \mode<presentation>{
-\slidesonly{\vspace{-5mm}
-}
+\svspace{-5mm}
 
 \begin{align}
-P(\mathit{Cavity}|\mathit{toothache}=\text{true}, \mathit{catch}=\text{true}) &\\ 
-=\alpha \underbrace{P(\mathit{toothache}=\text{true}, \mathit{catch}=\text{true}}_{\circledast} &| \mathit{Cavity}) P(\mathit{Cavity})
+P(\mathit{Cavity}|\mathit{toothache}, \mathit{catch}) &\\ 
+=\alpha {\color{blue}P(\mathit{toothache}, \mathit{catch} }&{\color{blue}| \mathit{Cavity})} P(\mathit{Cavity})
 \label{eq:applybayes}
 \end{align}
 
-\begin{itemize}
-\item $\mathit{toothache}$ depends on $\mathit{cavity}$: nerves \& tolerance for pain.
-\item $\mathit{catch}$ depends on $\mathit{cavity}$: dependent on how skillful the dentist is.
-\item \textbf{But}\ldots ``nerves \& tolerance for pain'' is \underline{independent} of ``how skillful the dentist is''.
-\end{itemize}
+``nerves \& tolerance for pain'' is \underline{independent} of ``how skillful the dentist is''.
 }
 
-Therefore:\slidesonly{\\ \vspace{-5mm}}
+Therefore:\slidesonly{\\ \vspace{-7mm}}
 \begin{align}
+{
+\slidesonly{\color{blue}}
 P(\mathit{toothache}
 %=\text{true}
 , \mathit{catch}
 %=\text{true}
- | \mathit{Cavity}) &\\
+ | \mathit{Cavity}) 
+} &\\
 = P(\mathit{toothache}
 %=\text{true}
 | \mathit{Cavity}) &P(\mathit{catch}
@@ -229,21 +261,20 @@ P(\mathit{toothache}
 \label{eq:condindep}
 \end{align}
 
-i.e. \emph{conditional} independence of $\mathit{toothache}$ and $\mathit{catch}$ \underline{given} $\mathit{cavity}$
+i.e. the \emph{conditional} independence of $\mathit{toothache}$ and $\mathit{catch}$ \underline{given} $\mathit{Cavity}$
 
 \pause
 
-Plugging \eqref{eq:condindep} into \eqref{eq:applybayes} yields:
+\notesonly{Plugging \eqref{eq:condindep} into \eqref{eq:applybayes} yields:}
 
-\slidesonly{\vspace{-4mm}}
+\svspace{-4mm}
 
 \begin{align}
 P(\mathit{toothache}, \mathit{catch} | \mathit{Cavity}) &\\
-= \alpha P(\mathit{toothache}| \mathit{Cavity}) &
-P(\mathit{catch}| \mathit{Cavity}) P(\mathit{Cavity})
+= \alpha {\slidesonly{\color{blue}}P(\mathit{toothache}| \mathit{Cavity})} &
+{\slidesonly{\color{blue}}P(\mathit{catch}| \mathit{Cavity})} P(\mathit{Cavity})
 \end{align}
 
-i.e. \emph{conditional} independence of $\mathit{toothache}$ and $\mathit{catch}$ \underline{given} $\mathit{Cavity}$
 \end{frame}
 
 \subsection{The Naive Bayes model}

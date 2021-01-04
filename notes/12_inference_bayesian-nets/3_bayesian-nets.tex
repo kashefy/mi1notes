@@ -42,11 +42,30 @@ P(A,B,C) = P(A|C)P(B|C)P(C)
 \end{frame}
 
 
-\begin{frame}\frametitle{\subsecname}
-    
-\question{What does the DAG representation of this full joint distribution look like for toothache example?}
+\begin{frame}\frametitle{\subsecname: toothache example}
 
-(\textbf{see blackboard})
+\svspace{-5mm}
+    
+\question{What does the DAG representation of the full joint distribution look like for toothache example?}
+
+%(\textbf{see blackboard})
+\mode<presentation>{
+
+\svspace{-5mm}
+\begin{align*}
+P(\mathit{Toothache},\mathit{Catch},\mathit{Cavity}) &\\
+= P(\mathit{Toothache}|\mathit{Cavity}) &P(\mathit{Catch}|\mathit{Cavity}) P(\mathit{Cavity})
+\end{align*}
+
+\begin{center}
+	\includegraphics<1>[width=0.3\textwidth]{img/toothache_dag_circle}
+\end{center}
+}
+
+\begin{center}
+	\includegraphics<2>[width=0.3\textwidth]{img/toothache_dag}
+	\captionof{figure}{DAG representation for the toothache example.}
+\end{center}
 
 \end{frame}
 
@@ -59,7 +78,7 @@ P(A,B,C) = P(A|C)P(B|C)P(C)
 		\includegraphics<1>[width=7cm]{img/section3_fig5_v2_1} 
 		}
 %		\includegraphics<2>[width=8cm]{img/section3_fig5_v2_2}
-		\includegraphics<2>[width=7cm]{img/section3_fig5_v2_2}  
+		\includegraphics<3>[width=7cm]{img/section3_fig5_v2_2}  
 	\end{center}
 	
 %	\only<2>{
@@ -72,6 +91,7 @@ P(A,B,C) = P(A|C)P(B|C)P(C)
 %			\quad$P\big(X_i\,|\, \text{parents}(X_i)\big)$
 %	\end{itemize}
 %	} 
+\visible<2->{
 Considering statistical dependencies, only 10 instead of 31 entries have to be stored.
 	{ \small
 		\begin{align} 
@@ -79,6 +99,7 @@ Considering statistical dependencies, only 10 instead of 31 entries have to be s
 			P(J|M,A,B,E) \, P(M|A,B,E) \, P(A|B,E) \, P(B|E) \, P(E) \\\slidesonly{\vspace{-5mm}}
 			\stackrel{\substack{\text{cond.}\\\text{indep.}}}{=}& P(J|A) \, P(M|A) \, P(A|B,E) \, P(B) \, P(E)
 		\end{align}
+	}
 	}
 \end{frame}
 
@@ -121,7 +142,7 @@ The Markov blanket of a node includes:
 \begin{itemize}
 \item its parents
 \item its children
-other parents of the children    
+\item other parents of the children    
 \end{itemize}
     
 \end{frame}
@@ -191,12 +212,12 @@ other parents of the children
 			\begin{itemize}
 				\item example:
 					\begin{itemize}
-						\item ${\color{red}x_3},
-							\visible<2->{x_6,}
-							\visible<3->{x_5,}
-							\visible<4->{x_4,}
-							\visible<5->{x_2,}
-							\visible<6->{x_1}$
+						\item ${\slidesonly{\only<1,7->{\color{red}}}x_3},
+							\visible<2->{{\slidesonly{\only<2>{\color{red}}}x_6},}
+							\visible<3->{{\slidesonly{\only<3>{\color{red}}}x_5},}
+							\visible<4->{{\slidesonly{\only<4>{\color{red}}}x_4},}
+							\visible<5->{{\slidesonly{\only<5>{\color{red}}}x_2},}
+							\visible<6->{{\slidesonly{\only<6>{\color{red}}}x_1}}$
 					\end{itemize}
 				\vspace{5mm}
 				\item<7-> other possible topological orderings:
@@ -236,9 +257,9 @@ other parents of the children
 	\end{minipage}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Exercise: topological sorting}
 
-Exercise: topological sorting
+\notesonly{Exercise: topological sorting}
 
 \begin{figure}[h]
 	\centering
@@ -268,9 +289,9 @@ Exercise: topological sorting
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}{Exercise: topological sorting}
 
-Exercise: topological sorting
+\notesonly{Exercise: topological sorting}
 
 \begin{figure}[h]
 	\centering
@@ -299,9 +320,12 @@ Exercise: topological sorting
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{
+Exercise: DAG (same as before) to moral graph}
 
-Exercise: DAG (same as before) to moral graph
+\notesonly{
+Exercise: DAG (same as before) to moral graph}
+
 
 \mode<presentation>{
 \begin{figure}[h]
