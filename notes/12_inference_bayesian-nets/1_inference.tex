@@ -149,13 +149,21 @@ e.g.\\
  However, the prior becomes less useful if we proceed to infer other things.
 \end{itemize}
 
+\mode<presentation>{
+\svspace{-5mm}
+\begin{center}
+	\includegraphics[width=0.3\textwidth]{img/meme_toothache}
+\end{center}
+}
+
 
 \end{frame}
 
-\begin{frame}\frametitle{A thing about priors}
+\begin{frame}\frametitle{Interpreting conditional probabilities}
 
 \mode<presentation>{
 $$P(\mathit{cavity} | \mathit{toothache}) = 0.6$$
+\svspace{-3mm}
 }
     
 \textbf{Caution}\notesonly{ in interpreting conditional probabilities:}\\
@@ -169,15 +177,25 @@ $$P(\mathit{cavity} | \mathit{toothache}) = 0.6$$
 P(\mathit{cavity} \,|\, \mathit{toothache} \wedge diagnosis_{\mathit{cavity}} = \text{false}) \stackrel{\text{e.g.}}{=} 0.02
 \end{equation}
 
+\pause
+
+\mode<presentation>{
+\svspace{-3mm}
+\begin{center}
+	\includegraphics[width=0.28\textwidth]{img/meme_cond}
+\end{center}
+}
+
 \end{frame}
 
 \begin{frame}\frametitle{We were talking about evidence}
 
 Observing event $e$ rules out events where $e$ is false. This leaves a set where $P(e)>0$.\\
+\svspace{5mm}
 Therefore, when we query for some variable $x$,
-we look within that set for the fraction that satisfies $x$ and $e$.
+we look within that set for the fraction that satisfies $x$ and $e$\notesonly{.}\slidesonly{:}
 
-This fraction can be calculated using the following:
+\notesonly{This fraction can be calculated using the following:}
 
 \begin{equation}
 P(x|e) = \frac{P(x,e)}{P(e)}
@@ -196,13 +214,14 @@ P(x,e) = P(x|e) P(e)
 
 \question{What information do I need to calculate the probability of any proposition?}\\
 
+\pause
+
 - The full joint probability distribution\notesonly{ provides all the information to calculate the probability of any proposition.}\\
 
-\pause
 
 \newpage
 
-Example of a full joint distribution between $\mathit{Cavity},Toothache$ and $\mathit{Catch}$:\\
+Example \notesonly{of a full joint distribution between}\slidesonly{with} $\mathit{Cavity},Toothache$ and $\mathit{Catch}$:\\
 
 %\footnotesize
 	%\begin{center}
@@ -268,7 +287,7 @@ where
 \begin{equation}
 \frac{1}{\alpha} := P(\vec e) = \sum_{x, \vec y} P(x, \vec e, \vec y)  
 \end{equation}
-\item or simply whatever ensures $\sum_{ x} P(x, \vec e) = 1$
+\item or simply whatever ensures $\sum_{ x} P(x, \vec e) \eqexcl 1$
 \end{enumerate}
 
 \end{itemize}
