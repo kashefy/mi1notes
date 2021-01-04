@@ -152,17 +152,37 @@ Remember: We are only dealing with a linearly separable problem.
 
 \subsection{Margins and the VC dimension}
 
+\mode<presentation>{
+
 \begin{frame}
+	\begin{center} \Huge
+	\subsecname
+	\end{center}
+	\begin{center}
+		\includegraphics[width=0.3\textwidth]{img/meme_margin_dvc}
+	\end{center}
+\end{frame}
+}
+
+\begin{frame}{\subsecname}
 
 \slidesonly{\vspace{-5mm}} 
 
 \question{Where does the VC dimension come into all of this?}\\
 
-\slidesonly{\vspace{-5mm}} 
+\pause
+
+\slidesonly{\vspace{5mm}} 
+
+The short answer:\\
 
 \begin{equation}
 \, \uparrow \text{margin} \;\; \leadsto \;\; \dvc \, \downarrow   
 \end{equation}
+
+\end{frame}
+
+\begin{frame}{\subsecname:~The longer answer}
 
 \mode<article>{
 \begin{figure}[h]
@@ -181,7 +201,7 @@ Remember: We are only dealing with a linearly separable problem.
 }
 
 \notesonly{        
-Large margins imply a small VC dimension. }A larger margin tightens the upper bound of the VC dimension, regardless of the dimensionality of the problem. 
+Large margins imply a small VC dimension. }A larger margin tightens the upper bound of the VC dimension, potentially disregarding the dimensionality of the problem. 
 
 \begin{block}{\textit{Theorem 10.3} in \citep{Vapnik1998}}
 \notesonly{states that}
@@ -403,6 +423,12 @@ only depends on $p$ and $\dvc$.}}
 \end{equation}
 
 \question{What about $\dvc \rightarrow 0$? Is this ideal?}
+
+\mode<presentation>{
+\only<4>{
+	\placeimage{11}{10.7}{img/meme_lower_dvc}{width=3.cm}
+}
+}
 
 %\begin{equation}
 %\boxed{
