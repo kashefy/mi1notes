@@ -91,16 +91,25 @@
 		\mu_{X_m \to f_s}(X_m) &\;:=&&\kern-4ex
 			\kern-3ex\prod_{l \in \text{neighbor}(X_m) \setminus\{f_s\}}\kern-3ex
 			\mu_{f_l \to X_m}(X_m) \tag{product}\\[1mm] 
-		\visible<2>{
+		\visible<3>{
 		\mu_{f_s \to X_i}(X_i) &\;:=&&\kern-3ex 
-			\sum_{X_m, \ldots, X_M}\kern-2ex f_s(X_i, X_m,\ldots, X_M) 
+			\sum_{x_m, \ldots, x_M}\kern-2ex f_s(X_i, x_m,\ldots, x_M) 
 			\kern-5ex\prod_{k \in \text{neighbor}(f_s)\setminus\{X_i\}}\kern-5ex 
-			\mu_{X_k \to f_s}(X_k) 
-			\only<1>{\nonumber\hspace{10mm}}
-			\only<2>{\tag{sum}}
+			\mu_{X_k \to f_s}(x_k) 
+			\only<1,2>{\nonumber\hspace{10mm}}
+			\only<3>{\tag{sum}}
 		}
         \label{eq:sumproduct}
 	\end{align}
+	
+	\mode<presentation>{
+	\only<2>{
+	\svspace{-15mm}
+	\begin{center}
+		\includegraphics[width=0.3\textwidth]{img/meme_product}
+	\end{center}
+	}
+	}
 	
 	\mode<article>{
 	\begin{itemize}

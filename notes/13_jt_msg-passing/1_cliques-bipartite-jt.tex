@@ -4,12 +4,11 @@
 \begin{frame} 
 \mode<presentation>{
     \begin{center} \huge
-        \secname
+        \subsecname
     \end{center}
-    \begin{figure}[h]
-	 \centering
+    \begin{center}
 	 \includegraphics[width=0.8\textwidth]{img/jt_roadmap}%
-	\end{figure}
+	\end{center}
 }
 \end{frame}
 
@@ -109,7 +108,7 @@
 					\textbf{Caution: only eliminate a node if it is not part of another clique}
 					\slidesonly{\vspace{5mm}}
 					%\item sub-cliques $\{A,B\} \subseteq \{A,B,C\}$ are absorbed
-					\item requires variable ordering by topological sorting: 
+					\item requires variable ordering by (\textbf{reverse}) topological sorting: 
 						F, D, E, C, B, A
 				\end{itemize}
 	
