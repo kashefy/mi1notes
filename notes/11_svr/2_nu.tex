@@ -47,7 +47,7 @@ $\nu$-SVR extends $\varepsilon$-SVR, by allowing the width of the ``$\varepsilon
 The SRM objective for $\nu$-SVR becomes:
 
     \begin{equation}
-        \min_{\vec w,b,\varepsilon} \frac{1}{2} \lVert \vec w \rVert^2_2 + C \;\Big\lbrack \nu \varepsilon + \frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*) \Big\rbrack
+        \min_{\vec w,b,\{\varphi_\alpha\},\{\varphi_\alpha^*\},\varepsilon} \frac{1}{2} \lVert \vec w \rVert^2_2 + C \;\Big\lbrack \nu \varepsilon + \frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*) \Big\rbrack
         \label{eq:srmnu}
     \end{equation}
 
@@ -241,13 +241,13 @@ with $\{\lambda_{\alpha}\}, \{\lambda_{\alpha}^*\},\{\eta_{\alpha}\},\{\eta_{\al
 \begin{enumerate}
 \item We start with optimizing the Lagrangian of the \emph{primal problem}. As we did with SVMs and C-SVMs, this is achieved by
 \begin{enumerate}[(a)]
-\item calculating the derivatives of $L$ w.r.t. \emph{primal variables} $\vec w, b, \varphi_\alpha, \varphi_\alpha^*, \varepsilon$
+\item calculating the derivatives of $L$ w.r.t. \emph{primal variables} $\vec w, b, \{\varphi_\alpha\}, \{\varphi_\alpha^*\}, \varepsilon$
 \item setting the partial derivatives to zero. (\textbf{see homework})
 \end{enumerate}
 
 \item Substituting the solutions to the \emph{primal problem} back into the Lagrangian yields the Lagrangian of the \emph{dual problem}\notesonly{, which can be expressed in terms of the \emph{dual variables} only}:
 		\begin{equation}
-		  \max_{\lambda_{\alpha}, \lambda_{\alpha}^*}
+		  \max_{\{\lambda_{\alpha}\}, \{\lambda_{\alpha}^*\}}
 		  - \smallfrac{1}{2}\sum_{\alpha,\beta=1}^p(\lambda_{\alpha}^* -
 		  \lambda_{\alpha}) (\lambda_{\beta}^* - \lambda_{\beta})
 		  (\vec{x}^{(\alpha)})^\top\vec{x}^{(\beta)} +

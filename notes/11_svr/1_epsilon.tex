@@ -126,7 +126,7 @@ using
 
 \subsection{Deriving the primal problem for $\varepsilon$-SVR}
 
-\begin{frame}{Only}\frametitle{\subsubsecname}
+\begin{frame}{Only}\frametitle{$\varepsilon$-SVR}
 
 \begin{figure}[h]
      \centering
@@ -175,7 +175,7 @@ Simplify assumptions (will be relaxed later){\footnote{This is based on my under
 
 \newpage
 
-\begin{frame}{Only}\frametitle{\subsubsecname}
+\begin{frame}{Only}\frametitle{$\varepsilon$-SVR requires slack variables}
 
 \slidesonly{\vspace{-3mm}}
 
@@ -231,7 +231,7 @@ Relax constraints by allowing for errors\\
 		\only<2->{
         \begin{equation}
         \begin{array}{ll}
-        \min_{\vec w, b\only<3>{,\{\varphi_\alpha, \varphi_\alpha^*\}}} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \only<3->{+ C \frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*)}\\
+        \min_{\vec w, b\only<3->{,\{\varphi_\alpha\},\{\varphi_\alpha^*\}}} & \frac{1}{2} \lVert \vec w \rVert_{2}^{2} \only<3->{+ C \frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*)}\\
         \text{subject to} & 
         \vec w^{\top} \vec x^{(\alpha)} + b - y_{T}^{(\alpha)} \le \varepsilon + \varphi_\alpha\\
         &
@@ -271,7 +271,7 @@ Relax constraints by allowing for errors\\
 \footnotesize
 }
         \begin{equation}
-        \min_{\vec w,b} \frac{1}{2} \lVert \vec w \rVert^2_2 + C \; \overbrace{\frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*)}^{=:R^{\varepsilon}_{\text{emp}}(\vec w,b)}
+        \min_{\vec w,b,\{\varphi_\alpha\},\{\varphi_\alpha^*\}} \frac{1}{2} \lVert \vec w \rVert^2_2 + C \; \overbrace{\frac{1}{p} \sum_{\alpha=1}^p (\varphi_\alpha + \varphi_\alpha^*)}^{=:R^{\varepsilon}_{\text{emp}}(\vec w,b)}
     \end{equation}
 \slidesonly{
 \endgroup
