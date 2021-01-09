@@ -7,12 +7,14 @@
     \begin{center} \huge
         \secname
     \end{center}
-    $$P(X,Y) = P(X)P(Y)$$
+    \begin{center}
+    Statistical independence: $P(X,Y) = P(X)P(Y)$
+    \end{center}
     
-    %\svspace{5mm}
-    %\begin{center}
-		%\includegraphics[width=0.2\textwidth]{img/meme_independence}
-    %\end{center}
+    \svspace{5mm}
+    \begin{center}
+		\includegraphics[width=0.2\textwidth]{img/meme_independence_xy}
+    \end{center}
 \end{frame}
 }
 
@@ -270,7 +272,7 @@ i.e. the \emph{conditional} independence of $\mathit{toothache}$ and $\mathit{ca
 \svspace{-4mm}
 
 \begin{align}
-P(\mathit{toothache}, \mathit{catch} | \mathit{Cavity}) &\\
+P(\mathit{Cavity}|\mathit{toothache}, \mathit{catch}) &\\
 = \alpha {\slidesonly{\color{blue}}P(\mathit{toothache}| \mathit{Cavity})} &
 {\slidesonly{\color{blue}}P(\mathit{catch}| \mathit{Cavity})} P(\mathit{Cavity})
 \end{align}

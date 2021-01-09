@@ -75,7 +75,7 @@ P(\mathit{Toothache},\mathit{Catch},\mathit{Cavity}) &\\
 \begin{frame} \frametitle{\subsubsecname}
 	\begin{center}
 	\slidesonly{
-		\includegraphics<1>[width=7cm]{img/section3_fig5_v2_1} 
+		\includegraphics<1,2>[width=7cm]{img/section3_fig5_v2_1} 
 		}
 %		\includegraphics<2>[width=8cm]{img/section3_fig5_v2_2}
 		\includegraphics<3>[width=7cm]{img/section3_fig5_v2_2}  
@@ -92,12 +92,17 @@ P(\mathit{Toothache},\mathit{Catch},\mathit{Cavity}) &\\
 %	\end{itemize}
 %	} 
 \visible<2->{
+\visible<3>{
 Considering statistical dependencies, only 10 instead of 31 entries have to be stored.
+}
 	{ \small
 		\begin{align} 
+		\visible<2->{
 			P(J,M,A,B,E) \stackrel{\substack{\text{product}\\\text{rule}}}{=}& 
-			P(J|M,A,B,E) \, P(M|A,B,E) \, P(A|B,E) \, P(B|E) \, P(E) \\\slidesonly{\vspace{-5mm}}
+			P(J|M,A,B,E) \, P(M|A,B,E) \, P(A|B,E) \, P(B|E) \, P(E) \\\slidesonly{\vspace{-5mm}}}
+			\visible<3>{
 			\stackrel{\substack{\text{cond.}\\\text{indep.}}}{=}& P(J|A) \, P(M|A) \, P(A|B,E) \, P(B) \, P(E)
+			}
 		\end{align}
 	}
 	}
