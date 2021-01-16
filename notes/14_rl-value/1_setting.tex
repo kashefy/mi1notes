@@ -33,7 +33,11 @@ $\\
 Data in Reinforcement Learning:
 }
 \only<1>{
-A sequence of random states $\vec x$ resulting from taking actions $\vec a$ over time which result in some reward $r$.
+\begin{itemize}
+	\item[] A sequence of random states $\vec x$
+	\item[] resulting from taking actions $\vec a$ over time
+	\item[] which result in some reward $r$.
+\end{itemize}
 }
 \pause
 \only<2->{
@@ -64,20 +68,22 @@ The sequence we observe becomes:
 \end{align}
 }
 
-
 \end{frame}
+
+\subsection{The Transition Model}
 
 \begin{frame}
 
-\only<1>{    
+\only<1,2>{    
 \begin{block}{Markov property}
 
 The probability of transitioning from state $\vec x_i$ to $\vec x_j$ only depends on state $\vec x_i$ and the action $\vec a_k$ that was taken. It does not depend on earlier history.
 \end{block}
+}
+\only<2-4>{
+This leads to the following \textcolor{trans}{transition model (transition ``matrix'')}:
 
-This leads to the following }\textcolor{trans}{transition model (transition ``matrix'')}:
-
-\slidesonly{\vspace{-3mm}}
+\svspace{-3mm}
 
 \begin{equation}
 {
@@ -85,7 +91,9 @@ This leads to the following }\textcolor{trans}{transition model (transition ``ma
 P(\vec x_j | \vec x_i, \vec a_k)
 }
 \end{equation}
-\only<1>{
+
+\only<2->
+{
 which
 \begin{itemize}
 	\item measures the probability to end up in $\vec x_j$ 
@@ -95,6 +103,15 @@ which
 	P(\vec x_j^{(t+1+\tau)} | \vec x_i^{(t+\tau)}, \vec a_k^{(t+\tau)}) = P(\vec x_j^{(t+1)} | \vec x_i^{(t)}, \vec a_k^{(t)})\,,\quad \tau \in \{0,1,\ldots\}
 	\end{equation}
 \end{itemize}
+}
+\only<3>{
+\mode<presentation>{
+	\begin{center}
+		\includegraphics[width=0.3\textwidth]{img/meme_stationary}
+	\end{center}
+	}
+}
+\only<4>{
 
 and where
 \begin{align}
@@ -102,8 +119,13 @@ and where
 \text{and}~ \sum_{j} {\color{trans}P(\vec x_j | \vec x_i, \vec a_k)} &= 1 \quad \forall i,k \quad \text{i.e. every ``row'' sums to 1}
 \end{align}
 }
+}
 
-\slidesonly{\vspace{-4mm}}
+\end{frame}
+
+\begin{frame}{Properties of the transition model}
+
+\svspace{-4mm}
 
 \question{What would $\sum_{\substack{j\\j \ne i}} {P(\vec x_j | \vec x_i, \vec a_k)} = 0 \;\; \forall \; k$ imply?}
 
@@ -153,6 +175,8 @@ a sequence of random states $\vec x$ with a \emph{Markov property}.
 
 \end{frame}
 
+\subsection{The Policy}
+
 \begin{frame}
 
 \begin{block}{\textcolor{policy}{Policy}}
@@ -167,6 +191,9 @@ Having a policy (wanting to find a policy) turns the Markov Reward Process into 
 \color{policy}
 \text{policy }\pi := \pi(\vec a_k | \vec x_i)
 \end{equation}
+
+\pause
+
 \item the mapping can be stochastic or deterministic
 \item the policy is stationary. That the policy changes during the training process does not contradict this.
 It is regarded as stationary because once trained and deployed, the way the agent decides does not change over time.

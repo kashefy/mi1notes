@@ -1,4 +1,4 @@
-\section{Model-free evaluation of policy}
+\section{Model-free evaluation of a policy}
 
 \newcommand{\lr}{\eta}
 
@@ -12,17 +12,30 @@
     \underline{Last time}: Model-based $\corresponds$ offline-planning.\\
     \underline{Today}: Model-free $\corresponds$ inductive online-planning.\\
     \end{center}
+    
+\mode<presentation>{
+\svspace{5mm}
+\begin{center}
+    \begin{minipage}{0.4\textwidth}
+		\includegraphics[width=0.7\textwidth]{img/meme_model-based}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+		\includegraphics[width=0.9\textwidth]{img/meme_model-free}
+    \end{minipage}
+\end{center}
+}
+    
 \end{frame}
 
 \begin{frame}\frametitle{\secname}
 
 Motivation for model-free evaluation methods:\\
 
-\slidesonly{\vspace{5mm}}
+\svspace{5mm}
 
 The MDP is not explicitly available, i.e. \notesonly{\textcolor{trans}the transition model }${\color{trans}P}$ and \notesonly{\textcolor{reward}the reward function }${\color{reward}r}$ are unknown and have to be ``experienced''.\\
 
-\slidesonly{\vspace{5mm}}
+\svspace{5mm}
 
 Options:
 \begin{enumerate}[A]
@@ -139,7 +152,7 @@ Temporal difference learning (TD learning) is also a form of inductive value est
 \vspace{2mm}
 
 TD learning is the asynchronous on-line update of the value function one state at a time
-	\slidesonly{\vspace{-8mm}}
+	\svspace{-7mm}
 	
 	\begin{equation}
 		\tilde V^{\pi}_{(t+1)}(\vec x^{(t)}) \; = \; 
@@ -152,12 +165,13 @@ TD learning is the asynchronous on-line update of the value function one state a
 		\label{eq:tdlearningvalue}
 	\end{equation}
 	
+	\svspace{-5mm}
 	where $\eta$ is the learning rate\notesonly{, ${\color{reward}r^{(t)}}$ is short for the immediate ${\color{reward}r(\vec x^{(t)},\vec a^{(t)})}$.}
 	
 	\only<2>{
-	Basically,
+	\notesonly{Basically,}
 	\begin{equation}
-		\mathit{Estimate_{New}} = \mathit{Estimate_{old}} + \lr \Big(\mathit{Target} - \mathit{Estimate_{old}} \Big)
+		\mathit{Estimate_{new}} = \mathit{Estimate_{old}} + \lr \Big(\mathit{Target} - \mathit{Estimate_{old}} \Big)
 	\end{equation}
 	}
 	\only<3>{
@@ -169,11 +183,15 @@ TD learning is the asynchronous on-line update of the value function one state a
 	\item \notesonly{TD learning} named after the difference $\Delta V_{(t)}$ in value function estimates (TD-error)
 	}
 	\end{itemize}
+	
+	\slidesonly{
+	\placeimage{13.1}{4.1}{img/meme_nomodelknowledge}{width=2.2cm}
+	}
 	}
 	
 \end{frame}
 
-\subsubsection{Relation of Model-free TD learning to model-based value iteration}
+\subsubsection{Relation of model-free TD learning to model-based value iteration}
 
 \begin{frame}\frametitle{\subsubsecname}
 
@@ -183,27 +201,47 @@ TD learning is the asynchronous on-line update of the value function one state a
 		
 		\pause
 		
+		\only<2,3>{
+		\begin{center}
+			\includegraphics[width=0.4\textwidth]{img/rl_chains_i-at-t}
+		\end{center}
+		
+		\slidesonly{
+			\begin{equation}
+				\tilde V^{\pi}_{(t+1)}(\vec x^{(t)}) \; = \; 
+				\tilde V^{\pi}_{(t)}(\vec x^{(t)}) \;+\;
+				\lr \Big( {\color{reward}r^{(t)}} 
+				+ 
+				\gamma \tilde V^{\pi}_{(t)}({\color{trans}\vec x^{(t+1)}})
+				- \tilde V^{\pi}_{(t)}{(\vec x^{(t)})}
+				\Big)
+			\end{equation}
+			}
+		}
+		
+		\visible<3->{
 		\begin{itemize}
 			\item Taking the expectation over all Markov chains 
 			that pass~$\vec x_i$~at~time~$t$~reads~$(\vec x^{(t)} = \vec x_i)$ yields:
 			
 			\begin{equation}
-		\underbrace{\E\big\lbrack\tilde V^\pi_{(t+1)}(\vec x^{(t)})\big\rbrack
-			}_{\tilde v_i^{\pi(t+1)}}
-		\,=\, 
-		(1 - \lr)\underbrace{\E\big\lbrack \tilde V^\pi_{(t)}(\vec x^{(t)}) \big\rbrack
-			}_{\tilde v_i^{\pi(t)}}
-		\,+\, \lr \Big( \underbrace{\E\lbrack{\color{reward} r^{(t)}}\rbrack
-		+ \gamma \E\big\lbrack\tilde V^\pi_{(t)}({\color{trans}\vec x^{(t+1)}})\big\rbrack
-		}_{({\color{reward} \vec r^\pi} 
-			+ \gamma {\color{trans} \vec P^\pi} \tilde{\vec v}^{\pi(t)})_i}\Big)
+				\underbrace{\E\big\lbrack\tilde V^\pi_{(t+1)}(\vec x^{(t)})\big\rbrack
+					}_{\tilde v_i^{\pi(t+1)}}
+				\,=\, 
+				(1 - \lr)\underbrace{\E\big\lbrack \tilde V^\pi_{(t)}(\vec x^{(t)}) \big\rbrack
+					}_{\tilde v_i^{\pi(t)}}
+				\,+\, \lr \Big( \underbrace{\E\lbrack{\color{reward} r^{(t)}}\rbrack
+				+ \gamma \E\big\lbrack\tilde V^\pi_{(t)}({\color{trans}\vec x^{(t+1)}})\big\rbrack
+				}_{({\color{reward} \vec r^\pi} 
+					+ \gamma {\color{trans} \vec P^\pi} \tilde{\vec v}^{\pi(t)})_i}\Big)
 			\end{equation}
 			
 		\notesonly{Which we recognize as \emph{value iteration} \slidesonly{from last time}.}
 			
 		\end{itemize}
+		}
 	
-	
+	\only<5>{
 	\vspace{2mm}
 	\item TD learning provides an {\em asynchronous online estimate} of 
 			$\hat B^\pi[\tilde{\vec v}^{\pi(t)}] = {\color{reward}\vec r^\pi} 
@@ -215,7 +253,7 @@ TD learning is the asynchronous on-line update of the value function one state a
 					\vspace{1mm}
 			\item model knowledge not required!
 		\end{itemize}
-
+	}
 	\end{itemize}
 
 \end{frame}
