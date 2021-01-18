@@ -4,12 +4,11 @@
 \begin{frame} 
 \mode<presentation>{
     \begin{center} \huge
-        \secname
+        \subsecname
     \end{center}
-    \begin{figure}[h]
-	 \centering
+    \begin{center}
 	 \includegraphics[width=0.8\textwidth]{img/jt_roadmap}%
-	\end{figure}
+	\end{center}
 }
 \end{frame}
 
@@ -109,7 +108,7 @@
 					\textbf{Caution: only eliminate a node if it is not part of another clique}
 					\slidesonly{\vspace{5mm}}
 					%\item sub-cliques $\{A,B\} \subseteq \{A,B,C\}$ are absorbed
-					\item requires variable ordering by topological sorting: 
+					\item requires variable ordering by (\textbf{reverse}) topological sorting: 
 						F, D, E, C, B, A
 				\end{itemize}
 	
@@ -158,16 +157,16 @@
 \begin{frame} \frametitle{\subsecname
 }
 		\begin{itemize}		
-			\item construct bipartite graph: 
+			\item construct the bipartite graph: 
 				\only<1>{ \begin{itemize}
-					\item edges weighted by separator size 
+					\item edges weighted by separator size\\ 
 						$\rightarrow$ number of nodes within separator
 					\item find a {\em maximal spanning tree} 
 				\end{itemize}}	
 			\item<2-> junction tree for inference
 				\only<2>{ \begin{itemize}
 					\item maximal spanning tree of the clique graph
-					\item data structure for \\ belief propagation
+					\item data structure for belief propagation
 					\item not always unique
 				\end{itemize}}			
 		\end{itemize}
