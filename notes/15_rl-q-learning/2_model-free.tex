@@ -49,6 +49,7 @@ Options:
 
 \begin{frame}\frametitle{Model-free option A:~\subsecname}
 
+\only<1,2>{
 Monte-Carlo estimation:
 
 	\begin{itemize}
@@ -58,17 +59,30 @@ Monte-Carlo estimation:
 				\item rewards weighted by $\gamma^H < \epsilon$ are neglected
 				\item value is the discounted reward \textbf{averaged} over $n$ Markov chains of length $H$. \notesonly{This averaging is what leads to the estimates of the state values.}
 			\end{itemize}
+	\end{itemize}
+	}
+	
+	\pause
+	
+	\question{What are your thoughts about the efficiency of Monte-Carlo estimation?}
 		
-		\question{What are your thoughts about the efficiency of Monte-Carlo estimation?}
+	\pause 
 		
-		\pause 
-		
-		\item Monte-Carlo estimation requires drawing $n$ chains 
+	\begin{itemize}
+		\item \notesonly{Monte-Carlo}\slidesonly{MC} estimation requires drawing $n$ chains 
 			from the same initial state %$\vec x^{(0)}$
 		\item $n$ must be sufficiently large
 		\item every state must be evaluated often 
 			$\leadsto$ not sample efficient
 	\end{itemize}
+	
+	\mode<presentation>{
+	\only<3>{
+		\begin{center}
+			\includegraphics[width=0.2\textwidth]{img/meme_neverpicked}
+		\end{center}
+	}
+	}
 	
 \end{frame}
 

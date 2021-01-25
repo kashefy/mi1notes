@@ -36,7 +36,7 @@
 		\vec a_l = \argmax_{1\leq k \leq A} Q^\pi(\vec x_i, \vec a_k)
 	\end{equation}
 }
-\only<2,3>{
+\only<2->{
 	The greedy\footnote{``greedy'' is to try and get closer to the ``globally'' optimal choice by making ``locally'' optimal decisions} policy method decides on a new policy $\pi'$ using the Q-value function, by:	
 
 	\begin{equation}
@@ -47,11 +47,20 @@
 	   \end{array}
 	   \right.
 	\end{equation}
+	
+	
 }
 \only<3>{
 \mode<presentation>{
 \begin{center}
-		\includegraphics[width=\notesonly{0.9}\textwidth]{img/nav_qvalues}
+		\includegraphics[width=0.3\textwidth]{img/meme_greedy}
+\end{center} 
+}
+}
+\only<4>{
+\mode<presentation>{
+\begin{center}
+		\includegraphics[width=1.0\textwidth]{img/nav_qvalues}
 \end{center} 
 }
 }
@@ -145,17 +154,19 @@ Q-learning is an on-line off-policy improvement method, which integrates greedy 
 			\Delta Q_{(t)} = {\color{reward} r^{(t)}} \, + \, \gamma \, \tilde{Q}^\pi_{(t)} ({\color{trans}  \vec x^{(t+1)}},\,{\color{policy}  \vec a^{(t+1)}} ) - \tilde{Q}^\pi_{(t)} ( \vec x^{(t)},\, \vec a^{(t)} )
 	\end{equation}
 	}
-	\only<2>{
+	\only<2->{
 	
-	\slidesonly{\vspace{-3mm}}
+	\svspace{-3mm}
 	
 	\question{How do we extract the optimal policy $\pi^*$?}\\
 	
-	\slidesonly{\vspace{-5mm}}
+	\svspace{-5mm}
 	
 	\notesonly{
 	 - Extracting the optimal policy is done the same way as by the greedy policy:
 	 }
+	 }
+	 \only<3>{
 	\begin{equation}
 	   \pi^*(\vec a_k | \vec x_i) = \left\{
 	   \begin{array}{ll}
