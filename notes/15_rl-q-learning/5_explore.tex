@@ -84,7 +84,7 @@ Some of the possible approaches:
 
 	\item Optimistic Initialization
 	
-	\only<3>{
+	\only<3->{
 	A greedy sampling policy would fail at exploration,\\
 	unless all Q-values are initialized with high values.
 	
@@ -94,10 +94,13 @@ Some of the possible approaches:
 		\vspace{1mm}
 		\item unexplored actions are initially made very attractive
 		
-		\question{How does the transition to exploration happen?}\\
+		\visible<4->{
+		
+		\question{How does the transition to exploitation happen?}\\
 		
 		\notesonly{
 		- Through experience, as Q-values are reduced over time exploitation takes over.
+		}
 		}
 	\end{itemize}
 	}
