@@ -2,11 +2,19 @@
 
 \begin{frame} 
 \mode<presentation>{
+
+	\svspace{10mm}
     \begin{center} \huge
         \secname
     \end{center}  
+    
     \begin{center}
     updating the policy to yield a better state value function and state-action value function
+    \end{center}
+    
+	\svspace{10mm}
+    \begin{center}
+		\includegraphics[width=0.2\textwidth]{img/meme_givebetterpolicy}
     \end{center}
     }
 \end{frame}
@@ -28,7 +36,7 @@
 		\vec a_l = \argmax_{1\leq k \leq A} Q^\pi(\vec x_i, \vec a_k)
 	\end{equation}
 }
-\only<2,3>{
+\only<2->{
 	The greedy\footnote{``greedy'' is to try and get closer to the ``globally'' optimal choice by making ``locally'' optimal decisions} policy method decides on a new policy $\pi'$ using the Q-value function, by:	
 
 	\begin{equation}
@@ -39,11 +47,20 @@
 	   \end{array}
 	   \right.
 	\end{equation}
+	
+	
 }
 \only<3>{
 \mode<presentation>{
 \begin{center}
-		\includegraphics[width=\notesonly{0.9}\textwidth]{img/nav_qvalues}
+		\includegraphics[width=0.3\textwidth]{img/meme_greedy}
+\end{center} 
+}
+}
+\only<4>{
+\mode<presentation>{
+\begin{center}
+		\includegraphics[width=1.0\textwidth]{img/nav_qvalues}
 \end{center} 
 }
 }
@@ -108,15 +125,25 @@
 
 \begin{frame}\frametitle{\subsecname}
 
-Q-learning is an on-line off-policy improvement method, which integrates greedy policy improvement into off-policy TD learning.
+\only<1>{
+Q-learning is an \textbf{on}-line \textbf{off}-policy improvement method, which integrates greedy policy improvement into off-policy TD learning.
+}
+\only<2->{
+\slidesonly{Integrate greedy policy improvement into off-policy TD learning.}
+}
 
 \begin{block}{Q-learning}
-	Pick a sampling policy $\pi$. (It will typically depend on the current Q-values.)
-	\slidesonly{\vspace{-3mm}}
+	Pick a sampling policy $\pi'$. \notesonly{(It will typically depend on the current Q-values.)}
+	\svspace{-3mm}
 	\begin{align}
 			\tilde Q_{(t+1)}^*(\vec x^{(t)}, \vec a^{(t)})
-			\;\;=\;\;&
+			\;=\;&
 			\tilde Q_{(t)}^*(\vec x^{(t)}, \vec a^{(t)})
+			\only<1>{
+			\;+\; \lr~
+			{\color{magenta}\Delta Q_{(t)}}
+			}
+			\only<2->{
 			\\
 			&\kern-10ex
 			 \;+\; \lr \Big( \underbrace{
@@ -127,27 +154,48 @@ Q-learning is an on-line off-policy improvement method, which integrates greedy 
 						{\color{policy}\vec a_k})
 				}^{\text{\scriptsize \kern-2exgreedy policy improvement\kern-2ex}}
 				- \, \tilde Q_{(t)}^*(\vec x^{(t)}, \vec a^{(t)})	
-				}_{\text{\scriptsize TD-error} \displaystyle \scriptstyle \;\Delta Q_{(t)} }\Big)
+				}_{\text{\scriptsize TD-error} \displaystyle \scriptstyle \; {\color{magenta}\Delta Q_{(t)}} }\Big)
+			}
 	\end{align}
 \end{block}
 	
-	\only<1>{
-	$\Delta Q_{(t)}$ in SARSA for comparison:
-	\begin{equation}
-			\Delta Q_{(t)} = {\color{reward} r^{(t)}} \, + \, \gamma \, \tilde{Q}^\pi_{(t)} ({\color{trans}  \vec x^{(t+1)}},\,{\color{policy}  \vec a^{(t+1)}} ) - \tilde{Q}^\pi_{(t)} ( \vec x^{(t)},\, \vec a^{(t)} )
-	\end{equation}
-	}
 	\only<2>{
+	\svspace{-2mm}
+	For comparison:
+	\begin{itemize}
+		\item \textbf{on}-policy SARSA:
+			\begin{equation}
+	\scriptsize
+					{\color{magenta}\Delta Q_{(t)}} = {\color{reward} r^{(t)}} \, + \, \gamma \, \tilde{Q}^\pi_{(t)} ({\color{trans}  \vec x^{(t+1)}},\,{\color{policy}  \vec a^{(t+1)}} ) - \tilde{Q}^\pi_{(t)} ( \vec x^{(t)},\, \vec a^{(t)} )
+			\end{equation}
+		\item \textbf{off}-policy TD learning:
+			\begin{equation}
+	\scriptsize
+					{\color{magenta}\Delta Q_{(t)}} \,=\, {\color{reward}r^{(t)}} 
+				 \, + \, \gamma \, 
+				 %\overbrace{
+				 {\color{policy}\smallsum{k=1}{A}
+					\pi(\vec a_k \,|\, {\color{trans}\vec x^{(t+1)}})} \,
+					\tilde{Q}^\pi_{(t)}({\color{trans}\vec x^{(t+1)}}, {\color{policy}\vec a_k})
+					%}^{\circledast} 
+				\;-\; \tilde{Q}^\pi_{(t)}(\vec x^{(t)}, \vec a^{(t)})
+			\end{equation}
+	\end{itemize}
+	}
+	\only<3->{
 	
-	\slidesonly{\vspace{-3mm}}
+	\svspace{-3mm}
 	
+	\only<3,4>{
 	\question{How do we extract the optimal policy $\pi^*$?}\\
 	
-	\slidesonly{\vspace{-5mm}}
+	\svspace{-5mm}
 	
 	\notesonly{
 	 - Extracting the optimal policy is done the same way as by the greedy policy:
 	 }
+	 }
+	 \visible<4>{
 	\begin{equation}
 	   \pi^*(\vec a_k | \vec x_i) = \left\{
 	   \begin{array}{ll}
@@ -156,6 +204,7 @@ Q-learning is an on-line off-policy improvement method, which integrates greedy 
 	   \end{array}
 	   \right.
 	\end{equation}
+	}
 	}
 
 \end{frame}
@@ -166,7 +215,7 @@ Q-learning \citep{Watkins92}:
 \begin{itemize}
 \item online policy improvement
 \item estimates the Q-value function of an optimal (unknown) policy $\pi^*$
-\item off-policy with sampling policy $\pi$
+\item off-policy with sampling policy $\pi'$
 \item effectively TD learning with greedy policy improvement
 \item Q-learning is a contraction mapping for \emph{any} ergodic Markov chain
 			\begin{equation}

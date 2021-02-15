@@ -8,7 +8,11 @@
     }
     \begin{center} 
     Model-based $\corresponds$ offline-planning.\\
-    We are told everything about the environment, so we can simulate ``looking ahead'' and determine if one policy is better than another.
+    We are told everything about the environment,\\so we can simulate ``looking ahead'' and\\ determine if one policy is better than another.
+    \end{center}
+    
+    \begin{center}
+		\includegraphics[width=0.3\textwidth]{img/meme_model-based}
     \end{center}
 \end{frame}
 
@@ -233,6 +237,8 @@ There are two approaches to finding $\vec v^\pi$:
 
 Essentially solve for $\vec v^\pi$ (get \underline{all} $\vec v^\pi$ on one side):
 
+\svspace{-5mm}
+
 	\begin{align}
 		\vec v^\pi &= {\color{reward}\vec r^\pi} 
 		+ \gamma {\color{trans}\vec P^\pi} \vec v^\pi \\
@@ -261,9 +267,45 @@ Essentially solve for $\vec v^\pi$ (get \underline{all} $\vec v^\pi$ on one side
 \item[$\Rightarrow$] it is always invertible
 \end{enumerate}
 
-\slidesonly{\vspace{-5mm}}
+\end{frame}
+
+\begin{frame}\frametitle{Finding $\vec v^\pi$:~\subsubsecname}
+
+%\pause
+
+%\svspace{-5mm}
+
+\mode<presentation>{
+\begin{equation}
+	\vec v^\pi = \big(\vec I 
+			- \gamma {\color{trans}\vec P^\pi}\big)^{-1}
+		 {\color{reward}\vec r^\pi}
+\end{equation}
+}
 
 \question{Any disadvantages to the analytical solution?}\\
+
+\mode<presentation>{
+\only<1>{
+\begin{center}
+	\includegraphics[width=0.2\textwidth]{img/meme_analyticalbest}
+\end{center}
+}
+\only<2>{
+\begin{center}
+\begin{minipage}{.3\textwidth}
+\begin{center}
+	\includegraphics[width=0.9\textwidth]{img/meme_statespacetoobig}
+\end{center}
+\end{minipage}
+\begin{minipage}{.3\textwidth}
+\begin{center}
+	\includegraphics[width=0.8\textwidth]{img/meme_canthandleanalytical}
+\end{center}
+\end{minipage}
+\end{center}
+}
+}
 
 \pause 
 - It could be very costly for very large state spaces.
@@ -281,6 +323,7 @@ Value iteration: a fixed-point iteration for finding $\vec v^\pi$
 \item A fixed point: $x=g(x)=g(g(\ldots g(x)\ldots))$\\
 
 Example:
+\svspace{-3mm}
 \begin{align}
     g(x) &= x^{2} - 3x + 4\\
     g(2) &= 2^{2} - 3\cdot 2 + 4 = 4 - 6 + 4 = 2
@@ -301,6 +344,12 @@ x^{(t+1)} = g(x^{(t)}), t=0,1,2,\ldots
     \label{fig:fixedpointcos}
     } 
 \end{center}
+
+\mode<presentation>{
+\only<2>{
+	\placeimage{11.5}{9.3}{img/meme_fixedpoint}{width=3.5cm}
+}
+}
 
 \end{frame}
 
@@ -352,7 +401,7 @@ at time step $t$
 	\begin{equation*}
 		\hat B^\pi[\vec v^\pi] :=
 		{\color{reward}\vec r^\pi} 
-			+ \gamma {\color{trans}\vec P^\pi} \kern-1.7ex \underbrace{\vec v^\pi}_{\text{look-ahead}}
+			+ \gamma {\color{trans}\vec P^\pi} \kern-2.7ex \underbrace{\vec v^\pi}_{\text{look-ahead}}
 	\end{equation*}
 \end{itemize}
 
@@ -377,113 +426,123 @@ Analytical solution vs. value iteration:
 
 \newpage
 
-\subsubsection{Convergence of value iteration}
-
+%\subsubsection{Convergence of value iteration}
+% excluded
 
 % -----------------------------------------------------------------------------
-\begin{frame} \frametitle{\subsubsecname}
+%\begin{frame} \frametitle{\subsubsecname}
     
-    \only<1,2>{
-	\begin{block}{Contraction mapping}
-		\small
-		A mapping function $f(x)$ is a contraction with $0 < \gamma < 1$ if for any $x, x'$, $\lVert f(x) - f(x') \rVert \le \gamma \lVert x - x' \rVert$.
-	\normalsize
-	\end{block}
+    %\only<1,2>{
+	%\begin{block}{Contraction mapping}
+		%\small
+		%A mapping function $f(x)$ is a contraction with $0 < \gamma < 1$ if for any $x, x'$, $\lVert f(x) - f(x') \rVert \le \gamma \lVert x - x' \rVert$.
+	%\normalsize
+	%\end{block}
     
-    \mode<article>{
-    We specify this a little further:
-    }
-    }
+    %\mode<article>{
+    %We specify this a little further:
+    %}
+    %}
     
-    \only<2->{
-	\begin{block}{Contraction mapping (in supremum norm)}
-		\small
-		A function $\hat B : \R^S \to \R^S$ is called a 
-		{\em contraction mapping} 
-		with Lipschitz constant\notesonly{\footnote{i.e. the function is continuous and the absolute value of the slope does not exceed some constant, which is a real number. That real number is the Lipschitz constant.}} $0 \leq \lambda < 1$ if 
-		$\max\limits_{j} 
-		\big|(\hat B[\tilde{\vec v}] - \hat B[\tilde{\vec w}])_j \big| 
-		\;\leq\; \lambda \max\limits_{j} \big|\tilde v_j - \tilde w_j \big|,
-		\forall \tilde{\vec v}, \tilde{\vec w} \in \R^S$.
-	\normalsize
-	\end{block}
-	}
-	\only<3>{ 
-		\vspace{2mm}
-		\iitem{application to the Bellman operator 
-				$\hat B^\pi[\tilde{\vec v}] =
-				{\color{reward}\vec r^\pi} 
-				+ \gamma {\color{trans}\vec P^\pi} \tilde{\vec v}$}
-		\begin{eqnarray*}
-			\max_j \big| \hat B^\pi[\tilde{\vec v}]_j 
-				- \hat B^\pi[\tilde{\vec w}]_j \big| 
-			&=& \max_j
-				\big| {\color{reward} r^\pi_j} 
-					+ \gamma {\color{trans}(\vec P^\pi \tilde{\vec v})_j}
-					- {\color{reward}r^\pi_j} 
-					- \gamma {\color{trans}(\vec P^\pi \tilde{\vec w})_j} 
-				\big| \\[-2mm]
-			&\stackrel{\text{(i)}}{\leq}& 
-				\max_j \gamma \, \big({\color{trans}\vec P^\pi} 
-				|\tilde{\vec v} - \tilde{\vec w}|\big)_j 
-			\quad\stackrel{\text{(ii)}}{\leq}\quad  
-				\gamma \, \max_j |\tilde v_j - \tilde w_j|
-		\end{eqnarray*}
-		\vspace{2mm}
-		\begin{eqnarray*}
-			\text{(i)} \quad 
-			 \Big|{\color{trans}\smallsum{i=1}{S} P^\pi_{ji}} \,x_i \Big|
-			 	&\leq & 
-				 {\color{trans} \smallsum{i=1}{S} P^\pi_{ji}} \, |x_i| \,,
-				 \qquad\; \forall \vec x \in \R^S 
-				 \hspace{1.2cm}\text{(Jensen's inequality)} \\[-1mm]
-			\text{(ii)} \quad
-			{\color{trans}\smallsum{i=1}{S} P^\pi_{ji}} \, |x_i|
-				& \leq &
-				{\color{trans} \smallsum{i=1}{S} P^\pi_{ji}}
-					\max_{1\leq k\leq S} |x_k|
-				\quad = \;\;\; \max_{1\leq k\leq S} |x_k| 
-				\hspace{1.1cm}
-				\text{(${\color{trans}\smallsum{i=1}{S} P^\pi_{ji} = 1}$)}
-		\end{eqnarray*}
-	} \only<4>{
-		\vspace{1mm}
-		\begin{itemize}
-			\item $\hat B^\pi$ is a contraction mapping 
-				with Lipschitz constant $0 < \gamma < 1$ 
-			\vspace{2mm}
-			\begin{align} \tag{value iteration}
-				\tilde{\vec v}^{\pi(t+1)} 
-				\quad=\quad \hat B^\pi\lbrack\tilde{\vec v}^{\pi(t)}]\rbrack
-				\quad=\quad {\color{reward}\vec r^\pi} 
-					+ \gamma {\color{trans}\vec P^\pi} \tilde{\vec v}^{\pi(t)}
-			\end{align}
-			\vspace{-2mm}
-			\item Let $\vec v^\pi$ be the unique fixed point. Then:\\[10pt]
-			\hspace{-3mm}$\max\limits_j \big|
-				(\hat B^\pi \lbrack \vec v^{\pi(t)} \rbrack)_j - (\hat B^\pi \lbrack \vec v^{\pi} \rbrack)_j \big| 
-				\leq \gamma \max\limits_j 
-					\big|v^{\pi(t)}_j - v^\pi_j \big| $ 
-				for {\em any} $\vec v^{\pi(t)} \in \R^S$
-			\vspace{3mm}
-			\item[$\Rightarrow$] value iteration converges in the limit $t\to\infty$
-%					to unique fixed-point $\vec v^\pi$
-				\vspace{1mm}
-				\iitem{number of iterations until convergence 
-					$\sim -\frac{1}{\log(\gamma)}$
-				 \vspace{1mm}
-				 \item analytic solution is faster for large values of $\gamma$
-				}
-		\end{itemize} 
-		\vspace{4mm}
-	}
-\end{frame}
+    %\only<2->{
+	%\begin{block}{Contraction mapping (in supremum norm)}
+		%\small
+		%A function $\hat B : \R^S \to \R^S$ is called a 
+		%{\em contraction mapping} 
+		%with Lipschitz constant\notesonly{\footnote{i.e. the function is continuous and the absolute value of the slope does not exceed some constant, which is a real number. That real number is the Lipschitz constant.}} $0 \leq \lambda < 1$ if 
+		%$\max\limits_{j} 
+		%\big|(\hat B[\tilde{\vec v}] - \hat B[\tilde{\vec w}])_j \big| 
+		%\;\leq\; \lambda \max\limits_{j} \big|\tilde v_j - \tilde w_j \big|,
+		%\forall \tilde{\vec v}, \tilde{\vec w} \in \R^S$.
+	%\normalsize
+	%\end{block}
+	%}
+	%\only<3>{ 
+		%\vspace{2mm}
+		%\iitem{application to the Bellman operator 
+				%$\hat B^\pi[\tilde{\vec v}] =
+				%{\color{reward}\vec r^\pi} 
+				%+ \gamma {\color{trans}\vec P^\pi} \tilde{\vec v}$}
+		%\begin{eqnarray*}
+			%\max_j \big| \hat B^\pi[\tilde{\vec v}]_j 
+				%- \hat B^\pi[\tilde{\vec w}]_j \big| 
+			%&=& \max_j
+				%\big| {\color{reward} r^\pi_j} 
+					%+ \gamma {\color{trans}(\vec P^\pi \tilde{\vec v})_j}
+					%- {\color{reward}r^\pi_j} 
+					%- \gamma {\color{trans}(\vec P^\pi \tilde{\vec w})_j} 
+				%\big| \\[-2mm]
+			%&\stackrel{\text{(i)}}{\leq}& 
+				%\max_j \gamma \, \big({\color{trans}\vec P^\pi} 
+				%|\tilde{\vec v} - \tilde{\vec w}|\big)_j 
+			%\quad\stackrel{\text{(ii)}}{\leq}\quad  
+				%\gamma \, \max_j |\tilde v_j - \tilde w_j|
+		%\end{eqnarray*}
+		%\vspace{2mm}
+		%\begin{eqnarray*}
+			%\text{(i)} \quad 
+			 %\Big|{\color{trans}\smallsum{i=1}{S} P^\pi_{ji}} \,x_i \Big|
+			 	%&\leq & 
+				 %{\color{trans} \smallsum{i=1}{S} P^\pi_{ji}} \, |x_i| \,,
+				 %\qquad\; \forall \vec x \in \R^S 
+				 %\hspace{1.2cm}\text{(Jensen's inequality)} \\[-1mm]
+			%\text{(ii)} \quad
+			%{\color{trans}\smallsum{i=1}{S} P^\pi_{ji}} \, |x_i|
+				%& \leq &
+				%{\color{trans} \smallsum{i=1}{S} P^\pi_{ji}}
+					%\max_{1\leq k\leq S} |x_k|
+				%\quad = \;\;\; \max_{1\leq k\leq S} |x_k| 
+				%\hspace{1.1cm}
+				%\text{(${\color{trans}\smallsum{i=1}{S} P^\pi_{ji} = 1}$)}
+		%\end{eqnarray*}
+	%} \only<4>{
+		%\vspace{1mm}
+		%\begin{itemize}
+			%\item $\hat B^\pi$ is a contraction mapping 
+				%with Lipschitz constant $0 < \gamma < 1$ 
+			%\vspace{2mm}
+			%\begin{align} \tag{value iteration}
+				%\tilde{\vec v}^{\pi(t+1)} 
+				%\quad=\quad \hat B^\pi\lbrack\tilde{\vec v}^{\pi(t)}]\rbrack
+				%\quad=\quad {\color{reward}\vec r^\pi} 
+					%+ \gamma {\color{trans}\vec P^\pi} \tilde{\vec v}^{\pi(t)}
+			%\end{align}
+			%\vspace{-2mm}
+			%\item Let $\vec v^\pi$ be the unique fixed point. Then:\\[10pt]
+			%\hspace{-3mm}$\max\limits_j \big|
+				%(\hat B^\pi \lbrack \vec v^{\pi(t)} \rbrack)_j - (\hat B^\pi \lbrack \vec v^{\pi} \rbrack)_j \big| 
+				%\leq \gamma \max\limits_j 
+					%\big|v^{\pi(t)}_j - v^\pi_j \big| $ 
+				%for {\em any} $\vec v^{\pi(t)} \in \R^S$
+			%\vspace{1mm}
+			%\item[$\Rightarrow$] value iteration converges in the limit $t\to\infty$
+				%\vspace{1mm}
+				%\iitem{number of iterations until convergence 
+					%$\sim -\frac{1}{\log(\gamma)}$
+				 %\vspace{1mm}
+				 %\item analytic solution is faster for large values of $\gamma$
+				%}
+		%\end{itemize} 
+		%\vspace{4mm}
+	%}
+%\end{frame}
 
 \newpage
 
 \subsection{Finding the optimal policy}
 
 \subsubsection{Comparing two policies}
+
+\mode<presentation>{
+\begin{frame}    
+	\begin{center} \LARGE
+        \subsecname
+    \end{center}      
+	\begin{center}
+        \subsubsecname
+    \end{center}  
+\end{frame}
+}
 
 \begin{frame}\frametitle{My policy is better than yours}
 

@@ -33,7 +33,7 @@
 %\end{tabular}%
 %}
 %\end{table}
-	\slidesonly{\textbf{(see blackboard)}}
+	%\slidesonly{\textbf{(see blackboard)}}
 }
 \end{frame}
 
@@ -46,8 +46,9 @@ Some of the possible approaches:
 \begin{enumerate}
 
 	\item parametrize the extraction of the policy from the Q-values:
-
-		\begin{enumerate}[a.]
+	
+		%\begin{enumerate}[a\notesonly{.}]
+		\begin{itemize}
 		
 		\item $\varepsilon$-greedy\only<2>{:
 
@@ -78,11 +79,12 @@ Some of the possible approaches:
 		%\end{equation}
 		
 
-		\end{enumerate}
+		%\end{enumerate}
+		\end{itemize}
 
 	\item Optimistic Initialization
 	
-	\only<3>{
+	\only<3->{
 	A greedy sampling policy would fail at exploration,\\
 	unless all Q-values are initialized with high values.
 	
@@ -92,10 +94,13 @@ Some of the possible approaches:
 		\vspace{1mm}
 		\item unexplored actions are initially made very attractive
 		
-		\question{How does the transition to exploration happen?}\\
+		\visible<4->{
+		
+		\question{How does the transition to exploitation happen?}\\
 		
 		\notesonly{
 		- Through experience, as Q-values are reduced over time exploitation takes over.
+		}
 		}
 	\end{itemize}
 	}
