@@ -606,7 +606,7 @@ A policy $\pi$ that maximizes the value function and yields $\vec v^{*}$ is an o
 \slidesonly{\vspace{-5mm}}
 
 \begin{equation}
-\pi^{*}(\vec a_{k} | \vec x_{i}) = \argmax_{\vec a} \sum_{j=1}^{S} {\color{trans} P(\vec x_{j}| \vec x_{i}, \vec a)} \Big( {\color{reward}r(\vec x_{j}, \vec a)} + \gamma V^{*}(\vec x_{j}) \Big)    
+\pi^{*}(\vec a_{k} | \vec x_{i}) = \argmax_{\vec a} \Big( {\color{reward}r(\vec x_{i}, \vec a)} +  \gamma \sum_{j=1}^{S} {\color{trans} P(\vec x_{j}| \vec x_{i}, \vec a)} V^{*}(\vec x_{j}) \Big)    
 \end{equation}   
 
 \slidesonly{\vspace{-5mm}} 
