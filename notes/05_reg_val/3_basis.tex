@@ -51,7 +51,7 @@ Feature transformation $(\vec x\in \R^N)$:
 \vec \phi: \vec x \mapsto \vec \phi(\vec x)
 \end{equation}
 
-\mode<article>{$\phi(\vec x)$ can transform our N-dim input $\vec x$ to another feature space of possibly higher dimensionality.
+\mode<article>{$\phi(\vec x)$ can transform our $N$-dim input $\vec x$ to another feature space of possibly higher dimensionality.
 }
 Expanding our feature space using \emph{Monomials} of highest degree $k$ (i.e. polynomial expansion):
 
@@ -115,7 +115,7 @@ Examining the properties of the data after sphering:
 
 \begin{align}
 \frac{1}{p}  \sum_{\alpha=1}^{p} \vec x^{(\alpha)}_\mathrm{sphered} &= \vec 0 \quad \text{(centered)},\\
-\frac{1}{p}  \sum_{\alpha=1}^{p} (\vec x^{(\alpha)}_\mathrm{sphered})^{2} &=  1 \quad \text{(unit variance)},\\
+\frac{1}{p}  \sum_{\alpha=1}^{p} (x^{(\alpha)}_\mathrm{sphered,i})^{2} &=  1 \quad \text{(unit variance)},\\
 \frac{1}{p}  \sum_{\alpha=1}^{p} x^{(\alpha)}_{\mathrm{sphered},i} \, x^{(\alpha)}_{\mathrm{sphered},j} &= 0 \quad \text{(zero covariance)},
 \end{align}
 
