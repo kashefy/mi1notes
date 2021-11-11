@@ -6,14 +6,14 @@ script:
 after_success:
 - bash .ci/travis/zip_pdfs.sh
 deploy:
-  provider: releases
-  token: "$GITHU8_T0KEN"
-  file_glob: true
-  file:
-  - "./notes/**/tutorial_*.slides.pdf"
-  - "./notes/**/tutorial_*.notes.pdf"
-  - "./tutorial_*.zip"
-  cleanup: false
-  on:
-    branch: master
+  - provider: releases
+    token: "$GITHU8_T0KEN"
+    file_glob: true
+    file:
+    - "./notes/**/tutorial_*.slides.pdf"
+    - "./notes/**/tutorial_*.notes.pdf"
+    - "./tutorial_*.zip"
+    skip_cleanup: true
+    on:
+      branch: master
 
