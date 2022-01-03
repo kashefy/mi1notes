@@ -340,7 +340,7 @@ However, for $p > \dvc$ the growth function behaves differently, namely
 			\end{equation}
 			
 			\textbf{But} Our dataset is never going to be infinitely large. Therefore, a more realistic formulation would be that ERM converges to some small $\epsilon$.\\
-			We therefore reiterate \eqref{eq:convergenceeps}:
+			We therefore reformulate the above to:
 			
 			\begin{equation}
 				\lim_{p \to \infty} P\bigg\{ 
@@ -451,7 +451,7 @@ generalization capabilities of the model class which leads us to the following f
 			\vspace{-2mm}
 			\begin{equation}
 				P\bigg\{ \sup\limits_{\vec w \in \Lambda}
-					{%\color{question2} 
+					{\color{question2} 
 						\Big|R_{(\vec w)} - R^{(p)}_{\text{emp}(\vec w)}\Big| 
 					} > \eta
 				\bigg\} < 4 \exp\Big( G^\Lambda_{(2p)} 
