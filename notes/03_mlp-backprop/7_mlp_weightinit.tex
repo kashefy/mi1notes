@@ -1,0 +1,57 @@
+\section{Weight initialization}
+
+\begin{frame}\frametitle{\secname}
+
+\mode<article>{
+Aspects to consider in weight initialization:
+\begin{itemize}
+\item the non-linear transfer function. Avodiing an initialization that will leads initial neuron activations already in the saturated range (see earlier tutorial on Connectionist Neurons).
+\item the chain rule and how it is implemented in the backpropagation algorithm.
+\end{itemize}
+
+\subsection{Initialization of MLPs with zeros}
+
+\begin{itemize}
+
+\item weight update (hidden to hidden)
+
+    \begin{align}
+            {w}_{ij}^{v'v}
+            &\; \leftarrow \; 
+            {w}_{ij}^{v'v} - \eta \cdot
+            \smallfrac{\partial e}{\partial{w}_{ij}^{v'v}}
+            \;=\; {w}_{ij}^{v'v} - \eta \, \cdot 
+            \smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot
+            \only<5>{
+            \smallfrac{\partial y(\vec{x}; \vec{w})}{\partial{w}_{ij}^{v'v}}\hspace{8.5mm}
+            }
+            \slidesonly{
+            \only<6>{
+            {\color{red} \delta_i^{v'}} \kern-.5ex\cdot
+                    f_j^v( {\color{teal}h_j^v} )
+            }}\\
+            &\; = \; 
+                {w}_{ij}^{v'v} - \eta \, \cdot
+				\smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot
+				{
+				{\color{red} \delta_i^{v'}} \kern-.5ex\cdot
+			   			f_j^v( {\color{teal}h_j^v} )
+			   	}
+            &\; = \; 
+                {w}_{ij}^{v'v} - \eta \, \cdot
+				\smallfrac{\partial e}{\partial y(\vec{x}; \vec{w})} \cdot
+				{
+				{\color{red} \delta_i^{v'}} \kern-.5ex\cdot
+			   			f_j^v( {\color{teal}h_j^v} )
+			   	}
+    \end{align}
+
+\end{itemize}
+
+
+
+
+}
+  
+\end{frame}
+
