@@ -259,7 +259,7 @@ It is closely related to the \emph{VC dimension}.
 \begin{frame}
 However, for $p > \dvc$ the growth function behaves differently, namely
 	\begin{equation}
-		G^{\Lambda}_{(p)} \le \dvc \cdot \big(1+ ln \frac{p}{\dvc}\big)
+		G^{\Lambda}_{(p)} \le \dvc \cdot \Big(1+ ln \frac{p}{\dvc}\Big)
 	\end{equation}
 	
 	In this case  $\lim_{p \to \infty} G_{(p)}^\Lambda$ converges to zero, and there is no more complete ambiguity. There is at least one region in feature space where all different classifiers from $\Lambda$ will agree on what class to assign to points in that region. There may still exist regions for which predictions will be ambiguous but the complete ambiguity is gone. The more points we add, the less likely a model will find a solution, but if it does, they will no longer be ambiguous.
@@ -276,7 +276,7 @@ However, for $p > \dvc$ the growth function behaves differently, namely
 				\left \{ \begin{array}{ll}
 					= p \ln 2 
 					& \text{for } p \leq \dvc \\
-					\leq \dvc \Big( 1 + \ln \frac{p}{\dvc} \Big) 
+					\leq \dvc \cdot \Big( 1 + \ln \frac{p}{\dvc} \Big) 
 					& \text{for } p > \dvc
 				\end{array} \right.
 			\label{eq:growthpiecewise}
