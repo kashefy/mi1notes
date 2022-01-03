@@ -80,19 +80,19 @@ It is closely related to the \emph{VC dimension}.
 			y_{(\vec{x}^{(p)}, \vec{w})} \Big)$
 			\begin{itemize}	
 				\item different classifiers can induce the 
-					same label vector on the training set\notesonly{ (cf. \figref{fig:dichotomy_redundant})}
+					same label vector on the training set
+                    \notesonly{(cf. \figref{fig:dichotomy_redundant})
 					
-				%\begin{center}
-					%\includegraphics<2>[width=0.25\textwidth]{img/dichotomy_redundant}
-					%\notesonly{
-					%\captionof{figure}{Different weight vectors that produce identical labelng of the points.}
-					%}
-					%\label{fig:dichotomy_redundant}
-				%\end{center}
+				\begin{center}
+					\includegraphics[width=0.25\textwidth]{img/dichotomy_redundant}
+					\captionof{figure}{Different weight vectors that produce identical labelng of the points.}
+					\label{fig:dichotomy_redundant}
+				\end{center}
+                }
 			\end{itemize}
 			
 			Each classifier in $\Lambda$ describes a different hyperplane.
-            \mode<article>{
+            \notesonly{
 			Looking at the predictions each one produces for the $p$ points will produce some label vector $\vec y_{(\vec{w})}$ with $p$ elements. A prediction for every point.
 			}
 		\vspace{5mm}
