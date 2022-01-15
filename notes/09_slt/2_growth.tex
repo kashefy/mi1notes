@@ -80,19 +80,19 @@ It is closely related to the \emph{VC dimension}.
 			y_{(\vec{x}^{(p)}, \vec{w})} \Big)$
 			\begin{itemize}	
 				\item different classifiers can induce the 
-					same label vector on the training set\notesonly{ (cf. \figref{fig:dichotomy_redundant})}
+					same label vector on the training set
+                    \notesonly{(cf. \figref{fig:dichotomy_redundant})
 					
-				%\begin{center}
-					%\includegraphics<2>[width=0.25\textwidth]{img/dichotomy_redundant}
-					%\notesonly{
-					%\captionof{figure}{Different weight vectors that produce identical labelng of the points.}
-					%}
-					%\label{fig:dichotomy_redundant}
-				%\end{center}
+				\begin{center}
+					\includegraphics[width=0.25\textwidth]{img/dichotomy_redundant}
+					\captionof{figure}{Different weight vectors that produce identical labelng of the points.}
+					\label{fig:dichotomy_redundant}
+				\end{center}
+                }
 			\end{itemize}
 			
 			Each classifier in $\Lambda$ describes a different hyperplane.
-            \mode<article>{
+            \notesonly{
 			Looking at the predictions each one produces for the $p$ points will produce some label vector $\vec y_{(\vec{w})}$ with $p$ elements. A prediction for every point.
 			}
 		\vspace{5mm}
@@ -259,7 +259,7 @@ It is closely related to the \emph{VC dimension}.
 \begin{frame}
 However, for $p > \dvc$ the growth function behaves differently, namely
 	\begin{equation}
-		G^{\Lambda}_{(p)} \le \dvc (1+ ln \frac{p}{\dvc}
+		G^{\Lambda}_{(p)} \le \dvc \cdot \Big(1+ ln \frac{p}{\dvc}\Big)
 	\end{equation}
 	
 	In this case  $\lim_{p \to \infty} G_{(p)}^\Lambda$ converges to zero, and there is no more complete ambiguity. There is at least one region in feature space where all different classifiers from $\Lambda$ will agree on what class to assign to points in that region. There may still exist regions for which predictions will be ambiguous but the complete ambiguity is gone. The more points we add, the less likely a model will find a solution, but if it does, they will no longer be ambiguous.
@@ -276,13 +276,13 @@ However, for $p > \dvc$ the growth function behaves differently, namely
 				\left \{ \begin{array}{ll}
 					= p \ln 2 
 					& \text{for } p \leq \dvc \\
-					\leq \dvc \Big( 1 + \ln \frac{p}{\dvc} \Big) 
+					\leq \dvc \cdot \Big( 1 + \ln \frac{p}{\dvc} \Big) 
 					& \text{for } p > \dvc
 				\end{array} \right.
 			\label{eq:growthpiecewise}
 			\end{equation}
 
-		\item Vapnik-Chernovenkis dimension $d_{VC}$: \\
+		\item Vapnik-Chernovenkis dimension $\dvc$: \\
 			capacity measure of the model class
 		%\itR the growth function is independent of a specific sample
 		%\itR the growth function is bounded by a term logarithmic in $p$
@@ -296,9 +296,9 @@ However, for $p > \dvc$ the growth function behaves differently, namely
 		\includegraphics[height=5.7cm]{img/growth_function_clean}
 	\end{center}
 	\vspace{-2mm}
-	$d_{VC}$: capacity measure of the model class\\
-	small $d_{VC}$: small sample size sufficient for learning\\
-	large $d_{VC}$: large sample size required
+	$\dvc$: capacity measure of the model class\\
+	small $\dvc$: small sample size sufficient for learning\\
+	large $\dvc$: large sample size required
 
 		%\item growth function defines VC-dimension $\dvc$
 		%\item higher capacity $\rightarrow$ more different labelings
@@ -332,23 +332,23 @@ However, for $p > \dvc$ the growth function behaves differently, namely
 			
 			\begin{equation}
 				\lim_{p \to \infty} P\bigg\{ 
-					{
+					{\color{blue}
 						\Big|R_{(\vec w_p)} - R_{(\vec w_0)}\Big| 
 					}
 				\geq \eta \bigg\}\;\;=\;\; 0 \,, \quad \forall \eta > 0
-				\label{eq:risktozero}
+				%\label{eq:risktozero}
 			\end{equation}
 			
 			\textbf{But} Our dataset is never going to be infinitely large. Therefore, a more realistic formulation would be that ERM converges to some small $\epsilon$.\\
-			We therefore reiterate \eqref{eq:convergenceeps}:
+			We therefore reformulate the above to:
 			
 			\begin{equation}
 				\lim_{p \to \infty} P\bigg\{ 
-					{
+					{\color{blue}
 						\Big|R_{(\vec w_p)} - R_{(\vec w_0)}\Big| 
 					}
 				\geq \eta \bigg\}\;\;<\;\; \epsilon \,, \quad \forall \eta > 0
-				\label{eq:risktozero}
+				%\label{eq:risktozero}
 			\end{equation}
 			
 			The takeaway from the growth function and the bounds is that it defines the value of $\eta$ in \eqref{eq:convergenceeps} that can be targeted when training a specific model with a finite set of $p$ points.
@@ -451,7 +451,7 @@ generalization capabilities of the model class which leads us to the following f
 			\vspace{-2mm}
 			\begin{equation}
 				P\bigg\{ \sup\limits_{\vec w \in \Lambda}
-					{%\color{question2} 
+					{\color{question2} 
 						\Big|R_{(\vec w)} - R^{(p)}_{\text{emp}(\vec w)}\Big| 
 					} > \eta
 				\bigg\} < 4 \exp\Big( G^\Lambda_{(2p)} 
