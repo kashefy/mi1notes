@@ -4,7 +4,6 @@
 % packages and classes, scrartcle is an extended article 
 %\LoadClass[a4paper]{scrbook}  % has chapters but needs formatting
 \LoadClass[a4paper]{scrartcl} % doesn't have chapters - see workaround
-\usepackage{etex}
 \RequirePackage{scrlayer-scrpage, times, amsmath, amssymb, bm}
 \RequirePackage{etoolbox, comment} % not ifthen, xstring, 
 \RequirePackage[latin9]{inputenc}
