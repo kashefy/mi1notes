@@ -1,5 +1,6 @@
 # Machine Intelligence 1: Supervised Learning - Tutorial Notes #
 
+[![make LaTeX](https://github.com/kashefy/mi1notes/actions/workflows/main.yml/badge.svg)](https://github.com/kashefy/mi1notes/actions/workflows/main.yml)
 [![Build Status](https://app.travis-ci.com/kashefy/mi1notes.svg?branch=master)](https://app.travis-ci.com/kashefy/mi1notes)
 [![License: CC BY-SA 4.0](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](https://creativecommons.org/licenses/by-sa/4.0/)
 
