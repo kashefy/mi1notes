@@ -14,11 +14,13 @@ Reinforcement learning is about what actions to take in which situations in orde
 Our data consists of a sequence. Each time step is described by 
 
 \begin{itemize}
-\item a state $\vec x \in \mathcal{X}$ or $\vec x \in \R^N$, e.g. $\mathcal{X} := \{ \vec x_1, \ldots, \vec x_S\} \subset \{0,1\}^S$ (1-out-$S$ encoding)
+\item a state $\vec x \in \mathcal{X}$ or $\vec x \in \R^N$,\\
+e.g. $\mathcal{X} := \{ \vec x_1, \ldots, \vec x_S\} \subset \{0,1\}^S$ (1-out-$S$ encoding)
 \pause
 \item an action $\vec a$ which can be taken by the agent:\\
 
-$\vec a \in \mathcal{A}$ or $\vec a \in \R^M$, e.g. $\mathcal{A} := \{ \vec a_1, \ldots, \vec a_A\} \subset \{0,1\}^A$ (1-out-$A$ encoding)
+$\vec a \in \mathcal{A}$ or $\vec a \in \R^M$,\\
+e.g. $\mathcal{A} := \{ \vec a_1, \ldots, \vec a_A\} \subset \{0,1\}^A$ (1-out-$A$ encoding)
 \pause
 \item a reward $r \in \R$ or $r \in \{0,1\}$, e.g. $r \in \{\text{``cheese''},\text{``no cheese''}\}$.
 
