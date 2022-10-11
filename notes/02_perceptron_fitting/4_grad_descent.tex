@@ -1,21 +1,24 @@
 \section{Gradient-based learning}
 
 \mode<presentation>{
+\begin{frame}{Where are we?}
 
-\begin{frame}
-\begin{center}
-    \begin{center} \huge
-        \secname
-    \end{center}
-    
-    \begin{center}
-		\includegraphics[width=0.25\textwidth]{img/meme_slide}
-    \end{center}
-    
-    \begin{center}
-    Iterative, step-by-step minimization of the training error.
-    \end{center}
-\end{center}
+\begin{columns}
+    \begin{column}{0.55\textwidth}
+        \tableofcontents[currentsection,hideallsubsections]
+    \end{column}
+    \vrule{}
+    \begin{column}{0.45\textwidth}
+        \begin{center}
+            \includegraphics[width=0.85\textwidth]{img/meme_slide}
+        \end{center}
+        \begin{center}
+        Iterative, step-by-step\\
+        minimization\\
+        of the training error.
+        \end{center}
+    \end{column}
+\end{columns}
 \end{frame}
 }
 
@@ -86,7 +89,7 @@
 
 \subsection{Gradient descent}
 
-\begin{frame}\frametitle{Finding the minumum of $\ETw$ iteratively\only<2->{ for an \underline{MLP}}}
+\begin{frame}\frametitle{Finding the minumum of $\ETw$ iteratively}
 
 \mode<article>{
 
@@ -96,11 +99,11 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     \begin{figure}[h]
         \centering
         \includegraphics[height=3.cm]{img/section1_fig19}
-        \caption{Minimizing the training error iteratively via gradient descent}
+        \notesonly{\caption{Minimizing the training error iteratively via gradient descent}
+        }
         \label{fig:minimize_via_gradient_descent} 
     \end{figure}
     
-    \only<1>{
     For our connectionist neuron example:
     \begin{equation}
     		w_{j}(t+1) \quad=\quad w_{j}(t) 
@@ -121,41 +124,22 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     \mode<article>{
     $\vec w^{\mathrm{init}}$ is basically a random guess of where the solution might be and going against the gradient will potentially move us closer to the minimum. 
     }
-    }
-	\only<2,3>{
-    For an MLP:
-    \begin{equation}
-		w_{ij}^{v'v}(t+1) \quad=\quad w_{ij}^{v'v}(t) 
-				\;\;{\color{red}-}\;\;
-				\underbrace{\eta}_{ 
-						\substack{\text{learning} \\ \text{step} } }
-                        \cdot
-				\underbrace{\frac{\partial \ETw}{
-					\partial {w}_{ij}^{v'v}}}_{
-						\substack{
-							\text{component of}\\
-							\text{\textcolor{red}{gradient vector}} 
-			} }
-            \label{eq:gradient_descent_mlp}
-    \end{equation}
-    }
     
     \mode<article>{
     
     The learning step (learning rate) $\eta$ modulates the magnitude of our update. $\eta$ can be treated as a constant but we will also see how the value of $\eta$ can change over time, i.e. $\eta(t)$.
     }
-    \only<3>{
-    \mode<presentation>{\vspace{-4mm}}
-    \question{Why do we \underline{subtract} the gradient from $w_{ij}^{v'v}(t)$?}
+    \only<2>{
+        \svspace{-2mm}
+        \question{Why do we \underline{subtract} the gradient from $w_{ij}^{v'v}(t)$?}
     }
     
     \mode<article>{
-    
-    The gradient describes the slope. Adding it will move us upwards and potentially maximize our function. Gradient-based learning with the intention of maximizing some function is referred to as hill climbing or gradient \emph{ascent}.
+        The gradient describes the slope. Adding it will move us upwards and potentially maximize our function. Gradient-based learning with the intention of maximizing some function is referred to as hill climbing or gradient \emph{ascent}.
     }
     
-    \only<4>{
-    \question{So what's the downside of using gradient descent?}\\
+    \only<3>{
+    \question{So what is the downside of using gradient descent?}\\
     }
 \end{frame}
 
@@ -262,7 +246,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     \notesonly{
     Therefore, if the objective were to minimize} quadratic error:
     
-    \mode<presentation>{\vspace{-1cm}}
+    \svspace{-1cm}
     \begin{equation}
 			e\tyxw := \frac{1}{2} \left( y_T - y(\vec{x}; \vec w) \right)^2
     \end{equation}
@@ -270,7 +254,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     \mode<article>{it follows:}
     
     \begin{equation}
-			\textcolor{blue}{\frac{\partial e\tyxwalpha}{
+			\textcolor{blue}{\frac{\partial~e_{\text{quadr.}}\tyxwalpha}{
 					\partial y{(\vec{x}^{(\alpha)}; \vec{w})} }
 				= - y_T^{(\alpha)} + y{(\vec{x}^{(\alpha)}; \vec{w})}}
     \end{equation}
@@ -315,13 +299,14 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 
 \mode<presentation>{
 \begin{frame}
+Again with less clutter:
 
 	\begin{align}
 		\frac{\partial \ETw}
 			{\partial {w}_{j}}
 		\;=\;& \frac{1}{p} \sum_{\alpha=1}^p	\underbrace{
 			\textcolor{blue}{
-			\frac{\partial e\tyxwalpha}{\partial 
+			\frac{\partial e_{\text{quadr.}}\tyxwalpha}{\partial 
 					y(\vec{x}^{(\alpha)}, \vec{w})} }}_{
 						\substack{\text{factor depending} \\
 							\text{on cost function}}}
@@ -343,75 +328,13 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 	\end{align}
 
 \begin{center}
-
-\begin{minipage}{0.4\textwidth}
-\begin{center}
-	\includegraphics<2->[width=0.4\textwidth]{img/meme_perceptron_grad}
-\end{center}
-\end{minipage}
-\begin{minipage}{0.4\textwidth}
-\hspace{-30mm}
-%\begin{center}
-	%\includegraphics<3>[width=0.7\textwidth]{img/meme_showme_mlp}
-    %\only<3>{img/meme_showme_mlp}
-    %%%%%%%%%%%%%%%%%%%%%555
-    %%%%%%%%%%%%%%%%%%%%%%5
-    %%%%%%%%%%%%%%%%%%%%%%%55
-    %%%%%%%%%%%%%%%%%%%%%%5
-%\end{center}
-\end{minipage}
-
+	\includegraphics<2->[width=0.2\textwidth]{img/meme_perceptron_grad}
 \end{center}
 
 \end{frame}
-}
 
 \begin{frame}\frametitle{Computing gradients for an MLP}
 
-    \mode<presentation>{
-    \begin{equation*}
-        w_{ij}^{v'v}(t+1) \quad=\quad w_{ij}^{v'v}(t) 
-            \;\;{\color{red}-}\;\;
-            \underbrace{\eta}_{ 
-                    \substack{\text{learning} \\ \text{step} } }
-                    \cdot
-            \underbrace{\frac{\partial \ETw}{
-                \partial {w}_{ij}^{v'v}}}_{
-                    \substack{
-							\text{component of the }\\
-                        \text{\textcolor{red}{gradient vector}} 
-        } }
-    \end{equation*}
-    
-    \begin{figure}[ht]
-     \centering
-     \savebox{\imagebox}{
-	 \includegraphics[trim=150 0 0 0,clip,height=2.5cm]{img/section1_fig19}}%
-     \begin{subfigure}[t]{0.35\textwidth}
-         \centering
-         \usebox{\imagebox}% Place largest image
-     \end{subfigure}
-     \hspace{7mm}
-     \begin{subfigure}[t]{0.49\textwidth}
-         \centering
-         \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
-         \includegraphics[width=0.99\textwidth]{img/section1_fig14_ij}
-         }
-     \end{subfigure}
-    \end{figure}
-    }
+Next time.
 \end{frame}
-
-    
-    \mode<article>{
-    \begin{figure}[h]
-        \centering
-        \includegraphics[height=3cm]{img/section1_fig14_ij}
-        \caption{Example MLP architecture}
-        \label{fig:example_mlp}
-    \end{figure}
-    
-    \eqref{eq:gradient_descent_mlp} shows us how gradients are used for iteratively finding the minimum of the training error.
-    The layered structure of an MLP implies that computing the gradient requires a more involved application of the chain rule. The backpropagation algorithm exploits the chain rule to efficiently compute the gradients for an MLP.
-    }
-    
+}
