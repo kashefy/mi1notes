@@ -44,16 +44,18 @@
     \end{equation}
     \pause
     Because $P{(y_T, \vec{x})}$ is not known, \mode<article>{we turn to the principle of empirical risk minimization (ERM).
-    According to ERM we can approximate $\EGw$ by computing the} empirical average $\ETw$ using the available training data:
+    According to ERM we can approximate $\EGw$ by computing the}
+    \only<3>{empirical average $\ETw$ using the available training data:
     $$
     \left\{\left(\vec x^{(\alpha)}, y_T^{(\alpha)}\right)\right\}, \alpha=1,\ldots,p
-    $$.
+    $$.}
     \mode<article>{The training error $\ETw$ becomes:}
-
-    \mode<presentation>{\vspace{-10mm}}
-    \begin{equation}
-    \text{batch training error:}\quad \ETw=\frac{1}{p}\sum_{\alpha=1}^{p} \underbrace{e\tyxwalpha}_{e^{(\alpha)}}
-    \end{equation}
+    \only<3->{
+        \begin{equation}
+        \slidesonly{\hspace{-18mm}}
+        \only<3>{\text{batch training error:}\quad }\ETw=\frac{1}{p}\sum_{\alpha=1}^{p} \underbrace{e\tyxwalpha}_{e^{(\alpha)}}
+        \end{equation}
+    }
     \mode<article>{
     where $e\tyxwalpha$ (or $e^{(\alpha)}$ for brevity) is the cost computed from the prediction for a specific observation $y(\vec x^{(\alpha)};\vec w)$ and its corresponding label $y_T^{(\alpha)}$. The superscript $^{(\alpha)}$ is used to index a specific point (sample) in the dataset.
     }
