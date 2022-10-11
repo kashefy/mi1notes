@@ -35,7 +35,7 @@
 \makeatother{}
 
 %Omit subsections from table of content
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{1}
 
 \begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -56,8 +56,12 @@
 \end{frame}
 
 \begin{frame}{Our agenda for today}
-\tableofcontents[hideallsubsections]
+    \tableofcontents%[hideallsubsections]
 \end{frame}
+
+\mode<all>
+\input{./1_perceptron-limitations}
+\mode*
 
 \mode<all>
 \input{./0_mlp_feedfwd}

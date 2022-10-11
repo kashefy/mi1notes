@@ -37,6 +37,9 @@
 \newcommand{\removelatexerror}{\let\@latex@error\@gobble}
 \makeatother
 
+%Omit subsections from table of content
+\setcounter{tocdepth}{2}
+
 \begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \sheet{\sheetnum}{\tutorialtitleshort}
@@ -95,12 +98,16 @@
 
 \clearpage
 
-%\section{References}
-%\begin{frame}[allowframebreaks] \frametitle{References}
-	%\scriptsize
-	%\bibliographystyle{plainnat}
-	%\bibliography{bibliography}
-%\end{frame}
+\mode<all>
+\input{./6_connectionist_neuron}
+\mode*
+
+\section{References}
+\begin{frame}[allowframebreaks] \frametitle{References}
+	\scriptsize
+	\bibliographystyle{plainnat}
+	\bibliography{bibliography}
+\end{frame}
 
 \end{rightcolumn}
 \end{paracol}
