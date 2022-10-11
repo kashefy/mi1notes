@@ -25,7 +25,7 @@
     
 \end{frame}
 
-\begin{frame}\frametitle{Finding the minumum of $\ETw$ iteratively for an \underline{MLP}}
+\begin{frame}\frametitle{Finding the minimum of $\ETw$ iteratively for an \underline{MLP}}
 
 \mode<article>{
 
@@ -35,7 +35,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     \begin{figure}[h]
         \centering
         \includegraphics[height=3.cm]{img/section1_fig19}
-        \caption{Minimizing the training error iteratively via gradient descent}
+        \notesonly{\caption{Minimizing the training error iteratively via gradient descent}}
         \label{fig:minimize_via_gradient_descent} 
     \end{figure}
     
@@ -71,8 +71,6 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     - The gradient describes the slope. Subtracting the gradient aligns with minimizing the function, while adding the gradient would be suitable for maximizing it.
     }
 \end{frame}
-
-\subsection{Gradient calculation}
 
 \begin{frame}\frametitle{Recap: connectionist neuron for minimizing quadratic error}
     
@@ -139,7 +137,9 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 
 \end{frame}
 
-\begin{frame}\frametitle{Computing gradients for an MLP}
+\subsection{Computing gradients for an MLP}
+
+\begin{frame}\frametitle{\subsecname}
 
     \mode<presentation>{
     \begin{equation*}
