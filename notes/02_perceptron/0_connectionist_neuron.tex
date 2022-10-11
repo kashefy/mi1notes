@@ -158,7 +158,7 @@ A connectionist neuron's response to 3D data:}
     \end{figure}
     
 \end{frame}
-\begin{frame}
+\begin{frame}{The input-output relationship}
     
     The input-output relationship is described by a linear filter with a static non-linearity $f(\cdot)$:
 
@@ -278,21 +278,21 @@ $\frac{\vec w^\top \widetilde{\vec x}}{\,||\vec w||_2} = \frac{\theta}{\,||\vec 
 \subsubsection{From logistic sigmoidal to tanh}
 \label{sec:tanh_to_sigmoid}
 
-\begin{frame}
+%\begin{frame}
 
+\mode<article>{
 \question{How does the logistic sigmoidal function relate to the tanh function?}
-
-\mode<presentation>{
-
-	\only<1,2>{\placeimage{10}{3.5}{img/neuron_1d_sigm_tanh}{width=4.cm}}
 }
+%\mode<presentation>{
+
+	%\only<1,2>{\placeimage{10}{3.5}{img/neuron_1d_sigm_tanh}{width=4.cm}}
+%}
 
 \mode<article>{
 
 We observe in \figref{fig:sigmoid_tanh} that the logistic sigmoidal function (sigmoid) function is a shifted and scaled variant of the tanh function.
 
 From this follows:
-}
 
 	\begin{align}
 	f_{{\text{sigmoid}}}(h) 
@@ -311,9 +311,9 @@ From this follows:
 		\Bigg) \\
 	& = \frac{1}{2} \left( \tanh \frac{h}{2} + 1 \right)
 	\end{align}
-
+}
     
-\end{frame}
+%\end{frame}
 
 \subsection{Shortcut notation for weights and bias}
 
