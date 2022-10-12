@@ -1,92 +1,3 @@
-\section{Gradient-based learning}
-
-\mode<presentation>{
-\begin{frame}{Where are we?}
-
-\begin{columns}
-    \begin{column}{0.55\textwidth}
-        \tableofcontents[currentsection,hideallsubsections]
-    \end{column}
-    \vrule{}
-    \begin{column}{0.45\textwidth}
-        \begin{center}
-            \includegraphics[width=0.85\textwidth]{img/meme_slide}
-        \end{center}
-        \begin{center}
-        Iterative, step-by-step\\
-        minimization\\
-        of the training error.
-        \end{center}
-    \end{column}
-\end{columns}
-\end{frame}
-}
-
-\begin{frame}\frametitle{Minimizing the training error}
-	Training error $E^T$ for the training set $\left\{(\vec x^{(\alpha)}, y^{(\alpha)}_{T})\right\}$: 
-    \begin{equation}
-        \ETw = \frac{1}{p} \sum\limits_{\alpha = 1}^p 
-					e\tyxwalpha
-    \end{equation}
-    
-    \mode<article>{
-    The objective is to minimize the training error w.r.t. the model parameters $\vec w$. That is
-    }
-    
-    \begin{equation}
-        \ETw \eqexcl \min_{\vec w} \quad \Rightarrow \quad \vec w^{*} = \argmin_{\vec w} \ETw
-    \end{equation}
-
-    \begin{figure}[h]
-        \centering
-        \includegraphics[height=2.5cm]{img/section1_fig19_no_steps}
-        \caption{Training error with minimum at $\vec w^{*}$}
-        \label{fig:training_error} 
-    \end{figure}
-    \slidesonly{\vspace{-10mm}}
-    
-    \pause 
-    \question{What is the strategy for finding $\vec w^{*}$ analytically?}
-
-\end{frame}
-
-\subsection{Finding the minimum of the training error analytically}
-
-\begin{frame}\frametitle{\subsecname}
-
-    Example with a simple connectionist neuron model
-    with parameters
-    $$\vec w = (w_{0}, w_{1}, \ldots, w_{N})^{\top}$$\\
-
-
-    - The strategy for finding the minimum of a function $\ETw$ analytically is as follows:
-    \pause
-    \begin{enumerate}
-    \item Compute the gradient w.r.t. $\vec w$ by taking the first partial derivatives w.r.t to each component in the vector $\vec w$
-    \begin{equation}
-        \frac{\partial \ETw}{\partial \vec w} = \left(\,
-        \frac{\partial \ETw}{\partial w_{0}}, \,
-        \frac{\partial \ETw}{\partial w_{1}}, \,\ldots\,,\, 
-        \frac{\partial \ETw}{\partial w_{N}}\,
-        \right)^{\top}
-        \label{eq:gradient_partial}
-    \end{equation}
-    The gradient $\frac{\partial \ETw}{\partial \vec w}$ has the same dimensionality as $\vec w$.
-    \pause
-    
-    \item Set the gradient to zero: $\frac{\partial \ETw}{\partial \vec w} \eqexcl \vec 0$
-    \item Solve for $\vec w$ to find extrema.
-    \item Select solution corresponding to global minimum.
-    
-    \end{enumerate}
-    
-    Caveat: Closed-form solution infeasible for complex models such as MLPs.
-    
-    \mode<presentation>{
-    Instead: Iterative learning algorithm gradient descent.
-    }
-\end{frame}
-
 \subsection{Gradient descent}
 
 \begin{frame}\frametitle{Finding the minumum of $\ETw$ iteratively}
@@ -104,7 +15,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
         \label{fig:minimize_via_gradient_descent} 
     \end{figure}
     
-    For our connectionist neuron example:
+    For our connectionist neuron example\notesonly{ learning by gradient descent would update each weight iteratively using}:
     \begin{equation}
     		w_{j}(t+1) \quad=\quad w_{j}(t) 
 				\;\;{\color{red}-}\;\;
@@ -122,7 +33,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     
     with $j=0,\ldots,N$
     \mode<article>{
-    $\vec w^{\mathrm{init}}$ is basically a random guess of where the solution might be and going against the gradient will potentially move us closer to the minimum. 
+    $\vec w^{\mathrm{init}}$ from \figref{fig:minimize_via_gradient_descent} is a random guess of where the solution might be and going against the gradient will potentially move us closer to the minimum. 
     }
     
     \mode<article>{
@@ -169,18 +80,17 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 
 \begin{frame}\frametitle{Gradient calculation: Connectionist neuron}
     
-    Recall the previous example with the connectionist neuron:
-    
     \begin{figure}[h]
         \centering
-        \includegraphics[height=2.5cm]{img/linearNeuron_y}
+        \includegraphics[height=\notesonly{1.9cm}\slidesonly{2.5cm}]{img/linearNeuron_y}
         \mode<article>{
-        \caption{Connctionist neuron}
+        \caption{A connctionist neuron}
         }
         \label{fig:neuron} 
     \end{figure}
     
-    Gradient descent updates the weights using:
+    \mode<presentation>{
+    Working with the connectionist neuron\notesonly{ from figure \figref{fig:neuron}}, gradient descent updates the weights using:
     \begin{equation}
     		w_{j}(t+1) \quad=\quad w_{j}(t) 
 				\;\;{\color{red}-}\;\;
@@ -194,6 +104,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 							\text{\textcolor{red}{the gradient}} 
 			} }
     \end{equation}
+    }
     
 \end{frame}
 \begin{frame}
@@ -261,7 +172,7 @@ Learning from gradient descent is an alternate approach for finding the minimum 
     }
     
 \mode<article>{
-    The model-specific contribution to the error function appears in the second factor:
+    The model-specific contribution to the error appears in the \textcolor{orange}{second factor}.
     
     Continuing with our connectionist neuron \notesonly{from \figref{fig:neuron}}:
     }
@@ -281,15 +192,22 @@ Learning from gradient descent is an alternate approach for finding the minimum 
 			\textcolor{orange}{
 			\frac{\partial y(\vec{x}^{(\alpha)}; \vec{w})}
             {\partial {w}_{j}}}
-            &= \frac{\partial y(\vec{x}^{(\alpha)}, \vec{w})}
+            &= 
+            \textcolor{magenta}{
+            \frac{\partial y(\vec{x}^{(\alpha)}, \vec{w})}
             {\partial h(\vec x^{(\alpha)}; \vec w)}
+            }
             \cdot
             \frac{\partial h(\vec x^{(\alpha)}; \vec w)}
             {\partial {w}_{j}}\\
-            &= \underbrace{f'(h(\vec x^{(\alpha)}; \vec w))}_{\substack{\text{depends on}\\ \text{transfer function}}}
+            &= \underbrace{
+            \textcolor{magenta}{
+                f'(h(\vec x^{(\alpha)}; \vec w))
+                }
+            }_{\substack{\text{depends on}\\ \text{transfer function}}}
             \cdot
             \underbrace{
-                \frac{\partial \vec w^{\top} \vec x^{(\alpha)}}
+                \frac{\partial~\vec w^{\top} \vec x^{(\alpha)}}
                 {\partial {w}_{j}}
             }_{=x_{j}}
 	\end{align}
@@ -321,7 +239,7 @@ Again with less clutter:
             \textcolor{blue}{(y{(\vec{x}^{(\alpha)}; \vec{w}) - y_T^{(\alpha)})}}
             \cdot
             \textcolor{orange}{
-            \underbrace{f'(h(\vec x^{(\alpha)}; \vec w))}_{\substack{\text{depends on}\\ \text{transfer function}}}
+            f'(h(\vec x^{(\alpha)}; \vec w))
             \cdot
             x_{j}
             }

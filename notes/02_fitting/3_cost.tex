@@ -197,7 +197,7 @@ Using the quadratic cost leads to a solution that corresponds to the same soluti
 This property makes the quadratic cost function the standard choice for regression.
 }
 
-\subsubsection{Cost functions for binary classification}
+\subsubsection{Cost function for binary classification}
 
 \begin{frame}\frametitle{\subsubsecname\\Deriving the cross entropy cost function for binary classification}
 
@@ -238,7 +238,7 @@ for the \textcolor{blue}{``positive''} and \textcolor{red}{``negative''/``other'
 
 \end{frame}
 
-\begin{frame}\frametitle{Cost function derivation via minimization of \\the Kullback-Leibler divergence}
+\begin{frame}\frametitle{Cost function derivation based on the \only<1>{Kullback-Leibler~}\only<2->{KL-}divergence}
 
 \mode<article>{
 \textbf{The Kullback-Leibler divergence }
@@ -278,9 +278,9 @@ Properties of the KL-divergence:
 
 \end{frame}
 
-\begin{frame}\frametitle{Cost function derivation via minimization of the Kullback-Leibler divergence}
+\begin{frame}\frametitle{From KL-divergence to binary cross entropy loss}
  
-From KL-divergence to binary cross entropy loss:
+\notesonly{From KL-divergence to binary cross entropy loss:}
 \only<1>{
 
 \begin{align}
