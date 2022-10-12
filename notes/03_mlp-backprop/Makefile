@@ -1,8 +1,9 @@
 all: slides notes clean
 #all:  handout
 
-targetname = tutorial_03_mlp_cost_output_backprop
 projname = tutorial
+projname = tutorial
+targetname = $(projname)_$(shell basename $(CURDIR))
 compile = pdflatex
 projnameS = $(projname).slides
 projnameH = $(projname).handout
