@@ -11,7 +11,8 @@ projnameA = $(projname).notes
 slides: $(projname).slides.tex $(projname).tex
 	$(compile) $(projname).slides.tex
 	$(compile) $(projname).slides.tex
-#	bibtex $(projname).slides
+	bibtex $(projname).slides
+	$(compile) $(projname).slides.tex
 #	$(compile) --interaction=batchmode  $(projname).slides.tex
 #	$(compile) --interaction=batchmode   $(projname).slides.tex
 	mv $(projname).slides.pdf $(targetname).slides.pdf 
@@ -24,7 +25,8 @@ handout: $(projname).handout.tex $(projname).tex
 notes: $(projname).notes.tex $(projname).tex
 	$(compile) $(projname).notes.tex
 	$(compile) $(projname).notes.tex
-#	bibtex $(projname).notes
+	bibtex $(projname).notes
+	$(compile) $(projname).notes.tex
 #	$(compile) --interaction=batchmode  $(projname).notes.tex
 #	$(compile) --interaction=batchmode  $(projname).notes.tex
 	mv $(projname).notes.pdf $(targetname).notes.pdf 

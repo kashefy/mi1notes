@@ -35,7 +35,7 @@
 \makeatother{}
 
 %Omit subsections from table of content
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{1}
 
 \begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -55,43 +55,27 @@
 \titlepage
 \end{frame}
 
-\begin{frame}
-\tableofcontents[hideallsubsections]
+\begin{frame}{Our agenda for today}
+    \tableofcontents%[hideallsubsections]
 \end{frame}
 
 \mode<all>
-\input{./0_mlp_feedfwd}
+\input{./0_perceptron-limitations}
 \mode*
-
-\mode<article>
-\input{./1_mlp_universal}
-\mode*
-
-\newpage
 
 \mode<all>
-\input{./2_learning_components}
-\mode*
-
-\newpage
-
-\mode<all>
-\input{./3_cost}
+\input{./1_mlp_feedfwd}
 \mode*
 
 \clearpage
 
 \mode<article>
-\input{./3_cost-crossentropy-example}
+\input{./2_mlp_universal}
 \mode*
-
-\clearpage
 
 \mode<all>
-\input{./4_grad_descent}
+\input{./3-4_grad_descent_mlp}
 \mode*
-
-\clearpage
 
 \mode<all>
 \input{./5_mlp_backprop}

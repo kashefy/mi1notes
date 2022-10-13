@@ -1,15 +1,13 @@
 \usepackage[authoryear,round]{natbib}
-\usepackage{multirow}
-
 \newcommand{\sheetnum}{%
-	01
+	02
 }
 %\setcounter{section}{\sheetnum-3}
 \newcommand{\tutorialtitle}{%
-    Introduction and Learning Paradigms
+    Connectionist Neuron \& Function Fitting
 }
 \newcommand{\tutorialtitleshort}{%
-	Intro \& Learning Paradigms
+	Perceptron \& Learning
 }
 % for slides
 \subtitle{\sheetnum \tutorialtitle}
@@ -26,7 +24,7 @@
 %\begin{figure}[!t]
 %\removelatexerror
 %\begin{algorithm}[H]
-    % your algo here
+    % your aglo here
     %\label{alg:algolabel}
     %\caption{algocaption}
 %\end{algorithm}
@@ -35,9 +33,11 @@
 % Below is the definition for the command \removelatexerror:
 \makeatletter
 \newcommand{\removelatexerror}{\let\@latex@error\@gobble}
-\makeatother
+\makeatother{}
 
 \begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\maxdeadcycles=1000 % Workaround for ! Output loop---100 consecutive dead cycles because of too many figures
 
 \sheet{\sheetnum}{\tutorialtitleshort}
 
@@ -55,45 +55,47 @@
 \titlepage
 \end{frame}
 
-\begin{frame}
+\begin{frame}{The plan for today}
 \tableofcontents
 \end{frame}
+
+%\mode<all>
+%\input{./0_connectionist_neuron}
+%\mode*
+
+%\clearpage
+
+%\mode<all>
+%\input{./1_perceptron-limitations}
+%\mode*
+
+%\newpage
+
+\mode<all>
+\input{./2_learning_components}
+\mode*
 
 \newpage
 
 \mode<all>
-\input{./0_intro}
+\input{./3_cost}
 \mode*
 
-\mode<all>
-\input{./1_learning_paradigms}
+\clearpage
+
+\mode<article>
+\input{./3_cost-crossentropy-example}
 \mode*
 
 \clearpage
 
 \mode<all>
-\input{./2_learning_paradigms_sup}
+\input{./4_grad_based_learning}
 \mode*
-
-\clearpage
 
 \mode<all>
-\input{./3_learning_paradigms_unsup}
+\input{./5_grad_descent}
 \mode*
-
-\clearpage
-
-\mode<all>
-\input{./4_learning_paradigms_rl}
-\mode*
-
-\clearpage
-
-\mode<all>
-\input{./5_learning_paradigms_overview}
-\mode*
-
-\clearpage
 
 %\section{References}
 %\begin{frame}[allowframebreaks] \frametitle{References}

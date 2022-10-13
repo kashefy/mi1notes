@@ -16,7 +16,7 @@ The choice of cost function has a direct effect on how the model learns. For exa
 
 \subsubsection{Cost functions for Regression}
 
-\begin{frame}\frametitle{\subsecname}
+\begin{frame}\frametitle{\subsubsecname}
 
   \begin{tabular}{c c c}
     \parbox{4cm}{
@@ -197,7 +197,7 @@ Using the quadratic cost leads to a solution that corresponds to the same soluti
 This property makes the quadratic cost function the standard choice for regression.
 }
 
-\subsubsection{Cost functions for binary classification}
+\subsubsection{Cost function for binary classification}
 
 \begin{frame}\frametitle{\subsubsecname\\Deriving the cross entropy cost function for binary classification}
 
@@ -238,7 +238,7 @@ for the \textcolor{blue}{``positive''} and \textcolor{red}{``negative''/``other'
 
 \end{frame}
 
-\begin{frame}\frametitle{Cost function derivation via minimization of \\the Kullback-Leibler divergence}
+\begin{frame}\frametitle{Cost function derivation based on the \only<1>{Kullback-Leibler~}\only<2->{KL-}divergence}
 
 \mode<article>{
 \textbf{The Kullback-Leibler divergence }
@@ -278,9 +278,9 @@ Properties of the KL-divergence:
 
 \end{frame}
 
-\begin{frame}\frametitle{Cost function derivation via minimization of the Kullback-Leibler divergence}
+\begin{frame}\frametitle{From KL-divergence to binary cross entropy loss}
  
-From KL-divergence to binary cross entropy loss:
+\notesonly{From KL-divergence to binary cross entropy loss:}
 \only<1>{
 
 \begin{align}
@@ -447,8 +447,7 @@ Extendable to multi-class cross entropy alongside \emph{softmax} normalization.
 \begin{center}
 %\begin{table}[h!]
 \notesonly{\captionof{table}{Cost functions \& output layers}\slidesonly{\vspace{-5mm}}}
-\resizebox{0.9\textwidth}{!}{%
-\hskip-2.0cm
+\resizebox{0.95\textwidth}{!}{%
 \begin{tabular}{|l|c|c|l|}
 \hline
 task 
