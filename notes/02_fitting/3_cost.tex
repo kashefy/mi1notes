@@ -285,7 +285,7 @@ Properties of the KL-divergence:
 
 \begin{align}
 \dkl\left(\, P_{\text{data}}(\vec x, y) \,||\, P_{\text{model}}(\vec x, y) \,\right)
-= \iint d \vec x dy P_{\text{data}}(\vec x, y)
+= \int {\color{magenta}\hspace{-1mm} \int} d \vec x~{\color{magenta}dy} P_{\text{data}}(\vec x, y)
 \ln 
 \left( 
 \frac{P_{\text{data}}(\vec x, y)}{P_{\text{model}}(\vec x, y)}
@@ -293,14 +293,14 @@ Properties of the KL-divergence:
 \end{align}
 
 \mode<article>{
-Integrating w.r.t. $y$ $\corresponds$ sum over the set of all possible values for $y$, which is $\{0,1\}$ in this case:
+Integrating w.r.t. $y$ $\corresponds$ sum over the set of all possible values for $y$, which is $\{0,1\}$ in \textcolor{magenta}{this} case:
 }
 }
 \definecolor{darkgreen}{rgb}{0,0.6,0}
 \begin{align}
 \only<1,2>{
-\dkl&\left(\, P_{\text{data}}(\vec x, y) \,||\, P_{\text{model}}(\vec x, y) \,\right)\\
-&= \int_{\R^N} d \vec x \sum_{y \in \{0,1\}} P_{\text{data}}(\vec x, y) \ln 
+\only<2>{\dkl&\left(\, P_{\text{data}}(\vec x, y) \,||\, P_{\text{model}}(\vec x, y) \,\right)\\}
+&= \int_{\R^N} d \vec x {\only<1>{\color{magenta}}\sum_{y \in \{0,1\}}} P_{\text{data}}(\vec x, y) \ln 
 \left( 
 \frac{P_{\text{data}}(\vec x, y)}{P_{\text{model}}(\vec x, y)}
 \right)\\
