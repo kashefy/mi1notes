@@ -61,7 +61,7 @@
     The strategy for finding the minimum of a function $\ETw$ analytically\notesonly{ is as follows}:
     %\pause
     \begin{enumerate}
-    \item<2-> Compute the gradient w.r.t. $\vec w$ by taking the first partial derivatives w.r.t to each component in the vector $\vec w$
+    \item<1-> Compute the gradient w.r.t. $\vec w$ by taking the first partial derivatives w.r.t to each component in the vector $\vec w$
     \begin{equation}
         \frac{\partial \ETw}{\partial \vec w} = \left(\,
         \frac{\partial \ETw}{\partial w_{0}}, \,
@@ -70,14 +70,14 @@
         \right)^{\top}
         \label{eq:gradient_partial}
     \end{equation}
-    \only<2>{The gradient $\frac{\partial \ETw}{\partial \vec w}$ has the same dimensionality as $\vec w$.}
+    \only<1>{The gradient $\frac{\partial \ETw}{\partial \vec w}$ has the same dimensionality as $\vec w$.}
     
-    \item<3-> Set the gradient to zero: $\frac{\partial \ETw}{\partial \vec w} \eqexcl \vec 0$
-    \item<4-> Solve for $\vec w$ to find extrema.
-    \item<5-> Select solution corresponding to global minimum.
+    \item<2-> Set the gradient to zero: $\frac{\partial \ETw}{\partial \vec w} \eqexcl \vec 0$
+    \item<3-> Solve for $\vec w$ to find extrema.
+    \item<4-> Select solution corresponding to global minimum.
     
     \end{enumerate}
-    \only<6->{
+    \only<5->{
         Caveat: Closed-form solution infeasible for complex models such as MLPs.
         \mode<presentation>{
         Instead: Iterative learning algorithm gradient descent.
