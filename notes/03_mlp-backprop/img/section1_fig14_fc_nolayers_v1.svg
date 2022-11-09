@@ -9,8 +9,8 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="1.0.1 (1.0.1+r73)"
-   sodipodi:docname="section1_fig14_fc_v1.svg"
+   inkscape:version="1.0.2 (1.0.2+r75+1)"
+   sodipodi:docname="section1_fig14_fc_nolayers_v1.svg"
    id="svg537"
    version="1.1"
    height="267.85565"
@@ -20,13 +20,13 @@
   <sodipodi:namedview
      units="mm"
      inkscape:lockguides="true"
-     inkscape:current-layer="g535"
+     inkscape:current-layer="svg537"
      inkscape:window-maximized="1"
      inkscape:window-y="27"
      inkscape:window-x="53"
      inkscape:cy="138.12768"
      inkscape:cx="188.72786"
-     inkscape:zoom="1.4666667"
+     inkscape:zoom="4.1483599"
      showgrid="false"
      id="namedview539"
      inkscape:window-height="1145"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -727,7 +727,27 @@
          id="path4006-7-7"
          inkscape:connector-curvature="0" />
     </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker2022-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path2020-3"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
   </defs>
+  <path
+     inkscape:connector-curvature="0"
+     inkscape:connector-type="polyline"
+     id="path1874-5"
+     d="M 216.43866,206.64098 343.63027,89.77866"
+     style="isolation:isolate;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2022-5)" />
   <g
      id="g535"
      clip-path="url(#_clipPath_wEQTxVe92w5TJJAWM0JlaABHY6LZWJHc)"
@@ -1653,7 +1673,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1082"
-       d="M 82.328145,87.815836 H 206.28185"
+       d="m 82.473,86.4255 123.664,0"
        style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)" />
     <path
        inkscape:connection-start="#path7"
@@ -1661,7 +1681,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1856"
-       d="M 81.791012,89.369749 206.35194,135.58597"
+       d="M 82.056673,88.752312 206.55397,134.94493"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2544)" />
     <path
        inkscape:connection-start="#path7"
@@ -1669,7 +1689,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1858"
-       d="M 82.328145,87.815836 H 206.28185"
+       d="m 82.473,86.4255 123.664,0"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2462)" />
     <path
        inkscape:connection-start="#path9"
@@ -1677,7 +1697,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1860"
-       d="M 81.476934,140.78384 206.80023,209.43049"
+       d="m 81.651551,140.48467 125.307509,68.638"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2386)" />
     <path
        inkscape:connection-start="#path7"
@@ -1685,7 +1705,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1862"
-       d="M 80.846294,90.795795 208.04252,207.66236"
+       d="M 80.709304,90.94944 207.90091,207.81176"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2316)" />
     <path
        inkscape:connection-end="#path13"
@@ -1693,7 +1713,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1864"
-       d="m 81.73636,34.357415 124.68023,50.14995"
+       d="M 81.991138,33.800585 206.619,83.929472"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2252)" />
     <path
        inkscape:connection-end="#path15"
@@ -1701,7 +1721,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1866"
-       d="M 81.082642,35.385555 207.54284,133.17237"
+       d="M 81.075373,35.394956 207.53555,133.18176"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2194)" />
     <path
        inkscape:connection-start="#path27"
@@ -1709,7 +1729,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1868"
-       d="M 80.29071,36.245427 209.29135,206.65761"
+       d="M 79.821452,36.636066 208.78865,207.00407"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2142)" />
     <path
        inkscape:connection-start="#path9"
@@ -1717,7 +1737,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1870"
-       d="M 82.460405,136.85956 207.4969,90.466882"
+       d="M 82.05602,134.94493 206.55332,88.752316"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2096)" />
     <path
        inkscape:connection-start="#path9"
@@ -1725,7 +1745,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1872"
-       d="M 82.32839,138.66184 H 206.28161"
+       d="M 82.473,137.2715 H 206.137"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2056)" />
     <path
        inkscape:connection-start="#path11"
@@ -1733,7 +1753,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1874"
-       d="M 81.947349,209.73424 209.71204,92.345377"
+       d="M 80.709034,207.81181 207.90064,90.949492"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2022)" />
     <path
        inkscape:connection-start="#path11"
@@ -1741,7 +1761,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1876"
-       d="M 82.362325,211.11885 208.26001,142.15758"
+       d="m 81.650917,209.12268 125.307513,-68.638"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker1994)" />
     <path
        inkscape:connection-start="#path11"
@@ -1749,7 +1769,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1878"
-       d="m 82.328145,213.72584 123.953705,0"
+       d="M 82.473,212.3355 H 206.137"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2632)" />
     <path
        inkscape:connection-start="#path13"
@@ -1757,7 +1777,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1880"
-       d="M 219.36714,87.815836 H 343.32085"
+       d="M 219.512,86.4255 H 343.176"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker3564)" />
     <path
        inkscape:connection-end="#path21"
@@ -1765,7 +1785,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1882"
-       d="M 218.83001,89.369749 343.39094,135.58597"
+       d="m 219.09567,88.752312 124.4973,46.192618"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker3428)" />
     <path
        inkscape:connection-start="#path13"
@@ -1773,7 +1793,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1884"
-       d="M 217.88529,90.795795 345.08152,207.66236"
+       d="M 217.7483,90.94944 344.93991,207.81176"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker3298)" />
     <path
        inkscape:connection-start="#path15"
@@ -1781,7 +1801,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1886"
-       d="M 219.49941,136.85956 344.5359,90.466882"
+       d="M 219.09502,134.94493 343.59232,88.752316"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker3174)" />
     <path
        inkscape:connection-end="#path21"
@@ -1789,7 +1809,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1888"
-       d="M 219.36739,138.66184 H 343.32061"
+       d="M 219.512,137.2715 H 343.176"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker3056)" />
     <path
        inkscape:connection-end="#path23"
@@ -1797,7 +1817,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1890"
-       d="M 219.36714,213.72584 H 343.32085"
+       d="M 219.512,212.3355 H 343.176"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2944)" />
     <path
        id="path27-0"
@@ -1810,7 +1830,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1957"
-       d="m 218.77536,34.357415 124.68023,50.14995"
+       d="M 219.03014,33.800585 343.658,83.929472"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2838)" />
     <path
        inkscape:connection-end="#path21"
@@ -1818,7 +1838,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1959"
-       d="m 218.12164,35.385555 126.4602,97.786815"
+       d="M 218.11437,35.394956 344.57455,133.18176"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2738)" />
     <path
        inkscape:connection-end="#path23"
@@ -1826,7 +1846,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1961"
-       d="M 217.32971,36.245427 346.33035,206.65761"
+       d="M 216.86045,36.636066 345.82765,207.00407"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4168)" />
     <path
        id="path27-0-4"
@@ -1839,7 +1859,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1978"
-       d="m 354.55271,36.071098 81.49194,95.807932"
+       d="m 354.19579,36.397854 81.46934,95.781366"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4696)" />
     <path
        inkscape:connection-end="#path25"
@@ -1847,7 +1867,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1980"
-       d="m 355.52538,89.984567 78.4969,44.281823"
+       d="M 355.68853,89.711526 434.1723,133.98594"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4518)" />
     <path
        inkscape:connection-start="#path21"
@@ -1855,7 +1875,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1982"
-       d="m 356.40639,138.66184 h 77.04722"
+       d="m 356.551,137.2715 76.758,0"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4346)" />
     <path
        inkscape:connection-start="#path23"
@@ -1863,7 +1883,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path1984"
-       d="M 356.1367,210.01502 436.58064,143.0202"
+       d="m 355.0014,208.05659 79.85678,-66.50582"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4880)" />
     <path
        vector-effect="non-scaling-stroke"
@@ -1893,7 +1913,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path4595"
-       d="m 218.51593,140.78384 125.3233,68.64665"
+       d="m 218.69055,140.48467 125.30751,68.638"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4619)" />
     <path
        inkscape:connection-end="#path21"
@@ -1901,7 +1921,7 @@
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path4597"
-       d="M 219.40132,211.11885 345.29901,142.15758"
+       d="m 218.68992,209.12268 125.30751,-68.638"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker3685)" />
     <path
        inkscape:connector-curvature="0"

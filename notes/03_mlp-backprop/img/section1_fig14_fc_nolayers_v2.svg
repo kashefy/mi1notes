@@ -9,7 +9,7 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="1.0.1 (1.0.1+r73)"
+   inkscape:version="1.0.2 (1.0.2+r75+1)"
    sodipodi:docname="section1_fig14_fc_nolayers_v2.svg"
    id="svg537"
    version="1.1"
@@ -20,13 +20,13 @@
   <sodipodi:namedview
      units="mm"
      inkscape:lockguides="true"
-     inkscape:current-layer="g535"
+     inkscape:current-layer="svg537"
      inkscape:window-maximized="1"
      inkscape:window-y="27"
      inkscape:window-x="53"
      inkscape:cy="138.12768"
      inkscape:cx="188.72786"
-     inkscape:zoom="1.4666667"
+     inkscape:zoom="4.1483599"
      showgrid="false"
      id="namedview539"
      inkscape:window-height="1145"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -727,7 +727,27 @@
          id="path4006-7-7"
          inkscape:connector-curvature="0" />
     </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker2022-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path2020-3"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
   </defs>
+  <path
+     inkscape:connector-curvature="0"
+     inkscape:connector-type="polyline"
+     id="path1874-5"
+     d="M 216.07502,206.3228 343.26663,89.46048"
+     style="isolation:isolate;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2022-5)" />
   <g
      id="g535"
      clip-path="url(#_clipPath_wEQTxVe92w5TJJAWM0JlaABHY6LZWJHc)"

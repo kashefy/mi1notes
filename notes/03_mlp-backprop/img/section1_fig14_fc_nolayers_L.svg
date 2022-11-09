@@ -16,7 +16,7 @@
    version="1.1"
    id="svg537"
    sodipodi:docname="section1_fig14_fc_nolayers_L.svg"
-   inkscape:version="1.0.1 (1.0.1+r73)">
+   inkscape:version="1.0.2 (1.0.2+r75+1)">
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -30,13 +30,13 @@
      inkscape:window-height="1145"
      id="namedview539"
      showgrid="false"
-     inkscape:zoom="1.4666667"
-     inkscape:cx="266.83701"
-     inkscape:cy="91.243261"
+     inkscape:zoom="5.8666668"
+     inkscape:cx="263.51763"
+     inkscape:cy="137.71455"
      inkscape:window-x="53"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g535"
+     inkscape:current-layer="svg537"
      inkscape:lockguides="true"
      units="mm"
      inkscape:document-rotation="0" />
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -814,7 +814,27 @@
            inkscape:connector-curvature="0" />
       </symbol>
     </g>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker2022-5"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path2020-3"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
   </defs>
+  <path
+     inkscape:connector-curvature="0"
+     inkscape:connector-type="polyline"
+     id="path1874-5"
+     d="M 212.98412,205.50462 340.17573,88.6423"
+     style="isolation:isolate;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker2022-5)" />
   <g
      id="g535"
      clip-path="url(#_clipPath_wEQTxVe92w5TJJAWM0JlaABHY6LZWJHc)"
