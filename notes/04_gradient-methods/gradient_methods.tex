@@ -147,26 +147,29 @@ estimate of $E^T$
 
 \subsection{Learning rate schedules}
 
-\begin{frame}\frametitle{Robinns \& Munro condition}
+\begin{frame}\frametitle{Robbins \& Monro condition}
 
 \begin{figure}[ht]
      \centering
      \savebox{\imagebox}{
-	 \includegraphics[width=0.5\textwidth]{img/RobbinsMunroNew.png}}%
-     \begin{subfigure}[t]{0.35\textwidth}
+	 \includegraphics[trim={0 0 3cm 5.8cm},clip,width=0.5\textwidth]{img/RobbinsMunroNew.png}}%
+     \begin{subfigure}[t]{0.45\textwidth}
+         \svspace{-2cm}
          \centering
+         \caption{Stochastic Approximation\\\cite{RobbinsMonro1951}}
          \usebox{\imagebox}% Place largest image
-         \notesonly{\caption{}}
      \end{subfigure}
-     \hspace{10mm}
-     \begin{subfigure}[t]{0.5\textwidth}
+     \hspace{13mm}
+     \begin{subfigure}[t]{0.4\textwidth}
          \centering
+         \only<2>{
+         \caption{Decaying learning rate}
+         }
          \raisebox{\dimexpr.5\ht\imagebox-.5\height}{% Raise smaller image into place
          \only<2>{
          \includegraphics[width=0.99\textwidth]{img/learning_rate-eps-converted-to}
          }
          }
-         \notesonly{\caption{}}
      \end{subfigure}
 \end{figure}
 
