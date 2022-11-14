@@ -2,7 +2,7 @@
 
 \subsection{Data, Model and Objective}
 
-\begin{frame}\frametitle{Setting}
+\begin{frame}\frametitle{The setting for our linear regression}
 
 \underline{Data}:\\
 
@@ -23,8 +23,6 @@ $
 $
 \end{tabular}
 \end{table}
-
-\pause
 
 \underline{Model}:\\
 
@@ -70,10 +68,6 @@ E^{T} &\eqexcl \min_{\vec w}\\
 
 \subsection{Calculating the gradient}
 
-%\mode<article>{
-%Finding extrema that satisfy \eqref{eq:extremacond}:
-%}
-
 \begin{frame}\frametitle{\subsecname}
 
 \slidesonly{
@@ -84,7 +78,7 @@ E^{T} &\eqexcl \min_{\vec w}\\
 	\footnotesize
 	\begin{equation}
 	\label{eq:ephi}
-		e^{(\alpha)} = \frac{1}{2} \, \left( y(\vec x^{(\alpha)}; \vec w)- y^{(\alpha)}_{T}\right)^{2}
+		e = \frac{1}{2} \, \left( y-y_{T}\right)^{2}
 	\end{equation}
 	\begin{equation}
 	\label{eq:ephi}
@@ -97,48 +91,60 @@ E^{T} &\eqexcl \min_{\vec w}\\
 
 
 % temporarily change footnote marks to symbols so not to confuse with exponents
-\renewcommand*{\thefootnote}{\fnsymbol{footnote}}    
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\svspace{-5mm}    
 
 \begin{align}
 \frac{\partial E^{T}}{\partial \vec w} 
 \;\;&=\;\; 
 \frac{1}{p} \sum_{\alpha=1}^{p} \; 
-\frac{\partial e^{(\alpha)}}{\partial \vec w}\\
+\frac{\partial e^{(\alpha)}}{\partial \vec w}\notesonly{\\}\slidesonly{\\[5mm]}
+\slidesonly{
+\frac{\partial e}{\partial \vec w}
+}
 \;\;&\stackrel{\mathclap{
 \substack{\text{chain}\\\text{rule}}}
 }
 {=}\;\;
-\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\notesonly{\frac{1}{p} \sum_{\alpha=1}^{p} \;}
 {\color{blue}
-\frac{\partial e^{(\alpha)}}{\partial y(\vec x^{(\alpha)};\vec w)}
+\frac{\partial e\notesonly{^{(\alpha)}}}{\partial y\notesonly{(\vec x^{(\alpha)};\vec w)}}
 } 
 \cdot
 {\color{orange}
-\frac{\partial y(\vec x^{(\alpha)};\vec w)}{\partial \vec w}
+\frac{\partial y\notesonly{(\vec x^{(\alpha)};\vec w)}}{\partial \vec w}
 }\\
 \;\;&=\;\;
-\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\notesonly{\frac{1}{p} \sum_{\alpha=1}^{p} \;}
 {\color{blue}
-\big( y(\vec x^{(\alpha)}; \vec w) - y_{T}^{(\alpha)} \big)
+\big( y\notesonly{(\vec x^{(\alpha)}; \vec w)} - y_{T}\notesonly{^{(\alpha)}} \big)
 }
 \cdot
 {\color{orange}
-\frac{\partial}{\partial \vec w} \vec w^{\top} \vec x^{(\alpha)}
+\frac{\partial}{\partial \vec w} \vec w^{\top} \vec x\notesonly{^{(\alpha)}}
 }
 %} \;\footnotemark \\
+\svspace{-3mm}
 \intertext{using $\frac{\partial}{\partial \vec a}\left(\vec a^{\top} \vec b\right) = \vec b = (b_{1}, b_{2}, \ldots, b_{N})^{\top}$}
+\svspace{-3mm}
 \;\;&=\;\;
-\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\notesonly{\frac{1}{p} \sum_{\alpha=1}^{p} \;}
 {\color{blue}
-\big( \vec w^{\top}\vec x^{(\alpha)} - y_{T}^{(\alpha)} \big)
+\big( \vec w^{\top}\vec x\notesonly{^{(\alpha)}} - y_{T}\notesonly{^{(\alpha)}} \big)
 }
 \cdot
 {\color{orange}
-\vec x^{(\alpha)}
-}\\
+\vec x\notesonly{^{(\alpha)}}}
+\slidesonly{\;\;=\;\;
+\vec x~\vec w^{\top}\vec x - \vec x~y_{T}
+}
+\notesonly{\\}\slidesonly{\\[5mm]}
+\slidesonly{\frac{\partial E^{T}}{\partial \vec w}}
 \;\;&=\;\;
-\frac{1}{p} \sum_{\alpha=1}^{p} \;
-\big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)} y_{T}^{(\alpha)} \big)\\
+%\notesonly
+{\frac{1}{p} \sum_{\alpha=1}^{p} \;}
+\big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x\notesonly{^{(\alpha)}}~ y_{T}\notesonly{^{(\alpha)}} \big)\notesonly{\\}
 %\;\;&=\;\;
 %\frac{1}{p} \sum_{\alpha=1}^{p} \;
 %{\color{orange}
@@ -155,7 +161,7 @@ E^{T} &\eqexcl \min_{\vec w}\\
 %\vec x^{(\alpha)} 
 %- y_{T}^{(\alpha)} \vec x^{(\alpha)}
 %\Big)\\
-\;\;&=:\;\; \vec g
+\;\;\notesonly{&}=:\;\; \vec g
 \end{align}    
 
 %\notesonly{ 
