@@ -2,7 +2,7 @@
 
 \subsection{Data, Model and Objective}
 
-\begin{frame}\frametitle{Setting}
+\begin{frame}\frametitle{The setting for our linear regression}
 
 \underline{Data}:\\
 
@@ -24,8 +24,6 @@ $
 \end{tabular}
 \end{table}
 
-\pause
-
 \underline{Model}:\\
 
 linear neuron:
@@ -45,7 +43,7 @@ Quadratic error
 
 \begin{align}
 E^{T} &= \frac{1}{p} \sum_{\alpha=1}^{p} \;
-\frac{1}{2} \, \left( y(x^{(\alpha)}; \vec w)- y^{(\alpha)}_{T}\right)^{2}\\
+\frac{1}{2} \, \left( y(\vec x^{(\alpha)}; \vec w)- y^{(\alpha)}_{T}\right)^{2}\\
 &= \frac{1}{p} \sum_{\alpha=1}^{p}
 \;e^{(\alpha)}
 \end{align}
@@ -54,9 +52,9 @@ E^{T} &= \frac{1}{p} \sum_{\alpha=1}^{p} \;
 The term $\frac{1}{2}$ is merely for convenience when computing the gradient later.
 }
 
-\pause
-
 \underline{Optimization}:\\
+
+\pause
 
 \begin{align}
 E^{T} &\eqexcl \min_{\vec w}\\
@@ -70,55 +68,83 @@ E^{T} &\eqexcl \min_{\vec w}\\
 
 \subsection{Calculating the gradient}
 
-%\mode<article>{
-%Finding extrema that satisfy \eqref{eq:extremacond}:
-%}
-
 \begin{frame}\frametitle{\subsecname}
- 
+
+\slidesonly{
+\vspace{-12mm}
+\hspace{7.1cm}
+\StickyNote[1.cm]{
+	\begingroup
+	\footnotesize
+	\begin{equation}
+	\label{eq:ephi}
+		e = \frac{1}{2} \, \left( y-y_{T}\right)^{2}
+	\end{equation}
+	\begin{equation}
+	\label{eq:ephi}
+		y = \vec w^{\top}\vec x
+	\end{equation}
+	\endgroup
+}[4.2cm]
+\vspace{-14mm}
+}
+
+
 % temporarily change footnote marks to symbols so not to confuse with exponents
-\renewcommand*{\thefootnote}{\fnsymbol{footnote}}    
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\svspace{-5mm}    
 
 \begin{align}
 \frac{\partial E^{T}}{\partial \vec w} 
 \;\;&=\;\; 
 \frac{1}{p} \sum_{\alpha=1}^{p} \; 
-\frac{\partial e^{(\alpha)}}{\partial \vec w}\\
+\frac{\partial e^{(\alpha)}}{\partial \vec w}\notesonly{\\}\slidesonly{\\[5mm]}
+\slidesonly{
+\frac{\partial e}{\partial \vec w}
+}
 \;\;&\stackrel{\mathclap{
 \substack{\text{chain}\\\text{rule}}}
 }
 {=}\;\;
-\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\notesonly{\frac{1}{p} \sum_{\alpha=1}^{p} \;}
 {\color{blue}
-\frac{\partial e^{(\alpha)}}{\partial y(x^{(\alpha)};\vec w)}
+\frac{\partial e\notesonly{^{(\alpha)}}}{\partial y\notesonly{(\vec x^{(\alpha)};\vec w)}}
 } 
 \cdot
 {\color{orange}
-\frac{\partial y(x^{(\alpha)};\vec w)}{\partial \vec w}
+\frac{\partial y\notesonly{(\vec x^{(\alpha)};\vec w)}}{\partial \vec w}
 }\\
 \;\;&=\;\;
-\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\notesonly{\frac{1}{p} \sum_{\alpha=1}^{p} \;}
 {\color{blue}
-\big( y(x^{(\alpha)}; \vec w) - y_{T}^{(\alpha)} \big)
+\big( y\notesonly{(\vec x^{(\alpha)}; \vec w)} - y_{T}\notesonly{^{(\alpha)}} \big)
 }
 \cdot
 {\color{orange}
-\frac{\partial}{\partial \vec w} \vec w^{\top} \vec x^{(\alpha)}
+\frac{\partial}{\partial \vec w} \vec w^{\top} \vec x\notesonly{^{(\alpha)}}
 }
 %} \;\footnotemark \\
+\svspace{-3mm}
 \intertext{using $\frac{\partial}{\partial \vec a}\left(\vec a^{\top} \vec b\right) = \vec b = (b_{1}, b_{2}, \ldots, b_{N})^{\top}$}
+\svspace{-3mm}
 \;\;&=\;\;
-\frac{1}{p} \sum_{\alpha=1}^{p} \;
+\notesonly{\frac{1}{p} \sum_{\alpha=1}^{p} \;}
 {\color{blue}
-\big( \vec w^{\top}\vec x^{(\alpha)} - y_{T}^{(\alpha)} \big)
+\big( \vec w^{\top}\vec x\notesonly{^{(\alpha)}} - y_{T}\notesonly{^{(\alpha)}} \big)
 }
 \cdot
 {\color{orange}
-\vec x^{(\alpha)}
-}\\
+\vec x\notesonly{^{(\alpha)}}}
+\slidesonly{\;\;=\;\;
+\vec x~\vec w^{\top}\vec x - \vec x~y_{T}
+}
+\notesonly{\\}\slidesonly{\\[5mm]}
+\slidesonly{\frac{\partial E^{T}}{\partial \vec w}}
 \;\;&=\;\;
-\frac{1}{p} \sum_{\alpha=1}^{p} \;
-\big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x^{(\alpha)} y_{T}^{(\alpha)} \big)\\
+%\notesonly
+{\frac{1}{p} \sum_{\alpha=1}^{p} \;}
+\big( \vec x^{(\alpha)} \, \vec w^{\top}\vec x^{(\alpha)} - \vec x\notesonly{^{(\alpha)}}~ y_{T}\notesonly{^{(\alpha)}} \big)\notesonly{\\}
 %\;\;&=\;\;
 %\frac{1}{p} \sum_{\alpha=1}^{p} \;
 %{\color{orange}
@@ -135,7 +161,7 @@ E^{T} &\eqexcl \min_{\vec w}\\
 %\vec x^{(\alpha)} 
 %- y_{T}^{(\alpha)} \vec x^{(\alpha)}
 %\Big)\\
-\;\;&=:\;\; \vec g
+\;\;\notesonly{&}=:\;\; \vec g
 \end{align}    
 
 %\notesonly{ 
@@ -200,7 +226,7 @@ $$
 \left(
 \frac{e^{(\alpha)}}{y(\vec x^{(\alpha)}; \vec w)}
 \cdot
-\frac{\partial y(x^{(\alpha)};\vec w)}{\partial \vec w} 
+\frac{\partial y(\vec x^{(\alpha)};\vec w)}{\partial \vec w} 
 \right)^{\kern-1ex\top}\\
 \;\;&=\;\;
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
@@ -260,7 +286,7 @@ using the product rule
 
 \end{frame}
 
-\subsection{Represent gradient and Hessian in matrix form}
+\subsection{Represent the cost, gradient and Hessian in matrix form}
 
 \mode<presentation>{
 \begin{frame}
@@ -290,7 +316,7 @@ For the quadratic error:
 \end{frame}
 }
 
-\begin{frame}
+\begin{frame}{The data in matrix form}
 
 Let $\vec X$ represent the observations for all training points:
 
@@ -311,13 +337,74 @@ and let $\vec y_{\text{True}}$ represent the true labels for all training points
 \vec y_{\text{True}} := (y_T^{(1)}, \ldots, y_T^{(p)}) \in \R^{1 \times p}
 \end{equation}
 
+\end{frame}
+
 \notesonly{
 From this follows:
 }
 
-\pause
+\begin{frame}{The qudaratic cost (MSE)}
 
-\svspace{-3mm}
+\slidesonly{
+    \vspace{-6mm}
+    \hspace{8.cm}
+    \StickyNote[1.5cm]{
+        \begingroup
+        \footnotesize
+        \begin{equation}
+        \vec X \in \R^{2 \times p}
+        \end{equation}
+        \begin{equation}
+        \vec y_{\text{True}} \in \R^{1 \times p} 
+        \end{equation}
+        \begin{equation}
+        \vec H := \frac{1}{p} \vec X~\vec X^\top
+        \end{equation}
+        \endgroup
+    }[3cm]
+    \vspace{-14mm}
+}
+
+\begin{align}
+E^T_{\text{quadr.}}
+    &= \frac{1}{2p} \big\lVert \vec w^\top \vec X - \vec y_{\text{True}} \big\rVert_2^2\\
+    &= \frac{1}{2p} \underbrace{\left( \vec w^\top \vec X - \vec y_{\text{True}} \right)}_{1 \times p} \underbrace{\left( \vec w^\top \vec X - \vec y_{\text{True}} \right)^\top}_{p \times 1}
+    \svspace{-3mm}
+    \intertext{with $\vec y_{\text{True}} = \underline{\mathbf{w}}^{*\top}\vec X$:}
+    &= \frac{1}{2p} \left( \vec w^\top \vec X - \vec \underline{\mathbf{w}}^{*\top} \vec X \right) \left( \vec w^\top \vec X - \vec \underline{\mathbf{w}}^{*\top} \vec X \right)^\top\\
+\notesonly{
+    &= \frac{1}{2p} \left( \vec w - \vec \underline{\mathbf{w}}^{*} \right)^\top \vec X \left(\left( \vec w^\top - \vec \underline{\mathbf{w}}^{*\top} \right) \vec X \right)^\top\\
+\intertext{with $(\vec A~\vec B)^\top=\vec B^\top\vec A^\top$:}
+    &= \frac{1}{2p} \left( \vec w - \vec \underline{\mathbf{w}}^{*} \right)^\top \vec X~\vec X^\top \left( \vec w^{\top} - \vec \underline{\mathbf{w}}^{*\top} \right)^\top\\
+}
+    &= \frac{1}{2p} \left( \vec w - \vec \underline{\mathbf{w}}^{*} \right)^\top \vec X~\vec X^\top \left( \vec w - \vec \underline{\mathbf{w}}^{*} \right)\\
+    &= \frac{1}{2} \left( \vec w - \vec \underline{\mathbf{w}}^{*} \right)^\top \vec H \left( \vec w - \vec \underline{\mathbf{w}}^{*} \right)
+\end{align}
+
+
+\end{frame}
+
+\begin{frame}{The gradient}
+
+\slidesonly{
+    \vspace{-15mm}
+    \hspace{8.cm}
+    \StickyNote[1.5cm]{
+        \begingroup
+        \footnotesize
+        \begin{equation}
+        \vec X \in \R^{2 \times p}
+        \end{equation}
+        \begin{equation}
+        \vec y_{\text{True}} \in \R^{1 \times p} 
+        \end{equation}
+        \begin{equation}
+        \vec H := \frac{1}{p} \vec X~\vec X^\top
+        \end{equation}
+        \endgroup
+    }[3cm]
+    \vspace{-14mm}
+}
 
 \begin{align}
 \vec g
@@ -328,12 +415,12 @@ From this follows:
 \frac{1}{p} \sum_{\alpha=1}^{p} \;
 \big( \vec x^{(\alpha)} \, {\vec x^{(\alpha)}}^{\top} \vec w- \vec x^{(\alpha)} y_{T}^{(\alpha)} \big)\\
 \;\;&=\;\;
-\frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right)
+\frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right) =  \vec H~\vec w - \frac{1}{p} \vec X \vec y_{\text{True}}^\top
 \end{align}
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{The gradient}
 
 \slidesonly{
 \only<1>{
@@ -348,7 +435,9 @@ From this follows:
 stationary point:
 
 \begin{align}
+\only<1,2>{
 \vec g \eqexcl \vec 0 \iff \vec X \, \vec X^\top \vec w^*  &= \vec X\, \vec y_{\text{True}}^\top\\
+}
 \vec w^* &=
 {
 \underbrace{
@@ -359,9 +448,9 @@ stationary point:
 }^{-1} \vec X\, \vec y_{\text{True}}^\top
 \end{align}
 
-$\vec w^*$ is a global minimum because
+$\vec w^*$ is a global minimum because\slidesonly{\only<1>{...?}}
 \pause
-\begin{enumerate}[1.]
+\begin{enumerate}[1\notesonly{.}]
 \item it is a unique solution of $\vec g = \vec 0$ and
 \item 
 \begin{equation}
@@ -370,12 +459,11 @@ $\vec w^*$ is a global minimum because
 \vec x^{(\alpha)}~{\vec x^{(\alpha)}}^\top 
 = \frac{1}{p} \, \vec X \, \vec X^\top = \vec C
 \end{equation}
-where $\vec C$ is the \emph{empirical covariance matrix} which is positive definite for invertible $\vec X\, \vec X^\top$.
+where $\vec C$ is the \emph{empirical covariance matrix} of centered data which is positive definite for invertible $\vec X\, \vec X^\top$.
 \end{enumerate}
 
 \pause
 positive definiteness:
-%\slidesonly{\vspace{-3mm}}
 \begin{align}
 \forall \vec z \in \R^2: \quad \vec z^\top \vec H\, \vec z 
 \, &= \frac{1}{p} \, \vec z^\top \vec X \, \vec X^\top \vec z\notesonly{\\
@@ -396,7 +484,9 @@ E^R_{[\vec w]} := \frac{1}{2} \sum_{(i, j, v', v)}
 \end{equation}
 \renewcommand{\CancelColor}{\color{gray}}
 \begin{equation}
-\frac{\partial}{\partial \vec w} E^R_{[\vec w]} = \frac{1}{\wcancel{2}} \cdot \wcancel{2} \cdot \vec w = \vec w
+\frac{\partial}{\partial \vec w} E^R_{[\vec w]} = \slidesonly{\only<1>{...?}}\visible<2>{
+\frac{1}{\wcancel{2}} \cdot \wcancel{2} \cdot \vec w = \vec w
+}
 \end{equation}
 \pause
 The regularized cost function:
@@ -415,6 +505,7 @@ where
 	\item $\lambda:$ regularization parameter 
 \end{itemize}
 \end{frame}
+
 \begin{frame}
 Gradient:
 \slidesonly{
@@ -426,9 +517,9 @@ Gradient:
 		\eqexcl \min_{\vec w}
 \end{equation*}
 }
-\pause
+\visible<1->{
 \begin{align}
-\vec g^R :=  \frac{\partial}{\partial \vec w} R_{[\vec w]}
+\vec g^R :=  \slidesonly{\only<1>{...?}}\visible<2>{\frac{\partial}{\partial \vec w} R_{[\vec w]}
 &= \frac{\partial}{\partial \vec w} E^T_{[\vec w]} + \frac{\partial}{\partial \vec w} E^R_{[\vec w]}\\
 &= \frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right) + \vec I_N \, \lambda \, \vec w\\[2mm]
 \iff& \quad \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top + p \lambda \, \vec I_N \,  \vec w \eqexcl \vec 0\\[2mm]
@@ -441,6 +532,8 @@ Gradient:
 }
 }
 }^{-1} \vec X \, \vec y_{\mathrm{True}}^{\top}
+}
 \end{align}
+}
 
 \end{frame}

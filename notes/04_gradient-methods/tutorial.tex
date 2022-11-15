@@ -1,3 +1,8 @@
+\usepackage[authoryear,round]{natbib}
+\hypersetup{
+  colorlinks,
+  citecolor=black
+}
 \newcommand{\sheetnum}{%
 	04
 }
@@ -72,6 +77,14 @@
 \mode<all>
 \input{./conjugate_gradient}
 \mode*
+
+\section{References}
+\begin{frame}[allowframebreaks] \frametitle{References}
+	%\footnotesize
+	\scriptsize
+	\bibliographystyle{plainnat}
+	\bibliography{bibliography}
+\end{frame}
 
 \end{rightcolumn}
 \end{paracol}
