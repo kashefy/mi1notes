@@ -52,9 +52,9 @@ E^{T} &= \frac{1}{p} \sum_{\alpha=1}^{p} \;
 The term $\frac{1}{2}$ is merely for convenience when computing the gradient later.
 }
 
-\pause
-
 \underline{Optimization}:\\
+
+\pause
 
 \begin{align}
 E^{T} &\eqexcl \min_{\vec w}\\
@@ -448,7 +448,7 @@ stationary point:
 }^{-1} \vec X\, \vec y_{\text{True}}^\top
 \end{align}
 
-$\vec w^*$ is a global minimum because
+$\vec w^*$ is a global minimum because\slidesonly{\only<1>{...?}}
 \pause
 \begin{enumerate}[1\notesonly{.}]
 \item it is a unique solution of $\vec g = \vec 0$ and
@@ -484,7 +484,7 @@ E^R_{[\vec w]} := \frac{1}{2} \sum_{(i, j, v', v)}
 \end{equation}
 \renewcommand{\CancelColor}{\color{gray}}
 \begin{equation}
-\frac{\partial}{\partial \vec w} E^R_{[\vec w]} = \visible<2>{
+\frac{\partial}{\partial \vec w} E^R_{[\vec w]} = \slidesonly{\only<1>{...?}}\visible<2>{
 \frac{1}{\wcancel{2}} \cdot \wcancel{2} \cdot \vec w = \vec w
 }
 \end{equation}
@@ -519,7 +519,7 @@ Gradient:
 }
 \visible<1->{
 \begin{align}
-\vec g^R :=  \visible<2>{\frac{\partial}{\partial \vec w} R_{[\vec w]}
+\vec g^R :=  \slidesonly{\only<1>{...?}}\visible<2>{\frac{\partial}{\partial \vec w} R_{[\vec w]}
 &= \frac{\partial}{\partial \vec w} E^T_{[\vec w]} + \frac{\partial}{\partial \vec w} E^R_{[\vec w]}\\
 &= \frac{1}{p} \left(\, \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top \right) + \vec I_N \, \lambda \, \vec w\\[2mm]
 \iff& \quad \vec X \, \vec X^\top \vec w - \vec X\, \vec y_{\text{True}}^\top + p \lambda \, \vec I_N \,  \vec w \eqexcl \vec 0\\[2mm]
