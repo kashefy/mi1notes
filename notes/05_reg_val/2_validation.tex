@@ -39,9 +39,13 @@
     \begin{equation}
     \text{batch training error:}\quad \ETw=\frac{1}{p}\sum_{\alpha=1}^{p} \underbrace{e\tyxwalpha}_{e^{(\alpha)}}
     \end{equation}
+    
     \mode<presentation>{
     or mini-batch and stochastic online approximations of $E^T_{[\vec w]}$ 
     }
+    
+\notesonly{The above is }not limited to scalar attributes $y$, $y_T$\notesonly{ and extends to $\vec y$, $\vec y_T \in \R^M$}.\\
+
     \mode<article>{
     where $e\tyxwalpha$ (or $e^{(\alpha)}$ for brevity) is the cost computed from the prediction for a specific observation $y(\vec x^{(\alpha)};\vec w)$ and its corresponding label $y_T^{(\alpha)}$. The superscript $^{(\alpha)}$ is used to index a specific point (sample) in the dataset.
     We have also seen that $E^T$ can be further approximated by changing its ``scope'' to a set of samples in a mini-batch or a single randomly selected sample (i.e. stochastic online learning)
@@ -58,7 +62,7 @@
 We will now focus on:
 }
 \mode<presentation>{
-Today:
+Planned for today:
 }
 \begin{enumerate}
 \item Diagnostics for how well $E^T$ represents $E^G$
@@ -91,10 +95,8 @@ E^T_{[\vec w^*]} \quad <\quad E^G_{[\vec w^*]}
 Validation: evaluate the generalization of a model (and its training procedure) by estimating
 
 \begin{equation}
-\widehat E^G_{[\vec w]} \approx E^G_{[\vec w]} = \iint d \vec x \, d  y P(\vec x,  y_T) \, e( y(\vec x; \vec w), y_T) 
+\widehat E^G_{[\vec w]} \approx E^G_{[\vec w]}% = \iint d \vec x \, d  y P(\vec x,  y_T) \, e( y(\vec x; \vec w), y_T) 
 \end{equation}
-
-\notesonly{The above is }not limited to scalar attributes $y$, $y_T$\notesonly{ and extends to $\vec y$, $\vec y_T \in \R^M$}.\\
 
 \pause
 This implies that we need a set of data.
@@ -112,7 +114,7 @@ We use the new hold-out set to \emph{validate} ($\{\vec x_{\text{val.}}^{(\beta)
 \item $\leadsto \vec w^* = \argmin_{\vec w} {\color{red}E^T_{[\vec w]}}$
 \pause
 \item $\{\vec x_{\text{val.}}^{(\beta)}, {y_T}_{\text{val.}}^{(\beta)}\}_{\beta=1}^{\color{darkgreen}q}$ for validation
-\pause
+%\pause
 \item $\leadsto {\color{darkgreen}\widehat E^G_{[\vec w^*]}}$
 \end{itemize}
 }
@@ -428,7 +430,7 @@ we would gain in generalization performance if we paid to increase the training 
 
 \begin{frame}{\subsecname}
 
-\pause
+%\pause
 
 \slidesonly{
 \begin{center}

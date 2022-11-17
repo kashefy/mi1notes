@@ -6,7 +6,8 @@
 	\begin{block}{Risk function}
 		\begin{equation*}
 			R_{[\vec{w}]} = \underbrace{ E_{[\vec{w}]}^T }_{
-					\substack{\text{training} \\ \text{error}}}
+					%\substack{\text{training} \\ \text{error}}}
+                    \substack{\text{training} \\ \text{error} \\ \text{e.g. quadratic cost,}\\\text{cross-entropy,...}}}
 				+ \underbrace{ \lambda E_{[\vec{w}]}^R }_{
 					\substack{\text{regularization} \\ \text{term}}}
 				\eqexcl \min_{\vec w}
@@ -18,7 +19,7 @@
 	\end{block}
 	
 	\begin{center}
-		\includegraphics[width=10cm]{img/ModelSelection_models_v2.pdf}
+		\includegraphics[width=9cm]{img/ModelSelection_models_v2.pdf}
 	\end{center}
 \end{frame}
 
@@ -34,7 +35,9 @@
 	
 	\begin{equation}
 		E_{[\vec{w}]}^R \;=\; \frac{1}{2} \sum_{(i, j, v', v)} 
-			\big( {w}_{ij}^{v'v} \big)^2 = \frac{1}{2} \vec w^\top \vec w
+			\big( {w}_{ij}^{v'v} \big)^2 
+            = \frac{1}{2} \lVert \vec w \rVert_2^2
+            = \frac{1}{2} \vec w^\top \vec w
 	\end{equation}
 	
 	%\only<3>{
@@ -45,7 +48,10 @@
 			\;=\; - \underbrace{\frac{\partial E^T_{[\vec w]}}%
 				{\partial {w}_{ij}^{v'v}}}_{
 				\substack{\text{e.g. via} \\ \text{backprop}}}
-			\;\;-\;\; \underbrace{\lambda {w}_{ij}^{v'v}}_{
+			\;\;-\;\; \underbrace{
+            \frac{\partial E^R_{[\vec w]}}{\partial {w}_{ij}^{v'v}}
+            %\lambda {w}_{ij}^{v'v}
+            }_{
 				\substack{\text{decay} \\ \text{term}}}
 		\end{equation}
 	\end{block}
@@ -66,7 +72,7 @@ E^R_{[\vec w]} := \frac{1}{2} \sum_{(i, j, v', v)}
 \end{equation}
 \renewcommand{\CancelColor}{\color{gray}}
 
-\only<1>{
+%\only<1>{
 Computing individual components of the gradient vector:
 
 	\begin{align}
@@ -75,38 +81,38 @@ Computing individual components of the gradient vector:
 		\;&=\; 0 + \ldots + \frac{1}{2} \frac{\partial}{\partial {w}_{ij}^{v'v}} \big( {w}_{ij}^{v'v} \big)^2 + \ldots + 0
 		\;=\; \frac{1}{\cancel{2}} \; \cancel{2} \; {w}_{ij}^{v'v}
 	\end{align}
-}
-\only<2>{
+%}
+%\only<2>{
 Using vector notation to compute the gradient:
 
 \begin{equation}
 \frac{\partial}{\partial \vec w} E^R_{[\vec w]} = \frac{1}{\wcancel{2}} \cdot \wcancel{2} \cdot \vec w = \vec w
 \end{equation}
-}
+%}
 
-\only<3>{
-The regularized cost function:
+%\only<3>{
+%The regularized cost function:
 
-\begin{equation}
-	R_{[\vec{w}]} = \underbrace{ E_{[\vec{w}]}^T }_{
-			\substack{\text{training} \\ \text{error} \\ \text{e.g. quadratic cost}}}
-		+ \underbrace{ \lambda E_{[\vec{w}]}^R }_{
-			\substack{\text{regularization} \\ \text{term}}}
-		\eqexcl \min_{\vec w}
-\end{equation}
+%\begin{equation}
+	%R_{[\vec{w}]} = \underbrace{ E_{[\vec{w}]}^T }_{
+			%\substack{\text{training} \\ \text{error} \\ \text{e.g. quadratic cost}}}
+		%+ \underbrace{ \lambda E_{[\vec{w}]}^R }_{
+			%\substack{\text{regularization} \\ \text{term}}}
+		%\eqexcl \min_{\vec w}
+%\end{equation}
 
-where 
-\begin{itemize}
-	\item $E^R \; \corresponds \; $ prior knowledge of solution
-	\item $\lambda:$ regularization parameter 
-\end{itemize}
-}
+%where 
+%\begin{itemize}
+	%\item $E^R \; \corresponds \; $ prior knowledge of solution
+	%\item $\lambda:$ regularization parameter 
+%\end{itemize}
+%}
 
 \end{frame}
 
 \subsubsection{Regularized linear neuron for regression: analytical solution}
 
-\begin{frame}
+\begin{frame}{\subsubsecname}
 
 \slidesonly{
 \begin{equation}
@@ -118,6 +124,8 @@ where
 \end{equation}
 }
 Gradient:
+
+\svspace{-5mm}
 
 \begin{align}
 \vec g^R :=  \frac{\partial}{\partial \vec w} R_{[\vec w]}

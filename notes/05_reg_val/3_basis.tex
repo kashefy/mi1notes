@@ -4,7 +4,7 @@
 
 \begin{frame}\frametitle{\subsecname}
 
-\question{Find a linear separation between the classes using only a connectionist neuron.}
+\question{Find a \textit{\underline{perfect}} linear separation between the classes using only a connectionist neuron.}
 
 \begin{figure}[ht]
      \centering
@@ -32,10 +32,9 @@
 
 \question{How would you characterize any parabolic (quadratic) function?}
 
-\pause
-\slidesonly{\vspace{-5mm}}
+\svspace{-5mm}
 \begin{equation}
-y(x) = a x^{2} + b x + c =  w_{2} x^{2} + w_{1} x + w_{0}
+y(x) = \visible<2>{a \cdot x^{2} + b \cdot x + c =  w_{2} \cdot x^{2} + w_{1} \cdot x + w_{0}}
 \end{equation}
 
 \end{frame}
@@ -148,7 +147,7 @@ with & $\alpha = 1,\ldots,p$ and $\vec x$ has been centered and sphered.
     y(\vec \phi; \vec w) = \vec w^{\top} \vec \phi = \sum_{i=1}^{d} w_{i} \phi_{i}(\vec x)\notesonly{\quad \text{(bias already incl.)}}
 \end{equation}
 
-quadratic cost function, L2 regularization. \pause Reuse solution for linear regression:
+quadratic cost function, $L_2$ regularization. \pause Reuse solution for linear regression:
 
 \begin{equation}
 \vec w^{*} = \left( \vec \Phi \, \vec \Phi^{\top} + \lambda \vec I_{d}\right)^{-1} \vec \Phi \, \vec y_{\text{True}}^{\top}
