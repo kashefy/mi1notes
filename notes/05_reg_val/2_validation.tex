@@ -321,17 +321,16 @@ Compare ${\color{red}E^T}$ and ${\color{darkgreen} \widehat E^G}$:\\
 \begin{tabular}{r|r|c|c|}
 \hline
 &          \underline{\textbf{potentially}} reduces $\rightarrow$                                                       & \begin{tabular}[c]{@{}c@{}} overfitting\end{tabular} & \begin{tabular}[c]{@{}c@{}}underfitting\end{tabular} \\ \hline
-1&more training data                                                                           & yes                                                           & no                                                             \\ \hline
-2&\begin{tabular}[c]{@{}r@{}}larger regularization\\ coeff. $\lambda$\end{tabular}   & yes                                                           & no                                                             \\ \hline
-3&\begin{tabular}[c]{@{}r@{}}smaller regularization\\ coeff. $\lambda$\end{tabular}  & no                                                            & yes                                                            \\ \hline
-4&use more complex model                                                             & no                                                            & yes                                                            \\ \hline
-5&use simpler model                                                                  & yes                                                           & no                                                             \\ \hline
-6&\begin{tabular}[c]{@{}r@{}}increase number of\\ hidden neurons in MLP\end{tabular} & no                                                            & yes                                                            \\ \hline
-7&\begin{tabular}[c]{@{}r@{}}add more hidden\\ layers to MLP\end{tabular}            & no                                                            & yes                                                            \\ \hline
-8&\begin{tabular}[c]{@{}r@{}}add features\\ to the input $\vec x$\end{tabular}            & no                                                            & yes                                                            \\ \hline
-9&\begin{tabular}[c]{@{}r@{}}shuffle the data\end{tabular}         &   no                                                            & no
-                                                                 \\ \hline
-&more techniques?                                                                   &                                                               &                                                                \\ \hline
+1&more training data                                                                 & yes                      & \textcolor{magenta}{no}     \\ \hline
+2&\begin{tabular}[c]{@{}r@{}}larger regularization\\ coeff. $\lambda$\end{tabular}   & yes                      & \textcolor{magenta}{no}     \\ \hline
+3&\begin{tabular}[c]{@{}r@{}}smaller regularization\\ coeff. $\lambda$\end{tabular}  & \textcolor{magenta}{no}  & yes                         \\ \hline
+4&use more complex model                                                             & \textcolor{magenta}{no}  & yes                         \\ \hline
+5&use simpler model                                                                  & yes                      & \textcolor{magenta}{no}     \\ \hline
+6&\begin{tabular}[c]{@{}r@{}}increase number of\\ hidden neurons in MLP\end{tabular} & \textcolor{magenta}{no}  & yes                         \\ \hline
+7&\begin{tabular}[c]{@{}r@{}}add more hidden\\ layers to MLP\end{tabular}            & \textcolor{magenta}{no}  & yes                         \\ \hline
+8&\begin{tabular}[c]{@{}r@{}}add features\\ to the input $\vec x$\end{tabular}       & \textcolor{magenta}{no}  & yes                         \\ \hline
+9&\begin{tabular}[c]{@{}r@{}}shuffle the data\end{tabular}                           &   \textcolor{magenta}{no}  & \textcolor{magenta}{no}   \\ \hline
+&more techniques?                                                                    &                          &                             \\ \hline
 \end{tabular}
 \end{table}
 \end{center}
@@ -486,7 +485,7 @@ we would gain in generalization performance if we paid to increase the training 
 		}
 		\vspace{2mm}
 
-		pick optimal $\lambda^{\text{opt}}$ with minimum $\widehat{E}^G=\big<\widehat{E}^G_{k}\big>_{n folds}$\\
+		pick optimal $\lambda^{\text{opt}}$ with minimum $\widehat{E}^G=\big<\widehat{E}^G_{k}\big>_{n \text{folds}}$\\
 		\vspace{2mm}
 
 		\textbf{final model:} train network on all data with $\lambda^{\text{opt}}$ 
@@ -507,7 +506,7 @@ we would gain in generalization performance if we paid to increase the training 
 	$ \begin{array}{ll}
 		\includegraphics[height=1.2cm]{img/section1_fig34}
 		& \begin{array}{ll}
-			\bullet & \text{\footnotesize do n - 1 
+			\bullet & \text{\footnotesize do $n$ - 1 
 				cross-validation for all values of } \lambda \\
 			\bullet & \text{\footnotesize train with best $\lambda$} \\
 			\bullet & \text{\footnotesize validate with learned model}
@@ -518,7 +517,7 @@ we would gain in generalization performance if we paid to increase the training 
 	$ \begin{array}{ll}
 		\includegraphics[height=1.2cm]{img/section1_fig35}
 		& \begin{array}{ll}
-			\bullet & \text{\footnotesize do n - 1 
+			\bullet & \text{\footnotesize do $n$ - 1 
 				cross-validation for all values of } \lambda \\
 			\bullet & \text{\footnotesize train with best $\lambda$} \\
 			\bullet & \text{\footnotesize validate with learned model}
@@ -529,7 +528,7 @@ we would gain in generalization performance if we paid to increase the training 
 	$ \begin{array}{ll}
 		\includegraphics[height=1.2cm]{img/section1_fig36}
 		& \begin{array}{ll}
-			\bullet & \text{\footnotesize do n - 1
+			\bullet & \text{\footnotesize do $n$ - 1
 				cross-validation for all values of } \lambda \\
 			\bullet & \text{\footnotesize train with best $\lambda$} \\
 			\bullet & \text{\footnotesize validate with learned model}
