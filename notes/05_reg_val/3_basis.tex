@@ -129,29 +129,33 @@ Also apply to test-set in case of a 3-way split.
 
 \underline{Data}:\\
 
-\begin{table}[h]
+%\begin{table}[h]
 \begin{tabular}{rl}
 transformed input & $\vec \phi^{(\alpha)} := \vec \phi(\vec x^{(\alpha)}) = \big (
 \phi_{1}(\vec x^{(\alpha)}), \phi_{2}(\vec x^{(\alpha)}), \ldots, \phi_{d}(\vec x^{(\alpha)}) \big)^{\top}$ \\
 label         & $y_{T}^{(\alpha)} \in \R$ \\
 with & $\alpha = 1,\ldots,p$ and $\vec x$ has been centered and sphered.
 \end{tabular}
-\end{table}
+%\end{table}
 
 \pause
 
-\underline{Model}:\\[-5mm]
+\underline{Model}:\\
+\svspace{-7mm}
 
 \notesonly{linear neuron on the \emph{the transformed} input:}
 \begin{equation}
     y(\vec \phi; \vec w) = \vec w^{\top} \vec \phi = \sum_{i=1}^{d} w_{i} \phi_{i}(\vec x)\notesonly{\quad \text{(bias already incl.)}}
 \end{equation}
 
-quadratic cost function, $L_2$ regularization. \pause Reuse solution for linear regression:
+quadratic cost function, $L_2$ regularization. \pause Reuse solution for regularized linear regression:
+
+\svspace{-3mm}
 
 \begin{equation}
 \vec w^{*} = \left( \vec \Phi \, \vec \Phi^{\top} + \lambda \vec I_{d}\right)^{-1} \vec \Phi \, \vec y_{\text{True}}^{\top}
 \end{equation}
+
 
 where $\vec \Phi = \left( \vec \phi^{(1)},\ldots, \vec \phi^{(\alpha)},\ldots, \vec \phi^{(p)}\right) \in \R^{d,p}$
 
