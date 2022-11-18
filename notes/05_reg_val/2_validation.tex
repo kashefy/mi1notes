@@ -1,15 +1,32 @@
 \section{Validation}
 
-\mode<presentation>{
-\begin{frame}
+%\mode<presentation>{
+%\begin{frame}
 
-	\begin{center}
-	\huge
-	\secname
-	\end{center}
-	\begin{center}
-	\includegraphics[width=0.4\textwidth]{img/meme_validation}
-	\end{center}
+	%\begin{center}
+	%\huge
+	%\secname
+	%\end{center}
+	%\begin{center}
+	%\includegraphics[width=0.4\textwidth]{img/meme_validation}
+	%\end{center}
+%\end{frame}
+%}
+
+\mode<presentation>{
+\begin{frame}{Where are we?}
+
+\begin{columns}
+    \begin{column}{0.45\textwidth}
+        \tableofcontents[currentsection,hideallsubsections]
+    \end{column}
+    \vrule{}
+    \begin{column}{0.45\textwidth}
+        \begin{center}
+            \includegraphics[width=0.9\textwidth]{img/meme_validation}
+        \end{center}
+    \end{column}
+\end{columns}
 \end{frame}
 }
 
@@ -57,13 +74,11 @@
     
 \end{frame}
 
-\begin{frame}
+\begin{frame}{A discussion about model validation}
 \mode<article>{
 We will now focus on:
 }
-\mode<presentation>{
-Planned for today:
-}
+
 \begin{enumerate}
 \item Diagnostics for how well $E^T$ represents $E^G$
 \item Improving estimates for the generalization error $E^G$
