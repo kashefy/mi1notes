@@ -25,6 +25,7 @@
 	\item using the Backpropagation algorithm
 	\end{enumerate}
 \end{frame}
+
 % -----------------------------------------------------------------------------
 \begin{frame}\frametitle{\secname}
 \mode<presentation>{
@@ -33,11 +34,9 @@
 	\end{center}
 	}
     forward pass:
-    \slidesonly{
-    \vspace{-5mm}
-    }
+    \svspace{-5mm}
 	\begin{equation}
-            {h_i^{v'}} 
+            {h_i^{v'}}
             := 
             \only<+->{
             \kern-2ex
@@ -46,18 +45,16 @@
             w_{ik}^{v'\mu}\cdot
             f_k^\mu\big( {h_k^\mu} \big) 
             }
-            \only<+->{
             \stackrel{{
     \substack{\text{this}\\ \text{model}}}
-    }{=} w^{v'v}\cdot
-            f\big( {h^{v}} \big)   
+    }{=} 
+            \only<+->{
+                w^{v'v}\cdot
+                f\big( {h^{v}} \big)   
             }
     \end{equation}
-    
     where $v=v'-1$
-    \slidesonly{
-    \vspace{-5mm}
-    }
+    \svspace{-5mm}
     
     \begin{align}
     y\;\;&=\;\;
@@ -159,16 +156,14 @@
     \substack{\text{this}\\ \text{model}}}
     }{=} 
             \only<+->{
-            f'({h^{v'}}) \,
-        {w}^{v'' v'} \cdot
+            f'({h^{v'}}) \,\cdot
     {\delta^{v''}} 
+        {w}^{v'' v'} 
             }
     \end{equation}
-    
-    and 
-    \slidesonly{
-	\vspace{-5mm}
-	}
+    \only<+->{
+    and
+    \svspace{-6mm}
     
     \begin{equation}
      \frac{\partial y}{\partial w^{v'v}} = 
@@ -177,9 +172,7 @@
     \end{equation}
     
     Therefore:
-    \slidesonly{
-	\vspace{-8mm}
-	}
+    \svspace{-9mm}
     
     \begin{align}
      \frac{\partial y}{\partial w^{10}} 
@@ -189,4 +182,6 @@
 	 &= x \cdot f'(h^{\color{red}1}) w^{21} \cdot f'(h^{\color{darkgreen}2}) w^{32} \cdot f'(h^{\color{magenta}3}) w^{43} \cdot \delta^4\\
 	 &= x \cdot f'(h^{\color{red}1}) w^{21} \cdot f'(h^{\color{darkgreen}2}) w^{32} \cdot f'(h^{\color{magenta}3}) w^{43} \cdot f'(h^{\color{blue}4})
     \end{align}
+    }
+    
 \end{frame}
