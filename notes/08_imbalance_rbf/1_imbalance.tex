@@ -36,15 +36,16 @@ A strong imbalance leads to the classifier learning a trivial solution that inde
 }
 \only<2>{
 \begin{equation}
-E^T = \sum_{\alpha=1}^p e^{(\alpha)}
+E^T = \frac{1}{p} \sum_{\alpha=1}^p e^{(\alpha)}
 \end{equation}
 }
 \only<3>{
 \begin{equation}
-E^T = 
+E^T = \frac{1}{p} \Big\lbrack
 {\color{blue}\sum_{\beta\,\in D_{+}}^{|D_{+}|} e^{(\beta)}}
 +
 {\color{red}\sum_{\beta\,\in D_{-}}^{|D_{-}|} e^{(\beta)}}
+\Big\rbrack
 \end{equation}
 
 \mode<article>{

@@ -78,3 +78,34 @@
 	\blfootnote{\hfill\citep[Section 10.8]{Jaeger04,Goodfellow16}}
 \end{frame}
 
+\subsection{Echo-state networks: Example}
+
+\begin{frame}{\subsecname}
+
+
+
+
+\begin{minipage}{\textwidth}
+
+    \begin{minipage}{0.65\textwidth}
+    \begin{itemize}
+        \item Data: images of digits
+        
+            \includegraphics[width=0.9\textwidth]{img/echo_sample_images}
+            \mode<article>{\captionof*{figure}{Sample images}}
+        
+        \item The sequence of hidden activities ${\color{blue}s_1}$ and ${\color{orange}s_2}$ for different samples from 3 different classes:
+        
+            \includegraphics[width=0.9\textwidth]{img/echo_hidden_vs_time}
+            \captionof*{figure}{Hidden activites over time}
+    \end{itemize}
+        
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.33\textwidth}
+        \includegraphics[width=0.95\textwidth]{img/echo_sample_traj}
+    \end{minipage}
+\end{minipage}
+
+\end{frame}
+
