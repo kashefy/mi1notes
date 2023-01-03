@@ -174,9 +174,9 @@ Using our example with $p=4$ and $N=2$:
 \question{Why does the sum for $\tilde C_{(p,N)}$ run to $N$ instead of $N-1$?}\\
 
 \mode<article>{
--The difference between $\tilde C_{(p,N)}$ from \eqref{eq:cwithbias} and $C_{(p,N)}$ from \eqref{eq:cnobias} look different is due to the fact that $\tilde C_{(p,N)}$ computes the sum for $k=1,\ldots,N$ instead of stopping at $N$ is that sum iterates over the degrees of freedom. 
-Choosing a connectionist neuron to the separation involves $N+1$ degrees of freedom because we add the bias term (the ability to translate the hyperplane).
-Therefore, the reason is the model choice and assuming that $C_{(p,N)}$ counts separability around the origin without the ability to shift the hyperplane.
+-The difference between $\tilde C_{(p,N)}$ from \eqref{eq:cwithbias} and $C_{(p,N)}$ from \eqref{eq:cnobias} look different is due to the fact that $\tilde C_{(p,N)}$ computes the sum for $k=1,\ldots,N$ instead of stopping at $N-1$. This way the sum iterates over the degrees of freedom in a connectionis neuron which has a bias term. 
+Choosing a connectionist neuron to separate the classes involves $N+1$ degrees of freedom because we add the bias term (the ability to translate the hyperplane).
+Therefore, the reason betweenn the two definitions is the model choice and assuming that $C_{(p,N)}$ counts separability around the origin without the ability to shift the hyperplane.
 
 -An alternative explanation to the difference between $\tilde C_{(p,N)}$ and $C_{(p,N)}$ is how to interpret $N$. The definition of $C_{(p,N)}$ treats $N$ as the parameters of the hyperplane. Therefore the bias is implicit.
 If we assume that $N$ is the number of components in $\vec x$ and we need to prepend a bias term to it, we compute the number of separable configurations using $\tilde C_{(p,N)}$. 
