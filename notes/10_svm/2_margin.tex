@@ -20,9 +20,9 @@ Consider the following linearly separable binary classification problem and the 
 
 \only<1-3>{
 \begin{enumerate}[(a)]
-\item select a hyperplane,
-\item select the training point closest to the hyperplane. Call it $\vec x^{*}$. \notesonly{$\vec x^{*}$ has the shortest normal distance to the hyperplane.}
-\item measure the normal distance between $\vec x^{*}$ and the hyperplane and call it $\mathrm{d}_{w}$
+\item<1-> select a hyperplane,
+\item<2-> select the training point closest to the hyperplane. Call it $\vec x^{*}$. \notesonly{$\vec x^{*}$ has the shortest normal distance to the hyperplane.}
+\item<3-> measure the normal distance between $\vec x^{*}$ and the hyperplane and call it $\mathrm{d}_{w}$
 \end{enumerate}
 }
 %\begin{figure}[h]
@@ -298,11 +298,8 @@ As the margin increases, i.e. $\mathrm{d}_{w}\,\rightarrow\,\mathrm{d}_{R}$\note
 $$
 \dvc\;\rightarrow\;2
 $$}
-In the case of $\mathrm{d}_{w} = \mathrm{d}_{R}$\notesonly{ the VC dimension will be reduced to 1. But since this implies a dataset of only a single point, it is not such an interesting case.}
-\slidesonly{
-$$
-\dvc\;\rightarrow\;1
-$$}
+In the case of $\mathrm{d}_{w} = \mathrm{d}_{R}$\notesonly{ the VC dimension will be remains $1+1=2$. However it is a case where there is no more space that is inside the sphere and outside of the margin as well. Without this makes this case not particulary interesting to us.}
+\slidesonly{...no usable points.}
 
 
 \begin{figure}[h]

@@ -89,7 +89,7 @@ y_T^{(\alpha)} \Big( \vec{w}^\top \vec{x}^{(\alpha)} + b \Big)
 \underline{Soft-margin SVM (C-SVM)}:
 
 Relaxing the constraint allows for a violating the ``rules'' of the hard margin classifier to a certain extent, which can be controlled.
-This is done by introducing a free parameter to the constraint, namely the slack variables $\{\varphi_{\alpha}\}$.
+This is done by introducing \notesonly{a free parameter to the constraint, namely the } slack variables $\{\varphi_{\alpha}\}$.
 The value of every $\varphi_{\alpha}$ is representative of the margin error.
 
 \begin{equation}
@@ -125,7 +125,7 @@ with $\varphi_{\alpha} \ge 0$.
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{cccclc}
 \begin{tabular}[c]{@{}c@{}}Where is\\ the point\\ relative to\\ the margin?\end{tabular} & \begin{tabular}[c]{@{}c@{}}label\\ $y_T$\end{tabular} & \begin{tabular}[c]{@{}c@{}}prediction\\ $\vec w^\top \vec x + b$\end{tabular} & \begin{tabular}[c]{@{}c@{}}correctly\\ classified\end{tabular} & \begin{tabular}[c]{@{}c@{}} $y_T^{(\alpha)} \Big( \vec{w}^\top \vec{x}^{(\alpha)} + b \Big)
-				\geq 1 {\color{blue} - \varphi_\alpha}$\end{tabular}      & \begin{tabular}[c]{@{}c@{}}constraint\\ met for\end{tabular}      
+				\geq 1 {- \varphi_\alpha}$\end{tabular}      & \begin{tabular}[c]{@{}c@{}}constraint\\ met for\end{tabular}      
 \\ \hline
 on  & $\mbox{\scriptsize-1}$                                                    & $\mbox{\scriptsize-1}$                                                        & yes                                                             & \mbox{\scriptsize$-1\cdot(-1) \ge 1-\varphi_\alpha$}        & \mbox{\scriptsize$\varphi_\alpha=0$}
 \\ \hline
@@ -169,7 +169,7 @@ The data point falls \emph{inside} the margin \textbf{and} on the \emph{correct}
 
 \item $\varphi = 1$:
 
-The data point falls \emph{on} the \textcolor{red}{\st{margin \textbf{and} on the \emph{correct} side of the}} decision boundary 
+The data point falls \emph{on} the decision boundary 
 
 
 \item $\varphi > 1$:
