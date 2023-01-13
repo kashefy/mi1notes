@@ -35,7 +35,7 @@ The binary classification setting:\\
 \end{figure}
 }
 \mode<presentation>{
-\placeimage{8.7}{2.2}{img/section2_fig13_v2_space}{width=4.8cm}
+\placeimage{9.}{2.2}{img/section2_fig13_v2_space}{width=4.2cm}
 }
 
 
@@ -131,7 +131,7 @@ Let $\vec w^{*}$ and $b^{*}$ describe the optimal hyperplane that maximizes the 
 
 \subsection{Structural risk minimization (SRM)}
 
-\begin{frame}\frametitle{\subsecname~applied to binary classification}
+\begin{frame}\frametitle{\only<1>{\subsecname}\only<2->{SRM}~applied to binary classification}
 
 The cost function\notesonly{ to minimize}:
 
@@ -161,7 +161,7 @@ We therefore constrain solutions such that:}
 
 \visible<3->{
 \svspace{5mm}
-\slidesonly{Constraint for correct classification (modified ``\emph{0-1 loss}'' or ``\emph{hinge loss}'') \underline{and} \textbf{not} inside the margin:}
+\slidesonly{Constraint for correct classification \only<3>{(modified ``\emph{0-1 loss}'' or ``\emph{hinge loss}'') }\underline{and} \textbf{not} inside the margin:}
 
 \svspace{-2mm}
 
@@ -170,8 +170,8 @@ We therefore constrain solutions such that:}
  \label{eq:constraint}
 \end{equation}
 
-\only<3>{
-\svspace{2mm}
+\only<3,4>{
+\svspace{4mm}
 }
 
 \begin{center}
