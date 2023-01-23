@@ -114,16 +114,18 @@ end
 \item ambiguous regions
 \item needs heuristic to disambiguate (e.g. $\argmax_{k} y_{k}(\vec x)$)\\
     but any heuristic needs to deal with the different scales of each $y_{k}(\vec x)$
-\item each classifier faces an imbalanced training set. In the case of SVMs, this leads to asymmetric margins. 
+\item each classifier faces an imbalanced training set. \notesonly{In the case of SVMs, this leads to asymmetric margins.} 
 But ``class weighted'' SVMs exist.
-
 \end{itemize}
+
+Actually: one-vs-rest classification for SVMs is good enough for many problems.
 }
 
     
 \end{frame}
 
-\begin{frame}
+\mode<article>{
+%\begin{frame}
 
 \begin{figure}[h]
      \centering
@@ -132,10 +134,11 @@ But ``class weighted'' SVMs exist.
 	 \label{fig:imbalance}
 \end{figure}
 
-Actually: one-vs-rest classification for SVMs is good enough for many problems.
+%Actually: one-vs-rest classification for SVMs is good enough for many problems.
 
     
-\end{frame}
+%\end{frame}
+}
 
 \subsection{One-vs-one (all pairs)}
 
