@@ -70,7 +70,7 @@
 
 \begin{frame}\frametitle{\subsecname}
 
-\slidesonly{\vspace{-5mm}}
+\svspace{-5mm}
 
 \begin{equation}
 e(y(\vec x; \vec w, b), y_{T}; \varepsilon)
@@ -103,10 +103,13 @@ The SRM objective becomes:
 \svspace{-5mm}
 
 \begin{equation}
-    \min_{\vec w,b} \frac{1}{2} \lVert \vec w \rVert^2 + C R^{\varepsilon}_{\text{emp}}(\vec w,b)
+    \min_{\vec w,b} \frac{1}{2} \lVert \vec w \rVert^2 + C 
+    \notesonly{R^{\varepsilon}_{\text{emp}}(\vec w,b)}
     \slidesonly{
-    \quad
-    \text{using}\quad R^{\varepsilon}_{\text{emp}}(\vec w,b) = \frac{1}{p}\sum_{\alpha=1}^{p} e(y(\vec x), y_{T}; \varepsilon)
+    %\quad
+    %\text{using}\quad R^{\varepsilon}_{\text{emp}}(\vec w,b) = 
+    \cdot
+    \frac{1}{p}\sum_{\alpha=1}^{p} e(y(\vec x), y_{T}; \varepsilon)
      %\max(0, \big|y(\vec x) - y_{T}\big|-\varepsilon)
      }
     \label{eq:srmeps}
