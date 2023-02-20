@@ -448,7 +448,13 @@ $C$ can also be a set of nodes (cf. ).
 	
 	\pause 
 	
+    \notesonly{
 	According to Ch 9.4.3 in \citep{koller2009probabilistic}, constructing the \emph{chordal graph} is actually a heuristic of elimination ordering. It plays a role in keeping the size of cliques small. Smaller cliques allow for a more ``modular'' bipartite graph which leads to faster computation during inference.
+    }
+    \slidesonly{
+	A heuristic to keep the sizes of cliques small.\\
+    Smaller cliques $\leadsto$ ``modular'' bipartite graph $\leadsto$ faster computation during inference.\footnote{\citealp[Ch 9.4.3]{koller2009probabilistic}}
+    }
 	
 \end{frame}
 
